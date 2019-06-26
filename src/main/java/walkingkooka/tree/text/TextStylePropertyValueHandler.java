@@ -98,16 +98,23 @@ abstract class TextStylePropertyValueHandler<T> {
      */
     final <U> U checkType(final Object value, final Class<U> type, final TextStylePropertyName<?> name) {
         if (!type.isInstance(value)) {
-            final Class<?> valueType = value.getClass();
-
-            String typeName = valueType.getName();
-            if (textStylePropertyType(typeName) || hasJsonType(valueType)) {
-                typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
-            }
-
-            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " value " + CharSequences.quoteIfChars(value) + "(" + typeName + ") is not a " + this.expectedTypeName(type));
+            throw this.textStylePropertyValueException(value, name);
         }
         return type.cast(value);
+    }
+
+    /**
+     * Creates a {@link TextStylePropertyValueException} used to report an invalid value.
+     */
+    final TextStylePropertyValueException textStylePropertyValueException(final Object value, final TextStylePropertyName<?> name) {
+        final Class<?> type = value.getClass();
+
+        String typeName = type.getName();
+        if (textStylePropertyType(typeName) || hasJsonType(type)) {
+            typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
+        }
+
+        return new TextStylePropertyValueException("Property " + name.inQuotes() + " value " + CharSequences.quoteIfChars(value) + "(" + typeName + ") is not a " + this.expectedTypeName(type));
     }
 
     abstract String expectedTypeName(final Class<?> type);
