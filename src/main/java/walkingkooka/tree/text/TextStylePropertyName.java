@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.color.ColorHslOrHsv;
+import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.HasJsonNode;
@@ -33,7 +34,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * The name of an expression node.
+ * The {@link Name} of an {@link TextStyle} property.
  */
 public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> {
 
