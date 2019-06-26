@@ -33,18 +33,7 @@ public final class NormalLength extends Length<Void> implements HasJsonNode, Val
 
     final static String TEXT = "normal";
 
-    /**
-     * Parses text that contains a normal literal.
-     */
-    public static NormalLength parseNormal(final String text) {
-        CharSequences.failIfNullOrEmpty(text, "text");
-
-        return parseNormal0(text);
-    }
-
     static NormalLength parseNormal0(final String text) {
-        checkText(text);
-
         if(!TEXT.equals(text)) {
             throw new IllegalArgumentException("Invalid normal text " + CharSequences.quoteAndEscape(text));
         }
@@ -143,25 +132,5 @@ public final class NormalLength extends Length<Void> implements HasJsonNode, Val
     @Override
     public String toString() {
         return TEXT;
-    }
-
-    // HasJsonNode......................................................................................................
-
-    /**
-     * Accepts a json string holding a number and px unit suffix.
-     */
-    public static NormalLength fromJsonNodeNormal(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return parseNormal(node.stringValueOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
-    }
-
-    @Override
-    public JsonNode toJsonNode() {
-        return JsonNode.string(this.toString());
     }
 }
