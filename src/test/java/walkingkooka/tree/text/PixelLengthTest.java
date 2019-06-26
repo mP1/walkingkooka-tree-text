@@ -35,6 +35,11 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     }
 
     @Test
+    public void testParseInvalidValueFails() {
+        this.parseFails("!px", IllegalArgumentException.class);
+    }
+
+    @Test
     public void testParseIncorrectUnitFails() {
         this.parseFails("12EM", IllegalArgumentException.class);
     }
