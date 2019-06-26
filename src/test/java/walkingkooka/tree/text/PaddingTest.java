@@ -17,7 +17,21 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
+import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
+
 public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
+
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(Padding.with(Direction.BOTTOM,
+                TextStyle.with(Maps.of(TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
+                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED))),
+                "BOTTOM {border-right-textStyle=DOTTED, padding-bottom=12.5px}");
+    }
 
     // helpers..........................................................................................................
 

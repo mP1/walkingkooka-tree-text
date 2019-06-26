@@ -22,6 +22,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting;
+import walkingkooka.test.ToStringTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Map;
@@ -33,7 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements ClassTesting2<T>,
-        HashCodeEqualsDefinedTesting<T> {
+        HashCodeEqualsDefinedTesting<T>,
+        ToStringTesting<T> {
 
     BorderMarginPaddingTestCase() {
         super();

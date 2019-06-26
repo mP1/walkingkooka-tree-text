@@ -17,7 +17,19 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
+import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
+
 public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(Margin.with(Direction.BOTTOM,
+                TextStyle.with(Maps.of(TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5),
+                        TextStylePropertyName.TEXT_COLOR, Color.fromRgb(0x123456)))),
+                "BOTTOM {margin-bottom=12.5px, text-color=#123456}");
+    }
 
     // helpers..........................................................................................................
 
