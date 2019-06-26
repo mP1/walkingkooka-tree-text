@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.color.ColorHslOrHsv;
@@ -702,6 +703,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
                 this.visited = t;
             }
         }.accept(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.OVERFLOW);
+    }
+
+    @Test
+    public void testVisitUnknown() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitUnknown(final Object value) {
+                this.visited = value;
+            }
+        }.accept(TextStylePropertyName.with("unknown123"), Cast.to("unknown123value"));
     }
 
     @Test
