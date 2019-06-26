@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
@@ -42,12 +41,12 @@ final class HasJsonNodeWithTypeTextStylePropertyValueHandler extends TextStylePr
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
         HasJsonNode.typeName(value.getClass())
-                .orElseThrow(() -> new TextStylePropertyValueException("Property " + name.inQuotes() + " value " + CharSequences.quoteIfChars(value) + " is not a supported type"));
+                .orElseThrow(() -> this.textStylePropertyValueException(value, name));
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return "String";
+        return "supported type";
     }
 
     // fromJsonNode ....................................................................................................

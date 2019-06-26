@@ -37,7 +37,21 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     @Test
     public final void testCheckNullValueFails() {
-        this.checkFails(null, "Property " + this.propertyName().inQuotes() + " missing value");
+        this.checkFails(null,
+                "Property " + this.propertyName().inQuotes() + " missing value");
+    }
+
+    @Test
+    public final void testCheckInvalidValueFails() {
+        this.checkFails(this,
+                "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
+    }
+
+    @Test
+    public final void testCheckInvalidValueFails2() {
+        final StringBuilder value = new StringBuilder("123abc");
+        this.checkFails(value,
+                "Property " + this.propertyName().inQuotes() + " value \"" + value + "\"(" + value.getClass().getName() + ") is not a " + this.propertyValueType());
     }
 
     @Test

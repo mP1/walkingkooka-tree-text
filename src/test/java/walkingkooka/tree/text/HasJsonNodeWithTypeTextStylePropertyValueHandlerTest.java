@@ -27,7 +27,8 @@ public final class HasJsonNodeWithTypeTextStylePropertyValueHandlerTest extends 
 
     @Test
     public void testCheckWrongValueTypeFails() {
-        this.checkFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + " is not a supported type");
+        this.checkFails(this,
+                "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a supported type");
     }
 
     @Test
@@ -70,7 +71,7 @@ public final class HasJsonNodeWithTypeTextStylePropertyValueHandlerTest extends 
 
     @Override
     String propertyValueType() {
-        return Color.class.getName();
+        return "supported type";
     }
 
     @Override

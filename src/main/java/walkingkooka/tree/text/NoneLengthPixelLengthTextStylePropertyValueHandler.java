@@ -23,7 +23,7 @@ import walkingkooka.tree.json.JsonNode;
 /**
  * A {@link TextStylePropertyValueHandler} that only allows {@link NoneLength} and {@link PixelLength} values.
  */
-final class NoneLengthPixelLengthTextStylePropertyValueHandler extends TextStylePropertyValueHandler<Length<?>> {
+final class NoneLengthPixelLengthTextStylePropertyValueHandler extends LengthTextStylePropertyValueHandler {
 
     /**
      * Singleton
@@ -38,39 +38,13 @@ final class NoneLengthPixelLengthTextStylePropertyValueHandler extends TextStyle
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
-        final Length<?> length = this.checkType(value, Length.class, name);
-        if(length.isNone() || length.isPixel()) {
-            // ok
-        } else {
-            final Class<?> valueType = value.getClass();
-
-            String typeName = valueType.getName();
-            if (textStylePropertyType(typeName) || hasJsonType(valueType)) {
-                typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
-            }
-
-            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " value " + CharSequences.quoteIfChars(value) + "(" + typeName + ") is not a " + this.toString());
-        }
+    boolean lengthCheck(final Length<?> length) {
+        return length.isNone() || length.isPixel();
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
         return "NoneLength|PixelLength";
-    }
-
-    // fromJsonNode ....................................................................................................
-
-    @Override
-    Length<?> fromJsonNode(final JsonNode node, final TextStylePropertyName<?> name) {
-        final Length<?> length = Length.fromJsonNode(node);
-        this.check0(length, name);
-        return length;
-    }
-
-    @Override
-    JsonNode toJsonNode(final Length<?> value) {
-        return value.toJsonNode();
     }
 
     // Object ..........................................................................................................
