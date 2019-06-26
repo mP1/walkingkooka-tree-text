@@ -34,15 +34,6 @@ public final class PixelLength extends Length<Double> implements HasJsonNode, Va
 
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;
 
-    /**
-     * Parses text that contains a pixel measurement, note the unit is required.
-     */
-    public static PixelLength parsePixels(final String text) {
-        CharSequences.failIfNullOrEmpty(text, "text");
-
-        return parsePixels0(text);
-    }
-
     static PixelLength parsePixels0(final String text) {
         UNIT.parseUnitTextCheck(text);
 
@@ -152,25 +143,5 @@ public final class PixelLength extends Length<Double> implements HasJsonNode, Va
     @Override
     public String toString() {
         return UNIT.toString(this.value);
-    }
-
-    // HasJsonNode......................................................................................................
-
-    /**
-     * Accepts a json string holding a number and px unit suffix.
-     */
-    public static PixelLength fromJsonNodePixel(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return parsePixels(node.stringValueOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
-    }
-
-    @Override
-    public JsonNode toJsonNode() {
-        return JsonNode.string(this.toString());
     }
 }

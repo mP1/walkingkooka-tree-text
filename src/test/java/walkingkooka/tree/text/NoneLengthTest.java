@@ -105,13 +105,13 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
 
     @Override
     public NoneLength parse(final String text) {
-        return NoneLength.parseNormal(text);
+        return Length.parseNone(text);
     }
     // HasJsonNodeTesting...............................................................................................
 
     @Override
     public NoneLength fromJsonNode(final JsonNode from) {
-        return NoneLength.fromJsonNodeNormal(from);
+        return Length.fromJsonNodeNone(from);
     }
 
 }

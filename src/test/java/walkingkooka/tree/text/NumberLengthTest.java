@@ -139,7 +139,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Override
     public NumberLength fromJsonNode(final JsonNode from) {
-        return NumberLength.fromJsonNodeNumber(from);
+        return Length.fromJsonNodeNumber(from);
     }
 
 }

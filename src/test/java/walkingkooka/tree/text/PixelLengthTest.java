@@ -159,7 +159,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Override
     public PixelLength fromJsonNode(final JsonNode from) {
-        return PixelLength.fromJsonNodePixel(from);
+        return Length.fromJsonNodePixel(from);
     }
 
 }

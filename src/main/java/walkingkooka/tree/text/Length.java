@@ -22,9 +22,11 @@ import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonNodeException;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Base class for any measure.
@@ -47,6 +49,42 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
 
     static void checkText(final String text) {
         CharSequences.failIfNullOrEmpty(text, "text");
+    }
+
+    /**
+     * Parses text that contains a normal literal.
+     */
+    public static NoneLength parseNone(final String text) {
+        checkText(text);
+
+        return NoneLength.parseNone0(text);
+    }
+
+    /**
+     * Parses text that contains a normal literal.
+     */
+    public static NormalLength parseNormal(final String text) {
+        checkText(text);
+
+        return NormalLength.parseNormal0(text);
+    }
+
+    /**
+     * Parses text that contains a number measurement.
+     */
+    public static NumberLength parseNumber(final String text) {
+        checkText(text);
+
+        return NumberLength.parseNumber0(text);
+    }
+
+    /**
+     * Parses text that contains a pixel measurement, note the unit is required.
+     */
+    public static PixelLength parsePixels(final String text) {
+        checkText(text);
+
+        return PixelLength.parsePixels0(text);
     }
 
     /**
@@ -169,5 +207,49 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
         Objects.requireNonNull(node, "node");
 
         return parse(node.stringValueOrFail());
+    }
+
+    /**
+     * Accepts a json string holding a {@link NoneLength}
+     */
+    public static NoneLength fromJsonNodeNone(final JsonNode node) {
+        return fromJsonNode0(node, Length::parseNone);
+    }
+    
+    /**
+     * Accepts a json string holding a {@link NormalLength}
+     */
+    public static NormalLength fromJsonNodeNormal(final JsonNode node) {
+        return fromJsonNode0(node, Length::parseNormal);
+    }
+
+    /**
+     * Accepts a json string holding a {@link NumberLength}
+     */
+    public static NumberLength fromJsonNodeNumber(final JsonNode node) {
+        return fromJsonNode0(node, Length::parseNumber);
+    }
+
+    /**
+     * Accepts a json string holding a {@link PixelLength}.
+     */
+    public static PixelLength fromJsonNodePixel(final JsonNode node) {
+        return fromJsonNode0(node, Length::parsePixels);
+    }
+
+    private static <L extends Length<?>> L fromJsonNode0(final JsonNode node,
+                                                         final Function<String, L> factory) {
+        Objects.requireNonNull(node, "node");
+
+        try {
+            return factory.apply(node.stringValueOrFail());
+        } catch (final JsonNodeException cause) {
+            throw new IllegalArgumentException(cause.getMessage(), cause);
+        }
+    }
+
+    @Override
+    public final JsonNode toJsonNode() {
+        return JsonNode.string(this.toString());
     }
 }

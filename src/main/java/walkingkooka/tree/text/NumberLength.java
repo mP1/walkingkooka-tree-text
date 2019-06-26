@@ -31,18 +31,7 @@ import java.util.Optional;
  */
 public final class NumberLength extends Length<Long> implements HasJsonNode, Value<Long> {
 
-    /**
-     * Parses text that contains a number measurement.
-     */
-    public static NumberLength parseNumber(final String text) {
-        checkText(text);
-
-        return parseNumber0(text);
-    }
-
     static NumberLength parseNumber0(final String text) {
-        checkText(text);
-
         try {
             return with(Long.parseLong(text));
         } catch (final NumberFormatException cause) {
@@ -153,25 +142,5 @@ public final class NumberLength extends Length<Long> implements HasJsonNode, Val
     @Override
     public String toString() {
         return String.valueOf(this.value);
-    }
-
-    // HasJsonNode......................................................................................................
-
-    /**
-     * Accepts a json string holding a number and px unit suffix.
-     */
-    public static NumberLength fromJsonNodeNumber(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return parseNumber(node.stringValueOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
-    }
-
-    @Override
-    public JsonNode toJsonNode() {
-        return JsonNode.string(this.toString());
     }
 }

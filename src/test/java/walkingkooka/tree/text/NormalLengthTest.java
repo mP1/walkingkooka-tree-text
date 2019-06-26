@@ -111,7 +111,7 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
 
     @Override
     public NormalLength fromJsonNode(final JsonNode from) {
-        return NormalLength.fromJsonNodeNormal(from);
+        return Length.fromJsonNodeNormal(from);
     }
 
 }
