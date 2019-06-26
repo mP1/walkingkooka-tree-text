@@ -19,9 +19,14 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.visit.Visiting;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> {
@@ -118,6 +123,38 @@ public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> 
                 familyName,
                 TextStyle.with(Maps.of(propertyName, familyName)));
     }
+
+    // TextStyleVisitor.................................................................................................
+
+    @Test
+    public void testAccept() {
+        final StringBuilder b = new StringBuilder();
+        final List<TextStyle> visited = Lists.array();
+
+        final EmptyTextStyle textStyle = EmptyTextStyle.instance();
+
+        new FakeTextStyleVisitor() {
+            @Override
+            protected Visiting startVisit(final TextStyle n) {
+                b.append("1");
+                visited.add(n);
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final TextStyle n) {
+                b.append("2");
+                visited.add(n);
+            }
+        }.accept(textStyle);
+
+        assertEquals("12", b.toString());
+        assertEquals(Lists.of(textStyle, textStyle),
+                visited,
+                "visited");
+    }
+
+    // toString.........................................................................................................
 
     @Test
     public void testToString() {
