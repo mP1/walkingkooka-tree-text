@@ -27,6 +27,7 @@ import walkingkooka.tree.json.JsonNode;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize>
@@ -48,6 +49,15 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         final int value = 10;
         final FontSize size = FontSize.with(value);
         assertEquals(value, size.value(), "value");
+    }
+
+    @Test
+    public void testWithNonConstant() {
+        final int value = 1000;
+        final FontSize size = FontSize.with(value);
+        assertEquals(value, size.value(), "value");
+
+        assertNotSame(FontSize.with(value), size);
     }
 
     // HasJsonNode......................................................................................
@@ -99,7 +109,25 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         this.toJsonNodeRoundTripTwiceAndCheck(this.createObject());
     }
 
-    // Object...........................................................................................
+    // Object...........................................................................................................
+
+    @Test
+    public void testDifferent() {
+        this.checkNotEquals(FontSize.with(99));
+    }
+
+    @Test
+    public void testDifferentNonConstants() {
+        this.checkNotEquals(FontSize.with(999), FontSize.with(888));
+    }
+
+    @Test
+    public void testEqualsNonConstants() {
+        final int value = 777;
+        this.checkEquals(FontSize.with(value), FontSize.with(value));
+    }
+
+    // toString.........................................................................................................
 
     @Test
     public void testToString() {
