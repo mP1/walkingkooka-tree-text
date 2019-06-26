@@ -138,8 +138,4 @@ abstract class TextStylePropertyValueHandler<T> {
 
     @Override
     abstract public String toString();
-
-    final String toStringType(final Class<?> type) {
-        return type.getSimpleName();
-    }
 }
