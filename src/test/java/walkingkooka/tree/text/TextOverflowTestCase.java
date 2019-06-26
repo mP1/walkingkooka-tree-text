@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ConstantsTesting;
@@ -31,6 +32,36 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     TextOverflowTestCase() {
         super();
+    }
+
+    @Test
+    public final void testFromJsonArrayNodeFails() {
+        this.fromJsonNodeFails(JsonNode.array());
+    }
+
+    @Test
+    public final void testFromJsonBooleanNodeFails() {
+        this.fromJsonNodeFails(JsonNode.booleanNode(true));
+    }
+
+    @Test
+    public final void testFromJsonNumberNodeFails() {
+        this.fromJsonNodeFails(JsonNode.number(12.5));
+    }
+
+    @Test
+    public final void testFromJsonNulNodeFails() {
+        this.fromJsonNodeFails(JsonNode.nullNode());
+    }
+
+    @Test
+    public final void testFromJsonStringNodeEmptyFails() {
+        this.fromJsonNodeFails(JsonNode.string(""));
+    }
+
+    @Test
+    public final void testFromJsonObjectNodeFails() {
+        this.fromJsonNodeFails(JsonNode.object());
     }
 
     @Override
