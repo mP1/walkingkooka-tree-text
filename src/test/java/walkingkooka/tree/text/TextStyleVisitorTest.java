@@ -808,8 +808,13 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
 
         <T> void accept(final TextStylePropertyName<T> propertyName, final T value) {
             this.expected = value;
-            this.accept(textStyle(propertyName, value));
+
+            final TextStyle textStyle = textStyle(propertyName, value);
+            this.accept(textStyle);
             assertEquals(this.expected, this.visited);
+
+            new TextStyleVisitor() {
+            }.accept(textStyle);
         }
 
         private Object expected;
