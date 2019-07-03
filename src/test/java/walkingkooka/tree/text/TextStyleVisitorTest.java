@@ -596,6 +596,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
+    public void testVisitText() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitText(final String t) {
+                this.visited = t;
+            }
+        }.accept(TextStylePropertyName.TEXT, "abc1234");
+    }
+
+    @Test
     public void testVisitTextAlignment() {
         new TestTextStyleVisitor() {
             @Override
