@@ -736,6 +736,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
+    public void testVisitWhitespace() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitWhitespace(final TextWhitespace t) {
+                this.visited = t;
+            }
+        }.accept(TextStylePropertyName.WHITE_SPACE, TextWhitespace.PRE);
+    }
+
+    @Test
     public void testVisitWidth() {
         new TestTextStyleVisitor() {
             @Override
