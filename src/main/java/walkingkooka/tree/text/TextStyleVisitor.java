@@ -77,7 +77,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
 
     // properties..........................................................................................................
 
-    protected void visitBackgroundColor(final Color color) {
+    protected void visitBackgroundColor(final ColorHslOrHsv color) {
         // nop
     }
 
@@ -233,7 +233,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitOutlineColor(final Color color) {
+    protected void visitOutlineColor(final ColorHslOrHsv color) {
         // nop
     }
 
@@ -285,7 +285,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitTextColor(final Color textColor) {
+    protected void visitTextColor(final ColorHslOrHsv textColor) {
         // nop
     }
 
@@ -293,7 +293,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitTextDecorationColor(final Color textDecorationColor) {
+    protected void visitTextDecorationColor(final ColorHslOrHsv textDecorationColor) {
         // nop
     }
 

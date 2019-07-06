@@ -48,7 +48,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBackgroundColor(final Color color) {
+    protected void visitBackgroundColor(final ColorHslOrHsv color) {
         throw new UnsupportedOperationException();
     }
 
@@ -243,7 +243,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitOutlineColor(final Color color) {
+    protected void visitOutlineColor(final ColorHslOrHsv color) {
         throw new UnsupportedOperationException();
     }
 
@@ -308,7 +308,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextColor(final Color textColor) {
+    protected void visitTextColor(final ColorHslOrHsv textColor) {
         throw new UnsupportedOperationException();
     }
 
@@ -318,7 +318,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextDecorationColor(final Color textDecorationColor) {
+    protected void visitTextDecorationColor(final ColorHslOrHsv textDecorationColor) {
         throw new UnsupportedOperationException();
     }
 

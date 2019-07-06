@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 
@@ -277,7 +278,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         final TextStylePropertyName<FontFamilyName> property2 = this.property2();
         final FontFamilyName value2 = this.value2();
 
-        final TextStylePropertyName<Color> property3 = TextStylePropertyName.BACKGROUND_COLOR;
+        final TextStylePropertyName<ColorHslOrHsv> property3 = TextStylePropertyName.BACKGROUND_COLOR;
         final Color value3 = Color.fromRgb(0x123456);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
