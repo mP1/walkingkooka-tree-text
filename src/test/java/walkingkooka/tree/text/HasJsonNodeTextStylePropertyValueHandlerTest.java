@@ -20,9 +20,10 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.color.Color;
+import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.tree.json.HasJsonNode;
 
-public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<HasJsonNodeTextStylePropertyValueHandler<Color>, Color> {
+public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv>, ColorHslOrHsv> {
 
     @Test
     public void testFromJsonNode() {
@@ -50,27 +51,27 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(this.handler(), "Color");
+        this.toStringAndCheck(this.handler(), ColorHslOrHsv.class.getSimpleName());
     }
 
     @Override
-    HasJsonNodeTextStylePropertyValueHandler<Color> handler() {
-        return HasJsonNodeTextStylePropertyValueHandler.with(Color.class, Color::fromJsonNodeColor);
+    HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv> handler() {
+        return HasJsonNodeTextStylePropertyValueHandler.with(ColorHslOrHsv.class, ColorHslOrHsv::fromJsonNode);
     }
 
     @Override
-    TextStylePropertyName<Color> propertyName() {
+    TextStylePropertyName<ColorHslOrHsv> propertyName() {
         return TextStylePropertyName.BACKGROUND_COLOR;
     }
 
     @Override
-    Color propertyValue() {
+    ColorHslOrHsv propertyValue() {
         return Color.BLACK;
     }
 
     @Override
     String propertyValueType() {
-        return Color.class.getSimpleName();
+        return ColorHslOrHsv.class.getSimpleName();
     }
 
     @Override
@@ -79,7 +80,7 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
     }
 
     @Override
-    public Class<HasJsonNodeTextStylePropertyValueHandler<Color>> type() {
+    public Class<HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv>> type() {
         return Cast.to(HasJsonNodeTextStylePropertyValueHandler.class);
     }
 }

@@ -142,9 +142,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Background color
      */
-    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
-            Color.class,
-            Color::fromJsonNodeColor,
+    public final static TextStylePropertyName<ColorHslOrHsv> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
+            ColorHslOrHsv.class,
+            ColorHslOrHsv::fromJsonNodeColor,
             (c, v) -> v.visitBackgroundColor(c));
 
     /**
@@ -427,8 +427,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * outline-color
      */
-    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
-            Color.class,
+    public final static TextStylePropertyName<ColorHslOrHsv> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
+            ColorHslOrHsv.class,
             Color::fromJsonNodeColor,
             (t, v) -> v.visitOutlineColor(t));
 
@@ -515,9 +515,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Text color
      */
-    public final static TextStylePropertyName<Color> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
-            Color.class,
-            Color::fromJsonNodeColor,
+    public final static TextStylePropertyName<ColorHslOrHsv> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
+            ColorHslOrHsv.class,
+            ColorHslOrHsv::fromJsonNode,
             (t, v) -> v.visitTextColor(t));
 
     /**
@@ -531,9 +531,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-decoration-color
      */
-    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
-            Color.class,
-            Color::fromJsonNodeColor,
+    public final static TextStylePropertyName<ColorHslOrHsv> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
+            ColorHslOrHsv.class,
+            ColorHslOrHsv::fromJsonNode,
             (t, v) -> v.visitTextDecorationColor(t));
 
     /**

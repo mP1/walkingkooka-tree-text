@@ -66,7 +66,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
 
     @Test
     public void testVisitTextStylePropertyNameSkip() {
-        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.TEXT_COLOR;
+        final TextStylePropertyName<ColorHslOrHsv> propertyName = TextStylePropertyName.TEXT_COLOR;
         final Color value = Color.BLACK;
         final TextStyle textStyle = textStyle(propertyName, value);
 
@@ -99,7 +99,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBackgroundColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBackgroundColor(final Color c) {
+            protected void visitBackgroundColor(final ColorHslOrHsv c) {
                 this.visited = c;
             }
         }.accept(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
@@ -489,7 +489,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitOutlineColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitOutlineColor(final Color c) {
+            protected void visitOutlineColor(final ColorHslOrHsv c) {
                 this.visited = c;
             }
         }.accept(TextStylePropertyName.OUTLINE_COLOR, Color.parseColor("red"));
@@ -619,7 +619,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitTextColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextColor(final Color c) {
+            protected void visitTextColor(final ColorHslOrHsv c) {
                 this.visited = c;
             }
         }.accept(TextStylePropertyName.TEXT_COLOR, Color.BLACK);
@@ -639,7 +639,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitTextDecorationColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextDecorationColor(final Color t) {
+            protected void visitTextDecorationColor(final ColorHslOrHsv t) {
                 this.visited = t;
             }
         }.accept(TextStylePropertyName.TEXT_DECORATION_COLOR, Color.fromRgb(0x123));
