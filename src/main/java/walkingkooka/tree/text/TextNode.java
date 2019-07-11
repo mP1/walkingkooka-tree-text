@@ -318,6 +318,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final void buildToString(final ToStringBuilder b) {
         b.defaults();
         b.enable(ToStringBuilderOption.ESCAPE);
+        b.disable(ToStringBuilderOption.SKIP_IF_DEFAULT_VALUE);
         b.labelSeparator(": ");
         b.valueSeparator(", ");
         b.separator("");
