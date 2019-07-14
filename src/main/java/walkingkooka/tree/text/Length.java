@@ -17,9 +17,11 @@
 
 package walkingkooka.tree.text;
 
+import jdk.jshell.spi.ExecutionControl.RunException;
 import walkingkooka.Cast;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
+import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
@@ -206,7 +208,7 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
     public static Length fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
-        return parse(node.stringValueOrFail());
+        return fromJsonNode0(node, Length::parse);
     }
 
     /**
@@ -243,8 +245,8 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
 
         try {
             return factory.apply(node.stringValueOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), node, cause);
         }
     }
 

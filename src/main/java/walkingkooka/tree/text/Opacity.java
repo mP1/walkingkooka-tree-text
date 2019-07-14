@@ -21,9 +21,9 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
+import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -94,21 +94,24 @@ public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined
 
         try {
             return node.isString() ?
-                    fromJsonStringNode(node.stringValueOrFail()) :
+                    fromJsonStringNode(node.stringValueOrFail(), node) :
                     with(node.numberValueOrFail().doubleValue());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
+        } catch (final FromJsonNodeException cause) {
+            throw cause;
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), node, cause);
         }
     }
 
-    private static Opacity fromJsonStringNode(final String value) {
+    private static Opacity fromJsonStringNode(final String value,
+                                              final JsonNode node) {
         return OPAQUE_TEXT.equals(value) ? OPAQUE :
                 TRANSPARENT_TEXT.equals(value) ? TRANSPARENT :
-                        fromJsonStringNode0(value);
+                        fromJsonStringNode0(value, node);
     }
 
-    private static Opacity fromJsonStringNode0(final String value) {
-        throw new IllegalArgumentException("Unknown opacity " + CharSequences.quote(value));
+    private static Opacity fromJsonStringNode0(final String value, final JsonNode node) {
+        throw new FromJsonNodeException("Unknown opacity " + CharSequences.quote(value), node);
     }
 
     @Override
