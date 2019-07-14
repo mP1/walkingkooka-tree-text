@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.test.HashCodeEqualsDefined;
+import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
@@ -203,15 +204,21 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     }
 
     private static TextStyle fromJson0(final JsonObjectNode json) {
-        final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
+        try {
+            final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
-        for (JsonNode child : json.children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeName(child);
-            properties.put(name,
-                    name.handler.fromJsonNode(child, name));
+            for (JsonNode child : json.children()) {
+                final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeName(child);
+                properties.put(name,
+                        name.handler.fromJsonNode(child, name));
+            }
+
+            return with(properties);
+        } catch (final FromJsonNodeException cause) {
+            throw cause;
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), json, cause);
         }
-
-        return with(properties);
     }
 
     static {
