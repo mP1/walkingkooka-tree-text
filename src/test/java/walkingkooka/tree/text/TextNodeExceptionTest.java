@@ -18,11 +18,27 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.test.StandardThrowableTesting;
+import walkingkooka.type.JavaVisibility;
 
 public final class TextNodeExceptionTest implements StandardThrowableTesting<TextNodeException> {
 
     @Override
+    public TextNodeException createThrowable(final String message) {
+        return new TextNodeException(message);
+    }
+
+    @Override
+    public TextNodeException createThrowable(final String message, final Throwable cause) {
+        return new TextNodeException(message, cause);
+    }
+
+    @Override
     public Class<TextNodeException> type() {
         return TextNodeException.class;
+    }
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PUBLIC;
     }
 }

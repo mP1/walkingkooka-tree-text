@@ -18,11 +18,27 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.test.StandardThrowableTesting;
+import walkingkooka.type.JavaVisibility;
 
 public final class TextStylePropertyValueExceptionTest implements StandardThrowableTesting<TextStylePropertyValueException> {
 
     @Override
+    public TextStylePropertyValueException createThrowable(final String message) {
+        return new TextStylePropertyValueException(message);
+    }
+
+    @Override
+    public TextStylePropertyValueException createThrowable(final String message, final Throwable cause) {
+        return new TextStylePropertyValueException(message, cause);
+    }
+
+    @Override
     public Class<TextStylePropertyValueException> type() {
         return TextStylePropertyValueException.class;
+    }
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PUBLIC;
     }
 }
