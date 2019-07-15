@@ -23,6 +23,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.HashCodeEqualsDefinedTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonNodeException;
 
 import java.util.Set;
 
@@ -36,32 +37,27 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     @Test
     public final void testFromJsonArrayNodeFails() {
-        this.fromJsonNodeFails(JsonNode.array());
+        this.fromJsonNodeFails(JsonNode.array(), JsonNodeException.class);
     }
 
     @Test
     public final void testFromJsonBooleanNodeFails() {
-        this.fromJsonNodeFails(JsonNode.booleanNode(true));
+        this.fromJsonNodeFails(JsonNode.booleanNode(true), JsonNodeException.class);
     }
 
     @Test
     public final void testFromJsonNumberNodeFails() {
-        this.fromJsonNodeFails(JsonNode.number(12.5));
-    }
-
-    @Test
-    public final void testFromJsonNulNodeFails() {
-        this.fromJsonNodeFails(JsonNode.nullNode());
+        this.fromJsonNodeFails(JsonNode.number(12.5), JsonNodeException.class);
     }
 
     @Test
     public final void testFromJsonStringNodeEmptyFails() {
-        this.fromJsonNodeFails(JsonNode.string(""));
+        this.fromJsonNodeFails(JsonNode.string(""), JsonNodeException.class);
     }
 
     @Test
     public final void testFromJsonObjectNodeFails() {
-        this.fromJsonNodeFails(JsonNode.object());
+        this.fromJsonNodeFails(JsonNode.object(), JsonNodeException.class);
     }
 
     @Override
