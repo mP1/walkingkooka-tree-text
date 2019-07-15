@@ -167,7 +167,7 @@ public final class TextStyleNode extends TextParentNode {
     /**
      * Accepts a json object which holds a {@link TextStyleNode}.
      */
-    public static TextNode fromJsonNode(final JsonNode node) {
+    public static TextStyleNode fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {
@@ -177,7 +177,7 @@ public final class TextStyleNode extends TextParentNode {
         }
     }
 
-    private static TextNode fromJsonNode0(final JsonObjectNode node) {
+    private static TextStyleNode fromJsonNode0(final JsonObjectNode node) {
         TextStyle textStyle = TextStyle.EMPTY;
         List<TextNode> children = NO_CHILDREN;
 
@@ -194,7 +194,7 @@ public final class TextStyleNode extends TextParentNode {
             }
         }
 
-        return textStyle.setChildren(children);
+        return textStyle.setChildren(children).cast();
     }
 
     @Override
@@ -211,7 +211,9 @@ public final class TextStyleNode extends TextParentNode {
     final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
 
     static {
-        HasJsonNode.register("text-textStyle-node", TextStyleNode::fromJsonNode, TextStyleNode.class);
+        HasJsonNode.register("text-textStyle-node",
+                TextStyleNode::fromJsonNode,
+                TextStyleNode.class);
     }
 
     // Visitor .................................................................................................
