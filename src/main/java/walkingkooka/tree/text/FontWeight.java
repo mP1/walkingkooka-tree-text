@@ -88,7 +88,7 @@ public final class FontWeight implements Comparable<FontWeight>, HashCodeEqualsD
     /**
      * Factory that creates a {@link FontWeight} from the given node.
      */
-    public static FontWeight fromJsonNode(final JsonNode node) {
+    static FontWeight fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {

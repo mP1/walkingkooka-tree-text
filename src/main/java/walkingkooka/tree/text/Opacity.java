@@ -89,7 +89,7 @@ public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined
     /**
      * Factory that creates a {@link Opacity} from the given node.
      */
-    public static Opacity fromJsonNode(final JsonNode node) {
+    static Opacity fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {

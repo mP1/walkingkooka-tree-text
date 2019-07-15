@@ -193,13 +193,13 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     /**
      * Accepts a json object holding the textStyle as a map.
      */
-    public static TextStyle fromJsonNode(final JsonNode node) {
+    static TextStyle fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {
             return fromJson0(node.objectOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), node, cause);
         }
     }
 

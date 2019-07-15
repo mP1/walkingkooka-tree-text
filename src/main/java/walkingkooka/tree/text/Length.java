@@ -205,7 +205,7 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
     /**
      * Accepts a json string holding a number and unit.
      */
-    public static Length fromJsonNode(final JsonNode node) {
+    static Length fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         return fromJsonNode0(node, Length::parse);
@@ -214,28 +214,28 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
     /**
      * Accepts a json string holding a {@link NoneLength}
      */
-    public static NoneLength fromJsonNodeNone(final JsonNode node) {
+    static NoneLength fromJsonNodeNone(final JsonNode node) {
         return fromJsonNode0(node, Length::parseNone);
     }
     
     /**
      * Accepts a json string holding a {@link NormalLength}
      */
-    public static NormalLength fromJsonNodeNormal(final JsonNode node) {
+    static NormalLength fromJsonNodeNormal(final JsonNode node) {
         return fromJsonNode0(node, Length::parseNormal);
     }
 
     /**
      * Accepts a json string holding a {@link NumberLength}
      */
-    public static NumberLength fromJsonNodeNumber(final JsonNode node) {
+    static NumberLength fromJsonNodeNumber(final JsonNode node) {
         return fromJsonNode0(node, Length::parseNumber);
     }
 
     /**
      * Accepts a json string holding a {@link PixelLength}.
      */
-    public static PixelLength fromJsonNodePixel(final JsonNode node) {
+    static PixelLength fromJsonNodePixel(final JsonNode node) {
         return fromJsonNode0(node, Length::parsePixels);
     }
 

@@ -40,9 +40,8 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * {@see HasJsonNodeTextStylePropertyValueHandler}
      */
-    static <T extends HasJsonNode> TextStylePropertyValueHandler<T> hasJsonNode(final Class<T> type,
-                                                                                final Function<JsonNode, T> fromJsonNode) {
-        return HasJsonNodeTextStylePropertyValueHandler.with(type, fromJsonNode);
+    static <T extends HasJsonNode> TextStylePropertyValueHandler<T> hasJsonNode(final Class<T> type) {
+        return HasJsonNodeTextStylePropertyValueHandler.with(type);
     }
 
     /**

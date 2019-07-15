@@ -86,7 +86,7 @@ public final class FontSize implements Comparable<FontSize>, HashCodeEqualsDefin
     /**
      * Factory that creates a {@link FontSize} from the given node.
      */
-    public static FontSize fromJsonNode(final JsonNode node) {
+    static FontSize fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {

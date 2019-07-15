@@ -56,7 +56,7 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
 
     @Override
     HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv> handler() {
-        return HasJsonNodeTextStylePropertyValueHandler.with(ColorHslOrHsv.class, ColorHslOrHsv::fromJsonNode);
+        return HasJsonNodeTextStylePropertyValueHandler.with(ColorHslOrHsv.class);
     }
 
     @Override
