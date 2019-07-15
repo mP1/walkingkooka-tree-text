@@ -163,7 +163,14 @@ public final class TextStyleNode extends TextParentNode {
 
     // HasJsonNode.....................................................................................................
 
+    /**
+     * Accepts a json string which holds {@link TextStyleNode}.
+     */
     static TextStyleNode fromJsonNodeTextStyleNode(final JsonNode node) {
+        return fromJsonNode0(node, TextStyleNode::fromJsonNodeTextStyleNode0);
+    }
+
+    private static TextStyleNode fromJsonNodeTextStyleNode0(final JsonNode node) {
         TextStyle textStyle = TextStyle.EMPTY;
         List<TextNode> children = NO_CHILDREN;
 

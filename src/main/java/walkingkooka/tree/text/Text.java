@@ -89,6 +89,10 @@ public final class Text extends TextLeafNode<String> implements HasText {
      * Accepts a json string which holds text.
      */
     static Text fromJsonNodeText(final JsonNode node) {
+        return fromJsonNode0(node, Text::fromJsonNodeText0);
+    }
+
+    private static Text fromJsonNodeText0(final JsonNode node) {
         return Text.with(node.stringValueOrFail());
     }
 

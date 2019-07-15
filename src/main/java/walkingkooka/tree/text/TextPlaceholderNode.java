@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 
 import java.util.Objects;
 
@@ -80,6 +79,10 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
      * Accepts a json string which holds a {@link TextPlaceholderNode}.
      */
     static TextPlaceholderNode fromJsonNodeTextPlaceholderNode(final JsonNode node) {
+        return fromJsonNode0(node, TextPlaceholderNode::fromJsonNodeTextPlaceholderNode0);
+    }
+
+    private static TextPlaceholderNode fromJsonNodeTextPlaceholderNode0(final JsonNode node) {
         return TextPlaceholderNode.with(TextPlaceholderName.fromJsonNode(node));
     }
 
