@@ -319,6 +319,6 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
 
     @Override
     public final TextStyleNameNode fromJsonNode(final JsonNode from) {
-        return TextStyleNameNode.fromJsonNode(from);
+        return TextStyleNameNode.fromJsonNodeTextStyleNameNode(from);
     }
 }

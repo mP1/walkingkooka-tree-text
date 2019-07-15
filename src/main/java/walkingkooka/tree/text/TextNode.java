@@ -27,9 +27,9 @@ import walkingkooka.text.HasText;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.ExpressionNodeName;
+import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
 
@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -292,12 +293,23 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Creates a {@link TextNode} from a {@link JsonNode}.
      */
     public static TextNode fromJsonNode(final JsonNode from) {
-        Objects.requireNonNull(from, "from");
+        return fromJsonNode0(from, TextNode::fromJsonNodeTextNode);
+    }
+
+    private static TextNode fromJsonNodeTextNode(final JsonNode from) {
+        return from.objectOrFail().fromJsonNodeWithType();
+    }
+
+    private static <T extends TextNode> T fromJsonNode0(final JsonNode node,
+                                                        final Function<JsonNode, T> factory) {
+        Objects.requireNonNull(node, "node");
 
         try {
-            return from.objectOrFail().fromJsonNodeWithType();
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
+            return factory.apply(node);
+        } catch (final FromJsonNodeException cause) {
+            throw cause;
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), node, cause);
         }
     }
 

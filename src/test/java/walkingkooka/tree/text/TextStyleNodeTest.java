@@ -491,6 +491,6 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Override
     public final TextStyleNode fromJsonNode(final JsonNode from) {
-        return Cast.to(TextStyleNode.fromJsonNode(from));
+        return TextStyleNode.fromJsonNodeTextStyleNode(from);
     }
 }
