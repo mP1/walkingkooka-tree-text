@@ -289,19 +289,12 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     // HasJsonNode......................................................................................................
 
-    /**
-     * Creates a {@link TextNode} from a {@link JsonNode}.
-     */
-    public static TextNode fromJsonNode(final JsonNode from) {
-        return fromJsonNode0(from, TextNode::fromJsonNodeTextNode);
-    }
-
-    private static TextNode fromJsonNodeTextNode(final JsonNode from) {
+    static TextNode fromJsonNode(final JsonNode from) {
         return from.objectOrFail().fromJsonNodeWithType();
     }
 
-    private static <T extends TextNode> T fromJsonNode0(final JsonNode node,
-                                                        final Function<JsonNode, T> factory) {
+    static <T extends TextNode> T fromJsonNode0(final JsonNode node,
+                                                final Function<JsonNode, T> factory) {
         Objects.requireNonNull(node, "node");
 
         try {
