@@ -24,7 +24,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.json.JsonNodeName;
 import walkingkooka.tree.json.JsonObjectNode;
 import walkingkooka.tree.visit.Visiting;
@@ -164,20 +163,7 @@ public final class TextStyleNode extends TextParentNode {
 
     // HasJsonNode.....................................................................................................
 
-    /**
-     * Accepts a json object which holds a {@link TextStyleNode}.
-     */
-    public static TextStyleNode fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return fromJsonNode0(node.objectOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
-    }
-
-    private static TextStyleNode fromJsonNode0(final JsonObjectNode node) {
+    static TextStyleNode fromJsonNodeTextStyleNode(final JsonNode node) {
         TextStyle textStyle = TextStyle.EMPTY;
         List<TextNode> children = NO_CHILDREN;
 
@@ -212,7 +198,7 @@ public final class TextStyleNode extends TextParentNode {
 
     static {
         HasJsonNode.register("text-textStyle-node",
-                TextStyleNode::fromJsonNode,
+                TextStyleNode::fromJsonNodeTextStyleNode,
                 TextStyleNode.class);
     }
 

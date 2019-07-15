@@ -79,14 +79,8 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     /**
      * Accepts a json string which holds a {@link TextPlaceholderNode}.
      */
-    public static TextPlaceholderNode fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return TextPlaceholderNode.with(TextPlaceholderName.fromJsonNode(node));
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
+    static TextPlaceholderNode fromJsonNodeTextPlaceholderNode(final JsonNode node) {
+        return TextPlaceholderNode.with(TextPlaceholderName.fromJsonNode(node));
     }
 
     @Override
@@ -95,7 +89,9 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     }
 
     static {
-        HasJsonNode.register("text-placeholder", TextPlaceholderNode::fromJsonNode, TextPlaceholderNode.class);
+        HasJsonNode.register("text-placeholder",
+                TextPlaceholderNode::fromJsonNodeTextPlaceholderNode,
+                TextPlaceholderNode.class);
     }
 
     // Visitor .......................................................................................................

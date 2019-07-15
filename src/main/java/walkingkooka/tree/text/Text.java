@@ -88,14 +88,8 @@ public final class Text extends TextLeafNode<String> implements HasText {
     /**
      * Accepts a json string which holds text.
      */
-    public static Text fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        try {
-            return Text.with(node.stringValueOrFail());
-        } catch (final JsonNodeException cause) {
-            throw new IllegalArgumentException(cause.getMessage(), cause);
-        }
+    static Text fromJsonNodeText(final JsonNode node) {
+        return Text.with(node.stringValueOrFail());
     }
 
     @Override
@@ -104,7 +98,9 @@ public final class Text extends TextLeafNode<String> implements HasText {
     }
 
     static {
-        HasJsonNode.register("text", Text::fromJsonNode, Text.class);
+        HasJsonNode.register("text",
+                Text::fromJsonNodeText,
+                Text.class);
     }
 
     // Visitor .......................................................................................................

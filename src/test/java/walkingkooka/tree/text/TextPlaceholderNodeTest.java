@@ -120,6 +120,6 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
 
     @Override
     public final TextPlaceholderNode fromJsonNode(final JsonNode from) {
-        return TextPlaceholderNode.fromJsonNode(from);
+        return TextPlaceholderNode.fromJsonNodeTextPlaceholderNode(from);
     }
 }

@@ -187,6 +187,6 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String>{
 
     @Override
     public final Text fromJsonNode(final JsonNode from) {
-        return Text.fromJsonNode(from);
+        return Text.fromJsonNodeText(from);
     }
 }
