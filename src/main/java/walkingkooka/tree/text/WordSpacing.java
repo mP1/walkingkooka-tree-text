@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
@@ -44,8 +45,12 @@ public final class WordSpacing extends LengthTextStylePropertyValue implements H
 
     // HasJsonNode.....................................................................................................
 
-    public static WordSpacing fromJsonNode(final JsonNode node) {
-        return with(Length.fromJsonNode(node));
+    static WordSpacing fromJsonNode(final JsonNode node) {
+        try {
+            return with(Length.fromJsonNode(node));
+        } catch (final RuntimeException cause) {
+            throw new FromJsonNodeException(cause.getMessage(), node, cause);
+        }
     }
 
     @Override

@@ -90,7 +90,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     /**
      * Factory that creates a {@link TextOverflow} from the given node.
      */
-    public static TextOverflow fromJsonNode(final JsonNode node) {
+    static TextOverflow fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {

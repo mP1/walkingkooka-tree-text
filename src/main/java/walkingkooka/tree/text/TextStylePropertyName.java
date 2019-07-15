@@ -67,10 +67,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static <H extends HasJsonNode> TextStylePropertyName<H> registerHasJsonNodeConstant(final String property,
                                                                                                 final Class<H> type,
-                                                                                                final Function<JsonNode, H> fromJsonNode,
                                                                                                 final BiConsumer<H, TextStyleVisitor> visitor) {
         return registerConstant(property,
-                TextStylePropertyValueHandler.hasJsonNode(type, fromJsonNode),
+                TextStylePropertyValueHandler.hasJsonNode(type),
                 visitor);
     }
 
@@ -102,7 +101,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         final Class<Length<?>> length = Cast.to(Length.class);
         return registerHasJsonNodeConstant(property,
                 length,
-                PixelLength::fromJsonNodePixel,
                 visitor);
     }
 
@@ -114,7 +112,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         final Class<Length<?>> length = Cast.to(Length.class);
         return registerHasJsonNodeConstant(property,
                 length,
-                NumberLength::fromJsonNode,
                 visitor);
     }
 
@@ -144,7 +141,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNodeColor,
             (c, v) -> v.visitBackgroundColor(c));
 
     /**
@@ -152,7 +148,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> BORDER_BOTTOM_COLOR = registerHasJsonNodeConstant("border-bottom-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (c, v) -> v.visitBorderBottomColor(c));
 
     /**
@@ -182,7 +177,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> BORDER_LEFT_COLOR = registerHasJsonNodeConstant("border-left-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (c, v) -> v.visitBorderLeftColor(c));
 
     /**
@@ -205,7 +199,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<BorderSpacing> BORDER_SPACING = registerHasJsonNodeConstant("border-spacing",
             BorderSpacing.class,
-            BorderSpacing::fromJsonNode,
             (l, v) -> v.visitBorderSpacing(l));
 
     /**
@@ -213,7 +206,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> BORDER_RIGHT_COLOR = registerHasJsonNodeConstant("border-right-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (c, v) -> v.visitBorderRightColor(c));
 
     /**
@@ -235,7 +227,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> BORDER_TOP_COLOR = registerHasJsonNodeConstant("border-top-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (c, v) -> v.visitBorderTopColor(c));
 
     /**
@@ -257,7 +248,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontFamilyName> FONT_FAMILY_NAME = registerHasJsonNodeConstant("font-family-name",
             FontFamilyName.class,
-            FontFamilyName::fromJsonNode,
             (f, v) -> v.visitFontFamilyName(f));
 
     /**
@@ -273,7 +263,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontSize> FONT_SIZE = registerHasJsonNodeConstant("font-size",
             FontSize.class,
-            FontSize::fromJsonNode,
             (f, v) -> v.visitFontSize(f));
 
     /**
@@ -305,7 +294,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontWeight> FONT_WEIGHT = registerHasJsonNodeConstant("font-weight",
             FontWeight.class,
-            FontWeight::fromJsonNode,
             (f, v) -> v.visitFontWeight(f));
 
     /**
@@ -343,7 +331,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<LetterSpacing> LETTER_SPACING = registerHasJsonNodeConstant("letter-spacing",
             LetterSpacing.class,
-            LetterSpacing::fromJsonNode,
             (l, v) -> v.visitLetterSpacing(l));
 
     /**
@@ -421,7 +408,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Opacity> OPACITY = registerHasJsonNodeConstant("opacity",
             Opacity.class,
-            Opacity::fromJsonNode,
             (o, v) -> v.visitOpacity(o));
 
     /**
@@ -429,7 +415,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
             ColorHslOrHsv.class,
-            Color::fromJsonNodeColor,
             (t, v) -> v.visitOutlineColor(t));
 
     /**
@@ -517,7 +502,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (t, v) -> v.visitTextColor(t));
 
     /**
@@ -533,7 +517,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ColorHslOrHsv> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
             ColorHslOrHsv.class,
-            ColorHslOrHsv::fromJsonNode,
             (t, v) -> v.visitTextDecorationColor(t));
 
     /**
@@ -571,7 +554,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerHasJsonNodeConstant("text-overflow",
             TextOverflow.class,
-            TextOverflow::fromJsonNode,
             (t, v) -> v.visitTextOverflow(t));
 
     /**
@@ -633,7 +615,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<WordSpacing> WORD_SPACING = registerHasJsonNodeConstant("word-spacing",
             WordSpacing.class,
-            WordSpacing::fromJsonNode,
             (w, v) -> v.visitWordSpacing(w));
 
     /**

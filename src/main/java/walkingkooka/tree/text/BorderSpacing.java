@@ -44,7 +44,7 @@ public final class BorderSpacing extends LengthTextStylePropertyValue implements
 
     // HasJsonNode.....................................................................................................
 
-    public static BorderSpacing fromJsonNode(final JsonNode node) {
+    static BorderSpacing fromJsonNode(final JsonNode node) {
         return with(Length.fromJsonNode(node));
     }
 

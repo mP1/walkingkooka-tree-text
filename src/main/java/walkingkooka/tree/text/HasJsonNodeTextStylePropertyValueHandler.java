@@ -30,18 +30,15 @@ final class HasJsonNodeTextStylePropertyValueHandler<H extends HasJsonNode> exte
     /**
      * Factory
      */
-    static <T extends HasJsonNode> HasJsonNodeTextStylePropertyValueHandler<T> with(final Class<T> type,
-                                                                                          final Function<JsonNode, T> fromJsonNode) {
-        return new HasJsonNodeTextStylePropertyValueHandler<>(type, fromJsonNode);
+    static <T extends HasJsonNode> HasJsonNodeTextStylePropertyValueHandler<T> with(final Class<T> type) {
+        return new HasJsonNodeTextStylePropertyValueHandler<>(type);
     }
 
     /**
      * Private ctor
      */
-    private HasJsonNodeTextStylePropertyValueHandler(final Class<H> type,
-                                                     final Function<JsonNode, H> fromJsonNode) {
+    private HasJsonNodeTextStylePropertyValueHandler(final Class<H> type) {
         super();
-        this.fromJsonNode = fromJsonNode;
         this.type = type;
     }
 
@@ -59,10 +56,8 @@ final class HasJsonNodeTextStylePropertyValueHandler<H extends HasJsonNode> exte
 
     @Override
     H fromJsonNode(final JsonNode node, final TextStylePropertyName<?> name) {
-        return this.fromJsonNode.apply(node);
+        return node.fromJsonNode(this.type);
     }
-
-    private final Function<JsonNode, H> fromJsonNode;
 
     @Override
     JsonNode toJsonNode(final H value) {

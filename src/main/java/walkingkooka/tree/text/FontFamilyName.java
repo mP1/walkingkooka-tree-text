@@ -57,7 +57,7 @@ public final class FontFamilyName implements Name,
     /**
      * Factory that creates a {@link FontFamilyName} from a {@link JsonNode}.
      */
-    public static FontFamilyName fromJsonNode(final JsonNode node) {
+    static FontFamilyName fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
         try {
