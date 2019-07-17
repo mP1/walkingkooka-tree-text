@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.color.Color;
 
 public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 

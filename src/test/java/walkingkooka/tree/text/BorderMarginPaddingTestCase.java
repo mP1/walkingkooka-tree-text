@@ -134,7 +134,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     @Test
     public final void testSetWidthDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#333"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
 
         final Direction direction = Direction.RIGHT;
         final T borderMarginPadding = this.createBorderMarginPadding(direction, TextStyle.with(properties));
@@ -153,7 +153,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final Direction direction = Direction.RIGHT;
 
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#444"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#444"));
         properties.put(this.widthPropertyName(direction), Length.pixel(1.5));
 
         final T borderMarginPadding = this.createBorderMarginPadding(direction, TextStyle.with(properties));

@@ -22,7 +22,6 @@ import walkingkooka.ToStringBuilderOption;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 
 import java.util.Objects;
 

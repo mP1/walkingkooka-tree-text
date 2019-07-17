@@ -17,14 +17,12 @@
 
 package walkingkooka.tree.text;
 
-import jdk.jshell.spi.ExecutionControl.RunException;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 
 import java.io.Serializable;
 import java.util.Objects;

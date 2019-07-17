@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
         implements ComparableTesting<FontWeight>,
         ConstantsTesting<FontWeight>,
-        SerializationTesting<FontWeight>  {
+        SerializationTesting<FontWeight> {
 
     private final static int VALUE = 456;
 

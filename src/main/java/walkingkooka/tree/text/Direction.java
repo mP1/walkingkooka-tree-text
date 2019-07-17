@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.color.ColorHslOrHsv;
+import walkingkooka.color.Color;
 
 /**
  * One of the four direction around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
@@ -31,7 +31,7 @@ public enum Direction {
         }
 
         @Override
-        TextStylePropertyName<ColorHslOrHsv> borderColorPropertyName() {
+        TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_BOTTOM_COLOR;
         }
 
@@ -62,7 +62,7 @@ public enum Direction {
         }
 
         @Override
-        TextStylePropertyName<ColorHslOrHsv> borderColorPropertyName() {
+        TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_LEFT_COLOR;
         }
 
@@ -93,7 +93,7 @@ public enum Direction {
         }
 
         @Override
-        TextStylePropertyName<ColorHslOrHsv> borderColorPropertyName() {
+        TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_RIGHT_COLOR;
         }
 
@@ -124,7 +124,7 @@ public enum Direction {
         }
 
         @Override
-        TextStylePropertyName<ColorHslOrHsv> borderColorPropertyName() {
+        TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_TOP_COLOR;
         }
 
@@ -195,7 +195,7 @@ public enum Direction {
 
     // property names...................................................................................................
 
-    abstract TextStylePropertyName<ColorHslOrHsv> borderColorPropertyName();
+    abstract TextStylePropertyName<Color> borderColorPropertyName();
 
     abstract TextStylePropertyName<BorderStyle> borderStylePropertyName();
 

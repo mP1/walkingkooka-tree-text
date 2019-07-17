@@ -87,7 +87,8 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
 
     @Test
     public final void testVisitor() {
-        new TextNodeVisitor(){}.accept(this.createNode());
+        new TextNodeVisitor() {
+        }.accept(this.createNode());
     }
 
     // helpers .........................................................................................................

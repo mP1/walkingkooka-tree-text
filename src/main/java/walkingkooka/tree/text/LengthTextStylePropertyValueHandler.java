@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 
 /**

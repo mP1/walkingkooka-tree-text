@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.color.ColorHslOrHsv;
+import walkingkooka.color.Color;
 
 import java.util.Optional;
 
@@ -34,11 +34,11 @@ public final class Border extends BorderMarginPadding {
         super(direction, textStyle);
     }
 
-    public Optional<ColorHslOrHsv> color() {
+    public Optional<Color> color() {
         return this.textStyle.get(this.direction.borderColorPropertyName());
     }
 
-    public Border setColor(final Optional<ColorHslOrHsv> color) {
+    public Border setColor(final Optional<Color> color) {
         return this.setProperty(this.direction.borderColorPropertyName(), color).cast();
     }
 

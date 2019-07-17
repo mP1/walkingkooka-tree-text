@@ -50,10 +50,10 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
 
     @Test
     public void testSetDifferentStyleName() {
-        final TextStyleName name = TextStyleName.with( "abc123");
+        final TextStyleName name = TextStyleName.with("abc123");
         final TextStyleNameNode node = TextStyleNameNode.with(name);
 
-        final TextStyleName name2 = TextStyleName.with( "different");
+        final TextStyleName name2 = TextStyleName.with("different");
         final TextStyleNameNode different = node.setStyleName(name2);
         assertNotSame(node, different);
 
@@ -297,7 +297,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
 
     private final static String STYLE_NAME = "styleName123";
 
-    private TextStyleNameNode styleName(final String name, final TextNode...children) {
+    private TextStyleNameNode styleName(final String name, final TextNode... children) {
         return TextStyleNameNode.with(TextStyleName.with(name))
                 .setChildren(Lists.of(children));
     }

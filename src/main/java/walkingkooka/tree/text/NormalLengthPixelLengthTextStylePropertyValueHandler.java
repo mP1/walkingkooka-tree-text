@@ -17,9 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.JsonNode;
-
 /**
  * A {@link TextStylePropertyValueHandler} that only allows {@link NormalLength} and {@link PixelLength} values.
  */

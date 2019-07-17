@@ -97,7 +97,7 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
 
     final void withFails(final Length<?> length) {
         assertThrows(IllegalArgumentException.class, () -> {
-           this.createPropertyValue(length);
+            this.createPropertyValue(length);
         });
     }
 

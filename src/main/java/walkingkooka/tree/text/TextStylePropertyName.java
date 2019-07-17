@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
@@ -137,17 +136,17 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Background color
+     * Background rgb
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
+            Color.class,
             (c, v) -> v.visitBackgroundColor(c));
 
     /**
      * border-bottom-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> BORDER_BOTTOM_COLOR = registerHasJsonNodeConstant("border-bottom-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> BORDER_BOTTOM_COLOR = registerHasJsonNodeConstant("border-bottom-color",
+            Color.class,
             (c, v) -> v.visitBorderBottomColor(c));
 
     /**
@@ -175,8 +174,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-left-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> BORDER_LEFT_COLOR = registerHasJsonNodeConstant("border-left-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerHasJsonNodeConstant("border-left-color",
+            Color.class,
             (c, v) -> v.visitBorderLeftColor(c));
 
     /**
@@ -204,8 +203,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-right-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> BORDER_RIGHT_COLOR = registerHasJsonNodeConstant("border-right-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerHasJsonNodeConstant("border-right-color",
+            Color.class,
             (c, v) -> v.visitBorderRightColor(c));
 
     /**
@@ -225,8 +224,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-top-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> BORDER_TOP_COLOR = registerHasJsonNodeConstant("border-top-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerHasJsonNodeConstant("border-top-color",
+            Color.class,
             (c, v) -> v.visitBorderTopColor(c));
 
     /**
@@ -413,8 +412,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * outline-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
+            Color.class,
             (t, v) -> v.visitOutlineColor(t));
 
     /**
@@ -498,10 +497,10 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitTextAlignment(t));
 
     /**
-     * Text color
+     * Text rgb
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
+            Color.class,
             (t, v) -> v.visitTextColor(t));
 
     /**
@@ -515,8 +514,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-decoration-color
      */
-    public final static TextStylePropertyName<ColorHslOrHsv> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
-            ColorHslOrHsv.class,
+    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
+            Color.class,
             (t, v) -> v.visitTextDecorationColor(t));
 
     /**

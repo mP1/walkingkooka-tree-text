@@ -52,7 +52,7 @@ public final class NormalLengthPixelLengthTextStylePropertyValueHandlerTest exte
 
     @Test
     public void testFromJsonNodeNoneFails() {
-        assertThrows(TextStylePropertyValueException.class,() -> {
+        assertThrows(TextStylePropertyValueException.class, () -> {
             this.handler().fromJsonNode(Length.none().toJsonNode(), this.propertyName());
         });
     }
@@ -65,7 +65,7 @@ public final class NormalLengthPixelLengthTextStylePropertyValueHandlerTest exte
 
     @Test
     public void testFromJsonNodeNumberFails() {
-        assertThrows(TextStylePropertyValueException.class,() -> {
+        assertThrows(TextStylePropertyValueException.class, () -> {
             this.handler().fromJsonNode(Length.number(1).toJsonNode(), this.propertyName());
         });
     }
