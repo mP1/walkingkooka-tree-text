@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.tree.visit.Visiting;
 import walkingkooka.tree.visit.Visitor;
 
@@ -77,11 +76,11 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
 
     // properties..........................................................................................................
 
-    protected void visitBackgroundColor(final ColorHslOrHsv color) {
+    protected void visitBackgroundColor(final Color color) {
         // nop
     }
 
-    protected void visitBorderBottomColor(final ColorHslOrHsv color) {
+    protected void visitBorderBottomColor(final Color color) {
         // nop
     }
 
@@ -97,7 +96,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitBorderLeftColor(final ColorHslOrHsv color) {
+    protected void visitBorderLeftColor(final Color color) {
         // nop
     }
 
@@ -109,7 +108,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitBorderRightColor(final ColorHslOrHsv color) {
+    protected void visitBorderRightColor(final Color color) {
         // nop
     }
 
@@ -125,7 +124,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitBorderTopColor(final ColorHslOrHsv color) {
+    protected void visitBorderTopColor(final Color color) {
         // nop
     }
 
@@ -233,7 +232,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitOutlineColor(final ColorHslOrHsv color) {
+    protected void visitOutlineColor(final Color color) {
         // nop
     }
 
@@ -285,7 +284,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitTextColor(final ColorHslOrHsv textColor) {
+    protected void visitTextColor(final Color textColor) {
         // nop
     }
 
@@ -293,7 +292,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitTextDecorationColor(final ColorHslOrHsv textDecorationColor) {
+    protected void visitTextDecorationColor(final Color textDecorationColor) {
         // nop
     }
 

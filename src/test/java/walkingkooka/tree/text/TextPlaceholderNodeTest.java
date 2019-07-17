@@ -25,7 +25,7 @@ import walkingkooka.tree.visit.Visiting;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlaceholderNode, TextPlaceholderName>{
+public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlaceholderNode, TextPlaceholderName> {
 
     // HasText ........................................................................................................
 

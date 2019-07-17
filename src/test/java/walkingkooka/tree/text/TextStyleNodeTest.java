@@ -195,8 +195,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testSetAttributesAndTextStyle() {
         final Map<TextStylePropertyName<?>, Object> style = Maps.sorted();
-        style.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseColor("blue"));
-        style.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("lime"));
+        style.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("blue"));
+        style.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("lime"));
         style.put(TextStylePropertyName.TEXT_ALIGNMENT, TextAlignment.RIGHT);
 
         final TextNode node = TextNode.style(TextNode.NO_CHILDREN)
@@ -244,7 +244,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testToJsonNodeWithStyleNode() {
         this.toJsonNodeAndCheck(textStyleNode()
-                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
+                        .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
                 "{\"textStyle\": {\"background-color\": \"#123456\"}}");
     }
 
@@ -255,6 +255,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         .parentOrFail(),
                 "{\"textStyle\": {\"background-color\": \"#123456\"}, \"values\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
     }
+
     @Test
     public void testFromJsonNodeWithoutChildren() {
         this.fromJsonNodeAndCheck("{}",
@@ -338,7 +339,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.MIN_HEIGHT, Length.pixel(10.0));
         styleNode.put(TextStylePropertyName.MIN_WIDTH, Length.pixel(11.0));
         styleNode.put(TextStylePropertyName.OPACITY, Opacity.with(0.5));
-        styleNode.put(TextStylePropertyName.OUTLINE_COLOR, Color.parseColor("red"));
+        styleNode.put(TextStylePropertyName.OUTLINE_COLOR, Color.parseRgb("red"));
         styleNode.put(TextStylePropertyName.OUTLINE_OFFSET, Length.pixel(0.25));
         styleNode.put(TextStylePropertyName.OUTLINE_STYLE, OutlineStyle.HIDDEN);
         styleNode.put(TextStylePropertyName.OUTLINE_WIDTH, Length.pixel(0.5));
@@ -458,8 +459,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testToStringWithChildrenAndAttributes() {
         this.toStringAndCheck(text1()
-                .setAttributes(Maps.of(TextStylePropertyName.with("style-1"), "value-1"))
-                .parentOrFail(),
+                        .setAttributes(Maps.of(TextStylePropertyName.with("style-1"), "value-1"))
+                        .parentOrFail(),
                 "{style-1: \"value-1\"}[\"text-1a\"]");
     }
 

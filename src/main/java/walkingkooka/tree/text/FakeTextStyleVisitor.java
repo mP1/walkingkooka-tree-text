@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.tree.visit.Visiting;
 
 public class FakeTextStyleVisitor extends TextStyleVisitor {
@@ -48,12 +47,12 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBackgroundColor(final ColorHslOrHsv color) {
+    protected void visitBackgroundColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    protected void visitBorderBottomColor(final ColorHslOrHsv color) {
+    protected void visitBorderBottomColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
@@ -73,7 +72,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBorderLeftColor(final ColorHslOrHsv color) {
+    protected void visitBorderLeftColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
@@ -88,7 +87,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBorderRightColor(final ColorHslOrHsv color) {
+    protected void visitBorderRightColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
@@ -108,7 +107,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBorderTopColor(final ColorHslOrHsv color) {
+    protected void visitBorderTopColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
@@ -243,7 +242,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitOutlineColor(final ColorHslOrHsv color) {
+    protected void visitOutlineColor(final Color color) {
         throw new UnsupportedOperationException();
     }
 
@@ -308,7 +307,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextColor(final ColorHslOrHsv textColor) {
+    protected void visitTextColor(final Color textColor) {
         throw new UnsupportedOperationException();
     }
 
@@ -318,7 +317,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextDecorationColor(final ColorHslOrHsv textDecorationColor) {
+    protected void visitTextDecorationColor(final Color textDecorationColor) {
         throw new UnsupportedOperationException();
     }
 

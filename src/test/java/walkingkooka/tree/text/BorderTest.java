@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 
 import java.util.Map;
 import java.util.Optional;
@@ -31,19 +30,19 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
-    // color............................................................................................................
+    // rgb............................................................................................................
 
     @Test
     public final void testColor() {
-        final ColorHslOrHsv color = ColorHslOrHsv.parse("red");
+        final Color color = Color.parse("red");
         final Direction direction = Direction.BOTTOM;
         final Border border = direction.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_COLOR, color));
-        assertEquals(Optional.of(color), border.color(), "color");
+        assertEquals(Optional.of(color), border.color(), "rgb");
     }
 
     @Test
     public final void testSetColorSame() {
-        final ColorHslOrHsv color = ColorHslOrHsv.parse("blue");
+        final Color color = Color.parse("blue");
         final Direction direction = Direction.TOP;
         final Border border = direction.border(this.textStyle(TextStylePropertyName.BORDER_TOP_COLOR, color));
         assertSame(border, border.setColor(Optional.of(color)));
@@ -51,11 +50,11 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
     @Test
     public final void testSetColorDifferent() {
-        final ColorHslOrHsv color = ColorHslOrHsv.parse("lime");
+        final Color color = Color.parse("lime");
         final Direction direction = Direction.LEFT;
         final Border border = direction.border(this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, color));
 
-        final ColorHslOrHsv differentColor = ColorHslOrHsv.parse("yellow");
+        final Color differentColor = Color.parse("yellow");
         final Border different = border.setColor(Optional.of(differentColor));
 
         assertNotSame(border, different);
@@ -65,13 +64,13 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetColorDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#333"));
-        properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseColor("aqua"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final Direction direction = Direction.RIGHT;
         final Border border = direction.border(TextStyle.with(properties));
 
-        final ColorHslOrHsv differentColor = ColorHslOrHsv.parse("yellow");
+        final Color differentColor = Color.parse("yellow");
         final Border different = border.setColor(Optional.of(differentColor));
 
         assertNotSame(border, different);
@@ -83,8 +82,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetColorRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#333"));
-        properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseColor("aqua"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final Direction direction = Direction.RIGHT;
         final Border border = direction.border(TextStyle.with(properties));
@@ -131,7 +130,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetStyleDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#333"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.OUTSET);
 
         final Direction direction = Direction.RIGHT;
@@ -149,7 +148,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetStyleRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseColor("#333"));
+        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOUBLE);
 
         final Direction direction = Direction.RIGHT;
@@ -179,7 +178,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     Border createBorderMarginPadding(final Direction direction, final TextStyle textStyle) {
         return direction.border(textStyle);
     }
-    
+
     @Override
     TextStylePropertyName<Length<?>> widthPropertyName(final Direction direction) {
         return direction.borderWidthPropertyName();

@@ -61,7 +61,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testMergeNullFails() {
         assertThrows(NullPointerException.class, () -> {
-           this.createObject().merge(null);
+            this.createObject().merge(null);
         });
     }
 
@@ -151,8 +151,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     final <TT> void getAndCheck(final TextStyle textStyle,
-                               final TextStylePropertyName<TT> propertyName,
-                               final TT value) {
+                                final TextStylePropertyName<TT> propertyName,
+                                final TT value) {
         assertEquals(Optional.ofNullable(value),
                 textStyle.get(propertyName),
                 () -> textStyle + " get " + propertyName);

@@ -22,7 +22,6 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 
@@ -278,7 +277,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         final TextStylePropertyName<FontFamilyName> property2 = this.property2();
         final FontFamilyName value2 = this.value2();
 
-        final TextStylePropertyName<ColorHslOrHsv> property3 = TextStylePropertyName.BACKGROUND_COLOR;
+        final TextStylePropertyName<Color> property3 = TextStylePropertyName.BACKGROUND_COLOR;
         final Color value3 = Color.fromRgb(0x123456);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
@@ -418,14 +417,14 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
     }
 
     private <X> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
-                                                       final X value1) {
+                                                  final X value1) {
         return this.createTextStyle(Maps.of(property1, value1));
     }
 
     private <X, Y> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
-                                                          final X value1,
-                                                          final TextStylePropertyName<Y> property2,
-                                                          final Y value2) {
+                                                     final X value1,
+                                                     final TextStylePropertyName<Y> property2,
+                                                     final Y value2) {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(property1, value1);
         map.put(property2, value2);
@@ -433,11 +432,11 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
     }
 
     private <X, Y, Z> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
-                                                             final X value1,
-                                                             final TextStylePropertyName<Y> property2,
-                                                             final Y value2,
-                                                             final TextStylePropertyName<Z> property3,
-                                                             final Z value3) {
+                                                        final X value1,
+                                                        final TextStylePropertyName<Y> property2,
+                                                        final Y value2,
+                                                        final TextStylePropertyName<Z> property3,
+                                                        final Z value3) {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(property1, value1);
         map.put(property2, value2);

@@ -20,10 +20,9 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.tree.json.HasJsonNode;
 
-public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv>, ColorHslOrHsv> {
+public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<HasJsonNodeTextStylePropertyValueHandler<Color>, Color> {
 
     @Test
     public void testFromJsonNode() {
@@ -51,27 +50,27 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(this.handler(), ColorHslOrHsv.class.getSimpleName());
+        this.toStringAndCheck(this.handler(), Color.class.getSimpleName());
     }
 
     @Override
-    HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv> handler() {
-        return HasJsonNodeTextStylePropertyValueHandler.with(ColorHslOrHsv.class);
+    HasJsonNodeTextStylePropertyValueHandler<Color> handler() {
+        return HasJsonNodeTextStylePropertyValueHandler.with(Color.class);
     }
 
     @Override
-    TextStylePropertyName<ColorHslOrHsv> propertyName() {
+    TextStylePropertyName<Color> propertyName() {
         return TextStylePropertyName.BACKGROUND_COLOR;
     }
 
     @Override
-    ColorHslOrHsv propertyValue() {
+    Color propertyValue() {
         return Color.BLACK;
     }
 
     @Override
     String propertyValueType() {
-        return ColorHslOrHsv.class.getSimpleName();
+        return Color.class.getSimpleName();
     }
 
     @Override
@@ -80,7 +79,7 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
     }
 
     @Override
-    public Class<HasJsonNodeTextStylePropertyValueHandler<ColorHslOrHsv>> type() {
+    public Class<HasJsonNodeTextStylePropertyValueHandler<Color>> type() {
         return Cast.to(HasJsonNodeTextStylePropertyValueHandler.class);
     }
 }

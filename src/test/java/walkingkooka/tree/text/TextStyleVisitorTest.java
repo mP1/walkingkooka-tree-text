@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.color.ColorHslOrHsv;
 import walkingkooka.tree.visit.Visiting;
 import walkingkooka.type.JavaVisibility;
 
@@ -66,7 +65,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
 
     @Test
     public void testVisitTextStylePropertyNameSkip() {
-        final TextStylePropertyName<ColorHslOrHsv> propertyName = TextStylePropertyName.TEXT_COLOR;
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.TEXT_COLOR;
         final Color value = Color.BLACK;
         final TextStyle textStyle = textStyle(propertyName, value);
 
@@ -99,7 +98,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBackgroundColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBackgroundColor(final ColorHslOrHsv c) {
+            protected void visitBackgroundColor(final Color c) {
                 this.visited = c;
             }
         }.accept(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
@@ -109,10 +108,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBorderBottomColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBorderBottomColor(final ColorHslOrHsv c) {
+            protected void visitBorderBottomColor(final Color c) {
                 this.visited = c;
             }
-        }.accept(TextStylePropertyName.BORDER_BOTTOM_COLOR, ColorHslOrHsv.parse("red"));
+        }.accept(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("red"));
     }
 
     @Test
@@ -149,10 +148,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBorderLeftColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBorderLeftColor(final ColorHslOrHsv c) {
+            protected void visitBorderLeftColor(final Color c) {
                 this.visited = c;
             }
-        }.accept(TextStylePropertyName.BORDER_LEFT_COLOR, ColorHslOrHsv.parse("green"));
+        }.accept(TextStylePropertyName.BORDER_LEFT_COLOR, Color.parse("green"));
     }
 
     @Test
@@ -179,10 +178,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBorderRightColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBorderRightColor(final ColorHslOrHsv c) {
+            protected void visitBorderRightColor(final Color c) {
                 this.visited = c;
             }
-        }.accept(TextStylePropertyName.BORDER_RIGHT_COLOR, ColorHslOrHsv.parse("yellow"));
+        }.accept(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parse("yellow"));
     }
 
     @Test
@@ -219,10 +218,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBorderTopColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBorderTopColor(final ColorHslOrHsv c) {
+            protected void visitBorderTopColor(final Color c) {
                 this.visited = c;
             }
-        }.accept(TextStylePropertyName.BORDER_TOP_COLOR, ColorHslOrHsv.parse("pink"));
+        }.accept(TextStylePropertyName.BORDER_TOP_COLOR, Color.parse("pink"));
     }
 
     @Test
@@ -284,7 +283,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.FONT_STRETCH, FontStretch.CONDENSED);
     }
-    
+
     @Test
     public void testVisitFontStyle() {
         new TestTextStyleVisitor() {
@@ -314,7 +313,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.FONT_WEIGHT, FontWeight.BOLD);
     }
-    
+
     @Test
     public void testVisitHangingPunctuation() {
         new TestTextStyleVisitor() {
@@ -344,7 +343,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.HORIZONTAL_ALIGNMENT, HorizontalAlignment.LEFT);
     }
-    
+
     @Test
     public void testVisitHyphens() {
         new TestTextStyleVisitor() {
@@ -435,7 +434,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         }.accept(TextStylePropertyName.MARGIN_TOP, Length.parse("1px"));
     }
 
-       @Test
+    @Test
     public void testVisitMaxHeight() {
         new TestTextStyleVisitor() {
             @Override
@@ -489,10 +488,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitOutlineColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitOutlineColor(final ColorHslOrHsv c) {
+            protected void visitOutlineColor(final Color c) {
                 this.visited = c;
             }
-        }.accept(TextStylePropertyName.OUTLINE_COLOR, Color.parseColor("red"));
+        }.accept(TextStylePropertyName.OUTLINE_COLOR, Color.parseRgb("red"));
     }
 
     @Test
@@ -584,7 +583,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.PADDING_TOP, Length.parse("1px"));
     }
-    
+
     @Test
     public void testVisitTabSize() {
         new TestTextStyleVisitor() {
@@ -614,12 +613,12 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.TEXT_ALIGNMENT, TextAlignment.RIGHT);
     }
-    
+
     @Test
     public void testVisitTextColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextColor(final ColorHslOrHsv c) {
+            protected void visitTextColor(final Color c) {
                 this.visited = c;
             }
         }.accept(TextStylePropertyName.TEXT_COLOR, Color.BLACK);
@@ -639,7 +638,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitTextDecorationColor() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextDecorationColor(final ColorHslOrHsv t) {
+            protected void visitTextDecorationColor(final Color t) {
                 this.visited = t;
             }
         }.accept(TextStylePropertyName.TEXT_DECORATION_COLOR, Color.fromRgb(0x123));
@@ -684,7 +683,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER);
     }
-    
+
     @Test
     public void testVisitTextOverflow() {
         new TestTextStyleVisitor() {

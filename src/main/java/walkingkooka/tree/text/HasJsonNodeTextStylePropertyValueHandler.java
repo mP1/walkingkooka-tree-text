@@ -20,8 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
-import java.util.function.Function;
-
 /**
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type that also implements {@link walkingkooka.tree.json.HasJsonNode}
  */

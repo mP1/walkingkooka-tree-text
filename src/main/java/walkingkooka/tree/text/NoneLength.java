@@ -20,10 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.HasJsonNode;
-import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 
-import java.util.Objects;
 import java.util.Optional;
 
 /**
