@@ -21,7 +21,6 @@ import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.HasJsonNodeStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.type.JavaVisibility;
 
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N> & HasJsonNode> extends TextNodeTestCase<N>
