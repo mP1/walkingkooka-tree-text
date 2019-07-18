@@ -99,7 +99,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
 
     @Test
     public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test

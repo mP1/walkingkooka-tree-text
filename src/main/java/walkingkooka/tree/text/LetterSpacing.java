@@ -46,11 +46,7 @@ public final class LetterSpacing extends LengthTextStylePropertyValue implements
     // HasJsonNode.....................................................................................................
 
     static LetterSpacing fromJsonNode(final JsonNode node) {
-        try {
-            return with(Length.fromJsonNode(node));
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return with(Length.fromJsonNode(node));
     }
 
     @Override

@@ -241,11 +241,7 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
                                                          final Function<String, L> factory) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return factory.apply(node.stringValueOrFail());
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return factory.apply(node.stringValueOrFail());
     }
 
     @Override

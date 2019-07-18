@@ -60,11 +60,7 @@ public final class FontFamilyName implements Name,
     static FontFamilyName fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return with(node.stringValueOrFail());
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return with(node.stringValueOrFail());
     }
 
     @Override

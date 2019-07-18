@@ -52,7 +52,7 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     @Test
     public final void testFromJsonStringNodeEmptyFails() {
-        this.fromJsonNodeFails(JsonNode.string(""), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.string(""), IllegalArgumentException.class);
     }
 
     @Test

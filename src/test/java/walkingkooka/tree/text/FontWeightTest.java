@@ -71,7 +71,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testFromJsonNodeInvalidStringFails() {
-        this.fromJsonNodeFails(JsonNode.string("not bold or normal"), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.string("not bold or normal"), IllegalArgumentException.class);
     }
 
     @Test
@@ -86,7 +86,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test
