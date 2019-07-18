@@ -297,13 +297,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
                                                 final Function<JsonNode, T> factory) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return factory.apply(node);
-        } catch (final FromJsonNodeException cause) {
-            throw cause;
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return factory.apply(node);
     }
 
     static {

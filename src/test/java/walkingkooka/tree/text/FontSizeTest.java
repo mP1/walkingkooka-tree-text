@@ -85,7 +85,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
 
     @Test
     public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test

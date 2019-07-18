@@ -92,15 +92,9 @@ public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined
     static Opacity fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return node.isString() ?
-                    fromJsonStringNode(node.stringValueOrFail(), node) :
-                    with(node.numberValueOrFail().doubleValue());
-        } catch (final FromJsonNodeException cause) {
-            throw cause;
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return node.isString() ?
+                fromJsonStringNode(node.stringValueOrFail(), node) :
+                with(node.numberValueOrFail().doubleValue());
     }
 
     private static Opacity fromJsonStringNode(final String value,

@@ -37,7 +37,7 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
 
     @Test
     public void testFromJsonNodeStringInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.string(""), JsonNodeException.class);
+        this.fromJsonNodeFails(JsonNode.string(""), IllegalArgumentException.class);
     }
 
     @Test

@@ -88,11 +88,7 @@ public final class FontSize implements Comparable<FontSize>, HashCodeEqualsDefin
     static FontSize fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return with(node.numberValueOrFail().intValue());
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
+        return with(node.numberValueOrFail().intValue());
     }
 
     @Override

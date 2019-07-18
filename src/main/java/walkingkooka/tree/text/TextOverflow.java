@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
@@ -91,14 +90,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     static TextOverflow fromJsonNode(final JsonNode node) {
         Objects.requireNonNull(node, "node");
 
-        try {
-            return fromJsonStringNode0(node.stringValueOrFail());
-        } catch (final RuntimeException cause) {
-            throw new FromJsonNodeException(cause.getMessage(), node, cause);
-        }
-    }
-
-    private static TextOverflow fromJsonStringNode0(final String value) {
+        final String value = node.stringValueOrFail();
         return value.startsWith(STRING_PREFIX) ?
                 string(value.substring(STRING_PREFIX.length())) :
                 CLIP_TEXT.equals(value) ?
