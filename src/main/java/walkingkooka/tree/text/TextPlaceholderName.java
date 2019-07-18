@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
 /**
@@ -38,7 +39,13 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
     // HasJsonNode.....................................................................................................
 
     static TextPlaceholderName fromJsonNode(final JsonNode from) {
-        return TextPlaceholderName.with(from.stringValueOrFail());
+        return with(from.stringValueOrFail());
+    }
+
+    static {
+        HasJsonNode.register("text-placeholder-name",
+                TextPlaceholderName::fromJsonNode,
+                TextPlaceholderName.class);
     }
 
     // Object..........................................................................................................

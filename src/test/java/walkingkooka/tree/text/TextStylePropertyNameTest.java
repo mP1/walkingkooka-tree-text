@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.tree.json.JsonNode;
 import walkingkooka.type.FieldAttributes;
 
 import java.lang.reflect.Field;
@@ -66,6 +67,11 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Override
     public CaseSensitivity caseSensitivity() {
         return CaseSensitivity.SENSITIVE;
+    }
+
+    @Override
+    public TextStylePropertyName fromJsonNode(final JsonNode jsonNode) {
+        return TextStylePropertyName.fromJsonNode(jsonNode);
     }
 
     @Override

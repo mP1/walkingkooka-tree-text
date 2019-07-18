@@ -681,8 +681,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     // HasJsonNode.....................................................................................................
 
-    static TextStylePropertyName<?> fromJsonNodeName(final JsonNode node) {
-        return TextStylePropertyName.with(node.name().value());
+    static TextStylePropertyName<?> fromJsonNode(final JsonNode node) {
+        return with(node.name().value());
     }
 
     JsonNodeName toJsonNodeName() {
@@ -690,6 +690,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     private final JsonNodeName jsonNodeName;
+
+    static {
+        HasJsonNode.register("text-style-property-name",
+                TextStylePropertyName::fromJsonNode,
+                TextStylePropertyName.class);
+    }
+
+    // TextStyleVisitor.................................................................................................
 
     /**
      * Dispatches to the appropriate {@link TextStyleVisitor} visit method.

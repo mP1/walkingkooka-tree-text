@@ -25,6 +25,7 @@ import walkingkooka.test.IsMethodTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.test.TypeNameTesting;
+import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
@@ -37,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting<L>,
-        HasJsonNodeTesting<L>,
+        HasJsonNodeStringTesting<L>,
         IsMethodTesting<L>,
         ParseStringTesting<L>,
         ToStringTesting<L>,
@@ -45,26 +46,6 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
 
     LengthTestCase() {
         super();
-    }
-
-    @Test
-    public final void testFromJsonBooleanFails() {
-        this.fromJsonNodeFails(JsonNode.booleanNode(true), JsonNodeException.class);
-    }
-
-    @Test
-    public final void testFromJsonNumberFails() {
-        this.fromJsonNodeFails(JsonNode.number(11), JsonNodeException.class);
-    }
-
-    @Test
-    public final void testFromJsonArrayFails() {
-        this.fromJsonNodeFails(JsonNode.array(), JsonNodeException.class);
-    }
-
-    @Test
-    public final void testFromJsonObjectFails() {
-        this.fromJsonNodeFails(JsonNode.object(), JsonNodeException.class);
     }
 
     @Test

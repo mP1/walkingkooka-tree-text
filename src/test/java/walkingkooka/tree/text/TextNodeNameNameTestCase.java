@@ -19,10 +19,13 @@ package walkingkooka.tree.text;
 
 import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
+import walkingkooka.tree.json.HasJsonNode;
+import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.type.JavaVisibility;
 
-public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>
-        implements NameTesting2<N, N> {
+public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N> & HasJsonNode> extends TextNodeTestCase<N>
+        implements NameTesting2<N, N>,
+        HasJsonNodeStringTesting<N> {
 
     TextNodeNameNameTestCase() {
         super();
@@ -72,6 +75,13 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
     @Override
     public final JavaVisibility typeVisibility() {
         return JavaVisibility.PUBLIC;
+    }
+
+    // HasJsonNodeTesting...............................................................................................
+
+    @Override
+    public final N createHasJsonNode() {
+        return this.createObject();
     }
 
     // TypeNameTesting...................................................................................................

@@ -19,11 +19,12 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.test.ClassTesting2;
+import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.type.JavaVisibility;
 
-public final class TextOverflowTest implements ClassTesting2<TextOverflow>, HasJsonNodeTesting<TextOverflow> {
+public final class TextOverflowTest implements ClassTesting2<TextOverflow>, HasJsonNodeStringTesting<TextOverflow> {
 
     @Test
     public void testClipJsonRoundtrip() {
