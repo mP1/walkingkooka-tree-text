@@ -19,6 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.tree.json.HasJsonNode;
+import walkingkooka.tree.json.JsonNode;
 
 /**
  * The name of an {@link TextNode}.
@@ -51,4 +53,16 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
     }
 
     private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
+
+    // HasJsonNode.....................................................................................................
+
+    static TextNodeName fromJsonNode(final JsonNode node) {
+        return with(node.stringValueOrFail());
+    }
+
+    static {
+        HasJsonNode.register("text-node-name",
+                TextNodeName::fromJsonNode,
+                TextNodeName.class);
+    }
 }
