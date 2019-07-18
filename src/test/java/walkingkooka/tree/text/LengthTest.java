@@ -21,12 +21,12 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ParseStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
+import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.type.JavaVisibility;
 
 public final class LengthTest implements ClassTesting2<Length<?>>,
-        HasJsonNodeTesting<Length<?>>,
+        HasJsonNodeStringTesting<Length<?>>,
         ParseStringTesting<Length<?>> {
 
     @Test

@@ -22,7 +22,7 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
+import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.type.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextStylePropertyValue> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting<L>,
-        HasJsonNodeTesting<L>,
+        HasJsonNodeStringTesting<L>,
         ParseStringTesting<L>,
         ToStringTesting<L> {
 
