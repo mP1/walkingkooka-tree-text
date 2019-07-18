@@ -21,12 +21,14 @@ import walkingkooka.Cast;
 import walkingkooka.naming.Name;
 import walkingkooka.predicate.character.CharPredicate;
 import walkingkooka.predicate.character.CharPredicates;
+import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
 /**
  * Base class of all {@link Name names} in this package.
  */
-abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> implements Name, Comparable<N> {
+abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> implements Name, Comparable<N>,
+        HasJsonNode {
 
     static String checkName(final String name) {
         CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(name,
@@ -50,11 +52,6 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     }
 
     final String name;
-
-
-    final JsonNode toJsonNode() {
-        return JsonNode.string(this.name);
-    }
 
     // Object..........................................................................................................
 
@@ -86,5 +83,12 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     @Override
     public final int compareTo(final N other) {
         return this.caseSensitivity().comparator().compare(this.name, other.name);
+    }
+
+    // HasJsonNode......................................................................................................
+
+    @Override
+    public final JsonNode toJsonNode() {
+        return JsonNode.string(this.name);
     }
 }
