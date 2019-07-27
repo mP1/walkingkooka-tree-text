@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.test.Fake;
-import walkingkooka.tree.visit.Visiting;
+import walkingkooka.visit.Visiting;
 
 public class FakeTextNodeVisitor extends TextNodeVisitor implements Fake {
 

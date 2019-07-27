@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.color.Color;
-import walkingkooka.tree.visit.Visiting;
-import walkingkooka.tree.visit.Visitor;
+import walkingkooka.visit.Visiting;
+import walkingkooka.visit.Visitor;
 
 import java.util.Map.Entry;
 import java.util.Objects;

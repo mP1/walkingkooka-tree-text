@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.visit.VisitorTesting;
+import walkingkooka.visit.VisitorTesting;
 
 public interface TextStyleVisitorTesting<V extends TextStyleVisitor> extends VisitorTesting<V, TextStyle> {
 
