@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.color.Color;
-import walkingkooka.tree.visit.Visiting;
+import walkingkooka.visit.Visiting;
 
 public class FakeTextStyleVisitor extends TextStyleVisitor {
 

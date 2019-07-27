@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
-import walkingkooka.tree.json.FromJsonNodeException;
 import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 
