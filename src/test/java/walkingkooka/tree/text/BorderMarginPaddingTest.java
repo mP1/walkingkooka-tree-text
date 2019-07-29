@@ -17,10 +17,17 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.type.JavaVisibility;
 
 public final class BorderMarginPaddingTest implements ClassTesting2<BorderMarginPadding> {
+
+    @Test
+    @Override
+    public void testAllMethodsVisibility() {
+        this.allMethodsVisibilityCheck("direction", "length", "textStyle", "width");
+    }
 
     @Override
     public Class<BorderMarginPadding> type() {
