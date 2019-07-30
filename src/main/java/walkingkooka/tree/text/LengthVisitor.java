@@ -24,10 +24,11 @@ import java.util.Objects;
 
 public abstract class LengthVisitor extends Visitor<Length<?>> {
 
-    protected LengthVisitor() {
+    LengthVisitor() {
         super();
     }
 
+    @Override
     public final void accept(final Length<?> length) {
         Objects.requireNonNull(length, "length");
         this.accept0(length);
