@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -63,7 +63,7 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements Ha
         assertEquals(2, TextNode.absoluteNodeSelector()
                 .descendant()
                 .named(Text.NAME)
-                .stream(node, NodeSelectorContexts.basicFunctions(), Converters.fake(), DecimalNumberContexts.fake(), TextNode.class)
+                .stream(node, NodeSelectorContexts.basicFunctions(), Converters.fake(), ConverterContexts.fake(), TextNode.class)
                 .count());
     }
 
