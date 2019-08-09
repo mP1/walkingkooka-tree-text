@@ -31,12 +31,12 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
 
     @Test
     public void testParseInvalidTextFails() {
-        this.parseFails("12px", IllegalArgumentException.class);
+        this.parseStringFails("12px", IllegalArgumentException.class);
     }
 
     @Test
     public void testParse() {
-        this.parseAndCheck("none", NoneLength.INSTANCE);
+        this.parseStringAndCheck("none", NoneLength.INSTANCE);
     }
 
     @Test
@@ -104,7 +104,7 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
     // ParseStringTesting...............................................................................................
 
     @Override
-    public NoneLength parse(final String text) {
+    public NoneLength parseString(final String text) {
         return Length.parseNone(text);
     }
     // HasJsonNodeTesting...............................................................................................

@@ -31,22 +31,22 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Test
     public void testParseInvalidNumberFails() {
-        this.parseFails("A", IllegalArgumentException.class);
+        this.parseStringFails("A", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseFails("12EM", IllegalArgumentException.class);
+        this.parseStringFails("12EM", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseIncorrectUnitCaseFails() {
-        this.parseFails("12PX", IllegalArgumentException.class);
+        this.parseStringFails("12PX", IllegalArgumentException.class);
     }
 
     @Test
     public void testParse() {
-        this.parseAndCheck("12", NumberLength.with(12L));
+        this.parseStringAndCheck("12", NumberLength.with(12L));
     }
 
     @Test
@@ -132,7 +132,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
     // ParseStringTesting...............................................................................................
 
     @Override
-    public NumberLength parse(final String text) {
+    public NumberLength parseString(final String text) {
         return NumberLength.parseNumber(text);
     }
     // HasJsonNodeTesting...............................................................................................

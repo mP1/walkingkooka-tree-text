@@ -55,7 +55,7 @@ public final class WordSpacingTest extends LengthTextStylePropertyValueTestCase<
     // ParseStringTesting...............................................................................................
 
     @Override
-    public WordSpacing parse(final String text) {
+    public WordSpacing parseString(final String text) {
         return WordSpacing.parse(text);
     }
 

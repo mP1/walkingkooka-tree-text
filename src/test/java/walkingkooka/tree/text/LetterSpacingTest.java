@@ -55,7 +55,7 @@ public final class LetterSpacingTest extends LengthTextStylePropertyValueTestCas
     // ParseStringTesting...............................................................................................
 
     @Override
-    public LetterSpacing parse(final String text) {
+    public LetterSpacing parseString(final String text) {
         return LetterSpacing.parse(text);
     }
 
