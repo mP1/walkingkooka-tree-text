@@ -55,7 +55,7 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
     @Test
     public final void testParse() {
         final L propertyValue = this.createPropertyValue();
-        this.parseAndCheck(propertyValue.toString(), propertyValue);
+        this.parseStringAndCheck(propertyValue.toString(), propertyValue);
     }
 
     @Test
@@ -118,12 +118,12 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
     // ParseStringTesting...............................................................................................
 
     @Override
-    public final Class<? extends RuntimeException> parseFailedExpected(final Class<? extends RuntimeException> expected) {
+    public final Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
         return expected;
     }
 
     @Override
-    public final RuntimeException parseFailedExpected(final RuntimeException expected) {
+    public final RuntimeException parseStringFailedExpected(final RuntimeException expected) {
         return expected;
     }
 

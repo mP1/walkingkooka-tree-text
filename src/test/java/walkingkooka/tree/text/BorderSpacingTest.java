@@ -55,7 +55,7 @@ public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCas
     // ParseStringTesting...............................................................................................
 
     @Override
-    public BorderSpacing parse(final String text) {
+    public BorderSpacing parseString(final String text) {
         return BorderSpacing.parse(text);
     }
 

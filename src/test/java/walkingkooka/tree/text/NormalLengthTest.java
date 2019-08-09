@@ -31,12 +31,12 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
 
     @Test
     public void testParseInvalidTextFails() {
-        this.parseFails("12px", IllegalArgumentException.class);
+        this.parseStringFails("12px", IllegalArgumentException.class);
     }
 
     @Test
     public void testParse() {
-        this.parseAndCheck("normal", NormalLength.INSTANCE);
+        this.parseStringAndCheck("normal", NormalLength.INSTANCE);
     }
 
     @Test
@@ -104,7 +104,7 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
     // ParseStringTesting...............................................................................................
 
     @Override
-    public NormalLength parse(final String text) {
+    public NormalLength parseString(final String text) {
         return NormalLength.parseNormal(text);
     }
     // HasJsonNodeTesting...............................................................................................

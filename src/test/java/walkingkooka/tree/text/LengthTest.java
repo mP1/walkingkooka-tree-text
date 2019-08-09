@@ -31,27 +31,27 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseFails("12EM", IllegalArgumentException.class);
+        this.parseStringFails("12EM", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseNone() {
-        this.parseAndCheck("none", Length.none());
+        this.parseStringAndCheck("none", Length.none());
     }
 
     @Test
     public void testParseNormal() {
-        this.parseAndCheck("normal", Length.normal());
+        this.parseStringAndCheck("normal", Length.normal());
     }
 
     @Test
     public void testParseNumber() {
-        this.parseAndCheck("123", Length.number(123L));
+        this.parseStringAndCheck("123", Length.number(123L));
     }
 
     @Test
     public void testParsePixels() {
-        this.parseAndCheck("12.5px", Length.pixel(12.5));
+        this.parseStringAndCheck("12.5px", Length.pixel(12.5));
     }
 
     // ClassTesting.....................................................................................................
@@ -69,17 +69,17 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
     // ParseStringTesting...............................................................................................
 
     @Override
-    public Length<?> parse(final String text) {
+    public Length<?> parseString(final String text) {
         return Length.parse(text);
     }
 
     @Override
-    public Class<? extends RuntimeException> parseFailedExpected(final Class<? extends RuntimeException> expected) {
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
         return expected;
     }
 
     @Override
-    public RuntimeException parseFailedExpected(final RuntimeException expected) {
+    public RuntimeException parseStringFailedExpected(final RuntimeException expected) {
         return expected;
     }
 

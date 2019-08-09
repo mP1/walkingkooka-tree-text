@@ -31,37 +31,37 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
     public void testParseMissingUnitFails() {
-        this.parseFails("12", IllegalArgumentException.class);
+        this.parseStringFails("12", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseInvalidValueFails() {
-        this.parseFails("!px", IllegalArgumentException.class);
+        this.parseStringFails("!px", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseFails("12EM", IllegalArgumentException.class);
+        this.parseStringFails("12EM", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseIncorrectUnitCaseFails() {
-        this.parseFails("12PX", IllegalArgumentException.class);
+        this.parseStringFails("12PX", IllegalArgumentException.class);
     }
 
     @Test
     public void testParse() {
-        this.parseAndCheck("12px", PixelLength.with(12));
+        this.parseStringAndCheck("12px", PixelLength.with(12));
     }
 
     @Test
     public void testParse2() {
-        this.parseAndCheck("12.5px", PixelLength.with(12.5));
+        this.parseStringAndCheck("12.5px", PixelLength.with(12.5));
     }
 
     @Test
     public void testParse3() {
-        this.parseAndCheck("345.75px", PixelLength.with(345.75));
+        this.parseStringAndCheck("345.75px", PixelLength.with(345.75));
     }
 
     @Test
@@ -152,7 +152,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     // ParseStringTesting...............................................................................................
 
     @Override
-    public PixelLength parse(String text) {
+    public PixelLength parseString(final String text) {
         return PixelLength.parsePixels(text);
     }
     // HasJsonNodeTesting...............................................................................................
