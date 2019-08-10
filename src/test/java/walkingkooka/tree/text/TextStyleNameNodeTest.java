@@ -91,12 +91,12 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
 
         final TextNode child2 = this.text2();
         final TextNode different = grandParent.children().get(0).appendChild(child2);
-        this.checkWithParent(different);
+        this.parentPresentCheck(different);
         this.childCountCheck(different, child1, child2);
 
         final TextNode grandParent2 = different.parentOrFail();
         this.childCountCheck(grandParent2, different);
-        this.checkWithoutParent(grandParent2);
+        this.parentMissingCheck(grandParent2);
     }
 
     @Test
