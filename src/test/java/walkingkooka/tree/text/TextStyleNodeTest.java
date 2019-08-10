@@ -88,12 +88,12 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final TextStyleNode grandParent = textStyleNode(parent, child3);
 
         final TextNode parent2 = grandParent.children().get(0);
-        this.checkWithParent(parent2);
+        this.parentPresentCheck(parent2);
         this.childCountCheck(parent2, child1, child2);
 
         final TextNode grandParent2 = parent2.parentOrFail();
         this.childCountCheck(grandParent2, parent, child3);
-        this.checkWithoutParent(grandParent2);
+        this.parentMissingCheck(grandParent2);
     }
 
     @Test
@@ -120,12 +120,12 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
         final TextNode differentChild = TextNode.text("different");
         final TextNode different = grandParent.children().get(0).appendChild(differentChild);
-        this.checkWithParent(different);
+        this.parentPresentCheck(different);
         this.childCountCheck(different, child1, child2, differentChild);
 
         final TextNode grandParent2 = different.parentOrFail();
         this.childCountCheck(grandParent2, different, parent2);
-        this.checkWithoutParent(grandParent2);
+        this.parentMissingCheck(grandParent2);
     }
 
     @Test

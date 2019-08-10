@@ -19,13 +19,13 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.NodeTesting2;
+import walkingkooka.tree.ParentNodeTesting;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class TextParentNodeTestCase<T extends TextParentNode> extends TextNodeTestCase2<T> implements NodeTesting2<TextNode, TextNodeName, TextStylePropertyName<?>, Object> {
+public abstract class TextParentNodeTestCase<T extends TextParentNode> extends TextNodeTestCase2<T> implements ParentNodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object> {
 
     TextParentNodeTestCase() {
         super();
