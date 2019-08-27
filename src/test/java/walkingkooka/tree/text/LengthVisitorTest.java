@@ -18,16 +18,183 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.test.ClassTesting2;
 import walkingkooka.type.JavaVisibility;
+import walkingkooka.visit.Visiting;
 
-public final class LengthVisitorTest implements ClassTesting2<LengthVisitor> {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisitor> {
+
+    @Override
+    public void testCheckToStringOverridden() {
+    }
 
     @Test
-    public void testAccept() {
-        new LengthVisitor() {
-        }.accept(Length.normal());
+    public void testAcceptSkipRemaining() {
+        final StringBuilder b = new StringBuilder();
+
+        new FakeLengthVisitor() {
+            @Override
+            protected Visiting startVisit(final Length<?> length) {
+                b.append("1");
+                return Visiting.SKIP;
+            }
+
+            @Override
+            protected void endVisit(final Length<?> length) {
+                b.append("2");
+            }
+
+        }.accept(Length.pixel(10.0));
+
+        assertEquals("12", b.toString());
     }
+
+    @Test
+    public void testNoneLength() {
+        final StringBuilder b = new StringBuilder();
+        final Length length = Length.none();
+
+        new FakeLengthVisitor() {
+            @Override
+            protected Visiting startVisit(final Length<?> length) {
+                b.append("1");
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final Length<?> length) {
+                b.append("2");
+            }
+
+            @Override
+            protected void visit(final NoneLength l) {
+                assertSame(length, l);
+                b.append("3");
+            }
+        }.accept(length);
+
+        assertEquals("132", b.toString());
+    }
+
+    @Test
+    public void testNoneLength2() {
+        this.createVisitor().accept(Length.none());
+    }
+
+    @Test
+    public void testNormalLength() {
+        final StringBuilder b = new StringBuilder();
+        final Length length = Length.normal();
+
+        new FakeLengthVisitor() {
+            @Override
+            protected Visiting startVisit(final Length<?> length) {
+                b.append("1");
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final Length<?> length) {
+                b.append("2");
+            }
+
+            @Override
+            protected void visit(final NormalLength l) {
+                assertSame(length, l);
+                b.append("3");
+            }
+        }.accept(length);
+
+        assertEquals("132", b.toString());
+    }
+
+    @Test
+    public void testNormalLength2() {
+        this.createVisitor().accept(Length.normal());
+    }
+
+    @Test
+    public void testNumberLength() {
+        final StringBuilder b = new StringBuilder();
+        final Length length = Length.number(1);
+
+        new FakeLengthVisitor() {
+            @Override
+            protected Visiting startVisit(final Length<?> length) {
+                b.append("1");
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final Length<?> length) {
+                b.append("2");
+            }
+
+            @Override
+            protected void visit(final NumberLength l) {
+                assertSame(length, l);
+                b.append("3");
+            }
+        }.accept(length);
+
+        assertEquals("132", b.toString());
+    }
+
+    @Test
+    public void testNumberLength2() {
+        this.createVisitor().accept(Length.number(1));
+    }
+
+    @Test
+    public void testPixelLength() {
+        final StringBuilder b = new StringBuilder();
+        final Length length = Length.pixel(12.3);
+
+        new FakeLengthVisitor() {
+            @Override
+            protected Visiting startVisit(final Length<?> length) {
+                b.append("1");
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final Length<?> length) {
+                b.append("2");
+            }
+
+            @Override
+            protected void visit(final PixelLength l) {
+                assertSame(length, l);
+                b.append("3");
+            }
+        }.accept(length);
+
+        assertEquals("132", b.toString());
+    }
+
+    @Test
+    public void testPixelLength2() {
+        this.createVisitor().accept(Length.pixel(12.3));
+    }
+
+    // LengthVisitorTesting.............................................................................................
+
+    @Override
+    public LengthVisitor createVisitor() {
+        return new LengthVisitor() {
+        };
+    }
+
+    // TypeNameTesting..................................................................................................
+
+    @Override
+    public String typeNamePrefix() {
+        return "";
+    }
+
+    // ClassTesting.....................................................................................................
 
     @Override
     public Class<LengthVisitor> type() {
