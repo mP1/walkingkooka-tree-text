@@ -20,8 +20,10 @@ package walkingkooka.tree.text;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.ToStringBuilderOption;
 import walkingkooka.text.HasText;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.Objects;
 
@@ -82,27 +84,24 @@ public final class Text extends TextLeafNode<String> implements HasText {
         return this.value();
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Accepts a json string which holds text.
      */
-    static Text fromJsonNodeText(final JsonNode node) {
-        return fromJsonNode0(node, Text::fromJsonNodeText0);
-    }
-
-    private static Text fromJsonNodeText0(final JsonNode node) {
+    static Text fromJsonNodeText(final JsonNode node,
+                                 final FromJsonNodeContext context) {
         return Text.with(node.stringValueOrFail());
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.string(this.value);
     }
 
     static {
-        HasJsonNode.register("text",
+        JsonNodeContext.register("text",
                 Text::fromJsonNodeText,
+                Text::toJsonNode,
                 Text.class);
     }
 

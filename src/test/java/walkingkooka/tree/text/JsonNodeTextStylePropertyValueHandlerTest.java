@@ -20,32 +20,32 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.color.Color;
-import walkingkooka.tree.json.HasJsonNode;
+import walkingkooka.tree.json.JsonNode;
 
-public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<HasJsonNodeTextStylePropertyValueHandler<Color>, Color> {
+public final class JsonNodeTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<JsonNodeTextStylePropertyValueHandler<Color>, Color> {
 
     @Test
     public void testFromJsonNode() {
         final Color color = Color.fromRgb(0x123456);
-        this.fromJsonNodeAndCheck(color.toJsonNode(), color);
+        this.fromJsonNodeAndCheck(this.toJsonNode(color), color);
     }
 
     @Test
     public void testFromJsonNodeRgba() {
         final Color color = Color.fromArgb(0x12345678);
-        this.fromJsonNodeAndCheck(color.toJsonNode(), color);
+        this.fromJsonNodeAndCheck(this.toJsonNode(color), color);
     }
 
     @Test
     public void testToJsonNode() {
         final Color color = Color.fromRgb(0x123456);
-        this.toJsonNodeAndCheck(color, color.toJsonNode());
+        this.toJsonNodeAndCheck(color, this.toJsonNode(color));
     }
 
     @Test
     public void testToJsonNodeRgba() {
         final Color color = Color.fromArgb(0x12345678);
-        this.toJsonNodeAndCheck(color, color.toJsonNode());
+        this.toJsonNodeAndCheck(color, this.toJsonNode(color));
     }
 
     @Test
@@ -54,8 +54,8 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
     }
 
     @Override
-    HasJsonNodeTextStylePropertyValueHandler<Color> handler() {
-        return HasJsonNodeTextStylePropertyValueHandler.with(Color.class);
+    JsonNodeTextStylePropertyValueHandler<Color> handler() {
+        return JsonNodeTextStylePropertyValueHandler.with(Color.class);
     }
 
     @Override
@@ -75,11 +75,11 @@ public final class HasJsonNodeTextStylePropertyValueHandlerTest extends TextStyl
 
     @Override
     public String typeNamePrefix() {
-        return HasJsonNode.class.getSimpleName();
+        return JsonNode.class.getSimpleName();
     }
 
     @Override
-    public Class<HasJsonNodeTextStylePropertyValueHandler<Color>> type() {
-        return Cast.to(HasJsonNodeTextStylePropertyValueHandler.class);
+    public Class<JsonNodeTextStylePropertyValueHandler<Color>> type() {
+        return Cast.to(JsonNodeTextStylePropertyValueHandler.class);
     }
 }

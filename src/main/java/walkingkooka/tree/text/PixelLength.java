@@ -20,14 +20,13 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 
 import java.util.Optional;
 
 /**
  * A measurement in pixels.
  */
-public final class PixelLength extends Length<Double> implements HasJsonNode, Value<Double> {
+public final class PixelLength extends Length<Double> implements Value<Double> {
 
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;
 

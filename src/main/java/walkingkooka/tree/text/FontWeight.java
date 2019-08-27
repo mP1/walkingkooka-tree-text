@@ -21,8 +21,10 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,7 +32,10 @@ import java.util.Objects;
 /**
  * Value class that holds a font weight.
  */
-public final class FontWeight implements Comparable<FontWeight>, HashCodeEqualsDefined, Value<Integer>, Serializable, HasJsonNode {
+public final class FontWeight implements Comparable<FontWeight>,
+        HashCodeEqualsDefined,
+        Value<Integer>,
+        Serializable {
 
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;
@@ -81,14 +86,13 @@ public final class FontWeight implements Comparable<FontWeight>, HashCodeEqualsD
 
     private final int value;
 
-    // HasJsonNode .....................................................................................................
+    // JsonNodeCon .....................................................................................................
 
     /**
      * Factory that creates a {@link FontWeight} from the given node.
      */
-    static FontWeight fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static FontWeight fromJsonNode(final JsonNode node,
+                                   final FromJsonNodeContext context) {
         return node.isString() ?
                 fromJsonStringNode(node.stringValueOrFail()) :
                 with(node.numberValueOrFail().intValue());
@@ -104,8 +108,7 @@ public final class FontWeight implements Comparable<FontWeight>, HashCodeEqualsD
         throw new IllegalArgumentException("Unknown font weight " + CharSequences.quote(value));
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return NORMAL_VALUE == this.value ?
                 NORMAL_JSON :
                 BOLD_VALUE == this.value ?
@@ -117,8 +120,9 @@ public final class FontWeight implements Comparable<FontWeight>, HashCodeEqualsD
     private final static JsonNode BOLD_JSON = JsonNode.string(BOLD_TEXT);
 
     static {
-        HasJsonNode.register("font-weight",
+        JsonNodeContext.register("font-weight",
                 FontWeight::fromJsonNode,
+                FontWeight::toJsonNode,
                 FontWeight.class);
     }
 

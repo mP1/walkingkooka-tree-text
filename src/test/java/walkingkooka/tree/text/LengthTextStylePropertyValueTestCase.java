@@ -22,7 +22,7 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.HasJsonNodeStringTesting;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextStylePropertyValue> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting<L>,
-        HasJsonNodeStringTesting<L>,
+        JsonNodeMappingTesting<L>,
         ParseStringTesting<L>,
         ToStringTesting<L> {
 
@@ -61,13 +61,13 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
     @Test
     public final void testFromJsonNode() {
         final L propertyValue = this.createPropertyValue();
-        this.fromJsonNodeAndCheck(propertyValue.toJsonNode(), propertyValue);
+        this.fromJsonNodeAndCheck(this.toJsonNodeContext().toJsonNode(propertyValue), propertyValue);
     }
 
     @Test
     public final void testToJsonNode() {
         final Length<?> length = this.length();
-        this.toJsonNodeAndCheck(this.createPropertyValue(length), length.toJsonNode());
+        this.toJsonNodeAndCheck(this.createPropertyValue(length), length.toJsonNode(this.toJsonNodeContext()));
     }
 
     @Test
@@ -127,10 +127,10 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
         return expected;
     }
 
-    // HasJsonNodeTesting...............................................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public final L createHasJsonNode() {
+    public final L createJsonNodeMappingValue() {
         return this.createPropertyValue();
     }
 }

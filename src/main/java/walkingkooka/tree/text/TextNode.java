@@ -27,23 +27,20 @@ import walkingkooka.text.HasText;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.ExpressionNodeName;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
  * Base class that may be used to represent rich text, some nodes with styling textStyle and others with plain text.
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
-        HasJsonNode,
         HasText,
         TraversableHasTextOffset<TextNode>,
         UsesToStringBuilder {
@@ -286,22 +283,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     abstract void accept(final TextNodeVisitor visitor);
 
-    // HasJsonNode......................................................................................................
+    // ToJsonNodeContext.................................................................................................
 
-    static TextNode fromJsonNode(final JsonNode from) {
-        return from.objectOrFail().fromJsonNodeWithType();
-    }
-
-    static <T extends TextNode> T fromJsonNode0(final JsonNode node,
-                                                final Function<JsonNode, T> factory) {
-        Objects.requireNonNull(node, "node");
-
-        return factory.apply(node);
-    }
-
-    static {
-        HasJsonNode.register("text-node", TextNode::fromJsonNode, TextNode.class);
-    }
+    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
 
     // Object ..........................................................................................................
 

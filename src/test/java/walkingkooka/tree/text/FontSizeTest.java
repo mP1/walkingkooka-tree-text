@@ -24,6 +24,7 @@ import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 
 import java.util.Set;
 
@@ -161,11 +162,12 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         return Sets.empty();
     }
 
-    // HasJsonNodeTesting...............................................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public FontSize fromJsonNode(final JsonNode jsonNode) {
-        return FontSize.fromJsonNode(jsonNode);
+    public FontSize fromJsonNode(final JsonNode jsonNode,
+                                 final FromJsonNodeContext context) {
+        return FontSize.fromJsonNode(jsonNode, context);
     }
 
     // SerializationTesting.............................................................................................

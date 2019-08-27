@@ -19,8 +19,9 @@ package walkingkooka.tree.text;
 
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
 
 /**
  * The name of an {@link TextNode}.
@@ -54,15 +55,17 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
 
     private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext..................................................................................................
 
-    static TextNodeName fromJsonNode(final JsonNode node) {
+    static TextNodeName fromJsonNode(final JsonNode node,
+                                     final FromJsonNodeContext context) {
         return with(node.stringValueOrFail());
     }
 
     static {
-        HasJsonNode.register("text-node-name",
+        JsonNodeContext.register("text-node-name",
                 TextNodeName::fromJsonNode,
+                TextNodeName::toJsonNode,
                 TextNodeName.class);
     }
 }

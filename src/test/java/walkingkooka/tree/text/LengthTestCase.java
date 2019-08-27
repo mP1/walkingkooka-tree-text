@@ -25,7 +25,7 @@ import walkingkooka.test.IsMethodTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.test.TypeNameTesting;
-import walkingkooka.tree.json.HasJsonNodeStringTesting;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Optional;
@@ -35,8 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting<L>,
-        HasJsonNodeStringTesting<L>,
         IsMethodTesting<L>,
+        JsonNodeMappingTesting<L>,
         ParseStringTesting<L>,
         ToStringTesting<L>,
         TypeNameTesting<L> {
@@ -69,10 +69,10 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
         return this.createLength();
     }
 
-    // HasJsonNodeTesting...............................................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public final L createHasJsonNode() {
+    public final L createJsonNodeMappingValue() {
         return this.createLength();
     }
 

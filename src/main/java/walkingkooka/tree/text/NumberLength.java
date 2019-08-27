@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -27,7 +26,7 @@ import java.util.Optional;
 /**
  * A positive whole number
  */
-public final class NumberLength extends Length<Long> implements HasJsonNode, Value<Long> {
+public final class NumberLength extends Length<Long> implements Value<Long> {
 
     static NumberLength parseNumber0(final String text) {
         try {

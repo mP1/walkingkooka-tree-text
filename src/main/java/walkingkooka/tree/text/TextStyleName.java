@@ -18,8 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
 
 /**
  * The name of a textStyle {@link TextNode}.
@@ -39,15 +40,17 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
         super(name);
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext..................................................................................................
 
-    static TextStyleName fromJsonNode(final JsonNode node) {
+    static TextStyleName fromJsonNode(final JsonNode node,
+                                      final FromJsonNodeContext context) {
         return with(node.stringValueOrFail());
     }
 
     static {
-        HasJsonNode.register("text-style-name",
+        JsonNodeContext.register("text-style-name",
                 TextStyleName::fromJsonNode,
+                TextStyleName::toJsonNode,
                 TextStyleName.class);
     }
 

@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.List;
 import java.util.Map;
@@ -218,18 +219,17 @@ final class NonEmptyTextStyle extends TextStyle {
         return this.value.toString();
     }
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Creates a json-object where the properties are strings, and the value without types.
      */
-    @Override
-    public JsonNode toJsonNode() {
+    final JsonNode toJsonNode(final ToJsonNodeContext context) {
         final List<JsonNode> json = Lists.array();
 
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
             final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.toJsonNode(Cast.to(propertyAndValue.getValue()));
+            final JsonNode value = propertyName.handler.toJsonNode(Cast.to(propertyAndValue.getValue()), context);
 
             json.add(value.setName(propertyName.toJsonNodeName()));
         }

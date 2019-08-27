@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
-import walkingkooka.tree.json.HasJsonNode;
 
 import java.util.Objects;
 
@@ -28,7 +27,6 @@ import java.util.Objects;
  * Base class for numerous properties that hold a {@link Length}.
  */
 abstract class LengthTextStylePropertyValue implements HashCodeEqualsDefined,
-        HasJsonNode,
         Value<Length<?>> {
 
     static void check(final Length<?> length) {

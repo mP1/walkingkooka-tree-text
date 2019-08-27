@@ -23,6 +23,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.AbstractSet;
 import java.util.Comparator;
@@ -109,18 +111,19 @@ final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName
                 .forEach(visitor::acceptPropertyAndValue);
     }
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Recreates this {@link TextStyleMapEntrySet} from the json object.
      */
-    static TextStyleMapEntrySet fromJson(final JsonNode json) {
+    static TextStyleMapEntrySet fromJson(final JsonNode json,
+                                         final FromJsonNodeContext context) {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : json.children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeEntryKey(child);
             properties.put(name,
-                    name.handler.fromJsonNode(child, name));
+                    name.handler.fromJsonNode(child, name, context));
         }
 
         return with(properties);
@@ -129,12 +132,12 @@ final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName
     /**
      * Creates a json object using the keys and values from the entries in this {@link Set}.
      */
-    JsonNode toJson() {
+    JsonNode toJson(final ToJsonNodeContext context) {
         final List<JsonNode> json = Lists.array();
 
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entries) {
             final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.toJsonNode(Cast.to(propertyAndValue.getValue()));
+            final JsonNode value = propertyName.handler.toJsonNode(Cast.to(propertyAndValue.getValue()), context);
 
             json.add(value.setName(propertyName.toJsonNodeName()));
         }

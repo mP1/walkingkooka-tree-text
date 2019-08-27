@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 
 public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCase<BorderSpacing> {
 
@@ -59,11 +60,12 @@ public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCas
         return BorderSpacing.parse(text);
     }
 
-    // HasJsonNodeTesting...............................................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public BorderSpacing fromJsonNode(final JsonNode from) {
-        return BorderSpacing.fromJsonNode(from);
+    public BorderSpacing fromJsonNode(final JsonNode from,
+                                      final FromJsonNodeContext context) {
+        return BorderSpacing.fromJsonNode(from, context);
     }
 
     // ClassTesting.....................................................................................................

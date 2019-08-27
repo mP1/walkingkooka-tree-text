@@ -18,6 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 /**
  * Base class for {@link TextStylePropertyValueHandler} that have {@link Length} values.
@@ -46,14 +48,17 @@ abstract class LengthTextStylePropertyValueHandler extends TextStylePropertyValu
     // fromJsonNode ....................................................................................................
 
     @Override
-    final Length<?> fromJsonNode(final JsonNode node, final TextStylePropertyName<?> name) {
-        final Length<?> length = Length.fromJsonNode(node);
+    final Length<?> fromJsonNode(final JsonNode node,
+                                 final TextStylePropertyName<?> name,
+                                 final FromJsonNodeContext context) {
+        final Length<?> length = context.fromJsonNode(node, Length.class);
         this.check0(length, name);
         return length;
     }
 
     @Override
-    final JsonNode toJsonNode(final Length<?> value) {
-        return value.toJsonNode();
+    final JsonNode toJsonNode(final Length<?> value,
+                              final ToJsonNodeContext context) {
+        return context.toJsonNode(value);
     }
 }

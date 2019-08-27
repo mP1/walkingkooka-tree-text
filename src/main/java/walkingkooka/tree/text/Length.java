@@ -20,8 +20,10 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -30,8 +32,7 @@ import java.util.function.Function;
 /**
  * Base class for any measure.
  */
-public abstract class Length<V> implements HashCodeEqualsDefined,
-        HasJsonNode{
+public abstract class Length<V> implements HashCodeEqualsDefined {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.
@@ -191,20 +192,13 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
 
     abstract boolean equals0(final Length other);
 
-    static {
-        HasJsonNode.register("length",
-                Length::fromJsonNode,
-                Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
-    }
-
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Accepts a json string holding a number and unit.
      */
-    static Length fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static Length fromJsonNode(final JsonNode node,
+                               final FromJsonNodeContext context) {
         return fromJsonNode0(node, Length::parse);
     }
 
@@ -243,8 +237,14 @@ public abstract class Length<V> implements HashCodeEqualsDefined,
         return factory.apply(node.stringValueOrFail());
     }
 
-    @Override
-    public final JsonNode toJsonNode() {
+    final JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.string(this.toString());
+    }
+
+    static {
+        JsonNodeContext.register("length",
+                Length::fromJsonNode,
+                Length::toJsonNode,
+                Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
     }
 }

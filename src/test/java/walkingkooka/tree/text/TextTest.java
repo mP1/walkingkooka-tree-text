@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -186,7 +187,8 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     // JsonNodeTesting...................................................................................................
 
     @Override
-    public final Text fromJsonNode(final JsonNode from) {
-        return Text.fromJsonNodeText(from);
+    public final Text fromJsonNode(final JsonNode from,
+                                   final FromJsonNodeContext context) {
+        return Text.fromJsonNodeText(from, context);
     }
 }

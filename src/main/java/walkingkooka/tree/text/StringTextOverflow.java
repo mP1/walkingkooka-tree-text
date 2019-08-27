@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.Optional;
 
@@ -89,14 +90,13 @@ final class StringTextOverflow extends TextOverflow {
         return CharSequences.quoteAndEscape(this.value).toString();
     }
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.string(STRING_PREFIX + this.value);
     }
 
-    // Serializable ..................................................................................................
+    // Serializable ....................................................................................................
 
     private final static long serialVersionUID = 1L;
 }

@@ -17,10 +17,12 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
-public final class BorderSpacing extends LengthTextStylePropertyValue implements HasJsonNode {
+public final class BorderSpacing extends LengthTextStylePropertyValue {
 
     public static BorderSpacing parse(final String text) {
         return with(Length.parse(text));
@@ -42,20 +44,21 @@ public final class BorderSpacing extends LengthTextStylePropertyValue implements
         return other instanceof BorderSpacing;
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext..................................................................................................
 
-    static BorderSpacing fromJsonNode(final JsonNode node) {
-        return with(Length.fromJsonNode(node));
+    static BorderSpacing fromJsonNode(final JsonNode node,
+                                      final FromJsonNodeContext context) {
+        return with(context.fromJsonNode(node, Length.class));
     }
 
-    @Override
-    public JsonNode toJsonNode() {
-        return this.length.toJsonNode();
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
+        return context.toJsonNode(this.length);
     }
 
     static {
-        HasJsonNode.register("border-spacing",
+        JsonNodeContext.register("border-spacing",
                 BorderSpacing::fromJsonNode,
+                BorderSpacing::toJsonNode,
                 BorderSpacing.class);
     }
 }

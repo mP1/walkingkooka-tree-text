@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.Map;
 import java.util.Optional;
@@ -152,10 +153,9 @@ final class EmptyTextStyle extends TextStyle {
         return "";
     }
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
-    @Override
-    public JsonNode toJsonNode() {
+    final JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.object();
     }
 }
