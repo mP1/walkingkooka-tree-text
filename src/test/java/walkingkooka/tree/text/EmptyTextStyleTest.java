@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -163,7 +164,7 @@ public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> 
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object()));
+        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContext.basic()));
     }
 
     @Override

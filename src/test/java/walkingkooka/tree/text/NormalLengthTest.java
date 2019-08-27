@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
@@ -107,11 +108,12 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
     public NormalLength parseString(final String text) {
         return NormalLength.parseNormal(text);
     }
-    // HasJsonNodeTesting...............................................................................................
+
+    // JsonNodeMappingTesting...........................................................................................
 
     @Override
-    public NormalLength fromJsonNode(final JsonNode from) {
+    public NormalLength fromJsonNode(final JsonNode from,
+                                     final FromJsonNodeContext context) {
         return Length.fromJsonNodeNormal(from);
     }
-
 }

@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
@@ -107,11 +108,12 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
     public NoneLength parseString(final String text) {
         return Length.parseNone(text);
     }
-    // HasJsonNodeTesting...............................................................................................
+
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public NoneLength fromJsonNode(final JsonNode from) {
+    public NoneLength fromJsonNode(final JsonNode from,
+                                   final FromJsonNodeContext context) {
         return Length.fromJsonNodeNone(from);
     }
-
 }

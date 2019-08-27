@@ -23,9 +23,10 @@ import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeName;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
 
 import java.util.Map;
 import java.util.Objects;
@@ -64,11 +65,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link Enum} values.
      */
-    private static <H extends HasJsonNode> TextStylePropertyName<H> registerHasJsonNodeConstant(final String property,
-                                                                                                final Class<H> type,
-                                                                                                final BiConsumer<H, TextStyleVisitor> visitor) {
+    private static <V> TextStylePropertyName<V> registerJsonNodeConstant(final String property,
+                                                                         final Class<V> type,
+                                                                         final BiConsumer<V, TextStyleVisitor> visitor) {
         return registerConstant(property,
-                TextStylePropertyValueHandler.hasJsonNode(type),
+                TextStylePropertyValueHandler.jsonNode(type),
                 visitor);
     }
 
@@ -98,7 +99,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private static TextStylePropertyName<Length<?>> registerPixelLengthConstant(final String property,
                                                                                 final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
         final Class<Length<?>> length = Cast.to(Length.class);
-        return registerHasJsonNodeConstant(property,
+        return registerJsonNodeConstant(property,
                 length,
                 visitor);
     }
@@ -109,7 +110,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private static TextStylePropertyName<Length<?>> registerNumberLengthConstant(final String property,
                                                                                  final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
         final Class<Length<?>> length = Cast.to(Length.class);
-        return registerHasJsonNodeConstant(property,
+        return registerJsonNodeConstant(property,
                 length,
                 visitor);
     }
@@ -138,14 +139,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Background rgb
      */
-    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerHasJsonNodeConstant("background-color",
+    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerJsonNodeConstant("background-color",
             Color.class,
             (c, v) -> v.visitBackgroundColor(c));
 
     /**
      * border-bottom-color
      */
-    public final static TextStylePropertyName<Color> BORDER_BOTTOM_COLOR = registerHasJsonNodeConstant("border-bottom-color",
+    public final static TextStylePropertyName<Color> BORDER_BOTTOM_COLOR = registerJsonNodeConstant("border-bottom-color",
             Color.class,
             (c, v) -> v.visitBorderBottomColor(c));
 
@@ -174,7 +175,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-left-color
      */
-    public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerHasJsonNodeConstant("border-left-color",
+    public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerJsonNodeConstant("border-left-color",
             Color.class,
             (c, v) -> v.visitBorderLeftColor(c));
 
@@ -196,14 +197,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-space
      */
-    public final static TextStylePropertyName<BorderSpacing> BORDER_SPACING = registerHasJsonNodeConstant("border-spacing",
+    public final static TextStylePropertyName<BorderSpacing> BORDER_SPACING = registerJsonNodeConstant("border-spacing",
             BorderSpacing.class,
             (l, v) -> v.visitBorderSpacing(l));
 
     /**
      * border-right-color
      */
-    public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerHasJsonNodeConstant("border-right-color",
+    public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerJsonNodeConstant("border-right-color",
             Color.class,
             (c, v) -> v.visitBorderRightColor(c));
 
@@ -224,7 +225,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-top-color
      */
-    public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerHasJsonNodeConstant("border-top-color",
+    public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerJsonNodeConstant("border-top-color",
             Color.class,
             (c, v) -> v.visitBorderTopColor(c));
 
@@ -245,7 +246,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-family-name
      */
-    public final static TextStylePropertyName<FontFamilyName> FONT_FAMILY_NAME = registerHasJsonNodeConstant("font-family-name",
+    public final static TextStylePropertyName<FontFamilyName> FONT_FAMILY_NAME = registerJsonNodeConstant("font-family-name",
             FontFamilyName.class,
             (f, v) -> v.visitFontFamilyName(f));
 
@@ -260,7 +261,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-size
      */
-    public final static TextStylePropertyName<FontSize> FONT_SIZE = registerHasJsonNodeConstant("font-size",
+    public final static TextStylePropertyName<FontSize> FONT_SIZE = registerJsonNodeConstant("font-size",
             FontSize.class,
             (f, v) -> v.visitFontSize(f));
 
@@ -291,7 +292,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-weight
      */
-    public final static TextStylePropertyName<FontWeight> FONT_WEIGHT = registerHasJsonNodeConstant("font-weight",
+    public final static TextStylePropertyName<FontWeight> FONT_WEIGHT = registerJsonNodeConstant("font-weight",
             FontWeight.class,
             (f, v) -> v.visitFontWeight(f));
 
@@ -328,7 +329,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * letter-space
      */
-    public final static TextStylePropertyName<LetterSpacing> LETTER_SPACING = registerHasJsonNodeConstant("letter-spacing",
+    public final static TextStylePropertyName<LetterSpacing> LETTER_SPACING = registerJsonNodeConstant("letter-spacing",
             LetterSpacing.class,
             (l, v) -> v.visitLetterSpacing(l));
 
@@ -405,14 +406,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * opacity
      */
-    public final static TextStylePropertyName<Opacity> OPACITY = registerHasJsonNodeConstant("opacity",
+    public final static TextStylePropertyName<Opacity> OPACITY = registerJsonNodeConstant("opacity",
             Opacity.class,
             (o, v) -> v.visitOpacity(o));
 
     /**
      * outline-color
      */
-    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerHasJsonNodeConstant("outline-color",
+    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerJsonNodeConstant("outline-color",
             Color.class,
             (t, v) -> v.visitOutlineColor(t));
 
@@ -499,7 +500,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Text rgb
      */
-    public final static TextStylePropertyName<Color> TEXT_COLOR = registerHasJsonNodeConstant("text-color",
+    public final static TextStylePropertyName<Color> TEXT_COLOR = registerJsonNodeConstant("text-color",
             Color.class,
             (t, v) -> v.visitTextColor(t));
 
@@ -514,7 +515,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-decoration-color
      */
-    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerHasJsonNodeConstant("text-decoration-color",
+    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerJsonNodeConstant("text-decoration-color",
             Color.class,
             (t, v) -> v.visitTextDecorationColor(t));
 
@@ -551,7 +552,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-overflow
      */
-    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerHasJsonNodeConstant("text-overflow",
+    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerJsonNodeConstant("text-overflow",
             TextOverflow.class,
             (t, v) -> v.visitTextOverflow(t));
 
@@ -612,7 +613,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * word-spacing
      */
-    public final static TextStylePropertyName<WordSpacing> WORD_SPACING = registerHasJsonNodeConstant("word-spacing",
+    public final static TextStylePropertyName<WordSpacing> WORD_SPACING = registerJsonNodeConstant("word-spacing",
             WordSpacing.class,
             (w, v) -> v.visitWordSpacing(w));
 
@@ -642,7 +643,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         return null != textStylePropertyName ?
                 textStylePropertyName :
                 new TextStylePropertyName<>(checkName(name),
-                        TextStylePropertyValueHandler.hasJsonNodeWithType(),
+                        TextStylePropertyValueHandler.jsonNodeWithType(),
                         TextStylePropertyName::acceptUnknown);
     }
 
@@ -679,13 +680,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         return CharSequences.quoteAndEscape(this.name);
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext..................................................................................................
 
     static TextStylePropertyName<?> fromJsonNodeEntryKey(final JsonNode node) {
         return with(node.name().value());
     }
 
-    static TextStylePropertyName<?> fromJsonNode(final JsonNode node) {
+    static TextStylePropertyName<?> fromJsonNode(final JsonNode node,
+                                                 final FromJsonNodeContext context) {
         return with(node.stringValueOrFail());
     }
 
@@ -696,8 +698,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private final JsonNodeName jsonNodeName;
 
     static {
-        HasJsonNode.register("text-style-property-name",
+        JsonNodeContext.register("text-style-property-name",
                 TextStylePropertyName::fromJsonNode,
+                TextStylePropertyName::toJsonNode,
                 TextStylePropertyName.class);
     }
 

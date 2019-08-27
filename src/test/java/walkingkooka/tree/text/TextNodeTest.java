@@ -22,29 +22,12 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
-import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.select.NodeSelectorContexts;
 import walkingkooka.type.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public final class TextNodeTest extends TextNodeTestCase<TextNode> implements HasJsonNodeTesting<TextNode>,
-        ToStringTesting<TextNode> {
-
-    @Test
-    public void testFromJsonNode() {
-        final TextNode text = this.createHasJsonNode();
-        final JsonNode jsonNode = text.toJsonNodeWithType();
-        assertEquals(text,
-                TextNode.fromJsonNode(jsonNode),
-                () -> "" + text);
-    }
-
-    @Override
-    public void testToJsonNodeRoundtripTwice() {
-        // nop
-    }
+public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
     @Test
     public void testBuildAndCheckToString() {
@@ -77,19 +60,6 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements Ha
     @Override
     public JavaVisibility typeVisibility() {
         return JavaVisibility.PUBLIC;
-    }
-
-    // HasJsonNode.....................................................................................................
-
-    @Override
-    public TextNode fromJsonNode(final JsonNode from) {
-        return TextNode.fromJsonNode(from);
-    }
-
-    @Override
-    public TextNode createHasJsonNode() {
-        return TextNode.styleName(TextStyleName.with("style123"))
-                .setChildren(Lists.of(TextNode.style(Lists.of(TextNode.text("text1"), TextNode.placeholder(TextPlaceholderName.with("place2"))))));
     }
 
     // TypeNameTesting...................................................................................................

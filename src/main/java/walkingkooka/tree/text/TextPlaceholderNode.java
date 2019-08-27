@@ -18,8 +18,10 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.ToStringBuilder;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.Objects;
 
@@ -73,27 +75,24 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return false;
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNode.........................................................................................................
 
     /**
      * Accepts a json string which holds a {@link TextPlaceholderNode}.
      */
-    static TextPlaceholderNode fromJsonNodeTextPlaceholderNode(final JsonNode node) {
-        return fromJsonNode0(node, TextPlaceholderNode::fromJsonNodeTextPlaceholderNode0);
+    static TextPlaceholderNode fromJsonNodeTextPlaceholderNode(final JsonNode node,
+                                                               final FromJsonNodeContext context) {
+        return TextPlaceholderNode.with(context.fromJsonNode(node, TextPlaceholderName.class));
     }
 
-    private static TextPlaceholderNode fromJsonNodeTextPlaceholderNode0(final JsonNode node) {
-        return TextPlaceholderNode.with(TextPlaceholderName.fromJsonNode(node));
-    }
-
-    @Override
-    public JsonNode toJsonNode() {
-        return this.value.toJsonNode();
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
+        return context.toJsonNode(this.value);
     }
 
     static {
-        HasJsonNode.register("text-placeholder",
+        JsonNodeContext.register("text-placeholder",
                 TextPlaceholderNode::fromJsonNodeTextPlaceholderNode,
+                TextPlaceholderNode::toJsonNode,
                 TextPlaceholderNode.class);
     }
 

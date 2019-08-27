@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
@@ -155,10 +156,12 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public PixelLength parseString(final String text) {
         return PixelLength.parsePixels(text);
     }
-    // HasJsonNodeTesting...............................................................................................
+
+    // JsonNodeMappingTesting............................................................................................
 
     @Override
-    public PixelLength fromJsonNode(final JsonNode from) {
+    public PixelLength fromJsonNode(final JsonNode from,
+                                    final FromJsonNodeContext context) {
         return Length.fromJsonNodePixel(from);
     }
 

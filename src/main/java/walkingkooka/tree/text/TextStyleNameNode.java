@@ -21,9 +21,11 @@ import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeName;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -155,21 +157,18 @@ public final class TextStyleNameNode extends TextParentNode {
     /**
      * Accepts a json string which holds {@link TextStyleNameNode}.
      */
-    static TextStyleNameNode fromJsonNodeTextStyleNameNode(final JsonNode node) {
-        return fromJsonNode0(node, TextStyleNameNode::fromJsonNodeTextStyleNameNode0);
-    }
-
-    private static TextStyleNameNode fromJsonNodeTextStyleNameNode0(final JsonNode node) {
+    static TextStyleNameNode fromJsonNodeTextStyleNameNode(final JsonNode node,
+                                                           final FromJsonNodeContext context) {
         TextStyleName styleName = null;
         List<TextNode> children = NO_CHILDREN;
 
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case STYLE:
-                    styleName = TextStyleName.fromJsonNode(child);
+                    styleName = context.fromJsonNode(child, TextStyleName.class);
                     break;
                 case VALUES:
-                    children = child.arrayOrFail().fromJsonNodeWithTypeList();
+                    children = context.fromJsonNodeWithTypeList(child);
                     break;
                 default:
                     NeverError.unhandledCase(child, STYLE_PROPERTY, VALUES_PROPERTY);
@@ -177,25 +176,26 @@ public final class TextStyleNameNode extends TextParentNode {
         }
 
         if (null == styleName) {
-            HasJsonNode.requiredPropertyMissing(STYLE_PROPERTY, node);
+            FromJsonNodeContext.requiredPropertyMissing(STYLE_PROPERTY, node);
         }
 
         return TextStyleNameNode.with(styleName)
                 .setChildren(children);
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return this.addChildrenValuesJson(JsonNode.object()
-                .set(STYLE_PROPERTY, this.styleName.toJsonNode()));
+                .set(STYLE_PROPERTY, context.toJsonNode(this.styleName)),
+                context);
     }
 
     final static String STYLE = "textStyle";
     final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
 
     static {
-        HasJsonNode.register("text-styleName",
+        JsonNodeContext.register("text-styleName",
                 TextStyleNameNode::fromJsonNodeTextStyleNameNode,
+                TextStyleNameNode::toJsonNode,
                 TextStyleNameNode.class);
     }
     

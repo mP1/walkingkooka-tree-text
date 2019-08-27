@@ -24,9 +24,10 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Set;
@@ -39,7 +40,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         ComparableTesting<Opacity>,
         ConstantsTesting<Opacity>,
         SerializationTesting<Opacity>,
-        HasJsonNodeTesting<Opacity>,
+        JsonNodeMappingTesting<Opacity>,
         ToStringTesting<Opacity> {
 
     private final static double VALUE = 0.25;
@@ -208,15 +209,16 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         return Opacity.class;
     }
 
-    // HasJsonNodeTesting.....................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public Opacity createHasJsonNode() {
+    public Opacity createJsonNodeMappingValue() {
         return this.createObject();
     }
 
     @Override
-    public Opacity fromJsonNode(final JsonNode jsonNode) {
-        return Opacity.fromJsonNode(jsonNode);
+    public Opacity fromJsonNode(final JsonNode jsonNode,
+                                final FromJsonNodeContext context) {
+        return Opacity.fromJsonNode(jsonNode, context);
     }
 }

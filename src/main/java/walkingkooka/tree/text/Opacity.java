@@ -21,9 +21,11 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.FromJsonNodeException;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.FromJsonNodeException;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -31,7 +33,10 @@ import java.util.Objects;
 /**
  * Value class that holds an opacity value.
  */
-public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined, Value<Double>, Serializable, HasJsonNode {
+public final class Opacity implements Comparable<Opacity>,
+        HashCodeEqualsDefined,
+        Value<Double>,
+        Serializable {
 
     private final static double TRANSPARENT_VALUE = 0;
     private final static double OPAQUE_VALUE = 1;
@@ -84,32 +89,30 @@ public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined
 
     private final double value;
 
-    // HasJsonNode .....................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Factory that creates a {@link Opacity} from the given node.
      */
-    static Opacity fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static Opacity fromJsonNode(final JsonNode node,
+                                final FromJsonNodeContext context) {
         return node.isString() ?
-                fromJsonStringNode(node.stringValueOrFail(), node) :
+                fromJsonNodeString(node.stringValueOrFail(), node) :
                 with(node.numberValueOrFail().doubleValue());
     }
 
-    private static Opacity fromJsonStringNode(final String value,
+    private static Opacity fromJsonNodeString(final String value,
                                               final JsonNode node) {
         return OPAQUE_TEXT.equals(value) ? OPAQUE :
                 TRANSPARENT_TEXT.equals(value) ? TRANSPARENT :
-                        fromJsonStringNode0(value, node);
+                        failUnknownOpacity(value, node);
     }
 
-    private static Opacity fromJsonStringNode0(final String value, final JsonNode node) {
+    private static Opacity failUnknownOpacity(final String value, final JsonNode node) {
         throw new FromJsonNodeException("Unknown opacity " + CharSequences.quote(value), node);
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return TRANSPARENT_VALUE == this.value ?
                 TRANSPARENT_JSON :
                 OPAQUE_VALUE == this.value ?
@@ -121,8 +124,9 @@ public final class Opacity implements Comparable<Opacity>, HashCodeEqualsDefined
     private final static JsonNode OPAQUE_JSON = JsonNode.string(OPAQUE_TEXT);
 
     static {
-        HasJsonNode.register("opacity",
+        JsonNodeContext.register("opacity",
                 Opacity::fromJsonNode,
+                Opacity::toJsonNode,
                 Opacity.class);
     }
 

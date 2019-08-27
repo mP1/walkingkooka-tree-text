@@ -20,11 +20,12 @@ package walkingkooka.tree.text;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -32,7 +33,6 @@ import java.util.Optional;
  */
 public abstract class TextOverflow implements HashCodeEqualsDefined,
         Serializable,
-        HasJsonNode,
         Value<Optional<String>> {
 
     final static String CLIP_TEXT = "clip";
@@ -82,14 +82,13 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     @Override
     public abstract String toString();
 
-    // HasJsonNode .....................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Factory that creates a {@link TextOverflow} from the given node.
      */
-    static TextOverflow fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static TextOverflow fromJsonNode(final JsonNode node,
+                                     final FromJsonNodeContext context) {
         final String value = node.stringValueOrFail();
         return value.startsWith(STRING_PREFIX) ?
                 string(value.substring(STRING_PREFIX.length())) :
@@ -97,16 +96,19 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
                         CLIP :
                         ELLIPSIS_TEXT.equals(value) ?
                                 ELLIPSIS :
-                                fromJsonStringNode1(value);
+                                failInvalidOverflow(value);
     }
 
-    private static TextOverflow fromJsonStringNode1(final String value) {
+    private static TextOverflow failInvalidOverflow(final String value) {
         throw new IllegalArgumentException("Unknown text-overflow " + CharSequences.quote(value));
     }
 
+    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
+
     static {
-        HasJsonNode.register("text-overflow",
+        JsonNodeContext.register("text-overflow",
                 TextOverflow::fromJsonNode,
+                TextOverflow::toJsonNode,
                 TextOverflow.class, NonStringTextOverflow.class, StringTextOverflow.class);
     }
 

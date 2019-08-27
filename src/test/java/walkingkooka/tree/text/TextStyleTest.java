@@ -23,8 +23,9 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.HasJsonNodeTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.List;
@@ -36,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting<TextStyle>,
-        HasJsonNodeTesting<TextStyle>,
+        JsonNodeMappingTesting<TextStyle>,
         ToStringTesting<TextStyle> {
 
     @Test
@@ -166,7 +167,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object()));
+        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContext.basic()));
     }
 
     @Override
@@ -209,15 +210,16 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         return JavaVisibility.PUBLIC;
     }
 
-    // HasJsonNodeTesting................................................................................................
+    // JsonNodeMappingTesting...........................................................................................
 
     @Override
-    public TextStyle fromJsonNode(final JsonNode from) {
-        return TextStyle.fromJsonNode(from);
+    public TextStyle fromJsonNode(final JsonNode from,
+                                  final FromJsonNodeContext context) {
+        return TextStyle.fromJsonNode(from, context);
     }
 
     @Override
-    public TextStyle createHasJsonNode() {
+    public TextStyle createJsonNodeMappingValue() {
         return this.createObject();
     }
 }

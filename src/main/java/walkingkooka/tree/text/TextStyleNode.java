@@ -22,10 +22,12 @@ import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeName;
 import walkingkooka.tree.json.JsonObjectNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -161,26 +163,23 @@ public final class TextStyleNode extends TextParentNode {
         return false;
     }
 
-    // HasJsonNode.....................................................................................................
+    // JsonNodeContext...................................................................................................
 
     /**
      * Accepts a json string which holds {@link TextStyleNode}.
      */
-    static TextStyleNode fromJsonNodeTextStyleNode(final JsonNode node) {
-        return fromJsonNode0(node, TextStyleNode::fromJsonNodeTextStyleNode0);
-    }
-
-    private static TextStyleNode fromJsonNodeTextStyleNode0(final JsonNode node) {
+    static TextStyleNode fromJsonNodeTextStyleNode(final JsonNode node,
+                                                   final FromJsonNodeContext context) {
         TextStyle textStyle = TextStyle.EMPTY;
         List<TextNode> children = NO_CHILDREN;
 
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case STYLE:
-                    textStyle = TextStyle.withTextStyleMap(TextStyleMap.fromJson(child));
+                    textStyle = TextStyle.withTextStyleMap(TextStyleMap.fromJson(child, context));
                     break;
                 case VALUES:
-                    children = child.arrayOrFail().fromJsonNodeWithTypeList();
+                    children = context.fromJsonNodeWithTypeList(child);
                     break;
                 default:
                     NeverError.unhandledCase(child, STYLE_PROPERTY, VALUES_PROPERTY);
@@ -190,22 +189,22 @@ public final class TextStyleNode extends TextParentNode {
         return textStyle.setChildren(children).cast();
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         JsonObjectNode json = JsonNode.object();
         if (!this.attributes.isEmpty()) {
-            json = json.set(STYLE_PROPERTY, this.attributes.toJson());
+            json = json.set(STYLE_PROPERTY, this.attributes.toJson(context));
         }
 
-        return this.addChildrenValuesJson(json);
+        return this.addChildrenValuesJson(json, context);
     }
 
     final static String STYLE = "textStyle";
     final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
 
     static {
-        HasJsonNode.register("text-textStyle-node",
+        JsonNodeContext.register("text-textStyle-node",
                 TextStyleNode::fromJsonNodeTextStyleNode,
+                TextStyleNode::toJsonNode,
                 TextStyleNode.class);
     }
 

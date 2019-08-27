@@ -19,14 +19,13 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 
 import java.util.Optional;
 
 /**
  * A none measurement.
  */
-public final class NoneLength extends Length<Void> implements HasJsonNode, Value<Void> {
+public final class NoneLength extends Length<Void> implements Value<Void> {
 
     final static String TEXT = "none";
 

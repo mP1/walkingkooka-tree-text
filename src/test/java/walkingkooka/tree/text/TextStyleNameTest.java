@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 
 public final class TextStyleNameTest extends TextNodeNameNameTestCase<TextStyleName> {
 
@@ -38,7 +39,8 @@ public final class TextStyleNameTest extends TextNodeNameNameTestCase<TextStyleN
     }
 
     @Override
-    public TextStyleName fromJsonNode(final JsonNode jsonNode) {
-        return TextStyleName.fromJsonNode(jsonNode);
+    public TextStyleName fromJsonNode(final JsonNode jsonNode,
+                                      final FromJsonNodeContext context) {
+        return TextStyleName.fromJsonNode(jsonNode, context);
     }
 }

@@ -21,12 +21,13 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ParseStringTesting;
-import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public final class LengthTest implements ClassTesting2<Length<?>>,
-        HasJsonNodeStringTesting<Length<?>>,
+        JsonNodeMappingTesting<Length<?>>,
         ParseStringTesting<Length<?>> {
 
     @Test
@@ -83,15 +84,16 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
         return expected;
     }
 
-    // HasJsonNodeTesting...............................................................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public Length fromJsonNode(final JsonNode from) {
-        return Length.fromJsonNode(from);
+    public Length fromJsonNode(final JsonNode from,
+                               final FromJsonNodeContext context) {
+        return Length.fromJsonNode(from, context);
     }
 
     @Override
-    public Length createHasJsonNode() {
+    public Length createJsonNodeMappingValue() {
         return Length.pixel(123.0);
     }
 }

@@ -58,39 +58,39 @@ public final class NoneLengthPixelLengthTextStylePropertyValueHandlerTest extend
     @Test
     public void testFromJsonNodeNone() {
         final NoneLength none = Length.none();
-        this.fromJsonNodeAndCheck(none.toJsonNode(), none);
+        this.fromJsonNodeAndCheck(this.toJsonNode(none), none);
     }
 
     @Test
     public void testFromJsonNodeNormalFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(Length.normal().toJsonNode(), this.propertyName());
+            this.handler().fromJsonNode(this.toJsonNode(Length.normal()), this.propertyName(), this.fromJsonNodeContext());
         });
     }
 
     @Test
     public void testFromJsonNodeNumberFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(Length.number(1).toJsonNode(), this.propertyName());
+            this.handler().fromJsonNode(this.toJsonNode(Length.number(1)), this.propertyName(), this.fromJsonNodeContext());
         });
     }
 
     @Test
     public void testFromJsonNodePixel() {
         final PixelLength pixel = Length.pixel(1.0);
-        this.fromJsonNodeAndCheck(pixel.toJsonNode(), pixel);
+        this.fromJsonNodeAndCheck(this.toJsonNode(pixel), pixel);
     }
 
     @Test
     public void testToJsonNodeNormal() {
         final NormalLength normal = Length.normal();
-        this.toJsonNodeAndCheck(normal, normal.toJsonNode());
+        this.toJsonNodeAndCheck(normal, this.toJsonNode(normal));
     }
 
     @Test
     public void testToJsonNodePixel() {
         final PixelLength pixel = Length.pixel(1.0);
-        this.toJsonNodeAndCheck(pixel, pixel.toJsonNode());
+        this.toJsonNodeAndCheck(pixel, this.toJsonNode(pixel));
     }
 
     @Test

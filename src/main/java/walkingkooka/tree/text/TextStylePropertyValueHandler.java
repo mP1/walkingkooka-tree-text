@@ -19,8 +19,9 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.function.Function;
 
@@ -38,17 +39,17 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
-     * {@see HasJsonNodeTextStylePropertyValueHandler}
+     * {@see JsonNodeTextStylePropertyValueHandler}
      */
-    static <T extends HasJsonNode> TextStylePropertyValueHandler<T> hasJsonNode(final Class<T> type) {
-        return HasJsonNodeTextStylePropertyValueHandler.with(type);
+    static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type) {
+        return JsonNodeTextStylePropertyValueHandler.with(type);
     }
 
     /**
-     * {@see HasJsonNodeWithTypeTextStylePropertyValueHandler}
+     * {@see JsonNodeWithTypeTextStylePropertyValueHandler}
      */
-    static HasJsonNodeWithTypeTextStylePropertyValueHandler hasJsonNodeWithType() {
-        return HasJsonNodeWithTypeTextStylePropertyValueHandler.INSTANCE;
+    static JsonNodeWithTypeTextStylePropertyValueHandler jsonNodeWithType() {
+        return JsonNodeWithTypeTextStylePropertyValueHandler.INSTANCE;
     }
 
     /**
@@ -105,11 +106,12 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * Creates a {@link TextStylePropertyValueException} used to report an invalid value.
      */
-    final TextStylePropertyValueException textStylePropertyValueException(final Object value, final TextStylePropertyName<?> name) {
+    final TextStylePropertyValueException textStylePropertyValueException(final Object value,
+                                                                          final TextStylePropertyName<?> name) {
         final Class<?> type = value.getClass();
 
         String typeName = type.getName();
-        if (textStylePropertyType(typeName) || hasJsonType(type)) {
+        if (textStylePropertyType(typeName)) {
             typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
         }
 
@@ -122,10 +124,6 @@ abstract class TextStylePropertyValueHandler<T> {
         return type.startsWith(PACKAGE) && type.indexOf('.', 1 + PACKAGE.length()) == -1;
     }
 
-    final boolean hasJsonType(final Class<?> type) {
-        return HasJsonNode.typeName(type).isPresent();
-    }
-
     private final static String PACKAGE = "walkingkooka.tree.text";
 
     // fromJsonNode ....................................................................................................
@@ -133,12 +131,15 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * Transforms a {@link JsonNode} into a value.
      */
-    abstract T fromJsonNode(final JsonNode node, final TextStylePropertyName<?> name);
+    abstract T fromJsonNode(final JsonNode node,
+                            final TextStylePropertyName<?> name,
+                            final FromJsonNodeContext context);
 
     /**
-     * Transforms a value into json, performing the inverse of {@link #fromJsonNode(JsonNode, TextStylePropertyName)}
+     * Transforms a value into json, performing the inverse of {@link #fromJsonNode(JsonNode, TextStylePropertyName, FromJsonNodeContext)}
      */
-    abstract JsonNode toJsonNode(final T value);
+    abstract JsonNode toJsonNode(final T value,
+                                 final ToJsonNodeContext context);
 
     // Object .........................................................................................................
 

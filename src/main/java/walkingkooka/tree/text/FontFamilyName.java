@@ -22,18 +22,17 @@ import walkingkooka.naming.Name;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-
-import java.util.Objects;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 /**
  * A font family name, which are also case insensitive when compared.
  */
 public final class FontFamilyName implements Name,
         Comparable<FontFamilyName>,
-        HashCodeEqualsDefined,
-        HasJsonNode {
+        HashCodeEqualsDefined {
 
     public static FontFamilyName with(final String name) {
         CharSequences.failIfNullOrEmpty(name, "name");
@@ -51,25 +50,24 @@ public final class FontFamilyName implements Name,
 
     private final String name;
 
-    // HasJsonNode ...................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Factory that creates a {@link FontFamilyName} from a {@link JsonNode}.
      */
-    static FontFamilyName fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static FontFamilyName fromJsonNode(final JsonNode node,
+                                       final FromJsonNodeContext context) {
         return with(node.stringValueOrFail());
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.string(this.name);
     }
 
     static {
-        HasJsonNode.register("font-family-name",
+        JsonNodeContext.register("font-family-name",
                 FontFamilyName::fromJsonNode,
+                FontFamilyName::toJsonNode,
                 FontFamilyName.class);
     }
 

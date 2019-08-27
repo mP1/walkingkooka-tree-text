@@ -22,6 +22,8 @@ import walkingkooka.test.ToStringTesting;
 import walkingkooka.test.TypeNameTesting;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 import walkingkooka.type.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,19 +44,6 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     }
 
     @Test
-    public final void testCheckInvalidValueFails() {
-        this.checkFails(this,
-                "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
-    }
-
-    @Test
-    public final void testCheckInvalidValueFails2() {
-        final StringBuilder value = new StringBuilder("123abc");
-        this.checkFails(value,
-                "Property " + this.propertyName().inQuotes() + " value \"" + value + "\"(" + value.getClass().getName() + ") is not a " + this.propertyValueType());
-    }
-
-    @Test
     public final void testCheck() {
         this.check(this.propertyValue());
     }
@@ -64,10 +53,10 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
         final T value = this.propertyValue();
         final P handler = this.handler();
 
-        final JsonNode json = handler.toJsonNode(value);
+        final JsonNode json = handler.toJsonNode(value, this.toJsonNodeContext());
 
         assertEquals(value,
-                handler.fromJsonNode(json, this.propertyName()),
+                handler.fromJsonNode(json, this.propertyName(), this.fromJsonNodeContext()),
                 () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
     }
 
@@ -91,13 +80,13 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final void fromJsonNodeAndCheck(final JsonNode node, final T value) {
         assertEquals(value,
-                this.handler().fromJsonNode(node, this.propertyName()),
+                this.handler().fromJsonNode(node, this.propertyName(), this.fromJsonNodeContext()),
                 () -> "from JsonNode " + node);
     }
 
     final void toJsonNodeAndCheck(final T value, final JsonNode node) {
         assertEquals(node,
-                this.handler().toJsonNode(value),
+                this.handler().toJsonNode(value, this.toJsonNodeContext()),
                 () -> "toJsonNode " + CharSequences.quoteIfChars(value));
     }
 
@@ -111,10 +100,26 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     abstract String propertyValueType();
 
+    final FromJsonNodeContext fromJsonNodeContext() {
+        return FromJsonNodeContext.basic();
+    }
+
+    final ToJsonNodeContext toJsonNodeContext() {
+        return ToJsonNodeContext.basic();
+    }
+
+    final JsonNode toJsonNode(final Object value) {
+        return this.toJsonNodeContext().toJsonNode(value);
+    }
+
+    // ClassTesting.....................................................................................................
+
     @Override
     public final JavaVisibility typeVisibility() {
         return JavaVisibility.PACKAGE_PRIVATE;
     }
+
+    // TypeNameTesting...................................................................................................
 
     @Override
     public final String typeNameSuffix() {

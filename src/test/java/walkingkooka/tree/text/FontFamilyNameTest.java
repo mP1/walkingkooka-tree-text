@@ -21,13 +21,14 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.naming.NameTesting;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.tree.json.HasJsonNodeStringTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
         NameTesting<FontFamilyName, FontFamilyName>,
-        HasJsonNodeStringTesting<FontFamilyName> {
+        JsonNodeMappingTesting<FontFamilyName> {
 
     private final static String TEXT = "Times New Roman";
 
@@ -89,15 +90,16 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
         return JavaVisibility.PUBLIC;
     }
 
-    // HasJsonNodeTesting............................................................
+    // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public FontFamilyName createHasJsonNode() {
+    public FontFamilyName createJsonNodeMappingValue() {
         return this.createObject();
     }
 
     @Override
-    public FontFamilyName fromJsonNode(final JsonNode jsonNode) {
-        return FontFamilyName.fromJsonNode(jsonNode);
+    public FontFamilyName fromJsonNode(final JsonNode jsonNode,
+                                       final FromJsonNodeContext context) {
+        return FontFamilyName.fromJsonNode(jsonNode, context);
     }
 }

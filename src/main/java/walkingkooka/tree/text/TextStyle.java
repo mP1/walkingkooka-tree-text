@@ -21,9 +21,10 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.test.HashCodeEqualsDefined;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonObjectNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,6 @@ import java.util.Optional;
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
 public abstract class TextStyle implements HashCodeEqualsDefined,
-        HasJsonNode,
         Value<Map<TextStylePropertyName<?>, Object>> {
 
     /**
@@ -186,31 +186,31 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     @Override
     abstract public String toString();
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Accepts a json object holding the textStyle as a map.
      */
-    static TextStyle fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
-        return fromJson0(node.objectOrFail());
-    }
-
-    private static TextStyle fromJson0(final JsonObjectNode json) {
+    static TextStyle fromJsonNode(final JsonNode node,
+                                  final FromJsonNodeContext context) {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
-        for (JsonNode child : json.children()) {
+        for (JsonNode child : node.objectOrFail().children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeEntryKey(child);
             properties.put(name,
-                    name.handler.fromJsonNode(child, name));
+                    name.handler.fromJsonNode(child, name, context));
         }
 
         return with(properties);
     }
 
+    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
+
     static {
-        HasJsonNode.register("text-textStyle", TextStyle::fromJsonNode, TextStyle.class,
+        JsonNodeContext.register("text-textStyle",
+                TextStyle::fromJsonNode,
+                TextStyle::toJsonNode,
+                TextStyle.class,
                 NonEmptyTextStyle.class,
                 EmptyTextStyle.class);
     }

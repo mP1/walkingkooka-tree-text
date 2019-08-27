@@ -20,8 +20,10 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
-import walkingkooka.tree.json.HasJsonNode;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.map.ToJsonNodeContext;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,7 +32,10 @@ import java.util.stream.IntStream;
 /**
  * Value class that holds a font size.
  */
-public final class FontSize implements Comparable<FontSize>, HashCodeEqualsDefined, Value<Integer>, Serializable, HasJsonNode {
+public final class FontSize implements Comparable<FontSize>,
+        HashCodeEqualsDefined,
+        Value<Integer>,
+        Serializable {
 
     private final static int CONSTANT_COUNT = 40;
 
@@ -79,25 +84,24 @@ public final class FontSize implements Comparable<FontSize>, HashCodeEqualsDefin
 
     private final int value;
 
-    // HasJsonNode ...................................................................................................
+    // JsonNodeContext..................................................................................................
 
     /**
      * Factory that creates a {@link FontSize} from the given node.
      */
-    static FontSize fromJsonNode(final JsonNode node) {
-        Objects.requireNonNull(node, "node");
-
+    static FontSize fromJsonNode(final JsonNode node,
+                                 final FromJsonNodeContext context) {
         return with(node.numberValueOrFail().intValue());
     }
 
-    @Override
-    public JsonNode toJsonNode() {
+    JsonNode toJsonNode(final ToJsonNodeContext context) {
         return JsonNode.number(this.value);
     }
 
     static {
-        HasJsonNode.register("font-size",
+        JsonNodeContext.register("font-size",
                 FontSize::fromJsonNode,
+                FontSize::toJsonNode,
                 FontSize.class);
     }
 

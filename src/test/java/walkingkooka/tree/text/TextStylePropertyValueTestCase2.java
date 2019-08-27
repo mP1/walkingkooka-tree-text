@@ -17,12 +17,11 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.json.HasJsonNode;
-import walkingkooka.tree.json.HasJsonNodeTesting;
+import walkingkooka.tree.json.map.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
-public abstract class TextStylePropertyValueTestCase2<V extends HasJsonNode> extends TextStylePropertyValueTestCase<V>
-        implements HasJsonNodeTesting<V> {
+public abstract class TextStylePropertyValueTestCase2<V> extends TextStylePropertyValueTestCase<V>
+        implements JsonNodeMappingTesting<V> {
 
     TextStylePropertyValueTestCase2() {
         super();
@@ -35,10 +34,10 @@ public abstract class TextStylePropertyValueTestCase2<V extends HasJsonNode> ext
         return JavaVisibility.PUBLIC;
     }
 
-    // HasJsonNode......................................................................................................
+    // JsonNodeMapTesting................................................................................................
 
     @Override
-    public final V createHasJsonNode() {
+    public final V createJsonNodeMappingValue() {
         return this.createTextStylePropertyValue();
     }
 }

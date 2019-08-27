@@ -24,6 +24,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 
 import java.util.List;
 import java.util.Map;
@@ -404,7 +405,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object()));
+        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContext.basic()));
     }
 
     @Override

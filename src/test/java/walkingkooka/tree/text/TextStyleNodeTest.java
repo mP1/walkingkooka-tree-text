@@ -23,6 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.map.FromJsonNodeContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -491,7 +492,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // JsonNodeTesting...................................................................................................
 
     @Override
-    public final TextStyleNode fromJsonNode(final JsonNode from) {
-        return TextStyleNode.fromJsonNodeTextStyleNode(from);
+    public final TextStyleNode fromJsonNode(final JsonNode from,
+                                            final FromJsonNodeContext context) {
+        return TextStyleNode.fromJsonNodeTextStyleNode(from, context);
     }
 }
