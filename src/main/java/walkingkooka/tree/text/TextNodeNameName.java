@@ -22,7 +22,7 @@ import walkingkooka.naming.Name;
 import walkingkooka.predicate.character.CharPredicate;
 import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 /**
  * Base class of all {@link Name names} in this package.

@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 /**
  * A {@link TextStylePropertyValueHandler} for non empty {@link String} parameter values.

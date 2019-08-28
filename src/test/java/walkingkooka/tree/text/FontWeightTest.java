@@ -24,7 +24,7 @@ import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 
 import java.util.Set;
 

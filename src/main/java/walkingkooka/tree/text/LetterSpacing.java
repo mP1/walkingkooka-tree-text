@@ -18,9 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.JsonNodeContext;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 public final class LetterSpacing extends LengthTextStylePropertyValue {
 

@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.json.map.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public abstract class TextStylePropertyValueTestCase3<V> extends TextStylePropertyValueTestCase<V>

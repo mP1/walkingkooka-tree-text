@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 import java.util.Optional;
 

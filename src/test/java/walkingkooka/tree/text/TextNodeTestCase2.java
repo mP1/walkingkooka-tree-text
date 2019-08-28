@@ -26,7 +26,7 @@ import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.NodeTesting;
-import walkingkooka.tree.json.map.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Map;

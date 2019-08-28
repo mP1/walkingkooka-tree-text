@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
-import walkingkooka.tree.json.map.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>

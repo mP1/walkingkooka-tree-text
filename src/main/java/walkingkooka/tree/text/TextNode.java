@@ -28,7 +28,7 @@ import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.ExpressionNodeName;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
 

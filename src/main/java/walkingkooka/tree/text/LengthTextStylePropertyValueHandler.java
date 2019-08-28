@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 /**
  * Base class for {@link TextStylePropertyValueHandler} that have {@link Length} values.
