@@ -23,7 +23,9 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContexts;
 import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContexts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,9 +39,9 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
     public final void testTextStylePropertyJsonRoundtrip() {
         final TextNode properties = TextNode.style(TextStyleNode.NO_CHILDREN)
                 .setAttributes(Maps.of(this.textStylePropertyName(), this.createTextStylePropertyValue()));
-        final JsonNode json = ToJsonNodeContext.basic().toJsonNodeWithType(properties);
+        final JsonNode json = ToJsonNodeContexts.basic().toJsonNodeWithType(properties);
         assertEquals(properties,
-                FromJsonNodeContext.basic().fromJsonNodeWithType(json),
+                FromJsonNodeContexts.basic().fromJsonNodeWithType(json),
                 () -> "" + properties);
     }
 

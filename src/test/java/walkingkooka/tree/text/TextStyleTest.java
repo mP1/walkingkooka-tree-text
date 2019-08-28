@@ -25,6 +25,7 @@ import walkingkooka.test.HashCodeEqualsDefinedTesting;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContexts;
 import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
@@ -167,7 +168,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContext.basic()));
+        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContexts.basic()));
     }
 
     @Override
