@@ -22,7 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNodeName;
 import walkingkooka.tree.json.JsonObjectNode;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 import java.util.List;
 import java.util.Objects;

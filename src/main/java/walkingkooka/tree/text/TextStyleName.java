@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.JsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
 
 /**
  * The name of a textStyle {@link TextNode}.

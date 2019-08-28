@@ -22,8 +22,8 @@ import walkingkooka.naming.NameTesting;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,

@@ -22,8 +22,8 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.map.FromJsonNodeContext;
-import walkingkooka.tree.json.map.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
