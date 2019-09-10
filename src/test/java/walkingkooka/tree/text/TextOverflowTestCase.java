@@ -22,16 +22,13 @@ import walkingkooka.Cast;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.HashCodeEqualsDefinedTesting2;
+import walkingkooka.test.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
-
-import java.util.Set;
 
 public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase3<TextOverflow>
-        implements ConstantsTesting<TextOverflow>,
-        HashCodeEqualsDefinedTesting2<TextOverflow>,
-        JsonNodeMappingTesting<TextOverflow> {
+        implements HashCodeEqualsDefinedTesting2<TextOverflow>,
+        TypeNameTesting<TextOverflow> {
 
     TextOverflowTestCase() {
         super();
@@ -64,17 +61,22 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     abstract Class<T> textOverflowType();
 
-    // ConstantTesting..................................................................................................
-
-    @Override
-    public final Set<TextOverflow> intentionalDuplicateConstants() {
-        return Sets.empty();
-    }
-
     // HashCodeEqualsDefinedTesting.....................................................................................
 
     @Override
     public final TextOverflow createObject() {
         return this.createTextStylePropertyValue();
+    }
+
+    // TypeNameTesting..................................................................................................
+
+    @Override
+    public final String typeNamePrefix() {
+        return TextOverflow.class.getSimpleName();
+    }
+
+    @Override
+    public final String typeNameSuffix() {
+        return "";
     }
 }

@@ -23,19 +23,19 @@ import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 import java.util.Optional;
 
-final class NonStringTextOverflow extends TextOverflow {
+final class TextOverflowNonString extends TextOverflow {
 
     /**
      * Factory that creates a constant.
      */
-    static NonStringTextOverflow constant(final String value) {
-        return new NonStringTextOverflow(value);
+    static TextOverflowNonString constant(final String value) {
+        return new TextOverflowNonString(value);
     }
 
     /**
      * Private constructor use static factory
      */
-    private NonStringTextOverflow(final String value) {
+    private TextOverflowNonString(final String value) {
         super();
         this.value = value;
         this.jsonNode = JsonNode.string(value);
@@ -73,11 +73,11 @@ final class NonStringTextOverflow extends TextOverflow {
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof NonStringTextOverflow &&
+                other instanceof TextOverflowNonString &&
                         this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final NonStringTextOverflow other) {
+    private boolean equals0(final TextOverflowNonString other) {
         return this.value.equals(other.value);
     }
 

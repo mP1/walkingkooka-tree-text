@@ -26,53 +26,53 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class StringTextOverflowTest extends TextOverflowTestCase<StringTextOverflow> {
+public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverflowString> {
 
     private final static String TEXT = "abc123";
 
     @Test
     public void testWithNullFails() {
         assertThrows(NullPointerException.class, () -> {
-            StringTextOverflow.with(null);
+            TextOverflowString.with(null);
         });
     }
 
     @Test
     public void testWithEmptyFails() {
         assertThrows(IllegalArgumentException.class, () -> {
-            StringTextOverflow.with("");
+            TextOverflowString.with("");
         });
     }
 
     @Test
     public void testWith() {
-        final StringTextOverflow textOverflow = StringTextOverflow.with(TEXT);
+        final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
         assertEquals(Optional.of(TEXT), textOverflow.value());
     }
 
     @Test
     public void testIsClip() {
-        assertEquals(false, StringTextOverflow.with(TEXT).isClip());
+        assertEquals(false, TextOverflowString.with(TEXT).isClip());
     }
 
     @Test
     public void testIsEllipse() {
-        assertEquals(false, StringTextOverflow.with(TEXT).isEllipse());
+        assertEquals(false, TextOverflowString.with(TEXT).isEllipse());
     }
 
     @Test
     public void testIsString() {
-        assertEquals(true, StringTextOverflow.with(TEXT).isString());
+        assertEquals(true, TextOverflowString.with(TEXT).isString());
     }
 
     @Test
     public void testDifferentEllipsis() {
-        this.checkNotEquals(StringTextOverflow.with("abc123"), TextOverflow.ELLIPSIS);
+        this.checkNotEquals(TextOverflowString.with("abc123"), TextOverflow.ELLIPSIS);
     }
 
     @Test
     public void testDifferentString() {
-        this.checkNotEquals(StringTextOverflow.with("abc123"), StringTextOverflow.with("different"));
+        this.checkNotEquals(TextOverflowString.with("abc123"), TextOverflowString.with("different"));
     }
 
     @Test
@@ -92,11 +92,11 @@ public final class StringTextOverflowTest extends TextOverflowTestCase<StringTex
 
     @Override
     TextOverflow createTextStylePropertyValue() {
-        return StringTextOverflow.with(TEXT);
+        return TextOverflowString.with(TEXT);
     }
 
     @Override
-    Class<StringTextOverflow> textOverflowType() {
-        return StringTextOverflow.class;
+    Class<TextOverflowString> textOverflowType() {
+        return TextOverflowString.class;
     }
 }

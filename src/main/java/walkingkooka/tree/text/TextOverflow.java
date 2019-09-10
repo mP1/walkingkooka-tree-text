@@ -40,17 +40,17 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     /**
      * A constant holding the font-weight of normal text
      */
-    public final static TextOverflow CLIP = NonStringTextOverflow.constant(CLIP_TEXT);
+    public final static TextOverflow CLIP = TextOverflowNonString.constant(CLIP_TEXT);
 
     final static String ELLIPSIS_TEXT = "ellipsis";
 
     /**
      * A constant holding the font-weight of bold text
      */
-    public final static TextOverflow ELLIPSIS = NonStringTextOverflow.constant(ELLIPSIS_TEXT);
+    public final static TextOverflow ELLIPSIS = TextOverflowNonString.constant(ELLIPSIS_TEXT);
 
     /**
-     * Prefix added to {@link StringTextOverflow}.
+     * Prefix added to {@link TextOverflowString}.
      */
     final static String STRING_PREFIX = "string-";
 
@@ -58,7 +58,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
      * Factory that creates a {@link TextOverflow}.
      */
     public static TextOverflow string(final String value) {
-        return StringTextOverflow.with(value);
+        return TextOverflowString.with(value);
     }
 
     /**
@@ -109,7 +109,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
         JsonNodeContext.register("text-overflow",
                 TextOverflow::fromJsonNode,
                 TextOverflow::toJsonNode,
-                TextOverflow.class, NonStringTextOverflow.class, StringTextOverflow.class);
+                TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
     }
 
     // Serializable ..................................................................................................
