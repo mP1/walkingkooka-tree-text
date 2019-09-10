@@ -39,7 +39,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
-        final TextStyleMap textStyleMap = TextStyleMap.with(map);
+        final TextNodeMap textStyleMap = TextNodeMap.with(map);
 
         final TextStyleNonEmpty textStyle = this.createTextStyle(textStyleMap);
         assertSame(textStyleMap, textStyle.value(), "value");
@@ -62,7 +62,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testEmpty() {
-        assertSame(TextStyleMap.EMPTY, TextStyleMap.with(Maps.empty()));
+        assertSame(TextNodeMap.EMPTY, TextNodeMap.with(Maps.empty()));
     }
 
     @Test
@@ -72,7 +72,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         map.put(this.property2(), this.value2());
 
         final TextStyleNonEmpty textStyle = this.createTextStyle(map);
-        assertEquals(TextStyleMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
+        assertEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
     }
 
     // merge............................................................................................................
@@ -100,7 +100,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
         this.replaceAndCheck(textStyle,
                 TextNode.style(children),
-                TextStyleNode.with(children, TextStyleMap.with(textStyle.value())));
+                TextStyleNode.with(children, TextNodeMap.with(textStyle.value())));
     }
 
     @Test

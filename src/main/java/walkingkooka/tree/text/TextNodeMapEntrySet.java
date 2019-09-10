@@ -37,21 +37,21 @@ import java.util.Set;
 /**
  * A read only {@link Set} sorted view of textStyle that have had their values checked.
  */
-final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> {
+final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> {
 
     static {
-        Sets.registerImmutableType(TextStyleMapEntrySet.class);
+        Sets.registerImmutableType(TextNodeMapEntrySet.class);
     }
 
     /**
-     * An empty {@link TextStyleMap}.
+     * An empty {@link TextNodeMap}.
      */
-    static final TextStyleMapEntrySet EMPTY = new TextStyleMapEntrySet(Lists.empty());
+    static final TextNodeMapEntrySet EMPTY = new TextNodeMapEntrySet(Lists.empty());
 
     /**
-     * Factory that creates a {@link TextStyleMapEntrySet}.
+     * Factory that creates a {@link TextNodeMapEntrySet}.
      */
-    static TextStyleMapEntrySet with(final Map<TextStylePropertyName<?>, Object> entries) {
+    static TextNodeMapEntrySet with(final Map<TextStylePropertyName<?>, Object> entries) {
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
         for(Entry<TextStylePropertyName<?>, Object> propertyAndValue : entries.entrySet()) {
@@ -72,7 +72,7 @@ final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName
      * Sorts the {@link List} so all textStyle using the {@link TextStylePropertyName} {@link Comparator}.
      */
     static void sort(final List<Entry<TextStylePropertyName<?>, Object>> list) {
-        list.sort(TextStyleMapEntrySet::comparator);
+        list.sort(TextNodeMapEntrySet::comparator);
     }
 
     /**
@@ -83,11 +83,11 @@ final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName
         return first.getKey().compareTo(second.getKey());
     }
 
-    static TextStyleMapEntrySet withList(final List<Entry<TextStylePropertyName<?>, Object>> entries) {
-        return new TextStyleMapEntrySet(entries);
+    static TextNodeMapEntrySet withList(final List<Entry<TextStylePropertyName<?>, Object>> entries) {
+        return new TextNodeMapEntrySet(entries);
     }
 
-    private TextStyleMapEntrySet(final List<Entry<TextStylePropertyName<?>, Object>> entries) {
+    private TextNodeMapEntrySet(final List<Entry<TextStylePropertyName<?>, Object>> entries) {
         super();
         this.entries = entries;
     }
@@ -114,10 +114,10 @@ final class TextStyleMapEntrySet extends AbstractSet<Entry<TextStylePropertyName
     // JsonNodeContext..................................................................................................
 
     /**
-     * Recreates this {@link TextStyleMapEntrySet} from the json object.
+     * Recreates this {@link TextNodeMapEntrySet} from the json object.
      */
-    static TextStyleMapEntrySet fromJson(final JsonNode json,
-                                         final FromJsonNodeContext context) {
+    static TextNodeMapEntrySet fromJson(final JsonNode json,
+                                        final FromJsonNodeContext context) {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : json.children()) {

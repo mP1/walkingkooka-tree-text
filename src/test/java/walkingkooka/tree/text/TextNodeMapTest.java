@@ -31,12 +31,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStyleMapTest implements MapTesting2<TextStyleMap, TextStylePropertyName<?>, Object> {
+public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStylePropertyName<?>, Object> {
 
     @Test
     public void testWithInvalidPropertyFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            TextStyleMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
+            TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
         });
     }
 
@@ -47,7 +47,7 @@ public final class TextStyleMapTest implements MapTesting2<TextStyleMap, TextSty
         from.put(this.property1(), this.value1());
         from.put(this.property2(), this.value2());
 
-        final TextStyleMap map = TextStyleMap.with(from);
+        final TextNodeMap map = TextNodeMap.with(from);
 
         from.clear();
         this.sizeAndCheck(map, 2);
@@ -88,7 +88,7 @@ public final class TextStyleMapTest implements MapTesting2<TextStyleMap, TextSty
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyleMap.EMPTY, TextStyleMap.fromJson(JsonNode.object(), FromJsonNodeContexts.basic()));
+        assertSame(TextNodeMap.EMPTY, TextNodeMap.fromJson(JsonNode.object(), FromJsonNodeContexts.basic()));
     }
 
     @Test
@@ -101,11 +101,11 @@ public final class TextStyleMapTest implements MapTesting2<TextStyleMap, TextSty
     }
 
     @Override
-    public TextStyleMap createMap() {
+    public TextNodeMap createMap() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.ordered();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
-        return TextStyleMap.with(map);
+        return TextNodeMap.with(map);
     }
 
     private TextStylePropertyName<?> property1() {
@@ -125,7 +125,7 @@ public final class TextStyleMapTest implements MapTesting2<TextStyleMap, TextSty
     }
 
     @Override
-    public Class<TextStyleMap> type() {
-        return TextStyleMap.class;
+    public Class<TextNodeMap> type() {
+        return TextNodeMap.class;
     }
 }

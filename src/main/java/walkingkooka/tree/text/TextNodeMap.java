@@ -30,43 +30,43 @@ import java.util.Set;
 /**
  * A read only sorted view of attributes or text style to values that appear within a {@link TextStyleNode}.
  */
-final class TextStyleMap extends AbstractMap<TextStylePropertyName<?>, Object> {
+final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
 
     static {
-        Maps.registerImmutableType(TextStyleMap.class);
+        Maps.registerImmutableType(TextNodeMap.class);
     }
 
     /**
-     * An empty {@link TextStyleMap}.
+     * An empty {@link TextNodeMap}.
      */
-    static final TextStyleMap EMPTY = new TextStyleMap(TextStyleMapEntrySet.EMPTY);
+    static final TextNodeMap EMPTY = new TextNodeMap(TextNodeMapEntrySet.EMPTY);
 
     /**
-     * Factory that takes a copy if the given {@link Map} is not a {@link TextStyleMap}.
+     * Factory that takes a copy if the given {@link Map} is not a {@link TextNodeMap}.
      */
-    static TextStyleMap with(final Map<TextStylePropertyName<?>, Object> map) {
+    static TextNodeMap with(final Map<TextStylePropertyName<?>, Object> map) {
         Objects.requireNonNull(map, "map");
 
-        return map instanceof TextStyleMap ?
-                TextStyleMap.class.cast(map) :
+        return map instanceof TextNodeMap ?
+                TextNodeMap.class.cast(map) :
                 with0(map);
     }
 
-    private static TextStyleMap with0(final Map<TextStylePropertyName<?>, Object> map) {
-        return with1(TextStyleMapEntrySet.with(map));
+    private static TextNodeMap with0(final Map<TextStylePropertyName<?>, Object> map) {
+        return with1(TextNodeMapEntrySet.with(map));
     }
 
-    private static TextStyleMap with1(final TextStyleMapEntrySet entrySet) {
+    private static TextNodeMap with1(final TextNodeMapEntrySet entrySet) {
         return entrySet.isEmpty() ?
                 EMPTY :
                 withTextStyleMapEntrySet(entrySet);
     }
 
-    static TextStyleMap withTextStyleMapEntrySet(final TextStyleMapEntrySet entrySet) {
-        return new TextStyleMap(entrySet);
+    static TextNodeMap withTextStyleMapEntrySet(final TextNodeMapEntrySet entrySet) {
+        return new TextNodeMap(entrySet);
     }
 
-    private TextStyleMap(final TextStyleMapEntrySet entries) {
+    private TextNodeMap(final TextNodeMapEntrySet entries) {
         super();
         this.entries = entries;
     }
@@ -76,7 +76,7 @@ final class TextStyleMap extends AbstractMap<TextStylePropertyName<?>, Object> {
         return this.entries;
     }
 
-    final TextStyleMapEntrySet entries;
+    final TextNodeMapEntrySet entries;
 
     // TextStyleVisitor.................................................................................................
 
@@ -86,9 +86,9 @@ final class TextStyleMap extends AbstractMap<TextStylePropertyName<?>, Object> {
 
     // JsonNodeContext..................................................................................................
 
-    static TextStyleMap fromJson(final JsonNode json,
-                                 final FromJsonNodeContext context) {
-        return TextStyleMap.with1(TextStyleMapEntrySet.fromJson(json, context));
+    static TextNodeMap fromJson(final JsonNode json,
+                                final FromJsonNodeContext context) {
+        return TextNodeMap.with1(TextNodeMapEntrySet.fromJson(json, context));
     }
 
     JsonNode toJson(final ToJsonNodeContext context) {

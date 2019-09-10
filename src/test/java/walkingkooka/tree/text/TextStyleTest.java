@@ -60,7 +60,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
-        final TextStyleMap textStyleMap = TextStyleMap.with(map);
+        final TextNodeMap textStyleMap = TextNodeMap.with(map);
 
         final TextStyle textStyle = TextStyle.with(textStyleMap);
         assertSame(textStyleMap, textStyle.value(), "value");
@@ -83,7 +83,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testEmpty() {
-        assertSame(TextStyleMap.EMPTY, TextStyleMap.with(Maps.empty()));
+        assertSame(TextNodeMap.EMPTY, TextNodeMap.with(Maps.empty()));
     }
 
     @Test
@@ -93,7 +93,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         map.put(this.property2(), this.value2());
 
         final TextStyle textStyle = TextStyle.with(map);
-        assertEquals(TextStyleMap.class, textStyle.value().getClass(), () -> "" + textStyle);
+        assertEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle);
     }
 
     // setChildren......................................................................................................
@@ -111,7 +111,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
                 children,
-                TextStyleNode.with(children, TextStyleMap.EMPTY));
+                TextStyleNode.with(children, TextNodeMap.EMPTY));
     }
 
     @Test
@@ -130,7 +130,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
                 children,
-                TextStyleNode.with(children, TextStyleMap.EMPTY));
+                TextStyleNode.with(children, TextNodeMap.EMPTY));
     }
 
     @Test

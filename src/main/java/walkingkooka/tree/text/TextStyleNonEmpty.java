@@ -34,13 +34,13 @@ import java.util.Optional;
 final class TextStyleNonEmpty extends TextStyle {
 
     /**
-     * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextStyleMap}.
+     * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextNodeMap}.
      */
-    static TextStyleNonEmpty withNonEmpty(final TextStyleMap value) {
+    static TextStyleNonEmpty withNonEmpty(final TextNodeMap value) {
         return new TextStyleNonEmpty(value);
     }
 
-    private TextStyleNonEmpty(final TextStyleMap value) {
+    private TextStyleNonEmpty(final TextNodeMap value) {
         super();
         this.value = value;
     }
@@ -60,7 +60,7 @@ final class TextStyleNonEmpty extends TextStyle {
         return this.value;
     }
 
-    final TextStyleMap value;
+    final TextNodeMap value;
 
     // merge............................................................................................................
 
@@ -83,7 +83,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 this :
                 merged.equals(before) ?
                         textStyle :
-                        new TextStyleNonEmpty(TextStyleMap.with(merged));
+                        new TextStyleNonEmpty(TextNodeMap.with(merged));
     }
 
     // replace..........................................................................................................
@@ -96,7 +96,7 @@ final class TextStyleNonEmpty extends TextStyle {
     // setChildren......................................................................................................
 
     @Override
-    TextStyleMap textStyleMap() {
+    TextNodeMap textStyleMap() {
         return this.value;
     }
 
@@ -111,7 +111,7 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
-        TextStyleMap map = this.value;
+        TextNodeMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
         int mode = 0; // new property added.
@@ -135,12 +135,12 @@ final class TextStyleNonEmpty extends TextStyle {
         // replace didnt happen
         if (0 == mode) {
             list.add(Maps.entry(propertyName, value));
-            TextStyleMapEntrySet.sort(list);
+            TextNodeMapEntrySet.sort(list);
         }
 
         return 1 == mode ?
                 this :
-                new TextStyleNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list)));
+                new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list)));
     }
 
     // remove...........................................................................................................
@@ -170,7 +170,7 @@ final class TextStyleNonEmpty extends TextStyle {
     private TextStyle remove1(List<Entry<TextStylePropertyName<?>, Object>> list) {
         return list.isEmpty() ?
                 TextStyle.EMPTY :
-                new TextStyleNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list))); // no need to sort after a delete
+                new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list))); // no need to sort after a delete
     }
 
     // TextStyleVisitor.................................................................................................

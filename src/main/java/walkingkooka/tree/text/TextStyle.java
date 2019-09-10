@@ -46,10 +46,10 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
      * Factory that creates a {@link TextStyle} from a {@link Map}.
      */
     public static TextStyle with(final Map<TextStylePropertyName<?>, Object> value) {
-        return withTextStyleMap(TextStyleMap.with(value));
+        return withTextStyleMap(TextNodeMap.with(value));
     }
 
-    static TextStyle withTextStyleMap(final TextStyleMap map) {
+    static TextStyle withTextStyleMap(final TextNodeMap map) {
         return map.isEmpty() ?
                 EMPTY :
                 TextStyleNonEmpty.withNonEmpty(map);
@@ -77,7 +77,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
         return TextStyleNode.with(textNodes, this.textStyleMap());
     }
 
-    abstract TextStyleMap textStyleMap();
+    abstract TextNodeMap textStyleMap();
 
     // merge............................................................................................................
 
