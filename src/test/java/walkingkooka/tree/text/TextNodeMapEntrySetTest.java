@@ -29,19 +29,19 @@ import java.util.Map.Entry;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStyleMapEntrySetTest implements SetTesting<TextStyleMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
+public final class TextNodeMapEntrySetTest implements SetTesting<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
         IteratorTesting {
 
     @Test
     public void testWithInvalidPropertyFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            TextStyleMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
+            TextNodeMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
         });
     }
 
     @Test
     public void testEmpty() {
-        assertSame(TextStyleMapEntrySet.EMPTY, TextStyleMapEntrySet.with(Maps.empty()));
+        assertSame(TextNodeMapEntrySet.EMPTY, TextNodeMapEntrySet.with(Maps.empty()));
     }
 
     @Test
@@ -74,11 +74,11 @@ public final class TextStyleMapEntrySetTest implements SetTesting<TextStyleMapEn
     }
 
     @Override
-    public TextStyleMapEntrySet createSet() {
+    public TextNodeMapEntrySet createSet() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.ordered();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
-        return TextStyleMapEntrySet.with(map);
+        return TextNodeMapEntrySet.with(map);
     }
 
     private TextStylePropertyName<?> property1() {
@@ -98,7 +98,7 @@ public final class TextStyleMapEntrySetTest implements SetTesting<TextStyleMapEn
     }
 
     @Override
-    public Class<TextStyleMapEntrySet> type() {
-        return TextStyleMapEntrySet.class;
+    public Class<TextNodeMapEntrySet> type() {
+        return TextNodeMapEntrySet.class;
     }
 }

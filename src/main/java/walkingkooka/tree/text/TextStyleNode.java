@@ -41,7 +41,7 @@ public final class TextStyleNode extends TextParentNode {
 
     public final static TextNodeName NAME = TextNodeName.fromClass(TextStyleNode.class);
 
-    final static TextStyleMap NO_ATTRIBUTES_MAP = TextStyleMap.with(Maps.empty());
+    final static TextNodeMap NO_ATTRIBUTES_MAP = TextNodeMap.with(Maps.empty());
 
     /**
      * Factory that creates a {@link TextStyleNode} with the given children and textStyle.
@@ -49,7 +49,7 @@ public final class TextStyleNode extends TextParentNode {
      */
     // TextStyle.setTextNodes
     static TextNode with(final List<TextNode> children,
-                         final TextStyleMap properties) {
+                         final TextNodeMap properties) {
         final List<TextNode> copy = Lists.immutable(children);
         return properties.isEmpty() && copy.size() == 1 ?
                 copy.get(0) :
@@ -61,7 +61,7 @@ public final class TextStyleNode extends TextParentNode {
      */
     private TextStyleNode(final int index,
                           final List<TextNode> children,
-                          final TextStyleMap attributes) {
+                          final TextNodeMap attributes) {
         super(index, children);
         this.attributes = attributes;
     }
@@ -115,15 +115,15 @@ public final class TextStyleNode extends TextParentNode {
 
     @Override
     TextNode setAttributesEmptyTextStyleMap() {
-        return this.setAttributesTextStyleMap(TextStyleMap.EMPTY);
+        return this.setAttributesTextStyleMap(TextNodeMap.EMPTY);
     }
 
     @Override
-    final TextStyleNode setAttributesNonEmptyTextStyleMap(final TextStyleMap textStyleMap) {
+    final TextStyleNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return this.setAttributesTextStyleMap(textStyleMap);
     }
 
-    private TextStyleNode setAttributesTextStyleMap(final TextStyleMap textStyleMap) {
+    private TextStyleNode setAttributesTextStyleMap(final TextNodeMap textStyleMap) {
         return this.attributes.equals(textStyleMap) ?
                 this :
                 this.replaceAttributes(textStyleMap);
@@ -132,7 +132,7 @@ public final class TextStyleNode extends TextParentNode {
     /**
      * Create a new {@link TextStylePropertyName}.
      */
-    private TextStyleNode replaceAttributes(final TextStyleMap attributes) {
+    private TextStyleNode replaceAttributes(final TextNodeMap attributes) {
         return new TextStyleNode(this.index, this.children, attributes);
     }
 
@@ -141,7 +141,7 @@ public final class TextStyleNode extends TextParentNode {
         return TextStyle.with(this.attributes);
     }
 
-    private final TextStyleMap attributes;
+    private final TextNodeMap attributes;
 
     // replace.........................................................................................................
 
@@ -176,7 +176,7 @@ public final class TextStyleNode extends TextParentNode {
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case STYLE:
-                    textStyle = TextStyle.withTextStyleMap(TextStyleMap.fromJson(child, context));
+                    textStyle = TextStyle.withTextStyleMap(TextNodeMap.fromJson(child, context));
                     break;
                 case VALUES:
                     children = context.fromJsonNodeWithTypeList(child);

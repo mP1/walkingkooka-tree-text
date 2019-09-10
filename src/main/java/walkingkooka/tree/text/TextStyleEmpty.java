@@ -86,8 +86,8 @@ final class TextStyleEmpty extends TextStyle {
     // setChildren......................................................................................................
 
     @Override
-    TextStyleMap textStyleMap() {
-        return TextStyleMap.EMPTY;
+    TextNodeMap textStyleMap() {
+        return TextNodeMap.EMPTY;
     }
 
     // get/set/remove...................................................................................................
@@ -99,7 +99,7 @@ final class TextStyleEmpty extends TextStyle {
 
     @Override
     <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
-        return TextStyleNonEmpty.withNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
+        return TextStyleNonEmpty.withNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
     }
 
     @Override

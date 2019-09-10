@@ -53,7 +53,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testWithOneChildAndAttributes() {
         final TextNode child = TextNode.text("child");
-        final TextNode styleNode = TextStyleNode.with(Lists.of(child), TextStyleMap.with(Maps.of(TextStylePropertyName.WIDTH, Length.pixel(1.0))));
+        final TextNode styleNode = TextStyleNode.with(Lists.of(child), TextNodeMap.with(Maps.of(TextStylePropertyName.WIDTH, Length.pixel(1.0))));
         this.childCountCheck(styleNode, child);
     }
 

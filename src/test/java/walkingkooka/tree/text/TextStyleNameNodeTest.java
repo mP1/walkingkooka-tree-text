@@ -154,7 +154,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     public void testDifferentParent() {
         final TextStyleNameNode child = TextStyleNameNode.with(TextStyleName.with("child-1a"));
 
-        this.checkNotEquals(TextStyleNode.with(Lists.of(child), TextStyleMap.with(Maps.of(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD))).children().get(0),
+        this.checkNotEquals(TextStyleNode.with(Lists.of(child), TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD))).children().get(0),
                 this.styleName("different-parent", child));
     }
 
