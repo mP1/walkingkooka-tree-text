@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.compare.ComparableTesting;
+import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class OpacityTest implements ClassTesting2<Opacity>,
-        ComparableTesting<Opacity>,
+        ComparableTesting2<Opacity>,
         ConstantsTesting<Opacity>,
         SerializationTesting<Opacity>,
         JsonNodeMappingTesting<Opacity>,

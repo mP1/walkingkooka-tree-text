@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ConstantsTesting;
-import walkingkooka.test.HashCodeEqualsDefinedTesting;
+import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
@@ -30,7 +30,7 @@ import java.util.Set;
 
 public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase3<TextOverflow>
         implements ConstantsTesting<TextOverflow>,
-        HashCodeEqualsDefinedTesting<TextOverflow>,
+        HashCodeEqualsDefinedTesting2<TextOverflow>,
         JsonNodeMappingTesting<TextOverflow> {
 
     TextOverflowTestCase() {
