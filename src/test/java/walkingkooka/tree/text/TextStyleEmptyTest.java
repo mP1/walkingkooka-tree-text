@@ -30,7 +30,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> {
+public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> {
 
     @Test
     public void testEmpty() {
@@ -132,7 +132,7 @@ public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> 
         final StringBuilder b = new StringBuilder();
         final List<TextStyle> visited = Lists.array();
 
-        final EmptyTextStyle textStyle = EmptyTextStyle.instance();
+        final TextStyleEmpty textStyle = TextStyleEmpty.instance();
 
         new FakeTextStyleVisitor() {
             @Override
@@ -168,12 +168,12 @@ public final class EmptyTextStyleTest extends TextStyleTestCase<EmptyTextStyle> 
     }
 
     @Override
-    public EmptyTextStyle createObject() {
+    public TextStyleEmpty createObject() {
         return Cast.to(TextStyle.EMPTY);
     }
 
     @Override
-    Class<EmptyTextStyle> textStyleType() {
-        return EmptyTextStyle.class;
+    Class<TextStyleEmpty> textStyleType() {
+        return TextStyleEmpty.class;
     }
 }

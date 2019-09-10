@@ -29,18 +29,18 @@ import java.util.Map.Entry;
 import java.util.Optional;
 
 /**
- * A {@link NonEmptyTextStyle} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
+ * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
  */
-final class NonEmptyTextStyle extends TextStyle {
+final class TextStyleNonEmpty extends TextStyle {
 
     /**
-     * Factory that creates a {@link NonEmptyTextStyle} from a {@link TextStyleMap}.
+     * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextStyleMap}.
      */
-    static NonEmptyTextStyle with(final TextStyleMap value) {
-        return new NonEmptyTextStyle(value);
+    static TextStyleNonEmpty withNonEmpty(final TextStyleMap value) {
+        return new TextStyleNonEmpty(value);
     }
 
-    private NonEmptyTextStyle(final TextStyleMap value) {
+    private TextStyleNonEmpty(final TextStyleMap value) {
         super();
         this.value = value;
     }
@@ -70,7 +70,7 @@ final class NonEmptyTextStyle extends TextStyle {
     }
 
     @Override
-    TextStyle merge1(final NonEmptyTextStyle textStyle) {
+    TextStyle merge1(final TextStyleNonEmpty textStyle) {
         final Map<TextStylePropertyName<?>, Object> otherBefore = this.value; // because of double dispatch params are reversed.
         final Map<TextStylePropertyName<?>, Object> before = textStyle.value;
 
@@ -83,7 +83,7 @@ final class NonEmptyTextStyle extends TextStyle {
                 this :
                 merged.equals(before) ?
                         textStyle :
-                        new NonEmptyTextStyle(TextStyleMap.with(merged));
+                        new TextStyleNonEmpty(TextStyleMap.with(merged));
     }
 
     // replace..........................................................................................................
@@ -140,7 +140,7 @@ final class NonEmptyTextStyle extends TextStyle {
 
         return 1 == mode ?
                 this :
-                new NonEmptyTextStyle(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list)));
+                new TextStyleNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list)));
     }
 
     // remove...........................................................................................................
@@ -170,7 +170,7 @@ final class NonEmptyTextStyle extends TextStyle {
     private TextStyle remove1(List<Entry<TextStylePropertyName<?>, Object>> list) {
         return list.isEmpty() ?
                 TextStyle.EMPTY :
-                new NonEmptyTextStyle(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list))); // no need to sort after a delete
+                new TextStyleNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(list))); // no need to sort after a delete
     }
 
     // TextStyleVisitor.................................................................................................
@@ -206,7 +206,7 @@ final class NonEmptyTextStyle extends TextStyle {
 
     @Override
     boolean canBeEquals(final Object other) {
-        return other instanceof NonEmptyTextStyle;
+        return other instanceof TextStyleNonEmpty;
     }
 
     @Override
