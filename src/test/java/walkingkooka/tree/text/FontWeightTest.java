@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.compare.ComparableTesting;
+import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
-        implements ComparableTesting<FontWeight>,
+        implements ComparableTesting2<FontWeight>,
         ConstantsTesting<FontWeight>,
         SerializationTesting<FontWeight> {
 

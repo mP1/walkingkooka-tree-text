@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.predicate.Predicates;
 import walkingkooka.test.ClassTesting2;
-import walkingkooka.test.HashCodeEqualsDefinedTesting;
+import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.test.IsMethodTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
@@ -34,7 +34,7 @@ import java.util.function.Predicate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
-        HashCodeEqualsDefinedTesting<L>,
+        HashCodeEqualsDefinedTesting2<L>,
         IsMethodTesting<L>,
         JsonNodeMappingTesting<L>,
         ParseStringTesting<L>,
