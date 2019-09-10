@@ -25,17 +25,17 @@ import walkingkooka.tree.json.marshall.ToJsonNodeContext;
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type a type that marshals into a {@link JsonNode}
  * with the type recorded.
  */
-final class JsonNodeWithTypeTextStylePropertyValueHandler extends TextStylePropertyValueHandler<Object> {
+final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePropertyValueHandler<Object> {
 
     /**
      * Singleton
      */
-    static JsonNodeWithTypeTextStylePropertyValueHandler INSTANCE = new JsonNodeWithTypeTextStylePropertyValueHandler();
+    static TextStylePropertyValueHandlerJsonNodeWithType INSTANCE = new TextStylePropertyValueHandlerJsonNodeWithType();
 
     /**
      * Private ctor
      */
-    private JsonNodeWithTypeTextStylePropertyValueHandler() {
+    private TextStylePropertyValueHandlerJsonNodeWithType() {
         super();
     }
 

@@ -18,36 +18,36 @@
 package walkingkooka.tree.text;
 
 /**
- * A {@link TextStylePropertyValueHandler} that only allows {@link NormalLength} and {@link PixelLength} values.
+ * A {@link TextStylePropertyValueHandler} that only allows {@link NoneLength} and {@link PixelLength} values.
  */
-final class NormalLengthPixelLengthTextStylePropertyValueHandler extends LengthTextStylePropertyValueHandler {
+final class TextStylePropertyValueHandlerNoneLengthPixelLength extends TextStylePropertyValueHandlerLength {
 
     /**
      * Singleton
      */
-    final static NormalLengthPixelLengthTextStylePropertyValueHandler INSTANCE = new NormalLengthPixelLengthTextStylePropertyValueHandler();
+    final static TextStylePropertyValueHandlerNoneLengthPixelLength INSTANCE = new TextStylePropertyValueHandlerNoneLengthPixelLength();
 
     /**
      * Private ctor
      */
-    private NormalLengthPixelLengthTextStylePropertyValueHandler() {
+    private TextStylePropertyValueHandlerNoneLengthPixelLength() {
         super();
     }
 
     @Override
     boolean lengthCheck(final Length<?> length) {
-        return length.isNormal() || length.isPixel();
+        return length.isNone() || length.isPixel();
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return "NormalLength|PixelLength";
+        return "NoneLength|PixelLength";
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return NormalLength.class.getSimpleName() + "|" + PixelLength.class.getSimpleName();
+        return NoneLength.class.getSimpleName() + "|" + PixelLength.class.getSimpleName();
     }
 }

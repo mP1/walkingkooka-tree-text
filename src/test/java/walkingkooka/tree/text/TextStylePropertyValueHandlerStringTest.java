@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
 
-public final class StringTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<StringTextStylePropertyValueHandler, String> {
+public final class TextStylePropertyValueHandlerStringTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerString, String> {
 
     @Test
     public void testCheckEmptyStringFails() {
@@ -50,8 +50,8 @@ public final class StringTextStylePropertyValueHandlerTest extends TextStyleProp
     }
 
     @Override
-    StringTextStylePropertyValueHandler handler() {
-        return StringTextStylePropertyValueHandler.INSTANCE;
+    TextStylePropertyValueHandlerString handler() {
+        return TextStylePropertyValueHandlerString.INSTANCE;
     }
 
     @Override
@@ -70,12 +70,12 @@ public final class StringTextStylePropertyValueHandlerTest extends TextStyleProp
     }
 
     @Override
-    public String typeNamePrefix() {
+    public String typeNameSuffix() {
         return String.class.getSimpleName();
     }
 
     @Override
-    public Class<StringTextStylePropertyValueHandler> type() {
-        return StringTextStylePropertyValueHandler.class;
+    public Class<TextStylePropertyValueHandlerString> type() {
+        return TextStylePropertyValueHandlerString.class;
     }
 }

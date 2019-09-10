@@ -17,60 +17,72 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
+import java.util.Objects;
+import java.util.function.Function;
+
 /**
- * A {@link TextStylePropertyValueHandler} for non empty {@link String} parameter values.
+ * A {@link TextStylePropertyValueHandler} for {@link Enum} parameter values.
  */
-final class StringTextStylePropertyValueHandler extends TextStylePropertyValueHandler<String> {
+final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextStylePropertyValueHandler<E> {
 
     /**
-     * Singleton
+     * Factory that creates a new {@link TextStylePropertyValueHandlerEnum}.
      */
-    final static StringTextStylePropertyValueHandler INSTANCE = new StringTextStylePropertyValueHandler();
+    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> with(final Function<String, E> factory,
+                                                                         final Class<E> type) {
+        Objects.requireNonNull(factory, "factory");
+        Objects.requireNonNull(type, "type");
+
+        return new TextStylePropertyValueHandlerEnum<>(factory, type);
+    }
 
     /**
      * Private ctor
      */
-    private StringTextStylePropertyValueHandler() {
+    private TextStylePropertyValueHandlerEnum(final Function<String, E> factory,
+                                              final Class<E> type) {
         super();
+        this.factory = factory;
+        this.type = type;
     }
 
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
-        final String string = this.checkType(value, String.class, name);
-        if (string.isEmpty()) {
-            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
-        }
+        this.checkType(value, this.type, name);
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return "String";
+        return this.type.getSimpleName();
     }
+
+    private final Class<E> type;
 
     // JsonNodeContext..................................................................................................
 
     @Override
-    String fromJsonNode(final JsonNode node,
-                        final TextStylePropertyName<?> name,
-                        final FromJsonNodeContext context) {
-        return node.stringValueOrFail();
+    E fromJsonNode(final JsonNode node,
+                   final TextStylePropertyName<?> name,
+                   final FromJsonNodeContext context) {
+        return this.factory.apply(node.stringValueOrFail());
     }
 
+    private final Function<String, E> factory;
+
     @Override
-    JsonNode toJsonNode(final String value,
+    JsonNode toJsonNode(final E value,
                         final ToJsonNodeContext context) {
-        return JsonNode.string(value);
+        return JsonNode.string(value.name());
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return String.class.getSimpleName();
+        return this.type.getSimpleName();
     }
 }

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
 
-public final class EnumTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase2<EnumTextStylePropertyValueHandler<TextWrapping>, TextWrapping> {
+public final class TextStylePropertyValueHandlerEnumTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerEnum<TextWrapping>, TextWrapping> {
 
     @Test
     public void testFromJsonNode() {
@@ -35,8 +35,8 @@ public final class EnumTextStylePropertyValueHandlerTest extends TextStyleProper
     }
 
     @Override
-    EnumTextStylePropertyValueHandler<TextWrapping> handler() {
-        return EnumTextStylePropertyValueHandler.with(TextWrapping::valueOf, TextWrapping.class);
+    TextStylePropertyValueHandlerEnum<TextWrapping> handler() {
+        return TextStylePropertyValueHandlerEnum.with(TextWrapping::valueOf, TextWrapping.class);
     }
 
     @Override
@@ -55,12 +55,12 @@ public final class EnumTextStylePropertyValueHandlerTest extends TextStyleProper
     }
 
     @Override
-    public String typeNamePrefix() {
+    public String typeNameSuffix() {
         return Enum.class.getSimpleName();
     }
 
     @Override
-    public Class<EnumTextStylePropertyValueHandler<TextWrapping>> type() {
-        return Cast.to(EnumTextStylePropertyValueHandler.class);
+    public Class<TextStylePropertyValueHandlerEnum<TextWrapping>> type() {
+        return Cast.to(TextStylePropertyValueHandlerEnum.class);
     }
 }
