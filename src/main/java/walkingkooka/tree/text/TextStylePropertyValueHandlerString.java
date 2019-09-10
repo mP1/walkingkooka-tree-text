@@ -17,61 +17,60 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
 /**
- * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type that can be made into a {@link JsonNode}.
+ * A {@link TextStylePropertyValueHandler} for non empty {@link String} parameter values.
  */
-final class JsonNodeTextStylePropertyValueHandler<H> extends TextStylePropertyValueHandler<H> {
+final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHandler<String> {
 
     /**
-     * Factory
+     * Singleton
      */
-    static <T> JsonNodeTextStylePropertyValueHandler<T> with(final Class<T> type) {
-        return new JsonNodeTextStylePropertyValueHandler<>(type);
-    }
+    final static TextStylePropertyValueHandlerString INSTANCE = new TextStylePropertyValueHandlerString();
 
     /**
      * Private ctor
      */
-    private JsonNodeTextStylePropertyValueHandler(final Class<H> type) {
+    private TextStylePropertyValueHandlerString() {
         super();
-        this.type = type;
     }
 
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
-        this.checkType(value, this.type, name);
+        final String string = this.checkType(value, String.class, name);
+        if (string.isEmpty()) {
+            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
+        }
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return this.type.getSimpleName();
+        return "String";
     }
 
     // JsonNodeContext..................................................................................................
 
     @Override
-    H fromJsonNode(final JsonNode node,
-                   final TextStylePropertyName<?> name,
-                   final FromJsonNodeContext context) {
-        return context.fromJsonNode(node, this.type);
+    String fromJsonNode(final JsonNode node,
+                        final TextStylePropertyName<?> name,
+                        final FromJsonNodeContext context) {
+        return node.stringValueOrFail();
     }
 
     @Override
-    JsonNode toJsonNode(final H value,
+    JsonNode toJsonNode(final String value,
                         final ToJsonNodeContext context) {
-        return context.toJsonNode(value);
+        return JsonNode.string(value);
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return this.type.getSimpleName();
+        return String.class.getSimpleName();
     }
-
-    private final Class<H> type;
 }

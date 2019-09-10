@@ -124,7 +124,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     // TypeNameTesting...................................................................................................
 
     @Override
-    public final String typeNameSuffix() {
+    public final String typeNamePrefix() {
         return TextStylePropertyValueHandler.class.getSimpleName();
     }
 }

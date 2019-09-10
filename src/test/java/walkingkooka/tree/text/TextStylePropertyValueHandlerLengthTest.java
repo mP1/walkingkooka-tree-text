@@ -20,13 +20,13 @@ package walkingkooka.tree.text;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.type.JavaVisibility;
 
-public final class LengthTextStylePropertyValueHandlerTest implements ClassTesting2<LengthTextStylePropertyValueHandler> {
+public final class TextStylePropertyValueHandlerLengthTest implements ClassTesting2<TextStylePropertyValueHandlerLength> {
 
     // ClassTesting.....................................................................................................
 
     @Override
-    public Class<LengthTextStylePropertyValueHandler> type() {
-        return LengthTextStylePropertyValueHandler.class;
+    public Class<TextStylePropertyValueHandlerLength> type() {
+        return TextStylePropertyValueHandlerLength.class;
     }
 
     @Override

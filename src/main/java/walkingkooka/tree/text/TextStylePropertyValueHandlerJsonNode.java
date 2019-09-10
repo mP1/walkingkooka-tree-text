@@ -21,32 +21,23 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 
-import java.util.Objects;
-import java.util.function.Function;
-
 /**
- * A {@link TextStylePropertyValueHandler} for {@link Enum} parameter values.
+ * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type that can be made into a {@link JsonNode}.
  */
-final class EnumTextStylePropertyValueHandler<E extends Enum<E>> extends TextStylePropertyValueHandler<E> {
+final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyValueHandler<H> {
 
     /**
-     * Factory that creates a new {@link EnumTextStylePropertyValueHandler}.
+     * Factory
      */
-    static <E extends Enum<E>> EnumTextStylePropertyValueHandler<E> with(final Function<String, E> factory,
-                                                                               final Class<E> type) {
-        Objects.requireNonNull(factory, "factory");
-        Objects.requireNonNull(type, "type");
-
-        return new EnumTextStylePropertyValueHandler<>(factory, type);
+    static <T> TextStylePropertyValueHandlerJsonNode<T> with(final Class<T> type) {
+        return new TextStylePropertyValueHandlerJsonNode<>(type);
     }
 
     /**
      * Private ctor
      */
-    private EnumTextStylePropertyValueHandler(final Function<String, E> factory,
-                                              final Class<E> type) {
+    private TextStylePropertyValueHandlerJsonNode(final Class<H> type) {
         super();
-        this.factory = factory;
         this.type = type;
     }
 
@@ -60,23 +51,19 @@ final class EnumTextStylePropertyValueHandler<E extends Enum<E>> extends TextSty
         return this.type.getSimpleName();
     }
 
-    private final Class<E> type;
-
     // JsonNodeContext..................................................................................................
 
     @Override
-    E fromJsonNode(final JsonNode node,
+    H fromJsonNode(final JsonNode node,
                    final TextStylePropertyName<?> name,
                    final FromJsonNodeContext context) {
-        return this.factory.apply(node.stringValueOrFail());
+        return context.fromJsonNode(node, this.type);
     }
 
-    private final Function<String, E> factory;
-
     @Override
-    JsonNode toJsonNode(final E value,
+    JsonNode toJsonNode(final H value,
                         final ToJsonNodeContext context) {
-        return JsonNode.string(value.name());
+        return context.toJsonNode(value);
     }
 
     // Object ..........................................................................................................
@@ -85,4 +72,6 @@ final class EnumTextStylePropertyValueHandler<E extends Enum<E>> extends TextSty
     public String toString() {
         return this.type.getSimpleName();
     }
+
+    private final Class<H> type;
 }

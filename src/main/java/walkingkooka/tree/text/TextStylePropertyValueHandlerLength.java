@@ -24,12 +24,12 @@ import walkingkooka.tree.json.marshall.ToJsonNodeContext;
 /**
  * Base class for {@link TextStylePropertyValueHandler} that have {@link Length} values.
  */
-abstract class LengthTextStylePropertyValueHandler extends TextStylePropertyValueHandler<Length<?>> {
+abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValueHandler<Length<?>> {
 
     /**
      * Package private to limit sub classes.
      */
-    LengthTextStylePropertyValueHandler() {
+    TextStylePropertyValueHandlerLength() {
         super();
     }
 

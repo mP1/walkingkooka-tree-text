@@ -22,21 +22,16 @@ import walkingkooka.tree.FakeNode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class NoneLengthPixelLengthTextStylePropertyValueHandlerTest extends TextStylePropertyValueHandlerTestCase<NoneLengthPixelLengthTextStylePropertyValueHandler, Length<?>> {
+public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerNormalLengthPixelLength, Length<?>> {
 
     @Test
-    public void testCheckNone() {
-        this.check(Length.none());
-    }
-
-    @Test
-    public void testCheckNormalFails() {
-        this.checkFails(Length.normal(), "Property \"max-height\" value normal(NormalLength) is not a NoneLength|PixelLength");
+    public void testCheckNormal() {
+        this.check(Length.normal());
     }
 
     @Test
     public void testCheckNumberFails() {
-        this.checkFails(Length.number(1L), "Property \"max-height\" value 1(NumberLength) is not a NoneLength|PixelLength");
+        this.checkFails(Length.number(1L), "Property \"line-height\" value 1(NumberLength) is not a NormalLength|PixelLength");
     }
 
     @Test
@@ -56,22 +51,26 @@ public final class NoneLengthPixelLengthTextStylePropertyValueHandlerTest extend
     }
 
     @Test
-    public void testFromJsonNodeNone() {
-        final NoneLength none = Length.none();
-        this.fromJsonNodeAndCheck(this.toJsonNode(none), none);
+    public void testFromJsonNodeNoneFails() {
+        assertThrows(TextStylePropertyValueException.class, () -> {
+            this.handler().fromJsonNode(this.toJsonNode(Length.none()),
+                    this.propertyName(),
+                    this.fromJsonNodeContext());
+        });
     }
 
     @Test
-    public void testFromJsonNodeNormalFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(this.toJsonNode(Length.normal()), this.propertyName(), this.fromJsonNodeContext());
-        });
+    public void testFromJsonNodeNormal() {
+        final NormalLength normal = Length.normal();
+        this.fromJsonNodeAndCheck(this.toJsonNode(normal), normal);
     }
 
     @Test
     public void testFromJsonNodeNumberFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(this.toJsonNode(Length.number(1)), this.propertyName(), this.fromJsonNodeContext());
+            this.handler().fromJsonNode(this.toJsonNode(Length.number(1)),
+                    this.propertyName(),
+                    this.fromJsonNodeContext());
         });
     }
 
@@ -95,17 +94,17 @@ public final class NoneLengthPixelLengthTextStylePropertyValueHandlerTest extend
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(this.handler(), "NoneLength|PixelLength");
+        this.toStringAndCheck(this.handler(), "NormalLength|PixelLength");
     }
 
     @Override
-    NoneLengthPixelLengthTextStylePropertyValueHandler handler() {
-        return NoneLengthPixelLengthTextStylePropertyValueHandler.INSTANCE;
+    TextStylePropertyValueHandlerNormalLengthPixelLength handler() {
+        return TextStylePropertyValueHandlerNormalLengthPixelLength.INSTANCE;
     }
 
     @Override
     TextStylePropertyName<Length<?>> propertyName() {
-        return TextStylePropertyName.MAX_HEIGHT;
+        return TextStylePropertyName.LINE_HEIGHT;
     }
 
     @Override
@@ -115,16 +114,16 @@ public final class NoneLengthPixelLengthTextStylePropertyValueHandlerTest extend
 
     @Override
     String propertyValueType() {
-        return "NoneLength|PixelLength";
+        return "NormalLength|PixelLength";
     }
 
     @Override
-    public String typeNamePrefix() {
-        return NoneLength.class.getSimpleName() + PixelLength.class.getSimpleName();
+    public String typeNameSuffix() {
+        return NormalLength.class.getSimpleName() + PixelLength.class.getSimpleName();
     }
 
     @Override
-    public Class<NoneLengthPixelLengthTextStylePropertyValueHandler> type() {
-        return NoneLengthPixelLengthTextStylePropertyValueHandler.class;
+    public Class<TextStylePropertyValueHandlerNormalLengthPixelLength> type() {
+        return TextStylePropertyValueHandlerNormalLengthPixelLength.class;
     }
 }

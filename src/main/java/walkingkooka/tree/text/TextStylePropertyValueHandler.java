@@ -31,46 +31,46 @@ import java.util.function.Function;
 abstract class TextStylePropertyValueHandler<T> {
 
     /**
-     * {@see EnumTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerEnum}
      */
-    static <E extends Enum<E>> EnumTextStylePropertyValueHandler<E> enumTextPropertyValueHandler(final Function<String, E> factory,
+    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextPropertyValueHandler(final Function<String, E> factory,
                                                                                                  final Class<E> type) {
-        return EnumTextStylePropertyValueHandler.with(factory, type);
+        return TextStylePropertyValueHandlerEnum.with(factory, type);
     }
 
     /**
-     * {@see JsonNodeTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerJsonNode}
      */
     static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type) {
-        return JsonNodeTextStylePropertyValueHandler.with(type);
+        return TextStylePropertyValueHandlerJsonNode.with(type);
     }
 
     /**
-     * {@see JsonNodeWithTypeTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerJsonNodeWithType}
      */
-    static JsonNodeWithTypeTextStylePropertyValueHandler jsonNodeWithType() {
-        return JsonNodeWithTypeTextStylePropertyValueHandler.INSTANCE;
+    static TextStylePropertyValueHandlerJsonNodeWithType jsonNodeWithType() {
+        return TextStylePropertyValueHandlerJsonNodeWithType.INSTANCE;
     }
 
     /**
-     * {@see NoneLengthPixelLengthTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerNoneLengthPixelLength}
      */
-    static NoneLengthPixelLengthTextStylePropertyValueHandler noneLengthPixelLength() {
-        return NoneLengthPixelLengthTextStylePropertyValueHandler.INSTANCE;
+    static TextStylePropertyValueHandlerNoneLengthPixelLength noneLengthPixelLength() {
+        return TextStylePropertyValueHandlerNoneLengthPixelLength.INSTANCE;
     }
     
     /**
-     * {@see NormalLengthPixelLengthTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerNormalLengthPixelLength}
      */
-    static NormalLengthPixelLengthTextStylePropertyValueHandler normalLengthPixelLength() {
-        return NormalLengthPixelLengthTextStylePropertyValueHandler.INSTANCE;
+    static TextStylePropertyValueHandlerNormalLengthPixelLength normalLengthPixelLength() {
+        return TextStylePropertyValueHandlerNormalLengthPixelLength.INSTANCE;
     }
 
     /**
-     * {@see StringTextStylePropertyValueHandler}
+     * {@see TextStylePropertyValueHandlerString}
      */
     static TextStylePropertyValueHandler<String> string() {
-        return StringTextStylePropertyValueHandler.INSTANCE;
+        return TextStylePropertyValueHandlerString.INSTANCE;
     }
 
     /**
