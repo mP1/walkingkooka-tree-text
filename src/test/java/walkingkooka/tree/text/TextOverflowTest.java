@@ -18,13 +18,19 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ClassTesting2;
+import walkingkooka.test.ConstantsTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
 import walkingkooka.type.JavaVisibility;
 
-public final class TextOverflowTest implements ClassTesting2<TextOverflow>, JsonNodeMappingTesting<TextOverflow> {
+import java.util.Set;
+
+public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
+        ConstantsTesting<TextOverflow>,
+        JsonNodeMappingTesting<TextOverflow> {
 
     @Test
     public void testClipJsonRoundtrip() {
@@ -61,6 +67,13 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>, Json
     @Override
     public JavaVisibility typeVisibility() {
         return JavaVisibility.PUBLIC;
+    }
+
+    // ConstantTesting..................................................................................................
+
+    @Override
+    public Set<TextOverflow> intentionalDuplicateConstants() {
+        return Sets.empty();
     }
 
     // HasJsonNodeTesting...............................................................................................

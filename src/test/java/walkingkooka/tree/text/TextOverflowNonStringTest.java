@@ -24,13 +24,13 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public final class NonStringTextOverflowTest extends TextOverflowTestCase<NonStringTextOverflow> {
+public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOverflowNonString> {
 
     private final static String TEXT = "abc123";
 
     @Test
     public void testWith() {
-        final StringTextOverflow textOverflow = StringTextOverflow.with(TEXT);
+        final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
         assertEquals(Optional.of(TEXT), textOverflow.value());
     }
 
@@ -100,7 +100,7 @@ public final class NonStringTextOverflowTest extends TextOverflowTestCase<NonStr
     }
 
     @Override
-    Class<NonStringTextOverflow> textOverflowType() {
-        return NonStringTextOverflow.class;
+    Class<TextOverflowNonString> textOverflowType() {
+        return TextOverflowNonString.class;
     }
 }
