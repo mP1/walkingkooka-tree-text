@@ -26,26 +26,26 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * A {@link TextStyle} with no textStyle and values.
+ * A {@link TextStyle} with style and values.
  */
-final class EmptyTextStyle extends TextStyle {
+final class TextStyleEmpty extends TextStyle {
 
     /**
      * Singleton necessary to avoid race conditions to a init'd static field
      */
-    static EmptyTextStyle instance() {
+    static TextStyleEmpty instance() {
         if (null == instance) {
-            instance = new EmptyTextStyle();
+            instance = new TextStyleEmpty();
         }
         return instance;
     }
 
-    private static EmptyTextStyle instance;
+    private static TextStyleEmpty instance;
 
     /**
      * Private ctor
      */
-    private EmptyTextStyle() {
+    private TextStyleEmpty() {
         super();
     }
 
@@ -72,7 +72,7 @@ final class EmptyTextStyle extends TextStyle {
     }
 
     @Override
-    TextStyle merge1(final NonEmptyTextStyle textStyle) {
+    TextStyle merge1(final TextStyleNonEmpty textStyle) {
         return textStyle; // EMPTY merge NOTEMPTY -> NOTEMPTY
     }
 
@@ -99,7 +99,7 @@ final class EmptyTextStyle extends TextStyle {
 
     @Override
     <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
-        return NonEmptyTextStyle.with(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
+        return TextStyleNonEmpty.withNonEmpty(TextStyleMap.withTextStyleMapEntrySet(TextStyleMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
     }
 
     @Override
@@ -140,7 +140,7 @@ final class EmptyTextStyle extends TextStyle {
 
     @Override
     final boolean canBeEquals(final Object other) {
-        return other instanceof EmptyTextStyle;
+        return other instanceof TextStyleEmpty;
     }
 
     @Override

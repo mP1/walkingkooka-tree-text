@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextStyle> {
+public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonEmpty> {
 
     @Test
     public void testWithTextStyleMap() {
@@ -41,7 +41,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         map.put(this.property2(), this.value2());
         final TextStyleMap textStyleMap = TextStyleMap.with(map);
 
-        final NonEmptyTextStyle textStyle = this.createTextStyle(textStyleMap);
+        final TextStyleNonEmpty textStyle = this.createTextStyle(textStyleMap);
         assertSame(textStyleMap, textStyle.value(), "value");
     }
 
@@ -54,7 +54,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         final Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
         copy.putAll(map);
 
-        final NonEmptyTextStyle textStyle = this.createTextStyle(map);
+        final TextStyleNonEmpty textStyle = this.createTextStyle(map);
 
         map.clear();
         assertEquals(copy, textStyle.value(), "value");
@@ -71,7 +71,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        final NonEmptyTextStyle textStyle = this.createTextStyle(map);
+        final TextStyleNonEmpty textStyle = this.createTextStyle(map);
         assertEquals(TextStyleMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
     }
 
@@ -399,7 +399,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        this.toStringAndCheck(NonEmptyTextStyle.with(map), map.toString());
+        this.toStringAndCheck(TextStyleNonEmpty.with(map), map.toString());
     }
 
     @Test
@@ -408,20 +408,20 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
     }
 
     @Override
-    public NonEmptyTextStyle createObject() {
+    public TextStyleNonEmpty createObject() {
         return this.createTextStyle();
     }
 
-    private NonEmptyTextStyle createTextStyle() {
+    private TextStyleNonEmpty createTextStyle() {
         return this.createTextStyle(this.property1(), this.value1(), this.property2(), this.value2());
     }
 
-    private <X> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
+    private <X> TextStyleNonEmpty createTextStyle(final TextStylePropertyName<X> property1,
                                                   final X value1) {
         return this.createTextStyle(Maps.of(property1, value1));
     }
 
-    private <X, Y> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
+    private <X, Y> TextStyleNonEmpty createTextStyle(final TextStylePropertyName<X> property1,
                                                      final X value1,
                                                      final TextStylePropertyName<Y> property2,
                                                      final Y value2) {
@@ -431,7 +431,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         return this.createTextStyle(map);
     }
 
-    private <X, Y, Z> NonEmptyTextStyle createTextStyle(final TextStylePropertyName<X> property1,
+    private <X, Y, Z> TextStyleNonEmpty createTextStyle(final TextStylePropertyName<X> property1,
                                                         final X value1,
                                                         final TextStylePropertyName<Y> property2,
                                                         final Y value2,
@@ -444,7 +444,7 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
         return this.createTextStyle(map);
     }
 
-    private NonEmptyTextStyle createTextStyle(final Map<TextStylePropertyName<?>, Object> map) {
+    private TextStyleNonEmpty createTextStyle(final Map<TextStylePropertyName<?>, Object> map) {
         return Cast.to(TextStyle.with(map));
     }
 
@@ -473,8 +473,8 @@ public final class NonEmptyTextStyleTest extends TextStyleTestCase<NonEmptyTextS
     }
 
     @Override
-    Class<NonEmptyTextStyle> textStyleType() {
-        return NonEmptyTextStyle.class;
+    Class<TextStyleNonEmpty> textStyleType() {
+        return TextStyleNonEmpty.class;
     }
 
 }

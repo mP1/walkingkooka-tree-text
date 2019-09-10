@@ -40,7 +40,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     /**
      * A {@link TextStyle} with no textStyle.
      */
-    public final static TextStyle EMPTY = EmptyTextStyle.instance();
+    public final static TextStyle EMPTY = TextStyleEmpty.instance();
 
     /**
      * Factory that creates a {@link TextStyle} from a {@link Map}.
@@ -52,7 +52,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     static TextStyle withTextStyleMap(final TextStyleMap map) {
         return map.isEmpty() ?
                 EMPTY :
-                NonEmptyTextStyle.with(map);
+                TextStyleNonEmpty.withNonEmpty(map);
     }
 
     /**
@@ -93,7 +93,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
 
     abstract TextStyle merge0(final TextStyle textStyle);
 
-    abstract TextStyle merge1(final NonEmptyTextStyle textStyle);
+    abstract TextStyle merge1(final TextStyleNonEmpty textStyle);
 
     // replace............................................................................................................
 
@@ -211,7 +211,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
                 TextStyle::fromJsonNode,
                 TextStyle::toJsonNode,
                 TextStyle.class,
-                NonEmptyTextStyle.class,
-                EmptyTextStyle.class);
+                TextStyleNonEmpty.class,
+                TextStyleEmpty.class);
     }
 }
