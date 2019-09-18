@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.collect.set.SetTesting;
+import walkingkooka.collect.set.SetTesting2;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextNodeMapEntrySetTest implements SetTesting<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
+public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
         IteratorTesting {
 
     @Test
