@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
  * Base class for {@link TextStylePropertyValueHandler} that have {@link Length} values.
@@ -33,8 +33,7 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
         super();
     }
 
-    @Override
-    final void check0(final Object value, final TextStylePropertyName<?> name) {
+    @Override final void check0(final Object value, final TextStylePropertyName<?> name) {
         final Length<?> length = this.checkType(value, Length.class, name);
         if (this.lengthCheck(length)) {
             // ok
@@ -45,20 +44,20 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
 
     abstract boolean lengthCheck(final Length<?> length);
 
-    // fromJsonNode ....................................................................................................
+    // unmarshall ....................................................................................................
 
     @Override
-    final Length<?> fromJsonNode(final JsonNode node,
-                                 final TextStylePropertyName<?> name,
-                                 final FromJsonNodeContext context) {
-        final Length<?> length = context.fromJsonNode(node, Length.class);
+    final Length<?> unmarshall(final JsonNode node,
+                               final TextStylePropertyName<?> name,
+                               final JsonNodeUnmarshallContext context) {
+        final Length<?> length = context.unmarshall(node, Length.class);
         this.check0(length, name);
         return length;
     }
 
     @Override
-    final JsonNode toJsonNode(final Length<?> value,
-                              final ToJsonNodeContext context) {
-        return context.toJsonNode(value);
+    final JsonNode marshall(final Length<?> value,
+                            final JsonNodeMarshallContext context) {
+        return context.marshall(value);
     }
 }

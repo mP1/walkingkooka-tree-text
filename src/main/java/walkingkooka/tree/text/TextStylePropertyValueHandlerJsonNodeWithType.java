@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type a type that marshals into a {@link JsonNode}
@@ -51,16 +51,16 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     // JsonNodeContext..................................................................................................
 
     @Override
-    Object fromJsonNode(final JsonNode node,
-                        final TextStylePropertyName<?> name,
-                        final FromJsonNodeContext context) {
-        return context.fromJsonNodeWithType(node);
+    Object unmarshall(final JsonNode node,
+                      final TextStylePropertyName<?> name,
+                      final JsonNodeUnmarshallContext context) {
+        return context.unmarshallWithType(node);
     }
 
     @Override
-    JsonNode toJsonNode(final Object value,
-                        final ToJsonNodeContext context) {
-        return context.toJsonNodeWithType(value);
+    JsonNode marshall(final Object value,
+                      final JsonNodeMarshallContext context) {
+        return context.marshallWithType(value);
     }
 
     // Object ..........................................................................................................

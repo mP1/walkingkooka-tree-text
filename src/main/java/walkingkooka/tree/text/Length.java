@@ -21,9 +21,9 @@ import walkingkooka.Cast;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -107,7 +107,7 @@ public abstract class Length<V> implements HashCodeEqualsDefined {
     public static NumberLength number(final long value) {
         return NumberLength.with(value);
     }
-    
+
     /**
      * {@see PixelLength}
      */
@@ -197,54 +197,54 @@ public abstract class Length<V> implements HashCodeEqualsDefined {
     /**
      * Accepts a json string holding a number and unit.
      */
-    static Length fromJsonNode(final JsonNode node,
-                               final FromJsonNodeContext context) {
-        return fromJsonNode0(node, Length::parse);
+    static Length unmarshall(final JsonNode node,
+                             final JsonNodeUnmarshallContext context) {
+        return unmarshall0(node, Length::parse);
     }
 
     /**
      * Accepts a json string holding a {@link NoneLength}
      */
-    static NoneLength fromJsonNodeNone(final JsonNode node) {
-        return fromJsonNode0(node, Length::parseNone);
+    static NoneLength unmarshallNone(final JsonNode node) {
+        return unmarshall0(node, Length::parseNone);
     }
-    
+
     /**
      * Accepts a json string holding a {@link NormalLength}
      */
-    static NormalLength fromJsonNodeNormal(final JsonNode node) {
-        return fromJsonNode0(node, Length::parseNormal);
+    static NormalLength unmarshallNormal(final JsonNode node) {
+        return unmarshall0(node, Length::parseNormal);
     }
 
     /**
      * Accepts a json string holding a {@link NumberLength}
      */
-    static NumberLength fromJsonNodeNumber(final JsonNode node) {
-        return fromJsonNode0(node, Length::parseNumber);
+    static NumberLength unmarshallNumber(final JsonNode node) {
+        return unmarshall0(node, Length::parseNumber);
     }
 
     /**
      * Accepts a json string holding a {@link PixelLength}.
      */
-    static PixelLength fromJsonNodePixel(final JsonNode node) {
-        return fromJsonNode0(node, Length::parsePixels);
+    static PixelLength unmarshallPixel(final JsonNode node) {
+        return unmarshall0(node, Length::parsePixels);
     }
 
-    private static <L extends Length<?>> L fromJsonNode0(final JsonNode node,
-                                                         final Function<String, L> factory) {
+    private static <L extends Length<?>> L unmarshall0(final JsonNode node,
+                                                       final Function<String, L> factory) {
         Objects.requireNonNull(node, "node");
 
         return factory.apply(node.stringValueOrFail());
     }
 
-    final JsonNode toJsonNode(final ToJsonNodeContext context) {
+    final JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(this.toString());
     }
 
     static {
         JsonNodeContext.register("length",
-                Length::fromJsonNode,
-                Length::toJsonNode,
+                Length::unmarshall,
+                Length::marshall,
                 Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
     }
 }

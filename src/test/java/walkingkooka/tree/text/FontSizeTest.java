@@ -24,7 +24,7 @@ import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
@@ -65,45 +65,45 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     // HasJsonNode......................................................................................
 
     @Test
-    public void testFromJsonNodeBooleanFails() {
-        this.fromJsonNodeFails(JsonNode.booleanNode(true), JsonNodeException.class);
+    public void testJsonNodeUnmarshallBooleanFails() {
+        this.unmarshallFails(JsonNode.booleanNode(true), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeStringFails() {
-        this.fromJsonNodeFails(JsonNode.string("fails!"), JsonNodeException.class);
+    public void testJsonNodeUnmarshallStringFails() {
+        this.unmarshallFails(JsonNode.string("fails!"), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeArrayFails() {
-        this.fromJsonNodeFails(JsonNode.array(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallArrayFails() {
+        this.unmarshallFails(JsonNode.array(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeObjectFails() {
-        this.fromJsonNodeFails(JsonNode.object(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallObjectFails() {
+        this.unmarshallFails(JsonNode.object(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
+    public void testJsonNodeUnmarshallNumberInvalidFails() {
+        this.unmarshallFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test
     public void testFromJsonNumber() {
         final int value = 20;
-        this.fromJsonNodeAndCheck(JsonNode.number(value),
+        this.unmarshallAndCheck(JsonNode.number(value),
                 FontSize.with(value));
     }
 
     @Test
-    public void testToJsonNode() {
-        this.toJsonNodeAndCheck(this.createComparable(), JsonNode.number(VALUE));
+    public void testJsonNodeMarshall() {
+        this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testToJsonNodeRoundtripTwice() {
-        this.toJsonNodeRoundTripTwiceAndCheck(this.createObject());
+    public void testJsonNodeMarshallRoundtripTwice() {
+        this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
     // Object...........................................................................................................
@@ -165,9 +165,9 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public FontSize fromJsonNode(final JsonNode jsonNode,
-                                 final FromJsonNodeContext context) {
-        return FontSize.fromJsonNode(jsonNode, context);
+    public FontSize unmarshall(final JsonNode jsonNode,
+                               final JsonNodeUnmarshallContext context) {
+        return FontSize.unmarshall(jsonNode, context);
     }
 
     // SerializationTesting.............................................................................................

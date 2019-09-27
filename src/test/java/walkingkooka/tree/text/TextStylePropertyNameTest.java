@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.FieldAttributes;
 
 import java.lang.reflect.Field;
@@ -57,7 +57,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testJsonNodeNameCached() {
         final TextStylePropertyName<?> propertyName = this.createObject();
-        assertSame(propertyName.toJsonNodeName(), propertyName.toJsonNodeName());
+        assertSame(propertyName.marshallName(), propertyName.marshallName());
     }
 
     @Override
@@ -71,9 +71,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Override
-    public TextStylePropertyName fromJsonNode(final JsonNode jsonNode,
-                                              final FromJsonNodeContext context) {
-        return TextStylePropertyName.fromJsonNode(jsonNode, context);
+    public TextStylePropertyName unmarshall(final JsonNode jsonNode,
+                                            final JsonNodeUnmarshallContext context) {
+        return TextStylePropertyName.unmarshall(jsonNode, context);
     }
 
     @Override

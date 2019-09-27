@@ -19,12 +19,10 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.collect.set.Sets;
-import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.test.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase3<TextOverflow>
         implements HashCodeEqualsDefinedTesting2<TextOverflow>,
@@ -36,7 +34,7 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     @Test
     public final void testFromJsonStringNodeEmptyFails() {
-        this.fromJsonNodeFails(JsonNode.string(""), IllegalArgumentException.class);
+        this.unmarshallFails(JsonNode.string(""), IllegalArgumentException.class);
     }
 
     @Override
@@ -44,12 +42,12 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
         return TextStylePropertyName.TEXT_OVERFLOW;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallingTesting.......................................................................................
 
     @Override
-    public TextOverflow fromJsonNode(final JsonNode from,
-                                     final FromJsonNodeContext context) {
-        return TextOverflow.fromJsonNode(from, context);
+    public TextOverflow unmarshall(final JsonNode from,
+                                   final JsonNodeUnmarshallContext context) {
+        return TextOverflow.unmarshall(from, context);
     }
 
     // ClassTesting.....................................................................................................

@@ -23,9 +23,9 @@ import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
  * A font family name, which are also case insensitive when compared.
@@ -55,19 +55,19 @@ public final class FontFamilyName implements Name,
     /**
      * Factory that creates a {@link FontFamilyName} from a {@link JsonNode}.
      */
-    static FontFamilyName fromJsonNode(final JsonNode node,
-                                       final FromJsonNodeContext context) {
+    static FontFamilyName unmarshall(final JsonNode node,
+                                     final JsonNodeUnmarshallContext context) {
         return with(node.stringValueOrFail());
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(this.name);
     }
 
     static {
         JsonNodeContext.register("font-family-name",
-                FontFamilyName::fromJsonNode,
-                FontFamilyName::toJsonNode,
+                FontFamilyName::unmarshall,
+                FontFamilyName::marshall,
                 FontFamilyName.class);
     }
 

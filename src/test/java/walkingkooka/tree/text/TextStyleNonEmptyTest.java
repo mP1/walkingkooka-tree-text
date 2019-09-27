@@ -404,7 +404,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), this.fromJsonNodeContext()));
+        assertSame(TextStyle.EMPTY, TextStyle.unmarshall(JsonNode.object(), this.unmarshallContext()));
     }
 
     @Override

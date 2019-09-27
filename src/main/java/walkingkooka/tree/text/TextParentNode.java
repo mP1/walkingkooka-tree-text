@@ -22,7 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNodeName;
 import walkingkooka.tree.json.JsonObjectNode;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -141,11 +141,11 @@ abstract class TextParentNode extends TextNode {
      * Because there are multiple types of children each json representation must be wrapped with the actual type.
      */
     final JsonObjectNode addChildrenValuesJson(final JsonObjectNode node,
-                                               final ToJsonNodeContext context) {
+                                               final JsonNodeMarshallContext context) {
         final List<TextNode> children = this.children();
         return children.isEmpty() ?
                 node :
-                node.set(VALUES_PROPERTY, context.toJsonNodeWithTypeList(children));
+                node.set(VALUES_PROPERTY, context.marshallWithTypeList(children));
     }
 
     final static String VALUES = "values";

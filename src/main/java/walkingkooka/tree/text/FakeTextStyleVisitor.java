@@ -235,7 +235,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     protected void visitMinWidth(final Length<?> minWidth) {
         throw new UnsupportedOperationException();
     }
-    
+
     @Override
     protected void visitOpacity(final Opacity opacity) {
         throw new UnsupportedOperationException();

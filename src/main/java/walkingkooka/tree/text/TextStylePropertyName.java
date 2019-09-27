@@ -25,8 +25,8 @@ import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeName;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Map;
 import java.util.Objects;
@@ -655,7 +655,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                                   final TextStylePropertyValueHandler<T> handler,
                                   final BiConsumer<T, TextStyleVisitor> visitor) {
         super(name);
-        this.handler= handler;
+        this.handler = handler;
         this.visitor = visitor;
 
         this.jsonNodeName = JsonNodeName.with(this.name);
@@ -682,16 +682,16 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     // JsonNodeContext..................................................................................................
 
-    static TextStylePropertyName<?> fromJsonNodeEntryKey(final JsonNode node) {
+    static TextStylePropertyName<?> unmarshallEntryKey(final JsonNode node) {
         return with(node.name().value());
     }
 
-    static TextStylePropertyName<?> fromJsonNode(final JsonNode node,
-                                                 final FromJsonNodeContext context) {
+    static TextStylePropertyName<?> unmarshall(final JsonNode node,
+                                               final JsonNodeUnmarshallContext context) {
         return with(node.stringValueOrFail());
     }
 
-    JsonNodeName toJsonNodeName() {
+    JsonNodeName marshallName() {
         return this.jsonNodeName;
     }
 
@@ -699,8 +699,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     static {
         JsonNodeContext.register("text-style-property-name",
-                TextStylePropertyName::fromJsonNode,
-                TextStylePropertyName::toJsonNode,
+                TextStylePropertyName::unmarshall,
+                TextStylePropertyName::marshall,
                 TextStylePropertyName.class);
     }
 

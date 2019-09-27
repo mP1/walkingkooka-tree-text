@@ -22,12 +22,12 @@ import walkingkooka.Cast;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.JavaVisibility;
 
 public final class LengthTest implements ClassTesting2<Length<?>>,
-        JsonNodeMappingTesting<Length<?>>,
+        JsonNodeMarshallingTesting<Length<?>>,
         ParseStringTesting<Length<?>> {
 
     @Test
@@ -87,9 +87,9 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
     // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public Length fromJsonNode(final JsonNode from,
-                               final FromJsonNodeContext context) {
-        return Length.fromJsonNode(from, context);
+    public Length unmarshall(final JsonNode from,
+                             final JsonNodeUnmarshallContext context) {
+        return Length.unmarshall(from, context);
     }
 
     @Override

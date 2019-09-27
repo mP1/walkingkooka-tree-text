@@ -26,21 +26,21 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerJsonNodeWithType, Object> {
 
     @Test
-    public void testFromJsonNode() {
+    public void testJsonNodeUnmarshall() {
         final Color color = Color.fromRgb(0x123456);
-        this.fromJsonNodeAndCheck(this.toJsonNodeContext().toJsonNodeWithType(color), color);
+        this.unmarshallAndCheck(this.marshallContext().marshallWithType(color), color);
     }
 
     @Test
-    public void testToJsonNode() {
+    public void testJsonNodeMarshall() {
         final Color color = Color.fromRgb(0x123456);
-        this.toJsonNodeAndCheck(color, this.toJsonNodeContext().toJsonNodeWithType(color));
+        this.marshallAndCheck(color, this.marshallContext().marshallWithType(color));
     }
 
     @Test
-    public void testToJsonNodeRgba() {
+    public void testJsonNodeMarshallRgba() {
         final EmailAddress emailAddress = EmailAddress.parse("user@example.com");
-        this.toJsonNodeAndCheck(emailAddress, this.toJsonNodeContext().toJsonNodeWithType(emailAddress));
+        this.marshallAndCheck(emailAddress, this.marshallContext().marshallWithType(emailAddress));
     }
 
     @Test

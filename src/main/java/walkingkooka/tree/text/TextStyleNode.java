@@ -25,9 +25,9 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeName;
 import walkingkooka.tree.json.JsonObjectNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -168,8 +168,8 @@ public final class TextStyleNode extends TextParentNode {
     /**
      * Accepts a json string which holds {@link TextStyleNode}.
      */
-    static TextStyleNode fromJsonNodeTextStyleNode(final JsonNode node,
-                                                   final FromJsonNodeContext context) {
+    static TextStyleNode unmarshallTextStyleNode(final JsonNode node,
+                                                 final JsonNodeUnmarshallContext context) {
         TextStyle textStyle = TextStyle.EMPTY;
         List<TextNode> children = NO_CHILDREN;
 
@@ -179,7 +179,7 @@ public final class TextStyleNode extends TextParentNode {
                     textStyle = TextStyle.withTextStyleMap(TextNodeMap.fromJson(child, context));
                     break;
                 case VALUES:
-                    children = context.fromJsonNodeWithTypeList(child);
+                    children = context.unmarshallWithTypeList(child);
                     break;
                 default:
                     NeverError.unhandledCase(child, STYLE_PROPERTY, VALUES_PROPERTY);
@@ -189,7 +189,7 @@ public final class TextStyleNode extends TextParentNode {
         return textStyle.setChildren(children).cast();
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObjectNode json = JsonNode.object();
         if (!this.attributes.isEmpty()) {
             json = json.set(STYLE_PROPERTY, this.attributes.toJson(context));
@@ -203,8 +203,8 @@ public final class TextStyleNode extends TextParentNode {
 
     static {
         JsonNodeContext.register("text-textStyle-node",
-                TextStyleNode::fromJsonNodeTextStyleNode,
-                TextStyleNode::toJsonNode,
+                TextStyleNode::unmarshallTextStyleNode,
+                TextStyleNode::marshall,
                 TextStyleNode.class);
     }
 

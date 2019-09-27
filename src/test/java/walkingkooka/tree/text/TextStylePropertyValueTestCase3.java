@@ -17,11 +17,11 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.type.JavaVisibility;
 
 public abstract class TextStylePropertyValueTestCase3<V> extends TextStylePropertyValueTestCase<V>
-        implements JsonNodeMappingTesting<V> {
+        implements JsonNodeMarshallingTesting<V> {
 
     TextStylePropertyValueTestCase3() {
         super();

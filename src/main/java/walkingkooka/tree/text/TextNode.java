@@ -28,7 +28,7 @@ import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.ExpressionNodeName;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
 
@@ -283,9 +283,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     abstract void accept(final TextNodeVisitor visitor);
 
-    // ToJsonNodeContext.................................................................................................
+    // JsonNodeMarshallContext.................................................................................................
 
-    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
+    abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     // Object ..........................................................................................................
 

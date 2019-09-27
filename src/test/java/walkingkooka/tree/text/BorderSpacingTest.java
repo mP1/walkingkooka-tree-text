@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCase<BorderSpacing> {
 
@@ -63,9 +63,9 @@ public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCas
     // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public BorderSpacing fromJsonNode(final JsonNode from,
-                                      final FromJsonNodeContext context) {
-        return BorderSpacing.fromJsonNode(from, context);
+    public BorderSpacing unmarshall(final JsonNode from,
+                                    final JsonNodeUnmarshallContext context) {
+        return BorderSpacing.unmarshall(from, context);
     }
 
     // ClassTesting.....................................................................................................

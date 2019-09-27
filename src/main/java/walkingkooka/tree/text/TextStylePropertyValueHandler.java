@@ -20,8 +20,8 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.function.Function;
 
@@ -58,7 +58,7 @@ abstract class TextStylePropertyValueHandler<T> {
     static TextStylePropertyValueHandlerNoneLengthPixelLength noneLengthPixelLength() {
         return TextStylePropertyValueHandlerNoneLengthPixelLength.INSTANCE;
     }
-    
+
     /**
      * {@see TextStylePropertyValueHandlerNormalLengthPixelLength}
      */
@@ -126,20 +126,20 @@ abstract class TextStylePropertyValueHandler<T> {
 
     private final static String PACKAGE = "walkingkooka.tree.text";
 
-    // fromJsonNode ....................................................................................................
+    // unmarshall ....................................................................................................
 
     /**
      * Transforms a {@link JsonNode} into a value.
      */
-    abstract T fromJsonNode(final JsonNode node,
-                            final TextStylePropertyName<?> name,
-                            final FromJsonNodeContext context);
+    abstract T unmarshall(final JsonNode node,
+                          final TextStylePropertyName<?> name,
+                          final JsonNodeUnmarshallContext context);
 
     /**
-     * Transforms a value into json, performing the inverse of {@link #fromJsonNode(JsonNode, TextStylePropertyName, FromJsonNodeContext)}
+     * Transforms a value into json, performing the inverse of {@link #unmarshall(JsonNode, TextStylePropertyName, JsonNodeUnmarshallContext)}
      */
-    abstract JsonNode toJsonNode(final T value,
-                                 final ToJsonNodeContext context);
+    abstract JsonNode marshall(final T value,
+                               final JsonNodeMarshallContext context);
 
     // Object .........................................................................................................
 

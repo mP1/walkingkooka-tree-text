@@ -24,9 +24,9 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerEnumTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerEnum<TextWrapping>, TextWrapping> {
 
     @Test
-    public void testFromJsonNode() {
+    public void testJsonNodeUnmarshall() {
         final TextWrapping textWrapping = TextWrapping.CLIP;
-        this.fromJsonNodeAndCheck(JsonNode.string(textWrapping.name()), textWrapping);
+        this.unmarshallAndCheck(JsonNode.string(textWrapping.name()), textWrapping);
     }
 
     @Test

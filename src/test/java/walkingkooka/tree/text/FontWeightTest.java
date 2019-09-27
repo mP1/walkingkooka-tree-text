@@ -24,7 +24,7 @@ import walkingkooka.test.ConstantsTesting;
 import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
@@ -66,45 +66,45 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     // HasJsonNode......................................................................................
 
     @Test
-    public void testFromJsonNodeBooleanFails() {
-        this.fromJsonNodeFails(JsonNode.booleanNode(true), JsonNodeException.class);
+    public void testJsonNodeUnmarshallBooleanFails() {
+        this.unmarshallFails(JsonNode.booleanNode(true), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeInvalidStringFails() {
-        this.fromJsonNodeFails(JsonNode.string("not bold or normal"), IllegalArgumentException.class);
+    public void testJsonNodeUnmarshallInvalidStringFails() {
+        this.unmarshallFails(JsonNode.string("not bold or normal"), IllegalArgumentException.class);
     }
 
     @Test
-    public void testFromJsonNodeArrayFails() {
-        this.fromJsonNodeFails(JsonNode.array(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallArrayFails() {
+        this.unmarshallFails(JsonNode.array(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeObjectFails() {
-        this.fromJsonNodeFails(JsonNode.object(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallObjectFails() {
+        this.unmarshallFails(JsonNode.object(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
+    public void testJsonNodeUnmarshallNumberInvalidFails() {
+        this.unmarshallFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test
     public void testFromJsonBold() {
-        this.fromJsonNodeAndCheck(JsonNode.string("bold"),
+        this.unmarshallAndCheck(JsonNode.string("bold"),
                 FontWeight.BOLD);
     }
 
     @Test
     public void testFromJsonNormal() {
-        this.fromJsonNodeAndCheck(JsonNode.string("normal"),
+        this.unmarshallAndCheck(JsonNode.string("normal"),
                 FontWeight.NORMAL);
     }
 
     @Test
     public void testFromJsonNormal2() {
-        this.fromJsonNodeAndCheck(JsonNode.array()
+        this.unmarshallAndCheck(JsonNode.array()
                         .appendChild(JsonNode.string("normal"))
                         .get(0),
                 FontWeight.NORMAL);
@@ -113,28 +113,28 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     @Test
     public void testFromJsonNumber() {
         final int value = 20;
-        this.fromJsonNodeAndCheck(JsonNode.number(value),
+        this.unmarshallAndCheck(JsonNode.number(value),
                 FontWeight.with(value));
     }
 
     @Test
-    public void testToJsonNode() {
-        this.toJsonNodeAndCheck(this.createComparable(), JsonNode.number(VALUE));
+    public void testJsonNodeMarshall() {
+        this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testToJsonNodeRoundtripTwice() {
-        this.toJsonNodeRoundTripTwiceAndCheck(this.createObject());
+    public void testJsonNodeMarshallRoundtripTwice() {
+        this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
     @Test
-    public void testToJsonNodeRoundtripBold() {
-        this.toJsonNodeRoundTripTwiceAndCheck(FontWeight.BOLD);
+    public void testJsonNodeMarshallRoundtripBold() {
+        this.marshallRoundTripTwiceAndCheck(FontWeight.BOLD);
     }
 
     @Test
-    public void testToJsonNodeRoundtripNormal() {
-        this.toJsonNodeRoundTripTwiceAndCheck(FontWeight.NORMAL);
+    public void testJsonNodeMarshallRoundtripNormal() {
+        this.marshallRoundTripTwiceAndCheck(FontWeight.NORMAL);
     }
 
     // Serializable.....................................................................................................
@@ -197,12 +197,12 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         return Sets.empty();
     }
 
-    // JsonNodeMappingTesting...........................................................................................
+    // JsonNodeMarshallingTesting...........................................................................................
 
     @Override
-    public FontWeight fromJsonNode(final JsonNode jsonNode,
-                                   final FromJsonNodeContext context) {
-        return FontWeight.fromJsonNode(jsonNode, context);
+    public FontWeight unmarshall(final JsonNode jsonNode,
+                                 final JsonNodeUnmarshallContext context) {
+        return FontWeight.unmarshall(jsonNode, context);
     }
 
     // SerializationTesting.............................................................................................

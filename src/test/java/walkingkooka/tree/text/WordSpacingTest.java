@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class WordSpacingTest extends LengthTextStylePropertyValueTestCase<WordSpacing> {
 
@@ -63,9 +63,9 @@ public final class WordSpacingTest extends LengthTextStylePropertyValueTestCase<
     // JsonNodeContextTesting...........................................................................................
 
     @Override
-    public WordSpacing fromJsonNode(final JsonNode from,
-                                    final FromJsonNodeContext context) {
-        return WordSpacing.fromJsonNode(from, context);
+    public WordSpacing unmarshall(final JsonNode from,
+                                  final JsonNodeUnmarshallContext context) {
+        return WordSpacing.unmarshall(from, context);
     }
 
     // ClassTesting.....................................................................................................

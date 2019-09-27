@@ -56,41 +56,41 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
     }
 
     @Test
-    public void testFromJsonNodeNone() {
+    public void testJsonNodeUnmarshallNone() {
         final NoneLength none = Length.none();
-        this.fromJsonNodeAndCheck(this.toJsonNode(none), none);
+        this.unmarshallAndCheck(this.marshall(none), none);
     }
 
     @Test
-    public void testFromJsonNodeNormalFails() {
+    public void testJsonNodeUnmarshallNormalFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(this.toJsonNode(Length.normal()), this.propertyName(), this.fromJsonNodeContext());
+            this.handler().unmarshall(this.marshall(Length.normal()), this.propertyName(), this.unmarshallContext());
         });
     }
 
     @Test
-    public void testFromJsonNodeNumberFails() {
+    public void testJsonNodeUnmarshallNumberFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().fromJsonNode(this.toJsonNode(Length.number(1)), this.propertyName(), this.fromJsonNodeContext());
+            this.handler().unmarshall(this.marshall(Length.number(1)), this.propertyName(), this.unmarshallContext());
         });
     }
 
     @Test
-    public void testFromJsonNodePixel() {
+    public void testJsonNodeUnmarshallPixel() {
         final PixelLength pixel = Length.pixel(1.0);
-        this.fromJsonNodeAndCheck(this.toJsonNode(pixel), pixel);
+        this.unmarshallAndCheck(this.marshall(pixel), pixel);
     }
 
     @Test
-    public void testToJsonNodeNormal() {
+    public void testJsonNodeMarshallNormal() {
         final NormalLength normal = Length.normal();
-        this.toJsonNodeAndCheck(normal, this.toJsonNode(normal));
+        this.marshallAndCheck(normal, this.marshall(normal));
     }
 
     @Test
-    public void testToJsonNodePixel() {
+    public void testJsonNodeMarshallPixel() {
         final PixelLength pixel = Length.pixel(1.0);
-        this.toJsonNodeAndCheck(pixel, this.toJsonNode(pixel));
+        this.marshallAndCheck(pixel, this.marshall(pixel));
     }
 
     @Test

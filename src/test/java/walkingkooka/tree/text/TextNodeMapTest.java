@@ -22,7 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.MapTesting2;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContexts;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import java.util.List;
 import java.util.Map;
@@ -88,7 +88,7 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextNodeMap.EMPTY, TextNodeMap.fromJson(JsonNode.object(), FromJsonNodeContexts.basic()));
+        assertSame(TextNodeMap.EMPTY, TextNodeMap.fromJson(JsonNode.object(), JsonNodeUnmarshallContexts.basic()));
     }
 
     @Test

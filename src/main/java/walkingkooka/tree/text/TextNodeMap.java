@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -48,7 +48,7 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
         Objects.requireNonNull(map, "map");
 
         return map instanceof TextNodeMap ?
-                TextNodeMap.class.cast(map) :
+                (TextNodeMap) map :
                 with0(map);
     }
 
@@ -87,11 +87,11 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
     // JsonNodeContext..................................................................................................
 
     static TextNodeMap fromJson(final JsonNode json,
-                                final FromJsonNodeContext context) {
+                                final JsonNodeUnmarshallContext context) {
         return TextNodeMap.with1(TextNodeMapEntrySet.fromJson(json, context));
     }
 
-    JsonNode toJson(final ToJsonNodeContext context) {
+    JsonNode toJson(final JsonNodeMarshallContext context) {
         return this.entries.toJson(context);
     }
 }

@@ -24,9 +24,9 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.FromJsonNodeContexts;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.List;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
-        JsonNodeMappingTesting<TextStyle>,
+        JsonNodeMarshallingTesting<TextStyle>,
         ToStringTesting<TextStyle> {
 
     @Test
@@ -168,7 +168,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.fromJsonNode(JsonNode.object(), FromJsonNodeContexts.basic()));
+        assertSame(TextStyle.EMPTY, TextStyle.unmarshall(JsonNode.object(), JsonNodeUnmarshallContexts.basic()));
     }
 
     @Override
@@ -211,12 +211,12 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         return JavaVisibility.PUBLIC;
     }
 
-    // JsonNodeMappingTesting...........................................................................................
+    // JsonNodeMarshallingTesting...........................................................................................
 
     @Override
-    public TextStyle fromJsonNode(final JsonNode from,
-                                  final FromJsonNodeContext context) {
-        return TextStyle.fromJsonNode(from, context);
+    public TextStyle unmarshall(final JsonNode from,
+                                final JsonNodeUnmarshallContext context) {
+        return TextStyle.unmarshall(from, context);
     }
 
     @Override
