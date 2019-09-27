@@ -30,7 +30,7 @@ public final class NormalLength extends Length<Void> implements Value<Void> {
     final static String TEXT = "normal";
 
     static NormalLength parseNormal0(final String text) {
-        if(!TEXT.equals(text)) {
+        if (!TEXT.equals(text)) {
             throw new IllegalArgumentException("Invalid normal text " + CharSequences.quoteAndEscape(text));
         }
         return INSTANCE;

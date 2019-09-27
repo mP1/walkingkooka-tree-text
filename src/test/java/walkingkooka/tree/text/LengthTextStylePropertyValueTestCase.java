@@ -22,7 +22,7 @@ import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.test.ToStringTesting;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextStylePropertyValue> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting2<L>,
-        JsonNodeMappingTesting<L>,
+        JsonNodeMarshallingTesting<L>,
         ParseStringTesting<L>,
         ToStringTesting<L> {
 
@@ -59,15 +59,15 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
     }
 
     @Test
-    public final void testFromJsonNode() {
+    public final void testJsonNodeUnmarshall() {
         final L propertyValue = this.createPropertyValue();
-        this.fromJsonNodeAndCheck(this.toJsonNodeContext().toJsonNode(propertyValue), propertyValue);
+        this.unmarshallAndCheck(this.marshallContext().marshall(propertyValue), propertyValue);
     }
 
     @Test
-    public final void testToJsonNode() {
+    public final void testJsonNodeMarshall() {
         final Length<?> length = this.length();
-        this.toJsonNodeAndCheck(this.createPropertyValue(length), length.toJsonNode(this.toJsonNodeContext()));
+        this.marshallAndCheck(this.createPropertyValue(length), length.marshall(this.marshallContext()));
     }
 
     @Test

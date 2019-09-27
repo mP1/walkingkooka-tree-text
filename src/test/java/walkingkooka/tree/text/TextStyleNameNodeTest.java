@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -180,34 +180,34 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testToJsonNodeWithoutChildren() {
-        this.toJsonNodeAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123")),
+    public void testJsonNodeMarshallWithoutChildren() {
+        this.marshallAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123")),
                 "{\"textStyle\": \"abc123\"}");
     }
 
     @Test
-    public void testToJsonNodeWithChildren() {
-        this.toJsonNodeAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123"))
+    public void testJsonNodeMarshallWithChildren() {
+        this.marshallAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))),
                 "{\"textStyle\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
-    public void testFromJsonNodeWithoutChildren() {
-        this.fromJsonNodeAndCheck("{\"textStyle\": \"abc123\"}",
+    public void testJsonNodeUnmarshallWithoutChildren() {
+        this.unmarshallAndCheck("{\"textStyle\": \"abc123\"}",
                 TextStyleNameNode.with(TextStyleName.with("abc123")));
     }
 
     @Test
-    public void testFromJsonNodeWithChildren() {
-        this.fromJsonNodeAndCheck("{\"textStyle\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
+    public void testJsonNodeUnmarshallWithChildren() {
+        this.unmarshallAndCheck("{\"textStyle\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
                 TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))));
     }
 
     @Test
     public void testJsonRoundtrip() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextStyleNameNode.with(TextStyleName.with("style1"))
+        this.marshallRoundTripTwiceAndCheck(TextStyleNameNode.with(TextStyleName.with("style1"))
                 .setChildren(Lists.of(
                         TextNode.text("text1"),
                         TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
@@ -316,11 +316,11 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
         assertEquals(name, node.styleName(), "name");
     }
 
-    // JsonNodeTesting...................................................................................................
+    // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextStyleNameNode fromJsonNode(final JsonNode from,
-                                                final FromJsonNodeContext context) {
-        return TextStyleNameNode.fromJsonNodeTextStyleNameNode(from, context);
+    public final TextStyleNameNode unmarshall(final JsonNode from,
+                                              final JsonNodeUnmarshallContext context) {
+        return TextStyleNameNode.unmarshallTextStyleNameNode(from, context);
     }
 }

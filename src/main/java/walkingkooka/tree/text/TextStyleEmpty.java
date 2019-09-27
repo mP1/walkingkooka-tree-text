@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 import java.util.Map;
 import java.util.Optional;
@@ -155,7 +155,7 @@ final class TextStyleEmpty extends TextStyle {
 
     // JsonNodeContext..................................................................................................
 
-    final JsonNode toJsonNode(final ToJsonNodeContext context) {
+    final JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.object();
     }
 }

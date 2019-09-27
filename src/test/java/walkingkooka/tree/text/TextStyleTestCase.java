@@ -26,8 +26,8 @@ import walkingkooka.test.HashCodeEqualsDefinedTesting2;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.List;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
-        JsonNodeMappingTesting<TextStyle>,
+        JsonNodeMarshallingTesting<TextStyle>,
         ToStringTesting<TextStyle> {
 
     TextStyleTestCase() {
@@ -258,9 +258,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     // JsonNodeMapTesting...............................................................................................
 
     @Override
-    public final TextStyle fromJsonNode(final JsonNode from,
-                                        final FromJsonNodeContext context) {
-        return TextStyle.fromJsonNode(from, context);
+    public final TextStyle unmarshall(final JsonNode from,
+                                      final JsonNodeUnmarshallContext context) {
+        return TextStyle.unmarshall(from, context);
     }
 
     @Override

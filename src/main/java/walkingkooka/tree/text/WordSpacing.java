@@ -18,9 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class WordSpacing extends LengthTextStylePropertyValue {
 
@@ -46,19 +46,19 @@ public final class WordSpacing extends LengthTextStylePropertyValue {
 
     // JsonNodeContext..................................................................................................
 
-    static WordSpacing fromJsonNode(final JsonNode node,
-                                    final FromJsonNodeContext context) {
-        return with(context.fromJsonNode(node, Length.class));
+    static WordSpacing unmarshall(final JsonNode node,
+                                  final JsonNodeUnmarshallContext context) {
+        return with(context.unmarshall(node, Length.class));
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
-        return context.toJsonNode(this.length);
+    JsonNode marshall(final JsonNodeMarshallContext context) {
+        return context.marshall(this.length);
     }
 
     static {
         JsonNodeContext.register("word-spacing",
-                WordSpacing::fromJsonNode,
-                WordSpacing::toJsonNode,
+                WordSpacing::unmarshall,
+                WordSpacing::marshall,
                 WordSpacing.class);
     }
 }

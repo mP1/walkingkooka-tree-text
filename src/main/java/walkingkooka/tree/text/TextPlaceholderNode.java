@@ -19,9 +19,9 @@ package walkingkooka.tree.text;
 
 import walkingkooka.ToStringBuilder;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 
@@ -80,19 +80,19 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     /**
      * Accepts a json string which holds a {@link TextPlaceholderNode}.
      */
-    static TextPlaceholderNode fromJsonNodeTextPlaceholderNode(final JsonNode node,
-                                                               final FromJsonNodeContext context) {
-        return TextPlaceholderNode.with(context.fromJsonNode(node, TextPlaceholderName.class));
+    static TextPlaceholderNode unmarshallTextPlaceholderNode(final JsonNode node,
+                                                             final JsonNodeUnmarshallContext context) {
+        return TextPlaceholderNode.with(context.unmarshall(node, TextPlaceholderName.class));
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
-        return context.toJsonNode(this.value);
+    JsonNode marshall(final JsonNodeMarshallContext context) {
+        return context.marshall(this.value);
     }
 
     static {
         JsonNodeContext.register("text-placeholder",
-                TextPlaceholderNode::fromJsonNodeTextPlaceholderNode,
-                TextPlaceholderNode::toJsonNode,
+                TextPlaceholderNode::unmarshallTextPlaceholderNode,
+                TextPlaceholderNode::marshall,
                 TextPlaceholderNode.class);
     }
 

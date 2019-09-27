@@ -22,7 +22,7 @@ import walkingkooka.naming.Name;
 import walkingkooka.predicate.character.CharPredicate;
 import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 /**
  * Base class of all {@link Name names} in this package.
@@ -87,7 +87,7 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
 
     // JsonNodeContext..................................................................................................
 
-    final JsonNode toJsonNode(final ToJsonNodeContext context) {
+    final JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(this.name);
     }
 }

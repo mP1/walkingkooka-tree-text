@@ -22,37 +22,37 @@ import walkingkooka.naming.NameTesting;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.JavaVisibility;
 
 public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
         NameTesting<FontFamilyName, FontFamilyName>,
-        JsonNodeMappingTesting<FontFamilyName> {
+        JsonNodeMarshallingTesting<FontFamilyName> {
 
     private final static String TEXT = "Times New Roman";
 
     // HasJsonNode......................................................................................................
 
     @Test
-    public void testFromJsonNodeStringInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.string(""), IllegalArgumentException.class);
+    public void testJsonNodeUnmarshallStringInvalidFails() {
+        this.unmarshallFails(JsonNode.string(""), IllegalArgumentException.class);
     }
 
     @Test
-    public void testFromJsonNodeString() {
-        this.fromJsonNodeAndCheck(JsonNode.string(TEXT),
+    public void testJsonNodeUnmarshallString() {
+        this.unmarshallAndCheck(JsonNode.string(TEXT),
                 FontFamilyName.with(TEXT));
     }
 
     @Test
-    public void testToJsonNode() {
-        this.toJsonNodeAndCheck(this.createComparable(), JsonNode.string(TEXT));
+    public void testJsonNodeMarshall() {
+        this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
     }
 
     @Test
-    public void testToJsonNodeRoundtripTwice() {
-        this.toJsonNodeRoundTripTwiceAndCheck(this.createObject());
+    public void testJsonNodeMarshallRoundtripTwice() {
+        this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
     @Override
@@ -98,8 +98,8 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
     }
 
     @Override
-    public FontFamilyName fromJsonNode(final JsonNode jsonNode,
-                                       final FromJsonNodeContext context) {
-        return FontFamilyName.fromJsonNode(jsonNode, context);
+    public FontFamilyName unmarshall(final JsonNode jsonNode,
+                                     final JsonNodeUnmarshallContext context) {
+        return FontFamilyName.unmarshall(jsonNode, context);
     }
 }

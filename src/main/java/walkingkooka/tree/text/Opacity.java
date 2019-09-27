@@ -22,10 +22,10 @@ import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.FromJsonNodeException;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallException;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -94,25 +94,25 @@ public final class Opacity implements Comparable<Opacity>,
     /**
      * Factory that creates a {@link Opacity} from the given node.
      */
-    static Opacity fromJsonNode(final JsonNode node,
-                                final FromJsonNodeContext context) {
+    static Opacity unmarshall(final JsonNode node,
+                              final JsonNodeUnmarshallContext context) {
         return node.isString() ?
-                fromJsonNodeString(node.stringValueOrFail(), node) :
+                unmarshallString(node.stringValueOrFail(), node) :
                 with(node.numberValueOrFail().doubleValue());
     }
 
-    private static Opacity fromJsonNodeString(final String value,
-                                              final JsonNode node) {
+    private static Opacity unmarshallString(final String value,
+                                            final JsonNode node) {
         return OPAQUE_TEXT.equals(value) ? OPAQUE :
                 TRANSPARENT_TEXT.equals(value) ? TRANSPARENT :
                         failUnknownOpacity(value, node);
     }
 
     private static Opacity failUnknownOpacity(final String value, final JsonNode node) {
-        throw new FromJsonNodeException("Unknown opacity " + CharSequences.quote(value), node);
+        throw new JsonNodeUnmarshallException("Unknown opacity " + CharSequences.quote(value), node);
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return TRANSPARENT_VALUE == this.value ?
                 TRANSPARENT_JSON :
                 OPAQUE_VALUE == this.value ?
@@ -125,8 +125,8 @@ public final class Opacity implements Comparable<Opacity>,
 
     static {
         JsonNodeContext.register("opacity",
-                Opacity::fromJsonNode,
-                Opacity::toJsonNode,
+                Opacity::unmarshall,
+                Opacity::marshall,
                 Opacity.class);
     }
 
@@ -162,7 +162,7 @@ public final class Opacity implements Comparable<Opacity>,
      */
     @Override
     public String toString() {
-        return TRANSPARENT == this?
+        return TRANSPARENT == this ?
                 TRANSPARENT_TEXT :
                 OPAQUE == this ?
                         OPAQUE_TEXT :

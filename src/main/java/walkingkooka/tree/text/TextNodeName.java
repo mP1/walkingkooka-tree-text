@@ -20,8 +20,8 @@ package walkingkooka.tree.text;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
  * The name of an {@link TextNode}.
@@ -57,15 +57,15 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
 
     // JsonNodeContext..................................................................................................
 
-    static TextNodeName fromJsonNode(final JsonNode node,
-                                     final FromJsonNodeContext context) {
+    static TextNodeName unmarshall(final JsonNode node,
+                                   final JsonNodeUnmarshallContext context) {
         return with(node.stringValueOrFail());
     }
 
     static {
         JsonNodeContext.register("text-node-name",
-                TextNodeName::fromJsonNode,
-                TextNodeName::toJsonNode,
+                TextNodeName::unmarshall,
+                TextNodeName::marshall,
                 TextNodeName.class);
     }
 }

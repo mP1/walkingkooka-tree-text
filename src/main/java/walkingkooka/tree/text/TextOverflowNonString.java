@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 import java.util.Optional;
 
@@ -90,7 +90,7 @@ final class TextOverflowNonString extends TextOverflow {
 
     // JsonNodeContext..................................................................................................
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return this.jsonNode;
     }
 

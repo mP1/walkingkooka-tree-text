@@ -26,8 +26,8 @@ import walkingkooka.test.SerializationTesting;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Set;
@@ -40,7 +40,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         ComparableTesting2<Opacity>,
         ConstantsTesting<Opacity>,
         SerializationTesting<Opacity>,
-        JsonNodeMappingTesting<Opacity>,
+        JsonNodeMarshallingTesting<Opacity>,
         ToStringTesting<Opacity> {
 
     private final static double VALUE = 0.25;
@@ -79,45 +79,45 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     // HasJsonNode......................................................................................
 
     @Test
-    public void testFromJsonNodeBooleanFails() {
-        this.fromJsonNodeFails(JsonNode.booleanNode(true), JsonNodeException.class);
+    public void testJsonNodeUnmarshallBooleanFails() {
+        this.unmarshallFails(JsonNode.booleanNode(true), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeInvalidStringFails() {
-        this.fromJsonNodeFails(JsonNode.string("not transparent or opaque"), JsonNodeException.class);
+    public void testJsonNodeUnmarshallInvalidStringFails() {
+        this.unmarshallFails(JsonNode.string("not transparent or opaque"), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeArrayFails() {
-        this.fromJsonNodeFails(JsonNode.array(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallArrayFails() {
+        this.unmarshallFails(JsonNode.array(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeObjectFails() {
-        this.fromJsonNodeFails(JsonNode.object(), JsonNodeException.class);
+    public void testJsonNodeUnmarshallObjectFails() {
+        this.unmarshallFails(JsonNode.object(), JsonNodeException.class);
     }
 
     @Test
-    public void testFromJsonNodeNumberInvalidFails() {
-        this.fromJsonNodeFails(JsonNode.number(-1), IllegalArgumentException.class);
+    public void testJsonNodeUnmarshallNumberInvalidFails() {
+        this.unmarshallFails(JsonNode.number(-1), IllegalArgumentException.class);
     }
 
     @Test
     public void testFromJsonTransparent() {
-        this.fromJsonNodeAndCheck(JsonNode.string("transparent"),
+        this.unmarshallAndCheck(JsonNode.string("transparent"),
                 Opacity.TRANSPARENT);
     }
 
     @Test
     public void testFromJsonOpaque() {
-        this.fromJsonNodeAndCheck(JsonNode.string("opaque"),
+        this.unmarshallAndCheck(JsonNode.string("opaque"),
                 Opacity.OPAQUE);
     }
 
     @Test
     public void testFromJsonOpaque2() {
-        this.fromJsonNodeAndCheck(JsonNode.array()
+        this.unmarshallAndCheck(JsonNode.array()
                         .appendChild(JsonNode.string("opaque"))
                         .get(0),
                 Opacity.OPAQUE);
@@ -126,28 +126,28 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     @Test
     public void testFromJsonNumber() {
         final double value = 0.25;
-        this.fromJsonNodeAndCheck(JsonNode.number(value),
+        this.unmarshallAndCheck(JsonNode.number(value),
                 Opacity.with(value));
     }
 
     @Test
-    public void testToJsonNode() {
-        this.toJsonNodeAndCheck(this.createComparable(), JsonNode.number(VALUE));
+    public void testJsonNodeMarshall() {
+        this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testToJsonNodeRoundtripTwice() {
-        this.toJsonNodeRoundTripTwiceAndCheck(this.createObject());
+    public void testJsonNodeMarshallRoundtripTwice() {
+        this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
     @Test
-    public void testToJsonNodeRoundtripTransparent() {
-        this.toJsonNodeRoundTripTwiceAndCheck(Opacity.TRANSPARENT);
+    public void testJsonNodeMarshallRoundtripTransparent() {
+        this.marshallRoundTripTwiceAndCheck(Opacity.TRANSPARENT);
     }
 
     @Test
-    public void testToJsonNodeRoundtripOpaque() {
-        this.toJsonNodeRoundTripTwiceAndCheck(Opacity.OPAQUE);
+    public void testJsonNodeMarshallRoundtripOpaque() {
+        this.marshallRoundTripTwiceAndCheck(Opacity.OPAQUE);
     }
 
     // Serializable.....................................................................................................
@@ -217,8 +217,8 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     @Override
-    public Opacity fromJsonNode(final JsonNode jsonNode,
-                                final FromJsonNodeContext context) {
-        return Opacity.fromJsonNode(jsonNode, context);
+    public Opacity unmarshall(final JsonNode jsonNode,
+                              final JsonNodeUnmarshallContext context) {
+        return Opacity.unmarshall(jsonNode, context);
     }
 }

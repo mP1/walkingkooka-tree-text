@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -65,17 +65,17 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     // JsonNodeContext..................................................................................................
 
     @Override
-    E fromJsonNode(final JsonNode node,
-                   final TextStylePropertyName<?> name,
-                   final FromJsonNodeContext context) {
+    E unmarshall(final JsonNode node,
+                 final TextStylePropertyName<?> name,
+                 final JsonNodeUnmarshallContext context) {
         return this.factory.apply(node.stringValueOrFail());
     }
 
     private final Function<String, E> factory;
 
     @Override
-    JsonNode toJsonNode(final E value,
-                        final ToJsonNodeContext context) {
+    JsonNode marshall(final E value,
+                      final JsonNodeMarshallContext context) {
         return JsonNode.string(value.name());
     }
 

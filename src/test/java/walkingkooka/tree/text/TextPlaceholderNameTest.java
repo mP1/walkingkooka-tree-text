@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class TextPlaceholderNameTest extends TextNodeNameNameTestCase<TextPlaceholderName> {
 
@@ -35,9 +35,9 @@ public final class TextPlaceholderNameTest extends TextNodeNameNameTestCase<Text
     }
 
     @Override
-    public TextPlaceholderName fromJsonNode(final JsonNode jsonNode,
-                                            final FromJsonNodeContext context) {
-        return TextPlaceholderName.fromJsonNode(jsonNode, context);
+    public TextPlaceholderName unmarshall(final JsonNode jsonNode,
+                                          final JsonNodeUnmarshallContext context) {
+        return TextPlaceholderName.unmarshall(jsonNode, context);
     }
 
     @Override

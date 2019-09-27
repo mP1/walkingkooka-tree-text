@@ -23,7 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
@@ -226,59 +226,59 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testToJsonNodeWithoutChildren() {
-        this.toJsonNodeAndCheck(textStyleNode(), "{}");
+    public void testJsonNodeMarshallWithoutChildren() {
+        this.marshallAndCheck(textStyleNode(), "{}");
     }
 
     @Test
-    public void testToJsonNodeWithChildren() {
-        this.toJsonNodeAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
+    public void testJsonNodeMarshallWithChildren() {
+        this.marshallAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
                 "{\"values\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
     }
 
     @Test
-    public void testToJsonNodeWithChildren2() {
-        this.toJsonNodeAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
+    public void testJsonNodeMarshallWithChildren2() {
+        this.marshallAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
                 "{\"values\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
-    public void testToJsonNodeWithStyleNode() {
-        this.toJsonNodeAndCheck(textStyleNode()
+    public void testJsonNodeMarshallWithStyleNode() {
+        this.marshallAndCheck(textStyleNode()
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
                 "{\"textStyle\": {\"background-color\": \"#123456\"}}");
     }
 
     @Test
-    public void testToJsonNodeWithStyleNodeAndChildren() {
-        this.toJsonNodeAndCheck(TextNode.text("text123")
+    public void testJsonNodeMarshallWithStyleNodeAndChildren() {
+        this.marshallAndCheck(TextNode.text("text123")
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456)))
                         .parentOrFail(),
                 "{\"textStyle\": {\"background-color\": \"#123456\"}, \"values\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
     }
 
     @Test
-    public void testFromJsonNodeWithoutChildren() {
-        this.fromJsonNodeAndCheck("{}",
+    public void testJsonNodeUnmarshallWithoutChildren() {
+        this.unmarshallAndCheck("{}",
                 textStyleNode());
     }
 
     @Test
-    public void testFromJsonNodeWithChildren() {
-        this.fromJsonNodeAndCheck("{\"values\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
+    public void testJsonNodeUnmarshallWithChildren() {
+        this.unmarshallAndCheck("{\"values\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
                 textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
     }
 
     @Test
     public void testJsonRoundtrip() {
-        this.toJsonNodeRoundTripTwiceAndCheck(textStyleNode(TextNode.text("text1"),
+        this.marshallRoundTripTwiceAndCheck(textStyleNode(TextNode.text("text1"),
                 TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                 textStyleNode(TextNode.text("text3"), TextNode.text("text4"))));
     }
 
     @Test
     public void testJsonRoundtrip2() {
-        this.toJsonNodeRoundTripTwiceAndCheck(textStyleNode(
+        this.marshallRoundTripTwiceAndCheck(textStyleNode(
                 TextNode.text("text1"),
                 textStyleNode(TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                         textStyleNode(TextNode.text("text3"), TextNode.text("text4")))));
@@ -286,7 +286,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testJsonRoundtripWithStyleNode() {
-        this.toJsonNodeRoundTripTwiceAndCheck(textStyleNode(
+        this.marshallRoundTripTwiceAndCheck(textStyleNode(
                 TextNode.text("text1"),
                 TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                 textStyleNode(TextNode.text("text3"), TextNode.text("text4")))
@@ -295,7 +295,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testJsonRoundtripWithStyleNode2() {
-        this.toJsonNodeRoundTripTwiceAndCheck(textStyleNode(
+        this.marshallRoundTripTwiceAndCheck(textStyleNode(
                 TextNode.text("text1"),
                 TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                 TextNode.style(Lists.of(TextNode.text("text3"))))
@@ -372,7 +372,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD);
         styleNode.put(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 
-        this.toJsonNodeRoundTripTwiceAndCheck(textStyleNode(
+        this.marshallRoundTripTwiceAndCheck(textStyleNode(
                 TextNode.text("text1"),
                 TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                 TextNode.style(Lists.of(TextNode.text("text3"))))
@@ -489,11 +489,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         return TextStyleNode.class;
     }
 
-    // JsonNodeTesting...................................................................................................
+    // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextStyleNode fromJsonNode(final JsonNode from,
-                                            final FromJsonNodeContext context) {
-        return TextStyleNode.fromJsonNodeTextStyleNode(from, context);
+    public final TextStyleNode unmarshall(final JsonNode from,
+                                          final JsonNodeUnmarshallContext context) {
+        return TextStyleNode.unmarshallTextStyleNode(from, context);
     }
 }

@@ -30,7 +30,7 @@ public final class NoneLength extends Length<Void> implements Value<Void> {
     final static String TEXT = "none";
 
     static NoneLength parseNone0(final String text) {
-        if(!TEXT.equals(text)) {
+        if (!TEXT.equals(text)) {
             throw new IllegalArgumentException("Invalid normal text " + CharSequences.quoteAndEscape(text));
         }
         return INSTANCE;

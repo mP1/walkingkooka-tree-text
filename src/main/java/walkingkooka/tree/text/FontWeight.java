@@ -22,9 +22,9 @@ import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -91,8 +91,8 @@ public final class FontWeight implements Comparable<FontWeight>,
     /**
      * Factory that creates a {@link FontWeight} from the given node.
      */
-    static FontWeight fromJsonNode(final JsonNode node,
-                                   final FromJsonNodeContext context) {
+    static FontWeight unmarshall(final JsonNode node,
+                                 final JsonNodeUnmarshallContext context) {
         return node.isString() ?
                 fromJsonStringNode(node.stringValueOrFail()) :
                 with(node.numberValueOrFail().intValue());
@@ -108,7 +108,7 @@ public final class FontWeight implements Comparable<FontWeight>,
         throw new IllegalArgumentException("Unknown font weight " + CharSequences.quote(value));
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return NORMAL_VALUE == this.value ?
                 NORMAL_JSON :
                 BOLD_VALUE == this.value ?
@@ -121,8 +121,8 @@ public final class FontWeight implements Comparable<FontWeight>,
 
     static {
         JsonNodeContext.register("font-weight",
-                FontWeight::fromJsonNode,
-                FontWeight::toJsonNode,
+                FontWeight::unmarshall,
+                FontWeight::marshall,
                 FontWeight.class);
     }
 
@@ -159,7 +159,7 @@ public final class FontWeight implements Comparable<FontWeight>,
     @Override
     public String toString() {
         final int value = this.value;
-        return  NORMAL_VALUE == value ?
+        return NORMAL_VALUE == value ?
                 NORMAL_TEXT :
                 BOLD_VALUE == value ?
                         BOLD_TEXT :

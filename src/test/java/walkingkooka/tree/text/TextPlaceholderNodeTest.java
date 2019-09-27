@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,15 +47,15 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testToJsonNode() {
+    public void testJsonNodeMarshall() {
         final String value = "abc123";
-        this.toJsonNodeAndCheck(TextPlaceholderNode.with(TextPlaceholderName.with(value)), JsonNode.string(value));
+        this.marshallAndCheck(TextPlaceholderNode.with(TextPlaceholderName.with(value)), JsonNode.string(value));
     }
 
     @Test
-    public void testFromJsonNode() {
+    public void testJsonNodeUnmarshall() {
         final String value = "abc123";
-        this.fromJsonNodeAndCheck(JsonNode.string(value), TextPlaceholderNode.with(TextPlaceholderName.with(value)));
+        this.unmarshallAndCheck(JsonNode.string(value), TextPlaceholderNode.with(TextPlaceholderName.with(value)));
     }
 
     // equals ..........................................................................................................
@@ -117,11 +117,11 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
         return TextPlaceholderNode.class;
     }
 
-    // JsonNodeTesting...................................................................................................
+    // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextPlaceholderNode fromJsonNode(final JsonNode from,
-                                                  final FromJsonNodeContext context) {
-        return TextPlaceholderNode.fromJsonNodeTextPlaceholderNode(from, context);
+    public final TextPlaceholderNode unmarshall(final JsonNode from,
+                                                final JsonNodeUnmarshallContext context) {
+        return TextPlaceholderNode.unmarshallTextPlaceholderNode(from, context);
     }
 }

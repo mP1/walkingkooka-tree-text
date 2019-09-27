@@ -21,9 +21,9 @@ import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -87,8 +87,8 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     /**
      * Factory that creates a {@link TextOverflow} from the given node.
      */
-    static TextOverflow fromJsonNode(final JsonNode node,
-                                     final FromJsonNodeContext context) {
+    static TextOverflow unmarshall(final JsonNode node,
+                                   final JsonNodeUnmarshallContext context) {
         final String value = node.stringValueOrFail();
         return value.startsWith(STRING_PREFIX) ?
                 string(value.substring(STRING_PREFIX.length())) :
@@ -103,12 +103,12 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
         throw new IllegalArgumentException("Unknown text-overflow " + CharSequences.quote(value));
     }
 
-    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
+    abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     static {
         JsonNodeContext.register("text-overflow",
-                TextOverflow::fromJsonNode,
-                TextOverflow::toJsonNode,
+                TextOverflow::unmarshall,
+                TextOverflow::marshall,
                 TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
     }
 

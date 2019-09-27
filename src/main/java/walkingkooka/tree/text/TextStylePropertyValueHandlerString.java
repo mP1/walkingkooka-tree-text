@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
  * A {@link TextStylePropertyValueHandler} for non empty {@link String} parameter values.
@@ -55,15 +55,15 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     // JsonNodeContext..................................................................................................
 
     @Override
-    String fromJsonNode(final JsonNode node,
-                        final TextStylePropertyName<?> name,
-                        final FromJsonNodeContext context) {
+    String unmarshall(final JsonNode node,
+                      final TextStylePropertyName<?> name,
+                      final JsonNodeUnmarshallContext context) {
         return node.stringValueOrFail();
     }
 
     @Override
-    JsonNode toJsonNode(final String value,
-                        final ToJsonNodeContext context) {
+    JsonNode marshall(final String value,
+                      final JsonNodeMarshallContext context) {
         return JsonNode.string(value);
     }
 

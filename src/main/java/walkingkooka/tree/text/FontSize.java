@@ -21,9 +21,9 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -89,19 +89,19 @@ public final class FontSize implements Comparable<FontSize>,
     /**
      * Factory that creates a {@link FontSize} from the given node.
      */
-    static FontSize fromJsonNode(final JsonNode node,
-                                 final FromJsonNodeContext context) {
+    static FontSize unmarshall(final JsonNode node,
+                               final JsonNodeUnmarshallContext context) {
         return with(node.numberValueOrFail().intValue());
     }
 
-    JsonNode toJsonNode(final ToJsonNodeContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.number(this.value);
     }
 
     static {
         JsonNodeContext.register("font-size",
-                FontSize::fromJsonNode,
-                FontSize::toJsonNode,
+                FontSize::unmarshall,
+                FontSize::marshall,
                 FontSize.class);
     }
 

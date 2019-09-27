@@ -26,7 +26,7 @@ import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.NodeTesting;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Map;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTestCase<TextNode>
         implements NodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
-        JsonNodeMappingTesting<TextNode>,
+        JsonNodeMarshallingTesting<TextNode>,
         HasTextLengthTesting,
         HasTextOffsetTesting,
         HasTextTesting,
@@ -143,7 +143,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         return (n) -> n.equals("isText") || n.equals("isRoot");
     }
 
-    // JsonNodeMappingTesting...........................................................................................
+    // JsonNodeMarshallingTesting...........................................................................................
 
     @Override
     public final TextNode createJsonNodeMappingValue() {

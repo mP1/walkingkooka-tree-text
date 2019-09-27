@@ -23,8 +23,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractSet;
 import java.util.Comparator;
@@ -54,7 +54,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     static TextNodeMapEntrySet with(final Map<TextStylePropertyName<?>, Object> entries) {
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
-        for(Entry<TextStylePropertyName<?>, Object> propertyAndValue : entries.entrySet()) {
+        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : entries.entrySet()) {
             final TextStylePropertyName<?> property = propertyAndValue.getKey();
             final Object value = propertyAndValue.getValue();
             property.check(value);
@@ -117,13 +117,13 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
      * Recreates this {@link TextNodeMapEntrySet} from the json object.
      */
     static TextNodeMapEntrySet fromJson(final JsonNode json,
-                                        final FromJsonNodeContext context) {
+                                        final JsonNodeUnmarshallContext context) {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : json.children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeEntryKey(child);
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshallEntryKey(child);
             properties.put(name,
-                    name.handler.fromJsonNode(child, name, context));
+                    name.handler.unmarshall(child, name, context));
         }
 
         return with(properties);
@@ -132,14 +132,14 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     /**
      * Creates a json object using the keys and values from the entries in this {@link Set}.
      */
-    JsonNode toJson(final ToJsonNodeContext context) {
+    JsonNode toJson(final JsonNodeMarshallContext context) {
         final List<JsonNode> json = Lists.array();
 
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entries) {
             final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.toJsonNode(Cast.to(propertyAndValue.getValue()), context);
+            final JsonNode value = propertyName.handler.marshall(Cast.to(propertyAndValue.getValue()), context);
 
-            json.add(value.setName(propertyName.toJsonNodeName()));
+            json.add(value.setName(propertyName.marshallName()));
         }
 
         return JsonNode.object()

@@ -22,9 +22,9 @@ import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.ToJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
 import java.util.Map;
@@ -191,25 +191,25 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     /**
      * Accepts a json object holding the textStyle as a map.
      */
-    static TextStyle fromJsonNode(final JsonNode node,
-                                  final FromJsonNodeContext context) {
+    static TextStyle unmarshall(final JsonNode node,
+                                final JsonNodeUnmarshallContext context) {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : node.objectOrFail().children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.fromJsonNodeEntryKey(child);
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshallEntryKey(child);
             properties.put(name,
-                    name.handler.fromJsonNode(child, name, context));
+                    name.handler.unmarshall(child, name, context));
         }
 
         return with(properties);
     }
 
-    abstract JsonNode toJsonNode(final ToJsonNodeContext context);
+    abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     static {
         JsonNodeContext.register("text-textStyle",
-                TextStyle::fromJsonNode,
-                TextStyle::toJsonNode,
+                TextStyle::unmarshall,
+                TextStyle::marshall,
                 TextStyle.class,
                 TextStyleNonEmpty.class,
                 TextStyleEmpty.class);

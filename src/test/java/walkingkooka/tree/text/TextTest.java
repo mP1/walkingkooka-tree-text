@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -111,15 +111,15 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testToJsonNode() {
+    public void testJsonNodeMarshall() {
         final String text = "abc123!\t";
-        this.toJsonNodeAndCheck(Text.with(text), JsonNode.string(text));
+        this.marshallAndCheck(Text.with(text), JsonNode.string(text));
     }
 
     @Test
-    public void testFromJsonNode() {
+    public void testJsonNodeUnmarshall() {
         final String text = "abc123!\t";
-        this.fromJsonNodeAndCheck(JsonNode.string(text), Text.with(text));
+        this.unmarshallAndCheck(JsonNode.string(text), Text.with(text));
     }
 
     // Visitor ........................................................................................................
@@ -184,11 +184,11 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         return Text.class;
     }
 
-    // JsonNodeTesting...................................................................................................
+    // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final Text fromJsonNode(final JsonNode from,
-                                   final FromJsonNodeContext context) {
-        return Text.fromJsonNodeText(from, context);
+    public final Text unmarshall(final JsonNode from,
+                                 final JsonNodeUnmarshallContext context) {
+        return Text.unmarshallText(from, context);
     }
 }

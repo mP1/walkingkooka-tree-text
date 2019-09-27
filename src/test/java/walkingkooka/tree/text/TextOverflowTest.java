@@ -22,39 +22,39 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ConstantsTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.FromJsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMappingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.type.JavaVisibility;
 
 import java.util.Set;
 
 public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
         ConstantsTesting<TextOverflow>,
-        JsonNodeMappingTesting<TextOverflow> {
+        JsonNodeMarshallingTesting<TextOverflow> {
 
     @Test
     public void testClipJsonRoundtrip() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextOverflow.CLIP);
+        this.marshallRoundTripTwiceAndCheck(TextOverflow.CLIP);
     }
 
     @Test
     public void testEllipsisJsonRoundtrip() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextOverflow.ELLIPSIS);
+        this.marshallRoundTripTwiceAndCheck(TextOverflow.ELLIPSIS);
     }
 
     @Test
     public void testStringJsonRoundtrip() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextOverflow.string("abc123"));
+        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("abc123"));
     }
 
     @Test
     public void testStringJsonRoundtrip2() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextOverflow.string("clip"));
+        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("clip"));
     }
 
     @Test
     public void testStringJsonRoundtrip3() {
-        this.toJsonNodeRoundTripTwiceAndCheck(TextOverflow.string("ellipsis"));
+        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("ellipsis"));
     }
 
     // ClassTesting.....................................................................................................
@@ -79,9 +79,9 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     // HasJsonNodeTesting...............................................................................................
 
     @Override
-    public TextOverflow fromJsonNode(final JsonNode from,
-                                     final FromJsonNodeContext context) {
-        return TextOverflow.fromJsonNode(from, context);
+    public TextOverflow unmarshall(final JsonNode from,
+                                   final JsonNodeUnmarshallContext context) {
+        return TextOverflow.unmarshall(from, context);
     }
 
     @Override
