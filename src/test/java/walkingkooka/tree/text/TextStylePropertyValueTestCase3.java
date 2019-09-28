@@ -34,7 +34,7 @@ public abstract class TextStylePropertyValueTestCase3<V> extends TextStyleProper
         return JavaVisibility.PACKAGE_PRIVATE;
     }
 
-    // JsonNodeMapTesting................................................................................................
+    // JsonNodeMarshallTesting...........................................................................................
 
     @Override
     public final V createJsonNodeMappingValue() {

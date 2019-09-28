@@ -69,7 +69,7 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
         return this.createLength();
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public final L createJsonNodeMappingValue() {
