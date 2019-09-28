@@ -32,7 +32,6 @@ import java.util.Optional;
  * Value class that holds a text-overflow
  */
 public abstract class TextOverflow implements HashCodeEqualsDefined,
-        Serializable,
         Value<Optional<String>> {
 
     final static String CLIP_TEXT = "clip";
@@ -111,8 +110,4 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
                 TextOverflow::marshall,
                 TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
     }
-
-    // Serializable ..................................................................................................
-
-    private final static long serialVersionUID = 1L;
 }

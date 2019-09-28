@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.test.ConstantsTesting;
-import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -33,9 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
-        implements ComparableTesting2<FontWeight>,
-        ConstantsTesting<FontWeight>,
-        SerializationTesting<FontWeight> {
+        implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight> {
 
     private final static int VALUE = 456;
 
@@ -137,18 +134,6 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         this.marshallRoundTripTwiceAndCheck(FontWeight.NORMAL);
     }
 
-    // Serializable.....................................................................................................
-
-    @Test
-    public void testSerializeBold() throws Exception {
-        this.serializeSingletonAndCheck(FontWeight.BOLD);
-    }
-
-    @Test
-    public void testSerializeNormal() throws Exception {
-        this.serializeSingletonAndCheck(FontWeight.NORMAL);
-    }
-
     // Object...........................................................................................................
 
     @Test
@@ -203,17 +188,5 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     public FontWeight unmarshall(final JsonNode jsonNode,
                                  final JsonNodeUnmarshallContext context) {
         return FontWeight.unmarshall(jsonNode, context);
-    }
-
-    // SerializationTesting.............................................................................................
-
-    @Override
-    public FontWeight serializableInstance() {
-        return this.createComparable();
-    }
-
-    @Override
-    public boolean serializableInstanceIsSingleton() {
-        return false;
     }
 }

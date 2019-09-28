@@ -95,8 +95,4 @@ final class TextOverflowString extends TextOverflow {
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(STRING_PREFIX + this.value);
     }
-
-    // Serializable ....................................................................................................
-
-    private final static long serialVersionUID = 1L;
 }

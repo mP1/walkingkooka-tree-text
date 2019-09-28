@@ -95,8 +95,4 @@ final class TextOverflowNonString extends TextOverflow {
     }
 
     private final JsonNode jsonNode;
-
-    // Serializable ....................................................................................................
-
-    private final static long serialVersionUID = 1L;
 }

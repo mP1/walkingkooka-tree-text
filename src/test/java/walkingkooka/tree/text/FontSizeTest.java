@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.test.ConstantsTesting;
-import walkingkooka.test.SerializationTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -34,8 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize>
         implements ComparableTesting2<FontSize>,
-        ConstantsTesting<FontSize>,
-        SerializationTesting<FontSize> {
+        ConstantsTesting<FontSize> {
 
     private final static int VALUE = 10;
 
@@ -168,17 +166,5 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     public FontSize unmarshall(final JsonNode jsonNode,
                                final JsonNodeUnmarshallContext context) {
         return FontSize.unmarshall(jsonNode, context);
-    }
-
-    // SerializationTesting.............................................................................................
-
-    @Override
-    public FontSize serializableInstance() {
-        return this.createComparable();
-    }
-
-    @Override
-    public boolean serializableInstanceIsSingleton() {
-        return true;
     }
 }
