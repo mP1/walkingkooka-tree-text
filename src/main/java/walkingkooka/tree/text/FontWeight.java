@@ -34,8 +34,7 @@ import java.util.Objects;
  */
 public final class FontWeight implements Comparable<FontWeight>,
         HashCodeEqualsDefined,
-        Value<Integer>,
-        Serializable {
+        Value<Integer> {
 
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;
@@ -164,19 +163,5 @@ public final class FontWeight implements Comparable<FontWeight>,
                 BOLD_VALUE == value ?
                         BOLD_TEXT :
                         String.valueOf(value);
-    }
-
-    // Serializable ..................................................................................................
-
-    private final static long serialVersionUID = 1L;
-
-    private Object readResolve() {
-        final int value = this.value;
-
-        return NORMAL_VALUE == value ?
-                NORMAL :
-                BOLD_VALUE == value ?
-                        BOLD :
-                        this;
     }
 }

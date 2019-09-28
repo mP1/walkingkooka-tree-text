@@ -34,8 +34,7 @@ import java.util.stream.IntStream;
  */
 public final class FontSize implements Comparable<FontSize>,
         HashCodeEqualsDefined,
-        Value<Integer>,
-        Serializable {
+        Value<Integer> {
 
     private final static int CONSTANT_COUNT = 40;
 
@@ -150,8 +149,4 @@ public final class FontSize implements Comparable<FontSize>,
     public String toString() {
         return String.valueOf(this.value);
     }
-
-    // Serializable ..................................................................................................
-
-    private final static long serialVersionUID = 1L;
 }

@@ -19,8 +19,6 @@ package walkingkooka.tree.text;
 
 public class TextStylePropertyValueException extends TextNodeException {
 
-    private static final long serialVersionUID = 1L;
-
     protected TextStylePropertyValueException() {
         super();
     }

@@ -35,8 +35,7 @@ import java.util.Objects;
  */
 public final class Opacity implements Comparable<Opacity>,
         HashCodeEqualsDefined,
-        Value<Double>,
-        Serializable {
+        Value<Double> {
 
     private final static double TRANSPARENT_VALUE = 0;
     private final static double OPAQUE_VALUE = 1;
@@ -174,19 +173,5 @@ public final class Opacity implements Comparable<Opacity>,
         return (percentage.endsWith(".0") ?
                 percentage.substring(0, percentage.length() - 2) :
                 percentage).concat("%");
-    }
-
-    // Serializable ..................................................................................................
-
-    private final static long serialVersionUID = 1L;
-
-    private Object readResolve() {
-        final double value = this.value;
-
-        return TRANSPARENT_VALUE == value ?
-                TRANSPARENT :
-                OPAQUE_VALUE == value ?
-                        OPAQUE :
-                        this;
     }
 }

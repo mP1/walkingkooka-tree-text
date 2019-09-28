@@ -22,7 +22,6 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.test.ClassTesting2;
 import walkingkooka.test.ConstantsTesting;
-import walkingkooka.test.SerializationTesting;
 import walkingkooka.test.ToStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
@@ -39,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class OpacityTest implements ClassTesting2<Opacity>,
         ComparableTesting2<Opacity>,
         ConstantsTesting<Opacity>,
-        SerializationTesting<Opacity>,
         JsonNodeMarshallingTesting<Opacity>,
         ToStringTesting<Opacity> {
 
@@ -150,18 +148,6 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         this.marshallRoundTripTwiceAndCheck(Opacity.OPAQUE);
     }
 
-    // Serializable.....................................................................................................
-
-    @Test
-    public void testSerializeTransparent() throws Exception {
-        this.serializeSingletonAndCheck(Opacity.TRANSPARENT);
-    }
-
-    @Test
-    public void testSerializeOpaque() throws Exception {
-        this.serializeSingletonAndCheck(Opacity.OPAQUE);
-    }
-
     // Object...........................................................................................................
 
     @Test
@@ -187,16 +173,6 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     @Override
     public Opacity createComparable() {
         return Opacity.with(VALUE);
-    }
-
-    @Override
-    public Opacity serializableInstance() {
-        return this.createComparable();
-    }
-
-    @Override
-    public boolean serializableInstanceIsSingleton() {
-        return false;
     }
 
     @Override

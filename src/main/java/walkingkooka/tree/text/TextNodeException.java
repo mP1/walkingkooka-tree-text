@@ -18,10 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.tree.NodeException;
+import walkingkooka.tree.TreeException;
 
-public class TextNodeException extends NodeException {
-
-    private static final long serialVersionUID = 1L;
+public class TextNodeException extends TreeException {
 
     protected TextNodeException() {
         super();
