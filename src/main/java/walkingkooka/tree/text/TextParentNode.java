@@ -104,18 +104,6 @@ abstract class TextParentNode extends TextNode {
 
     abstract TextParentNode replace0(final int index, final List<TextNode> children);
 
-    // is..............................................................................................................
-
-    @Override
-    public final boolean isPlaceholder() {
-        return false;
-    }
-
-    @Override
-    public final boolean isText() {
-        return false;
-    }
-
     // HasTextOffset...................................................................................................
 
     /**

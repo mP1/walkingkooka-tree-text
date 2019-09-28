@@ -76,7 +76,9 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
 
     public abstract boolean isEllipse();
 
-    public abstract boolean isString();
+    public final boolean isString() {
+        return this instanceof TextOverflowString;
+    }
 
     @Override
     public abstract String toString();

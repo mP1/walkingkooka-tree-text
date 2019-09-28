@@ -203,22 +203,30 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     /**
      * Only {@link TextPlaceholderNode} returns true
      */
-    public abstract boolean isPlaceholder();
+    public final boolean isPlaceholder() {
+        return this instanceof TextPlaceholderNode;
+    }
 
     /**
      * Only {@link TextStyleNode} returns true
      */
-    public abstract boolean isStyle();
+    public final boolean isStyle() {
+        return this instanceof TextStyleNode;
+    }
 
     /**
      * Only {@link TextStyleNameNode} returns true
      */
-    public abstract boolean isStyleName();
+    public final boolean isStyleName() {
+        return this instanceof TextStyleNameNode;
+    }
 
     /**
      * Only {@link Text} returns true
      */
-    public abstract boolean isText();
+    public final boolean isText() {
+        return this instanceof Text;
+    }
 
     // helper............................................................................................................
 

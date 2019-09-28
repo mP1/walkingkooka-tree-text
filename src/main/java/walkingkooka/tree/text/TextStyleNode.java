@@ -151,18 +151,6 @@ public final class TextStyleNode extends TextParentNode {
         return new TextStyleNode(index, children, this.attributes);
     }
 
-    // isXXX............................................................................................................
-
-    @Override
-    public boolean isStyle() {
-        return true;
-    }
-
-    @Override
-    public boolean isStyleName() {
-        return false;
-    }
-
     // JsonNodeContext...................................................................................................
 
     /**

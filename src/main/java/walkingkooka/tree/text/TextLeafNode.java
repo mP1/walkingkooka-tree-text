@@ -114,18 +114,6 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return TextStyle.EMPTY;
     }
 
-    // is ..............................................................................................................
-
-    @Override
-    public final boolean isStyle() {
-        return false;
-    }
-
-    @Override
-    public final boolean isStyleName() {
-        return false;
-    }
-
     // Object ..........................................................................................................
 
     @Override
