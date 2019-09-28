@@ -160,7 +160,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         return Sets.empty();
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public FontSize unmarshall(final JsonNode jsonNode,

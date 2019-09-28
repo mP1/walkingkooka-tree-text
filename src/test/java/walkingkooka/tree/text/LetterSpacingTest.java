@@ -60,7 +60,7 @@ public final class LetterSpacingTest extends LengthTextStylePropertyValueTestCas
         return LetterSpacing.parse(text);
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public LetterSpacing unmarshall(final JsonNode from,

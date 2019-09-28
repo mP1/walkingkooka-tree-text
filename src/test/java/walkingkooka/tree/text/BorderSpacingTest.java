@@ -60,7 +60,7 @@ public final class BorderSpacingTest extends LengthTextStylePropertyValueTestCas
         return BorderSpacing.parse(text);
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public BorderSpacing unmarshall(final JsonNode from,

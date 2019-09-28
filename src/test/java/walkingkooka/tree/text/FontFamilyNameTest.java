@@ -90,7 +90,7 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
         return JavaVisibility.PUBLIC;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public FontFamilyName createJsonNodeMappingValue() {

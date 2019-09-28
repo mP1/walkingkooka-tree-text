@@ -127,7 +127,7 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
         return expected;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public final L createJsonNodeMappingValue() {

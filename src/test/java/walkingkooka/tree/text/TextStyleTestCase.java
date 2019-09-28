@@ -255,7 +255,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         return JavaVisibility.PACKAGE_PRIVATE;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public final TextStyle unmarshall(final JsonNode from,

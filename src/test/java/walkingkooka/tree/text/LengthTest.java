@@ -84,7 +84,7 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
         return expected;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public Length unmarshall(final JsonNode from,

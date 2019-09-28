@@ -109,7 +109,7 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
         return Length.parseNone(text);
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public NoneLength unmarshall(final JsonNode from,

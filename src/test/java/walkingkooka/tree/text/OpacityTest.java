@@ -185,7 +185,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         return Opacity.class;
     }
 
-    // JsonNodeMapTesting...............................................................................................
+    // JsonNodeMarshallTesting..........................................................................................
 
     @Override
     public Opacity createJsonNodeMappingValue() {
