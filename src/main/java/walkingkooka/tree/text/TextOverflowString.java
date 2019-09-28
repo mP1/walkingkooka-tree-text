@@ -62,11 +62,6 @@ final class TextOverflowString extends TextOverflow {
         return false;
     }
 
-    @Override
-    public boolean isString() {
-        return true;
-    }
-
     // Object .........................................................................................................
 
     @Override

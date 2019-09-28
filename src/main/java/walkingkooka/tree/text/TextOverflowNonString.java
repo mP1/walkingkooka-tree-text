@@ -58,11 +58,6 @@ final class TextOverflowNonString extends TextOverflow {
         return ELLIPSIS_TEXT.equals(this.value);
     }
 
-    @Override
-    public boolean isString() {
-        return false;
-    }
-
     // Object .........................................................................................................
 
     @Override

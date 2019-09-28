@@ -65,18 +65,6 @@ public final class Text extends TextLeafNode<String> implements HasText {
         return new Text(index, value);
     }
 
-    // IsXXXX...........................................................................................................
-
-    @Override
-    public boolean isPlaceholder() {
-        return false;
-    }
-
-    @Override
-    public boolean isText() {
-        return true;
-    }
-
     // HasText.........................................................................................................
 
     @Override

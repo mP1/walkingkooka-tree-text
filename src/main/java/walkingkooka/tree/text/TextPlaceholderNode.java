@@ -63,18 +63,6 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return "";
     }
 
-    // isXXX..........................................................................................................
-
-    @Override
-    public boolean isPlaceholder() {
-        return true;
-    }
-
-    @Override
-    public boolean isText() {
-        return false;
-    }
-
     // JsonNode.........................................................................................................
 
     /**

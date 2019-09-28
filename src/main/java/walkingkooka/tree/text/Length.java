@@ -135,22 +135,30 @@ public abstract class Length<V> implements HashCodeEqualsDefined {
     /**
      * Only {@link NoneLength} returns true.
      */
-    public abstract boolean isNone();
+    public final boolean isNone() {
+        return this instanceof NoneLength;
+    }
 
     /**
      * Only {@link NormalLength} returns true.
      */
-    public abstract boolean isNormal();
+    public final boolean isNormal() {
+        return this instanceof NormalLength;
+    }
 
     /**
      * Only {@link NumberLength} returns true.
      */
-    public abstract boolean isNumber();
+    public final boolean isNumber() {
+        return this instanceof NumberLength;
+    }
 
     /**
      * Only {@link PixelLength} returns true.
      */
-    public abstract boolean isPixel();
+    public final boolean isPixel() {
+        return this instanceof PixelLength;
+    }
 
     // parameter checking...............................................................................................
 

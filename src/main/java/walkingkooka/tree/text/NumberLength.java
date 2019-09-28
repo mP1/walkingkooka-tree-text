@@ -75,28 +75,6 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
         return Optional.empty();
     }
 
-    // isXXX............................................................................................................
-
-    @Override
-    public boolean isNone() {
-        return false;
-    }
-
-    @Override
-    public boolean isNormal() {
-        return false;
-    }
-
-    @Override
-    public boolean isNumber() {
-        return true;
-    }
-
-    @Override
-    public boolean isPixel() {
-        return false;
-    }
-
     @Override
     void pixelOrFail() {
         this.pixelOrFail0();

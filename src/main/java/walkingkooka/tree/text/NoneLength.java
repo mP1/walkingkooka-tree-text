@@ -64,28 +64,6 @@ public final class NoneLength extends Length<Void> implements Value<Void> {
         return Optional.empty();
     }
 
-    // isXXX............................................................................................................
-
-    @Override
-    public boolean isNone() {
-        return true;
-    }
-
-    @Override
-    public boolean isNormal() {
-        return false;
-    }
-
-    @Override
-    public boolean isNumber() {
-        return false;
-    }
-
-    @Override
-    public boolean isPixel() {
-        return false;
-    }
-
     @Override
     void pixelOrFail() {
         this.pixelOrFail0();
