@@ -112,18 +112,7 @@ public final class FontSize implements Comparable<FontSize>,
         return this.value - size.value;
     }
 
-    // Serializable
-
-    /**
-     * Attempts to resolve to a constant singleton otherwise defaults to this.
-     */
-    public Object readResolve() {
-        return this.value < CONSTANT_COUNT ?
-                CONSTANTS[this.value] :
-                this;
-    }
-
-    // Object
+    // Object...........................................................................................................
 
     @Override
     public int hashCode() {
