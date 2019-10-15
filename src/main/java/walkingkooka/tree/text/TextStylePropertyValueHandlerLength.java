@@ -33,11 +33,10 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
         super();
     }
 
-    @Override final void check0(final Object value, final TextStylePropertyName<?> name) {
+    @Override
+    final void check0(final Object value, final TextStylePropertyName<?> name) {
         final Length<?> length = this.checkType(value, Length.class, name);
-        if (this.lengthCheck(length)) {
-            // ok
-        } else {
+        if (false == this.lengthCheck(length)) {
             throw this.textStylePropertyValueException(value, name);
         }
     }
