@@ -43,7 +43,7 @@ public final class LengthUnit<V, L extends Length<V>> {
 
     // @see Length:parse
     static Length tryAllParse(final String text) {
-        return Arrays.asList(UNITS).stream()
+        return Arrays.stream(UNITS)
                 .filter(u -> u.unitPresent(text))
                 .map(u -> u.parse(text))
                 .findFirst()
