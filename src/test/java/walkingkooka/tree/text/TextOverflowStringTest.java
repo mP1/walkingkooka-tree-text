@@ -32,16 +32,12 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
 
     @Test
     public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            TextOverflowString.with(null);
-        });
+        assertThrows(NullPointerException.class, () -> TextOverflowString.with(null));
     }
 
     @Test
     public void testWithEmptyFails() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            TextOverflowString.with("");
-        });
+        assertThrows(IllegalArgumentException.class, () -> TextOverflowString.with(""));
     }
 
     @Test

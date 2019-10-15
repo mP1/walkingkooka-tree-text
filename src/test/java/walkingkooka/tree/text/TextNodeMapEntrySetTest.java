@@ -34,9 +34,7 @@ public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEnt
 
     @Test
     public void testWithInvalidPropertyFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            TextNodeMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> TextNodeMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null)));
     }
 
     @Test

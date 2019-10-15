@@ -39,9 +39,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            TextStyleNode.with(null, TextStyleNode.NO_ATTRIBUTES_MAP);
-        });
+        assertThrows(NullPointerException.class, () -> TextStyleNode.with(null, TextStyleNode.NO_ATTRIBUTES_MAP));
     }
 
     @Test

@@ -43,9 +43,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testWithNullTextStyleFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createBorderMarginPadding(Direction.RIGHT, null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createBorderMarginPadding(Direction.RIGHT, null));
     }
 
     @Test

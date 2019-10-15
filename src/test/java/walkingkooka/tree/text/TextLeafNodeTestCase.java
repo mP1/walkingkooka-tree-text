@@ -44,9 +44,7 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
 
     @Test
     public final void testSetChildrenFails() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            this.createNode().setChildren(TextNode.NO_CHILDREN);
-        });
+        assertThrows(UnsupportedOperationException.class, () -> this.createNode().setChildren(TextNode.NO_CHILDREN));
     }
 
     @Override

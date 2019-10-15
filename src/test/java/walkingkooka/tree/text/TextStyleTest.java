@@ -43,16 +43,12 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            TextStyle.with(null);
-        });
+        assertThrows(NullPointerException.class, () -> TextStyle.with(null));
     }
 
     @Test
     public void testWithInvalidPropertyFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, null)));
     }
 
     @Test
@@ -100,9 +96,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testSetChildrenNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            TextStyle.EMPTY.setChildren(null);
-        });
+        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.setChildren(null));
     }
 
     @Test
