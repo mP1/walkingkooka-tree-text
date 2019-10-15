@@ -107,7 +107,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     // TextStyleVisitor.................................................................................................
 
     void accept(final TextStyleVisitor visitor) {
-        this.entries.stream()
+        this.entries
                 .forEach(visitor::acceptPropertyAndValue);
     }
 
