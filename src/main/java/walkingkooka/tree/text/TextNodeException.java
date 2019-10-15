@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.tree.NodeException;
 import walkingkooka.tree.TreeException;
 
 public class TextNodeException extends TreeException {
