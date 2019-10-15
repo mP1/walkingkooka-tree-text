@@ -40,6 +40,7 @@ public abstract class TextStyle implements HashCodeEqualsDefined,
     /**
      * A {@link TextStyle} with no textStyle.
      */
+    @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextStyle EMPTY = TextStyleEmpty.instance();
 
     /**
