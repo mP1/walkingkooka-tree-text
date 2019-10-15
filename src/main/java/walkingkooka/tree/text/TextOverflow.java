@@ -38,6 +38,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     /**
      * A constant holding the font-weight of normal text
      */
+    @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextOverflow CLIP = TextOverflowNonString.constant(CLIP_TEXT);
 
     final static String ELLIPSIS_TEXT = "ellipsis";
@@ -45,6 +46,7 @@ public abstract class TextOverflow implements HashCodeEqualsDefined,
     /**
      * A constant holding the font-weight of bold text
      */
+    @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextOverflow ELLIPSIS = TextOverflowNonString.constant(ELLIPSIS_TEXT);
 
     /**
