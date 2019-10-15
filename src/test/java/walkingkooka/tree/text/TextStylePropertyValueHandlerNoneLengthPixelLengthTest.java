@@ -63,16 +63,12 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
 
     @Test
     public void testJsonNodeUnmarshallNormalFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().unmarshall(this.marshall(Length.normal()), this.propertyName(), this.unmarshallContext());
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.normal()), this.propertyName(), this.unmarshallContext()));
     }
 
     @Test
     public void testJsonNodeUnmarshallNumberFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            this.handler().unmarshall(this.marshall(Length.number(1)), this.propertyName(), this.unmarshallContext());
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.number(1)), this.propertyName(), this.unmarshallContext()));
     }
 
     @Test

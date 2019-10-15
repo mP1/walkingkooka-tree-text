@@ -45,16 +45,12 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
 
     @Test
     public void testWithNegativeValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Opacity.with(-0.1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> Opacity.with(-0.1));
     }
 
     @Test
     public void testWithGreaterValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Opacity.with(1.01);
-        });
+        assertThrows(IllegalArgumentException.class, () -> Opacity.with(1.01));
     }
 
     @Test

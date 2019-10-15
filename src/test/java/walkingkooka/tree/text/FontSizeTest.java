@@ -39,9 +39,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
 
     @Test
     public void testWithNegativeValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            FontSize.with(-1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> FontSize.with(-1));
     }
 
     @Test

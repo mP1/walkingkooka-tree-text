@@ -35,9 +35,7 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
 
     @Test
     public void testWithInvalidPropertyFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null));
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null)));
     }
 
 
@@ -70,9 +68,7 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
 
     @Test
     public void testPutFails() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            this.createMap().put(this.property1(), this.value1());
-        });
+        assertThrows(UnsupportedOperationException.class, () -> this.createMap().put(this.property1(), this.value1()));
     }
 
     @Test

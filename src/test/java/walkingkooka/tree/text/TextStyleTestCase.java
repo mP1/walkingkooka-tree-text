@@ -61,9 +61,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testMergeNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createObject().merge(null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createObject().merge(null));
     }
 
     @Test
@@ -114,9 +112,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testReplaceNullTextNodeFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createObject().replace(null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createObject().replace(null));
     }
 
     final void replaceAndCheck(final TextStyle textStyle,
@@ -139,9 +135,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testGetNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createObject().get(null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createObject().get(null));
     }
 
     @Test
@@ -163,16 +157,12 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testSetNullPropertyNameFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createObject().set(null, "value");
-        });
+        assertThrows(NullPointerException.class, () -> this.createObject().set(null, "value"));
     }
 
     @Test
     public final void testSetNullPropertyValueFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> {
-            this.createObject().set(TextStylePropertyName.FONT_FAMILY_NAME, null);
-        });
+        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY_NAME, null));
     }
 
     @Test
@@ -198,9 +188,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testRemoveNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createObject().remove(null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createObject().remove(null));
     }
 
     @Test

@@ -41,9 +41,7 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
 
     @Test
     public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> {
-            this.createPropertyValue(null);
-        });
+        assertThrows(NullPointerException.class, () -> this.createPropertyValue(null));
     }
 
     @Test
@@ -96,9 +94,7 @@ public abstract class LengthTextStylePropertyValueTestCase<L extends LengthTextS
     }
 
     final void withFails(final Length<?> length) {
-        assertThrows(IllegalArgumentException.class, () -> {
-            this.createPropertyValue(length);
-        });
+        assertThrows(IllegalArgumentException.class, () -> this.createPropertyValue(length));
     }
 
     // ClassTesting......................................................................................................

@@ -59,9 +59,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Test
     public void testWithNegativeFails() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            NumberLength.with(-1L);
-        });
+        assertThrows(IllegalArgumentException.class, () -> NumberLength.with(-1L));
     }
 
     @Test

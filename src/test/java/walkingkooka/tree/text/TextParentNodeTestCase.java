@@ -34,9 +34,7 @@ public abstract class TextParentNodeTestCase<T extends TextParentNode> extends T
     @Test
     public final void testChildrenReadOnly() {
         final T parent = this.createTextNode();
-        assertThrows(UnsupportedOperationException.class, () -> {
-            parent.children().add(this.different());
-        });
+        assertThrows(UnsupportedOperationException.class, () -> parent.children().add(this.different()));
     }
 
     @Test
@@ -45,9 +43,7 @@ public abstract class TextParentNodeTestCase<T extends TextParentNode> extends T
 
         final TextNode parent = this.createTextNode()
                 .setChildren(children);
-        assertThrows(UnsupportedOperationException.class, () -> {
-            parent.children().add(this.different());
-        });
+        assertThrows(UnsupportedOperationException.class, () -> parent.children().add(this.different()));
     }
 
     final Text text1() {
