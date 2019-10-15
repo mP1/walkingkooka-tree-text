@@ -173,10 +173,10 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         });
     }
 
-    final <T> TextStyle setAndCheck(final TextStyle textStyle,
-                                    final TextStylePropertyName<T> propertyName,
-                                    final T value,
-                                    final TextStyle expected) {
+    final <TT> TextStyle setAndCheck(final TextStyle textStyle,
+                                     final TextStylePropertyName<TT> propertyName,
+                                     final TT value,
+                                     final TextStyle expected) {
         final TextStyle set = textStyle.set(propertyName, value);
         assertEquals(expected,
                 set,
@@ -197,9 +197,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         assertSame(textStyle, textStyle.remove(TextStylePropertyName.HYPHENS));
     }
 
-    final <T> TextStyle removeAndCheck(final TextStyle textStyle,
-                                       final TextStylePropertyName<T> propertyName,
-                                       final TextStyle expected) {
+    final TextStyle removeAndCheck(final TextStyle textStyle,
+                                   final TextStylePropertyName<?> propertyName,
+                                   final TextStyle expected) {
         final TextStyle removed = textStyle.remove(propertyName);
         assertEquals(expected,
                 removed,
@@ -209,7 +209,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     // helpers .........................................................................................................
 
-    final <T extends TextNode> T makeStyleNameParent(final T child) {
+    final <TT extends TextNode> TT makeStyleNameParent(final TT child) {
         return this.styleName("parent-textStyle-123")
                 .setChildren(Lists.of(child))
                 .children()
