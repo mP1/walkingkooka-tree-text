@@ -59,9 +59,7 @@ public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEnt
         final Iterator<?> iterator = this.createSet().iterator();
         iterator.next();
 
-        assertThrows(UnsupportedOperationException.class, () -> {
-            iterator.remove();
-        });
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Test
