@@ -30,7 +30,7 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     /**
      * Singleton
      */
-    static TextStylePropertyValueHandlerJsonNodeWithType INSTANCE = new TextStylePropertyValueHandlerJsonNodeWithType();
+    final static TextStylePropertyValueHandlerJsonNodeWithType INSTANCE = new TextStylePropertyValueHandlerJsonNodeWithType();
 
     /**
      * Private ctor
