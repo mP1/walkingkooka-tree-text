@@ -47,7 +47,7 @@ public abstract class Length<V> implements HashCodeEqualsDefined {
                         LengthUnit.tryAllParse(text);
     }
 
-    static void checkText(final String text) {
+    private static void checkText(final String text) {
         CharSequences.failIfNullOrEmpty(text, "text");
     }
 

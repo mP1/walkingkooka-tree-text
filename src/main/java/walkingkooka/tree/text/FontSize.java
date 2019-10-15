@@ -92,7 +92,7 @@ public final class FontSize implements Comparable<FontSize>,
         return with(node.numberValueOrFail().intValue());
     }
 
-    JsonNode marshall(final JsonNodeMarshallContext context) {
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.number(this.value);
     }
 
