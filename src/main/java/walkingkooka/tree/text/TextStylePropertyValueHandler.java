@@ -120,7 +120,7 @@ abstract class TextStylePropertyValueHandler<T> {
 
     abstract String expectedTypeName(final Class<?> type);
 
-    final boolean textStylePropertyType(final String type) {
+    private boolean textStylePropertyType(final String type) {
         return type.startsWith(PACKAGE) && type.indexOf('.', 1 + PACKAGE.length()) == -1;
     }
 

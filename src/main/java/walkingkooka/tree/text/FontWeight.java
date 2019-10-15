@@ -106,7 +106,7 @@ public final class FontWeight implements Comparable<FontWeight>,
         throw new IllegalArgumentException("Unknown font weight " + CharSequences.quote(value));
     }
 
-    JsonNode marshall(final JsonNodeMarshallContext context) {
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
         return NORMAL_VALUE == this.value ?
                 NORMAL_JSON :
                 BOLD_VALUE == this.value ?

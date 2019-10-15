@@ -177,8 +177,8 @@ public final class TextStyleNameNode extends TextParentNode {
                 context);
     }
 
-    final static String STYLE = "textStyle";
-    final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
+    private final static String STYLE = "textStyle";
+    private final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
 
     static {
         JsonNodeContext.register("text-styleName",

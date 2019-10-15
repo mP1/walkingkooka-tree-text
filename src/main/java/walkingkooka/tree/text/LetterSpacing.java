@@ -51,7 +51,7 @@ public final class LetterSpacing extends LengthTextStylePropertyValue {
         return with(context.unmarshall(node, Length.class));
     }
 
-    JsonNode marshall(final JsonNodeMarshallContext context) {
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
         return context.marshall(this.length);
     }
 

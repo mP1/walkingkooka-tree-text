@@ -110,7 +110,7 @@ public final class Opacity implements Comparable<Opacity>,
         throw new JsonNodeUnmarshallException("Unknown opacity " + CharSequences.quote(value), node);
     }
 
-    JsonNode marshall(final JsonNodeMarshallContext context) {
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
         return TRANSPARENT_VALUE == this.value ?
                 TRANSPARENT_JSON :
                 OPAQUE_VALUE == this.value ?

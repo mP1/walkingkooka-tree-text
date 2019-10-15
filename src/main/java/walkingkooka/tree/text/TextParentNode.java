@@ -82,7 +82,7 @@ abstract class TextParentNode extends TextNode {
                 this.replaceChild0(newChild, index);
     }
 
-    final TextNode replaceChild0(final TextNode newChild, final int index) {
+    private TextNode replaceChild0(final TextNode newChild, final int index) {
         final List<TextNode> newChildren = Lists.array();
         newChildren.addAll(this.children());
         newChildren.set(index, newChild);
