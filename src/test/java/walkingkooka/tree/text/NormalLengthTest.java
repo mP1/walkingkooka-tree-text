@@ -42,9 +42,7 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
 
     @Test
     public void testWith() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            NormalLength.INSTANCE.value();
-        });
+        assertThrows(UnsupportedOperationException.class, NormalLength.INSTANCE::value);
     }
 
     // LengthVisitor....................................................................................................

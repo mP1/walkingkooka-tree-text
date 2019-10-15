@@ -42,9 +42,7 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
 
     @Test
     public void testWith() {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            NoneLength.INSTANCE.value();
-        });
+        assertThrows(UnsupportedOperationException.class, NoneLength.INSTANCE::value);
     }
 
     // LengthVisitor....................................................................................................
