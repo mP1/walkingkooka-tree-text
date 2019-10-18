@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.naming.Name;
-import walkingkooka.type.JavaVisibility;
+import walkingkooka.reflect.JavaVisibility;
 
 public final class TextNodeNameNameTest extends TextNodeTestCase<TextNodeNameName<?>> {
     @Override

@@ -18,9 +18,9 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.test.ClassTesting2;
-import walkingkooka.test.ToStringTesting;
+import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;

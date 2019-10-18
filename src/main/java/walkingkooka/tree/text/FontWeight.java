@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -32,7 +31,6 @@ import java.util.Objects;
  * Value class that holds a font weight.
  */
 public final class FontWeight implements Comparable<FontWeight>,
-        HashCodeEqualsDefined,
         Value<Integer> {
 
     private final static int NORMAL_VALUE = 400;

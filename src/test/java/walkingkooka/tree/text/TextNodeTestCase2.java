@@ -20,14 +20,14 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.test.IsMethodTesting;
+import walkingkooka.reflect.IsMethodTesting;
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.NodeTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
-import walkingkooka.type.JavaVisibility;
 
 import java.util.Map;
 import java.util.function.Predicate;

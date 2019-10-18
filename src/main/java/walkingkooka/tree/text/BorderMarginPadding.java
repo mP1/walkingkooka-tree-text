@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.test.HashCodeEqualsDefined;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +25,7 @@ import java.util.Optional;
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
  */
-abstract class BorderMarginPadding implements HashCodeEqualsDefined {
+abstract class BorderMarginPadding {
 
     /**
      * Package private to limit sub classing.

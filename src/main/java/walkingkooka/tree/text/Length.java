@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -32,7 +31,7 @@ import java.util.function.Function;
 /**
  * Base class for any measure.
  */
-public abstract class Length<V> implements HashCodeEqualsDefined {
+public abstract class Length<V> {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.

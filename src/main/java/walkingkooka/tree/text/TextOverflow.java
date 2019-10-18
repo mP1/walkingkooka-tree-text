@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Value;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -30,8 +29,7 @@ import java.util.Optional;
 /**
  * Value class that holds a text-overflow
  */
-public abstract class TextOverflow implements HashCodeEqualsDefined,
-        Value<Optional<String>> {
+public abstract class TextOverflow implements Value<Optional<String>> {
 
     final static String CLIP_TEXT = "clip";
 

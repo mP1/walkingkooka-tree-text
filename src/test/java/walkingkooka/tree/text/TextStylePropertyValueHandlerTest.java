@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.test.ClassTesting;
-import walkingkooka.type.JavaVisibility;
+import walkingkooka.reflect.ClassTesting;
+import walkingkooka.reflect.JavaVisibility;
 
 public final class TextStylePropertyValueHandlerTest implements ClassTesting<TextStylePropertyValueHandler<?>> {
     @Override

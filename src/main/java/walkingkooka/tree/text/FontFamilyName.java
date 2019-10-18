@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.naming.Name;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
@@ -31,8 +30,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
  * A font family name, which are also case insensitive when compared.
  */
 public final class FontFamilyName implements Name,
-        Comparable<FontFamilyName>,
-        HashCodeEqualsDefined {
+        Comparable<FontFamilyName> {
 
     public static FontFamilyName with(final String name) {
         CharSequences.failIfNullOrEmpty(name, "name");

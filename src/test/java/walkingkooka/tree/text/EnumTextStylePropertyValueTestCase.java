@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.type.JavaVisibility;
+import walkingkooka.reflect.JavaVisibility;
 
 public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> extends TextStylePropertyValueTestCase<E> {
 

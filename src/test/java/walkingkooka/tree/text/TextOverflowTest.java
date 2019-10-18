@@ -19,12 +19,12 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.test.ClassTesting2;
-import walkingkooka.test.ConstantsTesting;
+import walkingkooka.reflect.ClassTesting2;
+import walkingkooka.reflect.ConstantsTesting;
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.type.JavaVisibility;
 
 import java.util.Set;
 
