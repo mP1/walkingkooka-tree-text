@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.test.ClassTesting2;
-import walkingkooka.type.JavaVisibility;
+import walkingkooka.reflect.ClassTesting2;
+import walkingkooka.reflect.JavaVisibility;
 
 public final class BorderMarginPaddingTest implements ClassTesting2<BorderMarginPadding> {
 

@@ -20,10 +20,10 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.type.FieldAttributes;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -34,8 +33,7 @@ import java.util.Optional;
 /**
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
-public abstract class TextStyle implements HashCodeEqualsDefined,
-        Value<Map<TextStylePropertyName<?>, Object>> {
+public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>> {
 
     /**
      * A {@link TextStyle} with no textStyle.

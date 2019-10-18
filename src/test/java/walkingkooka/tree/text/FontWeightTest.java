@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
-import walkingkooka.test.ConstantsTesting;
+import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;

@@ -17,8 +17,9 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.test.ClassTesting2;
-import walkingkooka.test.TypeNameTesting;
+
+import walkingkooka.reflect.ClassTesting2;
+import walkingkooka.reflect.TypeNameTesting;
 
 public abstract class TextNodeTestCase<T> implements ClassTesting2<T>, TypeNameTesting<T> {
 

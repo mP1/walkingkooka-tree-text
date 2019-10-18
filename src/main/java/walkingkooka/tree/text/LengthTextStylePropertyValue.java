@@ -19,15 +19,13 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
-import walkingkooka.test.HashCodeEqualsDefined;
 
 import java.util.Objects;
 
 /**
  * Base class for numerous properties that hold a {@link Length}.
  */
-abstract class LengthTextStylePropertyValue implements HashCodeEqualsDefined,
-        Value<Length<?>> {
+abstract class LengthTextStylePropertyValue implements Value<Length<?>> {
 
     static void check(final Length<?> length) {
         Objects.requireNonNull(length, "length");

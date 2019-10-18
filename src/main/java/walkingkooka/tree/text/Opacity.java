@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
-import walkingkooka.test.HashCodeEqualsDefined;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -33,7 +32,6 @@ import java.util.Objects;
  * Value class that holds an opacity value.
  */
 public final class Opacity implements Comparable<Opacity>,
-        HashCodeEqualsDefined,
         Value<Double> {
 
     private final static double TRANSPARENT_VALUE = 0;

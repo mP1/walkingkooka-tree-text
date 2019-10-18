@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.type.JavaVisibility;
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

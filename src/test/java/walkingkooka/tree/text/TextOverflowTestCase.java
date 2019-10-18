@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.test.HashCodeEqualsDefinedTesting2;
-import walkingkooka.test.TypeNameTesting;
+import walkingkooka.HashCodeEqualsDefinedTesting2;
+import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
