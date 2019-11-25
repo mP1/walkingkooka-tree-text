@@ -24,7 +24,7 @@ import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeName;
+import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -658,7 +658,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.handler = handler;
         this.visitor = visitor;
 
-        this.jsonNodeName = JsonNodeName.with(this.name);
+        this.jsonPropertyName = JsonPropertyName.with(this.name);
     }
 
     /**
@@ -691,11 +691,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         return with(node.stringValueOrFail());
     }
 
-    JsonNodeName marshallName() {
-        return this.jsonNodeName;
+    JsonPropertyName marshallName() {
+        return this.jsonPropertyName;
     }
 
-    private final JsonNodeName jsonNodeName;
+    private final JsonPropertyName jsonPropertyName;
 
     static {
         JsonNodeContext.register("text-style-property-name",

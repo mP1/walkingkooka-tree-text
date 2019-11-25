@@ -90,17 +90,17 @@ public final class FontWeight implements Comparable<FontWeight>,
     static FontWeight unmarshall(final JsonNode node,
                                  final JsonNodeUnmarshallContext context) {
         return node.isString() ?
-                fromJsonStringNode(node.stringValueOrFail()) :
+                fromJsonString(node.stringValueOrFail()) :
                 with(node.numberValueOrFail().intValue());
     }
 
-    private static FontWeight fromJsonStringNode(final String value) {
+    private static FontWeight fromJsonString(final String value) {
         return BOLD_TEXT.equals(value) ? BOLD :
                 NORMAL_TEXT.equals(value) ? NORMAL :
-                        fromJsonStringNode0(value);
+                        fromJsonString0(value);
     }
 
-    private static FontWeight fromJsonStringNode0(final String value) {
+    private static FontWeight fromJsonString0(final String value) {
         throw new IllegalArgumentException("Unknown font weight " + CharSequences.quote(value));
     }
 

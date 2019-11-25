@@ -22,7 +22,7 @@ import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeName;
+import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -178,7 +178,7 @@ public final class TextStyleNameNode extends TextParentNode {
     }
 
     private final static String STYLE = "textStyle";
-    private final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
+    private final static JsonPropertyName STYLE_PROPERTY = JsonPropertyName.with(STYLE);
 
     static {
         JsonNodeContext.register("text-styleName",
