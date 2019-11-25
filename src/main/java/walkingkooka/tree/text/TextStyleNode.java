@@ -23,8 +23,7 @@ import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeName;
-import walkingkooka.tree.json.JsonObjectNode;
+import walkingkooka.tree.json.*;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -178,7 +177,7 @@ public final class TextStyleNode extends TextParentNode {
     }
 
     JsonNode marshall(final JsonNodeMarshallContext context) {
-        JsonObjectNode json = JsonNode.object();
+        JsonObject json = JsonNode.object();
         if (!this.attributes.isEmpty()) {
             json = json.set(STYLE_PROPERTY, this.attributes.toJson(context));
         }
@@ -187,7 +186,7 @@ public final class TextStyleNode extends TextParentNode {
     }
 
     private final static String STYLE = "textStyle";
-    private final static JsonNodeName STYLE_PROPERTY = JsonNodeName.with(STYLE);
+    private final static JsonPropertyName STYLE_PROPERTY = JsonPropertyName.with(STYLE);
 
     static {
         JsonNodeContext.register("text-textStyle-node",
