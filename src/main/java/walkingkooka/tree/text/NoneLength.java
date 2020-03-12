@@ -25,6 +25,7 @@ import java.util.Optional;
 /**
  * A none measurement.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 public final class NoneLength extends Length<Void> implements Value<Void> {
 
     final static String TEXT = "none";

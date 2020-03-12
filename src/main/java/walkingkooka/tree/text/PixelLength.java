@@ -26,6 +26,7 @@ import java.util.Optional;
 /**
  * A measurement in pixels.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 public final class PixelLength extends Length<Double> implements Value<Double> {
 
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;

@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 /**
  * A parent holding zero or more child expressions.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 abstract class TextParentNode extends TextNode {
 
     /**

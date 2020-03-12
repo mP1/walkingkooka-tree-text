@@ -30,6 +30,7 @@ import java.util.Objects;
 /**
  * A leaf node, where a leaf has no children, but will have a value.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     /**

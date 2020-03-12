@@ -26,6 +26,7 @@ import java.util.Optional;
 /**
  * A positive whole number
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 public final class NumberLength extends Length<Long> implements Value<Long> {
 
     static NumberLength parseNumber0(final String text) {

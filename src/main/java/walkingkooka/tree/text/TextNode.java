@@ -240,6 +240,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // Object ..........................................................................................................
 
     @Override
+    public abstract int hashCode();
+
+    @Override
     public final boolean equals(final Object other) {
         return this == other ||
                 this.canBeEqual(other) &&
