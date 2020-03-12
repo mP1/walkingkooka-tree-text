@@ -28,6 +28,7 @@ import java.util.Optional;
 /**
  * A {@link TextStyle} with style and values.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 final class TextStyleEmpty extends TextStyle {
 
     /**

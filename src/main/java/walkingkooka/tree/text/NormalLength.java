@@ -25,6 +25,7 @@ import java.util.Optional;
 /**
  * A normal measurement.
  */
+@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 public final class NormalLength extends Length<Void> implements Value<Void> {
 
     final static String TEXT = "normal";
