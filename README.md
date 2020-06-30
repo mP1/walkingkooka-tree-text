@@ -7,3 +7,101 @@
 
 
 A [walkingkooka/tree.Node](https://github.com/mP1/walkingkooka/blob/master/Node.md) implementation representing rich text in a tree graph.
+
+## Java sample
+
+```java
+final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
+        .appendChild(TextNode.styleName(TextStyleName.with("head")).appendChild(TextNode.styleName(TextStyleName.with("TITLE")).appendChild(TextNode.text("title123"))))
+        .appendChild(TextNode.styleName(TextStyleName.with("BODY"))
+                .appendChild(TextNode.text("before"))
+                .appendChild(TextNode.text("something gray").setAttributes(Maps.of(TextStylePropertyName.TEXT_COLOR, Color.parse("#345"))).parentOrFail())
+                .appendChild(TextNode.text("after"))
+        );
+
+final StringBuilder html = new StringBuilder();
+final LineEnding eol = LineEnding.SYSTEM;
+final IndentingPrinter printer = Printers.stringBuilder(html, eol)
+        .indenting(Indentation.with("  "));
+
+// very simple html printer
+new FakeTextNodeVisitor(){
+    @Override
+    protected Visiting startVisit(final TextNode node) {
+        return Visiting.CONTINUE;
+    }
+
+    @Override
+    protected void endVisit(final TextNode node) {
+    }
+
+    @Override
+    protected Visiting startVisit(final TextStyleNode node) {
+        printer.lineStart();
+        printer.print("<SPAN style=\"");
+
+        node.attributes()
+                .forEach((p, v) -> {
+                    printer.print(p + ": " + v + ";");
+                });
+
+        printer.print("\">" + eol);
+        printer.indent();
+        return Visiting.CONTINUE;
+    }
+
+    @Override
+    protected void endVisit(final TextStyleNode node) {
+        printer.outdent();
+        printer.lineStart();
+        printer.print("</SPAN>" + eol);
+    }
+
+    @Override
+    protected Visiting startVisit(final TextStyleNameNode node) {
+        this.beginElement(node.styleName().value());
+        return Visiting.CONTINUE;
+    }
+
+    @Override
+    protected void endVisit(final TextStyleNameNode node) {
+        this.endElement(node.styleName().value());
+    }
+
+    @Override
+    protected void visit(final Text node) {
+        printer.print(node.value());
+    }
+
+    private void beginElement(final String element) {
+        printer.lineStart();
+        printer.print("<" + element + ">" + eol);
+        printer.indent();
+    }
+
+    private void endElement(final String element) {
+        printer.outdent();
+        printer.lineStart();
+        printer.print("</" + element + ">"+eol);
+    }
+}.accept(node);
+```
+
+prints
+
+```text
+<HTML>
+  <head>
+    <TITLE>
+      title123
+    </TITLE>
+  </head>
+  <BODY>
+    before
+    <SPAN style="text-color: #334455;">
+      something gray
+    </SPAN>
+    after
+  </BODY>
+</HTML>
+```
