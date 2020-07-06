@@ -38,7 +38,7 @@ public final class LengthUnit<V, L extends Length<V>> {
      * Returns all units.
      */
     public static LengthUnit<?, ?>[] units() {
-        return UNITS.clone();
+        return Arrays.copyOf(UNITS, UNITS.length); // array.clone not supported in j2cl.
     }
 
     // @see Length:parse
