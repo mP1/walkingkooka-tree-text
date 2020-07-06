@@ -100,7 +100,7 @@ abstract class TextStylePropertyValueHandler<T> {
         if (!type.isInstance(value)) {
             throw this.textStylePropertyValueException(value, name);
         }
-        return type.cast(value);
+        return Cast.to(value);
     }
 
     /**
