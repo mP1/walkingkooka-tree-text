@@ -21,6 +21,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.function.Predicate;
+
 /**
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type that can be made into a {@link JsonNode}.
  */
@@ -29,22 +31,27 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
     /**
      * Factory
      */
-    static <T> TextStylePropertyValueHandlerJsonNode<T> with(final Class<T> type) {
-        return new TextStylePropertyValueHandlerJsonNode<>(type);
+    static <T> TextStylePropertyValueHandlerJsonNode<T> with(final Class<T> type,
+                                                             final Predicate<Object> typeChecker) {
+        return new TextStylePropertyValueHandlerJsonNode<>(type, typeChecker);
     }
 
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerJsonNode(final Class<H> type) {
+    private TextStylePropertyValueHandlerJsonNode(final Class<H> type,
+                                                  final Predicate<Object> typeChecker) {
         super();
         this.type = type;
+        this.typeChecker = typeChecker;
     }
 
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
-        this.checkType(value, this.type, name);
+        this.checkType(value, this.typeChecker, name);
     }
+
+    private final Predicate<Object> typeChecker;
 
     @Override
     String expectedTypeName(final Class<?> type) {

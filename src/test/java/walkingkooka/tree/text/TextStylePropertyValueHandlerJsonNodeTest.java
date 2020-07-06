@@ -55,7 +55,7 @@ public final class TextStylePropertyValueHandlerJsonNodeTest extends TextStylePr
 
     @Override
     TextStylePropertyValueHandlerJsonNode<Color> handler() {
-        return TextStylePropertyValueHandlerJsonNode.with(Color.class);
+        return TextStylePropertyValueHandlerJsonNode.with(Color.class, v -> v instanceof Color);
     }
 
     @Override

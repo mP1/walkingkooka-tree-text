@@ -23,6 +23,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * A {@link TextStylePropertyValueHandler} for {@link Enum} parameter values.
@@ -33,27 +34,33 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
      * Factory that creates a new {@link TextStylePropertyValueHandlerEnum}.
      */
     static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> with(final Function<String, E> factory,
-                                                                         final Class<E> type) {
+                                                                         final Class<E> type,
+                                                                         final Predicate<Object> typeChecker) {
         Objects.requireNonNull(factory, "factory");
         Objects.requireNonNull(type, "type");
+        Objects.requireNonNull(typeChecker, "typeChecker");
 
-        return new TextStylePropertyValueHandlerEnum<>(factory, type);
+        return new TextStylePropertyValueHandlerEnum<>(factory, type, typeChecker);
     }
 
     /**
      * Private ctor
      */
     private TextStylePropertyValueHandlerEnum(final Function<String, E> factory,
-                                              final Class<E> type) {
+                                              final Class<E> type,
+                                              final Predicate<Object> typeChecker) {
         super();
         this.factory = factory;
         this.type = type;
+        this.typeChecker = typeChecker;
     }
 
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
-        this.checkType(value, this.type, name);
+        this.checkType(value, this.typeChecker, name);
     }
+
+    private final Predicate<Object> typeChecker;
 
     @Override
     String expectedTypeName(final Class<?> type) {
