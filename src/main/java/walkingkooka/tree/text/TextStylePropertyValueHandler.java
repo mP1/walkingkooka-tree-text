@@ -24,6 +24,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Base converter that provides support for handling property values.
@@ -34,15 +35,17 @@ abstract class TextStylePropertyValueHandler<T> {
      * {@see TextStylePropertyValueHandlerEnum}
      */
     static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextPropertyValueHandler(final Function<String, E> factory,
-                                                                                                 final Class<E> type) {
-        return TextStylePropertyValueHandlerEnum.with(factory, type);
+                                                                                                 final Class<E> type,
+                                                                                                 final Predicate<Object> typeChecker) {
+        return TextStylePropertyValueHandlerEnum.with(factory, type, typeChecker);
     }
 
     /**
      * {@see TextStylePropertyValueHandlerJsonNode}
      */
-    static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type) {
-        return TextStylePropertyValueHandlerJsonNode.with(type);
+    static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type,
+                                                         final Predicate<Object> typeChecker) {
+        return TextStylePropertyValueHandlerJsonNode.with(type, typeChecker);
     }
 
     /**
@@ -96,8 +99,10 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * Checks the type of the given value and throws a {@link TextStylePropertyValueException} if this test fails.
      */
-    final <U> U checkType(final Object value, final Class<U> type, final TextStylePropertyName<?> name) {
-        if (!type.isInstance(value)) {
+    final <U> U checkType(final Object value,
+                          final Predicate<Object> type,
+                          final TextStylePropertyName<?> name) {
+        if (!type.test(value)) {
             throw this.textStylePropertyValueException(value, name);
         }
         return Cast.to(value);

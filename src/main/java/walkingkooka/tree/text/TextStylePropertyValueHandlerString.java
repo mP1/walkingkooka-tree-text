@@ -41,7 +41,9 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
 
     @Override
     void check0(final Object value, final TextStylePropertyName<?> name) {
-        final String string = this.checkType(value, String.class, name);
+        final String string = this.checkType(value,
+                v -> v instanceof String,
+                name);
         if (string.isEmpty()) {
             throw new TextStylePropertyValueException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
         }
