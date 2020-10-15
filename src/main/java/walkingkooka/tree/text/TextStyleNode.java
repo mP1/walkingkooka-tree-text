@@ -185,7 +185,7 @@ public final class TextStyleNode extends TextParentNode {
         return this.addChildrenValuesJson(json, context);
     }
 
-    private final static String STYLE = "textStyle";
+    private final static String STYLE = "style";
     private final static JsonPropertyName STYLE_PROPERTY = JsonPropertyName.with(STYLE);
 
     static {
