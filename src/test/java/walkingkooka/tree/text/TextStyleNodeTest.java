@@ -244,7 +244,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     public void testJsonNodeMarshallWithStyleNode() {
         this.marshallAndCheck(textStyleNode()
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
-                "{\"textStyle\": {\"background-color\": \"#123456\"}}");
+                "{\"style\": {\"background-color\": \"#123456\"}}");
     }
 
     @Test
@@ -252,7 +252,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         this.marshallAndCheck(TextNode.text("text123")
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456)))
                         .parentOrFail(),
-                "{\"textStyle\": {\"background-color\": \"#123456\"}, \"values\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
+                "{\"style\": {\"background-color\": \"#123456\"}, \"values\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
     }
 
     @Test
