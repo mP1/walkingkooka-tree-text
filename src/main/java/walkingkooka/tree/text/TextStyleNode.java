@@ -162,14 +162,14 @@ public final class TextStyleNode extends TextParentNode {
 
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
-                case STYLE:
+                case STYLES:
                     textStyle = TextStyle.withTextStyleMap(TextNodeMap.fromJson(child, context));
                     break;
                 case VALUES:
                     children = context.unmarshallWithTypeList(child);
                     break;
                 default:
-                    NeverError.unhandledCase(child, STYLE_PROPERTY, VALUES_PROPERTY);
+                    NeverError.unhandledCase(child, STYLES_PROPERTY, VALUES_PROPERTY);
             }
         }
 
@@ -179,14 +179,14 @@ public final class TextStyleNode extends TextParentNode {
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object();
         if (!this.attributes.isEmpty()) {
-            json = json.set(STYLE_PROPERTY, this.attributes.toJson(context));
+            json = json.set(STYLES_PROPERTY, this.attributes.toJson(context));
         }
 
         return this.addChildrenValuesJson(json, context);
     }
 
-    private final static String STYLE = "style";
-    private final static JsonPropertyName STYLE_PROPERTY = JsonPropertyName.with(STYLE);
+    private final static String STYLES = "styles";
+    private final static JsonPropertyName STYLES_PROPERTY = JsonPropertyName.with(STYLES);
 
     static {
         JsonNodeContext.register("text-style",
