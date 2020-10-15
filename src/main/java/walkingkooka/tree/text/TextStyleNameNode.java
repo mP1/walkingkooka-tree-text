@@ -152,19 +152,19 @@ public final class TextStyleNameNode extends TextParentNode {
 
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
-                case STYLE:
+                case STYLE_NAME:
                     styleName = context.unmarshall(child, TextStyleName.class);
                     break;
                 case VALUES:
                     children = context.unmarshallWithTypeList(child);
                     break;
                 default:
-                    NeverError.unhandledCase(child, STYLE_PROPERTY, VALUES_PROPERTY);
+                    NeverError.unhandledCase(child, STYLE_NAME_PROPERTY, VALUES_PROPERTY);
             }
         }
 
         if (null == styleName) {
-            JsonNodeUnmarshallContext.requiredPropertyMissing(STYLE_PROPERTY, node);
+            JsonNodeUnmarshallContext.requiredPropertyMissing(STYLE_NAME_PROPERTY, node);
         }
 
         return TextStyleNameNode.with(styleName)
@@ -173,12 +173,12 @@ public final class TextStyleNameNode extends TextParentNode {
 
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return this.addChildrenValuesJson(JsonNode.object()
-                        .set(STYLE_PROPERTY, context.marshall(this.styleName)),
+                        .set(STYLE_NAME_PROPERTY, context.marshall(this.styleName)),
                 context);
     }
 
-    private final static String STYLE = "style";
-    private final static JsonPropertyName STYLE_PROPERTY = JsonPropertyName.with(STYLE);
+    private final static String STYLE_NAME = "style-name";
+    private final static JsonPropertyName STYLE_NAME_PROPERTY = JsonPropertyName.with(STYLE_NAME);
 
     static {
         JsonNodeContext.register("text-styleName",
