@@ -182,25 +182,25 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     @Test
     public void testJsonNodeMarshallWithoutChildren() {
         this.marshallAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123")),
-                "{\"textStyle\": \"abc123\"}");
+                "{\"style\": \"abc123\"}");
     }
 
     @Test
     public void testJsonNodeMarshallWithChildren() {
         this.marshallAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))),
-                "{\"textStyle\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}");
+                "{\"style\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
     public void testJsonNodeUnmarshallWithoutChildren() {
-        this.unmarshallAndCheck("{\"textStyle\": \"abc123\"}",
+        this.unmarshallAndCheck("{\"style\": \"abc123\"}",
                 TextStyleNameNode.with(TextStyleName.with("abc123")));
     }
 
     @Test
     public void testJsonNodeUnmarshallWithChildren() {
-        this.unmarshallAndCheck("{\"textStyle\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
+        this.unmarshallAndCheck("{\"style\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
                 TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))));
     }
