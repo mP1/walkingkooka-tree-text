@@ -231,13 +231,13 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testJsonNodeMarshallWithChildren() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
-                "{\"values\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
+                "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
     }
 
     @Test
     public void testJsonNodeMarshallWithChildren2() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
-                "{\"values\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
+                "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
@@ -252,7 +252,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         this.marshallAndCheck(TextNode.text("text123")
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456)))
                         .parentOrFail(),
-                "{\"styles\": {\"background-color\": \"#123456\"}, \"values\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
+                "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
     }
 
     @Test
@@ -263,7 +263,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testJsonNodeUnmarshallWithChildren() {
-        this.unmarshallAndCheck("{\"values\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
+        this.unmarshallAndCheck("{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
                 textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
     }
 

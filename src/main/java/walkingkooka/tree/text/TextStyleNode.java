@@ -165,11 +165,11 @@ public final class TextStyleNode extends TextParentNode {
                 case STYLES:
                     textStyle = TextStyle.withTextStyleMap(TextNodeMap.fromJson(child, context));
                     break;
-                case VALUES:
+                case CHILDREN:
                     children = context.unmarshallWithTypeList(child);
                     break;
                 default:
-                    NeverError.unhandledCase(child, STYLES_PROPERTY, VALUES_PROPERTY);
+                    NeverError.unhandledCase(child, STYLES_PROPERTY, CHILDREN_PROPERTY);
             }
         }
 
