@@ -134,11 +134,11 @@ abstract class TextParentNode extends TextNode {
         final List<TextNode> children = this.children();
         return children.isEmpty() ?
                 node :
-                node.set(VALUES_PROPERTY, context.marshallWithTypeList(children));
+                node.set(CHILDREN_PROPERTY, context.marshallWithTypeList(children));
     }
 
-    final static String VALUES = "values";
-    final static JsonPropertyName VALUES_PROPERTY = JsonPropertyName.with(VALUES);
+    final static String CHILDREN = "children";
+    final static JsonPropertyName CHILDREN_PROPERTY = JsonPropertyName.with(CHILDREN);
 
     // Visitor ........................................................................................................
 

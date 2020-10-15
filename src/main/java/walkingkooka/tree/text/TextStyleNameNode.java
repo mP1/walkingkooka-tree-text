@@ -155,11 +155,11 @@ public final class TextStyleNameNode extends TextParentNode {
                 case STYLE_NAME:
                     styleName = context.unmarshall(child, TextStyleName.class);
                     break;
-                case VALUES:
+                case CHILDREN:
                     children = context.unmarshallWithTypeList(child);
                     break;
                 default:
-                    NeverError.unhandledCase(child, STYLE_NAME_PROPERTY, VALUES_PROPERTY);
+                    NeverError.unhandledCase(child, STYLE_NAME_PROPERTY, CHILDREN_PROPERTY);
             }
         }
 

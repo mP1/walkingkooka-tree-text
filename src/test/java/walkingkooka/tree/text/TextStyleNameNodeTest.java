@@ -189,7 +189,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     public void testJsonNodeMarshallWithChildren() {
         this.marshallAndCheck(TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))),
-                "{\"style-name\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}");
+                "{\"style-name\": \"abc123\", \"children\": [{\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
@@ -200,7 +200,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
 
     @Test
     public void testJsonNodeUnmarshallWithChildren() {
-        this.unmarshallAndCheck("{\"style-name\": \"abc123\", \"values\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
+        this.unmarshallAndCheck("{\"style-name\": \"abc123\", \"children\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
                 TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))));
     }
