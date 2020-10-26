@@ -99,7 +99,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     abstract String propertyValueType();
 
     final JsonNodeUnmarshallContext unmarshallContext() {
-        return JsonNodeUnmarshallContexts.basic();
+        return JsonNodeUnmarshallContexts.basic(JsonNodeUnmarshallContexts.fake());
     }
 
     final JsonNodeMarshallContext marshallContext() {

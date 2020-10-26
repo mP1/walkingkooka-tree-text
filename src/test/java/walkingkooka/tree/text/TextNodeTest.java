@@ -23,6 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.select.NodeSelectorContexts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,7 +47,7 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
         assertEquals(2, TextNode.absoluteNodeSelector()
                 .descendant()
                 .named(Text.NAME)
-                .stream(node, NodeSelectorContexts.basicFunctions(), Converters.fake(), ConverterContexts.fake(), TextNode.class)
+                .stream(node, ExpressionNumberKind.DEFAULT, NodeSelectorContexts.basicFunctions(), Converters.fake(), ConverterContexts.fake(), TextNode.class)
                 .count());
     }
 
