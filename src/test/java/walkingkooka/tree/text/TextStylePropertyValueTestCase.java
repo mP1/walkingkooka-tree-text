@@ -21,6 +21,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.reflect.ClassTesting2;
+import walkingkooka.tree.expression.ExpressionNumberContexts;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
@@ -39,7 +41,7 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
                 .setAttributes(Maps.of(this.textStylePropertyName(), this.createTextStylePropertyValue()));
         final JsonNode json = JsonNodeMarshallContexts.basic().marshallWithType(properties);
         assertEquals(properties,
-                JsonNodeUnmarshallContexts.basic().unmarshallWithType(json),
+                JsonNodeUnmarshallContexts.basic(ExpressionNumberContexts.fake()).unmarshallWithType(json),
                 () -> "" + properties);
     }
 
