@@ -20,13 +20,8 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.convert.ConverterContexts;
-import walkingkooka.convert.Converters;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.tree.expression.ExpressionNumberContexts;
-import walkingkooka.tree.expression.ExpressionNumberConverterContexts;
-import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.select.NodeSelectorContexts;
+import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,7 +44,7 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
         assertEquals(2, TextNode.absoluteNodeSelector()
                 .descendant()
                 .named(Text.NAME)
-                .stream(node, NodeSelectorContexts.basicFunctions(), Converters.fake(), ExpressionNumberConverterContexts.fake(), TextNode.class)
+                .stream(node, (c) -> ExpressionEvaluationContexts.fake(), TextNode.class)
                 .count());
     }
 
