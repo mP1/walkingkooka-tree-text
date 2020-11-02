@@ -48,7 +48,7 @@ public class JunitTest {
                 );
 
         final StringBuilder html = new StringBuilder();
-        final LineEnding eol = LineEnding.NL;
+        final LineEnding eol = LineEnding.SYSTEM;
         final IndentingPrinter printer = Printers.stringBuilder(html, eol)
                 .indenting(Indentation.with("  "));
 
