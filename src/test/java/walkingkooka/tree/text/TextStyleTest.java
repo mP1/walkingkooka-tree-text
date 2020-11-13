@@ -150,6 +150,13 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 () -> properties + " setChildren " + children);
     }
 
+    // getOrFail.........................................................................................................
+
+    @Test
+    public void testGetOrFail() {
+        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH));
+    }
+
     // toString.........................................................................................................
 
     @Test
