@@ -748,6 +748,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private final JsonPropertyName jsonPropertyName;
 
     static {
+        // force JsonNodeContext.register for collaborating types.
+        BorderSpacing.with(Length.pixel(1.0));
+        FontFamilyName.with("Times New Roman");
+        FontSize.with(1);
+        FontWeight.NORMAL.value();
+        Opacity.OPAQUE.value();
+        TextOverflow.CLIP.value();
+
         JsonNodeContext.register("text-style-property-name",
                 TextStylePropertyName::unmarshall,
                 TextStylePropertyName::marshall,

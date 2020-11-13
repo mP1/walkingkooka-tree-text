@@ -51,14 +51,7 @@ public final class WordSpacing extends LengthTextStylePropertyValue {
         return with(context.unmarshall(node, Length.class));
     }
 
-    private JsonNode marshall(final JsonNodeMarshallContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return context.marshall(this.length);
-    }
-
-    static {
-        JsonNodeContext.register("word-spacing",
-                WordSpacing::unmarshall,
-                WordSpacing::marshall,
-                WordSpacing.class);
     }
 }

@@ -206,7 +206,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     static {
-        new FakeTextNodeVisitor(); // force JsonNodeContext.register of all collaborating types.
+        TextStylePropertyName.BACKGROUND_COLOR.toString();
+
         JsonNodeContext.register("text-textStyle",
                 TextStyle::unmarshall,
                 TextStyle::marshall,

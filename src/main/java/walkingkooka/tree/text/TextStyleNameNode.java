@@ -179,13 +179,6 @@ public final class TextStyleNameNode extends TextParentNode {
 
     private final static String STYLE_NAME = "style-name";
     private final static JsonPropertyName STYLE_NAME_PROPERTY = JsonPropertyName.with(STYLE_NAME);
-
-    static {
-        JsonNodeContext.register("text-styleName",
-                TextStyleNameNode::unmarshallTextStyleNameNode,
-                TextStyleNameNode::marshall,
-                TextStyleNameNode.class);
-    }
     
     // Visitor .................................................................................................
 
