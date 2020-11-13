@@ -110,8 +110,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // get..............................................................................................................
 
     /**
-     * Sets a possibly new property returning a {@link TextStyle} with the new definition which may or may not
-     * require creating a new {@link TextStyle}.
+     * Gets the value for the given {@link TextStylePropertyName}.
      */
     public final <V> Optional<V> get(final TextStylePropertyName<V> propertyName) {
         checkPropertyName(propertyName);
