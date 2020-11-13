@@ -86,13 +86,6 @@ public final class Text extends TextLeafNode<String> implements HasText {
         return JsonNode.string(this.value);
     }
 
-    static {
-        JsonNodeContext.register("text",
-                Text::unmarshallText,
-                Text::marshall,
-                Text.class);
-    }
-
     // Visitor .......................................................................................................
 
     @Override

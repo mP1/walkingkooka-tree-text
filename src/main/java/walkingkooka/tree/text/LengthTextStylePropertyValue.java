@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
 
 import java.util.Objects;
 
@@ -68,5 +69,26 @@ abstract class LengthTextStylePropertyValue implements Value<Length<?>> {
     @Override
     public final String toString() {
         return this.length.toString();
+    }
+
+    static {
+        JsonNodeContext.register("border-spacing",
+                BorderSpacing::unmarshall,
+                BorderSpacing::marshall,
+                BorderSpacing.class);
+    }
+
+    static {
+        JsonNodeContext.register("letter-spacing",
+                LetterSpacing::unmarshall,
+                LetterSpacing::marshall,
+                LetterSpacing.class);
+    }
+
+    static {
+        JsonNodeContext.register("word-spacing",
+                WordSpacing::unmarshall,
+                WordSpacing::marshall,
+                WordSpacing.class);
     }
 }

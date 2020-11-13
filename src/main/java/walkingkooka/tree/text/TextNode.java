@@ -28,6 +28,7 @@ import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
@@ -346,5 +347,29 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
                 n -> TextNodeName.with(n.value()),
                 functions,
                 TextNode.class);
+    }
+
+    // JsonNode.........................................................................................................
+
+    static {
+        JsonNodeContext.register("text",
+                Text::unmarshallText,
+                Text::marshall,
+                Text.class);
+
+        JsonNodeContext.register("text-placeholder",
+                TextPlaceholderNode::unmarshallTextPlaceholderNode,
+                TextPlaceholderNode::marshall,
+                TextPlaceholderNode.class);
+
+        JsonNodeContext.register("text-style",
+                TextStyleNode::unmarshallTextStyleNode,
+                TextStyleNode::marshall,
+                TextStyleNode.class);
+
+        JsonNodeContext.register("text-styleName",
+                TextStyleNameNode::unmarshallTextStyleNameNode,
+                TextStyleNameNode::marshall,
+                TextStyleNameNode.class);
     }
 }

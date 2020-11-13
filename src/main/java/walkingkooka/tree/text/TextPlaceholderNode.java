@@ -77,13 +77,6 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return context.marshall(this.value);
     }
 
-    static {
-        JsonNodeContext.register("text-placeholder",
-                TextPlaceholderNode::unmarshallTextPlaceholderNode,
-                TextPlaceholderNode::marshall,
-                TextPlaceholderNode.class);
-    }
-
     // Visitor .......................................................................................................
 
     @Override
