@@ -529,7 +529,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-alignment
      */
-    public final static TextStylePropertyName<TextAlignment> TEXT_ALIGNMENT = registerEnumConstant("text-align",
+    public final static TextStylePropertyName<TextAlignment> TEXT_ALIGNMENT = registerEnumConstant("text-alignment",
             TextAlignment::valueOf,
             TextAlignment.class,
             v -> v instanceof TextAlignment,
