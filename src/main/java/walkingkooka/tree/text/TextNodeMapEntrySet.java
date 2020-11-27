@@ -35,7 +35,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * A read only {@link Set} sorted view of textStyle that have had their values checked.
+ * A read only {@link Set} sorted view of properties that have had their values checked.
  */
 final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> {
 
@@ -69,7 +69,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     }
 
     /**
-     * Sorts the {@link List} so all textStyle using the {@link TextStylePropertyName} {@link Comparator}.
+     * Sorts the {@link List} so all properties using the {@link TextStylePropertyName} {@link Comparator}.
      */
     static void sort(final List<Entry<TextStylePropertyName<?>, Object>> list) {
         list.sort(TextNodeMapEntrySet::comparator);
