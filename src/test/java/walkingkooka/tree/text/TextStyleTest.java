@@ -22,6 +22,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionNumberContexts;
@@ -155,6 +156,48 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testGetOrFail() {
         assertThrows(TextStylePropertyValueException.class, () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH));
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testJsonRoundtripAllPropertyTypes() {
+        final TextStyle style = TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
+                .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
+                .set(TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(5.0)))
+                .set(TextStylePropertyName.FONT_FAMILY_NAME, FontFamilyName.with("Times New Roman"))
+                .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
+                .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
+                .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
+                .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+                .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
+                .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
+                .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
+                .set(TextStylePropertyName.HORIZONTAL_ALIGNMENT, HorizontalAlignment.CENTER)
+                .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
+                .set(TextStylePropertyName.LETTER_SPACING, LetterSpacing.parse("2.5px"))
+                .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
+                .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
+                .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+                .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
+                .set(TextStylePropertyName.TEXT_ALIGNMENT, TextAlignment.CENTER)
+                .set(TextStylePropertyName.TEXT_DECORATION, TextDecoration.LINE_THROUGH)
+                .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
+                .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
+                .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
+                .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
+                .set(TextStylePropertyName.VERTICAL_ALIGNMENT, VerticalAlignment.BOTTOM)
+                .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
+                .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
+                .set(TextStylePropertyName.WORD_SPACING, WordSpacing.with(Length.normal()))
+                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+                .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
+
+        this.marshallRoundTripTwiceAndCheck(style);
     }
 
     // toString.........................................................................................................
