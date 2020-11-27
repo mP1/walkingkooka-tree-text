@@ -29,7 +29,7 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         this.toStringAndCheck(Padding.with(Direction.BOTTOM,
                 TextStyle.with(Maps.of(TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
                         TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED))),
-                "BOTTOM {border-right-textStyle=DOTTED, padding-bottom=12.5px}");
+                "BOTTOM {border-right-style=DOTTED, padding-bottom=12.5px}");
     }
 
     // helpers..........................................................................................................

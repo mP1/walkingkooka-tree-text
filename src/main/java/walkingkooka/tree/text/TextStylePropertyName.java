@@ -47,7 +47,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     // constants
 
     /**
-     * A read only cache of already textStyle.
+     * A read only cache of already styles.
      */
     private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
 
@@ -181,9 +181,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (c, v) -> v.visitBorderBottomColor(c));
 
     /**
-     * border-bottom-textStyle
+     * border-bottom-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_BOTTOM_STYLE = registerBorderStyle("border-bottom-textStyle",
+    public final static TextStylePropertyName<BorderStyle> BORDER_BOTTOM_STYLE = registerBorderStyle("border-bottom-style",
             (s, v) -> v.visitBorderBottomStyle(s));
 
     /**
@@ -208,9 +208,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (c, v) -> v.visitBorderLeftColor(c));
 
     /**
-     * border-left-textStyle
+     * border-left-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_LEFT_STYLE = registerBorderStyle("border-left-textStyle",
+    public final static TextStylePropertyName<BorderStyle> BORDER_LEFT_STYLE = registerBorderStyle("border-left-style",
             (s, v) -> v.visitBorderLeftStyle(s));
 
     /**
@@ -235,9 +235,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (c, v) -> v.visitBorderRightColor(c));
 
     /**
-     * border-right-textStyle
+     * border-right-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_RIGHT_STYLE = registerBorderStyle("border-right-textStyle",
+    public final static TextStylePropertyName<BorderStyle> BORDER_RIGHT_STYLE = registerBorderStyle("border-right-style",
             (s, v) -> v.visitBorderRightStyle(s));
 
     /**
@@ -253,9 +253,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (c, v) -> v.visitBorderTopColor(c));
 
     /**
-     * border-top-textStyle
+     * border-top-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_TOP_STYLE = registerBorderStyle("border-top-textStyle",
+    public final static TextStylePropertyName<BorderStyle> BORDER_TOP_STYLE = registerBorderStyle("border-top-style",
             (s, v) -> v.visitBorderTopStyle(s));
 
     /**
@@ -299,9 +299,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (f, v) -> v.visitFontStretch(f));
 
     /**
-     * font-textStyle
+     * font-style
      */
-    public final static TextStylePropertyName<FontStyle> FONT_STYLE = registerEnumConstant("font-textStyle",
+    public final static TextStylePropertyName<FontStyle> FONT_STYLE = registerEnumConstant("font-style",
             FontStyle::valueOf,
             FontStyle.class,
             v -> v instanceof FontStyle,
@@ -372,18 +372,18 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitLineHeight(l));
 
     /**
-     * list-textStyle-position
+     * list-style-position
      */
-    public final static TextStylePropertyName<ListStylePosition> LIST_STYLE_POSITION = registerEnumConstant("list-textStyle-position",
+    public final static TextStylePropertyName<ListStylePosition> LIST_STYLE_POSITION = registerEnumConstant("list-style-position",
             ListStylePosition::valueOf,
             ListStylePosition.class,
             v -> v instanceof ListStylePosition,
             (p, v) -> v.visitListStylePosition(p));
 
     /**
-     * list-textStyle-type
+     * list-style-type
      */
-    public final static TextStylePropertyName<ListStyleType> LIST_STYLE_TYPE = registerEnumConstant("list-textStyle-type",
+    public final static TextStylePropertyName<ListStyleType> LIST_STYLE_TYPE = registerEnumConstant("list-style-type",
             ListStyleType::valueOf,
             ListStyleType.class,
             v -> v instanceof ListStyleType,
@@ -458,9 +458,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitOutlineOffset(l));
 
     /**
-     * outline-textStyle
+     * outline-style
      */
-    public final static TextStylePropertyName<OutlineStyle> OUTLINE_STYLE = registerEnumConstant("outline-textStyle",
+    public final static TextStylePropertyName<OutlineStyle> OUTLINE_STYLE = registerEnumConstant("outline-style",
             OutlineStyle::valueOf,
             OutlineStyle.class,
             v -> v instanceof OutlineStyle,
@@ -557,9 +557,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitTextDecorationColor(t));
 
     /**
-     * text-decoration-textStyle
+     * text-decoration-style
      */
-    public final static TextStylePropertyName<TextDecorationStyle> TEXT_DECORATION_STYLE = registerEnumConstant("text-decoration-textStyle",
+    public final static TextStylePropertyName<TextDecorationStyle> TEXT_DECORATION_STYLE = registerEnumConstant("text-decoration-style",
             TextDecorationStyle::valueOf,
             TextDecorationStyle.class,
             v -> v instanceof TextDecorationStyle,

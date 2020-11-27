@@ -169,7 +169,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         this.toStringAndCheck(Border.with(Direction.BOTTOM,
                 TextStyle.with(Maps.of(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
                         TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED))),
-                "BOTTOM {border-right-color=#123456, border-right-textStyle=DOTTED}");
+                "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}");
     }
 
     // helpers..........................................................................................................
