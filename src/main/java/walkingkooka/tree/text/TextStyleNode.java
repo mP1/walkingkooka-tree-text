@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Represents a collection of textStyle properties that apply upon a list of {@link TextNode children}.
+ * Represents a collection of style properties that apply upon a list of {@link TextNode children}.
  */
 public final class TextStyleNode extends TextParentNode {
 
@@ -43,8 +43,8 @@ public final class TextStyleNode extends TextParentNode {
     final static TextNodeMap NO_ATTRIBUTES_MAP = TextNodeMap.with(Maps.empty());
 
     /**
-     * Factory that creates a {@link TextStyleNode} with the given children and textStyle.
-     * If the textStyle is empty and there is only one child it will be unwrapped.
+     * Factory that creates a {@link TextStyleNode} with the given children and style.
+     * If the styles is empty and there is only one child it will be unwrapped.
      */
     // TextStyle.setTextNodes
     static TextNode with(final List<TextNode> children,

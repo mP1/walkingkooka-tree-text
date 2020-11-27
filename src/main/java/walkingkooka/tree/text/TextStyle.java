@@ -36,7 +36,7 @@ import java.util.Optional;
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>> {
 
     /**
-     * A {@link TextStyle} with no textStyle.
+     * A {@link TextStyle} with no styling.
      */
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextStyle EMPTY = TextStyleEmpty.instance();
@@ -62,7 +62,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     /**
-     * Returns true if the textStyle is empty.
+     * Returns true if the {@link TextStyle} is empty.
      */
     public abstract boolean isEmpty();
 
@@ -70,7 +70,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     /**
      * Factory that returns a {@link TextStyleNode} with the given {@link TextNode}
-     * and these textStyle.
+     * and these styles.
      */
     public final TextNode setChildren(final List<TextNode> textNodes) {
         return TextStyleNode.with(textNodes, this.textStyleMap());
@@ -194,7 +194,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // JsonNodeContext..................................................................................................
 
     /**
-     * Accepts a json object holding the textStyle as a map.
+     * Accepts a json object holding the styles as a map.
      */
     static TextStyle unmarshall(final JsonNode node,
                                 final JsonNodeUnmarshallContext context) {
