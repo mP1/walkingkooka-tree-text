@@ -362,7 +362,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
                 TextPlaceholderNode::marshall,
                 TextPlaceholderNode.class);
 
-        JsonNodeContext.register("text-style",
+        JsonNodeContext.register("text-style-node",
                 TextStyleNode::unmarshallTextStyleNode,
                 TextStyleNode::marshall,
                 TextStyleNode.class);
