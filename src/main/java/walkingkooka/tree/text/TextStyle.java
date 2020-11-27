@@ -214,7 +214,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     static {
         TextStylePropertyName.BACKGROUND_COLOR.toString();
 
-        JsonNodeContext.register("text-textStyle",
+        JsonNodeContext.register("text-style",
                 TextStyle::unmarshall,
                 TextStyle::marshall,
                 TextStyle.class,
