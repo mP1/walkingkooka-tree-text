@@ -750,6 +750,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     static {
         // force JsonNodeContext.register for collaborating types.
         BorderSpacing.with(Length.pixel(1.0));
+        Color.fromRgb(0);
         FontFamilyName.with("Times New Roman");
         FontSize.with(1);
         FontWeight.NORMAL.value();
