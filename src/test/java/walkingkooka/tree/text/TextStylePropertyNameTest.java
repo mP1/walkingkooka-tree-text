@@ -55,6 +55,36 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
+    public void testConstantValue() {
+        assertEquals(Lists.empty(),
+                Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
+                        .filter(FieldAttributes.STATIC::is)
+                        .filter(f -> f.getType() == TextStylePropertyName.class)
+                        .map(TextStylePropertyNameTest::checkConstantAndValueCompatible)
+                        .filter(v -> null != v)
+                        .collect(Collectors.toList()),
+                "");
+    }
+
+    private static String checkConstantAndValueCompatible(final Field field) {
+        try {
+            final String fieldName = field.getName();
+            final String expectedConstantValue = fieldName.replace('_', '-').toLowerCase();
+
+            field.setAccessible(true);
+
+            final TextStylePropertyName<?> constant = Cast.to(field.get(null));
+            final String value = constant.value();
+            return expectedConstantValue.equals(value) ?
+                    null :
+                    fieldName + "=" + value;
+
+        } catch (final Exception cause) {
+            throw new Error(cause.getMessage(), cause);
+        }
+    }
+
+    @Test
     public void testJsonNodeNameCached() {
         final TextStylePropertyName<?> propertyName = this.createObject();
         assertSame(propertyName.marshallName(), propertyName.marshallName());
