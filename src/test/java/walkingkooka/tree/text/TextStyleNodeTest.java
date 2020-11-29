@@ -314,7 +314,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.BORDER_LEFT_WIDTH, Length.pixel(2.0));
         styleNode.put(TextStylePropertyName.BORDER_RIGHT_WIDTH, Length.pixel(3.0));
         styleNode.put(TextStylePropertyName.BORDER_TOP_WIDTH, Length.pixel(4.0));
-        styleNode.put(TextStylePropertyName.FONT_FAMILY_NAME, FontFamilyName.with("Antiqua"));
+        styleNode.put(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Antiqua"));
         styleNode.put(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL);
         styleNode.put(TextStylePropertyName.FONT_SIZE, FontSize.with(10));
         styleNode.put(TextStylePropertyName.FONT_STRETCH, FontStretch.CONDENSED);

@@ -117,8 +117,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testSet() {
-        final TextStylePropertyName<FontFamilyName> propertyName = TextStylePropertyName.FONT_FAMILY_NAME;
-        final FontFamilyName familyName = FontFamilyName.with("Antiqua");
+        final TextStylePropertyName<FontFamily> propertyName = TextStylePropertyName.FONT_FAMILY;
+        final FontFamily familyName = FontFamily.with("Antiqua");
 
         this.setAndCheck(TextStyle.EMPTY,
                 propertyName,
