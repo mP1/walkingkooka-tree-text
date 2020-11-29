@@ -122,7 +122,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitFontFamilyName(final FontFamilyName fontFamilyName) {
+    protected void visitFontFamily(final FontFamily fontFamily) {
         throw new UnsupportedOperationException();
     }
 

@@ -29,15 +29,15 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * A font family name, which are also case insensitive when compared.
  */
-public final class FontFamilyName implements Name,
-        Comparable<FontFamilyName> {
+public final class FontFamily implements Name,
+        Comparable<FontFamily> {
 
-    public static FontFamilyName with(final String name) {
+    public static FontFamily with(final String name) {
         CharSequences.failIfNullOrEmpty(name, "name");
-        return new FontFamilyName(name);
+        return new FontFamily(name);
     }
 
-    private FontFamilyName(final String name) {
+    private FontFamily(final String name) {
         this.name = name;
     }
 
@@ -51,10 +51,10 @@ public final class FontFamilyName implements Name,
     // JsonNodeContext..................................................................................................
 
     /**
-     * Factory that creates a {@link FontFamilyName} from a {@link JsonNode}.
+     * Factory that creates a {@link FontFamily} from a {@link JsonNode}.
      */
-    static FontFamilyName unmarshall(final JsonNode node,
-                                     final JsonNodeUnmarshallContext context) {
+    static FontFamily unmarshall(final JsonNode node,
+                                 final JsonNodeUnmarshallContext context) {
         return with(node.stringValueOrFail());
     }
 
@@ -63,10 +63,10 @@ public final class FontFamilyName implements Name,
     }
 
     static {
-        JsonNodeContext.register("font-family-name",
-                FontFamilyName::unmarshall,
-                FontFamilyName::marshall,
-                FontFamilyName.class);
+        JsonNodeContext.register("font-family",
+                FontFamily::unmarshall,
+                FontFamily::marshall,
+                FontFamily.class);
     }
 
     // Object..................................................................................................
@@ -78,11 +78,11 @@ public final class FontFamilyName implements Name,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof FontFamilyName &&
+                other instanceof FontFamily &&
                         this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final FontFamilyName other) {
+    private boolean equals0(final FontFamily other) {
         return this.compareTo(other) == 0;
     }
 
@@ -94,7 +94,7 @@ public final class FontFamilyName implements Name,
     // Comparable ...................................................................................................
 
     @Override
-    public int compareTo(final FontFamilyName other) {
+    public int compareTo(final FontFamily other) {
         return CASE_SENSITIVITY.comparator().compare(this.name, other.name);
     }
 

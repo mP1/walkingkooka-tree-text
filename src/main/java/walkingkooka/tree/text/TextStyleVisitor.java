@@ -136,7 +136,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitFontFamilyName(final FontFamilyName fontFamilyName) {
+    protected void visitFontFamily(final FontFamily fontFamily) {
         // nop
     }
 

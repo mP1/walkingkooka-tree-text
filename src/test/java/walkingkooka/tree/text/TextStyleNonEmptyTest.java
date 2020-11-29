@@ -223,8 +223,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
 
         final WordWrap different = WordWrap.NORMAL;
         assertNotSame(different, value1);
@@ -240,10 +240,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
 
-        final FontFamilyName different = FontFamilyName.with("different");
+        final FontFamily different = FontFamily.with("different");
         assertNotSame(different, value2);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
@@ -257,8 +257,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
 
         final TextStylePropertyName<WritingMode> property3 = TextStylePropertyName.WRITING_MODE;
         final WritingMode value3 = WritingMode.VERTICAL_LR;
@@ -274,8 +274,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
 
         final TextStylePropertyName<Color> property3 = TextStylePropertyName.BACKGROUND_COLOR;
         final Color value3 = Color.fromRgb(0x123456);
@@ -300,8 +300,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     public void testRemove() {
         final TextStylePropertyName<WordWrap> property1 = this.property1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
 
         this.removeAndCheck(this.createTextStyle(property1, this.value1(), property2, value2),
                 property1,
@@ -313,7 +313,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
 
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
 
         this.removeAndCheck(this.createTextStyle(property1, value1, property2, this.value2()),
                 property2,
@@ -343,8 +343,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 this.createTextStyle(property1, value1));
 
         //set
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
         final TextStyle textStyle2 = this.setAndCheck(textStyle1,
                 property2,
                 value2,
@@ -371,8 +371,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 this.createTextStyle(property1, value1));
 
         //set
-        final TextStylePropertyName<FontFamilyName> property2 = this.property2();
-        final FontFamilyName value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final FontFamily value2 = this.value2();
         final TextStyle textStyle2 = this.setAndCheck(textStyle1,
                 property2,
                 value2,
@@ -456,12 +456,12 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         return WordWrap.BREAK_WORD;
     }
 
-    private TextStylePropertyName<FontFamilyName> property2() {
-        return TextStylePropertyName.FONT_FAMILY_NAME;
+    private TextStylePropertyName<FontFamily> property2() {
+        return TextStylePropertyName.FONT_FAMILY;
     }
 
-    private FontFamilyName value2() {
-        return FontFamilyName.with("Times News Roman");
+    private FontFamily value2() {
+        return FontFamily.with("Times News Roman");
     }
 
     private TextStylePropertyName<FontSize> property3() {

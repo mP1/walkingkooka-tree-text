@@ -245,13 +245,13 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
-    public void testVisitFontFamilyName() {
+    public void testVisitFontFamily() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitFontFamilyName(final FontFamilyName f) {
+            protected void visitFontFamily(final FontFamily f) {
                 this.visited = f;
             }
-        }.accept(TextStylePropertyName.FONT_FAMILY_NAME, FontFamilyName.with("Times"));
+        }.accept(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times"));
     }
 
     @Test

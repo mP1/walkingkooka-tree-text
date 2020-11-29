@@ -162,13 +162,13 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testSetNullPropertyValueFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY_NAME, null));
+        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null));
     }
 
     @Test
     public final void testSetInvalidPropertyValueFails() {
         assertThrows(TextStylePropertyValueException.class, () -> {
-            final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY_NAME;
+            final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY;
             this.createObject().set(propertyName, Cast.to("invalid"));
         });
     }

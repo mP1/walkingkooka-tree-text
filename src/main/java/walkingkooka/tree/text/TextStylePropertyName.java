@@ -265,12 +265,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitBorderTopWidth(l));
 
     /**
-     * font-family-name
+     * font-family
      */
-    public final static TextStylePropertyName<FontFamilyName> FONT_FAMILY_NAME = registerJsonNodeConstant("font-family-name",
-            FontFamilyName.class,
-            v -> v instanceof FontFamilyName,
-            (f, v) -> v.visitFontFamilyName(f));
+    public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant("font-family",
+            FontFamily.class,
+            v -> v instanceof FontFamily,
+            (f, v) -> v.visitFontFamily(f));
 
     /**
      * font-kerning
@@ -751,7 +751,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         // force JsonNodeContext.register for collaborating types.
         BorderSpacing.with(Length.pixel(1.0));
         Color.fromRgb(0);
-        FontFamilyName.with("Times New Roman");
+        FontFamily.with("Times New Roman");
         FontSize.with(1);
         FontWeight.NORMAL.value();
         Opacity.OPAQUE.value();

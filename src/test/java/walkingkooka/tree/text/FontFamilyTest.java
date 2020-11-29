@@ -26,11 +26,17 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
-        NameTesting<FontFamilyName, FontFamilyName>,
-        JsonNodeMarshallingTesting<FontFamilyName> {
+public final class FontFamilyTest implements ClassTesting2<FontFamily>,
+        NameTesting<FontFamily, FontFamily>,
+        JsonNodeMarshallingTesting<FontFamily> {
 
     private final static String TEXT = "Times New Roman";
+    
+    // TypeNaming.......................................................................................................
+
+    @Override
+    public void testTypeNaming() {
+    }
 
     // HasJsonNode......................................................................................................
 
@@ -42,7 +48,7 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
     @Test
     public void testJsonNodeUnmarshallString() {
         this.unmarshallAndCheck(JsonNode.string(TEXT),
-                FontFamilyName.with(TEXT));
+                FontFamily.with(TEXT));
     }
 
     @Test
@@ -56,8 +62,8 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
     }
 
     @Override
-    public FontFamilyName createName(final String name) {
-        return FontFamilyName.with(name);
+    public FontFamily createName(final String name) {
+        return FontFamily.with(name);
     }
 
     @Override
@@ -81,8 +87,8 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
     }
 
     @Override
-    public Class<FontFamilyName> type() {
-        return FontFamilyName.class;
+    public Class<FontFamily> type() {
+        return FontFamily.class;
     }
 
     @Override
@@ -93,13 +99,13 @@ public final class FontFamilyNameTest implements ClassTesting2<FontFamilyName>,
     // JsonNodeMarshallTesting..........................................................................................
 
     @Override
-    public FontFamilyName createJsonNodeMappingValue() {
+    public FontFamily createJsonNodeMappingValue() {
         return this.createObject();
     }
 
     @Override
-    public FontFamilyName unmarshall(final JsonNode jsonNode,
-                                     final JsonNodeUnmarshallContext context) {
-        return FontFamilyName.unmarshall(jsonNode, context);
+    public FontFamily unmarshall(final JsonNode jsonNode,
+                                 final JsonNodeUnmarshallContext context) {
+        return FontFamily.unmarshall(jsonNode, context);
     }
 }

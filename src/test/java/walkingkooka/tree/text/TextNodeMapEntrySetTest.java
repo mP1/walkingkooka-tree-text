@@ -86,11 +86,11 @@ public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEnt
     }
 
     private TextStylePropertyName<?> property2() {
-        return TextStylePropertyName.FONT_FAMILY_NAME;
+        return TextStylePropertyName.FONT_FAMILY;
     }
 
     private Object value2() {
-        return FontFamilyName.with("Times News Roman");
+        return FontFamily.with("Times News Roman");
     }
 
     @Override

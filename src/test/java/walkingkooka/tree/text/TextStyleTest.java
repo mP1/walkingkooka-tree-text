@@ -169,7 +169,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
                 .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
                 .set(TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(5.0)))
-                .set(TextStylePropertyName.FONT_FAMILY_NAME, FontFamilyName.with("Times New Roman"))
+                .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
                 .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
                 .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
                 .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
@@ -237,11 +237,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     private TextStylePropertyName<?> property2() {
-        return TextStylePropertyName.FONT_FAMILY_NAME;
+        return TextStylePropertyName.FONT_FAMILY;
     }
 
     private Object value2() {
-        return FontFamilyName.with("Times News Roman");
+        return FontFamily.with("Times News Roman");
     }
 
     // ClassTesting.....................................................................................................
