@@ -176,10 +176,6 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitHorizontalAlignment(final HorizontalAlignment horizontalAlignment) {
-        // nop
-    }
-
     protected void visitHyphens(final Hyphens hyphens) {
         // nop
     }

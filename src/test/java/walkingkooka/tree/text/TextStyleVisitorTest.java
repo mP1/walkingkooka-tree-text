@@ -345,16 +345,6 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
-    public void testVisitHorizontalAlignment() {
-        new TestTextStyleVisitor() {
-            @Override
-            protected void visitHorizontalAlignment(final HorizontalAlignment h) {
-                this.visited = h;
-            }
-        }.accept(TextStylePropertyName.HORIZONTAL_ALIGNMENT, HorizontalAlignment.LEFT);
-    }
-
-    @Test
     public void testVisitHyphens() {
         new TestTextStyleVisitor() {
             @Override

@@ -177,7 +177,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
                 .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
                 .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
-                .set(TextStylePropertyName.HORIZONTAL_ALIGNMENT, HorizontalAlignment.CENTER)
                 .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
                 .set(TextStylePropertyName.LETTER_SPACING, LetterSpacing.parse("2.5px"))
                 .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
