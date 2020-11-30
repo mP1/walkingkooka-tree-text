@@ -16,7 +16,7 @@ final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
         .appendChild(TextNode.styleName(TextStyleName.with("head")).appendChild(TextNode.styleName(TextStyleName.with("TITLE")).appendChild(TextNode.text("title123"))))
         .appendChild(TextNode.styleName(TextStyleName.with("BODY"))
                 .appendChild(TextNode.text("before"))
-                .appendChild(TextNode.text("something gray").setAttributes(Maps.of(TextStylePropertyName.TEXT_COLOR, Color.parse("#345"))).parentOrFail())
+                .appendChild(TextNode.text("something gray").setAttributes(Maps.of(TextStylePropertyName.COLOR, Color.parse("#345"))).parentOrFail())
                 .appendChild(TextNode.text("after"))
         );
 
@@ -99,7 +99,7 @@ prints
   </head>
   <BODY>
     before
-    <SPAN style="text-color: #334455;">
+    <SPAN style="color: #334455;">
       something gray
     </SPAN>
     after

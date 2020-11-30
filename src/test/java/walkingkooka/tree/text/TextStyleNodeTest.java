@@ -195,7 +195,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     public void testSetAttributesAndTextStyle() {
         final Map<TextStylePropertyName<?>, Object> style = Maps.sorted();
         style.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("blue"));
-        style.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("lime"));
+        style.put(TextStylePropertyName.COLOR, Color.parseRgb("lime"));
         style.put(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT);
 
         final TextNode node = TextNode.style(TextNode.NO_CHILDREN)
@@ -297,7 +297,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 TextNode.text("text1"),
                 TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
                 TextNode.style(Lists.of(TextNode.text("text3"))))
-                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456), TextStylePropertyName.TEXT_COLOR, Color.fromRgb(0x789abc))));
+                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456), TextStylePropertyName.COLOR, Color.fromRgb(0x789abc))));
     }
 
     @Test
@@ -351,7 +351,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.TAB_SIZE, Length.number(12));
         styleNode.put(TextStylePropertyName.TEXT, "abc123");
         styleNode.put(TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT);
-        styleNode.put(TextStylePropertyName.TEXT_COLOR, Color.fromRgb(0x789abc));
+        styleNode.put(TextStylePropertyName.COLOR, Color.fromRgb(0x789abc));
         styleNode.put(TextStylePropertyName.TEXT_DECORATION, TextDecoration.UNDERLINE);
         styleNode.put(TextStylePropertyName.TEXT_DECORATION_COLOR, Color.fromRgb(0xabcdef));
         styleNode.put(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED);
