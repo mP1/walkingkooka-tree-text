@@ -65,7 +65,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
 
     @Test
     public void testVisitTextStylePropertyNameSkip() {
-        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.TEXT_COLOR;
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color value = Color.BLACK;
         final TextStyle textStyle = textStyle(propertyName, value);
 
@@ -242,6 +242,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
                 this.visited = b;
             }
         }.accept(TextStylePropertyName.BORDER_TOP_WIDTH, Length.parse("1px"));
+    }
+
+    @Test
+    public void testVisitColor() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitColor(final Color c) {
+                this.visited = c;
+            }
+        }.accept(TextStylePropertyName.COLOR, Color.BLACK);
     }
 
     @Test
@@ -612,16 +622,6 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
                 this.visited = h;
             }
         }.accept(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT);
-    }
-
-    @Test
-    public void testVisitTextColor() {
-        new TestTextStyleVisitor() {
-            @Override
-            protected void visitTextColor(final Color c) {
-                this.visited = c;
-            }
-        }.accept(TextStylePropertyName.TEXT_COLOR, Color.BLACK);
     }
 
     @Test

@@ -64,7 +64,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetColorDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final Direction direction = Direction.RIGHT;
@@ -82,7 +82,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetColorRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final Direction direction = Direction.RIGHT;
@@ -130,7 +130,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetStyleDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.OUTSET);
 
         final Direction direction = Direction.RIGHT;
@@ -148,7 +148,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public final void testSetStyleRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.TEXT_COLOR, Color.parseRgb("#333"));
+        properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOUBLE);
 
         final Direction direction = Direction.RIGHT;

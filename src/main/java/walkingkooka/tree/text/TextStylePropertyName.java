@@ -265,6 +265,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitBorderTopWidth(l));
 
     /**
+     * color
+     */
+    public final static TextStylePropertyName<Color> COLOR = registerColor("color",
+            (c, v) -> v.visitColor(c));
+
+    /**
      * font-family
      */
     public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant("font-family",
@@ -534,12 +540,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             TextAlign.class,
             v -> v instanceof TextAlign,
             (t, v) -> v.visitTextAlign(t));
-
-    /**
-     * Text rgb
-     */
-    public final static TextStylePropertyName<Color> TEXT_COLOR = registerColor("text-color",
-            (t, v) -> v.visitTextColor(t));
 
     /**
      * text-decoration: UNDERLINE, OVERLINE, LINE_THROUGH

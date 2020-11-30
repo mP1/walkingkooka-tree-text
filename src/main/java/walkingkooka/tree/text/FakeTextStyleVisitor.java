@@ -122,6 +122,11 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
+    protected void visitColor(final Color color) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     protected void visitFontFamily(final FontFamily fontFamily) {
         throw new UnsupportedOperationException();
     }
@@ -303,11 +308,6 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
 
     @Override
     protected void visitTextAlign(final TextAlign textAlign) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    protected void visitTextColor(final Color textColor) {
         throw new UnsupportedOperationException();
     }
 
