@@ -605,13 +605,13 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
-    public void testVisitTextAlignment() {
+    public void testVisitTextAlign() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextAlignment(final TextAlignment h) {
+            protected void visitTextAlign(final TextAlign h) {
                 this.visited = h;
             }
-        }.accept(TextStylePropertyName.TEXT_ALIGNMENT, TextAlignment.RIGHT);
+        }.accept(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT);
     }
 
     @Test

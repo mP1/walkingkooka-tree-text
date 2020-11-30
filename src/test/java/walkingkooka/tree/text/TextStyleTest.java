@@ -184,7 +184,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
                 .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
                 .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
-                .set(TextStylePropertyName.TEXT_ALIGNMENT, TextAlignment.CENTER)
+                .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
                 .set(TextStylePropertyName.TEXT_DECORATION, TextDecoration.LINE_THROUGH)
                 .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
                 .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
