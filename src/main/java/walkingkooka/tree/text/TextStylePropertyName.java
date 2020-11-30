@@ -527,13 +527,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitText(t));
 
     /**
-     * text-alignment
+     * text-align
      */
-    public final static TextStylePropertyName<TextAlignment> TEXT_ALIGNMENT = registerEnumConstant("text-alignment",
-            TextAlignment::valueOf,
-            TextAlignment.class,
-            v -> v instanceof TextAlignment,
-            (t, v) -> v.visitTextAlignment(t));
+    public final static TextStylePropertyName<TextAlign> TEXT_ALIGN = registerEnumConstant("text-align",
+            TextAlign::valueOf,
+            TextAlign.class,
+            v -> v instanceof TextAlign,
+            (t, v) -> v.visitTextAlign(t));
 
     /**
      * Text rgb

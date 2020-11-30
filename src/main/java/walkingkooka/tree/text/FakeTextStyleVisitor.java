@@ -302,7 +302,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextAlignment(final TextAlignment textAlignment) {
+    protected void visitTextAlign(final TextAlign textAlign) {
         throw new UnsupportedOperationException();
     }
 

@@ -17,9 +17,20 @@
 
 package walkingkooka.tree.text;
 
-public enum TextAlignment {
-    LEFT,
-    RIGHT,
-    CENTER,
-    JUSTIFY
+public final class TextAlignTest extends EnumTextStylePropertyValueTestCase<TextAlign> {
+
+    @Override
+    TextStylePropertyName<TextAlign> textStylePropertyName() {
+        return TextStylePropertyName.TEXT_ALIGN;
+    }
+
+    @Override
+    TextAlign createTextStylePropertyValue() {
+        return TextAlign.LEFT;
+    }
+
+    @Override
+    public Class<TextAlign> type() {
+        return TextAlign.class;
+    }
 }
