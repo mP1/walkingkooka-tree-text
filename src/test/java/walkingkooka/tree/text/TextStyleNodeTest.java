@@ -323,7 +323,6 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.FONT_WEIGHT, FontWeight.with(1000));
         styleNode.put(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.LAST);
         styleNode.put(TextStylePropertyName.HEIGHT, Length.pixel(99.5));
-        styleNode.put(TextStylePropertyName.HORIZONTAL_ALIGNMENT, HorizontalAlignment.LEFT);
         styleNode.put(TextStylePropertyName.HYPHENS, Hyphens.AUTO);
         styleNode.put(TextStylePropertyName.LETTER_SPACING, LetterSpacing.with(Length.normal()));
         styleNode.put(TextStylePropertyName.LINE_HEIGHT, Length.pixel(100.0));

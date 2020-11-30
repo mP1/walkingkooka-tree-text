@@ -167,11 +167,6 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitHorizontalAlignment(final HorizontalAlignment horizontalAlignment) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     protected void visitHeight(final Length<?> height) {
         throw new UnsupportedOperationException();
     }

@@ -340,15 +340,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (h, v) -> v.visitHangingPunctuation(h));
 
     /**
-     * horizontal-alignment
-     */
-    public final static TextStylePropertyName<HorizontalAlignment> HORIZONTAL_ALIGNMENT = registerEnumConstant("horizontal-alignment",
-            HorizontalAlignment::valueOf,
-            HorizontalAlignment.class,
-            v -> v instanceof HorizontalAlignment,
-            (h, v) -> v.visitHorizontalAlignment(h));
-
-    /**
      * height
      */
     public final static TextStylePropertyName<Length<?>> HEIGHT = registerPixelLengthConstant("height",
