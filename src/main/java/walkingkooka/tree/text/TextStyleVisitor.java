@@ -320,7 +320,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitVerticalAlignment(final VerticalAlignment verticalAlignment) {
+    protected void visitVerticalAlign(final VerticalAlign verticalAlign) {
         // nop
     }
 

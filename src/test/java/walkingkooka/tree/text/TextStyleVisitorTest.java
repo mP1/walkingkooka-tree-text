@@ -715,13 +715,13 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
-    public void testVisitVerticalAlignment() {
+    public void testVisitVerticalAlign() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitVerticalAlignment(final VerticalAlignment v) {
+            protected void visitVerticalAlign(final VerticalAlign v) {
                 this.visited = v;
             }
-        }.accept(TextStylePropertyName.VERTICAL_ALIGNMENT, VerticalAlignment.BOTTOM);
+        }.accept(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM);
     }
 
     @Test
