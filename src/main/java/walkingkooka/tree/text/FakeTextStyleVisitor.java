@@ -352,7 +352,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitVerticalAlignment(final VerticalAlignment verticalAlignment) {
+    protected void visitVerticalAlign(final VerticalAlign verticalAlign) {
         throw new UnsupportedOperationException();
     }
 

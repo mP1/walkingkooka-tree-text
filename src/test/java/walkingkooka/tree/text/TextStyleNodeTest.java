@@ -360,7 +360,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.TEXT_OVERFLOW, TextOverflow.string("abc123"));
         styleNode.put(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE);
         styleNode.put(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.OVERFLOW);
-        styleNode.put(TextStylePropertyName.VERTICAL_ALIGNMENT, VerticalAlignment.BOTTOM);
+        styleNode.put(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM);
         styleNode.put(TextStylePropertyName.VISIBILITY, Visibility.COLLAPSE);
         styleNode.put(TextStylePropertyName.WHITE_SPACE, TextWhitespace.PRE);
         styleNode.put(TextStylePropertyName.WIDTH, Length.pixel(320.0));

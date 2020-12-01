@@ -607,13 +607,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitTextWrapping(t));
 
     /**
-     * vertical-alignment
+     * vertical-align
      */
-    public final static TextStylePropertyName<VerticalAlignment> VERTICAL_ALIGNMENT = registerEnumConstant("vertical-alignment",
-            VerticalAlignment::valueOf,
-            VerticalAlignment.class,
-            v -> v instanceof VerticalAlignment,
-            (va, v) -> v.visitVerticalAlignment(va));
+    public final static TextStylePropertyName<VerticalAlign> VERTICAL_ALIGN = registerEnumConstant("vertical-align",
+            VerticalAlign::valueOf,
+            VerticalAlign.class,
+            v -> v instanceof VerticalAlign,
+            (va, v) -> v.visitVerticalAlign(va));
 
     /**
      * visibility
