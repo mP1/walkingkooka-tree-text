@@ -18,5 +18,9 @@
 package walkingkooka.tree.text;
 
 public enum FontKerning {
-    NORMAL
+    // https://www.w3schools.com/cssref/css3_pr_font-kerning.asp
+    // font-kerning: auto|normal|none;
+    AUTO,
+    NORMAL,
+    NONE;
 }
