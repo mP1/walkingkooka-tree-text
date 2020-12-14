@@ -18,5 +18,9 @@
 package walkingkooka.tree.text;
 
 public enum FontVariant {
-    SMALL_CAPS
+    // https://www.w3schools.com/cssref/pr_font_font-variant.asp
+    // font-variant: normal|small-caps|initial|inherit;
+    NORMAL,
+    SMALL_CAPS,
+    INITIAL;
 }
