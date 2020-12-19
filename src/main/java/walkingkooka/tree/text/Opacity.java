@@ -94,7 +94,7 @@ public final class Opacity implements Comparable<Opacity>,
                               final JsonNodeUnmarshallContext context) {
         return node.isString() ?
                 unmarshallString(node.stringValueOrFail(), node) :
-                with(node.numberValueOrFail().doubleValue());
+                with(node.numberOrFail().doubleValue());
     }
 
     private static Opacity unmarshallString(final String value,

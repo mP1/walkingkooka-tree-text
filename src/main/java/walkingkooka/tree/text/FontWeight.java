@@ -91,7 +91,7 @@ public final class FontWeight implements Comparable<FontWeight>,
                                  final JsonNodeUnmarshallContext context) {
         return node.isString() ?
                 fromJsonString(node.stringValueOrFail()) :
-                with(node.numberValueOrFail().intValue());
+                with(node.numberOrFail().intValue());
     }
 
     private static FontWeight fromJsonString(final String value) {
