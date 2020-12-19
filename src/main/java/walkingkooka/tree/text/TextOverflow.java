@@ -89,7 +89,7 @@ public abstract class TextOverflow implements Value<Optional<String>> {
      */
     static TextOverflow unmarshall(final JsonNode node,
                                    final JsonNodeUnmarshallContext context) {
-        final String value = node.stringValueOrFail();
+        final String value = node.stringOrFail();
         return value.startsWith(STRING_PREFIX) ?
                 string(value.substring(STRING_PREFIX.length())) :
                 CLIP_TEXT.equals(value) ?

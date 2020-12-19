@@ -241,7 +241,7 @@ public abstract class Length<V> {
                                                        final Function<String, L> factory) {
         Objects.requireNonNull(node, "node");
 
-        return factory.apply(node.stringValueOrFail());
+        return factory.apply(node.stringOrFail());
     }
 
     final JsonNode marshall(final JsonNodeMarshallContext context) {

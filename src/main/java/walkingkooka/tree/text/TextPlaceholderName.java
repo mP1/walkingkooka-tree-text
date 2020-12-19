@@ -41,7 +41,7 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
 
     static TextPlaceholderName unmarshall(final JsonNode from,
                                           final JsonNodeUnmarshallContext context) {
-        return with(from.stringValueOrFail());
+        return with(from.stringOrFail());
     }
 
     static {

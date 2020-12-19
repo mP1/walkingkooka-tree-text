@@ -59,7 +59,7 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
 
     static TextNodeName unmarshall(final JsonNode node,
                                    final JsonNodeUnmarshallContext context) {
-        return with(node.stringValueOrFail());
+        return with(node.stringOrFail());
     }
 
     static {

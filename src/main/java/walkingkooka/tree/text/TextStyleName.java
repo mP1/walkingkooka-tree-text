@@ -44,7 +44,7 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
 
     static TextStyleName unmarshall(final JsonNode node,
                                     final JsonNodeUnmarshallContext context) {
-        return with(node.stringValueOrFail());
+        return with(node.stringOrFail());
     }
 
     static {
