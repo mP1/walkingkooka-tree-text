@@ -79,7 +79,7 @@ public final class Text extends TextLeafNode<String> implements HasText {
      */
     static Text unmarshallText(final JsonNode node,
                                final JsonNodeUnmarshallContext context) {
-        return Text.with(node.stringValueOrFail());
+        return Text.with(node.stringOrFail());
     }
 
     JsonNode marshall(final JsonNodeMarshallContext context) {

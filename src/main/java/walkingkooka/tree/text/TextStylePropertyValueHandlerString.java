@@ -60,7 +60,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     String unmarshall(final JsonNode node,
                       final TextStylePropertyName<?> name,
                       final JsonNodeUnmarshallContext context) {
-        return node.stringValueOrFail();
+        return node.stringOrFail();
     }
 
     @Override

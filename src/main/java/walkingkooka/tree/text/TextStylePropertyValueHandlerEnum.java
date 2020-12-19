@@ -75,7 +75,7 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     E unmarshall(final JsonNode node,
                  final TextStylePropertyName<?> name,
                  final JsonNodeUnmarshallContext context) {
-        return this.factory.apply(node.stringValueOrFail());
+        return this.factory.apply(node.stringOrFail());
     }
 
     private final Function<String, E> factory;
