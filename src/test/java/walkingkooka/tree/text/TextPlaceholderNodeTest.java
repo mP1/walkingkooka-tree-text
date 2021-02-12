@@ -58,6 +58,16 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
         this.unmarshallAndCheck(JsonNode.string(value), TextPlaceholderNode.with(TextPlaceholderName.with(value)));
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrint() {
+        this.treePrintAndCheck(
+                TextPlaceholderNode.with(TextPlaceholderName.with("placeholder1")),
+                "Placeholder \"placeholder1\"\n"
+        );
+    }
+
     // equals ..........................................................................................................
 
     @Test

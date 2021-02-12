@@ -18,8 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.ToStringBuilder;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -82,6 +83,13 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     @Override
     void accept(final TextNodeVisitor visitor) {
         visitor.visit(this);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public final void printTree(final IndentingPrinter printer) {
+        printer.println("Placeholder " + CharSequences.quote(this.value().value()));
     }
 
     // Object .........................................................................................................

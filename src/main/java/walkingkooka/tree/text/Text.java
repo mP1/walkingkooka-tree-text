@@ -19,9 +19,10 @@ package walkingkooka.tree.text;
 
 import walkingkooka.ToStringBuilder;
 import walkingkooka.ToStringBuilderOption;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -91,6 +92,13 @@ public final class Text extends TextLeafNode<String> implements HasText {
     @Override
     void accept(final TextNodeVisitor visitor) {
         visitor.visit(this);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public final void printTree(final IndentingPrinter printer) {
+        printer.println("Text " + CharSequences.quoteAndEscape(this.text()));
     }
 
     // Object .........................................................................................................

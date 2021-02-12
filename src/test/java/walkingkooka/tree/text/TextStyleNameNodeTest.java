@@ -214,6 +214,27 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
                         TextNode.style(Lists.of(TextNode.text("text3"))))));
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrintable() {
+        final TextStyleNameNode styleName = TextStyleNameNode.with(
+                TextStyleName.with("styleName123")
+        ).setChildren(
+                Lists.of(
+                        TextNode.text("a1"),
+                        TextNode.text("b2")
+                )
+        );
+
+        this.treePrintAndCheck(
+                styleName,
+                "StyleName styleName123\n" +
+                        "  Text \"a1\"\n" +
+                        "  Text \"b2\"\n"
+        );
+    }
+
     // Visitor ........................................................................................................
 
     @Test

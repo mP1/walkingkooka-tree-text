@@ -21,15 +21,17 @@ import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
-import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 /**
@@ -138,6 +140,27 @@ public final class TextStyleNameNode extends TextParentNode {
                                        final List<TextNode> children,
                                        final TextStyleName styleName) {
         return new TextStyleNameNode(index, children, styleName);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    String printTreeTypeName() {
+        return "StyleName " + this.styleName();
+    }
+
+    @Override
+    void printTreeAttributes(final IndentingPrinter printer) {
+        printer.indent();
+
+        for (final Entry<TextStylePropertyName<?>, Object> nameAndValue : this.attributes().entrySet()) {
+            printer.print(nameAndValue.getKey().value());
+            printer.print("=");
+            printer.print(CharSequences.quoteIfChars(nameAndValue.getValue()));
+            printer.println();
+        }
+
+        printer.outdent();
     }
 
     // HasJsonNode.....................................................................................................
