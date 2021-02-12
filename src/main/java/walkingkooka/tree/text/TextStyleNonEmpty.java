@@ -20,6 +20,8 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
@@ -196,6 +198,28 @@ final class TextStyleNonEmpty extends TextStyle {
     @Override
     Padding padding(final Direction direction) {
         return Padding.with(direction, this);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println("TextStyle");
+        printer.indent();
+
+        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
+            printer.print(propertyAndValue.getKey().value());
+            printer.print("=");
+
+            final Object value = propertyAndValue.getValue();
+            printer.print(CharSequences.quoteIfChars(value));
+            printer.print(" (");
+            printer.print(value.getClass().getName());
+            printer.print(")");
+            printer.println();
+        }
+
+        printer.outdent();
     }
 
     // Object...........................................................................................................

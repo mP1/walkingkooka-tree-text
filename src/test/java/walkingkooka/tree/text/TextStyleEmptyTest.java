@@ -156,6 +156,13 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 "visited");
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrint() {
+        this.treePrintAndCheck(TextStyleEmpty.instance(), "");
+    }
+
     // toString.........................................................................................................
 
     @Test

@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -33,7 +34,8 @@ import java.util.Optional;
 /**
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
-public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>> {
+public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
+        TreePrintable {
 
     /**
      * A {@link TextStyle} with no styling.
@@ -170,7 +172,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract Margin margin(final Direction direction);
 
     abstract Padding padding(final Direction direction);
-
 
     // Object...........................................................................................................
 

@@ -376,6 +376,36 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 .setAttributes(styleNode));
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrintable() {
+        this.treePrintAndCheck(
+                TextStyleNode.with(
+                        Lists.of(
+                                TextNode.text("a1"),
+                                TextNode.text("b2")
+                        ),
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456),
+                                        TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE,
+                                        TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(1.0)),
+                                        TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED
+                                )
+                        )
+                ),
+                "Style\n" +
+                        "  TextStyle\n" +
+                        "    background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
+                        "    border-bottom-style=DASHED (walkingkooka.tree.text.BorderStyle)\n" +
+                        "    border-collapse=SEPARATE (walkingkooka.tree.text.BorderCollapse)\n" +
+                        "    border-spacing=1px (walkingkooka.tree.text.BorderSpacing)\n" +
+                        "  Text \"a1\"\n" +
+                        "  Text \"b2\"\n"
+        );
+    }
+
     // Visitor .........................................................................................................
 
     @Test

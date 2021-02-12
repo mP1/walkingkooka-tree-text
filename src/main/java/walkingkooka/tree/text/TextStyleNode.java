@@ -22,9 +22,10 @@ import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.*;
-import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.JsonObject;
+import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
@@ -196,6 +197,25 @@ public final class TextStyleNode extends TextParentNode {
             this.acceptValues(visitor);
         }
         visitor.endVisit(this);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    String printTreeTypeName() {
+        return "Style";
+    }
+
+    @Override
+    void printTreeAttributes(final IndentingPrinter printer) {
+        final TextStyle style = this.textStyle();
+        final boolean attributesPresent = !style.isEmpty();
+
+        if (attributesPresent) {
+            printer.indent();
+            style.printTree(printer);
+            printer.outdent();
+        }
     }
 
     // Object .........................................................................................................

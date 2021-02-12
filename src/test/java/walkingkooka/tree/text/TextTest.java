@@ -152,6 +152,16 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         assertEquals("132", b.toString());
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrint() {
+        this.treePrintAndCheck(
+                Text.with("abc\t123\n"),
+                "Text \"abc\\t123\\n\"\n"
+        );
+    }
+
     // ToString ........................................................................................................
 
     @Test

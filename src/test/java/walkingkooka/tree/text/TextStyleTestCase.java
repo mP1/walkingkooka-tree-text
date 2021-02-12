@@ -26,6 +26,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -41,7 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
         JsonNodeMarshallingTesting<TextStyle>,
-        ToStringTesting<TextStyle> {
+        ToStringTesting<TextStyle>,
+        TreePrintableTesting {
 
     TextStyleTestCase() {
         super();

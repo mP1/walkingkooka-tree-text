@@ -24,6 +24,7 @@ import walkingkooka.reflect.IsMethodTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
 import walkingkooka.text.HasTextTesting;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.NodeTesting;
@@ -42,7 +43,8 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         HasTextLengthTesting,
         HasTextOffsetTesting,
         HasTextTesting,
-        IsMethodTesting<N> {
+        IsMethodTesting<N>,
+        TreePrintableTesting {
 
     TextNodeTestCase2() {
         super();

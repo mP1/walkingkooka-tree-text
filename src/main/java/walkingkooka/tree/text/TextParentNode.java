@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.text.HasText;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -146,6 +147,29 @@ abstract class TextParentNode extends TextNode {
         for (TextNode node : this.children()) {
             visitor.accept(node);
         }
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public final void printTree(final IndentingPrinter printer) {
+        printer.print(this.printTreeTypeName());
+        printer.println();
+
+        this.printTreeAttributes(printer);
+        this.printChildren(printer);
+    }
+
+    abstract String printTreeTypeName();
+
+    abstract void printTreeAttributes(final IndentingPrinter printer);
+
+    final void printChildren(final IndentingPrinter printer) {
+        printer.indent();
+        for (final TextNode child : this.children()) {
+            child.printTree(printer);
+        }
+        printer.outdent();
     }
 
     // Object..........................................................................................................

@@ -24,6 +24,7 @@ import walkingkooka.UsesToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.HasText;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.FunctionExpressionName;
@@ -43,6 +44,7 @@ import java.util.function.Predicate;
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
         HasText,
+        TreePrintable,
         TraversableHasTextOffset<TextNode>,
         UsesToStringBuilder {
     

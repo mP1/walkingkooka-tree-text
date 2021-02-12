@@ -391,6 +391,18 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 this.createTextStyle(property1, value1, property2, value2));
     }
 
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrint() {
+        this.treePrintAndCheck(
+                createTextStyle(),
+                "TextStyle\n" +
+                        "  font-family=Times News Roman (walkingkooka.tree.text.FontFamily)\n" +
+                        "  word-wrap=BREAK_WORD (walkingkooka.tree.text.WordWrap)\n"
+        );
+    }
+
     // ToString.........................................................................................................
 
     @Test

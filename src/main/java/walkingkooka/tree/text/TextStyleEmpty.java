@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
@@ -132,6 +133,13 @@ final class TextStyleEmpty extends TextStyle {
         return direction.emptyPadding;
     }
 
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        // nop
+    }
+
     // Object..........................................................................................................
 
     @Override
@@ -139,8 +147,7 @@ final class TextStyleEmpty extends TextStyle {
         return System.identityHashCode(this);
     }
 
-    @Override
-    final boolean canBeEquals(final Object other) {
+    @Override final boolean canBeEquals(final Object other) {
         return other instanceof TextStyleEmpty;
     }
 
