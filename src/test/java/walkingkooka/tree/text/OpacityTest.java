@@ -25,7 +25,6 @@ import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonNodeException;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -74,27 +73,27 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
 
     @Test
     public void testJsonNodeUnmarshallBooleanFails() {
-        this.unmarshallFails(JsonNode.booleanNode(true), JsonNodeException.class);
+        this.unmarshallFails(JsonNode.booleanNode(true));
     }
 
     @Test
     public void testJsonNodeUnmarshallInvalidStringFails() {
-        this.unmarshallFails(JsonNode.string("not transparent or opaque"), JsonNodeException.class);
+        this.unmarshallFails(JsonNode.string("not transparent or opaque"));
     }
 
     @Test
     public void testJsonNodeUnmarshallArrayFails() {
-        this.unmarshallFails(JsonNode.array(), JsonNodeException.class);
+        this.unmarshallFails(JsonNode.array());
     }
 
     @Test
     public void testJsonNodeUnmarshallObjectFails() {
-        this.unmarshallFails(JsonNode.object(), JsonNodeException.class);
+        this.unmarshallFails(JsonNode.object());
     }
 
     @Test
     public void testJsonNodeUnmarshallNumberInvalidFails() {
-        this.unmarshallFails(JsonNode.number(-1), IllegalArgumentException.class);
+        this.unmarshallFails(JsonNode.number(-1));
     }
 
     @Test

@@ -42,7 +42,7 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
 
     @Test
     public void testJsonNodeUnmarshallStringInvalidFails() {
-        this.unmarshallFails(JsonNode.string(""), IllegalArgumentException.class);
+        this.unmarshallFails(JsonNode.string(""));
     }
 
     @Test
