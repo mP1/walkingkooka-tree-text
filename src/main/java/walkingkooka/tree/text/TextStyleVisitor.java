@@ -120,7 +120,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitBorderSpacing(final BorderSpacing borderSpacing) {
+    protected void visitBorderSpacing(final Length<?> borderSpacing) {
         // nop
     }
 

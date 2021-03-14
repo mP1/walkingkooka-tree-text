@@ -168,7 +168,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
                 .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
                 .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
-                .set(TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(5.0)))
+                .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
                 .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
                 .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
                 .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))

@@ -219,13 +219,10 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public final static TextStylePropertyName<Length<?>> BORDER_LEFT_WIDTH = registerPixelLengthConstant("border-left-width",
             (l, v) -> v.visitBorderLeftWidth(l));
 
-
     /**
      * border-space
      */
-    public final static TextStylePropertyName<BorderSpacing> BORDER_SPACING = registerJsonNodeConstant("border-spacing",
-            BorderSpacing.class,
-            v -> v instanceof BorderSpacing,
+    public final static TextStylePropertyName<Length<?>> BORDER_SPACING = registerPixelLengthConstant("border-spacing",
             (l, v) -> v.visitBorderSpacing(l));
 
     /**
@@ -740,7 +737,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     static {
         // force JsonNodeContext.register for collaborating types.
-        BorderSpacing.with(Length.pixel(1.0));
         Color.fromRgb(0);
         FontFamily.with("Times New Roman");
         FontSize.with(1);

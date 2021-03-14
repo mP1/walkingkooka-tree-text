@@ -102,7 +102,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitBorderSpacing(final BorderSpacing borderSpacing) {
+    protected void visitBorderSpacing(final Length<?> borderSpacing) {
         throw new UnsupportedOperationException();
     }
 
