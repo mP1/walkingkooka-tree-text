@@ -305,7 +305,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final Map<TextStylePropertyName<?>, Object> styleNode = Maps.ordered();
         styleNode.put(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456));
         styleNode.put(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE);
-        styleNode.put(TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(1.0)));
+        styleNode.put(TextStylePropertyName.BORDER_SPACING, Length.pixel(1.0));
         styleNode.put(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED);
         styleNode.put(TextStylePropertyName.BORDER_LEFT_STYLE, BorderStyle.HIDDEN);
         styleNode.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED);
@@ -390,7 +390,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                                 Maps.of(
                                         TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456),
                                         TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE,
-                                        TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(1.0)),
+                                        TextStylePropertyName.BORDER_SPACING, Length.pixel(1.0),
                                         TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED
                                 )
                         )
@@ -400,7 +400,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         "    background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
                         "    border-bottom-style=DASHED (walkingkooka.tree.text.BorderStyle)\n" +
                         "    border-collapse=SEPARATE (walkingkooka.tree.text.BorderCollapse)\n" +
-                        "    border-spacing=1px (walkingkooka.tree.text.BorderSpacing)\n" +
+                        "    border-spacing=1px (walkingkooka.tree.text.PixelLength)\n" +
                         "  Text \"a1\"\n" +
                         "  Text \"b2\"\n"
         );

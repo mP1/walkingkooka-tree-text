@@ -208,10 +208,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitBorderSpacing() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitBorderSpacing(final BorderSpacing b) {
+            protected void visitBorderSpacing(final Length<?> b) {
                 this.visited = b;
             }
-        }.accept(TextStylePropertyName.BORDER_SPACING, BorderSpacing.with(Length.pixel(1.0)));
+        }.accept(TextStylePropertyName.BORDER_SPACING, Length.pixel(1.0));
     }
 
     @Test
