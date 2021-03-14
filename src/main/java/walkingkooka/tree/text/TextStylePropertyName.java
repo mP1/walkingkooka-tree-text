@@ -741,6 +741,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         FontFamily.with("Times New Roman");
         FontSize.with(1);
         FontWeight.NORMAL.value();
+        Length.none();
         Opacity.OPAQUE.value();
         TextOverflow.CLIP.value();
 
