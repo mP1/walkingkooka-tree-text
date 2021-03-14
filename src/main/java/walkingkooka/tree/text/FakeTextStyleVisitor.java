@@ -177,7 +177,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitLetterSpacing(final LetterSpacing letterSpacing) {
+    protected void visitLetterSpacing(final Length<?> letterSpacing) {
         throw new UnsupportedOperationException();
     }
 

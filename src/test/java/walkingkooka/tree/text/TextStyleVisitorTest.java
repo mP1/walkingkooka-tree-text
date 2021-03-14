@@ -358,10 +358,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitLetterSpacing() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitLetterSpacing(final LetterSpacing l) {
+            protected void visitLetterSpacing(final Length<?> l) {
                 this.visited = l;
             }
-        }.accept(TextStylePropertyName.LETTER_SPACING, LetterSpacing.parse("1px"));
+        }.accept(TextStylePropertyName.LETTER_SPACING, Length.pixel(1.0));
     }
 
     @Test

@@ -354,9 +354,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * letter-space
      */
-    public final static TextStylePropertyName<LetterSpacing> LETTER_SPACING = registerJsonNodeConstant("letter-spacing",
-            LetterSpacing.class,
-            v -> v instanceof LetterSpacing,
+    public final static TextStylePropertyName<Length<?>> LETTER_SPACING = registerNormalLengthPixelLengthConstant("letter-spacing",
             (l, v) -> v.visitLetterSpacing(l));
 
     /**
