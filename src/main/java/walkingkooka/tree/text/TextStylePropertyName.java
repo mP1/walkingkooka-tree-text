@@ -646,9 +646,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * word-spacing
      */
-    public final static TextStylePropertyName<WordSpacing> WORD_SPACING = registerJsonNodeConstant("word-spacing",
-            WordSpacing.class,
-            v -> v instanceof WordSpacing,
+    public final static TextStylePropertyName<Length<?>> WORD_SPACING = registerNormalLengthPixelLengthConstant("word-spacing",
             (w, v) -> v.visitWordSpacing(w));
 
     /**

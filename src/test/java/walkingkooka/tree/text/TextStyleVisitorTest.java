@@ -768,10 +768,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitWordSpacing() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitWordSpacing(final WordSpacing w) {
+            protected void visitWordSpacing(final Length<?> w) {
                 this.visited = w;
             }
-        }.accept(TextStylePropertyName.WORD_SPACING, WordSpacing.parse("1px"));
+        }.accept(TextStylePropertyName.WORD_SPACING, Length.pixel(1.0));
     }
 
     @Test

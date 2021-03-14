@@ -365,7 +365,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.WHITE_SPACE, TextWhitespace.PRE);
         styleNode.put(TextStylePropertyName.WIDTH, Length.pixel(320.0));
         styleNode.put(TextStylePropertyName.WORD_BREAK, WordBreak.BREAK_WORD);
-        styleNode.put(TextStylePropertyName.WORD_SPACING, WordSpacing.with(Length.normal()));
+        styleNode.put(TextStylePropertyName.WORD_SPACING, Length.normal());
         styleNode.put(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD);
         styleNode.put(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 

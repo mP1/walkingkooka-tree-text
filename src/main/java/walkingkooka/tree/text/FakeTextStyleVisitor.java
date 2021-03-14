@@ -377,7 +377,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitWordSpacing(final WordSpacing wordSpacing) {
+    protected void visitWordSpacing(final Length<?> wordSpacing) {
         throw new UnsupportedOperationException();
     }
 
