@@ -222,7 +222,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-space
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_SPACING = registerPixelLengthConstant("border-spacing",
+    public final static TextStylePropertyName<Length<?>> BORDER_SPACING = registerNormalLengthPixelLengthConstant("border-spacing",
             (l, v) -> v.visitBorderSpacing(l));
 
     /**
