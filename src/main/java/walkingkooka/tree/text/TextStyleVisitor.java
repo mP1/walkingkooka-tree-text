@@ -180,7 +180,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitLetterSpacing(final LetterSpacing letterSpacing) {
+    protected void visitLetterSpacing(final Length<?> letterSpacing) {
         // nop
     }
 

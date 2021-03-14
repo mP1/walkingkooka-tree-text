@@ -72,13 +72,6 @@ abstract class LengthTextStylePropertyValue implements Value<Length<?>> {
     }
 
     static {
-        JsonNodeContext.register("letter-spacing",
-                LetterSpacing::unmarshall,
-                LetterSpacing::marshall,
-                LetterSpacing.class);
-    }
-
-    static {
         JsonNodeContext.register("word-spacing",
                 WordSpacing::unmarshall,
                 WordSpacing::marshall,
