@@ -192,7 +192,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
                 .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
                 .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
-                .set(TextStylePropertyName.WORD_SPACING, WordSpacing.with(Length.normal()))
+                .set(TextStylePropertyName.WORD_SPACING, Length.normal())
                 .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
                 .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 

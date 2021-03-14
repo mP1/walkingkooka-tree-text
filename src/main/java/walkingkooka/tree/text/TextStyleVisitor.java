@@ -340,7 +340,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitWordSpacing(final WordSpacing wordSpacing) {
+    protected void visitWordSpacing(final Length<?> wordSpacing) {
         // nop
     }
 
