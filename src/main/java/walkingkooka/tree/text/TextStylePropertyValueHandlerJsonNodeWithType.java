@@ -21,6 +21,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Optional;
+
 /**
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type a type that marshals into a {@link JsonNode}
  * with the type recorded.
@@ -37,6 +39,11 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
      */
     private TextStylePropertyValueHandlerJsonNodeWithType() {
         super();
+    }
+
+    @Override
+    Optional<Class<Enum<?>>> enumType() {
+        return Optional.empty();
     }
 
     @Override

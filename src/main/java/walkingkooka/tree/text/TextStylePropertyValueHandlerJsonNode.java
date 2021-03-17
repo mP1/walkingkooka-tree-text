@@ -21,6 +21,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -44,6 +45,11 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
         super();
         this.type = type;
         this.typeChecker = typeChecker;
+    }
+
+    @Override
+    Optional<Class<Enum<?>>> enumType() {
+        return Optional.empty();
     }
 
     @Override

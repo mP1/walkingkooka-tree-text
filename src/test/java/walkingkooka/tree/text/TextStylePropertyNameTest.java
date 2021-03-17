@@ -109,6 +109,20 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
+    public void testEnumType() {
+        assertEquals((Object)
+                        TextStylePropertyName.values()
+                                .stream()
+                                .filter(n -> n.enumType().isPresent())
+                                .collect(Collectors.toCollection(Sets::sorted)),
+                TextStylePropertyName.values()
+                        .stream()
+                        .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
+                        .collect(Collectors.toCollection(Sets::sorted))
+        );
+    }
+
+    @Test
     public void testJsonNodeNameCached() {
         final TextStylePropertyName<?> propertyName = this.createObject();
         assertSame(propertyName.marshallName(), propertyName.marshallName());

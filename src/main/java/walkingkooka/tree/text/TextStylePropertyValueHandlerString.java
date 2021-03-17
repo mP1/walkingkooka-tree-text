@@ -22,6 +22,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Optional;
+
 /**
  * A {@link TextStylePropertyValueHandler} for non empty {@link String} parameter values.
  */
@@ -37,6 +39,11 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
      */
     private TextStylePropertyValueHandlerString() {
         super();
+    }
+
+    @Override
+    Optional<Class<Enum<?>>> enumType() {
+        return Optional.empty();
     }
 
     @Override
