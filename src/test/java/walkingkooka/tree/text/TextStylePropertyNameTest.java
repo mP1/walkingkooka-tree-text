@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
@@ -81,6 +82,29 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
         } catch (final Exception cause) {
             throw new Error(cause.getMessage(), cause);
+        }
+    }
+
+    @Test
+    public void testValues() {
+        assertEquals(
+                TextStylePropertyName.values(),
+                Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
+                        .filter(FieldAttributes.STATIC::is)
+                        .filter(f -> f.getType() == TextStylePropertyName.class)
+                        .map(TextStylePropertyNameTest::getField)
+                        .collect(Collectors.toCollection(Sets::sorted))
+        );
+    }
+
+    /**
+     * Wraps a call to {@link Field} wrapping any checked reflection exceptions.
+     */
+    private static TextStylePropertyName<?> getField(final Field field) {
+        try {
+            return Cast.to(field.get(null));
+        } catch (final Exception cause) {
+            throw new Error(cause.getMessage());
         }
     }
 

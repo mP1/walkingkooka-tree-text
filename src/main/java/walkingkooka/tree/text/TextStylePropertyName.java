@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.collect.set.Sets;
 import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseSensitivity;
@@ -30,6 +31,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -50,6 +52,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * A read only cache of already styles.
      */
     private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
+
+    /**
+     * Returns all {@link TextStylePropertyName}.
+     */
+    public static Set<TextStylePropertyName<?>> values() {
+        final Set<TextStylePropertyName<?>> values = Sets.sorted();
+        values.addAll(CONSTANTS.values());
+        return Sets.readOnly(values);
+    }
 
     /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link BorderStyle} values.
