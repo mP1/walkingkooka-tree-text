@@ -31,6 +31,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -704,6 +705,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.visitor = visitor;
 
         this.jsonPropertyName = JsonPropertyName.with(this.name);
+    }
+
+    /**
+     * If the type parameter is for an {@link Enum} return the {@link Class enum class} or {@link Optional#empty()}.
+     */
+    public Optional<Class<Enum<?>>> enumType() {
+        return this.handler.enumType();
     }
 
     /**

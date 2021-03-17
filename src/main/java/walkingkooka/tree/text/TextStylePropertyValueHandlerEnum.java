@@ -17,11 +17,13 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -53,6 +55,11 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
         this.factory = factory;
         this.type = type;
         this.typeChecker = typeChecker;
+    }
+
+    @Override
+    final Optional<Class<Enum<?>>> enumType() {
+        return Optional.of(Cast.to(this.type));
     }
 
     @Override

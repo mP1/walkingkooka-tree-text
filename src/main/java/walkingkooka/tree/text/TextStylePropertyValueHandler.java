@@ -23,6 +23,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -82,6 +83,8 @@ abstract class TextStylePropertyValueHandler<T> {
     TextStylePropertyValueHandler() {
         super();
     }
+
+    abstract Optional<Class<Enum<?>>> enumType();
 
     // checkValue...........................................................
 
