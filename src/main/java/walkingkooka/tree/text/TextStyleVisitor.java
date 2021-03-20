@@ -296,6 +296,10 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
+    protected void visitTextDecorationThickness(final Length<?> textDecorationThickness) {
+        // nop
+    }
+
     protected void visitTextDirection(final TextDirection textDirection) {
         // nop
     }

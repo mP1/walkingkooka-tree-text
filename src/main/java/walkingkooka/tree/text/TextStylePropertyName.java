@@ -564,6 +564,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitTextDecorationStyle(t));
 
     /**
+     * text-decoration-thickness
+     */
+    public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerPixelLengthConstant("text-decoration-thickness",
+            (l, v) -> v.visitTextDecorationThickness(l));
+
+    /**
      * text-direction
      */
     public final static TextStylePropertyName<TextDirection> TEXT_DIRECTION = registerEnumConstant("text-direction",

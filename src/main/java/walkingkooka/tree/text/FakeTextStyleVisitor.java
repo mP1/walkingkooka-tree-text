@@ -322,6 +322,11 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
+    protected void visitTextDecorationThickness(final Length<?> textDecorationThickness) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     protected void visitTextDirection(final TextDirection textDirection) {
         throw new UnsupportedOperationException();
     }

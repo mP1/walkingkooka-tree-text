@@ -645,6 +645,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
+    public void testVisitTextDecorationThickness() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitTextDecorationThickness(final Length<?> l) {
+                this.visited = l;
+            }
+        }.accept(TextStylePropertyName.TEXT_DECORATION_THICKNESS, Length.parse("1px"));
+    }
+    
+    @Test
     public void testVisitTextDirection() {
         new TestTextStyleVisitor() {
             @Override
