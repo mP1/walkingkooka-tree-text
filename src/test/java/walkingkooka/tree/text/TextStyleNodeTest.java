@@ -351,7 +351,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.TEXT, "abc123");
         styleNode.put(TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT);
         styleNode.put(TextStylePropertyName.COLOR, Color.fromRgb(0x789abc));
-        styleNode.put(TextStylePropertyName.TEXT_DECORATION, TextDecoration.UNDERLINE);
+        styleNode.put(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.UNDERLINE);
         styleNode.put(TextStylePropertyName.TEXT_DECORATION_COLOR, Color.fromRgb(0xabcdef));
         styleNode.put(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED);
         styleNode.put(TextStylePropertyName.TEXT_DIRECTION, TextDirection.LTR);

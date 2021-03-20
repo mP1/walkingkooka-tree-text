@@ -615,16 +615,6 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
-    public void testVisitTextDecoration() {
-        new TestTextStyleVisitor() {
-            @Override
-            protected void visitTextDecoration(final TextDecoration t) {
-                this.visited = t;
-            }
-        }.accept(TextStylePropertyName.TEXT_DECORATION, TextDecoration.UNDERLINE);
-    }
-
-    @Test
     public void testVisitTextDecorationColor() {
         new TestTextStyleVisitor() {
             @Override
@@ -632,6 +622,16 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
                 this.visited = t;
             }
         }.accept(TextStylePropertyName.TEXT_DECORATION_COLOR, Color.fromRgb(0x123));
+    }
+
+    @Test
+    public void testVisitTextDecorationLine() {
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitTextDecorationLine(final TextDecorationLine t) {
+                this.visited = t;
+            }
+        }.accept(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.UNDERLINE);
     }
 
     @Test
