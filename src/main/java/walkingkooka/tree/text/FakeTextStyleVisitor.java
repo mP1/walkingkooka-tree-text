@@ -307,12 +307,12 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     }
 
     @Override
-    protected void visitTextDecoration(final TextDecoration textDecoration) {
+    protected void visitTextDecorationColor(final Color textDecorationColor) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    protected void visitTextDecorationColor(final Color textDecorationColor) {
+    protected void visitTextDecorationLine(final TextDecorationLine textDecorationLine) {
         throw new UnsupportedOperationException();
     }
 

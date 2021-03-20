@@ -540,19 +540,19 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitTextAlign(t));
 
     /**
-     * text-decoration: UNDERLINE, OVERLINE, LINE_THROUGH
-     */
-    public final static TextStylePropertyName<TextDecoration> TEXT_DECORATION = registerEnumConstant("text-decoration",
-            TextDecoration::valueOf,
-            TextDecoration.class,
-            v -> v instanceof TextDecoration,
-            (t, v) -> v.visitTextDecoration(t));
-
-    /**
      * text-decoration-color
      */
     public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerColor("text-decoration-color",
             (t, v) -> v.visitTextDecorationColor(t));
+
+    /**
+     * text-decoration-line: UNDERLINE, OVERLINE, LINE_THROUGH
+     */
+    public final static TextStylePropertyName<TextDecorationLine> TEXT_DECORATION_LINE = registerEnumConstant("text-decoration-line",
+            TextDecorationLine::valueOf,
+            TextDecorationLine.class,
+            v -> v instanceof TextDecorationLine,
+            (t, v) -> v.visitTextDecorationLine(t));
 
     /**
      * text-decoration-style

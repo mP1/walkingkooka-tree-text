@@ -284,11 +284,11 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
-    protected void visitTextDecoration(final TextDecoration textDecoration) {
+    protected void visitTextDecorationColor(final Color textDecorationColor) {
         // nop
     }
 
-    protected void visitTextDecorationColor(final Color textDecorationColor) {
+    protected void visitTextDecorationLine(final TextDecorationLine textDecorationLine) {
         // nop
     }
 

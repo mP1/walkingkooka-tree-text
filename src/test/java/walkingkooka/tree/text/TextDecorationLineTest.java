@@ -17,20 +17,20 @@
 
 package walkingkooka.tree.text;
 
-public final class TextDecorationTest extends EnumTextStylePropertyValueTestCase<TextDecoration> {
+public final class TextDecorationLineTest extends EnumTextStylePropertyValueTestCase<TextDecorationLine> {
 
     @Override
-    TextStylePropertyName<TextDecoration> textStylePropertyName() {
-        return TextStylePropertyName.TEXT_DECORATION;
+    TextStylePropertyName<TextDecorationLine> textStylePropertyName() {
+        return TextStylePropertyName.TEXT_DECORATION_LINE;
     }
 
     @Override
-    TextDecoration createTextStylePropertyValue() {
-        return TextDecoration.UNDERLINE;
+    TextDecorationLine createTextStylePropertyValue() {
+        return TextDecorationLine.UNDERLINE;
     }
 
     @Override
-    public Class<TextDecoration> type() {
-        return TextDecoration.class;
+    public Class<TextDecorationLine> type() {
+        return TextDecorationLine.class;
     }
 }
