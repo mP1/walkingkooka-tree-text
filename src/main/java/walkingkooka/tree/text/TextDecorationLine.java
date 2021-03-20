@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 public enum TextDecorationLine {
+    NONE,
     UNDERLINE,
     OVERLINE,
     LINE_THROUGH
