@@ -713,6 +713,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
+     * Returns this property name as a constant, that is the name is transformed into UPPERCASED form with underscores.
+     */
+    public String constantName() {
+        return this.value()
+                .toUpperCase()
+                .replace('-', '_');
+    }
+
+    /**
      * Verifies that a value is legal for this {@link TextStylePropertyName}
      */
     public void check(final Object value) {

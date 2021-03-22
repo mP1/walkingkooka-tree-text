@@ -109,6 +109,30 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
+    public void testConstantNameBackgroundColor() {
+        this.constantNameAndCheck(TextStylePropertyName.BACKGROUND_COLOR, "BACKGROUND_COLOR");
+    }
+
+    @Test
+    public void testConstantBorderBottomColor() {
+        this.constantNameAndCheck(TextStylePropertyName.BORDER_BOTTOM_COLOR, "BORDER_BOTTOM_COLOR");
+    }
+
+    @Test
+    public void testConstantColor() {
+        this.constantNameAndCheck(TextStylePropertyName.COLOR, "COLOR");
+    }
+
+    private void constantNameAndCheck(final TextStylePropertyName<?> property,
+                                      final String constantName) {
+        assertEquals(
+                constantName,
+                property.constantName(),
+                () -> property + ".constantName()"
+        );
+    }
+
+    @Test
     public void testEnumType() {
         assertEquals((Object)
                         TextStylePropertyName.values()
