@@ -69,6 +69,11 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
         return this.value;
     }
 
+    @Override
+    public double pixelValue() {
+        throw new UnsupportedOperationException();
+    }
+
     // unit.............................................................................................................
 
     @Override

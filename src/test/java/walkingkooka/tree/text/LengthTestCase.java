@@ -32,6 +32,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting2<L>,
@@ -43,6 +44,18 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
 
     LengthTestCase() {
         super();
+    }
+
+    final void pixelLengthAndCheck(final L length, final double expected) {
+        assertEquals(
+                expected,
+                length.pixelValue(),
+                () -> "" + length + " pixelLength"
+        );
+    }
+
+    final void pixelLengthFails(final Length<?> length) {
+        assertThrows(UnsupportedOperationException.class, () -> length.pixelValue());
     }
 
     @Test

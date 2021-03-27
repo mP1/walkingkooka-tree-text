@@ -44,6 +44,11 @@ public final class NoneLength extends Length<Void> implements Value<Void> {
     }
 
     @Override
+    public double pixelValue() {
+        return 0;
+    }
+
+    @Override
     public Void value() {
         throw new UnsupportedOperationException();
     }
