@@ -63,6 +63,11 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
     }
 
     @Test
+    public void testPixelValueFails() {
+        this.pixelLengthFails(NumberLength.with(1L));
+    }
+
+    @Test
     public void testDifferentValue() {
         this.checkNotEquals(NumberLength.with(99L));
     }

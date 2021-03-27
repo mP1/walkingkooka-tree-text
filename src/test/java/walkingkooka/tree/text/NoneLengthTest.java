@@ -45,6 +45,11 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
         assertThrows(UnsupportedOperationException.class, NoneLength.INSTANCE::value);
     }
 
+    @Test
+    public void testPixelValue() {
+        this.pixelLengthAndCheck(NoneLength.INSTANCE, 0);
+    }
+
     // LengthVisitor....................................................................................................
 
     @Test

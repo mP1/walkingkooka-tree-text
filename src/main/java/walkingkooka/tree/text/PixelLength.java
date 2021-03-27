@@ -67,6 +67,12 @@ public final class PixelLength extends Length<Double> implements Value<Double> {
         throw new UnsupportedOperationException();
     }
 
+
+    @Override
+    public double pixelValue() {
+        return this.doubleValue();
+    }
+
     // unit.............................................................................................................
 
     @Override

@@ -120,6 +120,11 @@ public abstract class Length<V> {
     Length() {
     }
 
+    /**
+     * Returns this length in pixels or throws a {@link UnsupportedOperationException}.
+     */
+    abstract public double pixelValue();
+
     abstract double doubleValue();
 
     abstract long longValue();

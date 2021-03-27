@@ -58,6 +58,11 @@ public final class NormalLength extends Length<Void> implements Value<Void> {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public double pixelValue() {
+        throw new UnsupportedOperationException();
+    }
+
     // unit.............................................................................................................
 
     @Override
