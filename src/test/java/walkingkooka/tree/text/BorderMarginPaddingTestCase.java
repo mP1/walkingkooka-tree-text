@@ -43,17 +43,17 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testWithNullTextStyleFails() {
-        assertThrows(NullPointerException.class, () -> this.createBorderMarginPadding(Direction.RIGHT, null));
+        assertThrows(NullPointerException.class, () -> this.createBorderMarginPadding(BoxEdge.RIGHT, null));
     }
 
     @Test
     public final void testWithEmptyTextStyle() {
         final TextStyle textStyle = TextStyle.EMPTY;
 
-        for (Direction direction : Direction.values()) {
-            final T borderMarginPadding = this.createBorderMarginPadding(direction, textStyle);
-            this.check(borderMarginPadding, direction, textStyle);
-            assertSame(borderMarginPadding, this.createBorderMarginPadding(direction, textStyle));
+        for (BoxEdge edge : BoxEdge.values()) {
+            final T borderMarginPadding = this.createBorderMarginPadding(edge, textStyle);
+            this.check(borderMarginPadding, edge, textStyle);
+            assertSame(borderMarginPadding, this.createBorderMarginPadding(edge, textStyle));
         }
     }
 
@@ -61,40 +61,40 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     public final void testWithNonEmptyTextStyle() {
         final TextStyle textStyle = this.textStyle();
 
-        for (Direction direction : Direction.values()) {
-            this.check(this.createBorderMarginPadding(direction, textStyle), direction, textStyle);
+        for (BoxEdge edge : BoxEdge.values()) {
+            this.check(this.createBorderMarginPadding(edge, textStyle), edge, textStyle);
         }
     }
 
-    // direction........................................................................................................
+    // edge........................................................................................................
 
     @Test
-    public final void testDirection() {
+    public final void testEdge() {
         final TextStyle textStyle = this.textStyle();
 
-        for (Direction direction : Direction.values()) {
-            assertEquals(direction, this.createBorderMarginPadding(direction, textStyle).direction(), "direction");
-        }
-    }
-
-    @Test
-    public final void testSetDirectionSame() {
-        final TextStyle textStyle = this.textStyle();
-
-        for (Direction direction : Direction.values()) {
-            final T borderMarginPadding = this.createBorderMarginPadding(direction, textStyle);
-            assertSame(borderMarginPadding, borderMarginPadding.setDirection(direction));
+        for (BoxEdge edge : BoxEdge.values()) {
+            assertEquals(edge, this.createBorderMarginPadding(edge, textStyle).edge(), "edge");
         }
     }
 
     @Test
-    public final void testSetDirectionDifferent() {
+    public final void testSetEdgeSame() {
         final TextStyle textStyle = this.textStyle();
 
-        final T borderMarginPadding = this.createBorderMarginPadding(Direction.LEFT, textStyle);
-        final BorderMarginPadding different = borderMarginPadding.setDirection(Direction.RIGHT);
+        for (BoxEdge edge : BoxEdge.values()) {
+            final T borderMarginPadding = this.createBorderMarginPadding(edge, textStyle);
+            assertSame(borderMarginPadding, borderMarginPadding.setEdge(edge));
+        }
+    }
+
+    @Test
+    public final void testSetEdgeDifferent() {
+        final TextStyle textStyle = this.textStyle();
+
+        final T borderMarginPadding = this.createBorderMarginPadding(BoxEdge.LEFT, textStyle);
+        final BorderMarginPadding different = borderMarginPadding.setEdge(BoxEdge.RIGHT);
         assertNotSame(borderMarginPadding, different);
-        this.check(different, Direction.RIGHT, textStyle);
+        this.check(different, BoxEdge.RIGHT, textStyle);
     }
 
     // width............................................................................................................
@@ -102,25 +102,25 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     @Test
     public final void testWidth() {
         final Length<?> width = Length.pixel(2.5);
-        final Direction direction = Direction.BOTTOM;
-        final T borderMarginPadding = this.createBorderMarginPadding(direction, this.textStyle(this.widthPropertyName(direction), width));
+        final BoxEdge edge = BoxEdge.BOTTOM;
+        final T borderMarginPadding = this.createBorderMarginPadding(edge, this.textStyle(this.widthPropertyName(edge), width));
         assertEquals(Optional.of(width), borderMarginPadding.width(), "width");
     }
 
     @Test
     public final void testSetWidthSame() {
         final Length<?> width = Length.pixel(2.5);
-        final Direction direction = Direction.TOP;
-        final T borderMarginPadding = this.createBorderMarginPadding(direction, this.textStyle(this.widthPropertyName(direction), width));
+        final BoxEdge edge = BoxEdge.TOP;
+        final T borderMarginPadding = this.createBorderMarginPadding(edge, this.textStyle(this.widthPropertyName(edge), width));
         assertSame(borderMarginPadding, borderMarginPadding.setWidth(Optional.of(width)));
     }
 
     @Test
     public final void testSetWidthDifferent() {
         final Length<?> width = Length.pixel(2.5);
-        final Direction direction = Direction.LEFT;
-        final TextStylePropertyName<Length<?>> propertyName = this.widthPropertyName(direction);
-        final T borderMarginPadding = this.createBorderMarginPadding(direction, this.textStyle(propertyName, width));
+        final BoxEdge edge = BoxEdge.LEFT;
+        final TextStylePropertyName<Length<?>> propertyName = this.widthPropertyName(edge);
+        final T borderMarginPadding = this.createBorderMarginPadding(edge, this.textStyle(propertyName, width));
 
         final Length<?> differentWidth = Length.pixel(99.0);
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.of(differentWidth));
@@ -134,33 +134,33 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
 
-        final Direction direction = Direction.RIGHT;
-        final T borderMarginPadding = this.createBorderMarginPadding(direction, TextStyle.with(properties));
+        final BoxEdge edge = BoxEdge.RIGHT;
+        final T borderMarginPadding = this.createBorderMarginPadding(edge, TextStyle.with(properties));
 
         final Length<?> differentWidth = Length.pixel(99.0);
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.of(differentWidth));
 
         assertNotSame(borderMarginPadding, different);
 
-        properties.put(this.widthPropertyName(direction), differentWidth);
+        properties.put(this.widthPropertyName(edge), differentWidth);
         assertEquals(TextStyle.with(properties), different.textStyle());
     }
 
     @Test
     public final void testSetWidthRemoved() {
-        final Direction direction = Direction.RIGHT;
+        final BoxEdge edge = BoxEdge.RIGHT;
 
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#444"));
-        properties.put(this.widthPropertyName(direction), Length.pixel(1.5));
+        properties.put(this.widthPropertyName(edge), Length.pixel(1.5));
 
-        final T borderMarginPadding = this.createBorderMarginPadding(direction, TextStyle.with(properties));
+        final T borderMarginPadding = this.createBorderMarginPadding(edge, TextStyle.with(properties));
 
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.empty());
 
         assertNotSame(borderMarginPadding, different);
 
-        properties.remove(this.widthPropertyName(direction));
+        properties.remove(this.widthPropertyName(edge));
         assertEquals(TextStyle.with(properties), different.textStyle());
     }
 
@@ -169,23 +169,23 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     @Test
     public final void testDifferentDirection() {
         final TextStyle textStyle = this.textStyle();
-        this.checkNotEquals(this.createBorderMarginPadding(Direction.LEFT, textStyle),
-                this.createBorderMarginPadding(Direction.RIGHT, textStyle));
+        this.checkNotEquals(this.createBorderMarginPadding(BoxEdge.LEFT, textStyle),
+                this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
     }
 
     @Test
     public final void testDifferentTextStyle() {
-        final Direction direction = Direction.RIGHT;
-        this.checkNotEquals(this.createBorderMarginPadding(direction, TextStyle.EMPTY),
-                this.createBorderMarginPadding(direction, this.textStyle()));
+        final BoxEdge edge = BoxEdge.RIGHT;
+        this.checkNotEquals(this.createBorderMarginPadding(edge, TextStyle.EMPTY),
+                this.createBorderMarginPadding(edge, this.textStyle()));
     }
 
     // helpers..........................................................................................................
 
-    abstract T createBorderMarginPadding(final Direction direction,
+    abstract T createBorderMarginPadding(final BoxEdge edge,
                                          final TextStyle textStyle);
 
-    abstract TextStylePropertyName<Length<?>> widthPropertyName(final Direction direction);
+    abstract TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge);
 
     private TextStyle textStyle() {
         return this.textStyle(TextStylePropertyName.COLOR, Color.fromArgb(0x123456));
@@ -196,9 +196,9 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     }
 
     final void check(final BorderMarginPadding borderMarginPadding,
-                     final Direction direction,
+                     final BoxEdge edge,
                      final TextStyle textStyle) {
-        assertEquals(direction, borderMarginPadding.direction(), "direction");
+        assertEquals(edge, borderMarginPadding.edge(), "edge");
         assertEquals(textStyle, borderMarginPadding.textStyle(), "textStyle");
     }
 
@@ -213,6 +213,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Override
     public final T createObject() {
-        return this.createBorderMarginPadding(Direction.LEFT, this.textStyle());
+        return this.createBorderMarginPadding(BoxEdge.LEFT, this.textStyle());
     }
 }

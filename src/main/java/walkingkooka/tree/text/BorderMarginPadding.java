@@ -30,9 +30,9 @@ abstract class BorderMarginPadding {
     /**
      * Package private to limit sub classing.
      */
-    BorderMarginPadding(final Direction direction, final TextStyle textStyle) {
+    BorderMarginPadding(final BoxEdge edge, final TextStyle textStyle) {
         super();
-        this.direction = direction;
+        this.edge = edge;
         this.textStyle = textStyle;
     }
 
@@ -70,34 +70,34 @@ abstract class BorderMarginPadding {
                 before.remove(propertyName);
         return before == after ?
                 this :
-                this.replace(this.direction, after);
+                this.replace(this.edge, after);
     }
 
-    // direction........................................................................................................
+    // edge........................................................................................................
 
     /**
-     * Getter that returns the {@link Direction}.
+     * Getter that returns the {@link BoxEdge}.
      */
-    public final Direction direction() {
-        return this.direction;
+    public final BoxEdge edge() {
+        return this.edge;
     }
 
     /**
-     * Would be setter that returns a {@link BorderMarginPadding} with the given {@link Direction}.
+     * Would be setter that returns a {@link BorderMarginPadding} with the given {@link BoxEdge}.
      */
-    abstract BorderMarginPadding setDirection(final Direction direction);
+    abstract BorderMarginPadding setEdge(final BoxEdge edge);
 
-    final BorderMarginPadding setDirection0(final Direction direction) {
-        Objects.requireNonNull(direction, "direction");
-        return this.direction.equals(direction) ?
+    final BorderMarginPadding setEdge0(final BoxEdge edge) {
+        Objects.requireNonNull(edge, "edge");
+        return this.edge.equals(edge) ?
                 this :
-                this.replace(direction, this.textStyle);
+                this.replace(edge, this.textStyle);
 
     }
 
-    final Direction direction;
+    final BoxEdge edge;
 
-    abstract <V> BorderMarginPadding replace(final Direction direction, final TextStyle style);
+    abstract <V> BorderMarginPadding replace(final BoxEdge edge, final TextStyle style);
 
     // textStyle........................................................................................................
 
@@ -133,12 +133,12 @@ abstract class BorderMarginPadding {
     abstract boolean canBeEqual(final Object other);
 
     private boolean equals0(final BorderMarginPadding other) {
-        return this.direction.equals(other.direction) &&
+        return this.edge.equals(other.edge) &&
                 this.textStyle.equals(other.textStyle);
     }
 
     @Override
     public final String toString() {
-        return this.direction + " " + this.textStyle;
+        return this.edge + " " + this.textStyle;
     }
 }

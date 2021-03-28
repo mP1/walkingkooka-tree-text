@@ -24,17 +24,17 @@ import java.util.Optional;
  */
 public final class Margin extends BorderMarginPadding {
 
-    static Margin with(final Direction direction, final TextStyle textStyle) {
-        return new Margin(direction, textStyle);
+    static Margin with(final BoxEdge edge, final TextStyle textStyle) {
+        return new Margin(edge, textStyle);
     }
 
-    private Margin(final Direction direction, final TextStyle textStyle) {
-        super(direction, textStyle);
+    private Margin(final BoxEdge edge, final TextStyle textStyle) {
+        super(edge, textStyle);
     }
 
     @Override
-    public Margin setDirection(final Direction direction) {
-        return this.setDirection0(direction).cast();
+    public Margin setEdge(final BoxEdge edge) {
+        return this.setEdge0(edge).cast();
     }
 
     @Override
@@ -44,12 +44,12 @@ public final class Margin extends BorderMarginPadding {
 
     @Override
     TextStylePropertyName<Length<?>> widthPropertyName() {
-        return this.direction.marginPropertyName();
+        return this.edge.marginPropertyName();
     }
 
     @Override
-    BorderMarginPadding replace(final Direction direction, final TextStyle textStyle) {
-        return new Margin(direction, textStyle);
+    BorderMarginPadding replace(final BoxEdge edge, final TextStyle textStyle) {
+        return new Margin(edge, textStyle);
     }
 
     // Object...........................................................................................................

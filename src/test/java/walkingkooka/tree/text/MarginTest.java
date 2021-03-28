@@ -25,7 +25,7 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(Margin.with(Direction.BOTTOM,
+        this.toStringAndCheck(Margin.with(BoxEdge.BOTTOM,
                 TextStyle.with(Maps.of(TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5),
                         TextStylePropertyName.COLOR, Color.fromRgb(0x123456)))),
                 "BOTTOM {color=#123456, margin-bottom=12.5px}");
@@ -34,13 +34,13 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     // helpers..........................................................................................................
 
     @Override
-    Margin createBorderMarginPadding(final Direction direction, final TextStyle textStyle) {
-        return direction.margin(textStyle);
+    Margin createBorderMarginPadding(final BoxEdge edge, final TextStyle textStyle) {
+        return edge.margin(textStyle);
     }
 
     @Override
-    TextStylePropertyName<Length<?>> widthPropertyName(final Direction direction) {
-        return direction.marginPropertyName();
+    TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge) {
+        return edge.marginPropertyName();
     }
 
     @Override

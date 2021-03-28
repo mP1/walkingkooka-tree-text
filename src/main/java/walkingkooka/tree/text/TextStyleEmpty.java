@@ -116,21 +116,21 @@ final class TextStyleEmpty extends TextStyle {
         // no properties
     }
 
-    // Direction........................................................................................................
+    // BoxEdge........................................................................................................
 
     @Override
-    Border border(final Direction direction) {
-        return direction.emptyBorder;
+    Border border(final BoxEdge edge) {
+        return edge.emptyBorder;
     }
 
     @Override
-    Margin margin(final Direction direction) {
-        return direction.emptyMargin;
+    Margin margin(final BoxEdge edge) {
+        return edge.emptyMargin;
     }
 
     @Override
-    Padding padding(final Direction direction) {
-        return direction.emptyPadding;
+    Padding padding(final BoxEdge edge) {
+        return edge.emptyPadding;
     }
 
     // TreePrintable....................................................................................................

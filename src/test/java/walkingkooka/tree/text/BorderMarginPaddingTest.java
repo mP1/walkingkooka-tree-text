@@ -26,7 +26,7 @@ public final class BorderMarginPaddingTest implements ClassTesting2<BorderMargin
     @Test
     @Override
     public void testAllMethodsVisibility() {
-        this.allMethodsVisibilityCheck("direction", "length", "textStyle", "width");
+        this.allMethodsVisibilityCheck("edge", "length", "textStyle", "width");
     }
 
     @Override
