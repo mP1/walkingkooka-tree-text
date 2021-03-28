@@ -26,7 +26,7 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(Padding.with(Direction.BOTTOM,
+        this.toStringAndCheck(Padding.with(BoxEdge.BOTTOM,
                 TextStyle.with(Maps.of(TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
                         TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED))),
                 "BOTTOM {border-right-style=DOTTED, padding-bottom=12.5px}");
@@ -35,13 +35,13 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     // helpers..........................................................................................................
 
     @Override
-    Padding createBorderMarginPadding(final Direction direction, final TextStyle textStyle) {
-        return direction.padding(textStyle);
+    Padding createBorderMarginPadding(final BoxEdge edge, final TextStyle textStyle) {
+        return edge.padding(textStyle);
     }
 
     @Override
-    TextStylePropertyName<Length<?>> widthPropertyName(final Direction direction) {
-        return direction.paddingPropertyName();
+    TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge) {
+        return edge.paddingPropertyName();
     }
 
     @Override

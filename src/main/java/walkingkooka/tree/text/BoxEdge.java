@@ -20,13 +20,13 @@ package walkingkooka.tree.text;
 import walkingkooka.color.Color;
 
 /**
- * One of the four direction around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
+ * One of the four edge around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
  * style view.
  */
-public enum Direction {
+public enum BoxEdge {
     BOTTOM {
         @Override
-        public Direction flip() {
+        public BoxEdge flip() {
             return TOP;
         }
 
@@ -57,7 +57,7 @@ public enum Direction {
     },
     LEFT {
         @Override
-        public Direction flip() {
+        public BoxEdge flip() {
             return RIGHT;
         }
 
@@ -88,7 +88,7 @@ public enum Direction {
     },
     RIGHT {
         @Override
-        public Direction flip() {
+        public BoxEdge flip() {
             return LEFT;
         }
 
@@ -119,7 +119,7 @@ public enum Direction {
     },
     TOP {
         @Override
-        public Direction flip() {
+        public BoxEdge flip() {
             return BOTTOM;
         }
 
@@ -149,7 +149,7 @@ public enum Direction {
         }
     };
 
-    public abstract Direction flip();
+    public abstract BoxEdge flip();
 
     // border...........................................................................................................
 
@@ -161,7 +161,7 @@ public enum Direction {
     }
 
     /**
-     * Singleton for each direction.
+     * Singleton for each edge.
      */
     final Border emptyBorder = Border.with(this, TextStyle.EMPTY);
 
@@ -175,7 +175,7 @@ public enum Direction {
     }
 
     /**
-     * Singleton for each direction.
+     * Singleton for each edge.
      */
     final Margin emptyMargin = Margin.with(this, TextStyle.EMPTY);
 
@@ -189,7 +189,7 @@ public enum Direction {
     }
 
     /**
-     * Singleton for each direction.
+     * Singleton for each edge.
      */
     final Padding emptyPadding = Padding.with(this, TextStyle.EMPTY);
 

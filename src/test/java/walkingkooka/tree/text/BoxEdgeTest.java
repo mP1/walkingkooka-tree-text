@@ -23,35 +23,35 @@ import walkingkooka.reflect.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class DirectionTest implements ClassTesting2<Direction> {
+public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
 
     @Test
     public void testFlipBottom() {
-        this.flipAndCheck(Direction.BOTTOM, Direction.TOP);
+        this.flipAndCheck(BoxEdge.BOTTOM, BoxEdge.TOP);
     }
 
     @Test
     public void testFlipLeft() {
-        this.flipAndCheck(Direction.LEFT, Direction.RIGHT);
+        this.flipAndCheck(BoxEdge.LEFT, BoxEdge.RIGHT);
     }
 
     @Test
     public void testFlipRight() {
-        this.flipAndCheck(Direction.RIGHT, Direction.LEFT);
+        this.flipAndCheck(BoxEdge.RIGHT, BoxEdge.LEFT);
     }
 
     @Test
     public void testFlipTop() {
-        this.flipAndCheck(Direction.TOP, Direction.BOTTOM);
+        this.flipAndCheck(BoxEdge.TOP, BoxEdge.BOTTOM);
     }
 
-    private void flipAndCheck(final Direction direction, final Direction expected) {
-        assertSame(expected, direction.flip(), () -> direction + " flip");
+    private void flipAndCheck(final BoxEdge edge, final BoxEdge expected) {
+        assertSame(expected, edge.flip(), () -> edge + " flip");
     }
 
     @Override
-    public Class<Direction> type() {
-        return Direction.class;
+    public Class<BoxEdge> type() {
+        return BoxEdge.class;
     }
 
     @Override

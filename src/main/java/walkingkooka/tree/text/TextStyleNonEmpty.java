@@ -183,21 +183,21 @@ final class TextStyleNonEmpty extends TextStyle {
         this.value.accept(visitor);
     }
 
-    // Direction........................................................................................................
+    // BoxEdge........................................................................................................
 
     @Override
-    Border border(final Direction direction) {
-        return Border.with(direction, this);
+    Border border(final BoxEdge edge) {
+        return Border.with(edge, this);
     }
 
     @Override
-    Margin margin(final Direction direction) {
-        return Margin.with(direction, this);
+    Margin margin(final BoxEdge edge) {
+        return Margin.with(edge, this);
     }
 
     @Override
-    Padding padding(final Direction direction) {
-        return Padding.with(direction, this);
+    Padding padding(final BoxEdge edge) {
+        return Padding.with(edge, this);
     }
 
     // TreePrintable....................................................................................................

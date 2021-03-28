@@ -165,13 +165,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     abstract void accept(final TextStyleVisitor visitor);
 
-    // Direction........................................................................................................
+    // BoxEdge........................................................................................................
 
-    abstract Border border(final Direction direction);
+    abstract Border border(final BoxEdge edge);
 
-    abstract Margin margin(final Direction direction);
+    abstract Margin margin(final BoxEdge edge);
 
-    abstract Padding padding(final Direction direction);
+    abstract Padding padding(final BoxEdge edge);
 
     // Object...........................................................................................................
 
