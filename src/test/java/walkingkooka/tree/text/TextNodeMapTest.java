@@ -58,7 +58,7 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
 
     @Test
     public void testGetUnknown() {
-        this.getAndCheckAbsent(TextStylePropertyName.TEXT_DIRECTION);
+        this.getAndCheckAbsent(TextStylePropertyName.DIRECTION);
     }
 
     @Test

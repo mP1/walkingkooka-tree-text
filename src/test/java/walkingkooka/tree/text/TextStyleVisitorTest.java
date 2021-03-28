@@ -658,10 +658,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitTextDirection() {
         new TestTextStyleVisitor() {
             @Override
-            protected void visitTextDirection(final TextDirection d) {
+            protected void visitDirection(final Direction d) {
                 this.visited = d;
             }
-        }.accept(TextStylePropertyName.TEXT_DIRECTION, TextDirection.LTR);
+        }.accept(TextStylePropertyName.DIRECTION, Direction.LTR);
     }
 
     @Test

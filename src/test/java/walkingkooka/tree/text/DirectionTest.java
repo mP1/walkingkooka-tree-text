@@ -17,7 +17,20 @@
 
 package walkingkooka.tree.text;
 
-public enum TextDirection {
-    LTR,
-    RTL
+public final class DirectionTest extends EnumTextStylePropertyValueTestCase<Direction> {
+
+    @Override
+    TextStylePropertyName<Direction> textStylePropertyName() {
+        return TextStylePropertyName.DIRECTION;
+    }
+
+    @Override
+    Direction createTextStylePropertyValue() {
+        return Direction.LTR;
+    }
+
+    @Override
+    public Class<Direction> type() {
+        return Direction.class;
+    }
 }

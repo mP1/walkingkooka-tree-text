@@ -272,6 +272,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (c, v) -> v.visitColor(c));
 
     /**
+     * direction
+     */
+    public final static TextStylePropertyName<Direction> DIRECTION = registerEnumConstant("direction",
+            Direction::valueOf,
+            Direction.class,
+            v -> v instanceof Direction,
+            (d, v) -> v.visitDirection(d));
+
+    /**
      * font-family
      */
     public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant("font-family",
@@ -560,15 +569,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerNoneLengthPixelLengthConstant("text-decoration-thickness",
             (l, v) -> v.visitTextDecorationThickness(l));
-
-    /**
-     * text-direction
-     */
-    public final static TextStylePropertyName<TextDirection> TEXT_DIRECTION = registerEnumConstant("text-direction",
-            TextDirection::valueOf,
-            TextDirection.class,
-            v -> v instanceof TextDirection,
-            (d, v) -> v.visitTextDirection(d));
 
     /**
      * text-indent
