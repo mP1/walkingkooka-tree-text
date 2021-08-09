@@ -81,7 +81,7 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
     // JsonNodeMarshallingTesting...........................................................................................
 
     @Override
-    public final N createJsonNodeMappingValue() {
+    public final N createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 

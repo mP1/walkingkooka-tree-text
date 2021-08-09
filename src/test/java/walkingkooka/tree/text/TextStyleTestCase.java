@@ -254,7 +254,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Override
-    public final TextStyle createJsonNodeMappingValue() {
+    public final TextStyle createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 }

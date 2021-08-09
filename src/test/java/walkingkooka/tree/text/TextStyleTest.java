@@ -264,7 +264,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Override
-    public TextStyle createJsonNodeMappingValue() {
+    public TextStyle createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 }

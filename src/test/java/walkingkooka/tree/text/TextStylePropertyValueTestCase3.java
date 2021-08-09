@@ -37,7 +37,7 @@ public abstract class TextStylePropertyValueTestCase3<V> extends TextStyleProper
     // JsonNodeMarshallTesting...........................................................................................
 
     @Override
-    public final V createJsonNodeMappingValue() {
+    public final V createJsonNodeMarshallingValue() {
         return this.createTextStylePropertyValue();
     }
 }
