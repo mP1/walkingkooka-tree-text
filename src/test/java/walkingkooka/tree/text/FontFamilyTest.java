@@ -99,7 +99,7 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     // JsonNodeMarshallTesting..........................................................................................
 
     @Override
-    public FontFamily createJsonNodeMappingValue() {
+    public FontFamily createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 

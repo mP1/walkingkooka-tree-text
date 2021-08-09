@@ -183,7 +183,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     // JsonNodeMarshallTesting..........................................................................................
 
     @Override
-    public Opacity createJsonNodeMappingValue() {
+    public Opacity createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 

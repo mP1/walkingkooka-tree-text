@@ -85,7 +85,7 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     }
 
     @Override
-    public TextOverflow createJsonNodeMappingValue() {
+    public TextOverflow createJsonNodeMarshallingValue() {
         return TextOverflow.string("hello-123");
     }
 }

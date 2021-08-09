@@ -93,7 +93,7 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
     }
 
     @Override
-    public Length createJsonNodeMappingValue() {
+    public Length createJsonNodeMarshallingValue() {
         return Length.pixel(123.0);
     }
 }

@@ -148,7 +148,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     // JsonNodeMarshallingTesting...........................................................................................
 
     @Override
-    public final TextNode createJsonNodeMappingValue() {
+    public final TextNode createJsonNodeMarshallingValue() {
         return this.createTextNode();
     }
 }
