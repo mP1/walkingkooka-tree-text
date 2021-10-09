@@ -26,11 +26,16 @@ import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionNumberContexts;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonObject;
+import walkingkooka.tree.json.JsonPropertyName;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
+import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
 
@@ -197,6 +202,126 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 
         this.marshallRoundTripTwiceAndCheck(style);
+    }
+
+    // patch............................................................................................................
+
+    @Test
+    public void testPatchNullJsonFails() {
+        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.patch(null, JsonNodeUnmarshallContexts.fake()));
+    }
+
+    @Test
+    public void testPatchNullContextFails() {
+        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.patch(JsonNode.object(), null));
+    }
+
+    @Test
+    public void testPatchEmptyObject() {
+        this.patchAndCheck(
+                TextStyle.EMPTY,
+                JsonNode.object()
+        );
+    }
+
+    @Test
+    public void testPatchEmptyObject2() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.BLACK),
+                JsonNode.object()
+        );
+    }
+
+    @Test
+    public void testPatchRemoveUnknownProperty() {
+        this.patchAndCheck(
+                TextStyle.EMPTY,
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+        );
+    }
+
+    @Test
+    public void testPatchRemoveUnknownProperty2() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+        );
+    }
+
+    @Test
+    public void testPatchSetProperty() {
+        this.patchAndCheck(
+                TextStyle.EMPTY,
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.BLACK)
+        );
+    }
+
+    @Test
+    public void testPatchSetProperty2() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                        .set(TextStylePropertyName.COLOR, Color.BLACK)
+        );
+    }
+
+    @Test
+    public void testPatchReplaceProperty() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.BLACK),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.WHITE)),
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.WHITE)
+        );
+    }
+
+    @Test
+    public void testPatchSetReplaceAndRemove() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                        .set(TextStylePropertyName.COLOR, Color.BLACK)
+                        .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), marshall(Color.WHITE))
+                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode()),
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.WHITE)
+                        .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+        );
+    }
+
+    private JsonNode marshall(final Object value) {
+        return JsonNodeMarshallContexts.basic()
+                .marshall(value);
+    }
+
+    private void patchAndCheck(final TextStyle before,
+                               final JsonObject patch) {
+        this.patchAndCheck(before, patch, before);
+    }
+
+    private void patchAndCheck(final TextStyle before,
+                               final JsonObject patch,
+                               final TextStyle after) {
+        assertEquals(
+                after,
+                before.patch(patch, JsonNodeUnmarshallContexts.basic(ExpressionNumberContexts.basic(ExpressionNumberKind.BIG_DECIMAL, MathContext.UNLIMITED))),
+                () -> before + " patch " + patch
+        );
     }
 
     // toString.........................................................................................................
