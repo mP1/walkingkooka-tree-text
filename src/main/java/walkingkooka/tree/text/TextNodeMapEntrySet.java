@@ -121,7 +121,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : json.children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshallEntryKey(child);
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
             properties.put(name,
                     name.handler.unmarshall(child, name, context));
         }
