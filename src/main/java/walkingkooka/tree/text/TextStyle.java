@@ -22,6 +22,7 @@ import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -221,5 +222,32 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 TextStyle.class,
                 TextStyleNonEmpty.class,
                 TextStyleEmpty.class);
+    }
+
+    /**
+     * Performs a patch on this {@link TextStyle} returning the result. Null values will result in the property being removed.
+     */
+    public TextStyle patch(final JsonObject patch,
+                           final JsonNodeUnmarshallContext context) {
+        Objects.requireNonNull(patch, "patch");
+        Objects.requireNonNull(context, "context");
+
+        TextStyle result = this;
+
+        for (final JsonNode nameAndValue : patch.children()) {
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(nameAndValue);
+            if (nameAndValue.isNull()) {
+                result = result.remove(name);
+            } else {
+                result = result.set(
+                        name,
+                        Cast.to(
+                                name.handler.unmarshall(nameAndValue, name, context)
+                        )
+                );
+            }
+        }
+
+        return result;
     }
 }
