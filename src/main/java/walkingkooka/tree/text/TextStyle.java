@@ -202,7 +202,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
 
         for (JsonNode child : node.objectOrFail().children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshallEntryKey(child);
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
             properties.put(name,
                     name.handler.unmarshall(child, name, context));
         }

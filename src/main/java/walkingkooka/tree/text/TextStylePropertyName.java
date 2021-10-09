@@ -742,7 +742,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     // JsonNodeContext..................................................................................................
 
-    static TextStylePropertyName<?> unmarshallEntryKey(final JsonNode node) {
+    static TextStylePropertyName<?> unmarshall(final JsonNode node) {
         return with(node.name().value());
     }
 
