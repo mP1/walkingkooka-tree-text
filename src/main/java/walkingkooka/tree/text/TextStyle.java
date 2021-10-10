@@ -162,6 +162,16 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         Objects.requireNonNull(propertyName, "propertyName");
     }
 
+    // setOrRemove......................................................................................................
+
+    /**
+     * Does a set or remove if the value is null.
+     */
+    public final <V> TextStyle setOrRemove(final TextStylePropertyName<V> propertyName, final V value) {
+        return null != value ?
+                this.set(propertyName, value) :
+                this.remove(propertyName);
+    }
     // TextStyleVisitor.................................................................................................
 
     abstract void accept(final TextStyleVisitor visitor);
@@ -236,16 +246,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
         for (final JsonNode nameAndValue : patch.children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(nameAndValue);
-            if (nameAndValue.isNull()) {
-                result = result.remove(name);
-            } else {
-                result = result.set(
-                        name,
-                        Cast.to(
-                                name.handler.unmarshall(nameAndValue, name, context)
-                        )
-                );
-            }
+            result = result.setOrRemove(
+                    name,
+                    Cast.to(
+                            name.handler.unmarshall(nameAndValue, name, context)
+                    )
+            );
         }
 
         return result;

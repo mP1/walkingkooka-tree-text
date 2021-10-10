@@ -163,6 +163,28 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         assertThrows(TextStylePropertyValueException.class, () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH));
     }
 
+    // setOrRemove......................................................................................................
+
+    @Test
+    public void testSetOrRemoveNonNullValue() {
+        final TextStyle style = TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+        assertEquals(
+                style.set(TextStylePropertyName.COLOR, Color.WHITE),
+                style.setOrRemove(TextStylePropertyName.COLOR, Color.WHITE)
+        );
+    }
+
+    @Test
+    public void testSetOrRemoveNullValue() {
+        final TextStyle style = TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+        assertEquals(
+                style.remove(TextStylePropertyName.BACKGROUND_COLOR),
+                style.setOrRemove(TextStylePropertyName.BACKGROUND_COLOR, null)
+        );
+    }
+
     // json.............................................................................................................
 
     @Test
