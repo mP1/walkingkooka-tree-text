@@ -28,12 +28,12 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionNumberContexts;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
+import walkingkooka.tree.json.patch.PatchableTesting;
 
 import java.math.MathContext;
 import java.util.List;
@@ -46,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
         JsonNodeMarshallingTesting<TextStyle>,
+        PatchableTesting<TextStyle>,
         ToStringTesting<TextStyle> {
 
     @Test
@@ -229,16 +230,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     // patch............................................................................................................
 
     @Test
-    public void testPatchNullJsonFails() {
-        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.patch(null, JsonNodeUnmarshallContexts.fake()));
-    }
-
-    @Test
-    public void testPatchNullContextFails() {
-        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.patch(JsonNode.object(), null));
-    }
-
-    @Test
     public void testPatchEmptyObject() {
         this.patchAndCheck(
                 TextStyle.EMPTY,
@@ -331,21 +322,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .marshall(value);
     }
 
-    private void patchAndCheck(final TextStyle before,
-                               final JsonObject patch) {
-        this.patchAndCheck(before, patch, before);
-    }
-
-    private void patchAndCheck(final TextStyle before,
-                               final JsonObject patch,
-                               final TextStyle after) {
-        assertEquals(
-                after,
-                before.patch(patch, JsonNodeUnmarshallContexts.basic(ExpressionNumberContexts.basic(ExpressionNumberKind.BIG_DECIMAL, MathContext.UNLIMITED))),
-                () -> before + " patch " + patch
-        );
-    }
-
     // toString.........................................................................................................
 
     @Test
@@ -413,5 +389,24 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public TextStyle createJsonNodeMarshallingValue() {
         return this.createObject();
+    }
+
+    // PatchableTesting.................................................................................................
+
+    @Override
+    public TextStyle createPatchable() {
+        return this.createObject();
+    }
+
+    @Override
+    public JsonNode createPatch() {
+        return JsonNode.object();
+    }
+
+    @Override
+    public JsonNodeUnmarshallContext createPatchContext() {
+        return JsonNodeUnmarshallContexts.basic(
+                ExpressionNumberContexts.basic(ExpressionNumberKind.BIG_DECIMAL, MathContext.UNLIMITED)
+        );
     }
 }
