@@ -22,10 +22,10 @@ import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.patch.Patchable;
 
 import java.util.List;
 import java.util.Map;
@@ -36,6 +36,7 @@ import java.util.Optional;
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
+        Patchable<TextStyle>,
         TreePrintable {
 
     /**
@@ -234,17 +235,19 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 TextStyleEmpty.class);
     }
 
+    // Patchable........................................................................................................
+
     /**
      * Performs a patch on this {@link TextStyle} returning the result. Null values will result in the property being removed.
      */
-    public TextStyle patch(final JsonObject patch,
+    public TextStyle patch(final JsonNode patch,
                            final JsonNodeUnmarshallContext context) {
         Objects.requireNonNull(patch, "patch");
         Objects.requireNonNull(context, "context");
 
         TextStyle result = this;
 
-        for (final JsonNode nameAndValue : patch.children()) {
+        for (final JsonNode nameAndValue : patch.objectOrFail().children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(nameAndValue);
             result = result.setOrRemove(
                     name,
