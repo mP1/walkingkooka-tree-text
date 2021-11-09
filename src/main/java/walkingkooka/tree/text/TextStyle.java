@@ -251,9 +251,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(nameAndValue);
             result = result.setOrRemove(
                     name,
-                    Cast.to(
-                            name.handler.unmarshall(nameAndValue, name, context)
-                    )
+                    nameAndValue.isNull() ?
+                            null :
+                            Cast.to(
+                                    name.handler.unmarshall(nameAndValue, name, context)
+                            )
             );
         }
 

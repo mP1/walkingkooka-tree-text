@@ -266,6 +266,28 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testPatchRemoveProperty() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JsonNode.nullNode()),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testPatchRemovePropertyEnum() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.TEXT_ALIGN.value()), JsonNode.nullNode()),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
     public void testPatchSetProperty() {
         this.patchAndCheck(
                 TextStyle.EMPTY,
