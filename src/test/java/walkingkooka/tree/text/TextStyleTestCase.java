@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -54,7 +53,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testIsEmpty() {
         final TextStyle textStyle = this.createObject();
-        assertEquals(textStyle.value().isEmpty(),
+        this.checkEquals(textStyle.value().isEmpty(),
                 textStyle.isEmpty(),
                 () -> "" + textStyle);
     }
@@ -105,7 +104,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     private void mergeAndCheck1(final TextStyle textStyle,
                                 final TextStyle other,
                                 final TextStyle expected) {
-        assertEquals(expected,
+        this.checkEquals(expected,
                 textStyle.merge(other),
                 () -> textStyle + " merge " + other);
     }
@@ -128,7 +127,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                final TextNode textNode,
                                final TextNode expected) {
         final TextNode actual = textStyle.replace(textNode);
-        assertEquals(expected,
+        this.checkEquals(expected,
                 actual,
                 () -> textStyle + " replace " + textNode + "\nEXPECTED.root\n" + expected.root() + "\nACTUAL.root\n" + actual.root() + '\n');
     }
@@ -150,7 +149,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     final <TT> void getAndCheck(final TextStyle textStyle,
                                 final TextStylePropertyName<TT> propertyName,
                                 final TT value) {
-        assertEquals(Optional.ofNullable(value),
+        this.checkEquals(Optional.ofNullable(value),
                 textStyle.get(propertyName),
                 () -> textStyle + " get " + propertyName);
     }
@@ -180,7 +179,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                      final TT value,
                                      final TextStyle expected) {
         final TextStyle set = textStyle.set(propertyName, value);
-        assertEquals(expected,
+        this.checkEquals(expected,
                 set,
                 () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
         return set;
@@ -203,7 +202,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                    final TextStylePropertyName<?> propertyName,
                                    final TextStyle expected) {
         final TextStyle removed = textStyle.remove(propertyName);
-        assertEquals(expected,
+        this.checkEquals(expected,
                 removed,
                 () -> textStyle + " remove " + propertyName);
         return removed;

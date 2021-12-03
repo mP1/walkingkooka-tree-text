@@ -39,7 +39,6 @@ import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -82,7 +81,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final TextStyle textStyle = TextStyle.with(map);
 
         map.clear();
-        assertEquals(copy, textStyle.value(), "value");
+        this.checkEquals(copy, textStyle.value(), "value");
     }
 
     @Test
@@ -97,7 +96,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         map.put(this.property2(), this.value2());
 
         final TextStyle textStyle = TextStyle.with(map);
-        assertEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle);
+        this.checkEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle);
     }
 
     // setChildren......................................................................................................
@@ -152,7 +151,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     private void setChildrenAndCheck(final TextStyle properties,
                                      final List<TextNode> children,
                                      final TextNode textStyleNode) {
-        assertEquals(textStyleNode,
+        this.checkEquals(textStyleNode,
                 properties.setChildren(children),
                 () -> properties + " setChildren " + children);
     }
@@ -170,7 +169,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveNonNullValue() {
         final TextStyle style = TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
-        assertEquals(
+        this.checkEquals(
                 style.set(TextStylePropertyName.COLOR, Color.WHITE),
                 style.setOrRemove(TextStylePropertyName.COLOR, Color.WHITE)
         );
@@ -180,7 +179,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveNullValue() {
         final TextStyle style = TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
-        assertEquals(
+        this.checkEquals(
                 style.remove(TextStylePropertyName.BACKGROUND_COLOR),
                 style.setOrRemove(TextStylePropertyName.BACKGROUND_COLOR, null)
         );

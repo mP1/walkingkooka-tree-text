@@ -24,7 +24,6 @@ import walkingkooka.color.Color;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.visit.Visiting;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextStyleVisitor> {
@@ -813,14 +812,14 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         return new TestTextStyleVisitor();
     }
 
-    static class TestTextStyleVisitor extends FakeTextStyleVisitor {
+    class TestTextStyleVisitor extends FakeTextStyleVisitor {
 
         <T> void accept(final TextStylePropertyName<T> propertyName, final T value) {
             this.expected = value;
 
             final TextStyle textStyle = textStyle(propertyName, value);
             this.accept(textStyle);
-            assertEquals(this.expected, this.visited);
+            checkEquals(this.expected, this.visited);
 
             new TextStyleVisitor() {
             }.accept(textStyle);

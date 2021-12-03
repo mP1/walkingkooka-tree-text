@@ -28,7 +28,6 @@ import walkingkooka.reflect.JavaVisibility;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -73,7 +72,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final TextStyle textStyle = this.textStyle();
 
         for (BoxEdge edge : BoxEdge.values()) {
-            assertEquals(edge, this.createBorderMarginPadding(edge, textStyle).edge(), "edge");
+            this.checkEquals(edge, this.createBorderMarginPadding(edge, textStyle).edge(), "edge");
         }
     }
 
@@ -104,7 +103,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final Length<?> width = Length.pixel(2.5);
         final BoxEdge edge = BoxEdge.BOTTOM;
         final T borderMarginPadding = this.createBorderMarginPadding(edge, this.textStyle(this.widthPropertyName(edge), width));
-        assertEquals(Optional.of(width), borderMarginPadding.width(), "width");
+        this.checkEquals(Optional.of(width), borderMarginPadding.width(), "width");
     }
 
     @Test
@@ -126,7 +125,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.of(differentWidth));
 
         assertNotSame(borderMarginPadding, different);
-        assertEquals(this.textStyle(propertyName, differentWidth), different.textStyle());
+        this.checkEquals(this.textStyle(propertyName, differentWidth), different.textStyle());
     }
 
     @Test
@@ -143,7 +142,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         assertNotSame(borderMarginPadding, different);
 
         properties.put(this.widthPropertyName(edge), differentWidth);
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     @Test
@@ -161,7 +160,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         assertNotSame(borderMarginPadding, different);
 
         properties.remove(this.widthPropertyName(edge));
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     // equals...........................................................................................................
@@ -198,8 +197,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     final void check(final BorderMarginPadding borderMarginPadding,
                      final BoxEdge edge,
                      final TextStyle textStyle) {
-        assertEquals(edge, borderMarginPadding.edge(), "edge");
-        assertEquals(textStyle, borderMarginPadding.textStyle(), "textStyle");
+        this.checkEquals(edge, borderMarginPadding.edge(), "edge");
+        this.checkEquals(textStyle, borderMarginPadding.textStyle(), "textStyle");
     }
 
     // ClassTesting.....................................................................................................

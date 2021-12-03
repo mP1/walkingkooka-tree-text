@@ -23,17 +23,17 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
     @Test
     public void testBuildAndCheckToString() {
-        this.toStringAndCheck(TextNode.style(Lists.of(
-                TextNode.text("text-1a"),
-                TextNode.styleName(TextStyleName.with("style123"))
-                        .setChildren(Lists.of(TextNode.text("text-2b"), TextNode.placeholder(TextPlaceholderName.with("place-1")))))),
-                "[\"text-1a\", style123[\"text-2b\", place-1]]");
+        this.toStringAndCheck(
+                TextNode.style(Lists.of(
+                        TextNode.text("text-1a"),
+                        TextNode.styleName(TextStyleName.with("style123"))
+                                .setChildren(Lists.of(TextNode.text("text-2b"), TextNode.placeholder(TextPlaceholderName.with("place-1")))))),
+                "[\"text-1a\", style123[\"text-2b\", place-1]]"
+        );
     }
 
     @Test
@@ -41,11 +41,13 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
         final TextNode node = TextNode.style(Lists.of(
                 TextNode.styleName(TextStyleName.with("style123"))
                         .setChildren(Lists.of(TextNode.text("text-1a"), TextNode.text("text-2b"), TextNode.placeholder(TextPlaceholderName.with("place-1"))))));
-        assertEquals(2, TextNode.absoluteNodeSelector()
-                .descendant()
-                .named(Text.NAME)
-                .stream(node, (c) -> ExpressionEvaluationContexts.fake(), TextNode.class)
-                .count());
+        this.checkEquals(
+                2L,
+                TextNode.absoluteNodeSelector()
+                        .descendant()
+                        .named(Text.NAME)
+                        .stream(node, (c) -> ExpressionEvaluationContexts.fake(), TextNode.class)
+                        .count());
     }
 
     // ClassTesting.....................................................................................................

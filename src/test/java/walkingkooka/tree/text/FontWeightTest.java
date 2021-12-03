@@ -26,7 +26,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -44,7 +43,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     public void testWith() {
         final int value = 400;
         final FontWeight size = FontWeight.with(value);
-        assertEquals(value, size.value(), "value");
+        this.checkEquals(value, size.value(), "value");
     }
 
     @Test

@@ -28,7 +28,6 @@ import walkingkooka.visit.Visiting;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> {
@@ -150,8 +149,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             }
         }.accept(textStyle);
 
-        assertEquals("12", b.toString());
-        assertEquals(Lists.of(textStyle, textStyle),
+        this.checkEquals("12", b.toString());
+        this.checkEquals(Lists.of(textStyle, textStyle),
                 visited,
                 "visited");
     }

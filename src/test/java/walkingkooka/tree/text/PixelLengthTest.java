@@ -25,7 +25,6 @@ import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
@@ -69,14 +68,14 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public void testWith() {
         final double value = 12.5;
         final PixelLength pixels = PixelLength.with(value);
-        assertEquals(value, pixels.value(), "value");
+        this.checkEquals(value, pixels.value(), "value");
     }
 
     @Test
     public void testWithNegative() {
         final double value = -12.5;
         final PixelLength pixels = PixelLength.with(value);
-        assertEquals(value, pixels.value(), "value");
+        this.checkEquals(value, pixels.value(), "value");
     }
 
     @Test
@@ -124,7 +123,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     // toString........................................................................................................

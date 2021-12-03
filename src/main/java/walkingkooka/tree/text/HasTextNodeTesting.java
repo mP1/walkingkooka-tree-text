@@ -19,13 +19,11 @@ package walkingkooka.tree.text;
 
 import walkingkooka.test.Testing;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public interface HasTextNodeTesting extends Testing {
 
     default void toTextNodeAndCheck(final HasTextNode has,
                                     final TextNode textNode) {
-        assertEquals(textNode,
+        this.checkEquals(textNode,
                 has.toTextNode(),
                 () -> "" + has);
     }

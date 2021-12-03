@@ -27,7 +27,6 @@ import walkingkooka.visit.Visiting;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -282,11 +281,11 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
                 visited.add(t);
             }
         }.accept(styleName);
-        assertEquals("1517217262", b.toString());
-        assertEquals(Lists.of(styleName, styleName,
-                text1, text1, text1,
-                text2, text2, text2,
-                styleName, styleName),
+        this.checkEquals("1517217262", b.toString());
+        this.checkEquals(Lists.of(styleName, styleName,
+                        text1, text1, text1,
+                        text2, text2, text2,
+                        styleName, styleName),
                 visited,
                 "visited");
     }
@@ -334,7 +333,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     private void checkStyleName(final TextStyleNameNode node, final TextStyleName name) {
-        assertEquals(name, node.styleName(), "name");
+        this.checkEquals(name, node.styleName(), "name");
     }
 
     // JsonNodeMarshallingTesting........................................................................................

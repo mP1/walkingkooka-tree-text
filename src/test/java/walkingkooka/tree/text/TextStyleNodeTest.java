@@ -29,8 +29,6 @@ import walkingkooka.visit.Visiting;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -187,8 +185,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
     }
 
-    private static void checkAttributes(final TextNode node, final Map<TextStylePropertyName<?>, Object> attributes) {
-        assertEquals(attributes, node.attributes(), "attributes");
+    private void checkAttributes(final TextNode node, final Map<TextStylePropertyName<?>, Object> attributes) {
+        this.checkEquals(attributes, node.attributes(), "attributes");
     }
 
     @Test
@@ -200,7 +198,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
         final TextNode node = TextNode.style(TextNode.NO_CHILDREN)
                 .setAttributes(style);
-        assertEquals(TextStyle.with(style), node.textStyle(), "textStyle");
+        this.checkEquals(TextStyle.with(style), node.textStyle(), "textStyle");
     }
 
     // HasText..........................................................................................................
@@ -452,11 +450,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 visited.add(t);
             }
         }.accept(styleNode);
-        assertEquals("1517217262", b.toString());
-        assertEquals(Lists.of(styleNode, styleNode,
-                text1, text1, text1,
-                text2, text2, text2,
-                styleNode, styleNode),
+        this.checkEquals("1517217262", b.toString());
+        this.checkEquals(Lists.of(styleNode, styleNode,
+                        text1, text1, text1,
+                        text2, text2, text2,
+                        styleNode, styleNode),
                 visited,
                 "visited");
     }
@@ -502,12 +500,12 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         return textStyleNode(text1(), text2());
     }
 
-    private static TextStyleNode textStyleNode(final TextNode... children) {
+    private TextStyleNode textStyleNode(final TextNode... children) {
         return textStyleNode(Lists.of(children));
     }
 
-    private static TextStyleNode textStyleNode(final List<TextNode> children) {
-        assertNotEquals(1, children.size(), () -> "children must not be 1=" + children);
+    private TextStyleNode textStyleNode(final List<TextNode> children) {
+        this.checkNotEquals(1, children.size(), () -> "children must not be 1=" + children);
         return Cast.to(TextStyleNode.with(children, TextStyleNode.NO_ATTRIBUTES_MAP));
     }
 

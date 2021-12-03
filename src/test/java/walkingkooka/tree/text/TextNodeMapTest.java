@@ -27,7 +27,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -79,7 +78,7 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
             keys.add(key);
         }
 
-        assertEquals(Lists.of(this.property2(), this.property1()), keys);
+        this.checkEquals(Lists.of(this.property2(), this.property1()), keys);
     }
 
     @Test

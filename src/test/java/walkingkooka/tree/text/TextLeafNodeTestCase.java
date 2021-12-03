@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends TextNodeTestCase2<N> {
@@ -58,8 +57,8 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
 
     final void createTextNodeAndCheck(final V value) {
         final N textNode = this.createTextNode(value);
-        assertEquals(value, textNode.value(), "value");
+        this.checkEquals(value, textNode.value(), "value");
         this.childCountCheck(textNode, 0);
-        assertEquals(TextNode.NO_ATTRIBUTES, textNode.attributes(), "attributes");
+        this.checkEquals(TextNode.NO_ATTRIBUTES, textNode.attributes(), "attributes");
     }
 }

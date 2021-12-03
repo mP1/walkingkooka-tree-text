@@ -26,7 +26,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -45,14 +44,14 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     public void testWith() {
         final int value = 10;
         final FontSize size = FontSize.with(value);
-        assertEquals(value, size.value(), "value");
+        this.checkEquals(value, size.value(), "value");
     }
 
     @Test
     public void testWithNonConstant() {
         final int value = 1000;
         final FontSize size = FontSize.with(value);
-        assertEquals(value, size.value(), "value");
+        this.checkEquals(value, size.value(), "value");
 
         assertNotSame(FontSize.with(value), size);
     }

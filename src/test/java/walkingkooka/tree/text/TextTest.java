@@ -23,7 +23,6 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -80,7 +79,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     private void checkText(final Text text, final String value) {
         this.textAndCheck(text, value);
         this.textLengthAndCheck(text, value);
-        assertEquals(value, text.value(), "value");
+        this.checkEquals(value, text.value(), "value");
     }
 
     @Test
@@ -93,10 +92,10 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testIsMethods() {
         final Text text = Text.with("abc");
-        assertEquals(true, text.isText(), "isText");
-        assertEquals(false, text.isPlaceholder(), "isPlaceholder");
-        assertEquals(false, text.isStyle(), "isStyle");
-        assertEquals(false, text.isStyleName(), "isStyleName");
+        this.checkEquals(true, text.isText(), "isText");
+        this.checkEquals(false, text.isPlaceholder(), "isPlaceholder");
+        this.checkEquals(false, text.isStyle(), "isStyle");
+        this.checkEquals(false, text.isStyleName(), "isStyleName");
     }
 
     // HasTextOffset .....................................................................................................
@@ -149,7 +148,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
                 b.append("3");
             }
         }.accept(node);
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     // TreePrintable....................................................................................................
