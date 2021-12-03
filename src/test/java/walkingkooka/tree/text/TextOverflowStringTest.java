@@ -23,7 +23,6 @@ import walkingkooka.tree.json.JsonNode;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverflowString> {
@@ -43,22 +42,22 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
     @Test
     public void testWith() {
         final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
-        assertEquals(Optional.of(TEXT), textOverflow.value());
+        this.checkEquals(Optional.of(TEXT), textOverflow.value());
     }
 
     @Test
     public void testIsClip() {
-        assertEquals(false, TextOverflowString.with(TEXT).isClip());
+        this.checkEquals(false, TextOverflowString.with(TEXT).isClip());
     }
 
     @Test
     public void testIsEllipse() {
-        assertEquals(false, TextOverflowString.with(TEXT).isEllipse());
+        this.checkEquals(false, TextOverflowString.with(TEXT).isEllipse());
     }
 
     @Test
     public void testIsString() {
-        assertEquals(true, TextOverflowString.with(TEXT).isString());
+        this.checkEquals(true, TextOverflowString.with(TEXT).isString());
     }
 
     @Test

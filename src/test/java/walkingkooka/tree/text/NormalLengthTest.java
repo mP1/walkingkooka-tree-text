@@ -24,7 +24,6 @@ import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -78,7 +77,7 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     // toString........................................................................................................

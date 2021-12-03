@@ -24,7 +24,6 @@ import walkingkooka.color.Color;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -37,7 +36,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final Color color = Color.parse("red");
         final BoxEdge edge = BoxEdge.BOTTOM;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_COLOR, color));
-        assertEquals(Optional.of(color), border.color(), "rgb");
+        this.checkEquals(Optional.of(color), border.color(), "rgb");
     }
 
     @Test
@@ -58,7 +57,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final Border different = border.setColor(Optional.of(differentColor));
 
         assertNotSame(border, different);
-        assertEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, differentColor), different.textStyle());
+        this.checkEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, differentColor), different.textStyle());
     }
 
     @Test
@@ -76,7 +75,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, differentColor);
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     @Test
@@ -93,7 +92,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_COLOR);
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     // style............................................................................................................
@@ -103,7 +102,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final BorderStyle style = BorderStyle.DOTTED;
         final BoxEdge edge = BoxEdge.BOTTOM;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_STYLE, style));
-        assertEquals(Optional.of(style), border.style(), "style");
+        this.checkEquals(Optional.of(style), border.style(), "style");
     }
 
     @Test
@@ -124,7 +123,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final Border different = border.setStyle(Optional.of(differentStyle));
 
         assertNotSame(border, different);
-        assertEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_STYLE, differentStyle), different.textStyle());
+        this.checkEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_STYLE, differentStyle), different.textStyle());
     }
 
     @Test
@@ -142,7 +141,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, differentStyle);
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     @Test
@@ -159,7 +158,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_STYLE);
-        assertEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(TextStyle.with(properties), different.textStyle());
     }
 
     // toString.........................................................................................................

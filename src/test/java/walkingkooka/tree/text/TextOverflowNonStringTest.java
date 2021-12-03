@@ -22,8 +22,6 @@ import walkingkooka.tree.json.JsonNode;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOverflowNonString> {
 
     private final static String TEXT = "abc123";
@@ -31,32 +29,32 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
     @Test
     public void testWith() {
         final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
-        assertEquals(Optional.of(TEXT), textOverflow.value());
+        this.checkEquals(Optional.of(TEXT), textOverflow.value());
     }
 
     @Test
     public void testIsClipClip() {
-        assertEquals(true, TextOverflow.CLIP.isClip());
+        this.checkEquals(true, TextOverflow.CLIP.isClip());
     }
 
     @Test
     public void testIsClipEllipse() {
-        assertEquals(false, TextOverflow.ELLIPSIS.isClip());
+        this.checkEquals(false, TextOverflow.ELLIPSIS.isClip());
     }
 
     @Test
     public void testIsEllipseClip() {
-        assertEquals(false, TextOverflow.CLIP.isEllipse());
+        this.checkEquals(false, TextOverflow.CLIP.isEllipse());
     }
 
     @Test
     public void testIsEllipseEllipse() {
-        assertEquals(true, TextOverflow.ELLIPSIS.isEllipse());
+        this.checkEquals(true, TextOverflow.ELLIPSIS.isEllipse());
     }
 
     @Test
     public void testIsString() {
-        assertEquals(false, TextOverflow.ELLIPSIS.isString());
+        this.checkEquals(false, TextOverflow.ELLIPSIS.isString());
     }
 
     @Test

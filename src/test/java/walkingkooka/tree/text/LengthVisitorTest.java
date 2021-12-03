@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.visit.Visiting;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisitor> {
@@ -48,7 +47,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
 
         }.accept(Length.pixel(10.0));
 
-        assertEquals("12", b.toString());
+        this.checkEquals("12", b.toString());
     }
 
     @Test
@@ -75,7 +74,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     @Test
@@ -107,7 +106,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     @Test
@@ -139,7 +138,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     @Test
@@ -171,7 +170,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     @Test

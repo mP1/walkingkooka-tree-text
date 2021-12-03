@@ -30,14 +30,13 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>> {
 
     @Test
     public void testConstants() {
-        assertEquals(Lists.empty(),
+        this.checkEquals(Lists.empty(),
                 Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
                         .filter(FieldAttributes.STATIC::is)
                         .filter(f -> f.getType() == TextStylePropertyName.class)
@@ -57,7 +56,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testConstantValue() {
-        assertEquals(Lists.empty(),
+        this.checkEquals(Lists.empty(),
                 Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
                         .filter(FieldAttributes.STATIC::is)
                         .filter(f -> f.getType() == TextStylePropertyName.class)
@@ -87,7 +86,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testValues() {
-        assertEquals(
+        this.checkEquals(
                 TextStylePropertyName.values(),
                 Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
                         .filter(FieldAttributes.STATIC::is)
@@ -125,7 +124,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     private void constantNameAndCheck(final TextStylePropertyName<?> property,
                                       final String constantName) {
-        assertEquals(
+        this.checkEquals(
                 constantName,
                 property.constantName(),
                 () -> property + ".constantName()"
@@ -134,7 +133,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testEnumType() {
-        assertEquals((Object)
+        this.checkEquals((Object)
                         TextStylePropertyName.values()
                                 .stream()
                                 .filter(n -> n.enumType().isPresent())

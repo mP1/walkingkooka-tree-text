@@ -30,7 +30,6 @@ import walkingkooka.text.CharSequences;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
         ConstantsTesting<LengthUnit<?, ?>>,
@@ -44,7 +43,7 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
 
     @Test
     public void testSuffix() {
-        assertEquals("px", LengthUnit.PIXEL.suffix(), "suffix");
+        this.checkEquals("px", LengthUnit.PIXEL.suffix(), "suffix");
     }
 
     @Test
@@ -63,17 +62,17 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
     }
 
     private void unitPresentAndCheck(final String text, final LengthUnit<?, ?> unit, final boolean expected) {
-        assertEquals(expected, unit.unitPresent(text), () -> "unitPresent " + CharSequences.quoteAndEscape(text));
+        this.checkEquals(expected, unit.unitPresent(text), () -> "unitPresent " + CharSequences.quoteAndEscape(text));
     }
 
     @Test
     public void testCreate() {
-        assertEquals(Length.pixel(99.0), LengthUnit.PIXEL.create(99.0));
+        this.checkEquals(Length.pixel(99.0), LengthUnit.PIXEL.create(99.0));
     }
 
     @Test
     public void testParse() {
-        assertEquals(Length.pixel(99.0), LengthUnit.PIXEL.parse("99.0px"));
+        this.checkEquals(Length.pixel(99.0), LengthUnit.PIXEL.parse("99.0px"));
     }
 
     @Test

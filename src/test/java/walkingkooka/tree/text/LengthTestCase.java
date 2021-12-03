@@ -31,7 +31,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
@@ -47,7 +46,7 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
     }
 
     final void pixelLengthAndCheck(final L length, final double expected) {
-        assertEquals(
+        this.checkEquals(
                 expected,
                 length.pixelValue(),
                 () -> "" + length + " pixelLength"
@@ -61,7 +60,7 @@ public abstract class LengthTestCase<L extends Length, V> implements ClassTestin
     @Test
     public final void testUnit() {
         final L length = this.createLength();
-        assertEquals(this.unit(), length.unit(), "unit");
+        this.checkEquals(this.unit(), length.unit(), "unit");
     }
 
     abstract L createLength();

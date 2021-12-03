@@ -24,7 +24,6 @@ import walkingkooka.visit.Visiting;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -54,7 +53,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
     public void testWith() {
         final Long value = 12L;
         final NumberLength number = NumberLength.with(value);
-        assertEquals(value, number.value(), "value");
+        this.checkEquals(value, number.value(), "value");
     }
 
     @Test
@@ -100,7 +99,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
             }
         }.accept(length);
 
-        assertEquals("132", b.toString());
+        this.checkEquals("132", b.toString());
     }
 
     // toString........................................................................................................

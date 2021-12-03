@@ -28,7 +28,6 @@ import walkingkooka.tree.json.JsonNode;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -57,7 +56,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyleNonEmpty textStyle = this.createTextStyle(map);
 
         map.clear();
-        assertEquals(copy, textStyle.value(), "value");
+        this.checkEquals(copy, textStyle.value(), "value");
     }
 
     @Test
@@ -72,7 +71,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         map.put(this.property2(), this.value2());
 
         final TextStyleNonEmpty textStyle = this.createTextStyle(map);
-        assertEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
+        this.checkEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
     }
 
     // merge............................................................................................................

@@ -28,7 +28,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> extends TextNodeTestCase<P>
@@ -57,7 +56,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
         final JsonNode json = handler.marshall(value, this.marshallContext());
 
-        assertEquals(value,
+        this.checkEquals(value,
                 handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
                 () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
     }
@@ -70,20 +69,20 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final void checkFails(final Object value, final String message) {
         final TextStylePropertyValueException thrown = assertThrows(TextStylePropertyValueException.class, () -> this.check(value));
-        assertEquals(message, thrown.getMessage(), "message");
+        this.checkEquals(message, thrown.getMessage(), "message");
 
         final TextStylePropertyValueException thrown2 = assertThrows(TextStylePropertyValueException.class, () -> this.propertyName().check(value));
-        assertEquals(message, thrown2.getMessage(), "message");
+        this.checkEquals(message, thrown2.getMessage(), "message");
     }
 
     final void unmarshallAndCheck(final JsonNode node, final T value) {
-        assertEquals(value,
+        this.checkEquals(value,
                 this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
                 () -> "from JsonNode " + node);
     }
 
     final void marshallAndCheck(final T value, final JsonNode node) {
-        assertEquals(node,
+        this.checkEquals(node,
                 this.handler().marshall(value, this.marshallContext()),
                 () -> "marshall " + CharSequences.quoteIfChars(value));
     }

@@ -30,7 +30,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -56,7 +55,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     public void testWith() {
         final double value = 0.5;
         final Opacity size = Opacity.with(value);
-        assertEquals(value, size.value(), "value");
+        this.checkEquals(value, size.value(), "value");
     }
 
     @Test

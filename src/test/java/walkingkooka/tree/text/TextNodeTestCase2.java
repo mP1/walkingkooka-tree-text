@@ -33,7 +33,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -66,7 +65,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
 
         final TextStyleNode parent = after.parentOrFail().cast();
         this.childCountCheck(parent, before);
-        assertEquals(attributes, parent.attributes(), "attributes");
+        this.checkEquals(attributes, parent.attributes(), "attributes");
     }
 
     // textStyle........................................................................................................
@@ -74,8 +73,8 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     @Test
     public final void testTextStyle() {
         final N textNode = this.createTextNode();
-        assertEquals(textNode.attributes(), textNode.textStyle().textStyleMap());
-        assertEquals(TextStyle.with(textNode.attributes()), textNode.textStyle());
+        this.checkEquals(textNode.attributes(), textNode.textStyle().textStyleMap());
+        this.checkEquals(TextStyle.with(textNode.attributes()), textNode.textStyle());
     }
 
     // HasTextOffset .....................................................................................................
