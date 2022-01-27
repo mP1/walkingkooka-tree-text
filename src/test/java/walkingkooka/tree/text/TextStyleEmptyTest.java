@@ -21,11 +21,12 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.tree.expression.ExpressionNumberContexts;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import walkingkooka.visit.Visiting;
 
+import java.math.MathContext;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -171,7 +172,16 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.unmarshall(JsonNode.object(), JsonNodeUnmarshallContexts.basic(ExpressionNumberContexts.fake())));
+        assertSame(
+                TextStyle.EMPTY,
+                TextStyle.unmarshall(
+                        JsonNode.object(),
+                        JsonNodeUnmarshallContexts.basic(
+                                ExpressionNumberKind.DEFAULT,
+                                MathContext.DECIMAL32
+                        )
+                )
+        );
     }
 
     @Override
