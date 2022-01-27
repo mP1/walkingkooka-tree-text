@@ -22,11 +22,14 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.text.CharSequences;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
+
+import java.math.MathContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -98,7 +101,10 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     abstract String propertyValueType();
 
     final JsonNodeUnmarshallContext unmarshallContext() {
-        return JsonNodeUnmarshallContexts.basic(JsonNodeUnmarshallContexts.fake());
+        return JsonNodeUnmarshallContexts.basic(
+                ExpressionNumberKind.DEFAULT,
+                MathContext.DECIMAL32
+        );
     }
 
     final JsonNodeMarshallContext marshallContext() {

@@ -25,7 +25,6 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.tree.expression.ExpressionNumberContexts;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -356,7 +355,13 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testFromEmptyJsonObject() {
-        assertSame(TextStyle.EMPTY, TextStyle.unmarshall(JsonNode.object(), JsonNodeUnmarshallContexts.basic(ExpressionNumberContexts.fake())));
+        assertSame(
+                TextStyle.EMPTY,
+                TextStyle.unmarshall(
+                        JsonNode.object(),
+                        this.createPatchContext()
+                )
+        );
     }
 
     @Override
@@ -427,7 +432,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public JsonNodeUnmarshallContext createPatchContext() {
         return JsonNodeUnmarshallContexts.basic(
-                ExpressionNumberContexts.basic(ExpressionNumberKind.BIG_DECIMAL, MathContext.UNLIMITED)
+                ExpressionNumberKind.BIG_DECIMAL,
+                MathContext.UNLIMITED
         );
     }
 }
