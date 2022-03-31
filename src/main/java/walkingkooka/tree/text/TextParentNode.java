@@ -135,7 +135,7 @@ abstract class TextParentNode extends TextNode {
         final List<TextNode> children = this.children();
         return children.isEmpty() ?
                 node :
-                node.set(CHILDREN_PROPERTY, context.marshallWithTypeList(children));
+                node.set(CHILDREN_PROPERTY, context.marshallWithTypeCollection(children));
     }
 
     final static String CHILDREN = "children";
