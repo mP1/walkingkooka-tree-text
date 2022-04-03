@@ -21,6 +21,8 @@ import walkingkooka.tree.TreeException;
 
 public class TextNodeException extends TreeException {
 
+    private static final long serialVersionUID = 1L;
+
     protected TextNodeException() {
         super();
     }
