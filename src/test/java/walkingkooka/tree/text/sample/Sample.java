@@ -105,28 +105,26 @@ public final class Sample {
             private void endElement(final String element) {
                 printer.outdent();
                 printer.lineStart();
-                printer.print("</" + element + ">"+eol);
+                printer.print("</" + element + ">" + eol);
             }
         }.accept(node);
 
-        /**
-         * <pre>
-         * <HTML>
-         *   <head>
-         *     <TITLE>
-         *       title123
-         *     </TITLE>
-         *   </head>
-         *   <BODY>
-         *     before
-         *     <SPAN style="color: #334455;">
-         *       something gray
-         *     </SPAN>
-         *     after
-         *   </BODY>
-         * </HTML>
-         * </pre>
-         */
+        // <pre>
+        // <HTML>
+        //   <head>
+        //     <TITLE>
+        //       title123
+        //     </TITLE>
+        //   </head>
+        //   <BODY>
+        //     before
+        //     <SPAN style="color: #334455;">
+        //       something gray
+        //     </SPAN>
+        //     after
+        //   </BODY>
+        // </HTML>
+        // </pre>
         System.out.println(html);
     }
 }
