@@ -22,5 +22,5 @@ public enum FontVariant {
     // font-variant: normal|small-caps|initial|inherit;
     NORMAL,
     SMALL_CAPS,
-    INITIAL;
+    INITIAL
 }

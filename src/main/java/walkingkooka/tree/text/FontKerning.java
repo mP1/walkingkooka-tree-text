@@ -22,5 +22,5 @@ public enum FontKerning {
     // font-kerning: auto|normal|none;
     AUTO,
     NORMAL,
-    NONE;
+    NONE
 }
