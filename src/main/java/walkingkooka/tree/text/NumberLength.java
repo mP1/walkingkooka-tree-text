@@ -116,7 +116,7 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
     }
 
     @Override
-    boolean equals0(final Length other) {
+    boolean equals0(final Length<?> other) {
         return 0 == Long.compare(this.value, other.longValue());
     }
 

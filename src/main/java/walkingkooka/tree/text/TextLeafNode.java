@@ -66,11 +66,11 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return this.replace0(index);
     }
 
-    final TextLeafNode replace0(final int index) {
+    final TextLeafNode<V> replace0(final int index) {
         return this.replace1(index, this.value);
     }
 
-    abstract TextLeafNode replace1(final int index, final V value);
+    abstract TextLeafNode<V> replace1(final int index, final V value);
 
     // children.........................................................................................................
 
@@ -134,7 +134,7 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     }
 
-    private boolean equalsIgnoringParentAndChildren0(final TextLeafNode other) {
+    private boolean equalsIgnoringParentAndChildren0(final TextLeafNode<?> other) {
         return this.value.equals(other.value);
     }
 }

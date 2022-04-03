@@ -53,7 +53,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Test
     public void testNoneLength() {
         final StringBuilder b = new StringBuilder();
-        final Length length = Length.none();
+        final Length<?> length = Length.none();
 
         new FakeLengthVisitor() {
             @Override
@@ -85,7 +85,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Test
     public void testNormalLength() {
         final StringBuilder b = new StringBuilder();
-        final Length length = Length.normal();
+        final Length<?> length = Length.normal();
 
         new FakeLengthVisitor() {
             @Override
@@ -117,7 +117,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Test
     public void testNumberLength() {
         final StringBuilder b = new StringBuilder();
-        final Length length = Length.number(1);
+        final Length<?> length = Length.number(1);
 
         new FakeLengthVisitor() {
             @Override
@@ -149,7 +149,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Test
     public void testPixelLength() {
         final StringBuilder b = new StringBuilder();
-        final Length length = Length.pixel(12.3);
+        final Length<?> length = Length.pixel(12.3);
 
         new FakeLengthVisitor() {
             @Override
