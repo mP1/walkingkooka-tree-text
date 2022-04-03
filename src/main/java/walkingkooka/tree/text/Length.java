@@ -209,8 +209,8 @@ public abstract class Length<V> {
     /**
      * Accepts a json string holding a number and unit.
      */
-    static Length unmarshall(final JsonNode node,
-                             final JsonNodeUnmarshallContext context) {
+    static Length<?> unmarshall(final JsonNode node,
+                                final JsonNodeUnmarshallContext context) {
         return unmarshall0(node, Length::parse);
     }
 

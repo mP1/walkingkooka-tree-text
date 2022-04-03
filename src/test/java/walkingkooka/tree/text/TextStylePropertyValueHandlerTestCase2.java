@@ -33,7 +33,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
 
     @Test
     public final void testCheckWrongValueTypeFails2() {
-        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode();
+        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
         this.checkFails(
                 fakeNode,
                 "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
