@@ -118,8 +118,7 @@ public final class TextStyleNameNode extends TextParentNode {
         return this;
     }
 
-    @Override
-    final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    @Override TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return this.setAttributesNonEmptyTextStyleMap0(textStyleMap);
     }
 

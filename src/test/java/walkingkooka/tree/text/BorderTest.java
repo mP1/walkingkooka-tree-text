@@ -32,7 +32,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     // rgb............................................................................................................
 
     @Test
-    public final void testColor() {
+    public void testColor() {
         final Color color = Color.parse("red");
         final BoxEdge edge = BoxEdge.BOTTOM;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_COLOR, color));
@@ -40,7 +40,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetColorSame() {
+    public void testSetColorSame() {
         final Color color = Color.parse("blue");
         final BoxEdge edge = BoxEdge.TOP;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_TOP_COLOR, color));
@@ -48,7 +48,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetColorDifferent() {
+    public void testSetColorDifferent() {
         final Color color = Color.parse("lime");
         final BoxEdge edge = BoxEdge.LEFT;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, color));
@@ -61,7 +61,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetColorDifferent2() {
+    public void testSetColorDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
@@ -79,7 +79,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetColorRemoved() {
+    public void testSetColorRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
@@ -98,7 +98,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     // style............................................................................................................
 
     @Test
-    public final void testStyle() {
+    public void testStyle() {
         final BorderStyle style = BorderStyle.DOTTED;
         final BoxEdge edge = BoxEdge.BOTTOM;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_STYLE, style));
@@ -106,7 +106,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetStyleSame() {
+    public void testSetStyleSame() {
         final BorderStyle style = BorderStyle.DASHED;
         final BoxEdge edge = BoxEdge.TOP;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_TOP_STYLE, style));
@@ -114,7 +114,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetStyleDifferent() {
+    public void testSetStyleDifferent() {
         final BorderStyle style = BorderStyle.HIDDEN;
         final BoxEdge edge = BoxEdge.LEFT;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_LEFT_STYLE, style));
@@ -127,7 +127,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetStyleDifferent2() {
+    public void testSetStyleDifferent2() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.OUTSET);
@@ -145,7 +145,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public final void testSetStyleRemoved() {
+    public void testSetStyleRemoved() {
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
         properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOUBLE);

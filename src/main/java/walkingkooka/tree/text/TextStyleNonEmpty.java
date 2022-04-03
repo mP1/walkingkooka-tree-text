@@ -240,7 +240,7 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return this.value.toString();
     }
 
@@ -249,7 +249,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Creates a json-object where the properties are strings, and the value without types.
      */
-    final JsonNode marshall(final JsonNodeMarshallContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         final List<JsonNode> json = Lists.array();
 
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {

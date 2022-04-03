@@ -88,7 +88,7 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     // TreePrintable....................................................................................................
 
     @Override
-    public final void printTree(final IndentingPrinter printer) {
+    public void printTree(final IndentingPrinter printer) {
         printer.println("Placeholder " + CharSequences.quote(this.value().value()));
     }
 

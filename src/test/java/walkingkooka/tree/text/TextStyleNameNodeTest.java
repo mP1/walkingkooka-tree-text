@@ -62,7 +62,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     @Test
-    public final void testSetAttributesNotEmpty() {
+    public void testSetAttributesNotEmpty() {
         this.setAttributeNotEmptyAndCheck();
     }
 
@@ -339,8 +339,8 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextStyleNameNode unmarshall(final JsonNode from,
-                                              final JsonNodeUnmarshallContext context) {
+    public TextStyleNameNode unmarshall(final JsonNode from,
+                                        final JsonNodeUnmarshallContext context) {
         return TextStyleNameNode.unmarshallTextStyleNameNode(from, context);
     }
 }

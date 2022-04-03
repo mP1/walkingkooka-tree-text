@@ -196,8 +196,8 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final Text unmarshall(final JsonNode from,
-                                 final JsonNodeUnmarshallContext context) {
+    public Text unmarshall(final JsonNode from,
+                           final JsonNodeUnmarshallContext context) {
         return Text.unmarshallText(from, context);
     }
 }

@@ -71,7 +71,7 @@ public final class FontFamily implements Name,
 
     // Object..................................................................................................
 
-    public final int hashCode() {
+    public int hashCode() {
         return CASE_SENSITIVITY.hash(this.name);
     }
 
