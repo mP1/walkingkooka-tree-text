@@ -97,7 +97,7 @@ public final class Text extends TextLeafNode<String> implements HasText {
     // TreePrintable....................................................................................................
 
     @Override
-    public final void printTree(final IndentingPrinter printer) {
+    public void printTree(final IndentingPrinter printer) {
         printer.println("Text " + CharSequences.quoteAndEscape(this.text()));
     }
 

@@ -57,8 +57,7 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
         this.typeChecker = typeChecker;
     }
 
-    @Override
-    final Optional<Class<Enum<?>>> enumType() {
+    @Override Optional<Class<Enum<?>>> enumType() {
         return Optional.of(Cast.to(this.type));
     }
 

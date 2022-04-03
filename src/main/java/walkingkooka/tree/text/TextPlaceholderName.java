@@ -53,7 +53,7 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
 
     // Object..........................................................................................................
 
-    final boolean canBeEqual(final Object other) {
+    boolean canBeEqual(final Object other) {
         return other instanceof TextPlaceholderName;
     }
 

@@ -147,7 +147,7 @@ final class TextStyleEmpty extends TextStyle {
         return System.identityHashCode(this);
     }
 
-    @Override final boolean canBeEquals(final Object other) {
+    @Override boolean canBeEquals(final Object other) {
         return other instanceof TextStyleEmpty;
     }
 
@@ -163,7 +163,7 @@ final class TextStyleEmpty extends TextStyle {
 
     // JsonNodeContext..................................................................................................
 
-    final JsonNode marshall(final JsonNodeMarshallContext context) {
+    JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.object();
     }
 }

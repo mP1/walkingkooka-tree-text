@@ -129,8 +129,8 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextPlaceholderNode unmarshall(final JsonNode from,
-                                                final JsonNodeUnmarshallContext context) {
+    public TextPlaceholderNode unmarshall(final JsonNode from,
+                                          final JsonNodeUnmarshallContext context) {
         return TextPlaceholderNode.unmarshallTextPlaceholderNode(from, context);
     }
 }

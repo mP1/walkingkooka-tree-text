@@ -517,8 +517,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public final TextStyleNode unmarshall(final JsonNode from,
-                                          final JsonNodeUnmarshallContext context) {
+    public TextStyleNode unmarshall(final JsonNode from,
+                                    final JsonNodeUnmarshallContext context) {
         return TextStyleNode.unmarshallTextStyleNode(from, context);
     }
 }
