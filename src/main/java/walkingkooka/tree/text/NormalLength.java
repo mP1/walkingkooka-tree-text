@@ -105,7 +105,7 @@ public final class NormalLength extends Length<Void> implements Value<Void> {
     }
 
     @Override
-    boolean equals0(final Length other) {
+    boolean equals0(final Length<?> other) {
         return true;
     }
 

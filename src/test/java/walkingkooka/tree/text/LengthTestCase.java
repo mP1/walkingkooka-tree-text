@@ -33,7 +33,7 @@ import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class LengthTestCase<L extends Length, V> implements ClassTesting2<L>,
+public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTesting2<L>,
         HashCodeEqualsDefinedTesting2<L>,
         IsMethodTesting<L>,
         JsonNodeMarshallingTesting<L>,

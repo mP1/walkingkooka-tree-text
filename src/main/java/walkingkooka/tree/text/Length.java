@@ -202,7 +202,7 @@ public abstract class Length<V> {
 
     abstract boolean canBeEqual(final Object other);
 
-    abstract boolean equals0(final Length other);
+    abstract boolean equals0(final Length<?> other);
 
     // JsonNodeContext..................................................................................................
 

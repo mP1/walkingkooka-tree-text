@@ -162,8 +162,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Override
-    public TextStylePropertyName unmarshall(final JsonNode jsonNode,
-                                            final JsonNodeUnmarshallContext context) {
+    public TextStylePropertyName<?> unmarshall(final JsonNode jsonNode,
+                                               final JsonNodeUnmarshallContext context) {
         return TextStylePropertyName.unmarshall(jsonNode, context);
     }
 

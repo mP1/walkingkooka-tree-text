@@ -51,8 +51,11 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
 
     @Test
     public void testCheckWrongValueTypeFails2() {
-        final FakeNode fakeNode = new FakeNode();
-        this.checkFails(fakeNode, "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType());
+        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
+        this.checkFails(
+                fakeNode,
+                "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
+        );
     }
 
     @Test

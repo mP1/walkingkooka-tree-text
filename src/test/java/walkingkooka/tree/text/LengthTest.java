@@ -87,13 +87,13 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
     // JsonNodeMarshallTesting..........................................................................................
 
     @Override
-    public Length unmarshall(final JsonNode from,
-                             final JsonNodeUnmarshallContext context) {
+    public Length<?> unmarshall(final JsonNode from,
+                                final JsonNodeUnmarshallContext context) {
         return Length.unmarshall(from, context);
     }
 
     @Override
-    public Length createJsonNodeMarshallingValue() {
+    public Length<?> createJsonNodeMarshallingValue() {
         return Length.pixel(123.0);
     }
 }
