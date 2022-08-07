@@ -33,7 +33,7 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
     }
 
     @Test
-    public final void testFromJsonStringEmptyFails() {
+    public final void testUnmarshallStringEmptyFails() {
         this.unmarshallFails(JsonNode.string(""));
     }
 

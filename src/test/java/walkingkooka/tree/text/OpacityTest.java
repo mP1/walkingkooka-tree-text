@@ -71,44 +71,44 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     // HasJsonNode......................................................................................
 
     @Test
-    public void testJsonNodeUnmarshallBooleanFails() {
+    public void testUnmarshallBooleanFails() {
         this.unmarshallFails(JsonNode.booleanNode(true));
     }
 
     @Test
-    public void testJsonNodeUnmarshallInvalidStringFails() {
+    public void testUnmarshallInvalidStringFails() {
         this.unmarshallFails(JsonNode.string("not transparent or opaque"));
     }
 
     @Test
-    public void testJsonNodeUnmarshallArrayFails() {
+    public void testUnmarshallArrayFails() {
         this.unmarshallFails(JsonNode.array());
     }
 
     @Test
-    public void testJsonNodeUnmarshallObjectFails() {
+    public void testUnmarshallObjectFails() {
         this.unmarshallFails(JsonNode.object());
     }
 
     @Test
-    public void testJsonNodeUnmarshallNumberInvalidFails() {
+    public void testUnmarshallNumberInvalidFails() {
         this.unmarshallFails(JsonNode.number(-1));
     }
 
     @Test
-    public void testFromJsonTransparent() {
+    public void testUnmarshallTransparent() {
         this.unmarshallAndCheck(JsonNode.string("transparent"),
                 Opacity.TRANSPARENT);
     }
 
     @Test
-    public void testFromJsonOpaque() {
+    public void testUnmarshallOpaque() {
         this.unmarshallAndCheck(JsonNode.string("opaque"),
                 Opacity.OPAQUE);
     }
 
     @Test
-    public void testFromJsonOpaque2() {
+    public void testUnmarshallOpaque2() {
         this.unmarshallAndCheck(JsonNode.array()
                         .appendChild(JsonNode.string("opaque"))
                         .get(0),
@@ -116,7 +116,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     @Test
-    public void testFromJsonNumber() {
+    public void testUnmarshallNumber() {
         final double value = 0.25;
         this.unmarshallAndCheck(JsonNode.number(value),
                 Opacity.with(value));

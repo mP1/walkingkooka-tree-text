@@ -192,13 +192,13 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     @Test
-    public void testJsonNodeUnmarshallWithoutChildren() {
+    public void testUnmarshallWithoutChildren() {
         this.unmarshallAndCheck("{\"style-name\": \"abc123\"}",
                 TextStyleNameNode.with(TextStyleName.with("abc123")));
     }
 
     @Test
-    public void testJsonNodeUnmarshallWithChildren() {
+    public void testUnmarshallWithChildren() {
         this.unmarshallAndCheck("{\"style-name\": \"abc123\", \"children\": [{\"type\": \"text\", \"value\": \"text456\"}]}",
                 TextStyleNameNode.with(TextStyleName.with("abc123"))
                         .setChildren(Lists.of(TextNode.text("text456"))));

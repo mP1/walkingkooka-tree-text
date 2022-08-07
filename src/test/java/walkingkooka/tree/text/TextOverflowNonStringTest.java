@@ -73,12 +73,12 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
     }
 
     @Test
-    public void testJsonNodeUnmarshallClip() {
+    public void testUnmarshallClip() {
         this.unmarshallAndCheck(JsonNode.string("clip"), TextOverflow.CLIP);
     }
 
     @Test
-    public void testJsonNodeUnmarshallEllispsis() {
+    public void testUnmarshallEllispsis() {
         this.unmarshallAndCheck(JsonNode.string("ellipsis"), TextOverflow.ELLIPSIS);
     }
 

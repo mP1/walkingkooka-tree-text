@@ -254,13 +254,13 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     }
 
     @Test
-    public void testJsonNodeUnmarshallWithoutChildren() {
+    public void testUnmarshallWithoutChildren() {
         this.unmarshallAndCheck("{}",
                 textStyleNode());
     }
 
     @Test
-    public void testJsonNodeUnmarshallWithChildren() {
+    public void testUnmarshallWithChildren() {
         this.unmarshallAndCheck("{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
                 textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
     }
