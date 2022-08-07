@@ -26,7 +26,7 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerJsonNodeWithType, Object> {
 
     @Test
-    public void testJsonNodeUnmarshall() {
+    public void testUnmarshall() {
         final Color color = Color.fromRgb(0x123456);
         this.unmarshallAndCheck(this.marshallContext().marshallWithType(color), color);
     }

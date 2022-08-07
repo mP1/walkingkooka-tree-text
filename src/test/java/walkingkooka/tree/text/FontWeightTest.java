@@ -59,44 +59,44 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     // HasJsonNode......................................................................................
 
     @Test
-    public void testJsonNodeUnmarshallBooleanFails() {
+    public void testUnmarshallBooleanFails() {
         this.unmarshallFails(JsonNode.booleanNode(true));
     }
 
     @Test
-    public void testJsonNodeUnmarshallInvalidStringFails() {
+    public void testUnmarshallInvalidStringFails() {
         this.unmarshallFails(JsonNode.string("not bold or normal"));
     }
 
     @Test
-    public void testJsonNodeUnmarshallArrayFails() {
+    public void testUnmarshallArrayFails() {
         this.unmarshallFails(JsonNode.array());
     }
 
     @Test
-    public void testJsonNodeUnmarshallObjectFails() {
+    public void testUnmarshallObjectFails() {
         this.unmarshallFails(JsonNode.object());
     }
 
     @Test
-    public void testJsonNodeUnmarshallNumberInvalidFails() {
+    public void testUnmarshallNumberInvalidFails() {
         this.unmarshallFails(JsonNode.number(-1));
     }
 
     @Test
-    public void testFromJsonBold() {
+    public void testUnmarshallBold() {
         this.unmarshallAndCheck(JsonNode.string("bold"),
                 FontWeight.BOLD);
     }
 
     @Test
-    public void testFromJsonNormal() {
+    public void testUnmarshallNormal() {
         this.unmarshallAndCheck(JsonNode.string("normal"),
                 FontWeight.NORMAL);
     }
 
     @Test
-    public void testFromJsonNormal2() {
+    public void testUnmarshallNormal2() {
         this.unmarshallAndCheck(JsonNode.array()
                         .appendChild(JsonNode.string("normal"))
                         .get(0),
@@ -104,7 +104,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     }
 
     @Test
-    public void testFromJsonNumber() {
+    public void testUnmarshallNumber() {
         final int value = 20;
         this.unmarshallAndCheck(JsonNode.number(value),
                 FontWeight.with(value));

@@ -54,27 +54,27 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     }
 
     @Test
-    public void testJsonNodeUnmarshallNoneFails() {
+    public void testUnmarshallNoneFails() {
         assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.none()),
                 this.propertyName(),
                 this.unmarshallContext()));
     }
 
     @Test
-    public void testJsonNodeUnmarshallNormal() {
+    public void testUnmarshallNormal() {
         final NormalLength normal = Length.normal();
         this.unmarshallAndCheck(this.marshall(normal), normal);
     }
 
     @Test
-    public void testJsonNodeUnmarshallNumberFails() {
+    public void testUnmarshallNumberFails() {
         assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.number(1)),
                 this.propertyName(),
                 this.unmarshallContext()));
     }
 
     @Test
-    public void testJsonNodeUnmarshallPixel() {
+    public void testUnmarshallPixel() {
         final PixelLength pixel = Length.pixel(1.0);
         this.unmarshallAndCheck(this.marshall(pixel), pixel);
     }

@@ -116,7 +116,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     }
 
     @Test
-    public void testJsonNodeUnmarshall() {
+    public void testUnmarshall() {
         final String text = "abc123!\t";
         this.unmarshallAndCheck(JsonNode.string(text), Text.with(text));
     }

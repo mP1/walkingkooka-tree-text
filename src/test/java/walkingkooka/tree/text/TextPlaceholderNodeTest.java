@@ -52,7 +52,7 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     }
 
     @Test
-    public void testJsonNodeUnmarshall() {
+    public void testUnmarshall() {
         final String value = "abc123";
         this.unmarshallAndCheck(JsonNode.string(value), TextPlaceholderNode.with(TextPlaceholderName.with(value)));
     }
