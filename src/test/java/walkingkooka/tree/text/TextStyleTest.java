@@ -354,7 +354,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testFromEmptyJsonObject() {
+    public void testUnmarshallEmptyJsonObject() {
         assertSame(
                 TextStyle.EMPTY,
                 TextStyle.unmarshall(
