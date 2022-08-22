@@ -91,12 +91,12 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTwice() {
+    public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 

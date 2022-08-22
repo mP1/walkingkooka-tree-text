@@ -39,7 +39,7 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         final String value = "abc123";
         this.marshallAndCheck(value, JsonNode.string(value));
     }

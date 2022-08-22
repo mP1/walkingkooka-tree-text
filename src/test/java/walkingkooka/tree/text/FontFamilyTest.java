@@ -52,12 +52,12 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTwice() {
+    public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 

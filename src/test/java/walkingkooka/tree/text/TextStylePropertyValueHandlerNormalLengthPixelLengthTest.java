@@ -80,13 +80,13 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     }
 
     @Test
-    public void testJsonNodeMarshallNormal() {
+    public void testMarshallNormal() {
         final NormalLength normal = Length.normal();
         this.marshallAndCheck(normal, this.marshall(normal));
     }
 
     @Test
-    public void testJsonNodeMarshallPixel() {
+    public void testMarshallPixel() {
         final PixelLength pixel = Length.pixel(1.0);
         this.marshallAndCheck(pixel, this.marshall(pixel));
     }

@@ -32,13 +32,13 @@ public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends Tex
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         final Color color = Color.fromRgb(0x123456);
         this.marshallAndCheck(color, this.marshallContext().marshallWithType(color));
     }
 
     @Test
-    public void testJsonNodeMarshallRgba() {
+    public void testMarshallRgba() {
         final EmailAddress emailAddress = EmailAddress.parse("user@example.com");
         this.marshallAndCheck(emailAddress, this.marshallContext().marshallWithType(emailAddress));
     }

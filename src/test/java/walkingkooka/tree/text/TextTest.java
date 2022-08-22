@@ -110,7 +110,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         final String text = "abc123!\t";
         this.marshallAndCheck(Text.with(text), JsonNode.string(text));
     }

@@ -222,31 +222,31 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testJsonNodeMarshallWithoutChildren() {
+    public void testMarshallWithoutChildren() {
         this.marshallAndCheck(textStyleNode(), "{}");
     }
 
     @Test
-    public void testJsonNodeMarshallWithChildren() {
+    public void testMarshallWithChildren() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
                 "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
     }
 
     @Test
-    public void testJsonNodeMarshallWithChildren2() {
+    public void testMarshallWithChildren2() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
                 "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
-    public void testJsonNodeMarshallWithStyleNode() {
+    public void testMarshallWithStyleNode() {
         this.marshallAndCheck(textStyleNode()
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
                 "{\"styles\": {\"background-color\": \"#123456\"}}");
     }
 
     @Test
-    public void testJsonNodeMarshallWithStyleNodeAndChildren() {
+    public void testMarshallWithStyleNodeAndChildren() {
         this.marshallAndCheck(TextNode.text("text123")
                         .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456)))
                         .parentOrFail(),

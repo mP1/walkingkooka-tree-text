@@ -123,22 +123,22 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTwice() {
+    public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTransparent() {
+    public void testMarshallRoundtripTransparent() {
         this.marshallRoundTripTwiceAndCheck(Opacity.TRANSPARENT);
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripOpaque() {
+    public void testMarshallRoundtripOpaque() {
         this.marshallRoundTripTwiceAndCheck(Opacity.OPAQUE);
     }
 

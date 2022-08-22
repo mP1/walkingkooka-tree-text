@@ -37,13 +37,13 @@ public final class TextStylePropertyValueHandlerJsonNodeTest extends TextStylePr
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         final Color color = Color.fromRgb(0x123456);
         this.marshallAndCheck(color, this.marshall(color));
     }
 
     @Test
-    public void testJsonNodeMarshallRgba() {
+    public void testMarshallRgba() {
         final Color color = Color.fromArgb(0x12345678);
         this.marshallAndCheck(color, this.marshall(color));
     }
