@@ -46,13 +46,13 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     // HasJsonNode .....................................................................................................
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         final String value = "abc123";
         this.marshallAndCheck(TextPlaceholderNode.with(TextPlaceholderName.with(value)), JsonNode.string(value));
     }
 
     @Test
-    public void testJsonNodeUnmarshall() {
+    public void testUnmarshall() {
         final String value = "abc123";
         this.unmarshallAndCheck(JsonNode.string(value), TextPlaceholderNode.with(TextPlaceholderName.with(value)));
     }

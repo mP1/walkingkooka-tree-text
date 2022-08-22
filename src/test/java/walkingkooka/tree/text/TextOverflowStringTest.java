@@ -76,12 +76,12 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
     }
 
     @Test
-    public void testJsonNodeUnmarshall() {
+    public void testUnmarshall() {
         this.unmarshallAndCheck(JsonNode.string("string-abc123"), this.createTextStylePropertyValue());
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createTextStylePropertyValue(), JsonNode.string("string-abc123"));
     }
 

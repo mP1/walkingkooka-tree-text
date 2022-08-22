@@ -41,23 +41,23 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     // HasJsonNode......................................................................................................
 
     @Test
-    public void testJsonNodeUnmarshallStringInvalidFails() {
+    public void testUnmarshallStringInvalidFails() {
         this.unmarshallFails(JsonNode.string(""));
     }
 
     @Test
-    public void testJsonNodeUnmarshallString() {
+    public void testUnmarshallString() {
         this.unmarshallAndCheck(JsonNode.string(TEXT),
                 FontFamily.with(TEXT));
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTwice() {
+    public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 

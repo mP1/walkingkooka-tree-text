@@ -59,44 +59,44 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     // HasJsonNode......................................................................................
 
     @Test
-    public void testJsonNodeUnmarshallBooleanFails() {
+    public void testUnmarshallBooleanFails() {
         this.unmarshallFails(JsonNode.booleanNode(true));
     }
 
     @Test
-    public void testJsonNodeUnmarshallStringFails() {
+    public void testUnmarshallStringFails() {
         this.unmarshallFails(JsonNode.string("fails!"));
     }
 
     @Test
-    public void testJsonNodeUnmarshallArrayFails() {
+    public void testUnmarshallArrayFails() {
         this.unmarshallFails(JsonNode.array());
     }
 
     @Test
-    public void testJsonNodeUnmarshallObjectFails() {
+    public void testUnmarshallObjectFails() {
         this.unmarshallFails(JsonNode.object());
     }
 
     @Test
-    public void testJsonNodeUnmarshallNumberInvalidFails() {
+    public void testUnmarshallNumberInvalidFails() {
         this.unmarshallFails(JsonNode.number(-1));
     }
 
     @Test
-    public void testFromJsonNumber() {
+    public void testUnmarshallNumber() {
         final int value = 20;
         this.unmarshallAndCheck(JsonNode.number(value),
                 FontSize.with(value));
     }
 
     @Test
-    public void testJsonNodeMarshall() {
+    public void testMarshall() {
         this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
     }
 
     @Test
-    public void testJsonNodeMarshallRoundtripTwice() {
+    public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
