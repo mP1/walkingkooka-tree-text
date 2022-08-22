@@ -24,6 +24,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonPropertyName;
 
 import java.util.List;
 import java.util.Map;
@@ -402,16 +403,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
-    // ToString.........................................................................................................
-
-    @Test
-    public void testToString() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-
-        this.toStringAndCheck(TextStyleNonEmpty.with(map), map.toString());
-    }
+    // json.............................................................................................................
 
     @Test
     public void testUnmarshallEmptyJsonObject() {
@@ -423,6 +415,48 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 )
         );
     }
+
+    @Test
+    public void testMarshallColor() {
+        this.marshallAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.parse("#123456")),
+                JsonNode.object()
+                        .set(JsonPropertyName.with("color"), JsonNode.string("#123456"))
+        );
+    }
+
+    @Test
+    public void testMarshallColorRoundtrip() {
+        this.marshallRoundTripTwiceAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.parse("#123456"))
+        );
+    }
+
+    @Test
+    public void testMarshallManyRoundtrip() {
+        this.marshallRoundTripTwiceAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+                        .set(TextStylePropertyName.COLOR, Color.parse("#abcdef"))
+                        .set(TextStylePropertyName.DIRECTION, Direction.LTR)
+                        .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+        );
+    }
+
+    // ToString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
+        map.put(this.property1(), this.value1());
+        map.put(this.property2(), this.value2());
+
+        this.toStringAndCheck(TextStyleNonEmpty.with(map), map.toString());
+    }
+
+    // helpers.........................................................................................................
 
     @Override
     public TextStyleNonEmpty createObject() {
