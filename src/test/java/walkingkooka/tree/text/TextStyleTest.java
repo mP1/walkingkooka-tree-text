@@ -228,6 +228,24 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     // patch............................................................................................................
 
     @Test
+    public void testPatchJsonNull() {
+        this.patchAndCheck(
+                TextStyle.EMPTY,
+                JsonNode.nullNode()
+        );
+    }
+
+    @Test
+    public void testPatchJsonNull2() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.COLOR, Color.BLACK),
+                JsonNode.nullNode(),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
     public void testPatchEmptyObject() {
         this.patchAndCheck(
                 TextStyle.EMPTY,

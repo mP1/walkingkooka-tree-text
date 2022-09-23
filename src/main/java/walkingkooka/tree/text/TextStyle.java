@@ -238,13 +238,22 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // Patchable........................................................................................................
 
     /**
-     * Performs a patch on this {@link TextStyle} returning the result. Null values will result in the property being removed.
+     * Performs a patch on this {@link TextStyle} returning the result.<br>
+     * A null patch will return a {@link #EMPTY} this is necessary to support something like clear formatting<br>
+     * Null values will result in the property being removed.
      */
     public TextStyle patch(final JsonNode patch,
                            final JsonNodeUnmarshallContext context) {
         Objects.requireNonNull(patch, "patch");
         Objects.requireNonNull(context, "context");
 
+        return patch.isNull() ?
+                TextStyle.EMPTY :
+                this.patchNonNull(patch, context);
+    }
+
+    private TextStyle patchNonNull(final JsonNode patch,
+                                   final JsonNodeUnmarshallContext context) {
         TextStyle result = this;
 
         for (final JsonNode nameAndValue : patch.objectOrFail().children()) {
