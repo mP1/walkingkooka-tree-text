@@ -33,8 +33,9 @@ public final class FontFamily implements Name,
         Comparable<FontFamily> {
 
     public static FontFamily with(final String name) {
-        CharSequences.failIfNullOrEmpty(name, "name");
-        return new FontFamily(name);
+        return new FontFamily(
+                CharSequences.failIfNullOrEmpty(name, "name")
+        );
     }
 
     private FontFamily(final String name) {

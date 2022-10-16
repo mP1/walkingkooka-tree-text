@@ -46,8 +46,8 @@ public abstract class Length<V> {
                         LengthUnit.tryAllParse(text);
     }
 
-    private static void checkText(final String text) {
-        CharSequences.failIfNullOrEmpty(text, "text");
+    private static String checkText(final String text) {
+        return CharSequences.failIfNullOrEmpty(text, "text");
     }
 
     /**

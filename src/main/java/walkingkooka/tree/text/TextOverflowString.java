@@ -27,9 +27,9 @@ import java.util.Optional;
 final class TextOverflowString extends TextOverflow {
 
     static TextOverflowString with(final String value) {
-        CharSequences.failIfNullOrEmpty(value, "value");
-
-        return new TextOverflowString(value);
+        return new TextOverflowString(
+                CharSequences.failIfNullOrEmpty(value, "value")
+        );
     }
 
     /**
