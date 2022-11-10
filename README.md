@@ -23,7 +23,7 @@ final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
 final StringBuilder html = new StringBuilder();
 final LineEnding eol = LineEnding.SYSTEM;
 final IndentingPrinter printer = Printers.stringBuilder(html, eol)
-        .indenting(Indentation.with("  "));
+        .indenting(Indentation.SPACES2);
 
 // very simple html printer
 new FakeTextNodeVisitor(){
