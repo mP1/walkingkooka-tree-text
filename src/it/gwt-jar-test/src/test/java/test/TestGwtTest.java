@@ -4,6 +4,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.j2cl.locale.LocaleAware;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -16,7 +17,7 @@ import walkingkooka.tree.text.TextStyleNameNode;
 import walkingkooka.tree.text.TextStyleNode;
 import walkingkooka.tree.text.TextStylePropertyName;
 import walkingkooka.visit.Visiting;
-
+@LocaleAware
 public class TestGwtTest extends GWTTestCase {
 
     @Override
