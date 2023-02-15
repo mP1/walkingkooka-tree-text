@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
@@ -143,6 +144,16 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                         .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
                         .collect(Collectors.toCollection(Sets::sorted))
         );
+    }
+
+    @Test
+    public void testUrlFragment() {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
+            this.checkEquals(
+                    UrlFragment.with(propertyName.name),
+                    propertyName.urlFragment()
+            );
+        }
     }
 
     @Test

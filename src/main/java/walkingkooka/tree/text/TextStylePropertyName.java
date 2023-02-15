@@ -22,6 +22,8 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
+import walkingkooka.net.HasUrlFragment;
+import walkingkooka.net.UrlFragment;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
@@ -40,7 +42,7 @@ import java.util.function.Predicate;
 /**
  * The {@link Name} of an {@link TextStyle} property.
  */
-public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> {
+public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> implements HasUrlFragment {
 
     /**
      * First because required by {@link #CONSTANTS} init.
@@ -702,6 +704,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.handler = handler;
         this.visitor = visitor;
 
+        this.urlFragment = UrlFragment.with(name);
         this.jsonPropertyName = JsonPropertyName.with(this.name);
     }
 
@@ -739,6 +742,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     CharSequence inQuotes() {
         return CharSequences.quoteAndEscape(this.name);
     }
+
+    // HasUrlFragment...................................................................................................
+
+    @Override
+    public UrlFragment urlFragment() {
+        return this.urlFragment;
+    }
+
+    private final UrlFragment urlFragment;
 
     // JsonNodeContext..................................................................................................
 
