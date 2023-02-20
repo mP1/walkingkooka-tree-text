@@ -75,6 +75,11 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
 
     private final Class<E> type;
 
+    @Override
+    E parseValue(final String value) {
+        return this.factory.apply(value);
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

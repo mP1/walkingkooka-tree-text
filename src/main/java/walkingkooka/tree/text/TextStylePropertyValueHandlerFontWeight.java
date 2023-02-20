@@ -24,20 +24,19 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Optional;
 
 /**
- * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type a type that marshals into a {@link JsonNode}
- * with the type recorded.
+ * A {@link TextStylePropertyValueHandler} for {@link FontWeight}
  */
-final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePropertyValueHandler<Object> {
+final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyValueHandler<FontWeight> {
 
     /**
      * Singleton
      */
-    final static TextStylePropertyValueHandlerJsonNodeWithType INSTANCE = new TextStylePropertyValueHandlerJsonNodeWithType();
+    final static TextStylePropertyValueHandlerFontWeight INSTANCE = new TextStylePropertyValueHandlerFontWeight();
 
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerJsonNodeWithType() {
+    private TextStylePropertyValueHandlerFontWeight() {
         super();
     }
 
@@ -47,38 +46,49 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
+    void check0(final Object value,
+                final TextStylePropertyName<?> name) {
+        if (false == value instanceof FontWeight) {
+            throw this.textStylePropertyValueException(value, name);
+        }
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return "supported type";
+        return FontWeight.class.getSimpleName();
     }
 
     @Override
-    Object parseValue(final String value) {
-        throw new UnsupportedOperationException();
+    FontWeight parseValue(final String value) {
+        return FontWeight.BOLD_TEXT.equals(value) ?
+                FontWeight.BOLD :
+                FontWeight.NORMAL_TEXT.equals(value) ?
+                        FontWeight.NORMAL :
+                        FontWeight.with(Integer.parseInt(value));
     }
 
     // JsonNodeContext..................................................................................................
 
     @Override
-    Object unmarshall(final JsonNode node,
-                      final TextStylePropertyName<?> name,
-                      final JsonNodeUnmarshallContext context) {
-        return context.unmarshallWithType(node);
+    FontWeight unmarshall(final JsonNode node,
+                          final TextStylePropertyName<?> name,
+                          final JsonNodeUnmarshallContext context) {
+        return context.unmarshall(
+                node,
+                FontWeight.class
+        );
     }
 
     @Override
-    JsonNode marshall(final Object value,
+    JsonNode marshall(final FontWeight value,
                       final JsonNodeMarshallContext context) {
-        return context.marshallWithType(value);
+        return JsonNode.number(value.value());
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return "HasJsonNodeWithType";
+        return FontWeight.class.getSimpleName();
     }
 }

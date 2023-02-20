@@ -56,7 +56,25 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         assertNotSame(FontSize.with(value), size);
     }
 
-    // HasJsonNode......................................................................................
+    // parseValue......................................................................................................
+
+    @Test
+    public void testParseValue() {
+        this.checkEquals(
+                FontSize.with(1),
+                this.textStylePropertyName().parseValue("1")
+        );
+    }
+
+    @Test
+    public void testParseValue2() {
+        this.checkEquals(
+                FontSize.with(23),
+                this.textStylePropertyName().parseValue("23")
+        );
+    }
+
+    // HasJsonNode......................................................................................................
 
     @Test
     public void testUnmarshallBooleanFails() {

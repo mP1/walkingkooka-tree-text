@@ -17,10 +17,13 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
+import java.math.MathContext;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -63,6 +66,20 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
     String expectedTypeName(final Class<?> type) {
         return this.type.getSimpleName();
     }
+
+    @Override
+    H parseValue(final String value) {
+        return this.unmarshall(
+                JsonNode.string(value),
+                null,
+                CONTEXT
+        );
+    }
+
+    private final static JsonNodeUnmarshallContext CONTEXT = JsonNodeUnmarshallContexts.basic(
+            ExpressionNumberKind.DOUBLE,
+            MathContext.DECIMAL32
+    );
 
     // JsonNodeContext..................................................................................................
 

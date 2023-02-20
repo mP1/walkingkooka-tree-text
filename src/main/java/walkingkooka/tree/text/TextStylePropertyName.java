@@ -302,10 +302,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-size
      */
-    public final static TextStylePropertyName<FontSize> FONT_SIZE = registerJsonNodeConstant("font-size",
-            FontSize.class,
-            v -> v instanceof FontSize,
-            (f, v) -> v.visitFontSize(f));
+    public final static TextStylePropertyName<FontSize> FONT_SIZE = registerConstant(
+            "font-size",
+            TextStylePropertyValueHandler.fontSize(),
+            (f, v) -> v.visitFontSize(f)
+    );
 
     /**
      * font-stretch
@@ -337,10 +338,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-weight
      */
-    public final static TextStylePropertyName<FontWeight> FONT_WEIGHT = registerJsonNodeConstant("font-weight",
-            FontWeight.class,
-            v -> v instanceof FontWeight,
-            (f, v) -> v.visitFontWeight(f));
+    public final static TextStylePropertyName<FontWeight> FONT_WEIGHT = registerConstant(
+            "font-weight",
+            TextStylePropertyValueHandler.fontWeight(),
+            (f, v) -> v.visitFontWeight(f)
+    );
 
     /**
      * hanging-punctuation
@@ -722,6 +724,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         return this.value()
                 .toUpperCase()
                 .replace('-', '_');
+    }
+
+    /**
+     * Parses a {@link String} into the type value of this {@link TextStylePropertyName}.
+     */
+    public T parseValue(final String value) {
+        Objects.requireNonNull(value, "value");
+
+        return this.handler.parseValue(value);
     }
 
     /**

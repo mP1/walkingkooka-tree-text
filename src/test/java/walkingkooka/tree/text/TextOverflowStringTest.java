@@ -61,6 +61,17 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
     }
 
     @Test
+    public void testParseValue() {
+        final String value = "ABC123";
+
+        this.checkEquals(
+                TextOverflow.string(value),
+                this.textStylePropertyName()
+                        .parseValue(TextOverflow.STRING_PREFIX + value)
+        );
+    }
+
+    @Test
     public void testDifferentEllipsis() {
         this.checkNotEquals(TextOverflowString.with("abc123"), TextOverflow.ELLIPSIS);
     }

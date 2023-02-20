@@ -24,20 +24,19 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Optional;
 
 /**
- * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type a type that marshals into a {@link JsonNode}
- * with the type recorded.
+ * A {@link TextStylePropertyValueHandler} for {@link FontSize}
  */
-final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePropertyValueHandler<Object> {
+final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValueHandler<FontSize> {
 
     /**
      * Singleton
      */
-    final static TextStylePropertyValueHandlerJsonNodeWithType INSTANCE = new TextStylePropertyValueHandlerJsonNodeWithType();
+    final static TextStylePropertyValueHandlerFontSize INSTANCE = new TextStylePropertyValueHandlerFontSize();
 
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerJsonNodeWithType() {
+    private TextStylePropertyValueHandlerFontSize() {
         super();
     }
 
@@ -47,38 +46,47 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
+    void check0(final Object value,
+                final TextStylePropertyName<?> name) {
+        if (false == value instanceof FontSize) {
+            throw this.textStylePropertyValueException(value, name);
+        }
     }
 
     @Override
     String expectedTypeName(final Class<?> type) {
-        return "supported type";
+        return FontSize.class.getSimpleName();
     }
 
     @Override
-    Object parseValue(final String value) {
-        throw new UnsupportedOperationException();
+    FontSize parseValue(final String value) {
+        return FontSize.with(
+                Integer.parseInt(value)
+        );
     }
 
     // JsonNodeContext..................................................................................................
 
     @Override
-    Object unmarshall(final JsonNode node,
-                      final TextStylePropertyName<?> name,
-                      final JsonNodeUnmarshallContext context) {
-        return context.unmarshallWithType(node);
+    FontSize unmarshall(final JsonNode node,
+                        final TextStylePropertyName<?> name,
+                        final JsonNodeUnmarshallContext context) {
+        return context.unmarshall(
+                node,
+                FontSize.class
+        );
     }
 
     @Override
-    JsonNode marshall(final Object value,
+    JsonNode marshall(final FontSize value,
                       final JsonNodeMarshallContext context) {
-        return context.marshallWithType(value);
+        return JsonNode.number(value.value());
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return "HasJsonNodeWithType";
+        return FontSize.class.getSimpleName();
     }
 }

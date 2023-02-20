@@ -42,6 +42,20 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerFontSize}
+     */
+    static TextStylePropertyValueHandler<FontSize> fontSize() {
+        return TextStylePropertyValueHandlerFontSize.INSTANCE;
+    }
+
+    /**
+     * {@see TextStylePropertyValueHandlerFontWeight}
+     */
+    static TextStylePropertyValueHandler<FontWeight> fontWeight() {
+        return TextStylePropertyValueHandlerFontWeight.INSTANCE;
+    }
+
+    /**
      * {@see TextStylePropertyValueHandlerJsonNode}
      */
     static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type,
@@ -86,7 +100,7 @@ abstract class TextStylePropertyValueHandler<T> {
 
     abstract Optional<Class<Enum<?>>> enumType();
 
-    // checkValue...........................................................
+    // checkValue.......................................................................................................
 
     final T check(final Object value, final TextStylePropertyName<?> name) {
         if (null == value) {
@@ -133,6 +147,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     private final static String PACKAGE = "walkingkooka.tree.text";
+
+    // parseValue.......................................................................................................
+
+    /**
+     * Parses the text form of a value into an actual value instance.
+     */
+    abstract T parseValue(final String value);
 
     // unmarshall ....................................................................................................
 
