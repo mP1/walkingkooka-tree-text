@@ -163,7 +163,12 @@ public final class TextStyleNode extends TextParentNode {
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case STYLES:
-                    textStyle = TextStyle.withTextStyleMap(TextNodeMap.fromJson(child, context));
+                    textStyle = TextStyle.withTextStyleMap(
+                            TextNodeMap.unmarshall(
+                                    child,
+                                    context
+                            )
+                    );
                     break;
                 case CHILDREN:
                     children = context.unmarshallWithTypeList(child);
