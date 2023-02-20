@@ -34,7 +34,7 @@ public abstract class TextOverflow implements Value<Optional<String>> {
     final static String CLIP_TEXT = "clip";
 
     /**
-     * A constant holding the font-weight of normal text
+     * A constant that text-overflow should be clipped
      */
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextOverflow CLIP = TextOverflowNonString.constant(CLIP_TEXT);
@@ -42,7 +42,7 @@ public abstract class TextOverflow implements Value<Optional<String>> {
     final static String ELLIPSIS_TEXT = "ellipsis";
 
     /**
-     * A constant holding the font-weight of bold text
+     * A constant that text-overflow should be clipped with three ellipsis.
      */
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextOverflow ELLIPSIS = TextOverflowNonString.constant(ELLIPSIS_TEXT);
