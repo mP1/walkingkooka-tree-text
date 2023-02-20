@@ -85,7 +85,11 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
                 TextNodeMap.EMPTY,
-                TextNodeMap.fromJson(JsonNode.object(), JsonNodeUnmarshallContexts.fake()));
+                TextNodeMap.unmarshall(
+                        JsonNode.object(),
+                        JsonNodeUnmarshallContexts.fake()
+                )
+        );
     }
 
     @Test

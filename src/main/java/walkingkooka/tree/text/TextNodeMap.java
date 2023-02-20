@@ -86,9 +86,14 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
 
     // JsonNodeContext..................................................................................................
 
-    static TextNodeMap fromJson(final JsonNode json,
-                                final JsonNodeUnmarshallContext context) {
-        return TextNodeMap.with1(TextNodeMapEntrySet.fromJson(json, context));
+    static TextNodeMap unmarshall(final JsonNode json,
+                                  final JsonNodeUnmarshallContext context) {
+        return TextNodeMap.with1(
+                TextNodeMapEntrySet.unmarshall(
+                        json,
+                        context
+                )
+        );
     }
 
     JsonNode toJson(final JsonNodeMarshallContext context) {
