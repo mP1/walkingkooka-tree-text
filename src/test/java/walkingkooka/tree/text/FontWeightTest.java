@@ -130,7 +130,26 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testMarshall() {
-        this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
+        this.marshallAndCheck(
+                this.createComparable(),
+                JsonNode.number(VALUE)
+        );
+    }
+
+    @Test
+    public void testMarshallBold() {
+        this.marshallAndCheck(
+                FontWeight.BOLD,
+                JsonNode.string(FontWeight.BOLD_TEXT)
+        );
+    }
+
+    @Test
+    public void testMarshallNormal() {
+        this.marshallAndCheck(
+                FontWeight.NORMAL,
+                JsonNode.string(FontWeight.NORMAL_TEXT)
+        );
     }
 
     @Test
