@@ -56,7 +56,25 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         assertSame(FontWeight.NORMAL, FontWeight.with(FontWeight.NORMAL.value()));
     }
 
-    // HasJsonNode......................................................................................
+    // parseValue......................................................................................................
+
+    @Test
+    public void testParseValueBold() {
+        this.checkEquals(
+                FontWeight.BOLD,
+                this.textStylePropertyName().parseValue("bold")
+        );
+    }
+
+    @Test
+    public void testParseValueNumber() {
+        this.checkEquals(
+                FontWeight.with(23),
+                this.textStylePropertyName().parseValue("23")
+        );
+    }
+
+    // HasJsonNode......................................................................................................
 
     @Test
     public void testUnmarshallBooleanFails() {

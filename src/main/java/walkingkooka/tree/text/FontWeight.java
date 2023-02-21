@@ -36,8 +36,9 @@ public final class FontWeight implements Comparable<FontWeight>,
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;
 
-    private final static String NORMAL_TEXT = "normal";
-    private final static String BOLD_TEXT = "bold";
+    // VisibleFor TextStylePropertyValueHandlerFontWeight
+    final static String NORMAL_TEXT = "normal";
+    final static String BOLD_TEXT = "bold";
 
     /**
      * A constant holding the font-weight of normal text

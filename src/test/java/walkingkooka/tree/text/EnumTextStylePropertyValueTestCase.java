@@ -17,12 +17,33 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> extends TextStylePropertyValueTestCase<E> {
 
     EnumTextStylePropertyValueTestCase() {
         super();
+    }
+
+    @Test
+    public final void testParseValueInvalidFails() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> this.textStylePropertyName().parseValue("!invalid")
+        );
+    }
+
+    @Test
+    public final void testParseValue() {
+        final E enumValue = this.createTextStylePropertyValue();
+
+        this.checkEquals(
+                enumValue,
+                this.textStylePropertyName().parseValue(enumValue.name())
+        );
     }
 
     // ClassTyping......................................................................................................

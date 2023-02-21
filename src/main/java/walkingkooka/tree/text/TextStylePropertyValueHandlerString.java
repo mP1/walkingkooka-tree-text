@@ -61,6 +61,11 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
         return "String";
     }
 
+    @Override
+    String parseValue(final String value) {
+        return value;
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

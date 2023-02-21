@@ -21,9 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -154,6 +156,62 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                     propertyName.urlFragment()
             );
         }
+    }
+
+    // parseValue.......................................................................................................
+    @Test
+    public void testParseValueString() {
+        this.parseValueAndCheck(
+                TextStylePropertyName.TEXT,
+                "abc123",
+                "abc123"
+        );
+    }
+
+    @Test
+    public void testParseValueColor() {
+        this.parseValueAndCheck(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                "#123456",
+                Color.parse("#123456")
+        );
+    }
+
+    @Test
+    public void testParseValueEnum() {
+        this.parseValueAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                "CENTER",
+                TextAlign.CENTER
+        );
+    }
+
+    @Test
+    public void testParseValueNone() {
+        this.parseValueAndCheck(
+                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                "none",
+                Length.none()
+        );
+    }
+
+    @Test
+    public void testParseValuePixels() {
+        this.parseValueAndCheck(
+                TextStylePropertyName.WIDTH,
+                "100px",
+                Length.pixel(100.0)
+        );
+    }
+
+    private <T> void parseValueAndCheck(final TextStylePropertyName<T> propertyName,
+                                        final String string,
+                                        final T expectedValue) {
+        this.checkEquals(
+                expectedValue,
+                propertyName.parseValue(string),
+                () -> propertyName + " parseValue " + CharSequences.quoteAndEscape(string)
+        );
     }
 
     @Test

@@ -52,6 +52,11 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
 
     abstract boolean lengthCheck(final Length<?> length);
 
+    @Override
+    Length<?> parseValue(final String value) {
+        return Length.parse(value);
+    }
+
     // unmarshall ....................................................................................................
 
     @Override

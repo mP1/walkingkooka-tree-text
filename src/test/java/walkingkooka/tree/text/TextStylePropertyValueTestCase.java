@@ -28,10 +28,20 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import java.math.MathContext;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2<V>, ToStringTesting<V> {
 
     TextStylePropertyValueTestCase() {
         super();
+    }
+
+    @Test
+    public final void testParseValueNullFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.textStylePropertyName().parseValue(null)
+        );
     }
 
     @Test
