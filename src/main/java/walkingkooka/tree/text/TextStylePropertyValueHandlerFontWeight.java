@@ -82,7 +82,7 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     @Override
     JsonNode marshall(final FontWeight value,
                       final JsonNodeMarshallContext context) {
-        return JsonNode.number(value.value());
+        return context.marshall(value);
     }
 
     // Object ..........................................................................................................
