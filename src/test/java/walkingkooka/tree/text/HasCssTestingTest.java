@@ -19,6 +19,10 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.RoundingMode;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class HasCssTestingTest implements HasCssTesting {
 
     @Test
@@ -32,6 +36,42 @@ public final class HasCssTestingTest implements HasCssTesting {
                     }
                 },
                 css
+        );
+    }
+
+    // cssFromEnumName..................................................................................................
+
+    @Test
+    public void testCssFromEnumNameNullFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> HasCss.cssFromEnumName(null)
+        );
+    }
+
+    @Test
+    public void testCssFromEnumNameWithHasEnum() {
+        this.checkEquals(
+                TestHasCssEnum.FIRST.css(),
+                HasCss.cssFromEnumName(TestHasCssEnum.FIRST)
+        );
+    }
+
+    enum TestHasCssEnum implements HasCss {
+        FIRST;
+
+        @Override
+        public String css() {
+            return "ABC123";
+        }
+
+    }
+
+    @Test
+    public void testCssFromEnum() {
+        this.checkEquals(
+                "half-down",
+                HasCss.cssFromEnumName(RoundingMode.HALF_DOWN)
         );
     }
 }

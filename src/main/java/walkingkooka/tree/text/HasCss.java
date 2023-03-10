@@ -17,10 +17,28 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.text.CaseKind;
+
+import java.util.Objects;
+
 /**
  * Implemented by values that have a CSS representation.
  */
 public interface HasCss {
+
+    /**
+     * Converts the name of the enum into a css compatible.
+     */
+    static String cssFromEnumName(final Enum<?> value) {
+        Objects.requireNonNull(value, "value");
+
+        return value instanceof HasCss ?
+                ((HasCss) value).css() :
+                CaseKind.SNAKE.change(
+                        value.name().toLowerCase(),
+                        CaseKind.KEBAB
+                );
+    }
 
     String css();
 }
