@@ -30,7 +30,7 @@ import java.util.function.Predicate;
 /**
  * A {@link TextStylePropertyValueHandler} that acts as  bridge to a type that can be made into a {@link JsonNode}.
  */
-final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyValueHandler<H> {
+final class TextStylePropertyValueHandlerJsonNode<T> extends TextStylePropertyValueHandler<T> {
 
     /**
      * Factory
@@ -43,7 +43,7 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerJsonNode(final Class<H> type,
+    private TextStylePropertyValueHandlerJsonNode(final Class<T> type,
                                                   final Predicate<Object> typeChecker) {
         super();
         this.type = type;
@@ -68,7 +68,7 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
     }
 
     @Override
-    H parseValue(final String value) {
+    T parseValue(final String value) {
         return this.unmarshall(
                 JsonNode.string(value),
                 null,
@@ -84,14 +84,14 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
     // JsonNodeContext..................................................................................................
 
     @Override
-    H unmarshall(final JsonNode node,
+    T unmarshall(final JsonNode node,
                  final TextStylePropertyName<?> name,
                  final JsonNodeUnmarshallContext context) {
         return context.unmarshall(node, this.type);
     }
 
     @Override
-    JsonNode marshall(final H value,
+    JsonNode marshall(final T value,
                       final JsonNodeMarshallContext context) {
         return context.marshall(value);
     }
@@ -103,5 +103,5 @@ final class TextStylePropertyValueHandlerJsonNode<H> extends TextStylePropertyVa
         return this.type.getSimpleName();
     }
 
-    private final Class<H> type;
+    private final Class<T> type;
 }
