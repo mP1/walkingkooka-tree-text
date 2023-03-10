@@ -25,6 +25,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -43,6 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
+        HasCssTesting,
         JsonNodeMarshallingTesting<TextStyle>,
         PatchableTesting<TextStyle>,
         ToStringTesting<TextStyle> {
@@ -358,6 +360,129 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     private JsonNode marshall(final Object value) {
         return JsonNodeMarshallContexts.basic()
                 .marshall(value);
+    }
+
+    // css..............................................................................................................
+
+    @Test
+    public void testCssEmpty() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY,
+                "{}"
+        );
+    }
+
+    @Test
+    public void testCssStringValueWithoutSpaces() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.FONT_FAMILY,
+                                FontFamily.with("Banana")
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  font-family: Banana;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssStringValueWithSpaces() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.FONT_FAMILY,
+                                FontFamily.with("Times New Roman")
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  font-family: \"Times New Roman\";" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssBorderBottomStyleEnum() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                                BorderStyle.DOTTED
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  border-bottom-style: dotted;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssvBorderBottomWidth() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                Length.pixel(12.5)
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  border-bottom-width: 12.5px;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssColor() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.COLOR,
+                                Color.parse("#123456")
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  color: #123456;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssFontSize() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.FONT_SIZE,
+                                FontSize.with(123)
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  font-size: 123;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssText() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.TEXT,
+                                "has-no-spaces"
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  text: has-no-spaces;" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
+    }
+
+
+    @Test
+    public void testCssTextIncludesSpacesRequiresQuotes() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.TEXT,
+                                "has spaces"
+                        ),
+                "{" + LineEnding.SYSTEM +
+                        "  text: \"has spaces\";" + LineEnding.SYSTEM +
+                        "}" + LineEnding.SYSTEM
+        );
     }
 
     // toString.........................................................................................................

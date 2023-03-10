@@ -183,6 +183,13 @@ final class TextStyleNonEmpty extends TextStyle {
         this.value.accept(visitor);
     }
 
+    // css.............................................................................................................
+
+    @Override
+    public String css() {
+        return this.value.css();
+    }
+
     // BoxEdge........................................................................................................
 
     @Override
