@@ -18,6 +18,11 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.Indentation;
+import walkingkooka.text.LineEnding;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -82,6 +87,46 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
 
     void accept(final TextStyleVisitor visitor) {
         this.entries.accept(visitor);
+    }
+
+    // css..............................................................................................................
+
+    String css() {
+        final StringBuilder cssStringBuilder = new StringBuilder();
+
+        try (final IndentingPrinter css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
+            css.println("{");
+            css.indent();
+
+            for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entrySet()) {
+                final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
+                css.print(propertyName.value());
+                css.print(": ");
+
+                final Object value = propertyAndValue.getValue();
+                final CharSequence valueCss;
+                if (value instanceof Enum) {
+                    valueCss = HasCss.cssFromEnumName(
+                            (Enum<?>) value
+                    );
+                } else {
+                    final String stringValue = value.toString();
+                    if (stringValue.indexOf(' ') >= 0) {
+                        valueCss = CharSequences.quoteAndEscape(stringValue);
+                    } else {
+                        valueCss = stringValue;
+                    }
+                }
+
+                css.print(valueCss);
+                css.println(";");
+            }
+
+            css.outdent();
+            css.println("}");
+        }
+
+        return cssStringBuilder.toString();
     }
 
     // JsonNodeContext..................................................................................................
