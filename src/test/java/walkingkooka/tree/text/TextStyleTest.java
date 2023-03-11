@@ -470,7 +470,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
-
     @Test
     public void testCssTextIncludesSpacesRequiresQuotes() {
         this.hasCssAndCheck(
@@ -482,6 +481,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 "{" + LineEnding.SYSTEM +
                         "  text: \"has spaces\";" + LineEnding.SYSTEM +
                         "}" + LineEnding.SYSTEM
+        );
+    }
+
+    @Test
+    public void testCssCached() {
+        final TextStyle style = TextStyle.EMPTY
+                .set(
+                        TextStylePropertyName.TEXT,
+                        "has-no-spaces"
+                );
+        assertSame(
+                style.css(),
+                style.css()
         );
     }
 

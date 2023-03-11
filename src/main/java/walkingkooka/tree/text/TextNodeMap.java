@@ -92,6 +92,19 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
     // css..............................................................................................................
 
     String css() {
+        if (null == this.css) {
+            this.css = this.buildCss();
+        }
+
+        return this.css;
+    }
+
+    /**
+     * A lazily populated cache of the css
+     */
+    private String css;
+
+    private String buildCss() {
         final StringBuilder cssStringBuilder = new StringBuilder();
 
         try (final IndentingPrinter css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
