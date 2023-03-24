@@ -19,9 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.CharSequences;
-import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
-import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.Printer;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -104,14 +103,22 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
      */
     private String css;
 
+    /**
+     * Prints each property and value with spaces after each separator.
+     *
+     * <pre>
+     * border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;
+     * </pre>
+     */
     private String buildCss() {
         final StringBuilder cssStringBuilder = new StringBuilder();
 
-        try (final IndentingPrinter css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
-            css.println("{");
-            css.indent();
+        try (final Printer css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM)) {
+            String separator = "";
 
             for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entrySet()) {
+                css.print(separator);
+
                 final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
                 css.print(propertyName.value());
                 css.print(": ");
@@ -132,11 +139,10 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
                 }
 
                 css.print(valueCss);
-                css.println(";");
-            }
+                css.print(";");
 
-            css.outdent();
-            css.println("}");
+                separator = " ";
+            }
         }
 
         return cssStringBuilder.toString();

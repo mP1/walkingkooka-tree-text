@@ -118,9 +118,12 @@ final class TextStyleEmpty extends TextStyle {
 
     // css.............................................................................................................
 
+    /**
+     * Returns an empty string, no names and values.
+     */
     @Override
     public String css() {
-        return "{}";
+        return "";
     }
 
     // BoxEdge........................................................................................................

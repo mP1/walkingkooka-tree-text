@@ -25,7 +25,6 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -368,7 +367,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testCssEmpty() {
         this.hasCssAndCheck(
                 TextStyle.EMPTY,
-                "{}"
+                ""
         );
     }
 
@@ -380,9 +379,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.FONT_FAMILY,
                                 FontFamily.with("Banana")
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  font-family: Banana;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "font-family: Banana;"
         );
     }
 
@@ -394,9 +391,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.FONT_FAMILY,
                                 FontFamily.with("Times New Roman")
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  font-family: \"Times New Roman\";" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "font-family: \"Times New Roman\";"
         );
     }
 
@@ -408,9 +403,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.BORDER_BOTTOM_STYLE,
                                 BorderStyle.DOTTED
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  border-bottom-style: dotted;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "border-bottom-style: dotted;"
         );
     }
 
@@ -422,9 +415,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
                                 Length.pixel(12.5)
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  border-bottom-width: 12.5px;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "border-bottom-width: 12.5px;"
         );
     }
 
@@ -436,9 +427,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.COLOR,
                                 Color.parse("#123456")
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  color: #123456;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "color: #123456;"
         );
     }
 
@@ -450,9 +439,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.FONT_SIZE,
                                 FontSize.with(123)
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  font-size: 123;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "font-size: 123;"
         );
     }
 
@@ -464,9 +451,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.TEXT,
                                 "has-no-spaces"
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  text: has-no-spaces;" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "text: has-no-spaces;"
         );
     }
 
@@ -478,9 +463,25 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 TextStylePropertyName.TEXT,
                                 "has spaces"
                         ),
-                "{" + LineEnding.SYSTEM +
-                        "  text: \"has spaces\";" + LineEnding.SYSTEM +
-                        "}" + LineEnding.SYSTEM
+                "text: \"has spaces\";"
+        );
+    }
+
+    @Test
+    public void testCssTextSeveralProperties() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                Color.parse("#123456")
+                        ).set(
+                                TextStylePropertyName.BORDER_TOP_STYLE,
+                                BorderStyle.DOTTED
+                        ).set(
+                                TextStylePropertyName.BORDER_TOP_WIDTH,
+                                Length.pixel(123.0)
+                        ),
+                "border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;"
         );
     }
 
