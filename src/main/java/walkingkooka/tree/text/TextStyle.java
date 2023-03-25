@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -146,6 +147,34 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     abstract <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value);
+
+    /**
+     * Sets all border properties to the same given value.
+     */
+    public final TextStyle setBorder(final Color color,
+                                     final BorderStyle style,
+                                     final Length<?> width) {
+        Objects.requireNonNull(color, "color");
+        Objects.requireNonNull(style, "style");
+        Objects.requireNonNull(width, "width");
+
+        TextStyle textStyle = this;
+
+        for (final BoxEdge boxEdge : BoxEdge.values()) {
+            textStyle = textStyle.set(
+                    boxEdge.borderColorPropertyName(),
+                    color
+            ).set(
+                    boxEdge.borderStylePropertyName(),
+                    style
+            ).set(
+                    boxEdge.borderWidthPropertyName(),
+                    width
+            );
+        }
+
+        return textStyle;
+    }
 
     /**
      * Sets all margin to the given {@link Length}

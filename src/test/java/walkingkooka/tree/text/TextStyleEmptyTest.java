@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
@@ -126,6 +127,36 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 TextStyle.with(Maps.of(propertyName, familyName)));
     }
 
+    // setBorder.......................................................................................................
+
+    @Test
+    public void testSetBorder() {
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        this.checkEquals(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
+                TextStyle.EMPTY.setBorder(
+                        color,
+                        style,
+                        width
+                )
+        );
+    }
+    
     // setMargin.......................................................................................................
 
     @Test

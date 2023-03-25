@@ -23,6 +23,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CharSequences;
@@ -219,6 +220,48 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 removed,
                 () -> textStyle + " remove " + propertyName);
         return removed;
+    }
+
+    // setBorder........................................................................................................
+
+    @Test
+    public final void testSetBorderWithNullColorFails() {
+        this.setBorderWithNullFails(
+                null,
+                BorderStyle.DASHED,
+                Length.none()
+        );
+    }
+
+    @Test
+    public final void testSetBorderWithNullStyleFails() {
+        this.setBorderWithNullFails(
+                Color.BLACK,
+                null,
+                Length.none()
+        );
+    }
+
+    @Test
+    public final void testSetBorderWithNullWidthFails() {
+        this.setBorderWithNullFails(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                null
+        );
+    }
+
+    private void setBorderWithNullFails(final Color color,
+                                        final BorderStyle style,
+                                        final Length<?> length) {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createObject().setBorder(
+                        color,
+                        style,
+                        length
+                )
+        );
     }
 
     // helpers .........................................................................................................

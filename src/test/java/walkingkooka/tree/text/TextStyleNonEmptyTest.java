@@ -391,6 +391,65 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 this.createTextStyle(property1, value1, property2, value2));
     }
 
+    // setBorder.......................................................................................................
+
+    @Test
+    public void testSetBorder() {
+        final String text = "abc123";
+
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        this.checkEquals(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.TEXT, text)
+                        .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+                        .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+                        .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+                        .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
+                TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
+                        .setBorder(
+                                color,
+                                style,
+                                width
+                        )
+        );
+    }
+
+    @Test
+    public void testSetBorderSame() {
+        final String text = "abc123";
+
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        final TextStyle textStyle = TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
+                .setBorder(
+                        color,
+                        style,
+                        width
+                );
+
+        assertSame(
+                textStyle,
+                textStyle.setBorder(
+                        color,
+                        style,
+                        width
+                )
+        );
+    }
+
     // setMargin.......................................................................................................
 
     @Test
