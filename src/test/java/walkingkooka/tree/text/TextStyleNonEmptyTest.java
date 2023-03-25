@@ -145,9 +145,15 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyleNameNode styleName = this.styleName("child-style123");
         final TextStyle textStyle = this.createTextStyle();
 
-        this.replaceAndCheck(textStyle,
+        this.replaceAndCheck(
+                textStyle,
                 this.makeStyleNameParent(styleName),
-                this.makeStyleNameParent(styleName.setAttributes(textStyle.value()).parentOrFail()).children().get(0));
+                this.makeStyleNameParent(
+                        styleName.setAttributes(
+                                textStyle.value()
+                        )
+                )
+        );
     }
 
     @Test
@@ -173,17 +179,25 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     private void replaceAndCheck3(final TextNode textNode) {
         final TextStyle textStyle = this.createTextStyle();
 
-        this.replaceAndCheck(textStyle,
+        this.replaceAndCheck(
+                textStyle,
                 this.makeStyleNameParent(textNode),
-                this.makeStyleNameParent(TextStyleNode.with(Lists.of(textNode), textStyle.textStyleMap())).children().get(0));
+                this.makeStyleNameParent(
+                        TextStyleNode.with(
+                                Lists.of(textNode),
+                                textStyle.textStyleMap())
+                )
+        );
     }
 
     private void replaceAndCheck2(final TextNode textNode) {
         final TextStyle textStyle = this.createTextStyle();
 
-        this.replaceAndCheck(textStyle,
+        this.replaceAndCheck(
+                textStyle,
                 textNode,
-                textNode.setAttributes(textStyle.value()).parentOrFail().children().get(0));
+                textNode.setAttributes(textStyle.value())
+        );
     }
 
     // get..............................................................................................................

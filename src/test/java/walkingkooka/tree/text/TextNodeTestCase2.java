@@ -63,9 +63,13 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         final TextNode after = before.setAttributes(attributes);
         assertNotSame(after, before);
 
-        final TextStyleNode parent = after.parentOrFail().cast();
-        this.childCountCheck(parent, before);
-        this.checkEquals(attributes, parent.attributes(), "attributes");
+        this.parentMissingCheck(after);
+        this.childCountCheck(after, before);
+        this.checkEquals(
+                attributes,
+                after.attributes(),
+                "attributes"
+        );
     }
 
     // textStyle........................................................................................................

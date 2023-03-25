@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -118,8 +119,17 @@ public final class TextStyleNameNode extends TextParentNode {
         return this;
     }
 
-    @Override TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
-        return this.setAttributesNonEmptyTextStyleMap0(textStyleMap);
+    /**
+     * Factory that creates a new {@link TextStyleNode} with the given attributes and this as the only child.
+     */
+    @Override
+    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+        return TextStyleNode.with(
+                Lists.of(
+                        this
+                ),
+                textStyleMap
+        );
     }
 
     @Override

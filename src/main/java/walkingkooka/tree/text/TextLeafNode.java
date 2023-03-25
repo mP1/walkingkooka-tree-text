@@ -105,9 +105,17 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return this;
     }
 
+    /**
+     * Creates a new {@link TextStyleNode} with this leaf as its only child with the given attributes.
+     */
     @Override
     final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
-        return this.setAttributesNonEmptyTextStyleMap0(textStyleMap);
+        return TextStyleNode.with(
+                Lists.of(
+                        this
+                ),
+                textStyleMap
+        );
     }
 
     @Override
