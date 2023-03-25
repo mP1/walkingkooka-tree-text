@@ -34,9 +34,11 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
 
     @Test
     public void testWithInvalidPropertyFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null)));
+        assertThrows(
+                NullPointerException.class,
+                () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+        );
     }
-
 
     @Test
     public void testWithMapCopied() {

@@ -102,9 +102,10 @@ abstract class TextStylePropertyValueHandler<T> {
 
     // checkValue.......................................................................................................
 
-    final T check(final Object value, final TextStylePropertyName<?> name) {
+    final T check(final Object value,
+                  final TextStylePropertyName<?> name) {
         if (null == value) {
-            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " missing value");
+            throw new NullPointerException("Property " + name.inQuotes() + " missing value");
         }
 
         this.check0(value, name);

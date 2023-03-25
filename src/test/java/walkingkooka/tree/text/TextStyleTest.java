@@ -54,8 +54,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testWithInvalidPropertyFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, null)));
+    public void testWithNullPropertyValueFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+        );
+    }
+
+    @Test
+    public void testWithInvalidPropertyValueFails() {
+        assertThrows(
+                TextStylePropertyValueException.class,
+                () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, this))
+        );
     }
 
     @Test

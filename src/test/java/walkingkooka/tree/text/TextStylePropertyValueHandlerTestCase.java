@@ -43,8 +43,9 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     @Test
     public final void testCheckNullValueFails() {
-        this.checkFails(null,
-                "Property " + this.propertyName().inQuotes() + " missing value");
+        this.checkFails(
+                "Property " + this.propertyName().inQuotes() + " missing value"
+        );
     }
 
     @Test
@@ -70,12 +71,40 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
         propertyName.check(value);
     }
 
+    final void checkFails(final String message) {
+        this.checkFails(
+                null,
+                NullPointerException.class,
+                message
+        );
+    }
+
     final void checkFails(final Object value, final String message) {
-        final TextStylePropertyValueException thrown = assertThrows(TextStylePropertyValueException.class, () -> this.check(value));
+        this.checkFails(
+                value,
+                TextStylePropertyValueException.class,
+                message
+        );
+    }
+
+    private <T extends RuntimeException> void checkFails(final Object value,
+                                                         final Class<T> throwType,
+                                                         final String message) {
+        final T thrown = assertThrows(
+                throwType,
+                () -> this.check(value)
+        );
         this.checkEquals(message, thrown.getMessage(), "message");
 
-        final TextStylePropertyValueException thrown2 = assertThrows(TextStylePropertyValueException.class, () -> this.propertyName().check(value));
-        this.checkEquals(message, thrown2.getMessage(), "message");
+        final T thrown2 = assertThrows(
+                throwType,
+                () -> this.propertyName().check(value)
+        );
+        this.checkEquals(
+                message,
+                thrown2.getMessage(),
+                "message"
+        );
     }
 
     final void unmarshallAndCheck(final JsonNode node, final T value) {

@@ -163,7 +163,10 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testSetNullPropertyValueFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null));
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null)
+        );
     }
 
     @Test
