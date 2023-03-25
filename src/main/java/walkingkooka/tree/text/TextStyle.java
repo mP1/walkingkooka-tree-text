@@ -148,6 +148,18 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value);
 
     /**
+     * Sets all margin to the given {@link Length}
+     */
+    public final TextStyle setMargin(final Length<?> length) {
+        Objects.requireNonNull(length, "length");
+
+        return this.set(TextStylePropertyName.MARGIN_TOP, length)
+                .set(TextStylePropertyName.MARGIN_RIGHT, length)
+                .set(TextStylePropertyName.MARGIN_BOTTOM, length)
+                .set(TextStylePropertyName.MARGIN_LEFT, length);
+    }
+    
+    /**
      * Sets all padding to the given {@link Length}
      */
     public final TextStyle setPadding(final Length<?> length) {

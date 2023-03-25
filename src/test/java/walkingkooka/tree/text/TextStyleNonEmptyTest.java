@@ -391,6 +391,45 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 this.createTextStyle(property1, value1, property2, value2));
     }
 
+    // setMargin.......................................................................................................
+
+    @Test
+    public void testSetMargin() {
+        final Color color = Color.parse("#123");
+        final Length<?> length = Length.pixel(123.5);
+
+        this.checkEquals(
+                TextStyle.withTextStyleMap(
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR, color,
+                                        TextStylePropertyName.MARGIN_TOP, length,
+                                        TextStylePropertyName.MARGIN_RIGHT, length,
+                                        TextStylePropertyName.MARGIN_BOTTOM, length,
+                                        TextStylePropertyName.MARGIN_LEFT, length
+                                )
+                        )
+                ),
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.COLOR, color
+                ).setMargin(length)
+        );
+    }
+
+    @Test
+    public void testSetMarginSame() {
+        final Color color = Color.parse("#123");
+        final Length<?> length = Length.pixel(123.5);
+        final TextStyle style = TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR, color
+        ).setMargin(length);
+
+        assertSame(
+                style,
+                style.setMargin(length)
+        );
+    }
+    
     // setPadding.......................................................................................................
 
     @Test
