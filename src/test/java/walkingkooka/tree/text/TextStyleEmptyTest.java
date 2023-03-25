@@ -126,6 +126,27 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 TextStyle.with(Maps.of(propertyName, familyName)));
     }
 
+    // setMargin.......................................................................................................
+
+    @Test
+    public void testSetMargin() {
+        final Length<?> length = Length.pixel(123.5);
+
+        this.checkEquals(
+                TextStyle.withTextStyleMap(
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.MARGIN_TOP, length,
+                                        TextStylePropertyName.MARGIN_RIGHT, length,
+                                        TextStylePropertyName.MARGIN_BOTTOM, length,
+                                        TextStylePropertyName.MARGIN_LEFT, length
+                                )
+                        )
+                ),
+                TextStyle.EMPTY.setMargin(length)
+        );
+    }
+    
     // setPadding.......................................................................................................
 
     @Test
