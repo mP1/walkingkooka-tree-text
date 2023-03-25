@@ -107,6 +107,28 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
                 2);
     }
 
+    // toHtml...........................................................................................................
+
+    @Test
+    public void testToHtml() {
+        final String text = "abc123";
+
+        this.toHtmlAndCheck(
+            Text.with(text),
+            text
+        );
+    }
+
+    @Test
+    public void testToHtmlEscaped() {
+        final String text = "abc 123<>&\"'";
+
+        this.toHtmlAndCheck(
+                Text.with(text),
+                "abc&amp;nbsp;123&lt;&gt;&amp;&amp;quot;'"
+        );
+    }
+
     // HasJsonNode .....................................................................................................
 
     @Test

@@ -20,7 +20,10 @@ package walkingkooka.tree.text;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.text.HasText;
+import walkingkooka.text.Indentation;
+import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -123,6 +126,41 @@ abstract class TextParentNode extends TextNode {
         return this.children().stream()
                 .mapToInt(HasText::textLength)
                 .sum();
+    }
+
+    // toHtml...........................................................................................................
+
+    /**
+     * Placeholders must be resolved before converting to html.
+     */
+    @Override
+    public final String toHtml() {
+        final StringBuilder html = new StringBuilder();
+
+        try (final IndentingPrinter printer = Printers.stringBuilder(html, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
+            this.buildHtml(
+                    false, // shouldIndent
+                    printer
+            );
+        }
+
+        return html.toString();
+    }
+
+    final boolean buildChildNodesHtml(final boolean shouldIndent,
+                                      final IndentingPrinter html) {
+        boolean i = shouldIndent;
+
+        for (final TextNode child : this.children()) {
+            i = child.buildHtml(
+                    i,
+                    html
+            );
+
+            i = child.isStyle() || child.isStyleName();
+        }
+
+        return i;
     }
 
     // JsonNodeContext..................................................................................................

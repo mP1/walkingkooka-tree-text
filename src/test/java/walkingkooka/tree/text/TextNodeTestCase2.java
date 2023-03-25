@@ -88,6 +88,17 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         this.textOffsetAndCheck(this.createTextNode(), 0);
     }
 
+    // toHtml...........................................................................................................
+
+    final void toHtmlAndCheck(final TextNode node,
+                              final String html) {
+        this.checkEquals(
+                html,
+                node.toHtml(),
+                () -> node + " toHtml"
+        );
+    }
+
     // TextNodeVisitor..................................................................................................
 
     @Test

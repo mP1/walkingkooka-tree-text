@@ -73,6 +73,21 @@ public final class Text extends TextLeafNode<String> implements HasText {
         return this.value();
     }
 
+    // toHtml...........................................................................................................
+
+    /**
+     * Returns the HTML equivalent of this {@link TextNode}.
+     */
+    @Override
+    public String toHtml() {
+        return this.text()
+                .replace(" ", "&nbsp;")
+                .replace("\"", "&quot;")
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+    }
+
     // JsonNodeContext..................................................................................................
 
     /**

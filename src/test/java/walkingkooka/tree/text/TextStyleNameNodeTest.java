@@ -176,6 +176,45 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
                 2);
     }
 
+    // toHtml...........................................................................................................
+
+    @Test
+    public void testToHtml() {
+        this.toHtmlAndCheck(
+                this.createTextNode(),
+                "<SPAN class=\"styleName123\"></SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithText() {
+        this.toHtmlAndCheck(
+                TextStyleNameNode.with(
+                        TextStyleName.with(STYLE_NAME)
+                ).setChildren(
+                        Lists.of(
+                                TextNode.text("abc")
+                        )
+                ),
+                "<SPAN class=\"styleName123\">abc</SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithText2() {
+        this.toHtmlAndCheck(
+                TextStyleNameNode.with(
+                        TextStyleName.with(STYLE_NAME)
+                ).setChildren(
+                        Lists.of(
+                                TextNode.text("abc"),
+                                TextNode.text("xyz")
+                        )
+                ),
+                "<SPAN class=\"styleName123\">abcxyz</SPAN>"
+        );
+    }
+
     // HasJsonNode .....................................................................................................
 
     @Test

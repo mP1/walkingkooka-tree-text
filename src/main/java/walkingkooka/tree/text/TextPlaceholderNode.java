@@ -64,6 +64,16 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return "";
     }
 
+    // toHtml...........................................................................................................
+
+    /**
+     * Placeholders must be resolved before converting to html.
+     */
+    @Override
+    public String toHtml() {
+        throw new UnsupportedOperationException();
+    }
+
     // JsonNode.........................................................................................................
 
     /**

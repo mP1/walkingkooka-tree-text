@@ -24,6 +24,7 @@ import walkingkooka.UsesToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.HasText;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
@@ -221,6 +222,19 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final boolean isText() {
         return this instanceof Text;
     }
+
+    // toHtml...........................................................................................................
+
+    /**
+     * Returns the HTML equivalent of this {@link TextNode}.
+     */
+    public abstract String toHtml();
+
+    /**
+     * Internal method appends the HTML for this {@link TextNode}.
+     */
+    abstract boolean buildHtml(final boolean shouldIndent,
+                               final IndentingPrinter html);
 
     // helper............................................................................................................
 

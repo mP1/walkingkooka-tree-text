@@ -151,6 +151,35 @@ public final class TextStyleNode extends TextParentNode {
         return new TextStyleNode(index, children, this.attributes);
     }
 
+    // toHtml...........................................................................................................
+
+    @Override
+    boolean buildHtml(final boolean shouldIndent,
+                      final IndentingPrinter html) {
+        if (shouldIndent) {
+            html.lineStart();
+            html.indent();
+        }
+
+        html.print("<SPAN style=\"");
+        html.print(this.textStyle().css());
+        html.print("\">");
+
+        this.buildChildNodesHtml(
+                true,
+                html
+        );
+
+        html.print("</SPAN>");
+
+        if (shouldIndent) {
+            html.println();
+            html.outdent();
+        }
+
+        return true;
+    }
+
     // JsonNodeContext...................................................................................................
 
     /**

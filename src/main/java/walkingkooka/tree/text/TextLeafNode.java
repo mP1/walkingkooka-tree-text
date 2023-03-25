@@ -22,6 +22,7 @@ import walkingkooka.NeverError;
 import walkingkooka.Value;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.text.printer.IndentingPrinter;
 
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,15 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     @Override
     public final TextStyle textStyle() {
         return TextStyle.EMPTY;
+    }
+
+    // toHtml ..........................................................................................................
+
+    @Override
+    final boolean buildHtml(final boolean shouldIndent,
+                         final IndentingPrinter html) {
+        html.print(this.toHtml());
+        return false;
     }
 
     // Object ..........................................................................................................
