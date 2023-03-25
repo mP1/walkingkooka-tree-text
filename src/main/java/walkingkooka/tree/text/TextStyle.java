@@ -147,6 +147,18 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     abstract <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value);
 
+    /**
+     * Sets all padding to the given {@link Length}
+     */
+    public final TextStyle setPadding(final Length<?> length) {
+        Objects.requireNonNull(length, "length");
+
+        return this.set(TextStylePropertyName.PADDING_TOP, length)
+                .set(TextStylePropertyName.PADDING_RIGHT, length)
+                .set(TextStylePropertyName.PADDING_BOTTOM, length)
+                .set(TextStylePropertyName.PADDING_LEFT, length);
+    }
+
     // remove...........................................................................................................
 
     /**

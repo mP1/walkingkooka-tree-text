@@ -58,6 +58,16 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 () -> "" + textStyle);
     }
 
+    // setPadding.......................................................................................................
+
+    @Test
+    public final void testSetPaddingWithNullFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createObject().setPadding(null)
+        );
+    }
+
     // merge.............................................................................................................
 
     @Test
