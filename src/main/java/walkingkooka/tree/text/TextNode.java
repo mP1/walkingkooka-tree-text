@@ -188,15 +188,6 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     abstract TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap);
 
     /**
-     * Default for all sub classes except for {@link TextStyleNode}.
-     */
-    final TextNode setAttributesNonEmptyTextStyleMap0(final TextNodeMap textStyleMap) {
-        return TextStyleNode.with(Lists.of(this), textStyleMap)
-                .replaceChild(this.parent(), this.index)
-                .children().get(0);
-    }
-
-    /**
      * Getter that returns a {@link TextStyle} view over attributes.
      */
     public abstract TextStyle textStyle();

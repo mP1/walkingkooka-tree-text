@@ -247,10 +247,16 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testMarshallWithStyleNodeAndChildren() {
-        this.marshallAndCheck(TextNode.text("text123")
-                        .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456)))
-                        .parentOrFail(),
-                "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}");
+        this.marshallAndCheck(
+                TextNode.text("text123")
+                        .setAttributes(
+                                Maps.of(
+                                        TextStylePropertyName.BACKGROUND_COLOR,
+                                        Color.fromRgb(0x123456)
+                                )
+                        ),
+                "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
+        );
     }
 
     @Test
@@ -484,10 +490,15 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testToStringWithChildrenAndAttributes() {
-        this.toStringAndCheck(text1()
-                        .setAttributes(Maps.of(TextStylePropertyName.with("style-1"), "value-1"))
-                        .parentOrFail(),
-                "{style-1: \"value-1\"}[\"text-1a\"]");
+        this.toStringAndCheck(
+                text1().setAttributes(
+                        Maps.of(
+                                TextStylePropertyName.with("style-1"),
+                                "value-1"
+                        )
+                ),
+                "{style-1: \"value-1\"}[\"text-1a\"]"
+        );
     }
 
     @Test
