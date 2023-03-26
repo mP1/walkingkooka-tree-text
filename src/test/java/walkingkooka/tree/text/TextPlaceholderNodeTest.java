@@ -24,6 +24,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlaceholderNode, TextPlaceholderName> {
 
@@ -41,6 +42,21 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
         this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"), this.createTextNode()))
                         .children().get(1),
                 2);
+    }
+
+    // toHtml...........................................................................................................
+
+    @Test
+    public void testToHtml() {
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> this.createTextNode().toHtml()
+        );
+    }
+
+    @Override
+    public void testPropertiesNeverReturnNull() {
+
     }
 
     // HasJsonNode .....................................................................................................

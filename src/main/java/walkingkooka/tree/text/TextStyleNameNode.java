@@ -151,6 +151,34 @@ public final class TextStyleNameNode extends TextParentNode {
         return new TextStyleNameNode(index, children, styleName);
     }
 
+    // toHtml...........................................................................................................
+
+    @Override
+    boolean buildHtml(final boolean shouldIndent,
+                      final IndentingPrinter html) {
+        if (shouldIndent) {
+            html.lineStart();
+            html.indent();
+        }
+
+        html.print("<SPAN class=\"");
+        html.print(this.styleName().value());
+        html.print("\">");
+
+        final boolean i = this.buildChildNodesHtml(
+                true, // shouldIndent
+                html
+        );
+
+        html.print("</SPAN>");
+
+        if (shouldIndent) {
+            html.outdent();
+        }
+
+        return i;
+    }
+
     // TreePrintable....................................................................................................
 
     @Override

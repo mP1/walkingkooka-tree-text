@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
@@ -217,6 +218,143 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 TextNode.style(Lists.of(Text.with("b22")))))
                         .children().get(1),
                 2);
+    }
+
+    // toHtml...........................................................................................................
+
+    @Test
+    public void testToHtmlWithText() {
+        this.toHtmlAndCheck(
+                TextNode.text("abc123")
+                        .setAttributes(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR,
+                                        Color.parse("#123456")
+                                )
+                        ),
+                "<SPAN style=\"color: #123456;\">abc123</SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithText2() {
+        this.toHtmlAndCheck(
+                TextStyleNode.with(
+                        Lists.of(
+                                TextNode.text("abc"),
+                                TextNode.text("xyz")
+                        ),
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR,
+                                        Color.parse("#123456")
+                                )
+                        )
+                ),
+                "<SPAN style=\"color: #123456;\">abcxyz</SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithTextStyle() {
+        this.toHtmlAndCheck(
+                TextStyleNode.with(
+                        Lists.of(
+                                TextStyleNode.with(
+                                        Lists.of(
+                                                TextNode.text("middle")
+                                        ),
+                                        TextNodeMap.with(
+                                                Maps.of(
+                                                        TextStylePropertyName.COLOR,
+                                                        Color.parse("#222")
+                                                )
+                                        )
+                                )
+                        ),
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR,
+                                        Color.parse("#111")
+                                )
+                        )
+                ),
+                "<SPAN style=\"color: #111111;\">" + LineEnding.NL +
+                        "  <SPAN style=\"color: #222222;\">middle</SPAN>" + LineEnding.NL +
+                        "</SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithTextStyle2() {
+        this.toHtmlAndCheck(
+                TextStyleNode.with(
+                        Lists.of(
+                                TextStyleNode.with(
+                                        Lists.of(
+                                                TextNode.text("middle1")
+                                        ),
+                                        TextNodeMap.with(
+                                                Maps.of(
+                                                        TextStylePropertyName.COLOR,
+                                                        Color.parse("#222")
+                                                )
+                                        )
+                                ),
+                                TextStyleNode.with(
+                                        Lists.of(
+                                                TextNode.text("middle2")
+                                        ),
+                                        TextNodeMap.with(
+                                                Maps.of(
+                                                        TextStylePropertyName.COLOR,
+                                                        Color.parse("#333")
+                                                )
+                                        )
+                                )
+                        ),
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR,
+                                        Color.parse("#111")
+                                )
+                        )
+                ),
+                "<SPAN style=\"color: #111111;\">" + LineEnding.NL +
+                        "  <SPAN style=\"color: #222222;\">middle1</SPAN>" + LineEnding.NL +
+                        "  <SPAN style=\"color: #333333;\">middle2</SPAN>" + LineEnding.NL +
+                        "</SPAN>"
+        );
+    }
+
+    @Test
+    public void testToHtmlWithTextAndTextStyleAndText() {
+        this.toHtmlAndCheck(
+                TextStyleNode.with(
+                        Lists.of(
+                                TextNode.text("before"),
+                                TextStyleNode.with(
+                                        Lists.of(
+                                                TextNode.text("middle")
+                                        ),
+                                        TextNodeMap.with(
+                                                Maps.of(
+                                                        TextStylePropertyName.COLOR,
+                                                        Color.parse("#222")
+                                                )
+                                        )
+                                ),
+                                TextNode.text("after")
+                        ),
+                        TextNodeMap.with(
+                                Maps.of(
+                                        TextStylePropertyName.COLOR,
+                                        Color.parse("#111")
+                                )
+                        )
+                ),
+                "<SPAN style=\"color: #111111;\">before<SPAN style=\"color: #222222;\">middle</SPAN>after</SPAN>"
+        );
     }
 
     // HasJsonNode .....................................................................................................
