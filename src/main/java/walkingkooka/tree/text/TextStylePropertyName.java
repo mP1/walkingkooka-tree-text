@@ -29,6 +29,7 @@ import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Map;
@@ -708,6 +709,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
         this.urlFragment = UrlFragment.with(name);
         this.jsonPropertyName = JsonPropertyName.with(this.name);
+        this.patchRemove = JsonNode.object()
+                .set(
+                        this.jsonPropertyName,
+                        JsonNode.nullNode()
+                );
     }
 
     /**
@@ -809,6 +815,23 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * Calls the appropriate {@link TextStyleVisitor} visit method
      */
     private final BiConsumer<T, TextStyleVisitor> visitor;
+
+    // JsonNode.........................................................................................................
+
+    /**
+     * Creates a {@link JsonNode} which may be used to patch a {@link TextStyle}.
+     */
+    public JsonNode patch(final T value) {
+        return null == value ?
+                this.patchRemove :
+                TextStyle.EMPTY.set(this, value)
+                        .marshall(JsonNodeMarshallContexts.basic());
+    }
+
+    /**
+     * Cached {@link JsonNode}
+     */
+    private final JsonNode patchRemove;
 
     // Object..........................................................................................................
 
