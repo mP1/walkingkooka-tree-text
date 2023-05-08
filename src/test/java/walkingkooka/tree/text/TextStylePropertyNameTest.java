@@ -26,10 +26,14 @@ import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import java.lang.reflect.Field;
+import java.math.MathContext;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -220,6 +224,127 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         assertSame(propertyName.marshallName(), propertyName.marshallName());
     }
 
+    // patch............................................................................................................
+
+    @Test
+    public void testPatchNonNullValue() {
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.RIGHT,
+                JsonNode.object()
+                        .set(
+                                JsonPropertyName.with("text-align"),
+                                JsonNode.string("RIGHT")
+                        )
+        );
+    }
+
+    @Test
+    public void testPatchNonNullValue2() {
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.RIGHT,
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.JUSTIFY
+                ),
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.RIGHT
+                )
+        );
+    }
+
+    @Test
+    public void testPatchNonNullValue3() {
+        final TextStyle textStyle = TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
+
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.RIGHT,
+                textStyle.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.JUSTIFY
+                ),
+                textStyle.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.RIGHT
+                )
+        );
+    }
+
+    @Test
+    public void testPatchNullValue() {
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                null,
+                JsonNode.object()
+                        .set(
+                                JsonPropertyName.with("text-align"),
+                                JsonNode.nullNode()
+                        )
+        );
+    }
+
+    @Test
+    public void testPatchNullValue2() {
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                null,
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.CENTER
+                ),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testPatchNullValue3() {
+        final TextStyle textStyle = TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
+
+        this.patchAndCheck(
+                TextStylePropertyName.TEXT_ALIGN,
+                null,
+                textStyle.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.CENTER
+                ),
+                textStyle
+        );
+    }
+
+    private <T> void patchAndCheck(final TextStylePropertyName<T> propertyName,
+                                   final T value,
+                                   final JsonNode expected) {
+        this.checkEquals(
+                expected,
+                propertyName.patch(value),
+                () -> propertyName + " patch " + value
+        );
+    }
+
+    private <T> void patchAndCheck(final TextStylePropertyName<T> propertyName,
+                                   final T value,
+                                   final TextStyle initial,
+                                   final TextStyle expected) {
+        this.checkEquals(
+                expected,
+                initial.patch(
+                        propertyName.patch(value),
+                        JsonNodeUnmarshallContexts.basic(
+                                ExpressionNumberKind.BIG_DECIMAL,
+                                MathContext.DECIMAL32
+                        )
+                ),
+                () -> initial + " patch " + propertyName + " patch " + value
+        );
+    }
+    
+    // helpers..........................................................................................................
+    
     @Override
     public TextStylePropertyName<?> createName(final String name) {
         return TextStylePropertyName.with(name);
