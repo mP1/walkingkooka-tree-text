@@ -120,12 +120,28 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     }
 
     @Test
+    public void testToHtmlAmpersand() {
+        this.toHtmlAndCheck(
+                Text.with("&"),
+                "&amp;"
+        );
+    }
+
+    @Test
+    public void testToHtmlSpace() {
+        this.toHtmlAndCheck(
+                Text.with(" "),
+                "&nbsp;"
+        );
+    }
+
+    @Test
     public void testToHtmlEscaped() {
         final String text = "abc 123<>&\"'";
 
         this.toHtmlAndCheck(
                 Text.with(text),
-                "abc&amp;nbsp;123&lt;&gt;&amp;&amp;quot;'"
+                "abc&nbsp;123&lt;&gt;&amp;&amp;quot;'"
         );
     }
 
