@@ -500,7 +500,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssvBorderBottomWidth() {
+    public void testCssBorderBottomWidth() {
         this.hasCssAndCheck(
                 TextStyle.EMPTY
                         .set(
