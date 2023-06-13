@@ -63,14 +63,17 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testConstantValue() {
-        this.checkEquals(Lists.empty(),
-                Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
+        this.checkEquals(
+                Lists.of("ALL=*"),
+                Arrays.stream(
+                        TextStylePropertyName.class.getDeclaredFields())
                         .filter(FieldAttributes.STATIC::is)
                         .filter(f -> f.getType() == TextStylePropertyName.class)
                         .map(TextStylePropertyNameTest::checkConstantAndValueCompatible)
                         .filter(v -> null != v)
                         .collect(Collectors.toList()),
-                "");
+                ""
+        );
     }
 
     private static String checkConstantAndValueCompatible(final Field field) {

@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerFontWeightTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerFontWeight, FontWeight> {
+public final class TextStylePropertyValueHandlerFontWeightTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerFontWeight, FontWeight> {
 
     @Test
     public void testUnmarshall() {

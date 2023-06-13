@@ -23,7 +23,7 @@ import walkingkooka.color.Color;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerJsonNodeWithType, Object> {
+public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerJsonNodeWithType, Object> {
 
     @Test
     public void testUnmarshall() {

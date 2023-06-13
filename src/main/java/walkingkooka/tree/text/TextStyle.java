@@ -204,11 +204,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     /**
      * Removes a possibly existing property returning a {@link TextStyle} without.
+     * {@link TextStylePropertyName#ALL} is a special case and always returns a {@link #EMPTY}.
      */
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
         checkPropertyName(propertyName);
 
-        return this.remove0(propertyName);
+        return propertyName == TextStylePropertyName.ALL ?
+                TextStyle.EMPTY :
+                this.remove0(propertyName);
     }
 
     abstract TextStyle remove0(final TextStylePropertyName<?> propertyName);
