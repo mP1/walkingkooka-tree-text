@@ -18,7 +18,8 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.tree.FakeNode;
+import walkingkooka.text.CharSequences;
+import walkingkooka.tree.json.JsonNode;
 
 public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStylePropertyValueHandler<T>, T> extends TextStylePropertyValueHandlerTestCase<P, T> {
 
@@ -27,16 +28,37 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
     }
 
     @Test
-    public final void testCheckWrongValueTypeFails() {
-        this.checkFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
+    public final void testCheck() {
+        this.check(this.propertyValue());
     }
 
     @Test
-    public final void testCheckWrongValueTypeFails2() {
-        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
-        this.checkFails(
-                fakeNode,
-                "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
-        );
+    public final void testRoundtripJson() {
+        final T value = this.propertyValue();
+        final P handler = this.handler();
+
+        final JsonNode json = handler.marshall(value, this.marshallContext());
+
+        this.checkEquals(value,
+                handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
+                () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
     }
+
+    final void unmarshallAndCheck(final JsonNode node, final T value) {
+        this.checkEquals(value,
+                this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
+                () -> "from JsonNode " + node);
+    }
+
+    final void marshallAndCheck(final T value, final JsonNode node) {
+        this.checkEquals(node,
+                this.handler().marshall(value, this.marshallContext()),
+                () -> "marshall " + CharSequences.quoteIfChars(value));
+    }
+
+    // helper...........................................................................................................
+
+    abstract T propertyValue();
+
+    abstract String propertyValueType();
 }

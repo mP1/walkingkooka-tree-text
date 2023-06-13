@@ -22,7 +22,6 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -47,23 +46,6 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
         this.checkFails(
                 "Property " + this.propertyName().inQuotes() + " missing value"
         );
-    }
-
-    @Test
-    public final void testCheck() {
-        this.check(this.propertyValue());
-    }
-
-    @Test
-    public final void testRoundtripJson() {
-        final T value = this.propertyValue();
-        final P handler = this.handler();
-
-        final JsonNode json = handler.marshall(value, this.marshallContext());
-
-        this.checkEquals(value,
-                handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
-                () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
     }
 
     final void check(final Object value) {
@@ -108,25 +90,11 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
         );
     }
 
-    final void unmarshallAndCheck(final JsonNode node, final T value) {
-        this.checkEquals(value,
-                this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
-                () -> "from JsonNode " + node);
-    }
-
-    final void marshallAndCheck(final T value, final JsonNode node) {
-        this.checkEquals(node,
-                this.handler().marshall(value, this.marshallContext()),
-                () -> "marshall " + CharSequences.quoteIfChars(value));
-    }
-
     // helper...........................................................................................................
 
     abstract P handler();
 
     abstract TextStylePropertyName<T> propertyName();
-
-    abstract T propertyValue();
 
     abstract String propertyValueType();
 

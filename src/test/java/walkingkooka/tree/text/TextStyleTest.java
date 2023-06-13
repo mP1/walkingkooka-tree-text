@@ -171,7 +171,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testGetOrFail() {
-        assertThrows(TextStylePropertyValueException.class, () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH));
+        assertThrows(
+                TextStylePropertyValueException.class,
+                () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH)
+        );
+    }
+
+    @Test
+    public void testGetOrFailAll() {
+        assertThrows(
+                TextStylePropertyValueException.class,
+                () -> this.createObject().getOrFail(TextStylePropertyName.ALL)
+        );
     }
 
     // setOrRemove......................................................................................................
@@ -180,9 +191,23 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveNonNullValue() {
         final TextStyle style = TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
-        this.checkEquals(
-                style.set(TextStylePropertyName.COLOR, Color.WHITE),
-                style.setOrRemove(TextStylePropertyName.COLOR, Color.WHITE)
+        this.setOrRemoveAndCheck(
+                style,
+                TextStylePropertyName.COLOR,
+                Color.WHITE,
+                style.set(TextStylePropertyName.COLOR, Color.WHITE)
+        );
+    }
+
+    @Test
+    public void testSetOrRemoveAllNullValue() {
+        final TextStyle style = TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+        this.setOrRemoveAndCheck(
+                style,
+                TextStylePropertyName.BACKGROUND_COLOR,
+                null,
+                style.remove(TextStylePropertyName.BACKGROUND_COLOR)
         );
     }
 
@@ -190,9 +215,22 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveNullValue() {
         final TextStyle style = TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+        this.setOrRemoveAndCheck(
+                style,
+                TextStylePropertyName.BACKGROUND_COLOR,
+                null,
+                style.remove(TextStylePropertyName.BACKGROUND_COLOR)
+        );
+    }
+
+    private <T> void setOrRemoveAndCheck(final TextStyle style,
+                                         final TextStylePropertyName<T> name,
+                                         final T value,
+                                         final TextStyle expected) {
         this.checkEquals(
-                style.remove(TextStylePropertyName.BACKGROUND_COLOR),
-                style.setOrRemove(TextStylePropertyName.BACKGROUND_COLOR, null)
+                expected,
+                style.setOrRemove(name, value),
+                style + " setOrRemove " + name + " " + value
         );
     }
 
@@ -275,6 +313,26 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testPatchSetAllWithNonNullFails() {
+        final UnsupportedOperationException thrown = assertThrows(
+                UnsupportedOperationException.class,
+                () -> TextStyle.EMPTY.patch(
+                        JsonNode.object()
+                                .set(
+                                        JsonPropertyName.with(TextStylePropertyName.ALL.value()),
+                                        JsonNode.string("This must fail!")
+                                ),
+                        this.createPatchContext()
+                )
+        );
+        this.checkEquals(
+                "Unmarshalling \"*\" with \"This must fail!\" is not supported",
+                thrown.getMessage(),
+                "message"
+        );
+    }
+
+    @Test
     public void testPatchRemoveUnknownProperty() {
         this.patchAndCheck(
                 TextStyle.EMPTY,
@@ -300,6 +358,29 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                         .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
                 JsonNode.object()
                         .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JsonNode.nullNode()),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testPatchRemovePropertyAll() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
+                TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testPatchRemovePropertyAllManyValues() {
+        this.patchAndCheck(
+                TextStyle.EMPTY
+                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                        .set(TextStylePropertyName.COLOR, Color.WHITE),
+                JsonNode.object()
+                        .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
                 TextStyle.EMPTY
         );
     }

@@ -176,6 +176,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
+     * A {@link TextStylePropertyName} that matches all.
+     */
+    public final static TextStylePropertyName<Void> ALL = registerConstant(
+            "*",
+            TextStylePropertyValueHandlerVoid.INSTANCE,
+            null
+    );
+
+    /**
      * Background rgb
      */
     public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerColor("background-color",

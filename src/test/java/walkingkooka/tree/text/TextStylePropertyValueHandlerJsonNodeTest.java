@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.color.Color;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerJsonNodeTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerJsonNode<Color>, Color> {
+public final class TextStylePropertyValueHandlerJsonNodeTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerJsonNode<Color>, Color> {
 
     @Test
     public void testUnmarshall() {

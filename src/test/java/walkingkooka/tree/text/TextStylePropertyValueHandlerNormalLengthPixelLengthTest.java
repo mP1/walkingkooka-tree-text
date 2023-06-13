@@ -22,7 +22,7 @@ import walkingkooka.tree.FakeNode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerNormalLengthPixelLength, Length<?>> {
+public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerNormalLengthPixelLength, Length<?>> {
 
     @Test
     public void testCheckNormal() {
