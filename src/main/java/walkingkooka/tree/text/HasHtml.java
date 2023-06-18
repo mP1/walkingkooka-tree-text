@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 /**
  * Defines a single method that provides a means to convert this object to HTML.
  */
-public interface HtmlMaker {
+public interface HasHtml {
 
     /**
      * Returns the HTML equivalent of this value.
