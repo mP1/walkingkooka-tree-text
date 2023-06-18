@@ -45,7 +45,7 @@ import java.util.function.Predicate;
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
         HasText,
-        HtmlMaker,
+        HasHtml,
         TreePrintable,
         TraversableHasTextOffset<TextNode>,
         UsesToStringBuilder {
