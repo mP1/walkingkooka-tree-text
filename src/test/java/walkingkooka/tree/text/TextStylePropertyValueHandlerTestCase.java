@@ -65,7 +65,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     final void checkFails(final Object value, final String message) {
         this.checkFails(
                 value,
-                TextStylePropertyValueException.class,
+                IllegalArgumentException.class,
                 message
         );
     }

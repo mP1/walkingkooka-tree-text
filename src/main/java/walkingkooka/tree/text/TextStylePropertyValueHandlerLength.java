@@ -46,7 +46,7 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
                 (v) -> v instanceof Length,
                 name);
         if (false == this.lengthCheck(length)) {
-            throw this.textStylePropertyValueException(value, name);
+            throw this.reportInvalidValueType(value, name);
         }
     }
 

@@ -64,8 +64,13 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testWithInvalidPropertyValueFails() {
         assertThrows(
-                TextStylePropertyValueException.class,
-                () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, this))
+                IllegalArgumentException.class,
+                () -> TextStyle.with(
+                        Maps.of(
+                                TextStylePropertyName.WORD_BREAK,
+                                this
+                        )
+                )
         );
     }
 
@@ -172,16 +177,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testGetOrFail() {
         assertThrows(
-                TextStylePropertyValueException.class,
-                () -> this.createObject().getOrFail(TextStylePropertyName.WIDTH)
+                IllegalArgumentException.class,
+                () -> this.createObject()
+                        .getOrFail(TextStylePropertyName.WIDTH)
         );
     }
 
     @Test
     public void testGetOrFailAll() {
         assertThrows(
-                TextStylePropertyValueException.class,
-                () -> this.createObject().getOrFail(TextStylePropertyName.ALL)
+                IllegalArgumentException.class,
+                () -> this.createObject()
+                        .getOrFail(TextStylePropertyName.ALL)
         );
     }
 

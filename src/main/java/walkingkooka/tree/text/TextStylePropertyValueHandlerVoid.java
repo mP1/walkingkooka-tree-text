@@ -49,7 +49,7 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     @Override
     void check0(final Object value,
                 final TextStylePropertyName<?> name) {
-        throw new TextStylePropertyValueException("Values not allowed");
+        throw new IllegalArgumentException("Values not allowed");
     }
 
     @Override

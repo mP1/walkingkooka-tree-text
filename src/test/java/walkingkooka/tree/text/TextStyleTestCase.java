@@ -183,7 +183,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testSetInvalidPropertyValueFails() {
         assertThrows(
-                TextStylePropertyValueException.class,
+                IllegalArgumentException.class,
                 () -> {
                     final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY;
                     this.createObject().set(propertyName, Cast.to("invalid"));
@@ -194,7 +194,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testSetAllFails() {
         assertThrows(
-                TextStylePropertyValueException.class,
+                IllegalArgumentException.class,
                 () -> {
                     final TextStylePropertyName<?> propertyName = TextStylePropertyName.ALL;
                     this.createObject()

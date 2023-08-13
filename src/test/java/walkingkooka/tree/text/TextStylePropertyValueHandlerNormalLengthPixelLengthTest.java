@@ -55,9 +55,15 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
 
     @Test
     public void testUnmarshallNoneFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.none()),
-                this.propertyName(),
-                this.unmarshallContext()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> this.handler()
+                        .unmarshall(
+                                this.marshall(Length.none()),
+                                this.propertyName(),
+                                this.unmarshallContext()
+                        )
+        );
     }
 
     @Test
@@ -68,9 +74,15 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
 
     @Test
     public void testUnmarshallNumberFails() {
-        assertThrows(TextStylePropertyValueException.class, () -> this.handler().unmarshall(this.marshall(Length.number(1)),
-                this.propertyName(),
-                this.unmarshallContext()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> this.handler()
+                        .unmarshall(
+                                this.marshall(Length.number(1)),
+                                this.propertyName(),
+                                this.unmarshallContext()
+                        )
+        );
     }
 
     @Test

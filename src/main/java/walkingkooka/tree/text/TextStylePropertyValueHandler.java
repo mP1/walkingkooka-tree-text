@@ -121,7 +121,7 @@ abstract class TextStylePropertyValueHandler<T> {
                           final Predicate<Object> type,
                           final TextStylePropertyName<?> name) {
         if (!type.test(value)) {
-            throw this.textStylePropertyValueException(value, name);
+            throw this.reportInvalidValueType(value, name);
         }
         return Cast.to(value);
     }
@@ -129,8 +129,8 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * Creates a {@link TextStylePropertyValueException} used to report an invalid value.
      */
-    final TextStylePropertyValueException textStylePropertyValueException(final Object value,
-                                                                          final TextStylePropertyName<?> name) {
+    final IllegalArgumentException reportInvalidValueType(final Object value,
+                                                          final TextStylePropertyName<?> name) {
         final Class<?> type = value.getClass();
 
         String typeName = type.getName();
@@ -138,7 +138,16 @@ abstract class TextStylePropertyValueHandler<T> {
             typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
         }
 
-        return new TextStylePropertyValueException("Property " + name.inQuotes() + " value " + CharSequences.quoteIfChars(value) + "(" + typeName + ") is not a " + this.expectedTypeName(type));
+        return new IllegalArgumentException(
+                "Property " +
+                        name.inQuotes() +
+                        " value " +
+                        CharSequences.quoteIfChars(value) +
+                        "(" +
+                        typeName +
+                        ") is not a " +
+                        this.expectedTypeName(type)
+        );
     }
 
     abstract String expectedTypeName(final Class<?> type);
