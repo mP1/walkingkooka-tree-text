@@ -52,7 +52,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
                 v -> v instanceof String,
                 name);
         if (string.isEmpty()) {
-            throw new TextStylePropertyValueException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
+            throw new IllegalArgumentException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
         }
     }
 

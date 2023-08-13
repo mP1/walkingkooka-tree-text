@@ -127,10 +127,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract <V> Optional<V> get0(final TextStylePropertyName<V> propertyName);
 
     /**
-     * Gets the given property or throws an {@link TextStylePropertyValueException}
+     * Gets the given property or throws an {@link IllegalArgumentException}
      */
     public final <V> V getOrFail(final TextStylePropertyName<V> propertyName) {
-        return this.get(propertyName).orElseThrow(() -> new TextStylePropertyValueException("Missing " + propertyName));
+        return this.get(propertyName)
+                .orElseThrow(() -> new IllegalArgumentException("Missing " + propertyName));
     }
 
     // set..............................................................................................................

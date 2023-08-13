@@ -49,7 +49,7 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     void check0(final Object value,
                 final TextStylePropertyName<?> name) {
         if (false == value instanceof FontWeight) {
-            throw this.textStylePropertyValueException(value, name);
+            throw this.reportInvalidValueType(value, name);
         }
     }
 

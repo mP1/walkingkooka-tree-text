@@ -49,7 +49,7 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     void check0(final Object value,
                 final TextStylePropertyName<?> name) {
         if (false == value instanceof FontSize) {
-            throw this.textStylePropertyValueException(value, name);
+            throw this.reportInvalidValueType(value, name);
         }
     }
 
