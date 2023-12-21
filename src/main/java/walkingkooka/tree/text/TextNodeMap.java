@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.Printer;
@@ -130,11 +131,16 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
                             (Enum<?>) value
                     );
                 } else {
-                    final String stringValue = value.toString();
-                    if (stringValue.indexOf(' ') >= 0) {
-                        valueCss = CharSequences.quoteAndEscape(stringValue);
+                    if (value instanceof Color) {
+                        final Color color = (Color) value;
+                        valueCss = color.toCss();
                     } else {
-                        valueCss = stringValue;
+                        final String stringValue = value.toString();
+                        if (stringValue.indexOf(' ') >= 0) {
+                            valueCss = CharSequences.quoteAndEscape(stringValue);
+                        } else {
+                            valueCss = stringValue;
+                        }
                     }
                 }
 
