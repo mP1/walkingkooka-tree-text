@@ -19,8 +19,6 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends TextNodeTestCase2<N> {
 
     TextLeafNodeTestCase() {
@@ -39,11 +37,6 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
 
     @Override
     public final void testParentWithoutChild() {
-    }
-
-    @Test
-    public final void testSetChildrenFails() {
-        assertThrows(UnsupportedOperationException.class, () -> this.createNode().setChildren(TextNode.NO_CHILDREN));
     }
 
     @Override

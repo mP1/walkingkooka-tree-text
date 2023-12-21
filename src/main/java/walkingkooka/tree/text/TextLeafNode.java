@@ -86,7 +86,12 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     @Override
     public final TextNode setChildren(final List<TextNode> children) {
         Objects.requireNonNull(children, "children");
-        throw new UnsupportedOperationException();
+
+        if(false == children.isEmpty()) {
+            throw new UnsupportedOperationException();
+        }
+
+        return this;
     }
 
     @Override
