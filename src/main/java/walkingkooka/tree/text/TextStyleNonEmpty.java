@@ -63,6 +63,20 @@ final class TextStyleNonEmpty extends TextStyle {
         return this.value;
     }
 
+    @Override
+    TextStyle setValues0(final Map<TextStylePropertyName<?>, Object> values) {
+        final Map<TextStylePropertyName<?>, Object> newValuesMap = Maps.ordered();
+        final Map<TextStylePropertyName<?>, Object> oldValuesMap = this.value();
+        newValuesMap.putAll(oldValuesMap);
+        newValuesMap.putAll(values);
+
+        return oldValuesMap.equals(newValuesMap) ?
+                this:
+                TextStyleNonEmpty.with(
+                    TextNodeMap.with(newValuesMap)
+                );
+    }
+
     final TextNodeMap value;
 
     // merge............................................................................................................

@@ -30,6 +30,7 @@ import walkingkooka.tree.json.patch.Patchable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -162,22 +163,24 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         Objects.requireNonNull(style, "style");
         Objects.requireNonNull(width, "width");
 
-        TextStyle textStyle = this;
+        final Map<TextStylePropertyName<?>, Object> colorStyleWidth = Maps.ordered();
 
         for (final BoxEdge boxEdge : BoxEdge.values()) {
-            textStyle = textStyle.set(
+            colorStyleWidth.put(
                     boxEdge.borderColorPropertyName(),
                     color
-            ).set(
+            );
+            colorStyleWidth.put(
                     boxEdge.borderStylePropertyName(),
                     style
-            ).set(
+            );
+            colorStyleWidth.put(
                     boxEdge.borderWidthPropertyName(),
                     width
             );
         }
 
-        return textStyle;
+        return this.setValues(colorStyleWidth);
     }
 
     /**
@@ -186,10 +189,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextStyle setMargin(final Length<?> length) {
         Objects.requireNonNull(length, "length");
 
-        return this.set(TextStylePropertyName.MARGIN_TOP, length)
-                .set(TextStylePropertyName.MARGIN_RIGHT, length)
-                .set(TextStylePropertyName.MARGIN_BOTTOM, length)
-                .set(TextStylePropertyName.MARGIN_LEFT, length);
+        return this.setValues(
+                Maps.of(
+                        TextStylePropertyName.MARGIN_TOP, length,
+                        TextStylePropertyName.MARGIN_RIGHT, length,
+                        TextStylePropertyName.MARGIN_BOTTOM, length,
+                        TextStylePropertyName.MARGIN_LEFT, length
+                )
+        );
     }
     
     /**
@@ -198,11 +205,33 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextStyle setPadding(final Length<?> length) {
         Objects.requireNonNull(length, "length");
 
-        return this.set(TextStylePropertyName.PADDING_TOP, length)
-                .set(TextStylePropertyName.PADDING_RIGHT, length)
-                .set(TextStylePropertyName.PADDING_BOTTOM, length)
-                .set(TextStylePropertyName.PADDING_LEFT, length);
+        return this.setValues(
+                Maps.of(
+                        TextStylePropertyName.PADDING_TOP, length,
+                        TextStylePropertyName.PADDING_RIGHT, length,
+                        TextStylePropertyName.PADDING_BOTTOM, length,
+                        TextStylePropertyName.PADDING_LEFT, length
+                )
+        );
     }
+
+    /**
+     * Copies the new values into this {@link TextStyle}.
+     */
+    final TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
+        for(final Entry<TextStylePropertyName<?>, Object> nameAndValue : values.entrySet()) {
+            nameAndValue.getKey()
+                    .check(nameAndValue.getValue());
+
+        }
+        return this.setValues0(values);
+    }
+
+    /**
+     * Takes a copy of the existing properties and replaces them with the new values. This may result in a new {@link TextStyle}
+     * being returned if necessary.
+     */
+    abstract TextStyle setValues0(final Map<TextStylePropertyName<?>, Object> values);
 
     // remove...........................................................................................................
 
