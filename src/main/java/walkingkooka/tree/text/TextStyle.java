@@ -82,6 +82,9 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return TextStyleNode.with(textNodes, this.textStyleMap());
     }
 
+    /**
+     * A {@link Map} holding the {@link TextStylePropertyName} and values.
+     */
     abstract TextNodeMap textStyleMap();
 
     // merge............................................................................................................
