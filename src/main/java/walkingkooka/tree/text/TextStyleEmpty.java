@@ -59,6 +59,13 @@ final class TextStyleEmpty extends TextStyle {
         return true;
     }
 
+    @Override
+    TextStyle setValues0(final Map<TextStylePropertyName<?>, Object> values) {
+        return TextStyleNonEmpty.with(
+                TextNodeMap.with(values)
+        );
+    }
+
     // Value............................................................................................................
 
     @Override
