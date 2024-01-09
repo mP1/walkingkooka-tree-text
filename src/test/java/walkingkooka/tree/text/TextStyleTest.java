@@ -49,70 +49,17 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         ToStringTesting<TextStyle> {
 
     @Test
-    public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> TextStyle.with(null));
-    }
-
-    @Test
-    public void testWithNullPropertyValueFails() {
-        assertThrows(
-                NullPointerException.class,
-                () -> TextStyle.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
-        );
-    }
-
-    @Test
-    public void testWithInvalidPropertyValueFails() {
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> TextStyle.with(
-                        Maps.of(
-                                TextStylePropertyName.WORD_BREAK,
-                                this
-                        )
-                )
-        );
-    }
-
-    @Test
-    public void testWithTextStyleMap() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-        final TextNodeMap textStyleMap = TextNodeMap.with(map);
-
-        final TextStyle textStyle = TextStyle.with(textStyleMap);
-        assertSame(textStyleMap, textStyle.value(), "value");
-    }
-
-    @Test
-    public void testWithMapCopied() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-
-        final Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
-        copy.putAll(map);
-
-        final TextStyle textStyle = TextStyle.with(map);
-
-        map.clear();
-        this.checkEquals(copy, textStyle.value(), "value");
-    }
-
-    @Test
-    public void testEmpty() {
-        assertSame(TextNodeMap.EMPTY, TextNodeMap.with(Maps.empty()));
-    }
-
-    @Test
     public void testValue() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        final TextStyle textStyle = TextStyle.with(map);
-        this.checkEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle);
+        final TextStyle textStyle = TextStyle.EMPTY.setValues(map);
+        this.checkEquals(
+                TextNodeMap.class,
+                textStyle.value().getClass(),
+                () -> "" + textStyle
+        );
     }
 
     // setChildren......................................................................................................
@@ -605,7 +552,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        this.toStringAndCheck(TextStyle.with(map), map.toString());
+        this.toStringAndCheck(
+                TextStyle.EMPTY.setValues(map),
+                map.toString()
+        );
     }
 
     @Test
@@ -625,10 +575,12 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     private TextStyle textStyle() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.ordered();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-        return TextStyle.with(map);
+        return TextStyle.EMPTY.setValues(
+                Maps.of(
+                        this.property1(), this.value1(),
+                        this.property2(), this.value2()
+                )
+        );
     }
 
     private TextStylePropertyName<?> property1() {

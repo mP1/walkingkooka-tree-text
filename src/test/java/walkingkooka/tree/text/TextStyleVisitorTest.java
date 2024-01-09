@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.visit.Visiting;
@@ -66,7 +65,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     public void testVisitTextStylePropertyNameSkip() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color value = Color.BLACK;
-        final TextStyle textStyle = textStyle(propertyName, value);
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+                propertyName,
+                value
+        );
 
         new FakeTextStyleVisitor() {
             @Override
@@ -803,10 +805,6 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         }.accept(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
     }
 
-    private static <T> TextStyle textStyle(final TextStylePropertyName<T> propertyName, final T value) {
-        return TextStyle.with(Maps.of(propertyName, value));
-    }
-
     @Override
     public TextStyleVisitor createVisitor() {
         return new TestTextStyleVisitor();
@@ -817,7 +815,11 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         <T> void accept(final TextStylePropertyName<T> propertyName, final T value) {
             this.expected = value;
 
-            final TextStyle textStyle = textStyle(propertyName, value);
+            final TextStyle textStyle = TextStyle.EMPTY.set(
+                    propertyName,
+                    value
+            );
+
             this.accept(textStyle);
             checkEquals(this.expected, this.visited);
 

@@ -107,14 +107,12 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
 
         this.setValuesAndCheck(
-                TextStyle.with(
-                        Maps.of(
-                                TextStylePropertyName.BACKGROUND_COLOR,
-                                Color.parse("#123")
-                        )
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.BACKGROUND_COLOR,
+                        Color.parse("#123")
                 ),
                 values,
-                TextStyle.with(values)
+                TextStyle.EMPTY.setValues(values)
         );
     }
 
@@ -166,7 +164,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
             if (expected.equals(other.value())) {
                 this.mergeAndCheck0(textStyle, other, other);
             } else {
-                final TextStyle expectedTextStyle = TextStyle.with(expected);
+                final TextStyle expectedTextStyle = TextStyle.EMPTY.setValues(expected);
                 this.mergeAndCheck1(textStyle, other, expectedTextStyle);
                 this.mergeAndCheck1(other, textStyle, expectedTextStyle);
             }

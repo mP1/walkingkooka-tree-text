@@ -77,8 +77,16 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     @Test
     public final void testTextStyle() {
         final N textNode = this.createTextNode();
-        this.checkEquals(textNode.attributes(), textNode.textStyle().textStyleMap());
-        this.checkEquals(TextStyle.with(textNode.attributes()), textNode.textStyle());
+        this.checkEquals(
+                textNode.attributes(),
+                textNode.textStyle().textStyleMap()
+        );
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(
+                        textNode.attributes()
+                ),
+                textNode.textStyle()
+        );
     }
 
     // HasTextOffset .....................................................................................................

@@ -138,7 +138,7 @@ public final class TextStyleNode extends TextParentNode {
 
     @Override
     public TextStyle textStyle() {
-        return TextStyle.with(this.attributes);
+        return TextStyle.EMPTY.setValues(this.attributes);
     }
 
     private final TextNodeMap attributes;
@@ -193,7 +193,7 @@ public final class TextStyleNode extends TextParentNode {
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case STYLES:
-                    textStyle = TextStyle.withTextStyleMap(
+                    textStyle = textStyle.setValues(
                             TextNodeMap.unmarshall(
                                     child,
                                     context

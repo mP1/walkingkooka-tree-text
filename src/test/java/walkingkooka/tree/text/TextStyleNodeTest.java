@@ -199,7 +199,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
         final TextNode node = TextNode.style(TextNode.NO_CHILDREN)
                 .setAttributes(style);
-        this.checkEquals(TextStyle.with(style), node.textStyle(), "textStyle");
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(style),
+                node.textStyle(),
+                "textStyle"
+        );
     }
 
     // HasText..........................................................................................................

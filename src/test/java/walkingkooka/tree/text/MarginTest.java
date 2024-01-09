@@ -25,10 +25,17 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(Margin.with(BoxEdge.BOTTOM,
-                TextStyle.with(Maps.of(TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5),
-                        TextStylePropertyName.COLOR, Color.fromRgb(0x123456)))),
-                "BOTTOM {color=#123456, margin-bottom=12.5px}");
+        this.toStringAndCheck(
+                Margin.with(BoxEdge.BOTTOM,
+                        TextStyle.EMPTY.setValues(
+                                Maps.of(
+                                        TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5),
+                                        TextStylePropertyName.COLOR, Color.fromRgb(0x123456)
+                                )
+                        )
+                ),
+                "BOTTOM {color=#123456, margin-bottom=12.5px}"
+        );
     }
 
     // helpers..........................................................................................................

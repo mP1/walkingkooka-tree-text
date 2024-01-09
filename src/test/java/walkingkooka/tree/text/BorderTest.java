@@ -67,7 +67,9 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final BoxEdge edge = BoxEdge.RIGHT;
-        final Border border = edge.border(TextStyle.with(properties));
+        final Border border = edge.border(
+                TextStyle.EMPTY.setValues(properties)
+        );
 
         final Color differentColor = Color.parse("yellow");
         final Border different = border.setColor(Optional.of(differentColor));
@@ -75,7 +77,10 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, differentColor);
-        this.checkEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(properties),
+                different.textStyle()
+        );
     }
 
     @Test
@@ -85,14 +90,19 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.parseRgb("aqua"));
 
         final BoxEdge edge = BoxEdge.RIGHT;
-        final Border border = edge.border(TextStyle.with(properties));
+        final Border border = edge.border(
+                TextStyle.EMPTY.setValues(properties)
+        );
 
         final Border different = border.setColor(Optional.empty());
 
         assertNotSame(border, different);
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_COLOR);
-        this.checkEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(properties),
+                different.textStyle()
+        );
     }
 
     // style............................................................................................................
@@ -133,7 +143,9 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.OUTSET);
 
         final BoxEdge edge = BoxEdge.RIGHT;
-        final Border border = edge.border(TextStyle.with(properties));
+        final Border border = edge.border(
+                TextStyle.EMPTY.setValues(properties)
+        );
 
         final BorderStyle differentStyle = BorderStyle.INSET;
         final Border different = border.setStyle(Optional.of(differentStyle));
@@ -141,7 +153,10 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, differentStyle);
-        this.checkEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(properties),
+                different.textStyle()
+        );
     }
 
     @Test
@@ -151,24 +166,35 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOUBLE);
 
         final BoxEdge edge = BoxEdge.RIGHT;
-        final Border border = edge.border(TextStyle.with(properties));
+        final Border border = edge.border(
+                TextStyle.EMPTY.setValues(properties)
+        );
 
         final Border different = border.setStyle(Optional.empty());
 
         assertNotSame(border, different);
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_STYLE);
-        this.checkEquals(TextStyle.with(properties), different.textStyle());
+        this.checkEquals(
+                TextStyle.EMPTY.setValues(properties),
+                different.textStyle()
+        );
     }
 
     // toString.........................................................................................................
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(Border.with(BoxEdge.BOTTOM,
-                TextStyle.with(Maps.of(TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
-                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED))),
-                "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}");
+        this.toStringAndCheck(
+                Border.with(BoxEdge.BOTTOM,
+                        TextStyle.EMPTY.setValues(
+                                Maps.of(
+                                        TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
+                                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
+                        )
+                ),
+                "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}"
+        );
     }
 
     // helpers..........................................................................................................
