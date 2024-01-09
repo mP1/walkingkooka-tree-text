@@ -113,7 +113,7 @@ final class TextStyleEmpty extends TextStyle {
 
     @Override
     <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
-        return TextStyleNonEmpty.withNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
+        return TextStyleNonEmpty.with(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
     }
 
     @Override

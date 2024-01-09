@@ -35,11 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> {
 
     @Test
-    public void testEmpty() {
-        assertSame(TextStyle.EMPTY, TextStyle.with(Maps.empty()));
-    }
-
-    @Test
     public void testValue() {
         assertSame(TextStyle.EMPTY.value(), TextStyle.EMPTY.value());
     }
@@ -48,9 +43,14 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testMergeNotEmpty() {
-        final TextStyle notEmpty = TextStyle.with(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC));
-        assertSame(notEmpty,
-                TextStyle.EMPTY.merge(notEmpty));
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_STYLE,
+                FontStyle.ITALIC
+        );
+        assertSame(
+                notEmpty,
+                TextStyle.EMPTY.merge(notEmpty)
+        );
     }
 
     // replace...........................................................................................................
@@ -121,10 +121,17 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final TextStylePropertyName<FontFamily> propertyName = TextStylePropertyName.FONT_FAMILY;
         final FontFamily familyName = FontFamily.with("Antiqua");
 
-        this.setAndCheck(TextStyle.EMPTY,
+        this.setAndCheck(
+                TextStyle.EMPTY,
                 propertyName,
                 familyName,
-                TextStyle.with(Maps.of(propertyName, familyName)));
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                propertyName,
+                                familyName
+                        )
+                )
+        );
     }
 
     // setBorder.......................................................................................................
@@ -164,7 +171,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> length = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.withTextStyleMap(
+                TextStyleNonEmpty.with(
                         TextNodeMap.with(
                                 Maps.of(
                                         TextStylePropertyName.MARGIN_TOP, length,
@@ -185,7 +192,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> length = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.withTextStyleMap(
+                TextStyleNonEmpty.with(
                         TextNodeMap.with(
                                 Maps.of(
                                         TextStylePropertyName.PADDING_TOP, length,

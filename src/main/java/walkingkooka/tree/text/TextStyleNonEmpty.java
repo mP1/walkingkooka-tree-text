@@ -39,7 +39,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextNodeMap}.
      */
-    static TextStyleNonEmpty withNonEmpty(final TextNodeMap value) {
+    static TextStyleNonEmpty with(final TextNodeMap value) {
         return new TextStyleNonEmpty(value);
     }
 

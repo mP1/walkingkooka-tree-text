@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
@@ -35,44 +34,18 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonEmpty> {
 
     @Test
-    public void testWithTextStyleMap() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-        final TextNodeMap textStyleMap = TextNodeMap.with(map);
-
-        final TextStyleNonEmpty textStyle = this.createTextStyle(textStyleMap);
-        assertSame(textStyleMap, textStyle.value(), "value");
-    }
-
-    @Test
-    public void testWithMapCopied() {
-        final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
-
-        final Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
-        copy.putAll(map);
-
-        final TextStyleNonEmpty textStyle = this.createTextStyle(map);
-
-        map.clear();
-        this.checkEquals(copy, textStyle.value(), "value");
-    }
-
-    @Test
-    public void testEmpty() {
-        assertSame(TextNodeMap.EMPTY, TextNodeMap.with(Maps.empty()));
-    }
-
-    @Test
     public void testValue() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        final TextStyleNonEmpty textStyle = this.createTextStyle(map);
-        this.checkEquals(TextNodeMap.class, textStyle.value().getClass(), () -> "" + textStyle.value);
+        final TextStyleNonEmpty textStyle = (TextStyleNonEmpty)TextStyle.EMPTY.setValues(map);
+        this.checkEquals(
+                TextNodeMap.class,
+                textStyle.value()
+                        .getClass(),
+                () -> "" + textStyle.value
+        );
     }
 
     // merge............................................................................................................
@@ -80,15 +53,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMergeNotEmptySubset() {
         this.mergeAndCheck(
-                TextStyle.with(Maps.of(this.property1(), this.value1(), this.property2(), this.value2())),
-                TextStyle.with(Maps.of(this.property1(), this.value1())));
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                this.property1(), this.value1(),
+                                this.property2(), this.value2()
+                        )
+                ),
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                this.property1(), this.value1()
+                        )
+                )
+        );
     }
 
     @Test
     public void testMergeNotEmptyCombined() {
         this.mergeAndCheck(
-                TextStyle.with(Maps.of(this.property1(), this.value1(), this.property2(), this.value2())),
-                TextStyle.with(Maps.of(this.property1(), this.value1(), this.property3(), this.value3())));
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                this.property1(), this.value1(),
+                                this.property2(), this.value2()
+                        )
+                ),
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                this.property1(), this.value1(),
+                                this.property3(), this.value3()
+                        )
+                )
+        );
     }
 
     // replace...........................................................................................................
@@ -472,7 +466,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> length = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.withTextStyleMap(
+                TextStyleNonEmpty.with(
                         TextNodeMap.with(
                                 Maps.of(
                                         TextStylePropertyName.COLOR, color,
@@ -511,7 +505,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> length = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.withTextStyleMap(
+                TextStyleNonEmpty.with(
                         TextNodeMap.with(
                                 Maps.of(
                                         TextStylePropertyName.COLOR, color,
@@ -604,7 +598,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        this.toStringAndCheck(TextStyleNonEmpty.with(map), map.toString());
+        this.toStringAndCheck(
+                TextStyle.EMPTY.setValues(map),
+                map.toString()
+        );
     }
 
     // helpers.........................................................................................................
@@ -647,7 +644,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     private TextStyleNonEmpty createTextStyle(final Map<TextStylePropertyName<?>, Object> map) {
-        return Cast.to(TextStyle.with(map));
+        return  TextStyleNonEmpty.with(
+                TextNodeMap.with(map)
+        );
     }
 
     private TextStylePropertyName<WordWrap> property1() {

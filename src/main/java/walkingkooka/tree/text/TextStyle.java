@@ -49,19 +49,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final static TextStyle EMPTY = TextStyleEmpty.instance();
 
     /**
-     * Factory that creates a {@link TextStyle} from a {@link Map}.
-     */
-    public static TextStyle with(final Map<TextStylePropertyName<?>, Object> value) {
-        return withTextStyleMap(TextNodeMap.with(value));
-    }
-
-    static TextStyle withTextStyleMap(final TextNodeMap map) {
-        return map.isEmpty() ?
-                EMPTY :
-                TextStyleNonEmpty.withNonEmpty(map);
-    }
-
-    /**
      * Private ctor to limit sub classes.
      */
     TextStyle() {
@@ -271,21 +258,29 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
         Objects.requireNonNull(values, "values");
 
-        final Map<TextStylePropertyName<?>, Object> copy = Maps.ordered();
+        final Map<TextStylePropertyName<?>, Object> copy;
 
-        for(final Entry<TextStylePropertyName<?>, Object> propertyNameAndValue : values.entrySet()) {
-            final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
-            final Object value = propertyNameAndValue.getValue();
+        if (values instanceof TextNodeMap) {
+            copy = values;
+        } else {
+            copy = Maps.ordered();
 
-            propertyName.check(value);
+            for (final Entry<TextStylePropertyName<?>, Object> propertyNameAndValue : values.entrySet()) {
+                final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
+                final Object value = propertyNameAndValue.getValue();
 
-            copy.put(
-                    propertyName,
-                    value
-            );
+                propertyName.check(value);
+
+                copy.put(
+                        propertyName,
+                        value
+                );
+            }
         }
 
-        return this.setValuesWithCopy(copy);
+        return copy.isEmpty() ?
+                TextStyle.EMPTY :
+                this.setValuesWithCopy(copy);
 
     }
 
@@ -370,7 +365,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     name.handler.unmarshall(child, name, context));
         }
 
-        return with(properties);
+        return TextStyle.EMPTY.setValues(properties);
     }
 
     abstract JsonNode marshall(final JsonNodeMarshallContext context);
