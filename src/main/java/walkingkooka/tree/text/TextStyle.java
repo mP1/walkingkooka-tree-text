@@ -265,8 +265,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract Map<TextStylePropertyName<?>, Object> valuesCopy();
 
     /**
-     * Takes a copy of the existing properties and replaces them with the new values. This may result in a new {@link TextStyle}
-     * being returned if necessary.
+     * Assumes the old and new values have been copied and proceeds to return a {@link TextStyle} with the new values if necessary.
      */
     abstract TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values);
 
