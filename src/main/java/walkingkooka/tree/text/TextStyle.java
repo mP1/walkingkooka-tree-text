@@ -30,6 +30,7 @@ import walkingkooka.tree.json.patch.Patchable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -190,7 +191,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             );
         }
 
-        return this.setValues(colorStyleWidth);
+        return this.setValuesWithCopy(colorStyleWidth);
     }
 
     /**
@@ -223,7 +224,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 length
         );
 
-        return this.setValues(newValues);
+        return this.setValuesWithCopy(newValues);
     }
 
     /**
@@ -256,7 +257,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 length
         );
 
-        return this.setValues(newValues);
+        return this.setValuesWithCopy(newValues);
     }
 
     /**
@@ -265,9 +266,33 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract Map<TextStylePropertyName<?>, Object> valuesCopy();
 
     /**
+     * Would be setter that returns a {@link TextStyle} with the given values, returning a new instance if they are different values.
+     */
+    public final TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
+        Objects.requireNonNull(values, "values");
+
+        final Map<TextStylePropertyName<?>, Object> copy = Maps.ordered();
+
+        for(final Entry<TextStylePropertyName<?>, Object> propertyNameAndValue : values.entrySet()) {
+            final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
+            final Object value = propertyNameAndValue.getValue();
+
+            propertyName.check(value);
+
+            copy.put(
+                    propertyName,
+                    value
+            );
+        }
+
+        return this.setValuesWithCopy(copy);
+
+    }
+
+    /**
      * Assumes the old and new values have been copied and proceeds to return a {@link TextStyle} with the new values if necessary.
      */
-    abstract TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values);
+    abstract TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values);
 
     // remove...........................................................................................................
 

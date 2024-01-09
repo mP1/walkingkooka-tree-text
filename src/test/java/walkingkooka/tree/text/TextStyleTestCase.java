@@ -59,6 +59,75 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 () -> "" + textStyle);
     }
 
+    // setValues........................................................................................................
+
+    @Test
+    public final void testSetValuesWithNullFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createObject().setValues(null)
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithInvalidValueFails() {
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () -> this.createObject()
+                        .setValues(
+                                Maps.of(
+                                        TextStylePropertyName.BACKGROUND_COLOR,
+                                        "hello"
+                                )
+                        )
+        );
+        this.checkEquals(
+                "Property \"background-color\" value \"hello\"(java.lang.String) is not a Color",
+                thrown.getMessage(),
+                () -> thrown.toString()
+        );
+    }
+
+    @Test
+    public final void testSetValuesSame() {
+        final TextStyle textStyle = this.createObject();
+        assertSame(
+                textStyle,
+                textStyle.setValues(
+                        textStyle.value()
+                )
+        );
+    }
+
+    @Test
+    public final void testSetValuesDifferent() {
+        final Map<TextStylePropertyName<?>, Object> values = Maps.of(
+                TextStylePropertyName.COLOR,
+                Color.parse("#234")
+        );
+
+        this.setValuesAndCheck(
+                TextStyle.with(
+                        Maps.of(
+                                TextStylePropertyName.BACKGROUND_COLOR,
+                                Color.parse("#123")
+                        )
+                ),
+                values,
+                TextStyle.with(values)
+        );
+    }
+
+    private void setValuesAndCheck(final TextStyle textStyle,
+                                 final Map<TextStylePropertyName<?>, Object> values,
+                                 final TextStyle expected) {
+        this.checkEquals(
+                expected,
+                textStyle.setValues(values),
+                () -> textStyle + " setValues " + values
+        );
+    }
+
     // setPadding.......................................................................................................
 
     @Test

@@ -72,7 +72,7 @@ final class TextStyleEmpty extends TextStyle {
     }
 
     @Override
-    TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
+    TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
         return TextStyleNonEmpty.with(
                 TextNodeMap.with(values)
         );
