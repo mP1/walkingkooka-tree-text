@@ -60,6 +60,11 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     public final static Map<TextStylePropertyName<?>, Object> NO_ATTRIBUTES = Maps.empty();
 
+    /**
+     * Constant that holds a {@link Text} with no text.
+     */
+    public final static Text EMPTY_TEXT = text("");
+
     // public factory methods..........................................................................................
 
     /**
