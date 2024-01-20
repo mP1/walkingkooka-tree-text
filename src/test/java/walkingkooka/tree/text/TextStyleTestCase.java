@@ -101,24 +101,32 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testSetValuesDifferent() {
-        final Map<TextStylePropertyName<?>, Object> values = Maps.of(
+        final TextStyle before = this.createObject();
+
+
+        final Map<TextStylePropertyName<?>, Object> newValues = Maps.of(
                 TextStylePropertyName.COLOR,
                 Color.parse("#234")
         );
 
+        final Map<TextStylePropertyName<?>, Object> expected = Maps.sorted();
+        expected.putAll(before.value());
+        expected.putAll(
+                newValues
+        );
+
         this.setValuesAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.BACKGROUND_COLOR,
-                        Color.parse("#123")
-                ),
-                values,
-                TextStyle.EMPTY.setValues(values)
+                before,
+                expected,
+                TextStyle.EMPTY.setValues(
+                        expected
+                )
         );
     }
 
     private void setValuesAndCheck(final TextStyle textStyle,
-                                 final Map<TextStylePropertyName<?>, Object> values,
-                                 final TextStyle expected) {
+                                   final Map<TextStylePropertyName<?>, Object> values,
+                                   final TextStyle expected) {
         this.checkEquals(
                 expected,
                 textStyle.setValues(values),

@@ -64,7 +64,7 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    Map<TextStylePropertyName<?>, Object> valuesCopy() {
+    Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
         Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
         copy.putAll(this.value);
         return copy;
