@@ -150,7 +150,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         Objects.requireNonNull(style, "style");
         Objects.requireNonNull(width, "width");
 
-        final Map<TextStylePropertyName<?>, Object> colorStyleWidth = this.valuesCopy();
+        final Map<TextStylePropertyName<?>, Object> colorStyleWidth = this.valuesMutableCopy();
 
         for (final BoxEdge boxEdge : BoxEdge.values()) {
             final TextStylePropertyName<Color> colorPropertyName = boxEdge.borderColorPropertyName();
@@ -192,7 +192,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         TextStylePropertyName.MARGIN_BOTTOM.check(length);
         TextStylePropertyName.MARGIN_LEFT.check(length);
 
-        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesCopy();
+        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesMutableCopy();
 
         newValues.put(
                 TextStylePropertyName.MARGIN_TOP,
@@ -225,7 +225,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         TextStylePropertyName.PADDING_BOTTOM.check(length);
         TextStylePropertyName.PADDING_LEFT.check(length);
 
-        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesCopy();
+        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesMutableCopy();
 
         newValues.put(
                 TextStylePropertyName.PADDING_TOP,
@@ -250,10 +250,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * Returns a mutable copy of the current properties for modification.
      */
-    abstract Map<TextStylePropertyName<?>, Object> valuesCopy();
+    abstract Map<TextStylePropertyName<?>, Object> valuesMutableCopy();
 
     /**
-     * Would be setter that returns a {@link TextStyle} with the given values, returning a new instance if they are different values.
+     * Would be setter that returns a {@link TextStyle} that has the given values in addition to what it previously contained,
+     * returning a new instance if they are different values.
      */
     public final TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
         Objects.requireNonNull(values, "values");
@@ -263,7 +264,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         if (values instanceof TextNodeMap) {
             copy = values;
         } else {
-            copy = Maps.ordered();
+            copy = this.valuesMutableCopy();
 
             for (final Entry<TextStylePropertyName<?>, Object> propertyNameAndValue : values.entrySet()) {
                 final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
