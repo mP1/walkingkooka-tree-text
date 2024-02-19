@@ -115,7 +115,7 @@ abstract class TextStylePropertyValueHandler<T> {
     abstract void check0(final Object value, final TextStylePropertyName<?> name);
 
     /**
-     * Checks the type of the given value and throws a {@link TextStylePropertyValueException} if this test fails.
+     * Checks the type of the given value and throws a {@link IllegalArgumentException} if this test fails.
      */
     final <U> U checkType(final Object value,
                           final Predicate<Object> type,
@@ -127,7 +127,7 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
-     * Creates a {@link TextStylePropertyValueException} used to report an invalid value.
+     * Creates a {@link IllegalArgumentException} used to report an invalid value.
      */
     final IllegalArgumentException reportInvalidValueType(final Object value,
                                                           final TextStylePropertyName<?> name) {
