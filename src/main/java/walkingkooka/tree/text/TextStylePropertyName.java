@@ -491,6 +491,17 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public final static TextStylePropertyName<Length<?>> OUTLINE_WIDTH = registerNoneLengthPixelLengthConstant("outline-width",
             (l, v) -> v.visitOutlineWidth(l));
 
+
+    /**
+     * overflow-wrap
+     */
+    public final static TextStylePropertyName<OverflowWrap> OVERFLOW_WRAP = registerEnumConstant("overflow-wrap",
+            OverflowWrap::valueOf,
+            OverflowWrap.class,
+            v -> v instanceof OverflowWrap,
+            (o, v) -> v.visitOverflowWrap(o));
+
+
     /**
      * overflow-x
      */
