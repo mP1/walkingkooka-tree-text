@@ -125,24 +125,7 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
                 css.print(": ");
 
                 final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss;
-                if (value instanceof Enum) {
-                    valueCss = HasCss.cssFromEnumName(
-                            (Enum<?>) value
-                    );
-                } else {
-                    if (value instanceof Color) {
-                        final Color color = (Color) value;
-                        valueCss = color.toCss();
-                    } else {
-                        final String stringValue = value.toString();
-                        if (stringValue.indexOf(' ') >= 0) {
-                            valueCss = CharSequences.quoteAndEscape(stringValue);
-                        } else {
-                            valueCss = stringValue;
-                        }
-                    }
-                }
+                final CharSequence valueCss = valueToCss(value);
 
                 css.print(valueCss);
                 css.print(";");
@@ -152,6 +135,35 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
         }
 
         return cssStringBuilder.toString();
+    }
+
+    private static CharSequence valueToCss(final Object value) {
+        final CharSequence css;
+
+        if (value instanceof Color) {
+            final Color color = (Color) value;
+            css = color.toCss();
+        } else {
+            if (value instanceof HasCss) {
+                final HasCss hasCss = (HasCss) value;
+                css = hasCss.css();
+            } else {
+                if (value instanceof Enum) {
+                    css = HasCss.cssFromEnumName(
+                            (Enum<?>) value
+                    );
+                } else {
+                    final String stringValue = value.toString();
+                    if (stringValue.indexOf(' ') >= 0) {
+                        css = CharSequences.quoteAndEscape(stringValue);
+                    } else {
+                        css = stringValue;
+                    }
+                }
+            }
+        }
+
+        return css;
     }
 
     // JsonNodeContext..................................................................................................
