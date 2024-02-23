@@ -252,6 +252,10 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
         // nop
     }
 
+    protected void visitOverflowWrap(final OverflowWrap overflowWrap) {
+        // nop
+    }
+
     protected void visitOverflowX(final Overflow overflow) {
         // nop
     }

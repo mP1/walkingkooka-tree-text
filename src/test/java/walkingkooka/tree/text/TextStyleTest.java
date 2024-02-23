@@ -212,6 +212,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
                 .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
                 .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+                .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
                 .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
                 .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
                 .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
@@ -486,6 +487,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                 FontSize.with(123)
                         ),
                 "font-size: 123;"
+        );
+    }
+
+    @Test
+    public void testCssOverflowWrap() {
+        this.hasCssAndCheck(
+                TextStyle.EMPTY
+                        .set(
+                                TextStylePropertyName.OVERFLOW_WRAP,
+                                OverflowWrap.BREAK_WORD
+                        ),
+                "overflow-wrap: break-word;"
         );
     }
 
