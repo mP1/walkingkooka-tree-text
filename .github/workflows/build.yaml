@@ -30,17 +30,24 @@ jobs:
         if: ${{ always() }}
         run: |
           tail -n 500 target/it-tests/junit-test/build.log
-          tail -n 500 output.txt
+          tail -n 500 target/it-tests/gwt-jar-test/build.log
+          tail -n 500 it-output.txt
 
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: build.log
+          name: walkingkooka-tree-text-build.log
           path: target/it-tests/junit-test/build.log
 
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: it-output.txt
+          name: walkingkooka-tree-text-build.log
+          path: target/it-tests/gwt-jar-test/build.log
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: walkingkooka-tree-text-it-output.txt
           path: it-output.txt
 
