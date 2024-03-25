@@ -164,7 +164,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
 
     @Override
     public final Predicate<String> isMethodIgnoreMethodFilter() {
-        return (n) -> n.equals("isText") || n.equals("isRoot");
+        return (n) -> n.equals("isText") || n.equals("isRoot") || n.equals("isEmpty");
     }
 
     // JsonNodeMarshallingTesting...........................................................................................
