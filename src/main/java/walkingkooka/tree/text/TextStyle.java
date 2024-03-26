@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
@@ -40,7 +41,8 @@ import java.util.Optional;
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
         Patchable<TextStyle>,
         TreePrintable,
-        HasCss {
+        HasCss,
+        CanBeEmpty {
 
     /**
      * A {@link TextStyle} with no styling.
@@ -54,11 +56,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     TextStyle() {
         super();
     }
-
-    /**
-     * Returns true if the {@link TextStyle} is empty.
-     */
-    public abstract boolean isEmpty();
 
     // setChildren......................................................................................................
 
