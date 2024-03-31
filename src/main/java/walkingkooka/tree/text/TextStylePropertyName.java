@@ -186,7 +186,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     );
 
     /**
-     * Background rgb
+     * background-color
      */
     public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerColor("background-color",
             (c, v) -> v.visitBackgroundColor(c));
