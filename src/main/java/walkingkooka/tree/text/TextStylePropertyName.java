@@ -176,7 +176,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * A {@link TextStylePropertyName} that matches all.
+     * A {@link TextStylePropertyName} that matches all properties.
+     * Its only practical use is to clear or remove all style properties from a {@link TextStyle}, being the implementation of a clear style from a cell.
      */
     public final static TextStylePropertyName<Void> ALL = registerConstant(
             "*",
