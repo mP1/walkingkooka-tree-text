@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
@@ -257,14 +256,14 @@ public final class TextStyleNameNode extends TextParentNode {
         return other instanceof TextStyleNameNode;
     }
 
-    @Override
-    boolean equalsIgnoringParentAndChildren(final TextNode other) {
-        return other instanceof TextStyleNameNode &&
-                this.equalsIgnoringParentAndChildren0(Cast.to(other));
+    @Override //
+    boolean equals0(final TextNode other) {
+        return this.equals1((TextStyleNameNode) other);
     }
 
-    private boolean equalsIgnoringParentAndChildren0(final TextStyleNameNode other) {
-        return this.styleName.equals(other.styleName);
+    private boolean equals1(final TextStyleNameNode other) {
+        return this.styleName.equals(other.styleName) &&
+                this.children.equals(other.children);
     }
 
     // UsesToStringBuilder..............................................................................................

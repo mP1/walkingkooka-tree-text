@@ -73,7 +73,7 @@ abstract class TextParentNode extends TextNode {
         Objects.requireNonNull(children, "children");
 
         final List<TextNode> copy = Lists.immutable(children);
-        return Lists.equals(this.children(), copy, (first, other) -> first.equalsIgnoringParentAndChildren(other) && first.equalsDescendants0(other)) ?
+        return this.children.equals(copy) ?
                 this :
                 this.replaceChildren(copy);
     }
@@ -82,7 +82,7 @@ abstract class TextParentNode extends TextNode {
     final TextNode setChild(final TextNode newChild, final int index) {
         //int index = newChild.index();
         final TextNode previous = this.children().get(index);
-        return previous.equalsIgnoringParentAndChildren(newChild) && previous.equalsDescendants(newChild) ?
+        return previous.equals(newChild) ?
                 this :
                 this.replaceChild0(newChild, index);
     }
@@ -215,27 +215,6 @@ abstract class TextParentNode extends TextNode {
     @Override
     public final int hashCode() {
         return this.children().hashCode();
-    }
-
-    final boolean equalsDescendants0(final TextNode other) {
-        return this.equalsDescendants1(other.children());
-    }
-
-    /**
-     * Only returns true if the descendants of this node and the given children are equal ignoring the parents.
-     */
-    private boolean equalsDescendants1(final List<TextNode> otherChildren) {
-        final List<TextNode> children = this.children();
-        final int count = children.size();
-        boolean equals = count == otherChildren.size();
-
-        if (equals) {
-            for (int i = 0; equals && i < count; i++) {
-                equals = children.get(i).equalsDescendants(otherChildren.get(i));
-            }
-        }
-
-        return equals;
     }
 
     // UsesToStringBuilder..............................................................................................

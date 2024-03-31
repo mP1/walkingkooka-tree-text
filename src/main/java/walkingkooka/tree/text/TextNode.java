@@ -265,44 +265,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     abstract boolean canBeEqual(final Object other);
 
-    private boolean equals0(final TextNode other) {
-        return this.equalsAncestors(other) &&
-                this.equalsDescendants0(other);
-    }
-
-    private boolean equalsAncestors(final TextNode other) {
-        boolean result = this.equalsIgnoringParentAndChildren(other);
-
-        if (result) {
-            final Optional<TextNode> parent = this.parent();
-            final Optional<TextNode> otherParent = other.parent();
-            final boolean hasParent = parent.isPresent();
-            final boolean hasOtherParent = otherParent.isPresent();
-
-            if (hasParent) {
-                if (hasOtherParent) {
-                    result = parent.get().equalsAncestors(otherParent.get());
-                }
-            } else {
-                // result is only true if other is false
-                result = !hasOtherParent;
-            }
-        }
-
-        return result;
-    }
-
-    final boolean equalsDescendants(final TextNode other) {
-        return this.equalsIgnoringParentAndChildren(other) &&
-                this.equalsDescendants0(other);
-    }
-
-    abstract boolean equalsDescendants0(final TextNode other);
-
-    /**
-     * Sub classes should do equals but ignore the parent and children textStyle.
-     */
-    abstract boolean equalsIgnoringParentAndChildren(final TextNode other);
+    abstract boolean equals0(final TextNode other);
 
     // TextNodeVisitor..................................................................................................
 
