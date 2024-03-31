@@ -146,18 +146,10 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     }
 
     @Override
-    final boolean equalsDescendants0(final TextNode other) {
-        return true;
-    }
-
-    @Override
-    final boolean equalsIgnoringParentAndChildren(final TextNode other) {
-        return other instanceof TextLeafNode &&
-                equalsIgnoringParentAndChildren0(Cast.to(other));
-
-    }
-
-    private boolean equalsIgnoringParentAndChildren0(final TextLeafNode<?> other) {
-        return this.value.equals(other.value);
+    final boolean equals0(final TextNode other) {
+        final Value<?> hasValue = Cast.to(other);
+        return this.value.equals(
+                hasValue.value()
+        );
     }
 }
