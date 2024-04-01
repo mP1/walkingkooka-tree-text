@@ -160,6 +160,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         final Map<TextStylePropertyName<?>, Object> colorStyleWidth = this.valuesMutableCopy();
 
         for (final BoxEdge boxEdge : BoxEdge.values()) {
+            if(BoxEdge.ALL == boxEdge) {
+                continue;
+            }
+
             final TextStylePropertyName<Color> colorPropertyName = boxEdge.borderColorPropertyName();
             colorPropertyName.check(color);
 
