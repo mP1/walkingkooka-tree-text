@@ -331,16 +331,16 @@ final class TextStyleNonEmpty extends TextStyle {
 
         switch(propertyName.name) {
             case "border-color":
-                removeIf = BORDER_COLOR;
+                removeIf = BORDER_XXX_COLOR;
                 break;
             case "border-style":
-                removeIf = BORDER_STYLE;
+                removeIf = BORDER_XXX_STYLE;
                 break;
             case "border-width":
-                removeIf = BORDER_WIDTH;
+                removeIf = BORDER_XXX_WIDTH;
                 break;
             case "margin":
-                removeIf = MARGIN;
+                removeIf = MARGIN_XXX;
                 break;
             default:
                 removeIf = propertyName::equals;
@@ -364,7 +364,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Used to remove any of the 4 BORDER_XXX_COLOR properties.
      */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_COLOR = Predicates.setContains(
+    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_COLOR = Predicates.setContains(
             Sets.of(
                     TextStylePropertyName.BORDER_TOP_COLOR,
                     TextStylePropertyName.BORDER_LEFT_COLOR,
@@ -376,7 +376,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Used to remove any of the 4 BORDER_XXX_STYLE properties.
      */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_STYLE = Predicates.setContains(
+    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_STYLE = Predicates.setContains(
             Sets.of(
                     TextStylePropertyName.BORDER_TOP_STYLE,
                     TextStylePropertyName.BORDER_LEFT_STYLE,
@@ -388,7 +388,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Used to remove any of the 4 BORDER_XXX_WIDTH properties.
      */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_WIDTH = Predicates.setContains(
+    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_WIDTH = Predicates.setContains(
             Sets.of(
                     TextStylePropertyName.BORDER_TOP_WIDTH,
                     TextStylePropertyName.BORDER_LEFT_WIDTH,
@@ -400,7 +400,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Used to remove any of the 4 MARGIN_XXX properties.
      */
-    private static final Predicate<TextStylePropertyName<?>> MARGIN = Predicates.setContains(
+    private static final Predicate<TextStylePropertyName<?>> MARGIN_XXX = Predicates.setContains(
             Sets.of(
                     TextStylePropertyName.MARGIN_TOP,
                     TextStylePropertyName.MARGIN_LEFT,
