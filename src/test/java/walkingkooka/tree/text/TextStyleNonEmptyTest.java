@@ -536,6 +536,195 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // getBorderColor...................................................................................................
+
+    @Test
+    public void testBorderColorGetMissing() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ),
+                TextStylePropertyName.BORDER_COLOR,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderColorGetDifferent() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        Color.parse("#111")
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_COLOR,
+                        Color.parse("#222")
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR,
+                        Color.parse("#333")
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                        Color.parse("#444")
+                ),
+                TextStylePropertyName.BORDER_COLOR,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderColorGetSame() {
+        final Color color = Color.BLACK;
+
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        color
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_COLOR,
+                        color
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR,
+                        color
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                        color
+                ),
+                TextStylePropertyName.BORDER_COLOR,
+                color
+        );
+    }
+
+    // setBorderColor...................................................................................................
+
+    @Test
+    public void testBorderColorSet() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Color color = Color.WHITE;
+
+        this.setAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_COLOR,
+                color,
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_LEFT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                                color
+                        )
+                )
+        );
+    }
+
+    // removeBorderColor................................................................................................
+
+    @Test
+    public void testBorderColorRemoveMissing() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_COLOR,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderColorRemoveSome() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        Color.WHITE
+                ),
+                TextStylePropertyName.BORDER_COLOR,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderColorRemoveAll() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        Color.parse("#111")
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_COLOR,
+                        Color.parse("#222")
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR,
+                        Color.parse("#333")
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                        Color.parse("#444")
+                ),
+                TextStylePropertyName.BORDER_COLOR,
+                notEmpty
+        );
+    }
+
+    // setValues with BorderColor.......................................................................................
+
+    @Test
+    public void testBorderColorSetValues() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Color color = Color.WHITE;
+
+        this.checkEquals(
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_LEFT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                                color
+                        )
+                ),
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_COLOR,
+                                color
+                        )
+                )
+        );
+    }
+
     // TreePrintable....................................................................................................
 
     @Test

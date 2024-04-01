@@ -23,7 +23,9 @@ import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 /**
@@ -111,9 +113,47 @@ final class TextStyleEmpty extends TextStyle {
         return Optional.empty();
     }
 
-    @Override
-    <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
-        return TextStyleNonEmpty.with(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(Lists.of(Maps.entry(propertyName, value)))));
+    @Override //
+    <V> TextStyle set0(final TextStylePropertyName<V> propertyName,
+                       final V value) {
+        List<Entry<TextStylePropertyName<?>, Object>> entries;
+
+        switch (propertyName.name) {
+            case "border-color":
+                entries = Lists.of(
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_LEFT_COLOR,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                                value
+                        )
+                );
+                break;
+            default:
+                entries = Lists.of(
+                        Maps.entry(
+                                propertyName,
+                                value
+                        )
+                );
+                break;
+        }
+
+        return TextStyleNonEmpty.with(
+                TextNodeMap.withTextStyleMapEntrySet(
+                        TextNodeMapEntrySet.withList(entries)
+                )
+        );
     }
 
     @Override

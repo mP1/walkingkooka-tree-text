@@ -206,6 +206,53 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // getBorderColor...................................................................................................
+
+    @Test
+    public void testBorderColorGet() {
+        this.getAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_COLOR,
+                null
+        );
+    }
+
+    // setBorderColor...................................................................................................
+
+    @Test
+    public void testBorderColorSet() {
+        final Color color = Color.WHITE;
+
+        this.setAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_COLOR,
+                color,
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_LEFT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                                color
+                        )
+                )
+        );
+    }
+
+    // removeBorderColor...................................................................................................
+
+    @Test
+    public void testBorderColorRemove() {
+        this.removeAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_COLOR,
+                TextStyle.EMPTY
+        );
+    }
+
     // TextStyleVisitor.................................................................................................
 
     @Test

@@ -219,6 +219,18 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (b, v) -> v.visitBorderCollapse(b));
 
     /**
+     * border-color
+     */
+    public final static TextStylePropertyName<Color> BORDER_COLOR = registerConstant(
+            "border-color", // property name
+            TextStylePropertyValueHandler.jsonNode(
+                    Color.class, // type
+                    v -> v instanceof Color // type checker
+            ), // handler
+            null // visitor should NEVER happen
+    );
+
+    /**
      * border-left-color
      */
     public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerColor("border-left-color",
