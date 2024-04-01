@@ -393,6 +393,53 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 TextStyle.EMPTY
         );
     }
+
+    // getPadding.......................................................................................................
+
+    @Test
+    public void testPaddingGet() {
+        this.getAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.PADDING,
+                null
+        );
+    }
+
+    // setPadding.......................................................................................................
+
+    @Test
+    public void testPaddingSet() {
+        final Length<?> length = Length.pixel(100.0);
+
+        this.setAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.PADDING,
+                length,
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                TextStylePropertyName.PADDING_TOP,
+                                length,
+                                TextStylePropertyName.PADDING_LEFT,
+                                length,
+                                TextStylePropertyName.PADDING_RIGHT,
+                                length,
+                                TextStylePropertyName.PADDING_BOTTOM,
+                                length
+                        )
+                )
+        );
+    }
+
+    // removePadding....................................................................................................
+
+    @Test
+    public void testPaddingRemove() {
+        this.removeAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.PADDING,
+                TextStyle.EMPTY
+        );
+    }
     
     // TextStyleVisitor.................................................................................................
 
