@@ -20,6 +20,9 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.collect.set.Sets;
+import walkingkooka.color.Color;
+import walkingkooka.predicate.Predicates;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
@@ -29,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
@@ -123,21 +127,82 @@ final class TextStyleNonEmpty extends TextStyle {
 
     // get..............................................................................................................
 
-    @Override
+    @Override //
     <V> Optional<V> get0(final TextStylePropertyName<V> propertyName) {
-        return Optional.ofNullable(Cast.to(this.value.get(propertyName)));
+        Object get = null;
+
+        final TextNodeMap value = this.value;
+
+        switch (propertyName.name) {
+            case "border-color":
+                // only return a non null color if all colors are the same.
+                final Color top = (Color) value.get(TextStylePropertyName.BORDER_TOP_COLOR);
+                if (null != top) {
+                    final Color left = (Color) value.get(TextStylePropertyName.BORDER_LEFT_COLOR);
+                    if (top.equals(left)) {
+                        final Color right = (Color) value.get(TextStylePropertyName.BORDER_RIGHT_COLOR);
+                        if (top.equals(right)) {
+                            final Color bottom = (Color) value.get(TextStylePropertyName.BORDER_BOTTOM_COLOR);
+                            if (top.equals(bottom)) {
+                                get = top;
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                get = value.get(propertyName);
+                break;
+        }
+
+        return Optional.ofNullable(
+                Cast.to(get)
+        );
     }
 
     // set..............................................................................................................
 
-    @Override
-    <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value) {
+    @Override //
+    <V> TextStyle set0(final TextStylePropertyName<V> propertyName,
+                       final V value) {
+        TextStyle result;
+
+        switch (propertyName.name) {
+            case "border-color":
+                final Color color = Cast.to(value);
+
+                result = this.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_LEFT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                                color,
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                                color
+                        )
+                );
+                break;
+            default:
+                result = this.set1(
+                        propertyName,
+                        value
+                );
+                break;
+        }
+
+        return result;
+    }
+
+    private <V> TextStyleNonEmpty set1(final TextStylePropertyName<V> propertyName,
+                                       final V value) {
         TextNodeMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
         int mode = 0; // new property added.
 
-        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : map.entries) {
+        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : map.entries) {
             final TextStylePropertyName<?> property = propertyAndValue.getKey();
 
             if (propertyName.equals(property)) {
@@ -161,7 +226,11 @@ final class TextStyleNonEmpty extends TextStyle {
 
         return 1 == mode ?
                 this :
-                new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list)));
+                new TextStyleNonEmpty(
+                        TextNodeMap.withTextStyleMapEntrySet(
+                                TextNodeMapEntrySet.withList(list)
+                        )
+                );
     }
 
     // remove...........................................................................................................
@@ -171,9 +240,20 @@ final class TextStyleNonEmpty extends TextStyle {
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
         boolean removed = false;
 
-        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entries) {
+        Predicate<TextStylePropertyName<?>> removeIf;
+
+        switch(propertyName.name) {
+            case "border-color":
+                removeIf = BORDER_COLOR;
+                break;
+            default:
+                removeIf = propertyName::equals;
+                break;
+        }
+
+        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entries) {
             final TextStylePropertyName<?> property = propertyAndValue.getKey();
-            if (propertyName.equals(property)) {
+            if (removeIf.test(property)) {
                 removed = true;
             } else {
                 list.add(propertyAndValue);
@@ -184,6 +264,18 @@ final class TextStyleNonEmpty extends TextStyle {
                 this.remove1(list) :
                 this;
     }
+
+    /**
+     * Used to remove any of the 4 BORDER_XXX_COLOR properties.
+     */
+    private static final Predicate<TextStylePropertyName<?>> BORDER_COLOR = Predicates.setContains(
+            Sets.of(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR
+            )
+    );
 
     /**
      * Accepts a list after removing a property, special casing if the list is empty.
