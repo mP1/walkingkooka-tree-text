@@ -278,7 +278,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 propertyName.check(value);
 
                 switch (propertyName.name) {
-                    case "border-color":
+                    case BORDER_COLOR:
                         copy.put(
                                 TextStylePropertyName.BORDER_TOP_COLOR,
                                 value
@@ -296,7 +296,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 value
                         );
                         break;
-                    case "border-style":
+                    case BORDER_STYLE:
                         copy.put(
                                 TextStylePropertyName.BORDER_TOP_STYLE,
                                 value
@@ -314,7 +314,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 value
                         );
                         break;
-                    case "border-width":
+                    case BORDER_WIDTH:
                         copy.put(
                                 TextStylePropertyName.BORDER_TOP_WIDTH,
                                 value
@@ -332,7 +332,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 value
                         );
                         break;
-                    case "margin":
+                    case MARGIN:
                         copy.put(
                                 TextStylePropertyName.MARGIN_TOP,
                                 value
