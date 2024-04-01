@@ -31,7 +31,7 @@ jobs:
         run: |
           tail -n 500 target/it-tests/junit-test/build.log
           tail -n 500 target/it-tests/gwt-jar-test/build.log
-          tail -n 500 it-output.txt
+          tail -n 500 output.txt
 
       - uses: actions/upload-artifact@v2
         if: failure()
@@ -48,6 +48,6 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: walkingkooka-tree-text-it-output.txt
-          path: it-output.txt
+          name: walkingkooka-tree-text-output.txt
+          path: output.txt
 
