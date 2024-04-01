@@ -93,6 +93,25 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Test
+    public final void testSetValuesWithAllFails() {
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () -> this.createObject()
+                        .setValues(
+                                Maps.of(
+                                        TextStylePropertyName.ALL,
+                                        "hello"
+                                )
+                        )
+        );
+        this.checkEquals(
+                "Values not supported for \"*\"",
+                thrown.getMessage(),
+                () -> thrown.toString()
+        );
+    }
+
+    @Test
     public final void testSetValuesSame() {
         final TextStyle textStyle = this.createObject();
         assertSame(
