@@ -35,6 +35,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         this.checkEquals(
                 Lists.empty(),
                 Arrays.stream(BoxEdge.values())
+                        .filter(v -> v != BoxEdge.ALL)
                         .flatMap(b -> {
                             final String name = b.borderColorPropertyName()
                                     .value();
@@ -56,6 +57,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         this.checkEquals(
                 Lists.empty(),
                 Arrays.stream(BoxEdge.values())
+                        .filter(v -> v != BoxEdge.ALL)
                         .flatMap(b -> {
                             final String name = b.borderStylePropertyName()
                                     .value();
@@ -77,6 +79,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         this.checkEquals(
                 Lists.empty(),
                 Arrays.stream(BoxEdge.values())
+                        .filter(v -> v != BoxEdge.ALL)
                         .flatMap(b -> {
                             final String name = b.borderWidthPropertyName()
                                     .value();
@@ -98,6 +101,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         this.checkEquals(
                 Lists.empty(),
                 Arrays.stream(BoxEdge.values())
+                        .filter(v -> v != BoxEdge.ALL)
                         .flatMap(b -> {
                             final String name = b.marginPropertyName()
                                     .value();
@@ -118,6 +122,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         this.checkEquals(
                 Lists.empty(),
                 Arrays.stream(BoxEdge.values())
+                        .filter(v -> v != BoxEdge.ALL)
                         .flatMap(b -> {
                             final String name = b.paddingPropertyName()
                                     .value();

@@ -147,6 +147,38 @@ public enum BoxEdge {
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_TOP;
         }
+    },
+
+    ALL {
+        @Override
+        public BoxEdge flip() {
+            return ALL;
+        }
+
+        @Override
+        public TextStylePropertyName<Color> borderColorPropertyName() {
+            return TextStylePropertyName.BORDER_COLOR;
+        }
+
+        @Override
+        public TextStylePropertyName<BorderStyle> borderStylePropertyName() {
+            return TextStylePropertyName.BORDER_STYLE;
+        }
+
+        @Override
+        public TextStylePropertyName<Length<?>> borderWidthPropertyName() {
+            return TextStylePropertyName.BORDER_WIDTH;
+        }
+
+        @Override
+        public TextStylePropertyName<Length<?>> marginPropertyName() {
+            return TextStylePropertyName.MARGIN;
+        }
+
+        @Override
+        public TextStylePropertyName<Length<?>> paddingPropertyName() {
+            return TextStylePropertyName.PADDING;
+        }
     };
 
     public abstract BoxEdge flip();
