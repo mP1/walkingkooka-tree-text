@@ -300,6 +300,53 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // getBorderWidth...................................................................................................
+
+    @Test
+    public void testBorderWidthGet() {
+        this.getAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_WIDTH,
+                null
+        );
+    }
+
+    // setBorderWidth...................................................................................................
+
+    @Test
+    public void testBorderWidthSet() {
+        final Length<?> width = Length.pixel(123.0);
+
+        this.setAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_WIDTH,
+                width,
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                width
+                        )
+                )
+        );
+    }
+
+    // removeBorderWidth...................................................................................................
+
+    @Test
+    public void testBorderWidthRemove() {
+        this.removeAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.BORDER_WIDTH,
+                TextStyle.EMPTY
+        );
+    }
+
     // TextStyleVisitor.................................................................................................
 
     @Test
