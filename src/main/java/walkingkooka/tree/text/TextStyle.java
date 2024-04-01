@@ -288,6 +288,24 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 value
                         );
                         break;
+                    case "border-style":
+                        copy.put(
+                                TextStylePropertyName.BORDER_TOP_STYLE,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.BORDER_LEFT_STYLE,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                                value
+                        );
+                        break;
                     default:
                         copy.put(
                                 propertyName,

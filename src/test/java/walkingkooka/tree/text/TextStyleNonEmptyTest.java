@@ -496,7 +496,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 style.setMargin(length)
         );
     }
-    
+
     // setPadding.......................................................................................................
 
     @Test
@@ -692,6 +692,162 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // getBorderStyle...................................................................................................
+
+    @Test
+    public void testBorderStyleGetMissing() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ),
+                TextStylePropertyName.BORDER_STYLE,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderStyleGetDifferent() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        BorderStyle.DOUBLE
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_STYLE,
+                        BorderStyle.DASHED
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_STYLE,
+                        BorderStyle.SOLID
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                        BorderStyle.DOTTED
+                ),
+                TextStylePropertyName.BORDER_STYLE,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderStyleGetSame() {
+        final BorderStyle borderStyle = BorderStyle.DASHED;
+
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        borderStyle
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_STYLE,
+                        borderStyle
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_STYLE,
+                        borderStyle
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                        borderStyle
+                ),
+                TextStylePropertyName.BORDER_STYLE,
+                borderStyle
+        );
+    }
+
+    // setBorderStyle...................................................................................................
+
+    @Test
+    public void testBorderStyleSet() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final BorderStyle borderStyle = BorderStyle.DASHED;
+
+        this.setAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_STYLE,
+                borderStyle,
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_LEFT_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                                borderStyle
+                        )
+                )
+        );
+    }
+
+    // removeBorderStyle................................................................................................
+
+    @Test
+    public void testBorderStyleRemoveMissing() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_STYLE,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderStyleRemoveSome() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        BorderStyle.DOUBLE
+                ),
+                TextStylePropertyName.BORDER_STYLE,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderStyleRemoveAll() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        BorderStyle.DOUBLE
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_STYLE,
+                        BorderStyle.DASHED
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_STYLE,
+                        BorderStyle.DOTTED
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                        BorderStyle.SOLID
+                ),
+                TextStylePropertyName.BORDER_STYLE,
+                notEmpty
+        );
+    }
+
     // setValues with BorderColor.......................................................................................
 
     @Test
@@ -720,6 +876,39 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                         Maps.of(
                                 TextStylePropertyName.BORDER_COLOR,
                                 color
+                        )
+                )
+        );
+    }
+
+    // setValues with BorderStyle.......................................................................................
+
+    @Test
+    public void testBorderStyleSetValues() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final BorderStyle borderStyle = BorderStyle.DOUBLE;
+
+        this.checkEquals(
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_LEFT_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                                borderStyle,
+                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                                borderStyle
+                        )
+                ),
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_STYLE,
+                                borderStyle
                         )
                 )
         );
