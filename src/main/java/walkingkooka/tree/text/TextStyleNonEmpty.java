@@ -136,15 +136,12 @@ final class TextStyleNonEmpty extends TextStyle {
         switch (propertyName.name) {
             case BORDER_COLOR:
                 // only return a non null color if all colors are the same.
-                final Color top = (Color) value.get(TextStylePropertyName.BORDER_TOP_COLOR);
-                if (null != top) {
-                    final Color left = (Color) value.get(TextStylePropertyName.BORDER_LEFT_COLOR);
-                    if (top.equals(left)) {
-                        final Color right = (Color) value.get(TextStylePropertyName.BORDER_RIGHT_COLOR);
-                        if (top.equals(right)) {
-                            final Color bottom = (Color) value.get(TextStylePropertyName.BORDER_BOTTOM_COLOR);
-                            if (top.equals(bottom)) {
-                                get = top;
+                final Object borderColor = value.get(TextStylePropertyName.BORDER_TOP_COLOR);
+                if (null != borderColor) {
+                    if (borderColor.equals(value.get(TextStylePropertyName.BORDER_LEFT_COLOR))) {
+                        if (borderColor.equals(value.get(TextStylePropertyName.BORDER_RIGHT_COLOR))) {
+                            if (borderColor.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_COLOR))) {
+                                get = borderColor;
                             }
                         }
                     }
@@ -152,12 +149,12 @@ final class TextStyleNonEmpty extends TextStyle {
                 break;
             case BORDER_STYLE:
                 // only return a non null style if all styles are the same.
-                final BorderStyle topBorderStyle = (BorderStyle) value.get(TextStylePropertyName.BORDER_TOP_STYLE);
-                if (null != topBorderStyle) {
-                    if (topBorderStyle.equals(value.get(TextStylePropertyName.BORDER_LEFT_STYLE))) {
-                        if (topBorderStyle.equals(value.get(TextStylePropertyName.BORDER_RIGHT_STYLE))) {
-                            if (topBorderStyle.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_STYLE))) {
-                                get = topBorderStyle;
+                final Object borderStyle = value.get(TextStylePropertyName.BORDER_TOP_STYLE);
+                if (null != borderStyle) {
+                    if (borderStyle.equals(value.get(TextStylePropertyName.BORDER_LEFT_STYLE))) {
+                        if (borderStyle.equals(value.get(TextStylePropertyName.BORDER_RIGHT_STYLE))) {
+                            if (borderStyle.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_STYLE))) {
+                                get = borderStyle;
                             }
                         }
                     }
@@ -165,12 +162,12 @@ final class TextStyleNonEmpty extends TextStyle {
                 break;
             case BORDER_WIDTH:
                 // only return a non null width if all widths are the same.
-                final Object topBorderWidth = value.get(TextStylePropertyName.BORDER_TOP_WIDTH);
-                if (null != topBorderWidth) {
-                    if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_LEFT_WIDTH))) {
-                        if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_RIGHT_WIDTH))) {
-                            if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_WIDTH))) {
-                                get = topBorderWidth;
+                final Object borderWidth = value.get(TextStylePropertyName.BORDER_TOP_WIDTH);
+                if (null != borderWidth) {
+                    if (borderWidth.equals(value.get(TextStylePropertyName.BORDER_LEFT_WIDTH))) {
+                        if (borderWidth.equals(value.get(TextStylePropertyName.BORDER_RIGHT_WIDTH))) {
+                            if (borderWidth.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_WIDTH))) {
+                                get = borderWidth;
                             }
                         }
                     }
@@ -178,12 +175,12 @@ final class TextStyleNonEmpty extends TextStyle {
                 break;
             case MARGIN:
                 // only return a non null width if all margins are the same.
-                final Object topMarginWidth = value.get(TextStylePropertyName.MARGIN_TOP);
-                if (null != topMarginWidth) {
-                    if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_LEFT))) {
-                        if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_RIGHT))) {
-                            if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_BOTTOM))) {
-                                get = topMarginWidth;
+                final Object marginWidth = value.get(TextStylePropertyName.MARGIN_TOP);
+                if (null != marginWidth) {
+                    if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_LEFT))) {
+                        if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_RIGHT))) {
+                            if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_BOTTOM))) {
+                                get = marginWidth;
                             }
                         }
                     }
