@@ -176,6 +176,19 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
+            case "margin":
+                // only return a non null width if all margins are the same.
+                final Object topMarginWidth = value.get(TextStylePropertyName.MARGIN_TOP);
+                if (null != topMarginWidth) {
+                    if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_LEFT))) {
+                        if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_RIGHT))) {
+                            if (topMarginWidth.equals(value.get(TextStylePropertyName.MARGIN_BOTTOM))) {
+                                get = topMarginWidth;
+                            }
+                        }
+                    }
+                }
+                break;
             default:
                 get = value.get(propertyName);
                 break;
@@ -239,6 +252,22 @@ final class TextStyleNonEmpty extends TextStyle {
                                 borderWidth,
                                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
                                 borderWidth
+                        )
+                );
+                break;
+            case "margin":
+                final Length<?> margin = Cast.to(value);
+
+                result = this.setValues(
+                        Maps.of(
+                                TextStylePropertyName.MARGIN_TOP,
+                                margin,
+                                TextStylePropertyName.MARGIN_LEFT,
+                                margin,
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                margin,
+                                TextStylePropertyName.MARGIN_BOTTOM,
+                                margin
                         )
                 );
                 break;
@@ -310,6 +339,9 @@ final class TextStyleNonEmpty extends TextStyle {
             case "border-width":
                 removeIf = BORDER_WIDTH;
                 break;
+            case "margin":
+                removeIf = MARGIN;
+                break;
             default:
                 removeIf = propertyName::equals;
                 break;
@@ -362,6 +394,18 @@ final class TextStyleNonEmpty extends TextStyle {
                     TextStylePropertyName.BORDER_LEFT_WIDTH,
                     TextStylePropertyName.BORDER_RIGHT_WIDTH,
                     TextStylePropertyName.BORDER_BOTTOM_WIDTH
+            )
+    );
+
+    /**
+     * Used to remove any of the 4 MARGIN_XXX properties.
+     */
+    private static final Predicate<TextStylePropertyName<?>> MARGIN = Predicates.setContains(
+            Sets.of(
+                    TextStylePropertyName.MARGIN_TOP,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    TextStylePropertyName.MARGIN_BOTTOM
             )
     );
 

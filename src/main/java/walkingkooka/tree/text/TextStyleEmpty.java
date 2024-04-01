@@ -108,8 +108,7 @@ final class TextStyleEmpty extends TextStyle {
 
     // get/set/remove...................................................................................................
 
-    @Override
-    <V> Optional<V> get0(final TextStylePropertyName<V> propertyName) {
+    @Override <V> Optional<V> get0(final TextStylePropertyName<V> propertyName) {
         return Optional.empty();
     }
 
@@ -175,6 +174,26 @@ final class TextStyleEmpty extends TextStyle {
                         ),
                         Maps.entry(
                                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                value
+                        )
+                );
+                break;
+            case "margin":
+                entries = Lists.of(
+                        Maps.entry(
+                                TextStylePropertyName.MARGIN_TOP,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.MARGIN_LEFT,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.MARGIN_BOTTOM,
                                 value
                         )
                 );
