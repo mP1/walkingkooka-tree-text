@@ -324,6 +324,24 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 value
                         );
                         break;
+                    case "margin":
+                        copy.put(
+                                TextStylePropertyName.MARGIN_TOP,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.MARGIN_LEFT,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.MARGIN_BOTTOM,
+                                value
+                        );
+                        break;
                     default:
                         copy.put(
                                 propertyName,

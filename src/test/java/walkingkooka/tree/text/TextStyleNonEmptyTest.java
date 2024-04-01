@@ -1003,7 +1003,163 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 notEmpty
         );
     }
-    
+
+    // getMargin...................................................................................................
+
+    @Test
+    public void testMarginGetMissing() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ),
+                TextStylePropertyName.MARGIN,
+                null
+        );
+    }
+
+    @Test
+    public void testMarginGetDifferent() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.MARGIN_TOP,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_LEFT,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.MARGIN,
+                null
+        );
+    }
+
+    @Test
+    public void testMarginGetSame() {
+        final Length<?> width = Length.pixel(888.0);
+
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.MARGIN_TOP,
+                        width
+                ).set(
+                        TextStylePropertyName.MARGIN_LEFT,
+                        width
+                ).set(
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        width
+                ).set(
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        width
+                ),
+                TextStylePropertyName.MARGIN,
+                width
+        );
+    }
+
+    // setMargin........................................................................................................
+
+    @Test
+    public void testMarginSet() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(888.0);
+
+        this.setAndCheck(
+                notEmpty,
+                TextStylePropertyName.MARGIN,
+                width,
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.MARGIN_TOP,
+                                width,
+                                TextStylePropertyName.MARGIN_LEFT,
+                                width,
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                width,
+                                TextStylePropertyName.MARGIN_BOTTOM,
+                                width
+                        )
+                )
+        );
+    }
+
+    // removeMargin.....................................................................................................
+
+    @Test
+    public void testMarginRemoveMissing() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty,
+                TextStylePropertyName.MARGIN,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testMarginRemoveSome() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.MARGIN_TOP,
+                        Length.pixel(888.0)
+                ),
+                TextStylePropertyName.MARGIN,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testMarginRemoveAll() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.MARGIN_TOP,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_LEFT,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.MARGIN,
+                notEmpty
+        );
+    }
+
     // setValues with BorderColor.......................................................................................
 
     @Test
@@ -1097,6 +1253,39 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 notEmpty.setValues(
                         Maps.of(
                                 TextStylePropertyName.BORDER_WIDTH,
+                                width
+                        )
+                )
+        );
+    }
+
+    // setValues with MarginWidth.......................................................................................
+
+    @Test
+    public void testMarginSetValues() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(123.0);
+
+        this.checkEquals(
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.MARGIN_TOP,
+                                width,
+                                TextStylePropertyName.MARGIN_LEFT,
+                                width,
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                width,
+                                TextStylePropertyName.MARGIN_BOTTOM,
+                                width
+                        )
+                ),
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.MARGIN,
                                 width
                         )
                 )

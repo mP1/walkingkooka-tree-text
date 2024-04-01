@@ -444,6 +444,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (t, v) -> v.visitListStyleType(t));
 
     /**
+     * margin
+     */
+    public final static TextStylePropertyName<Length<?>> MARGIN = registerConstant(
+            "margin", // property name
+            TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+            null // visitor should NEVER happen
+    );
+
+    /**
      * margin-bottom
      */
     public final static TextStylePropertyName<Length<?>> MARGIN_BOTTOM = registerNoneLengthPixelLengthConstant("margin-bottom",

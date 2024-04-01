@@ -347,6 +347,53 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // getMargin...................................................................................................
+
+    @Test
+    public void testMarginGet() {
+        this.getAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.MARGIN,
+                null
+        );
+    }
+
+    // setMargin...................................................................................................
+
+    @Test
+    public void testMarginSet() {
+        final Length<?> length = Length.pixel(100.0);
+
+        this.setAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.MARGIN,
+                length,
+                TextStyle.EMPTY.setValues(
+                        Maps.of(
+                                TextStylePropertyName.MARGIN_TOP,
+                                length,
+                                TextStylePropertyName.MARGIN_LEFT,
+                                length,
+                                TextStylePropertyName.MARGIN_RIGHT,
+                                length,
+                                TextStylePropertyName.MARGIN_BOTTOM,
+                                length
+                        )
+                )
+        );
+    }
+
+    // removeMargin...................................................................................................
+
+    @Test
+    public void testMarginRemove() {
+        this.removeAndCheck(
+                TextStyle.EMPTY,
+                TextStylePropertyName.MARGIN,
+                TextStyle.EMPTY
+        );
+    }
+    
     // TextStyleVisitor.................................................................................................
 
     @Test
