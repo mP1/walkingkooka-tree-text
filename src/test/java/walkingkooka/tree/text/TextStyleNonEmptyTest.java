@@ -848,6 +848,162 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // getBorderWidth...................................................................................................
+
+    @Test
+    public void testBorderWidthGetMissing() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ),
+                TextStylePropertyName.BORDER_WIDTH,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderWidthGetDifferent() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_WIDTH,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                                Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.BORDER_WIDTH,
+                null
+        );
+    }
+
+    @Test
+    public void testBorderWidthGetSame() {
+        final Length<?> width = Length.pixel(888.0);
+
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        width
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_WIDTH,
+                        width
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                        width
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                        width
+                ),
+                TextStylePropertyName.BORDER_WIDTH,
+                width
+        );
+    }
+
+    // setBorderWidth...................................................................................................
+
+    @Test
+    public void testBorderWidthSet() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(888.0);
+
+        this.setAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_WIDTH,
+                width,
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                width
+                        )
+                )
+        );
+    }
+
+    // removeBorderWidth................................................................................................
+
+    @Test
+    public void testBorderWidthRemoveMissing() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty,
+                TextStylePropertyName.BORDER_WIDTH,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderWidthRemoveSome() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        Length.pixel(888.0)
+                ),
+                TextStylePropertyName.BORDER_WIDTH,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testBorderWidthRemoveAll() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.BORDER_LEFT_WIDTH,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                        Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.BORDER_WIDTH,
+                notEmpty
+        );
+    }
+    
     // setValues with BorderColor.......................................................................................
 
     @Test
@@ -909,6 +1065,39 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                         Maps.of(
                                 TextStylePropertyName.BORDER_STYLE,
                                 borderStyle
+                        )
+                )
+        );
+    }
+
+    // setValues with BorderWidth.......................................................................................
+
+    @Test
+    public void testBorderWidthSetValues() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(123.0);
+
+        this.checkEquals(
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                                width,
+                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                width
+                        )
+                ),
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_WIDTH,
+                                width
                         )
                 )
         );

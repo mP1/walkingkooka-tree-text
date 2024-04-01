@@ -163,6 +163,19 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
+            case "border-width":
+                // only return a non null width if all widths are the same.
+                final Object topBorderWidth = value.get(TextStylePropertyName.BORDER_TOP_WIDTH);
+                if (null != topBorderWidth) {
+                    if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_LEFT_WIDTH))) {
+                        if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_RIGHT_WIDTH))) {
+                            if (topBorderWidth.equals(value.get(TextStylePropertyName.BORDER_BOTTOM_WIDTH))) {
+                                get = topBorderWidth;
+                            }
+                        }
+                    }
+                }
+                break;
             default:
                 get = value.get(propertyName);
                 break;
@@ -210,6 +223,22 @@ final class TextStyleNonEmpty extends TextStyle {
                                 borderStyle,
                                 TextStylePropertyName.BORDER_BOTTOM_STYLE,
                                 borderStyle
+                        )
+                );
+                break;
+            case "border-width":
+                final Length<?> borderWidth = Cast.to(value);
+
+                result = this.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_WIDTH,
+                                borderWidth,
+                                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                                borderWidth,
+                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                                borderWidth,
+                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                                borderWidth
                         )
                 );
                 break;
@@ -278,6 +307,9 @@ final class TextStyleNonEmpty extends TextStyle {
             case "border-style":
                 removeIf = BORDER_STYLE;
                 break;
+            case "border-width":
+                removeIf = BORDER_WIDTH;
+                break;
             default:
                 removeIf = propertyName::equals;
                 break;
@@ -318,6 +350,18 @@ final class TextStyleNonEmpty extends TextStyle {
                     TextStylePropertyName.BORDER_LEFT_STYLE,
                     TextStylePropertyName.BORDER_RIGHT_STYLE,
                     TextStylePropertyName.BORDER_BOTTOM_STYLE
+            )
+    );
+
+    /**
+     * Used to remove any of the 4 BORDER_XXX_WIDTH properties.
+     */
+    private static final Predicate<TextStylePropertyName<?>> BORDER_WIDTH = Predicates.setContains(
+            Sets.of(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH
             )
     );
 

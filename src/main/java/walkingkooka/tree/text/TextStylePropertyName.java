@@ -304,6 +304,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitBorderTopWidth(l));
 
     /**
+     * border-width
+     */
+    public final static TextStylePropertyName<Length<?>> BORDER_WIDTH = registerConstant(
+            "border-width", // property name
+            TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+            null // visitor should NEVER happen
+    );
+
+    /**
      * color
      */
     public final static TextStylePropertyName<Color> COLOR = registerColor("color",
