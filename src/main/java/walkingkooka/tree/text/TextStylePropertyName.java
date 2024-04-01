@@ -273,6 +273,19 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (l, v) -> v.visitBorderRightWidth(l));
 
     /**
+     * border-style
+     */
+    public final static TextStylePropertyName<BorderStyle> BORDER_STYLE = registerConstant(
+            "border-style", // property name
+            TextStylePropertyValueHandler.enumTextPropertyValueHandler(
+                    BorderStyle::valueOf,
+                    BorderStyle.class,
+                    v -> v instanceof BorderStyle
+            ), // handler
+            null // visitor should NEVER happen
+    );
+
+    /**
      * border-top-color
      */
     public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerColor("border-top-color",

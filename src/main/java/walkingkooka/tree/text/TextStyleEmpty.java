@@ -139,6 +139,26 @@ final class TextStyleEmpty extends TextStyle {
                         )
                 );
                 break;
+            case "border-style":
+                entries = Lists.of(
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_TOP_STYLE,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_LEFT_STYLE,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                                value
+                        )
+                );
+                break;
             default:
                 entries = Lists.of(
                         Maps.entry(
