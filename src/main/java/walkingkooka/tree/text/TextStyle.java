@@ -50,6 +50,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextStyle EMPTY = TextStyleEmpty.instance();
 
+    static final String BORDER_COLOR = "border-color";
+
+    static final String BORDER_STYLE = "border-style";
+
+    static final String BORDER_WIDTH = "border-width";
+
+    static final String MARGIN = "margin";
+
     /**
      * Private ctor to limit sub classes.
      */

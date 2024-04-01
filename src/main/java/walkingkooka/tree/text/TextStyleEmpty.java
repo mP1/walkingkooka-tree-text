@@ -118,7 +118,7 @@ final class TextStyleEmpty extends TextStyle {
         List<Entry<TextStylePropertyName<?>, Object>> entries;
 
         switch (propertyName.name) {
-            case "border-color":
+            case BORDER_COLOR:
                 entries = Lists.of(
                         Maps.entry(
                                 TextStylePropertyName.BORDER_TOP_COLOR,
@@ -138,7 +138,7 @@ final class TextStyleEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "border-style":
+            case BORDER_STYLE:
                 entries = Lists.of(
                         Maps.entry(
                                 TextStylePropertyName.BORDER_TOP_STYLE,
@@ -158,7 +158,7 @@ final class TextStyleEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "border-width":
+            case BORDER_WIDTH:
                 entries = Lists.of(
                         Maps.entry(
                                 TextStylePropertyName.BORDER_TOP_WIDTH,
@@ -178,7 +178,7 @@ final class TextStyleEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "margin":
+            case MARGIN:
                 entries = Lists.of(
                         Maps.entry(
                                 TextStylePropertyName.MARGIN_TOP,
