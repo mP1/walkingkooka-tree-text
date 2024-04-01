@@ -31,27 +31,27 @@ public enum BoxEdge {
         }
 
         @Override
-        TextStylePropertyName<Color> borderColorPropertyName() {
+        public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_BOTTOM_COLOR;
         }
 
         @Override
-        TextStylePropertyName<BorderStyle> borderStylePropertyName() {
+        public TextStylePropertyName<BorderStyle> borderStylePropertyName() {
             return TextStylePropertyName.BORDER_BOTTOM_STYLE;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> borderWidthPropertyName() {
+        public TextStylePropertyName<Length<?>> borderWidthPropertyName() {
             return TextStylePropertyName.BORDER_BOTTOM_WIDTH;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> marginPropertyName() {
+        public TextStylePropertyName<Length<?>> marginPropertyName() {
             return TextStylePropertyName.MARGIN_BOTTOM;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> paddingPropertyName() {
+        public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_BOTTOM;
         }
     },
@@ -62,27 +62,27 @@ public enum BoxEdge {
         }
 
         @Override
-        TextStylePropertyName<Color> borderColorPropertyName() {
+        public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_LEFT_COLOR;
         }
 
         @Override
-        TextStylePropertyName<BorderStyle> borderStylePropertyName() {
+        public TextStylePropertyName<BorderStyle> borderStylePropertyName() {
             return TextStylePropertyName.BORDER_LEFT_STYLE;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> borderWidthPropertyName() {
+        public TextStylePropertyName<Length<?>> borderWidthPropertyName() {
             return TextStylePropertyName.BORDER_LEFT_WIDTH;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> marginPropertyName() {
+        public TextStylePropertyName<Length<?>> marginPropertyName() {
             return TextStylePropertyName.MARGIN_LEFT;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> paddingPropertyName() {
+        public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_LEFT;
         }
     },
@@ -93,27 +93,27 @@ public enum BoxEdge {
         }
 
         @Override
-        TextStylePropertyName<Color> borderColorPropertyName() {
+        public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_RIGHT_COLOR;
         }
 
         @Override
-        TextStylePropertyName<BorderStyle> borderStylePropertyName() {
+        public TextStylePropertyName<BorderStyle> borderStylePropertyName() {
             return TextStylePropertyName.BORDER_RIGHT_STYLE;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> borderWidthPropertyName() {
+        public TextStylePropertyName<Length<?>> borderWidthPropertyName() {
             return TextStylePropertyName.BORDER_RIGHT_WIDTH;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> marginPropertyName() {
+        public TextStylePropertyName<Length<?>> marginPropertyName() {
             return TextStylePropertyName.MARGIN_RIGHT;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> paddingPropertyName() {
+        public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_RIGHT;
         }
     },
@@ -124,27 +124,27 @@ public enum BoxEdge {
         }
 
         @Override
-        TextStylePropertyName<Color> borderColorPropertyName() {
+        public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_TOP_COLOR;
         }
 
         @Override
-        TextStylePropertyName<BorderStyle> borderStylePropertyName() {
+        public TextStylePropertyName<BorderStyle> borderStylePropertyName() {
             return TextStylePropertyName.BORDER_TOP_STYLE;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> borderWidthPropertyName() {
+        public TextStylePropertyName<Length<?>> borderWidthPropertyName() {
             return TextStylePropertyName.BORDER_TOP_WIDTH;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> marginPropertyName() {
+        public TextStylePropertyName<Length<?>> marginPropertyName() {
             return TextStylePropertyName.MARGIN_TOP;
         }
 
         @Override
-        TextStylePropertyName<Length<?>> paddingPropertyName() {
+        public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_TOP;
         }
     };
@@ -195,13 +195,13 @@ public enum BoxEdge {
 
     // property names...................................................................................................
 
-    abstract TextStylePropertyName<Color> borderColorPropertyName();
+    public abstract TextStylePropertyName<Color> borderColorPropertyName();
 
-    abstract TextStylePropertyName<BorderStyle> borderStylePropertyName();
+    public abstract TextStylePropertyName<BorderStyle> borderStylePropertyName();
 
-    abstract TextStylePropertyName<Length<?>> borderWidthPropertyName();
+    public abstract TextStylePropertyName<Length<?>> borderWidthPropertyName();
 
-    abstract TextStylePropertyName<Length<?>> marginPropertyName();
+    public abstract TextStylePropertyName<Length<?>> marginPropertyName();
 
-    abstract TextStylePropertyName<Length<?>> paddingPropertyName();
+    public abstract TextStylePropertyName<Length<?>> paddingPropertyName();
 }
