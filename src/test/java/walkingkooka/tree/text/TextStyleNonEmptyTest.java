@@ -1160,6 +1160,162 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // getPadding.......................................................................................................
+
+    @Test
+    public void testPaddingGetMissing() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ),
+                TextStylePropertyName.PADDING,
+                null
+        );
+    }
+
+    @Test
+    public void testPaddingGetDifferent() {
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.PADDING_TOP,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.PADDING_LEFT,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.PADDING_RIGHT,
+                        Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.PADDING,
+                null
+        );
+    }
+
+    @Test
+    public void testPaddingGetSame() {
+        final Length<?> width = Length.pixel(888.0);
+
+        this.getAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.PADDING_TOP,
+                        width
+                ).set(
+                        TextStylePropertyName.PADDING_LEFT,
+                        width
+                ).set(
+                        TextStylePropertyName.PADDING_RIGHT,
+                        width
+                ).set(
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        width
+                ),
+                TextStylePropertyName.PADDING,
+                width
+        );
+    }
+
+    // setPadding.......................................................................................................
+
+    @Test
+    public void testPaddingSet() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(888.0);
+
+        this.setAndCheck(
+                notEmpty,
+                TextStylePropertyName.PADDING,
+                width,
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.PADDING_TOP,
+                                width,
+                                TextStylePropertyName.PADDING_LEFT,
+                                width,
+                                TextStylePropertyName.PADDING_RIGHT,
+                                width,
+                                TextStylePropertyName.PADDING_BOTTOM,
+                                width
+                        )
+                )
+        );
+    }
+
+    // removePadding.....................................................................................................
+
+    @Test
+    public void testPaddingRemoveMissing() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty,
+                TextStylePropertyName.PADDING,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testPaddingRemoveSome() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.PADDING_TOP,
+                        Length.pixel(888.0)
+                ),
+                TextStylePropertyName.PADDING,
+                notEmpty
+        );
+    }
+
+    @Test
+    public void testPaddingRemoveAll() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        this.removeAndCheck(
+                notEmpty.set(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                ).set(
+                        TextStylePropertyName.PADDING_TOP,
+                        Length.pixel(111.0)
+                ).set(
+                        TextStylePropertyName.PADDING_LEFT,
+                        Length.pixel(222.0)
+                ).set(
+                        TextStylePropertyName.PADDING_RIGHT,
+                        Length.pixel(333.0)
+                ).set(
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        Length.pixel(444.0)
+                ),
+                TextStylePropertyName.PADDING,
+                notEmpty
+        );
+    }
+
     // setValues with BorderColor.......................................................................................
 
     @Test
@@ -1286,6 +1442,39 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 notEmpty.setValues(
                         Maps.of(
                                 TextStylePropertyName.MARGIN,
+                                width
+                        )
+                )
+        );
+    }
+
+    // setValues with Padding...........................................................................................
+
+    @Test
+    public void testPaddingSetValues() {
+        final TextStyle notEmpty = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Length<?> width = Length.pixel(123.0);
+
+        this.checkEquals(
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.PADDING_TOP,
+                                width,
+                                TextStylePropertyName.PADDING_LEFT,
+                                width,
+                                TextStylePropertyName.PADDING_RIGHT,
+                                width,
+                                TextStylePropertyName.PADDING_BOTTOM,
+                                width
+                        )
+                ),
+                notEmpty.setValues(
+                        Maps.of(
+                                TextStylePropertyName.PADDING,
                                 width
                         )
                 )

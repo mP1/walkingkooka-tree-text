@@ -186,6 +186,19 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
+            case PADDING:
+                // only return a non null width if all paddings are the same.
+                final Object paddingWidth = value.get(TextStylePropertyName.PADDING_TOP);
+                if (null != paddingWidth) {
+                    if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_LEFT))) {
+                        if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_RIGHT))) {
+                            if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_BOTTOM))) {
+                                get = paddingWidth;
+                            }
+                        }
+                    }
+                }
+                break;
             default:
                 get = value.get(propertyName);
                 break;
@@ -268,6 +281,22 @@ final class TextStyleNonEmpty extends TextStyle {
                         )
                 );
                 break;
+            case PADDING:
+                final Length<?> padding = Cast.to(value);
+
+                result = this.setValues(
+                        Maps.of(
+                                TextStylePropertyName.PADDING_TOP,
+                                padding,
+                                TextStylePropertyName.PADDING_LEFT,
+                                padding,
+                                TextStylePropertyName.PADDING_RIGHT,
+                                padding,
+                                TextStylePropertyName.PADDING_BOTTOM,
+                                padding
+                        )
+                );
+                break;
             default:
                 result = this.set1(
                         propertyName,
@@ -339,6 +368,9 @@ final class TextStyleNonEmpty extends TextStyle {
             case MARGIN:
                 removeIf = MARGIN_XXX;
                 break;
+            case PADDING:
+                removeIf = PADDING_XXX;
+                break;
             default:
                 removeIf = propertyName::equals;
                 break;
@@ -403,6 +435,18 @@ final class TextStyleNonEmpty extends TextStyle {
                     TextStylePropertyName.MARGIN_LEFT,
                     TextStylePropertyName.MARGIN_RIGHT,
                     TextStylePropertyName.MARGIN_BOTTOM
+            )
+    );
+
+    /**
+     * Used to remove any of the 4 PADDING_XXX properties.
+     */
+    private static final Predicate<TextStylePropertyName<?>> PADDING_XXX = Predicates.setContains(
+            Sets.of(
+                    TextStylePropertyName.PADDING_TOP,
+                    TextStylePropertyName.PADDING_LEFT,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    TextStylePropertyName.PADDING_BOTTOM
             )
     );
 

@@ -198,6 +198,26 @@ final class TextStyleEmpty extends TextStyle {
                         )
                 );
                 break;
+            case PADDING:
+                entries = Lists.of(
+                        Maps.entry(
+                                TextStylePropertyName.PADDING_TOP,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.PADDING_LEFT,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.PADDING_RIGHT,
+                                value
+                        ),
+                        Maps.entry(
+                                TextStylePropertyName.PADDING_BOTTOM,
+                                value
+                        )
+                );
+                break;
             default:
                 entries = Lists.of(
                         Maps.entry(

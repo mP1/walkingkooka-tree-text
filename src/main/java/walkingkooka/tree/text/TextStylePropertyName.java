@@ -565,6 +565,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             (o, v) -> v.visitOverflowY(o));
 
     /**
+     * padding
+     */
+    public final static TextStylePropertyName<Length<?>> PADDING = registerConstant(
+            "padding", // property name
+            TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+            null // visitor should NEVER happen
+    );
+    
+    /**
      * padding-bottom
      */
     public final static TextStylePropertyName<Length<?>> PADDING_BOTTOM = registerNoneLengthPixelLengthConstant("padding-bottom",

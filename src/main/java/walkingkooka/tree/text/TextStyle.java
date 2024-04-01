@@ -58,6 +58,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     static final String MARGIN = "margin";
 
+    static final String PADDING = "padding";
+
     /**
      * Private ctor to limit sub classes.
      */
@@ -347,6 +349,24 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                         );
                         copy.put(
                                 TextStylePropertyName.MARGIN_BOTTOM,
+                                value
+                        );
+                        break;
+                    case PADDING:
+                        copy.put(
+                                TextStylePropertyName.PADDING_TOP,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.PADDING_LEFT,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.PADDING_RIGHT,
+                                value
+                        );
+                        copy.put(
+                                TextStylePropertyName.PADDING_BOTTOM,
                                 value
                         );
                         break;
