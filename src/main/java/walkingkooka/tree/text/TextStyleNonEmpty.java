@@ -134,7 +134,7 @@ final class TextStyleNonEmpty extends TextStyle {
         final TextNodeMap value = this.value;
 
         switch (propertyName.name) {
-            case "border-color":
+            case BORDER_COLOR:
                 // only return a non null color if all colors are the same.
                 final Color top = (Color) value.get(TextStylePropertyName.BORDER_TOP_COLOR);
                 if (null != top) {
@@ -150,7 +150,7 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
-            case "border-style":
+            case BORDER_STYLE:
                 // only return a non null style if all styles are the same.
                 final BorderStyle topBorderStyle = (BorderStyle) value.get(TextStylePropertyName.BORDER_TOP_STYLE);
                 if (null != topBorderStyle) {
@@ -163,7 +163,7 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
-            case "border-width":
+            case BORDER_WIDTH:
                 // only return a non null width if all widths are the same.
                 final Object topBorderWidth = value.get(TextStylePropertyName.BORDER_TOP_WIDTH);
                 if (null != topBorderWidth) {
@@ -176,7 +176,7 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
-            case "margin":
+            case MARGIN:
                 // only return a non null width if all margins are the same.
                 final Object topMarginWidth = value.get(TextStylePropertyName.MARGIN_TOP);
                 if (null != topMarginWidth) {
@@ -207,7 +207,7 @@ final class TextStyleNonEmpty extends TextStyle {
         TextStyle result;
 
         switch (propertyName.name) {
-            case "border-color":
+            case BORDER_COLOR:
                 final Color color = Cast.to(value);
 
                 result = this.setValues(
@@ -223,7 +223,7 @@ final class TextStyleNonEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "border-style":
+            case BORDER_STYLE:
                 final BorderStyle borderStyle = Cast.to(value);
 
                 result = this.setValues(
@@ -239,7 +239,7 @@ final class TextStyleNonEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "border-width":
+            case BORDER_WIDTH:
                 final Length<?> borderWidth = Cast.to(value);
 
                 result = this.setValues(
@@ -255,7 +255,7 @@ final class TextStyleNonEmpty extends TextStyle {
                         )
                 );
                 break;
-            case "margin":
+            case MARGIN:
                 final Length<?> margin = Cast.to(value);
 
                 result = this.setValues(
@@ -330,16 +330,16 @@ final class TextStyleNonEmpty extends TextStyle {
         Predicate<TextStylePropertyName<?>> removeIf;
 
         switch(propertyName.name) {
-            case "border-color":
+            case BORDER_COLOR:
                 removeIf = BORDER_XXX_COLOR;
                 break;
-            case "border-style":
+            case BORDER_STYLE:
                 removeIf = BORDER_XXX_STYLE;
                 break;
-            case "border-width":
+            case BORDER_WIDTH:
                 removeIf = BORDER_XXX_WIDTH;
                 break;
-            case "margin":
+            case MARGIN:
                 removeIf = MARGIN_XXX;
                 break;
             default:
