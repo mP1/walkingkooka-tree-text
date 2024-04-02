@@ -895,7 +895,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Creates a {@link JsonNode} which may be used to patch a {@link TextStyle}.
      */
-    public JsonNode patch(final T value) {
+    public JsonNode makePatch(final T value) {
         return null == value ?
                 this.patchRemove :
                 JsonNode.object()
