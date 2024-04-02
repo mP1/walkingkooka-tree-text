@@ -193,39 +193,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     /**
-     * Sets all margin to the given {@link Length}
-     */
-    public final TextStyle setMargin(final Length<?> length) {
-        Objects.requireNonNull(length, "length");
-
-        TextStylePropertyName.MARGIN_TOP.check(length);
-        TextStylePropertyName.MARGIN_RIGHT.check(length);
-        TextStylePropertyName.MARGIN_BOTTOM.check(length);
-        TextStylePropertyName.MARGIN_LEFT.check(length);
-
-        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesMutableCopy();
-
-        newValues.put(
-                TextStylePropertyName.MARGIN_TOP,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.MARGIN_RIGHT,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.MARGIN_BOTTOM,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.MARGIN_LEFT,
-                length
-        );
-
-        return this.setValuesWithCopy(newValues);
-    }
-
-    /**
      * Sets all padding to the given {@link Length}
      */
     public final TextStyle setPadding(final Length<?> length) {
