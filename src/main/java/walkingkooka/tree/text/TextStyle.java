@@ -193,39 +193,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     /**
-     * Sets all padding to the given {@link Length}
-     */
-    public final TextStyle setPadding(final Length<?> length) {
-        Objects.requireNonNull(length, "length");
-
-        TextStylePropertyName.PADDING_TOP.check(length);
-        TextStylePropertyName.PADDING_RIGHT.check(length);
-        TextStylePropertyName.PADDING_BOTTOM.check(length);
-        TextStylePropertyName.PADDING_LEFT.check(length);
-
-        final Map<TextStylePropertyName<?>, Object> newValues = this.valuesMutableCopy();
-
-        newValues.put(
-                TextStylePropertyName.PADDING_TOP,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.PADDING_RIGHT,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.PADDING_BOTTOM,
-                length
-        );
-        newValues.put(
-                TextStylePropertyName.PADDING_LEFT,
-                length
-        );
-
-        return this.setValuesWithCopy(newValues);
-    }
-
-    /**
      * Returns a mutable copy of the current properties for modification.
      */
     abstract Map<TextStylePropertyName<?>, Object> valuesMutableCopy();

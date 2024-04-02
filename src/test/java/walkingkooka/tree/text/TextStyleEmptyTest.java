@@ -163,27 +163,6 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 )
         );
     }
-    
-    // setPadding.......................................................................................................
-
-    @Test
-    public void testSetPadding() {
-        final Length<?> length = Length.pixel(123.5);
-
-        this.checkEquals(
-                TextStyleNonEmpty.with(
-                        TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.PADDING_TOP, length,
-                                        TextStylePropertyName.PADDING_RIGHT, length,
-                                        TextStylePropertyName.PADDING_BOTTOM, length,
-                                        TextStylePropertyName.PADDING_LEFT, length
-                                )
-                        )
-                ),
-                TextStyle.EMPTY.setPadding(length)
-        );
-    }
 
     // getBorderColor...................................................................................................
 
