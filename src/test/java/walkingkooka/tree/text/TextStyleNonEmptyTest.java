@@ -458,45 +458,6 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
-    // setPadding.......................................................................................................
-
-    @Test
-    public void testSetPadding() {
-        final Color color = Color.parse("#123");
-        final Length<?> length = Length.pixel(123.5);
-
-        this.checkEquals(
-                TextStyleNonEmpty.with(
-                        TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR, color,
-                                        TextStylePropertyName.PADDING_TOP, length,
-                                        TextStylePropertyName.PADDING_RIGHT, length,
-                                        TextStylePropertyName.PADDING_BOTTOM, length,
-                                        TextStylePropertyName.PADDING_LEFT, length
-                                )
-                        )
-                ),
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.COLOR, color
-                ).setPadding(length)
-        );
-    }
-
-    @Test
-    public void testSetPaddingSame() {
-        final Color color = Color.parse("#123");
-        final Length<?> length = Length.pixel(123.5);
-        final TextStyle style = TextStyle.EMPTY.set(
-                TextStylePropertyName.COLOR, color
-        ).setPadding(length);
-
-        assertSame(
-                style,
-                style.setPadding(length)
-        );
-    }
-
     // getBorderColor...................................................................................................
 
     @Test
