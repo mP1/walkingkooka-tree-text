@@ -288,6 +288,29 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testPatchBorderColor() {
+        final TextStyle style = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+        );
+
+        final Color color = Color.WHITE;
+
+        this.patchAndCheck(
+                style,
+                TextStylePropertyName.BORDER_COLOR.patch(color),
+                style.setValues(
+                        Maps.of(
+                                TextStylePropertyName.BORDER_TOP_COLOR, color,
+                                TextStylePropertyName.BORDER_LEFT_COLOR, color,
+                                TextStylePropertyName.BORDER_RIGHT_COLOR, color,
+                                TextStylePropertyName.BORDER_BOTTOM_COLOR, color
+                        )
+                )
+        );
+    }
+
+    @Test
     public void testPatchRemoveUnknownProperty() {
         this.patchAndCheck(
                 TextStyle.EMPTY,
