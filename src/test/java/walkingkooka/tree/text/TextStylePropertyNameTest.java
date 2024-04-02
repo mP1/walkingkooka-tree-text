@@ -351,6 +351,21 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         );
     }
 
+    @Test
+    public void testPatchNullAllProperties() {
+        for(final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
+            this.patchAndCheck(
+                    propertyName,
+                    null,
+                    JsonNode.object()
+                            .set(
+                                    JsonPropertyName.with(propertyName.name),
+                                    JsonNode.nullNode()
+                            )
+            );
+        }
+    }
+
     private <T> void patchAndCheck(final TextStylePropertyName<T> propertyName,
                                    final T value,
                                    final JsonNode expected) {
