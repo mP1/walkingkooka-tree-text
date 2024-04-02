@@ -29,6 +29,7 @@ import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -889,7 +890,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private final BiConsumer<T, TextStyleVisitor> visitor;
 
-    // JsonNode.........................................................................................................
+    // patch............................................................................................................
 
     /**
      * Creates a {@link JsonNode} which may be used to patch a {@link TextStyle}.
@@ -897,14 +898,25 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public JsonNode patch(final T value) {
         return null == value ?
                 this.patchRemove :
-                TextStyle.EMPTY.set(this, value)
-                        .marshall(JsonNodeMarshallContexts.basic());
+                JsonNode.object()
+                        .set(
+                                this.jsonPropertyName,
+                                this.handler.marshall(
+                                        value,
+                                        MARSHALL_CONTEXT
+                                )
+                        );
     }
 
     /**
-     * Cached {@link JsonNode}
+     * Cached {@link JsonNode} for patches with a null value.
      */
     private final JsonNode patchRemove;
+
+    /**
+     * Used to marshall a value when creating a patch {@link JsonNode}.
+     */
+    private final static JsonNodeMarshallContext MARSHALL_CONTEXT = JsonNodeMarshallContexts.basic();
 
     // Object..........................................................................................................
 
