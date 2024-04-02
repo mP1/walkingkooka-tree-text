@@ -298,7 +298,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.patchAndCheck(
                 style,
-                TextStylePropertyName.BORDER_COLOR.makePatch(color),
+                TextStylePropertyName.BORDER_COLOR.stylePatch(color),
                 style.setValues(
                         Maps.of(
                                 TextStylePropertyName.BORDER_TOP_COLOR, color,
