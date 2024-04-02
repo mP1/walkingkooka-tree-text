@@ -227,11 +227,11 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         assertSame(propertyName.marshallName(), propertyName.marshallName());
     }
 
-    // makePatch.......................................................................................................
+    // stylePatch.......................................................................................................
 
     @Test
-    public void testMakePatchNonNullValue() {
-        this.makePatchAndCheck(
+    public void testStylePatchNonNullValue() {
+        this.stylePatchAndCheck(
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.RIGHT,
                 JsonNode.object()
@@ -243,7 +243,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNonNullValue2() {
+    public void testStylePatchNonNullValue2() {
         this.patchAndCheck(
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.RIGHT,
@@ -259,7 +259,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNonNullValue3() {
+    public void testStylePatchNonNullValue3() {
         final TextStyle textStyle = TextStyle.EMPTY
                 .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
 
@@ -278,11 +278,11 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchBorderColor() {
+    public void testStylePatchBorderColor() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.BORDER_COLOR;
         final Color propertyValue = Color.parse("#123456");
 
-        this.makePatchAndCheck(
+        this.stylePatchAndCheck(
                 propertyName,
                 propertyValue,
                 JsonNode.object()
@@ -310,8 +310,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNullValue() {
-        this.makePatchAndCheck(
+    public void testStylePatchNullValue() {
+        this.stylePatchAndCheck(
                 TextStylePropertyName.TEXT_ALIGN,
                 null,
                 JsonNode.object()
@@ -323,7 +323,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNullValue2() {
+    public void testStylePatchNullValue2() {
         this.patchAndCheck(
                 TextStylePropertyName.TEXT_ALIGN,
                 null,
@@ -336,7 +336,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNullValue3() {
+    public void testStylePatchNullValue3() {
         final TextStyle textStyle = TextStyle.EMPTY
                 .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
 
@@ -352,9 +352,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testMakePatchNullAllProperties() {
+    public void testStylePatchNullAllProperties() {
         for(final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
-            this.makePatchAndCheck(
+            this.stylePatchAndCheck(
                     propertyName,
                     null,
                     JsonNode.object()
@@ -366,12 +366,12 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         }
     }
 
-    private <T> void makePatchAndCheck(final TextStylePropertyName<T> propertyName,
+    private <T> void stylePatchAndCheck(final TextStylePropertyName<T> propertyName,
                                        final T value,
                                        final JsonNode expected) {
         this.checkEquals(
                 expected,
-                propertyName.makePatch(value),
+                propertyName.stylePatch(value),
                 () -> propertyName + " patch " + value
         );
     }
@@ -383,7 +383,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         this.checkEquals(
                 expected,
                 initial.patch(
-                        propertyName.makePatch(value),
+                        propertyName.stylePatch(value),
                         JsonNodeUnmarshallContexts.basic(
                                 ExpressionNumberKind.BIG_DECIMAL,
                                 MathContext.DECIMAL32
