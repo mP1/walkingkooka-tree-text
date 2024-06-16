@@ -149,7 +149,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testText() {
         this.textAndCheck(
-                TextNode.hyperLink(URL)
+                TextNode.hyperlink(URL)
                         .setChildren(
                                 Lists.of(
                                         Text.with("a1"),
@@ -165,7 +165,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(
-                TextNode.hyperLink(URL)
+                TextNode.hyperlink(URL)
                         .setChildren(
                                 Lists.of(
                                         Text.with("a1"),

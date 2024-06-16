@@ -69,9 +69,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // public factory methods..........................................................................................
 
     /**
-     * {@see Text}
+     * {@see TextHyperlinkNode}
      */
-    public static TextHyperlinkNode hyperLink(final Url url) {
+    public static TextHyperlinkNode hyperlink(final Url url) {
         return TextHyperlinkNode.with(url);
     }
 

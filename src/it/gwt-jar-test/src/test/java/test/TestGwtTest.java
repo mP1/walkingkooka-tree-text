@@ -48,7 +48,7 @@ public class TestGwtTest extends GWTTestCase {
                         )
                 ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
                         .appendChild(
-                                TextNode.hyperLink(
+                                TextNode.hyperlink(
                                         Url.parseAbsolute("https://example.com/hello")
                                 ).appendChild(TextNode.text("hyper link text 123"))
                         ).appendChild(TextNode.text("before"))
