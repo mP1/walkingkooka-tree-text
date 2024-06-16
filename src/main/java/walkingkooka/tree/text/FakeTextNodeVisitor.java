@@ -67,6 +67,11 @@ public class FakeTextNodeVisitor extends TextNodeVisitor implements Fake {
     }
 
     @Override
+    protected void visit(final Image node) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     protected void visit(final TextPlaceholderNode node) {
         throw new UnsupportedOperationException();
     }

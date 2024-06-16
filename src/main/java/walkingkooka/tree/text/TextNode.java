@@ -76,6 +76,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     }
 
     /**
+     * {@see Image}
+     */
+    public static Image image(final Url url) {
+        return Image.with(url);
+    }
+
+    /**
      * {@see TextPlaceholderNode}
      */
     public static TextPlaceholderNode placeholder(final TextPlaceholderName placeholder) {
@@ -347,6 +354,11 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
                 Hyperlink::unmarshallHyperLink,
                 Hyperlink::marshall,
                 Hyperlink.class);
+
+        JsonNodeContext.register("image",
+                Image::unmarshallImage,
+                Image::marshall,
+                Image.class);
 
         JsonNodeContext.register("text",
                 Text::unmarshallText,

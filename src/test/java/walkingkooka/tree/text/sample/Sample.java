@@ -26,6 +26,7 @@ import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
 import walkingkooka.tree.text.Hyperlink;
+import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
@@ -52,6 +53,10 @@ public final class Sample {
                                 TextNode.hyperlink(
                                         Url.parseAbsolute("https://example.com/hello")
                                 ).appendChild(TextNode.text("hyper link text 123"))
+                        ).appendChild(
+                                TextNode.image(
+                                        Url.parse("https://example.com/image.png")
+                                )
                         ).appendChild(TextNode.text("before"))
                         .appendChild(TextNode.text("something gray")
                                 .setAttributes(
@@ -124,6 +129,11 @@ public final class Sample {
             }
 
             @Override
+            protected void visit(final Image node) {
+                printer.print(node.toHtml());
+            }
+
+            @Override
             protected void visit(final Text node) {
                 printer.print(node.value());
             }
@@ -141,7 +151,7 @@ public final class Sample {
             }
         }.accept(node);
 
-        // TML>
+        // <HTML>
         //  <head>
         //    <TITLE>
         //      title123
@@ -151,7 +161,7 @@ public final class Sample {
         //    <A href="https://example.com/hello">
         //      hyper link text 123
         //    </A>
-        //    before
+        //    <IMG src="https://example.com/image.png"/>before
         //    <SPAN style="color: #667788;">
         //      something gray
         //    </SPAN>
