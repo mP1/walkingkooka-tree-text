@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHyperlinkNode> {
+public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
 
     private final static Url URL = Url.parseAbsolute("https://example.com/Hello123");
 
@@ -41,7 +41,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     public void testWithNullFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> TextHyperlinkNode.with(null)
+                () -> Hyperlink.with(null)
         );
     }
 
@@ -51,14 +51,14 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
         final TextNode child2 = this.text2();
         final TextNode child3 = this.text3();
 
-        final TextHyperlinkNode parent = TextHyperlinkNode.with(URL)
+        final Hyperlink parent = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 child1,
                                 child2
                         )
                 );
-        final TextHyperlinkNode grandParent = TextHyperlinkNode.with(URL)
+        final Hyperlink grandParent = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 parent,
@@ -79,10 +79,10 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
 
     @Test
     public void testSetChildrenDifferent() {
-        final TextHyperlinkNode node = this.createTextNode();
+        final Hyperlink node = this.createTextNode();
         final List<TextNode> children = Lists.of(different());
 
-        final TextHyperlinkNode different = node.setChildren(children);
+        final Hyperlink different = node.setChildren(children);
         assertNotSame(different, node);
 
         this.childCountCheck(different, different());
@@ -94,7 +94,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
         final TextNode child1 = this.text1();
         final TextNode child2 = this.text2();
 
-        final TextHyperlinkNode parent = TextHyperlinkNode.with(URL)
+        final Hyperlink parent = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 child1,
@@ -103,7 +103,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                 );
 
         final TextNode parent2 = this.text3();
-        final TextHyperlinkNode grandParent = TextHyperlinkNode.with(URL)
+        final Hyperlink grandParent = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 parent,
@@ -128,7 +128,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
 
     @Test
     public void testSetChildrenEmpty() {
-        final TextHyperlinkNode node = TextHyperlinkNode.with(URL)
+        final Hyperlink node = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 text1(),
@@ -137,7 +137,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                 );
         final List<TextNode> children = TextNode.NO_CHILDREN;
 
-        final TextHyperlinkNode different = node.setChildren(children);
+        final Hyperlink different = node.setChildren(children);
         assertNotSame(different, node);
         this.childCountCheck(different);
 
@@ -182,7 +182,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testToHtmlWithText() {
         this.toHtmlAndCheck(
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
                         .setChildren(
                                 Lists.of(
                                         TextNode.text("hyper-link-text")
@@ -193,8 +193,8 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     }
 
     @Override
-    TextHyperlinkNode createTextNode() {
-        return TextHyperlinkNode.with(
+    Hyperlink createTextNode() {
+        return Hyperlink.with(
                 URL,
                 Lists.of(
                     text1(),
@@ -204,8 +204,8 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     }
 
     @Override
-    Class<TextHyperlinkNode> textNodeType() {
-        return TextHyperlinkNode.class;
+    Class<Hyperlink> textNodeType() {
+        return Hyperlink.class;
     }
 
     // TreePrintable....................................................................................................
@@ -213,7 +213,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testTreePrintable() {
         this.treePrintAndCheck(
-                TextHyperlinkNode.with(
+                Hyperlink.with(
                         URL
                 ).setChildren(
                         Lists.of(
@@ -221,7 +221,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                                 TextNode.text("b2")
                         )
                 ),
-                "TextHyperlinkNode\n" +
+                "Hyperlink\n" +
                         "  https://example.com/Hello123\n" +
                         "  Text \"a1\"\n" +
                         "  Text \"b2\"\n"
@@ -235,7 +235,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
         final StringBuilder b = new StringBuilder();
         final List<TextNode> visited = Lists.array();
 
-        final TextHyperlinkNode hyperLink = TextHyperlinkNode.with(URL)
+        final Hyperlink hyperLink = Hyperlink.with(URL)
                 .setChildren(
                         Lists.of(
                                 TextNode.text("text-a1")
@@ -258,7 +258,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
             }
 
             @Override
-            protected Visiting startVisit(final TextHyperlinkNode t) {
+            protected Visiting startVisit(final Hyperlink t) {
                 assertSame(hyperLink, t);
                 b.append("5");
                 visited.add(t);
@@ -266,7 +266,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
             }
 
             @Override
-            protected void endVisit(final TextHyperlinkNode t) {
+            protected void endVisit(final Hyperlink t) {
                 assertSame(hyperLink, t);
                 b.append("6");
                 visited.add(t);
@@ -299,7 +299,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                TextHyperlinkNode.with(URL),
+                Hyperlink.with(URL),
                 "https://example.com/Hello123 []"
         );
     }
@@ -307,7 +307,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testToStringWithChildren() {
         this.toStringAndCheck(
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
                         .setChildren(
                                 Lists.of(
                                         text1(),
@@ -323,7 +323,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testMarshallWithoutChildren() {
         this.marshallAndCheck(
-                TextHyperlinkNode.with(URL),
+                Hyperlink.with(URL),
                 "{\n" +
                         "  \"url\": \"https://example.com/Hello123\"\n" +
                         "}"
@@ -333,7 +333,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testMarshallWithChildren() {
         this.marshallAndCheck(
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
                         .setChildren(
                                 Lists.of(
                                         TextNode.text("text-1a"),
@@ -362,7 +362,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                 "{\n" +
                         "  \"url\": \"https://example.com/Hello123\"\n" +
                         "}",
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
         );
     }
 
@@ -382,7 +382,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                         "    }\n" +
                         "  ]\n" +
                         "}",
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
                         .setChildren(
                                 Lists.of(
                                         TextNode.text("text-1a"),
@@ -395,7 +395,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testJsonRoundtripAbsoluteUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                TextHyperlinkNode.with(
+                Hyperlink.with(
                         Url.parse("https://example.com/123")
                 )
         );
@@ -404,7 +404,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testJsonRoundtripRelativeUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                TextHyperlinkNode.with(
+                Hyperlink.with(
                         Url.parse("/123/page.html")
                 )
         );
@@ -413,7 +413,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testJsonRoundtripDataUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                TextHyperlinkNode.with(
+                Hyperlink.with(
                         Url.parse("data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==")
                 )
         );
@@ -422,7 +422,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     @Test
     public void testJsonRoundtripWithChildren() {
         this.marshallRoundTripTwiceAndCheck(
-                TextHyperlinkNode.with(URL)
+                Hyperlink.with(URL)
                         .setChildren(
                                 Lists.of(
                                         TextNode.text("text-1a"),
@@ -439,11 +439,18 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     }
 
     @Override
-    public TextHyperlinkNode unmarshall(final JsonNode from,
-                                        final JsonNodeUnmarshallContext context) {
-        return TextHyperlinkNode.unmarshallHyperLink(
+    public Hyperlink unmarshall(final JsonNode from,
+                                final JsonNodeUnmarshallContext context) {
+        return Hyperlink.unmarshallHyperLink(
                 from,
                 context
         );
+    }
+
+    // TypeNaming.......................................................................................................
+
+    @Override
+    public void testTypeNaming() {
+        throw new UnsupportedOperationException();
     }
 }

@@ -69,10 +69,10 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // public factory methods..........................................................................................
 
     /**
-     * {@see TextHyperlinkNode}
+     * {@see Hyperlink}
      */
-    public static TextHyperlinkNode hyperlink(final Url url) {
-        return TextHyperlinkNode.with(url);
+    public static Hyperlink hyperlink(final Url url) {
+        return Hyperlink.with(url);
     }
 
     /**
@@ -210,10 +210,10 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // is...............................................................................................................
 
     /**
-     * Only {@link TextHyperlinkNode} returns true
+     * Only {@link Hyperlink} returns true
      */
     public final boolean isHyperlink() {
-        return this instanceof TextHyperlinkNode;
+        return this instanceof Hyperlink;
     }
 
     /**
@@ -344,9 +344,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     static {
         JsonNodeContext.register("hyperlink",
-                TextHyperlinkNode::unmarshallHyperLink,
-                TextHyperlinkNode::marshall,
-                TextHyperlinkNode.class);
+                Hyperlink::unmarshallHyperLink,
+                Hyperlink::marshall,
+                Hyperlink.class);
 
         JsonNodeContext.register("text",
                 Text::unmarshallText,

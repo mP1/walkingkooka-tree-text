@@ -20,18 +20,15 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.reflect.IsMethodTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
-import walkingkooka.tree.Node;
 import walkingkooka.tree.NodeTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
 import java.util.Map;
-import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -42,7 +39,6 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         HasTextLengthTesting,
         HasTextOffsetTesting,
         HasTextTesting,
-        IsMethodTesting<N>,
         TreePrintableTesting {
 
     TextNodeTestCase2() {
@@ -143,28 +139,6 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     @Override
     public final String typeNamePrefix() {
         return "Text";
-    }
-
-    // IsMethodTesting...................................................................................................
-
-    @Override
-    public final N createIsMethodObject() {
-        return this.createTextNode();
-    }
-
-    @Override
-    public final String isMethodTypeNamePrefix() {
-        return "Text";
-    }
-
-    @Override
-    public final String isMethodTypeNameSuffix() {
-        return Node.class.getSimpleName();
-    }
-
-    @Override
-    public final Predicate<String> isMethodIgnoreMethodFilter() {
-        return (n) -> n.equals("isText") || n.equals("isRoot") || n.equals("isEmpty");
     }
 
     // JsonNodeMarshallingTesting...........................................................................................

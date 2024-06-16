@@ -10,8 +10,8 @@ import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
+import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Text;
-import walkingkooka.tree.text.TextHyperlinkNode;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
 import walkingkooka.tree.text.TextStyleNameNode;
@@ -101,13 +101,13 @@ public class TestGwtTest extends GWTTestCase {
             }
 
             @Override
-            protected Visiting startVisit(final TextHyperlinkNode node) {
+            protected Visiting startVisit(final Hyperlink node) {
                 this.beginElement("A href=\"" + node.url() + "\"");
                 return Visiting.CONTINUE;
             }
 
             @Override
-            protected void endVisit(final TextHyperlinkNode node) {
+            protected void endVisit(final Hyperlink node) {
                 this.endElement("A");
             }
 
