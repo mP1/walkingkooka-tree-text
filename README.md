@@ -11,7 +11,7 @@ A [walkingkooka/tree.Node](https://github.com/mP1/walkingkooka/blob/master/Node.
 
 ## Java sample
 
-```java
+```text
 final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
         .appendChild(
                 TextNode.styleName(
@@ -25,9 +25,13 @@ final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
                 )
         ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
                 .appendChild(
-                        TextNode.hyperLink(
+                        TextNode.hyperlink(
                                 Url.parseAbsolute("https://example.com/hello")
                         ).appendChild(TextNode.text("hyper link text 123"))
+                ).appendChild(
+                        TextNode.image(
+                                Url.parse("https://example.com/image.png")
+                        )
                 ).appendChild(TextNode.text("before"))
                 .appendChild(TextNode.text("something gray")
                         .setAttributes(
@@ -100,6 +104,11 @@ new FakeTextNodeVisitor() {
     }
 
     @Override
+    protected void visit(final Image node) {
+        printer.print(node.toHtml());
+    }
+
+    @Override
     protected void visit(final Text node) {
         printer.print(node.value());
     }
@@ -122,20 +131,20 @@ prints
 
 ```text
 <HTML>
- <head>
-   <TITLE>
-     title123
-   </TITLE>
- </head>
- <BODY>
-   <A href="https://example.com/hello">
-     hyper link text 123
-   </A>
-   before
-   <SPAN style="color: #667788;">
-     something gray
-   </SPAN>
-   after
- </BODY>
+  <head>
+    <TITLE>
+      title123
+    </TITLE>
+  </head>
+  <BODY>
+    <A href="https://example.com/hello">
+      hyper link text 123
+    </A>
+    <IMG src="https://example.com/image.png"/>before
+    <SPAN style="color: #667788;">
+      something gray
+    </SPAN>
+    after
+  </BODY>
 </HTML>
 ```

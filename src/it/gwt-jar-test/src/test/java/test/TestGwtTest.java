@@ -51,6 +51,10 @@ public class TestGwtTest extends GWTTestCase {
                                 TextNode.hyperlink(
                                         Url.parseAbsolute("https://example.com/hello")
                                 ).appendChild(TextNode.text("hyper link text 123"))
+                        ).appendChild(
+                                TextNode.image(
+                                        Url.parse("https://example.com/image.png")
+                                )
                         ).appendChild(TextNode.text("before"))
                         .appendChild(TextNode.text("something gray")
                                 .setAttributes(
@@ -123,6 +127,11 @@ public class TestGwtTest extends GWTTestCase {
             }
 
             @Override
+            protected void visit(final Image node) {
+                printer.print(node.toHtml());
+            }
+
+            @Override
             protected void visit(final Text node) {
                 printer.print(node.value());
             }
@@ -151,7 +160,7 @@ public class TestGwtTest extends GWTTestCase {
                         "    <A href=\"https://example.com/hello\">\n" +
                         "      hyper link text 123\n" +
                         "    </A>\n" +
-                        "    before\n" +
+                        "    <IMG src=\"https://example.com/image.png\"/>before\n" +
                         "    <SPAN style=\"color: #667788;\">\n" +
                         "      something gray\n" +
                         "    </SPAN>\n" +
