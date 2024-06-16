@@ -19,15 +19,17 @@ package test;
 import com.google.j2cl.junit.apt.J2clTestInput;
 import org.junit.Assert;
 import org.junit.Test;
+
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.net.Url;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
-import walkingkooka.tree.text.HyperLink;
 import walkingkooka.tree.text.Text;
+import walkingkooka.tree.text.TextHyperlinkNode;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
 import walkingkooka.tree.text.TextStyleNameNode;
@@ -106,13 +108,13 @@ public class JunitTest {
             }
 
             @Override
-            protected Visiting startVisit(final HyperLink node) {
+            protected Visiting startVisit(final TextHyperlinkNode node) {
                 this.beginElement("A href=\"" + node.url() + "\"");
                 return Visiting.CONTINUE;
             }
 
             @Override
-            protected void endVisit(final HyperLink node) {
+            protected void endVisit(final TextHyperlinkNode node) {
                 this.endElement("A");
             }
 
@@ -162,7 +164,7 @@ public class JunitTest {
                         "    </SPAN>\n" +
                         "    after\n" +
                         "  </BODY>\n" +
-                        "</HTML>",
+                        "</HTML>\n",
                 html.toString()
         );
     }

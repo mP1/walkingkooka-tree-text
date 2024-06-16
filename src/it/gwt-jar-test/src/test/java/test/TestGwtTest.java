@@ -4,21 +4,22 @@ import com.google.gwt.junit.client.GWTTestCase;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.j2cl.locale.LocaleAware;
+import walkingkooka.net.Url;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
-import walkingkooka.tree.text.HyperLink;
 import walkingkooka.tree.text.Text;
+import walkingkooka.tree.text.TextHyperlinkNode;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
 import walkingkooka.tree.text.TextStyleNameNode;
 import walkingkooka.tree.text.TextStyleNode;
 import walkingkooka.tree.text.TextStylePropertyName;
 import walkingkooka.visit.Visiting;
-@LocaleAware
+
+@walkingkooka.j2cl.locale.LocaleAware
 public class TestGwtTest extends GWTTestCase {
 
     @Override
@@ -100,13 +101,13 @@ public class TestGwtTest extends GWTTestCase {
             }
 
             @Override
-            protected Visiting startVisit(final HyperLink node) {
+            protected Visiting startVisit(final TextHyperlinkNode node) {
                 this.beginElement("A href=\"" + node.url() + "\"");
                 return Visiting.CONTINUE;
             }
 
             @Override
-            protected void endVisit(final HyperLink node) {
+            protected void endVisit(final TextHyperlinkNode node) {
                 this.endElement("A");
             }
 
@@ -156,7 +157,7 @@ public class TestGwtTest extends GWTTestCase {
                         "    </SPAN>\n" +
                         "    after\n" +
                         "  </BODY>\n" +
-                        "</HTML>",
+                        "</HTML>\n",
                 html.toString()
         );
     }
