@@ -61,16 +61,4 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
     public JavaVisibility typeVisibility() {
         return JavaVisibility.PUBLIC;
     }
-
-    // TypeNameTesting...................................................................................................
-
-    @Override
-    public String typeNamePrefix() {
-        return "TextNode";
-    }
-
-    @Override
-    public String typeNameSuffix() {
-        return "";
-    }
 }

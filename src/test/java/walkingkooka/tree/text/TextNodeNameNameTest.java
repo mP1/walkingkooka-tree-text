@@ -18,27 +18,17 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.naming.Name;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class TextNodeNameNameTest extends TextNodeTestCase<TextNodeNameName<?>> {
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
-
-    @Override
-    public String typeNamePrefix() {
-        return TextNode.class.getSimpleName();
-    }
-
-    @Override
-    public String typeNameSuffix() {
-        return Name.class.getSimpleName();
-    }
 
     @Override
     public Class<TextNodeNameName<?>> type() {
         return Cast.to(TextNodeNameName.class);
+    }
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

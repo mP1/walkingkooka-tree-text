@@ -37,11 +37,11 @@ import java.util.Objects;
 /**
  * Represents a hyperlink with children.
  */
-public final class TextHyperlinkNode extends TextParentNode {
+public final class Hyperlink extends TextParentNode {
 
-    public final static TextNodeName NAME = TextNodeName.fromClass(TextHyperlinkNode.class);
+    public final static TextNodeName NAME = TextNodeName.fromClass(Hyperlink.class);
 
-    static TextHyperlinkNode with(final Url url) {
+    static Hyperlink with(final Url url) {
         return with(
                 url,
                 NO_CHILDREN
@@ -49,11 +49,11 @@ public final class TextHyperlinkNode extends TextParentNode {
     }
 
     // @VisibleForTesting
-    static TextHyperlinkNode with(final Url url,
-                                  final List<TextNode> children) {
+    static Hyperlink with(final Url url,
+                          final List<TextNode> children) {
         Objects.requireNonNull(url, "url");
 
-        return new TextHyperlinkNode(
+        return new Hyperlink(
                 NO_INDEX,
                 children,
                 url
@@ -63,9 +63,9 @@ public final class TextHyperlinkNode extends TextParentNode {
     /**
      * Private ctor
      */
-    private TextHyperlinkNode(final int index,
-                              final List<TextNode> children,
-                              final Url url) {
+    private Hyperlink(final int index,
+                      final List<TextNode> children,
+                      final Url url) {
         super(index, children);
         this.url = url;
     }
@@ -76,10 +76,10 @@ public final class TextHyperlinkNode extends TextParentNode {
     }
 
     /**
-     * Returns a {@link TextHyperlinkNode} with no parent but equivalent children.
+     * Returns a {@link Hyperlink} with no parent but equivalent children.
      */
     @Override
-    public TextHyperlinkNode removeParent() {
+    public Hyperlink removeParent() {
         return this.removeParent0().cast();
     }
 
@@ -97,7 +97,7 @@ public final class TextHyperlinkNode extends TextParentNode {
     /**
      * Would be setter that returns a new instance if the given {@link Url} is different.
      */
-    private TextHyperlinkNode setUrl(final Url url) {
+    private Hyperlink setUrl(final Url url) {
         Objects.requireNonNull(url, "url");
 
         return this.url.equals(url) ?
@@ -106,10 +106,10 @@ public final class TextHyperlinkNode extends TextParentNode {
     }
 
     /**
-     * Create a new {@link TextHyperlinkNode}.
+     * Create a new {@link Hyperlink}.
      */
-    private TextHyperlinkNode replaceUrl(final Url url) {
-        return new TextHyperlinkNode(
+    private Hyperlink replaceUrl(final Url url) {
+        return new Hyperlink(
                 this.index,
                 this.children,
                 url
@@ -124,7 +124,7 @@ public final class TextHyperlinkNode extends TextParentNode {
      * Would be setter that returns an array instance with the provided children, creating a new instance if necessary.
      */
     @Override
-    public TextHyperlinkNode setChildren(final List<TextNode> children) {
+    public Hyperlink setChildren(final List<TextNode> children) {
         Objects.requireNonNull(children, "children");
 
         return this.setChildren0(children)
@@ -132,14 +132,14 @@ public final class TextHyperlinkNode extends TextParentNode {
     }
 
     @Override
-    public TextHyperlinkNode appendChild(final TextNode child) {
+    public Hyperlink appendChild(final TextNode child) {
         return super.appendChild(child)
                 .cast();
     }
 
     @Override
-    public TextHyperlinkNode replaceChild(final TextNode oldChild,
-                                          final TextNode newChild) {
+    public Hyperlink replaceChild(final TextNode oldChild,
+                                  final TextNode newChild) {
         return super.replaceChild(
                 oldChild,
                 newChild
@@ -147,7 +147,7 @@ public final class TextHyperlinkNode extends TextParentNode {
     }
 
     @Override
-    public TextHyperlinkNode removeChild(final int child) {
+    public Hyperlink removeChild(final int child) {
         return super.removeChild(child)
                 .cast();
     }
@@ -155,9 +155,9 @@ public final class TextHyperlinkNode extends TextParentNode {
     // replace..........................................................................................................
 
     @Override
-    TextHyperlinkNode replace0(final int index,
-                               final List<TextNode> children) {
-        return new TextHyperlinkNode(
+    Hyperlink replace0(final int index,
+                       final List<TextNode> children) {
+        return new Hyperlink(
                 index,
                 children,
                 this.url
@@ -241,7 +241,7 @@ public final class TextHyperlinkNode extends TextParentNode {
 
     @Override
     String printTreeTypeName() {
-        return TextHyperlinkNode.class.getSimpleName();
+        return Hyperlink.class.getSimpleName();
     }
 
     @Override
@@ -257,15 +257,15 @@ public final class TextHyperlinkNode extends TextParentNode {
 
     @Override
     boolean canBeEqual(final Object other) {
-        return other instanceof TextHyperlinkNode;
+        return other instanceof Hyperlink;
     }
 
     @Override //
     boolean equals0(final TextNode other) {
-        return this.equals1((TextHyperlinkNode) other);
+        return this.equals1((Hyperlink) other);
     }
 
-    private boolean equals1(final TextHyperlinkNode other) {
+    private boolean equals1(final Hyperlink other) {
         return this.url.equals(other.url) &&
                 this.children.equals(other.children);
     }
@@ -280,8 +280,8 @@ public final class TextHyperlinkNode extends TextParentNode {
 
     // json.............................................................................................................
 
-    static TextHyperlinkNode unmarshallHyperLink(final JsonNode node,
-                                                 final JsonNodeUnmarshallContext context) {
+    static Hyperlink unmarshallHyperLink(final JsonNode node,
+                                         final JsonNodeUnmarshallContext context) {
         Url url = null;
         List<TextNode> children = NO_CHILDREN;
 

@@ -78,13 +78,13 @@ new FakeTextNodeVisitor() {
     }
 
     @Override
-    protected Visiting startVisit(final TextHyperlinkNode node) {
+    protected Visiting startVisit(final Hyperlink node) {
         this.beginElement("A href=\"" + node.url() + "\"");
         return Visiting.CONTINUE;
     }
 
     @Override
-    protected void endVisit(final TextHyperlinkNode node) {
+    protected void endVisit(final Hyperlink node) {
         this.endElement("A");
     }
 
