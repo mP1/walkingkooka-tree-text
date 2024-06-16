@@ -19,12 +19,14 @@ package walkingkooka.tree.text.sample;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.net.Url;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
 import walkingkooka.tree.text.Text;
+import walkingkooka.tree.text.TextHyperlinkNode;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
 import walkingkooka.tree.text.TextStyleNameNode;
@@ -35,11 +37,30 @@ import walkingkooka.visit.Visiting;
 public final class Sample {
     public static void main(final String[] args) {
         final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
-                .appendChild(TextNode.styleName(TextStyleName.with("head")).appendChild(TextNode.styleName(TextStyleName.with("TITLE")).appendChild(TextNode.text("title123"))))
-                .appendChild(TextNode.styleName(TextStyleName.with("BODY"))
-                        .appendChild(TextNode.text("before"))
-                        .appendChild(TextNode.text("something gray").setAttributes(Maps.of(TextStylePropertyName.COLOR, Color.parse("#678"))))
-                        .appendChild(TextNode.text("after"))
+                .appendChild(
+                        TextNode.styleName(
+                                TextStyleName.with("head")
+                        ).appendChild(
+                                TextNode.styleName(
+                                        TextStyleName.with("TITLE")
+                                ).appendChild(
+                                        TextNode.text("title123")
+                                )
+                        )
+                ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
+                        .appendChild(
+                                TextNode.hyperLink(
+                                        Url.parseAbsolute("https://example.com/hello")
+                                ).appendChild(TextNode.text("hyper link text 123"))
+                        ).appendChild(TextNode.text("before"))
+                        .appendChild(TextNode.text("something gray")
+                                .setAttributes(
+                                        Maps.of(
+                                                TextStylePropertyName.COLOR,
+                                                Color.parse("#678")
+                                        )
+                                )
+                        ).appendChild(TextNode.text("after"))
                 );
 
         final StringBuilder html = new StringBuilder();
@@ -48,7 +69,7 @@ public final class Sample {
                 .indenting(Indentation.SPACES2);
 
         // very simple html printer
-        new FakeTextNodeVisitor(){
+        new FakeTextNodeVisitor() {
             @Override
             protected Visiting startVisit(final TextNode node) {
                 return Visiting.CONTINUE;
@@ -81,6 +102,17 @@ public final class Sample {
             }
 
             @Override
+            protected Visiting startVisit(final TextHyperlinkNode node) {
+                this.beginElement("A href=\"" + node.url() + "\"");
+                return Visiting.CONTINUE;
+            }
+
+            @Override
+            protected void endVisit(final TextHyperlinkNode node) {
+                this.endElement("A");
+            }
+
+            @Override
             protected Visiting startVisit(final TextStyleNameNode node) {
                 this.beginElement(node.styleName().value());
                 return Visiting.CONTINUE;
@@ -109,22 +141,23 @@ public final class Sample {
             }
         }.accept(node);
 
-        // <pre>
-        // <HTML>
-        //   <head>
-        //     <TITLE>
-        //       title123
-        //     </TITLE>
-        //   </head>
-        //   <BODY>
-        //     before
-        //     <SPAN style="color: #667788;">
-        //       something gray
-        //     </SPAN>
-        //     after
-        //   </BODY>
-        // </HTML>
-        // </pre>
+        // TML>
+        //  <head>
+        //    <TITLE>
+        //      title123
+        //    </TITLE>
+        //  </head>
+        //  <BODY>
+        //    <A href="https://example.com/hello">
+        //      hyper link text 123
+        //    </A>
+        //    before
+        //    <SPAN style="color: #667788;">
+        //      something gray
+        //    </SPAN>
+        //    after
+        //  </BODY>
+        //</HTML>
         System.out.println(html);
     }
 }

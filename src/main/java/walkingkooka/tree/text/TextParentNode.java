@@ -219,7 +219,8 @@ abstract class TextParentNode extends TextNode {
 
     // UsesToStringBuilder..............................................................................................
 
-    @Override final void buildToString0(final ToStringBuilder b) {
+    @Override //
+    final void buildToString0(final ToStringBuilder b) {
         this.buildToStringBefore(b);
 
         b.surroundValues("[", "]");
