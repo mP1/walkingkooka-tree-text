@@ -83,7 +83,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     }
 
     @Test
-    public void testDifferentValue() {
+    public void testEqualsDifferentValue() {
         this.checkNotEquals(Text.with("ABC123"));
     }
 

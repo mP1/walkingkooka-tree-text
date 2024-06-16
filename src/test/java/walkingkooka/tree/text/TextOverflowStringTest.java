@@ -72,12 +72,12 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
     }
 
     @Test
-    public void testDifferentEllipsis() {
+    public void testEqualsDifferentEllipsis() {
         this.checkNotEquals(TextOverflowString.with("abc123"), TextOverflow.ELLIPSIS);
     }
 
     @Test
-    public void testDifferentString() {
+    public void testEqualsDifferentString() {
         this.checkNotEquals(TextOverflowString.with("abc123"), TextOverflowString.with("different"));
     }
 

@@ -86,7 +86,7 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     // equals ..........................................................................................................
 
     @Test
-    public void testDifferentValue() {
+    public void testEqualsDifferentValue() {
         this.checkNotEquals(TextPlaceholderNode.with(TextPlaceholderName.with("different-place")));
     }
 

@@ -91,7 +91,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     }
 
     @Test
-    public void testDifferentValue() {
+    public void testEqualsDifferentValue() {
         this.checkNotEquals(PixelLength.with(99));
     }
 
