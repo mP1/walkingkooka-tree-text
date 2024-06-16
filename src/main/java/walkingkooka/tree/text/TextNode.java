@@ -23,6 +23,7 @@ import walkingkooka.ToStringBuilderOption;
 import walkingkooka.UsesToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.net.Url;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -66,6 +67,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final static Text EMPTY_TEXT = text("");
 
     // public factory methods..........................................................................................
+
+    /**
+     * {@see Text}
+     */
+    public static TextHyperlinkNode hyperLink(final Url url) {
+        return TextHyperlinkNode.with(url);
+    }
 
     /**
      * {@see TextPlaceholderNode}
@@ -202,6 +210,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // is...............................................................................................................
 
     /**
+     * Only {@link TextHyperlinkNode} returns true
+     */
+    public final boolean isHyperlink() {
+        return this instanceof TextHyperlinkNode;
+    }
+
+    /**
      * Only {@link TextPlaceholderNode} returns true
      */
     public final boolean isPlaceholder() {
@@ -328,6 +343,11 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // JsonNode.........................................................................................................
 
     static {
+        JsonNodeContext.register("hyperlink",
+                TextHyperlinkNode::unmarshallHyperLink,
+                TextHyperlinkNode::marshall,
+                TextHyperlinkNode.class);
+
         JsonNodeContext.register("text",
                 Text::unmarshallText,
                 Text::marshall,
