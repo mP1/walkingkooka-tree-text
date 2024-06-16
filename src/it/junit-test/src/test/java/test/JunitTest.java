@@ -29,6 +29,7 @@ import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.text.FakeTextNodeVisitor;
 import walkingkooka.tree.text.Hyperlink;
+import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyleName;
