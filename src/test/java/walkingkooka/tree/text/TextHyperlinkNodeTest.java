@@ -325,10 +325,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
         this.marshallAndCheck(
                 TextHyperlinkNode.with(URL),
                 "{\n" +
-                        "  \"url\": {\n" +
-                        "    \"type\": \"url\",\n" +
-                        "    \"value\": \"https://example.com/Hello123\"\n" +
-                        "  }\n" +
+                        "  \"url\": \"https://example.com/Hello123\"\n" +
                         "}"
         );
     }
@@ -344,10 +341,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
                                 )
                         ),
                 "{\n" +
-                        "  \"url\": {\n" +
-                        "    \"type\": \"url\",\n" +
-                        "    \"value\": \"https://example.com/Hello123\"\n" +
-                        "  },\n" +
+                        "  \"url\": \"https://example.com/Hello123\",\n" +
                         "  \"children\": [\n" +
                         "    {\n" +
                         "      \"type\": \"text\",\n" +
@@ -366,10 +360,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     public void testUnmarshall() {
         this.unmarshallAndCheck(
                 "{\n" +
-                        "  \"url\": {\n" +
-                        "    \"type\": \"url\",\n" +
-                        "    \"value\": \"https://example.com/Hello123\"\n" +
-                        "  }\n" +
+                        "  \"url\": \"https://example.com/Hello123\"\n" +
                         "}",
                 TextHyperlinkNode.with(URL)
         );
@@ -379,10 +370,7 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     public void testUnmarshallWithChildren() {
         this.unmarshallAndCheck(
                 "{\n" +
-                        "  \"url\": {\n" +
-                        "    \"type\": \"url\",\n" +
-                        "    \"value\": \"https://example.com/Hello123\"\n" +
-                        "  },\n" +
+                        "  \"url\": \"https://example.com/Hello123\",\n" +
                         "  \"children\": [\n" +
                         "    {\n" +
                         "      \"type\": \"text\",\n" +
@@ -405,9 +393,29 @@ public final class TextHyperlinkNodeTest extends TextParentNodeTestCase<TextHype
     }
 
     @Test
-    public void testJsonRoundtrip() {
+    public void testJsonRoundtripAbsoluteUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                TextHyperlinkNode.with(URL)
+                TextHyperlinkNode.with(
+                        Url.parse("https://example.com/123")
+                )
+        );
+    }
+
+    @Test
+    public void testJsonRoundtripRelativeUrl() {
+        this.marshallRoundTripTwiceAndCheck(
+                TextHyperlinkNode.with(
+                        Url.parse("/123/page.html")
+                )
+        );
+    }
+
+    @Test
+    public void testJsonRoundtripDataUrl() {
+        this.marshallRoundTripTwiceAndCheck(
+                TextHyperlinkNode.with(
+                        Url.parse("data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==")
+                )
         );
     }
 

@@ -288,8 +288,9 @@ public final class TextHyperlinkNode extends TextParentNode {
         for (JsonNode child : node.children()) {
             switch (child.name().value()) {
                 case URL:
-                    url = context.unmarshallWithType(
-                            child
+                    url = context.unmarshall(
+                            child,
+                            Url.class
                     );
                     break;
                 case CHILDREN:
@@ -313,7 +314,7 @@ public final class TextHyperlinkNode extends TextParentNode {
         JsonObject json = JsonNode.object()
                 .set(
                         URL_PROPERTY,
-                        context.marshallWithType(this.url)
+                        context.marshall(this.url)
                 );
         return this.addChildrenValuesJson(
                 json,
