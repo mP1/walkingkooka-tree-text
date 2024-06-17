@@ -178,14 +178,14 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     // equals...........................................................................................................
 
     @Test
-    public final void testDifferentDirection() {
+    public final void testEqualsDifferentDirection() {
         final TextStyle textStyle = this.textStyle();
         this.checkNotEquals(this.createBorderMarginPadding(BoxEdge.LEFT, textStyle),
                 this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
     }
 
     @Test
-    public final void testDifferentTextStyle() {
+    public final void testEqualsDifferentTextStyle() {
         final BoxEdge edge = BoxEdge.RIGHT;
         this.checkNotEquals(this.createBorderMarginPadding(edge, TextStyle.EMPTY),
                 this.createBorderMarginPadding(edge, this.textStyle()));

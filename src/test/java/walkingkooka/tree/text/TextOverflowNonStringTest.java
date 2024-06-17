@@ -76,7 +76,7 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
     }
 
     @Test
-    public void testDifferent() {
+    public void testEqualsDifferent() {
         this.checkNotEquals(TextOverflow.CLIP, TextOverflow.ELLIPSIS);
     }
 

@@ -67,7 +67,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
     }
 
     @Test
-    public void testDifferentValue() {
+    public void testEqualsDifferentValue() {
         this.checkNotEquals(NumberLength.with(99L));
     }
 

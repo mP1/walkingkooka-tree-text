@@ -121,12 +121,12 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     // Object...........................................................................................................
 
     @Test
-    public void testDifferent() {
+    public void testEqualsDifferent() {
         this.checkNotEquals(FontSize.with(99));
     }
 
     @Test
-    public void testDifferentNonConstants() {
+    public void testEqualsDifferentNonConstants() {
         this.checkNotEquals(FontSize.with(999), FontSize.with(888));
     }
 
