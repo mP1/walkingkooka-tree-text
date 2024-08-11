@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
-        CanBeEmptyTesting<TextStyle>,
+        CanBeEmptyTesting,
         HashCodeEqualsDefinedTesting2<TextStyle>,
         JsonNodeMarshallingTesting<TextStyle>,
         ToStringTesting<TextStyle>,
@@ -55,7 +55,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testIsEmpty() {
-        final TextStyle textStyle = this.createCanBeEmpty();
+        final TextStyle textStyle = this.createObject();
 
         this.isEmptyAndCheck(
                 textStyle,
@@ -416,13 +416,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Override
     public final TextStyle createJsonNodeMarshallingValue() {
-        return this.createObject();
-    }
-
-    // CanBeEmptyTesting................................................................................................
-
-    @Override
-    public final TextStyle createCanBeEmpty() {
         return this.createObject();
     }
 }
