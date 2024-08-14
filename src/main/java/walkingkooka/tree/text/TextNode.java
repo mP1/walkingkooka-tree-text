@@ -29,7 +29,7 @@ import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
-import walkingkooka.tree.expression.FunctionExpressionName;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -340,11 +340,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Creates a {@link NodeSelector} for {@link TextNode} from a {@link NodeSelectorExpressionParserToken}.
      */
     public static NodeSelector<TextNode, TextNodeName, TextStylePropertyName<?>, Object> nodeSelectorExpressionParserToken(final NodeSelectorExpressionParserToken token,
-                                                                                                                           final Predicate<FunctionExpressionName> functions) {
-        return NodeSelector.parserToken(token,
+                                                                                                                           final Predicate<ExpressionFunctionName> functions) {
+        return NodeSelector.parserToken(
+                token,
                 n -> TextNodeName.with(n.value()),
                 functions,
-                TextNode.class);
+                TextNode.class
+        );
     }
 
     // JsonNode.........................................................................................................
