@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
+import walkingkooka.compare.CompareResult;
 import walkingkooka.naming.HasName;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -31,7 +32,8 @@ import java.util.Optional;
  */
 public final class TextStyleProperty<T> implements HasName<TextStylePropertyName<T>>,
         Value<Optional<T>>,
-        TreePrintable {
+        TreePrintable,
+        Comparable<TextStyleProperty<T>> {
 
     public static <T> TextStyleProperty<T> with(final TextStylePropertyName<T> name,
                                                 final Optional<T> value) {
@@ -118,5 +120,24 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
                 printer.outdent();
             }
         }
+    }
+
+    // Comparable.......................................................................................................
+
+    @Override
+    public int compareTo(final TextStyleProperty<T> other) {
+        int compare = this.name.compareTo(other.name);
+
+        if (CompareResult.EQ.test(compare)) {
+            // safest to compare values as Strings...
+            final String leftValue = this.value.map(Object::toString)
+                    .orElse("");
+            final String rightValue = other.value.map(Object::toString)
+                    .orElse("");
+
+            compare = leftValue.compareTo(rightValue);
+        }
+
+        return compare;
     }
 }
