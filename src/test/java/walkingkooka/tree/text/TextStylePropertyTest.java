@@ -145,7 +145,18 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
                                 TextAlign.CENTER
                         )
                 ),
-                "text-align=CENTER"
+                "text-align: CENTER"
+        );
+    }
+
+    @Test
+    public void testToStringEmptyValue() {
+        this.toStringAndCheck(
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.empty()
+                ),
+                "text-align"
         );
     }
 
