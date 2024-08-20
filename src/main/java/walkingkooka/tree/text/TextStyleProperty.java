@@ -18,8 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.ToStringBuilder;
-import walkingkooka.UsesToStringBuilder;
 import walkingkooka.Value;
 import walkingkooka.naming.HasName;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -33,8 +31,7 @@ import java.util.Optional;
  */
 public final class TextStyleProperty<T> implements HasName<TextStylePropertyName<T>>,
         Value<Optional<T>>,
-        TreePrintable,
-        UsesToStringBuilder {
+        TreePrintable {
 
     public static <T> TextStyleProperty<T> with(final TextStylePropertyName<T> name,
                                                 final Optional<T> value) {
@@ -88,15 +85,16 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
 
     @Override
     public String toString() {
-        return ToStringBuilder.buildFrom(this);
-    }
+        final StringBuilder b = new StringBuilder();
+        b.append(this.name);
 
-    // UsesToStringBuilder.............................................................................................
+        final Object value = this.value.orElse(null);
+        if(null != value) {
+            b.append(": ");
+            b.append(value);
+        }
 
-    @Override
-    public void buildToString(final ToStringBuilder builder) {
-        builder.label(this.name.value())
-                .value(this.value);
+        return b.toString();
     }
 
     // TreePrintable....................................................................................................
