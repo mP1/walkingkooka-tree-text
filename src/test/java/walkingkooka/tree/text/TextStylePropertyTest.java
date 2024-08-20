@@ -21,12 +21,16 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
+import walkingkooka.compare.ComparableTesting;
 import walkingkooka.naming.HasNameTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,7 +39,9 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
         HashCodeEqualsDefinedTesting2<TextStyleProperty<TextAlign>>,
         HasNameTesting<TextStylePropertyName<TextAlign>>,
         ToStringTesting<TextStyleProperty<TextAlign>>,
-        TreePrintableTesting {
+        TreePrintableTesting,
+        ComparableTesting {
+
     // with.............................................................................................................
 
     @Test
@@ -83,6 +89,148 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
                 value,
                 property.value(),
                 "value"
+        );
+    }
+
+    // comparable.......................................................................................................
+
+    @Test
+    public void testCompareSame() {
+        this.compareToAndCheckEquals(
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.CENTER
+                        )
+                ),
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.CENTER
+                        )
+                )
+        );
+    }
+
+    @Test
+    public void testCompareSameEmptyValue() {
+        this.compareToAndCheckEquals(
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.empty()
+                ),
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.empty()
+                )
+        );
+    }
+
+    @Test
+    public void testCompareDifferentNames() {
+        this.compareToAndCheckLess(
+                Cast.to(
+                    TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.CENTER
+                        )
+                    )
+                ),
+                TextStyleProperty.with(
+                        TextStylePropertyName.VERTICAL_ALIGN,
+                        Optional.of(
+                                VerticalAlign.TOP
+                        )
+                )
+        );
+    }
+
+    @Test
+    public void testCompareDifferentValue() {
+        this.compareToAndCheckLess(
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.CENTER
+                        )
+                ),
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.RIGHT
+                        )
+                )
+        );
+    }
+
+    @Test
+    public void testCompareDifferentValueEmptyVNotEmpty() {
+        this.compareToAndCheckLess(
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.empty()
+                ),
+                TextStyleProperty.with(
+                        TextStylePropertyName.TEXT_ALIGN,
+                        Optional.of(
+                                TextAlign.RIGHT
+                        )
+                )
+        );
+    }
+
+    @Test
+    public void testCompareSortArray() {
+        final TextStyleProperty<Color> color = TextStyleProperty.with(
+                TextStylePropertyName.COLOR,
+                Optional.of(
+                        Color.BLACK
+                )
+        );
+
+        final TextStyleProperty<TextAlign> textAlign = TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+        );
+
+        final TextStyleProperty<TextAlign> textAlignCenter = TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                        TextAlign.CENTER
+                )
+        );
+
+        final TextStyleProperty<TextAlign> textAlignRight = TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                        TextAlign.RIGHT
+                )
+        );
+
+        final TextStyleProperty<VerticalAlign> verticalAlign = TextStyleProperty.with(
+                TextStylePropertyName.VERTICAL_ALIGN,
+                Optional.empty()
+        );
+
+        final List list = Lists.array();
+        list.add(color);
+        list.add(textAlign);
+        list.add(textAlignCenter);
+        list.add(textAlignRight);
+        list.add(verticalAlign);
+
+        list.sort(Comparator.naturalOrder());
+
+        this.checkEquals(
+                Lists.of(
+                        color,
+                        textAlign,
+                        textAlignCenter,
+                        textAlignRight,
+                        verticalAlign
+                ),
+                list
         );
     }
 
