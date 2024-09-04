@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.collect.set.SetTesting2;
+import walkingkooka.collect.set.ImmutableSetTesting;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
+public final class TextNodeMapEntrySetTest implements ImmutableSetTesting<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
         IteratorTesting {
 
     @Test
@@ -95,6 +95,20 @@ public final class TextNodeMapEntrySetTest implements SetTesting2<TextNodeMapEnt
     private Object value2() {
         return FontFamily.with("Times News Roman");
     }
+
+    // ImmutableSetTesting..............................................................................................
+
+    @Override
+    public void testSetElementsNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetElementsSame() {
+        throw new UnsupportedOperationException();
+    }
+
+    // Class............................................................................................................
 
     @Override
     public Class<TextNodeMapEntrySet> type() {

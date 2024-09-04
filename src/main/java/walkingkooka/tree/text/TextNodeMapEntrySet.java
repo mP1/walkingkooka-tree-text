@@ -21,7 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.iterator.Iterators;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.ImmutableSetDefaults;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -37,11 +37,7 @@ import java.util.Set;
 /**
  * A read only {@link Set} sorted view of properties that have had their values checked.
  */
-final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> {
-
-    static {
-        Sets.registerImmutableType(TextNodeMapEntrySet.class);
-    }
+final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> implements ImmutableSetDefaults<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>> {
 
     /**
      * An empty {@link TextNodeMap}.
@@ -109,6 +105,18 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     void accept(final TextStyleVisitor visitor) {
         this.entries
                 .forEach(visitor::acceptPropertyAndValue);
+    }
+
+    // ImmutableSetDefaults.............................................................................................
+
+    @Override
+    public TextNodeMapEntrySet setElements(final Set<Entry<TextStylePropertyName<?>, Object>> elements) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<Entry<TextStylePropertyName<?>, Object>> toSet() {
+        throw new UnsupportedOperationException();
     }
 
     // JsonNodeContext..................................................................................................
