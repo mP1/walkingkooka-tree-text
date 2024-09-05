@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
@@ -102,7 +102,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                         .filter(FieldAttributes.STATIC::is)
                         .filter(f -> f.getType() == TextStylePropertyName.class)
                         .map(TextStylePropertyNameTest::getField)
-                        .collect(Collectors.toCollection(Sets::sorted))
+                        .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 
@@ -147,11 +147,11 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                         TextStylePropertyName.values()
                                 .stream()
                                 .filter(n -> n.enumType().isPresent())
-                                .collect(Collectors.toCollection(Sets::sorted)),
+                                .collect(Collectors.toCollection(SortedSets::tree)),
                 TextStylePropertyName.values()
                         .stream()
                         .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
-                        .collect(Collectors.toCollection(Sets::sorted))
+                        .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 
