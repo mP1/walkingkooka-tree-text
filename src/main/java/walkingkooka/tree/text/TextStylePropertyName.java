@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.net.HasUrlFragment;
@@ -62,7 +63,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * Returns all {@link TextStylePropertyName}.
      */
     public static Set<TextStylePropertyName<?>> values() {
-        final Set<TextStylePropertyName<?>> values = Sets.sorted();
+        final Set<TextStylePropertyName<?>> values = SortedSets.tree();
         values.addAll(CONSTANTS.values());
         return Sets.readOnly(values);
     }
