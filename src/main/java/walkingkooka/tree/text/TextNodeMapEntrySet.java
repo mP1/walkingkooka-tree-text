@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -111,6 +112,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
 
     @Override
     public TextNodeMapEntrySet setElements(final Set<Entry<TextStylePropertyName<?>, Object>> elements) {
+        Objects.requireNonNull(elements, "elements");
         throw new UnsupportedOperationException();
     }
 
