@@ -1403,6 +1403,30 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // HasCssText.......................................................................................................
+
+    @Test
+    public void testCssText() {
+        this.hasCssTextAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.COLOR, Color.parse("#123456")
+                ),
+                "color: rgb(18, 52, 86);"
+        );
+    }
+
+    @Test
+    public void testCssTextSeveralProperties() {
+        this.hasCssTextAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.COLOR, Color.parse("#123456")
+                ).set(
+                        TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
+                ),
+                "color: rgb(18, 52, 86); text-align: left;"
+        );
+    }
+
     // TreePrintable....................................................................................................
 
     @Test

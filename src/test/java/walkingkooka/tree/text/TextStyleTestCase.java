@@ -41,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
+        HasCssTextTesting,
         CanBeEmptyTesting,
         HashCodeEqualsDefinedTesting2<TextStyle>,
         JsonNodeMarshallingTesting<TextStyle>,
