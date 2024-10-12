@@ -304,6 +304,7 @@ final class TextStyleEmpty extends TextStyle {
 
     // JsonNodeContext..................................................................................................
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.object();
     }
