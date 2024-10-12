@@ -539,6 +539,7 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Creates a json-object where the properties are strings, and the value without types.
      */
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         final List<JsonNode> json = Lists.array();
 
