@@ -19,7 +19,10 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.naming.Name;
+import walkingkooka.text.CaseKind;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.Printer;
 import walkingkooka.text.printer.Printers;
@@ -144,13 +147,17 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
             final Color color = (Color) value;
             css = color.toCss();
         } else {
-            if (value instanceof HasCssText) {
-                final HasCssText hasCssText = (HasCssText) value;
-                css = hasCssText.cssText();
+            // dont want to handle values such as FontFamily (which implements Name) here.
+            // Name extends HasText
+            if (value instanceof HasText && false == value instanceof Name) {
+                final HasText hasText = (HasText) value;
+                css = hasText.text();
             } else {
                 if (value instanceof Enum) {
-                    css = HasCssText.cssFromEnumName(
-                            (Enum<?>) value
+                    final Enum<?> enumEnum = (Enum<?>) value;
+                    css = CaseKind.SNAKE.change(
+                            enumEnum.name().toLowerCase(),
+                            CaseKind.KEBAB
                     );
                 } else {
                     final String stringValue = value.toString();

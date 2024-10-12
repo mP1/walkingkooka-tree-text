@@ -1403,11 +1403,11 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
-    // HasCssText.......................................................................................................
+    // HasText..........................................................................................................
 
     @Test
-    public void testCssText() {
-        this.hasCssTextAndCheck(
+    public void testText() {
+        this.textAndCheck(
                 TextStyle.EMPTY.set(
                         TextStylePropertyName.COLOR, Color.parse("#123456")
                 ),
@@ -1416,8 +1416,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testCssTextSeveralProperties() {
-        this.hasCssTextAndCheck(
+    public void testTextSeveralProperties() {
+        this.textAndCheck(
                 TextStyle.EMPTY.set(
                         TextStylePropertyName.COLOR, Color.parse("#123456")
                 ).set(

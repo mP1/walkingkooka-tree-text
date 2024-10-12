@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -41,7 +42,7 @@ import java.util.Optional;
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
         Patchable<TextStyle>,
         TreePrintable,
-        HasCssText,
+        HasText,
         CanBeEmpty {
 
     /**
