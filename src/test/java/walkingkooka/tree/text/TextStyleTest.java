@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
-        HasCssTesting,
+        HasCssTextTesting,
         JsonNodeMarshallingTesting<TextStyle>,
         PatchableTesting<TextStyle>,
         ToStringTesting<TextStyle> {
@@ -431,11 +431,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .marshall(value);
     }
 
-    // css..............................................................................................................
+    // cssText..............................................................................................................
 
     @Test
     public void testCssEmpty() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY,
                 ""
         );
@@ -443,7 +443,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssStringValueWithoutSpaces() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_FAMILY,
@@ -455,7 +455,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssStringValueWithSpaces() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_FAMILY,
@@ -467,7 +467,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssBorderBottomStyleEnum() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_BOTTOM_STYLE,
@@ -479,7 +479,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssBorderBottomWidth() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
@@ -491,7 +491,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssColor() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.COLOR,
@@ -503,7 +503,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssFontSize() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_SIZE,
@@ -515,7 +515,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssOverflowWrap() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.OVERFLOW_WRAP,
@@ -527,7 +527,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssText() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.TEXT,
@@ -539,7 +539,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssTextIncludesSpacesRequiresQuotes() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.TEXT,
@@ -551,7 +551,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testCssTextSeveralProperties() {
-        this.hasCssAndCheck(
+        this.hasCssTextAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_TOP_COLOR,
@@ -575,8 +575,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                         "has-no-spaces"
                 );
         assertSame(
-                style.css(),
-                style.css()
+                style.cssText(),
+                style.cssText()
         );
     }
 

@@ -23,15 +23,15 @@ import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class HasCssTestingTest implements HasCssTesting {
+public final class HasCssTextTextTestingTest implements HasCssTextTesting {
 
     @Test
     public void testHasCssAndCheck() {
         final String css = "{ property: value}";
-        this.hasCssAndCheck(
-                new HasCss() {
+        this.hasCssTextAndCheck(
+                new HasCssText() {
                     @Override
-                    public String css() {
+                    public String cssText() {
                         return css;
                     }
                 },
@@ -45,23 +45,23 @@ public final class HasCssTestingTest implements HasCssTesting {
     public void testCssFromEnumNameNullFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> HasCss.cssFromEnumName(null)
+                () -> HasCssText.cssFromEnumName(null)
         );
     }
 
     @Test
     public void testCssFromEnumNameWithHasEnum() {
         this.checkEquals(
-                TestHasCssEnum.FIRST.css(),
-                HasCss.cssFromEnumName(TestHasCssEnum.FIRST)
+                TestHasCssTextEnum.FIRST.cssText(),
+                HasCssText.cssFromEnumName(TestHasCssTextEnum.FIRST)
         );
     }
 
-    enum TestHasCssEnum implements HasCss {
+    enum TestHasCssTextEnum implements HasCssText {
         FIRST;
 
         @Override
-        public String css() {
+        public String cssText() {
             return "ABC123";
         }
 
@@ -71,7 +71,7 @@ public final class HasCssTestingTest implements HasCssTesting {
     public void testCssFromEnum() {
         this.checkEquals(
                 "half-down",
-                HasCss.cssFromEnumName(RoundingMode.HALF_DOWN)
+                HasCssText.cssFromEnumName(RoundingMode.HALF_DOWN)
         );
     }
 }
