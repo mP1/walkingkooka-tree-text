@@ -144,12 +144,12 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
             final Color color = (Color) value;
             css = color.toCss();
         } else {
-            if (value instanceof HasCss) {
-                final HasCss hasCss = (HasCss) value;
-                css = hasCss.css();
+            if (value instanceof HasCssText) {
+                final HasCssText hasCssText = (HasCssText) value;
+                css = hasCssText.cssText();
             } else {
                 if (value instanceof Enum) {
-                    css = HasCss.cssFromEnumName(
+                    css = HasCssText.cssFromEnumName(
                             (Enum<?>) value
                     );
                 } else {

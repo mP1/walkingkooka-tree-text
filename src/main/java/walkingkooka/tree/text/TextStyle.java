@@ -41,7 +41,7 @@ import java.util.Optional;
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
         Patchable<TextStyle>,
         TreePrintable,
-        HasCss,
+        HasCssText,
         CanBeEmpty {
 
     /**

@@ -17,16 +17,28 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.CaseKind;
 
-public interface HasCssTesting extends Testing {
+import java.util.Objects;
 
-    default void hasCssAndCheck(final HasCss has,
-                                final String expected) {
-        this.checkEquals(
-                expected,
-                has.css(),
-                () -> "CSS of " + has
-        );
+/**
+ * Implemented by values that have a CSS representation.
+ */
+public interface HasCssText {
+
+    /**
+     * Converts the name of the enum into a cssText compatible.
+     */
+    static String cssFromEnumName(final Enum<?> value) {
+        Objects.requireNonNull(value, "value");
+
+        return value instanceof HasCssText ?
+                ((HasCssText) value).cssText() :
+                CaseKind.SNAKE.change(
+                        value.name().toLowerCase(),
+                        CaseKind.KEBAB
+                );
     }
+
+    String cssText();
 }

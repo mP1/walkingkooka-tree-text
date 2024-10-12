@@ -466,10 +466,10 @@ final class TextStyleNonEmpty extends TextStyle {
         this.value.accept(visitor);
     }
 
-    // css.............................................................................................................
+    // cssText.............................................................................................................
 
     @Override
-    public String css() {
+    public String cssText() {
         return this.value.css();
     }
 
