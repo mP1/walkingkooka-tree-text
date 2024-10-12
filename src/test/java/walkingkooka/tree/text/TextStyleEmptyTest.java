@@ -429,6 +429,16 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 "visited");
     }
 
+    // HasCssText.......................................................................................................
+
+    @Test
+    public void testCssText() {
+        this.hasCssTextAndCheck(
+                TextStyleEmpty.instance(),
+                ""
+        );
+    }
+
     // TreePrintable....................................................................................................
 
     @Test
