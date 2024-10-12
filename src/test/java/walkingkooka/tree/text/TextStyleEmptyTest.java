@@ -429,11 +429,11 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 "visited");
     }
 
-    // HasCssText.......................................................................................................
+    // HasText.......................................................................................................
 
     @Test
-    public void testCssText() {
-        this.hasCssTextAndCheck(
+    public void testText() {
+        this.textAndCheck(
                 TextStyleEmpty.instance(),
                 ""
         );

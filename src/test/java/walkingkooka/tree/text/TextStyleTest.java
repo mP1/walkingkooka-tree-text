@@ -25,6 +25,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -43,7 +44,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
         HashCodeEqualsDefinedTesting2<TextStyle>,
-        HasCssTextTesting,
+        HasTextTesting,
         JsonNodeMarshallingTesting<TextStyle>,
         PatchableTesting<TextStyle>,
         ToStringTesting<TextStyle> {
@@ -431,19 +432,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .marshall(value);
     }
 
-    // cssText..............................................................................................................
+    // text..............................................................................................................
 
     @Test
-    public void testCssEmpty() {
-        this.hasCssTextAndCheck(
+    public void testTextEmpty() {
+        this.textAndCheck(
                 TextStyle.EMPTY,
                 ""
         );
     }
 
     @Test
-    public void testCssStringValueWithoutSpaces() {
-        this.hasCssTextAndCheck(
+    public void testTextStringValueWithoutSpaces() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_FAMILY,
@@ -454,8 +455,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssStringValueWithSpaces() {
-        this.hasCssTextAndCheck(
+    public void testTextStringValueWithSpaces() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_FAMILY,
@@ -466,8 +467,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssBorderBottomStyleEnum() {
-        this.hasCssTextAndCheck(
+    public void testTextBorderBottomStyleEnum() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_BOTTOM_STYLE,
@@ -478,8 +479,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssBorderBottomWidth() {
-        this.hasCssTextAndCheck(
+    public void testTextBorderBottomWidth() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
@@ -490,8 +491,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssColor() {
-        this.hasCssTextAndCheck(
+    public void testTextColor() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.COLOR,
@@ -502,8 +503,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssFontSize() {
-        this.hasCssTextAndCheck(
+    public void testTextFontSize() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.FONT_SIZE,
@@ -514,8 +515,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssOverflowWrap() {
-        this.hasCssTextAndCheck(
+    public void testTextOverflowWrap() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.OVERFLOW_WRAP,
@@ -526,8 +527,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssText() {
-        this.hasCssTextAndCheck(
+    public void testText() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.TEXT,
@@ -538,8 +539,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssTextIncludesSpacesRequiresQuotes() {
-        this.hasCssTextAndCheck(
+    public void testTextIncludesSpacesRequiresQuotes() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.TEXT,
@@ -550,8 +551,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssTextSeveralProperties() {
-        this.hasCssTextAndCheck(
+    public void testTextSeveralProperties() {
+        this.textAndCheck(
                 TextStyle.EMPTY
                         .set(
                                 TextStylePropertyName.BORDER_TOP_COLOR,
@@ -568,15 +569,15 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testCssCached() {
+    public void testTextCached() {
         final TextStyle style = TextStyle.EMPTY
                 .set(
                         TextStylePropertyName.TEXT,
                         "has-no-spaces"
                 );
         assertSame(
-                style.cssText(),
-                style.cssText()
+                style.text(),
+                style.text()
         );
     }
 

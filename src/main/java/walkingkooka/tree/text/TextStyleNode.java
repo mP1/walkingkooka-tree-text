@@ -161,7 +161,7 @@ public final class TextStyleNode extends TextParentNode {
         }
 
         html.print("<SPAN style=\"");
-        html.print(this.textStyle().cssText());
+        html.print(this.textStyle().text());
         html.print("\">");
 
         this.buildChildNodesHtml(

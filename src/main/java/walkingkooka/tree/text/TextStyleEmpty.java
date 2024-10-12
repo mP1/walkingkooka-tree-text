@@ -247,13 +247,13 @@ final class TextStyleEmpty extends TextStyle {
         // no properties
     }
 
-    // cssText.............................................................................................................
+    // text.............................................................................................................
 
     /**
      * Returns an empty string, no names and values.
      */
     @Override
-    public String cssText() {
+    public String text() {
         return "";
     }
 

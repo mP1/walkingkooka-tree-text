@@ -28,6 +28,7 @@ import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
@@ -41,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
-        HasCssTextTesting,
+        HasTextTesting,
         CanBeEmptyTesting,
         HashCodeEqualsDefinedTesting2<TextStyle>,
         JsonNodeMarshallingTesting<TextStyle>,
