@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
-import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CharSequences;
@@ -143,29 +142,24 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
     private static CharSequence valueToCss(final Object value) {
         final CharSequence css;
 
-        if (value instanceof Color) {
-            final Color color = (Color) value;
-            css = color.toCss();
+        // dont want to handle values such as FontFamily (which implements Name) here.
+        // Name extends HasText
+        if (value instanceof HasText && false == value instanceof Name) {
+            final HasText hasText = (HasText) value;
+            css = hasText.text();
         } else {
-            // dont want to handle values such as FontFamily (which implements Name) here.
-            // Name extends HasText
-            if (value instanceof HasText && false == value instanceof Name) {
-                final HasText hasText = (HasText) value;
-                css = hasText.text();
+            if (value instanceof Enum) {
+                final Enum<?> enumEnum = (Enum<?>) value;
+                css = CaseKind.SNAKE.change(
+                        enumEnum.name().toLowerCase(),
+                        CaseKind.KEBAB
+                );
             } else {
-                if (value instanceof Enum) {
-                    final Enum<?> enumEnum = (Enum<?>) value;
-                    css = CaseKind.SNAKE.change(
-                            enumEnum.name().toLowerCase(),
-                            CaseKind.KEBAB
-                    );
+                final String stringValue = value.toString();
+                if (stringValue.indexOf(' ') >= 0) {
+                    css = CharSequences.quoteAndEscape(stringValue);
                 } else {
-                    final String stringValue = value.toString();
-                    if (stringValue.indexOf(' ') >= 0) {
-                        css = CharSequences.quoteAndEscape(stringValue);
-                    } else {
-                        css = stringValue;
-                    }
+                    css = stringValue;
                 }
             }
         }
