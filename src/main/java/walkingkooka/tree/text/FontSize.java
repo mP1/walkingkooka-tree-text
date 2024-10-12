@@ -80,12 +80,6 @@ public final class FontSize implements Comparable<FontSize>,
 
     private final int value;
 
-    // css..............................................................................................................
-
-    String css() {
-        return this.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     /**
