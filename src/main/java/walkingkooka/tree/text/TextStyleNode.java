@@ -212,7 +212,7 @@ public final class TextStyleNode extends TextParentNode {
 
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object();
-        if (!this.attributes.isEmpty()) {
+        if (this.attributes.isNotEmpty()) {
             json = json.set(STYLES_PROPERTY, this.attributes.toJson(context));
         }
 
@@ -242,7 +242,7 @@ public final class TextStyleNode extends TextParentNode {
     @Override
     void printTreeAttributes(final IndentingPrinter printer) {
         final TextStyle style = this.textStyle();
-        final boolean attributesPresent = !style.isEmpty();
+        final boolean attributesPresent = style.isNotEmpty();
 
         if (attributesPresent) {
             printer.indent();
@@ -273,7 +273,7 @@ public final class TextStyleNode extends TextParentNode {
     @Override
     void buildToStringBefore(final ToStringBuilder b) {
         final Map<TextStylePropertyName<?>, Object> attributes = this.attributes;
-        if(!attributes.isEmpty()) {
+        if(false == attributes.isEmpty()) {
             //b.valueSeparator(", ");
             b.surroundValues("{", "}");
             b.value(attributes);

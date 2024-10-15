@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.CanBeEmpty;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseKind;
@@ -37,7 +38,7 @@ import java.util.Set;
 /**
  * A read only sorted view of attributes or text style to values that appear within a {@link TextStyleNode}.
  */
-final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> {
+final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> implements CanBeEmpty {
 
     static {
         Maps.registerImmutableType(TextNodeMap.class);
