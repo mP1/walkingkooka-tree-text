@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -31,6 +32,13 @@ import java.util.function.Predicate;
  * Base converter that provides support for handling property values.
  */
 abstract class TextStylePropertyValueHandler<T> {
+
+    /**
+     * {@see TextStylePropertyValueHandlerColor}
+     */
+    static TextStylePropertyValueHandler<Color> color() {
+        return TextStylePropertyValueHandlerColor.INSTANCE;
+    }
 
     /**
      * {@see TextStylePropertyValueHandlerEnum}

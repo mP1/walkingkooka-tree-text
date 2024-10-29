@@ -85,10 +85,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<Color> registerColor(final String property,
                                                               final BiConsumer<Color, TextStyleVisitor> visitor) {
-        return registerJsonNodeConstant(property,
-                Color.class,
-                v -> v instanceof Color,
-                visitor);
+        return registerConstant(
+                property,
+                TextStylePropertyValueHandler.color(),
+                visitor
+        );
     }
 
     /**

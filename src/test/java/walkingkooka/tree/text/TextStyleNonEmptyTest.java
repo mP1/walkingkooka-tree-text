@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.color.WebColorName;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -1424,6 +1425,22 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                         TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
                 ),
                 "color: rgb(18, 52, 86); text-align: left;"
+        );
+    }
+
+    @Test
+    public void testTextIncludesWebColorNameColor() {
+        this.textAndCheck(
+                TextStyle.EMPTY.set(
+                        TextStylePropertyName.BACKGROUND_COLOR,
+                        Color.parse("#123456")
+                ).set(
+                        TextStylePropertyName.COLOR,
+                        WebColorName.RED.color()
+                ).set(
+                        TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
+                ),
+                "background-color: rgb(18, 52, 86); color: rgb(255, 0, 0); text-align: left;"
         );
     }
 
