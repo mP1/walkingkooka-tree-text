@@ -108,6 +108,11 @@ public final class TextNodeMapEntrySetTest implements ImmutableSetTesting<TextNo
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void testDeleteIfWithNeverPredicate() {
+        throw new UnsupportedOperationException();
+    }
+
     // Class............................................................................................................
 
     @Override
