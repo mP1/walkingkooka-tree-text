@@ -223,7 +223,7 @@ public final class TextStyleNameNode extends TextParentNode {
         }
 
         if (null == styleName) {
-            JsonNodeUnmarshallContext.requiredPropertyMissing(STYLE_NAME_PROPERTY, node);
+            JsonNodeUnmarshallContext.missingProperty(STYLE_NAME_PROPERTY, node);
         }
 
         return TextStyleNameNode.with(styleName)
