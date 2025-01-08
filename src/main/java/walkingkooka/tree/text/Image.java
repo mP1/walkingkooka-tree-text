@@ -56,8 +56,8 @@ public final class Image extends TextLeafNode<Url> {
     @Override
     Image replace1(final int index, final Url value) {
         return new Image(
-                index,
-                value
+            index,
+            value
         );
     }
 
@@ -114,10 +114,10 @@ public final class Image extends TextLeafNode<Url> {
     static Image unmarshallImage(final JsonNode node,
                                  final JsonNodeUnmarshallContext context) {
         return Image.with(
-                context.unmarshall(
-                        node,
-                        Url.class
-                )
+            context.unmarshall(
+                node,
+                Url.class
+            )
         );
     }
 

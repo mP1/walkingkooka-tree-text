@@ -34,12 +34,12 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTestCase<TextNode>
-        implements NodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
-        JsonNodeMarshallingTesting<TextNode>,
-        HasTextLengthTesting,
-        HasTextOffsetTesting,
-        HasTextTesting,
-        TreePrintableTesting {
+    implements NodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
+    JsonNodeMarshallingTesting<TextNode>,
+    HasTextLengthTesting,
+    HasTextOffsetTesting,
+    HasTextTesting,
+    TreePrintableTesting {
 
     TextNodeTestCase2() {
         super();
@@ -62,9 +62,9 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         this.parentMissingCheck(after);
         this.childCountCheck(after, before);
         this.checkEquals(
-                attributes,
-                after.attributes(),
-                "attributes"
+            attributes,
+            after.attributes(),
+            "attributes"
         );
     }
 
@@ -74,14 +74,14 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     public final void testTextStyle() {
         final N textNode = this.createTextNode();
         this.checkEquals(
-                textNode.attributes(),
-                textNode.textStyle().textStyleMap()
+            textNode.attributes(),
+            textNode.textStyle().textStyleMap()
         );
         this.checkEquals(
-                TextStyle.EMPTY.setValues(
-                        textNode.attributes()
-                ),
-                textNode.textStyle()
+            TextStyle.EMPTY.setValues(
+                textNode.attributes()
+            ),
+            textNode.textStyle()
         );
     }
 
@@ -97,9 +97,9 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     final void toHtmlAndCheck(final TextNode node,
                               final String html) {
         this.checkEquals(
-                html,
-                node.toHtml(),
-                () -> node + " toHtml"
+            html,
+            node.toHtml(),
+            () -> node + " toHtml"
         );
     }
 

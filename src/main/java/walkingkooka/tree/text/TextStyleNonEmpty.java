@@ -79,10 +79,10 @@ final class TextStyleNonEmpty extends TextStyle {
         final Map<TextStylePropertyName<?>, Object> oldValuesMap = this.value();
 
         return oldValuesMap.equals(values) ?
-                this:
-                TextStyleNonEmpty.with(
-                    TextNodeMap.with(values)
-                );
+            this :
+            TextStyleNonEmpty.with(
+                TextNodeMap.with(values)
+            );
     }
 
     final TextNodeMap value;
@@ -105,10 +105,10 @@ final class TextStyleNonEmpty extends TextStyle {
         merged.putAll(before);
 
         return merged.equals(otherBefore) ?
-                this :
-                merged.equals(before) ?
-                        textStyle :
-                        new TextStyleNonEmpty(TextNodeMap.with(merged));
+            this :
+            merged.equals(before) ?
+                textStyle :
+                new TextStyleNonEmpty(TextNodeMap.with(merged));
     }
 
     // replace..........................................................................................................
@@ -205,7 +205,7 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return Optional.ofNullable(
-                Cast.to(get)
+            Cast.to(get)
         );
     }
 
@@ -221,86 +221,86 @@ final class TextStyleNonEmpty extends TextStyle {
                 final Color color = Cast.to(value);
 
                 result = this.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                color
-                        )
+                    Maps.of(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        color,
+                        TextStylePropertyName.BORDER_LEFT_COLOR,
+                        color,
+                        TextStylePropertyName.BORDER_RIGHT_COLOR,
+                        color,
+                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                        color
+                    )
                 );
                 break;
             case BORDER_STYLE:
                 final BorderStyle borderStyle = Cast.to(value);
 
                 result = this.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                borderStyle
-                        )
+                    Maps.of(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        borderStyle,
+                        TextStylePropertyName.BORDER_LEFT_STYLE,
+                        borderStyle,
+                        TextStylePropertyName.BORDER_RIGHT_STYLE,
+                        borderStyle,
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                        borderStyle
+                    )
                 );
                 break;
             case BORDER_WIDTH:
                 final Length<?> borderWidth = Cast.to(value);
 
                 result = this.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                borderWidth,
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                borderWidth,
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                borderWidth,
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                borderWidth
-                        )
+                    Maps.of(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        borderWidth,
+                        TextStylePropertyName.BORDER_LEFT_WIDTH,
+                        borderWidth,
+                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                        borderWidth,
+                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                        borderWidth
+                    )
                 );
                 break;
             case MARGIN:
                 final Length<?> margin = Cast.to(value);
 
                 result = this.setValues(
-                        Maps.of(
-                                TextStylePropertyName.MARGIN_TOP,
-                                margin,
-                                TextStylePropertyName.MARGIN_LEFT,
-                                margin,
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                margin,
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                margin
-                        )
+                    Maps.of(
+                        TextStylePropertyName.MARGIN_TOP,
+                        margin,
+                        TextStylePropertyName.MARGIN_LEFT,
+                        margin,
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        margin,
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        margin
+                    )
                 );
                 break;
             case PADDING:
                 final Length<?> padding = Cast.to(value);
 
                 result = this.setValues(
-                        Maps.of(
-                                TextStylePropertyName.PADDING_TOP,
-                                padding,
-                                TextStylePropertyName.PADDING_LEFT,
-                                padding,
-                                TextStylePropertyName.PADDING_RIGHT,
-                                padding,
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                padding
-                        )
+                    Maps.of(
+                        TextStylePropertyName.PADDING_TOP,
+                        padding,
+                        TextStylePropertyName.PADDING_LEFT,
+                        padding,
+                        TextStylePropertyName.PADDING_RIGHT,
+                        padding,
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        padding
+                    )
                 );
                 break;
             default:
                 result = this.set1(
-                        propertyName,
-                        value
+                    propertyName,
+                    value
                 );
                 break;
         }
@@ -338,12 +338,12 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return 1 == mode ?
-                this :
-                new TextStyleNonEmpty(
-                        TextNodeMap.withTextStyleMapEntrySet(
-                                TextNodeMapEntrySet.withList(list)
-                        )
-                );
+            this :
+            new TextStyleNonEmpty(
+                TextNodeMap.withTextStyleMapEntrySet(
+                    TextNodeMapEntrySet.withList(list)
+                )
+            );
     }
 
     // remove...........................................................................................................
@@ -355,7 +355,7 @@ final class TextStyleNonEmpty extends TextStyle {
 
         Predicate<TextStylePropertyName<?>> removeIf;
 
-        switch(propertyName.name) {
+        switch (propertyName.name) {
             case BORDER_COLOR:
                 removeIf = BORDER_XXX_COLOR;
                 break;
@@ -386,68 +386,68 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return removed ?
-                this.remove1(list) :
-                this;
+            this.remove1(list) :
+            this;
     }
 
     /**
      * Used to remove any of the 4 BORDER_XXX_COLOR properties.
      */
     private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_COLOR = Predicates.setContains(
-            Sets.of(
-                    TextStylePropertyName.BORDER_TOP_COLOR,
-                    TextStylePropertyName.BORDER_LEFT_COLOR,
-                    TextStylePropertyName.BORDER_RIGHT_COLOR,
-                    TextStylePropertyName.BORDER_BOTTOM_COLOR
-            )
+        Sets.of(
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            TextStylePropertyName.BORDER_LEFT_COLOR,
+            TextStylePropertyName.BORDER_RIGHT_COLOR,
+            TextStylePropertyName.BORDER_BOTTOM_COLOR
+        )
     );
 
     /**
      * Used to remove any of the 4 BORDER_XXX_STYLE properties.
      */
     private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_STYLE = Predicates.setContains(
-            Sets.of(
-                    TextStylePropertyName.BORDER_TOP_STYLE,
-                    TextStylePropertyName.BORDER_LEFT_STYLE,
-                    TextStylePropertyName.BORDER_RIGHT_STYLE,
-                    TextStylePropertyName.BORDER_BOTTOM_STYLE
-            )
+        Sets.of(
+            TextStylePropertyName.BORDER_TOP_STYLE,
+            TextStylePropertyName.BORDER_LEFT_STYLE,
+            TextStylePropertyName.BORDER_RIGHT_STYLE,
+            TextStylePropertyName.BORDER_BOTTOM_STYLE
+        )
     );
 
     /**
      * Used to remove any of the 4 BORDER_XXX_WIDTH properties.
      */
     private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_WIDTH = Predicates.setContains(
-            Sets.of(
-                    TextStylePropertyName.BORDER_TOP_WIDTH,
-                    TextStylePropertyName.BORDER_LEFT_WIDTH,
-                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                    TextStylePropertyName.BORDER_BOTTOM_WIDTH
-            )
+        Sets.of(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            TextStylePropertyName.BORDER_LEFT_WIDTH,
+            TextStylePropertyName.BORDER_RIGHT_WIDTH,
+            TextStylePropertyName.BORDER_BOTTOM_WIDTH
+        )
     );
 
     /**
      * Used to remove any of the 4 MARGIN_XXX properties.
      */
     private static final Predicate<TextStylePropertyName<?>> MARGIN_XXX = Predicates.setContains(
-            Sets.of(
-                    TextStylePropertyName.MARGIN_TOP,
-                    TextStylePropertyName.MARGIN_LEFT,
-                    TextStylePropertyName.MARGIN_RIGHT,
-                    TextStylePropertyName.MARGIN_BOTTOM
-            )
+        Sets.of(
+            TextStylePropertyName.MARGIN_TOP,
+            TextStylePropertyName.MARGIN_LEFT,
+            TextStylePropertyName.MARGIN_RIGHT,
+            TextStylePropertyName.MARGIN_BOTTOM
+        )
     );
 
     /**
      * Used to remove any of the 4 PADDING_XXX properties.
      */
     private static final Predicate<TextStylePropertyName<?>> PADDING_XXX = Predicates.setContains(
-            Sets.of(
-                    TextStylePropertyName.PADDING_TOP,
-                    TextStylePropertyName.PADDING_LEFT,
-                    TextStylePropertyName.PADDING_RIGHT,
-                    TextStylePropertyName.PADDING_BOTTOM
-            )
+        Sets.of(
+            TextStylePropertyName.PADDING_TOP,
+            TextStylePropertyName.PADDING_LEFT,
+            TextStylePropertyName.PADDING_RIGHT,
+            TextStylePropertyName.PADDING_BOTTOM
+        )
     );
 
     /**
@@ -455,8 +455,8 @@ final class TextStyleNonEmpty extends TextStyle {
      */
     private TextStyle remove1(List<Entry<TextStylePropertyName<?>, Object>> list) {
         return list.isEmpty() ?
-                TextStyle.EMPTY :
-                new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list))); // no need to sort after a delete
+            TextStyle.EMPTY :
+            new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list))); // no need to sort after a delete
     }
 
     // TextStyleVisitor.................................................................................................
@@ -551,6 +551,6 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return JsonNode.object()
-                .setChildren(json);
+            .setChildren(json);
     }
 }

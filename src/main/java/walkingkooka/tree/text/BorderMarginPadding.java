@@ -66,11 +66,11 @@ abstract class BorderMarginPadding {
                                               final Optional<V> value) {
         final TextStyle before = this.textStyle;
         final TextStyle after = value.isPresent() ?
-                before.set(propertyName, value.get()) :
-                before.remove(propertyName);
+            before.set(propertyName, value.get()) :
+            before.remove(propertyName);
         return before == after ?
-                this :
-                this.replace(this.edge, after);
+            this :
+            this.replace(this.edge, after);
     }
 
     // edge........................................................................................................
@@ -90,8 +90,8 @@ abstract class BorderMarginPadding {
     final BorderMarginPadding setEdge0(final BoxEdge edge) {
         Objects.requireNonNull(edge, "edge");
         return this.edge.equals(edge) ?
-                this :
-                this.replace(edge, this.textStyle);
+            this :
+            this.replace(edge, this.textStyle);
 
     }
 
@@ -126,15 +126,15 @@ abstract class BorderMarginPadding {
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-                this.canBeEqual(other) &&
-                        this.equals0(Cast.to(other));
+            this.canBeEqual(other) &&
+                this.equals0(Cast.to(other));
     }
 
     abstract boolean canBeEqual(final Object other);
 
     private boolean equals0(final BorderMarginPadding other) {
         return this.edge.equals(other.edge) &&
-                this.textStyle.equals(other.textStyle);
+            this.textStyle.equals(other.textStyle);
     }
 
     @Override

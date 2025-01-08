@@ -25,8 +25,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase3<TextOverflow>
-        implements HashCodeEqualsDefinedTesting2<TextOverflow>,
-        TypeNameTesting<TextOverflow> {
+    implements HashCodeEqualsDefinedTesting2<TextOverflow>,
+    TypeNameTesting<TextOverflow> {
 
     TextOverflowTestCase() {
         super();
@@ -37,8 +37,7 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
         this.unmarshallFails(JsonNode.string(""));
     }
 
-    @Override
-    final TextStylePropertyName<TextOverflow> textStylePropertyName() {
+    @Override final TextStylePropertyName<TextOverflow> textStylePropertyName() {
         return TextStylePropertyName.TEXT_OVERFLOW;
     }
 

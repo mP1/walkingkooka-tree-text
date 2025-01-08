@@ -42,7 +42,7 @@ public abstract class TextParentNodeTestCase<T extends TextParentNode> extends T
         final List<TextNode> children = Lists.of(this.text3(), this.text2(), this.text1());
 
         final TextNode parent = this.createTextNode()
-                .setChildren(children);
+            .setChildren(children);
         assertThrows(UnsupportedOperationException.class, () -> parent.children().add(this.different()));
     }
 

@@ -53,8 +53,8 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
     public void testCheckWrongValueTypeFails2() {
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
         this.checkFails(
-                fakeNode,
-                "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
+            fakeNode,
+            "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
         );
     }
 
@@ -67,30 +67,30 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
     @Test
     public void testUnmarshallNormalFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.handler()
-                        .unmarshall(
-                                this.marshall(
-                                        Length.normal()
-                                ),
-                                this.propertyName(),
-                                this.unmarshallContext()
-                        )
+            IllegalArgumentException.class,
+            () -> this.handler()
+                .unmarshall(
+                    this.marshall(
+                        Length.normal()
+                    ),
+                    this.propertyName(),
+                    this.unmarshallContext()
+                )
         );
     }
 
     @Test
     public void testUnmarshallNumberFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.handler()
-                        .unmarshall(
-                                this.marshall(
-                                        Length.number(1)
-                                ),
-                                this.propertyName(),
-                                this.unmarshallContext()
-                        )
+            IllegalArgumentException.class,
+            () -> this.handler()
+                .unmarshall(
+                    this.marshall(
+                        Length.number(1)
+                    ),
+                    this.propertyName(),
+                    this.unmarshallContext()
+                )
         );
     }
 

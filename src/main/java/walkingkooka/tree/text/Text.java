@@ -81,11 +81,11 @@ public final class Text extends TextLeafNode<String> implements HasText {
     @Override
     public String toHtml() {
         return this.text()
-                .replace("\"", "&quot;")
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
-                .replace(" ", "&nbsp;");
+            .replace("\"", "&quot;")
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace(" ", "&nbsp;");
     }
 
     // JsonNodeContext..................................................................................................

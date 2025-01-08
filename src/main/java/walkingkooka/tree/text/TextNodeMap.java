@@ -56,8 +56,8 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> im
         Objects.requireNonNull(map, "map");
 
         return map instanceof TextNodeMap ?
-                (TextNodeMap) map :
-                with0(map);
+            (TextNodeMap) map :
+            with0(map);
     }
 
     private static TextNodeMap with0(final Map<TextStylePropertyName<?>, Object> map) {
@@ -66,8 +66,8 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> im
 
     private static TextNodeMap with1(final TextNodeMapEntrySet entrySet) {
         return entrySet.isEmpty() ?
-                EMPTY :
-                withTextStyleMapEntrySet(entrySet);
+            EMPTY :
+            withTextStyleMapEntrySet(entrySet);
     }
 
     static TextNodeMap withTextStyleMapEntrySet(final TextNodeMapEntrySet entrySet) {
@@ -152,8 +152,8 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> im
             if (value instanceof Enum) {
                 final Enum<?> enumEnum = (Enum<?>) value;
                 css = CaseKind.SNAKE.change(
-                        enumEnum.name().toLowerCase(),
-                        CaseKind.KEBAB
+                    enumEnum.name().toLowerCase(),
+                    CaseKind.KEBAB
                 );
             } else {
                 final String stringValue = value.toString();
@@ -173,10 +173,10 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> im
     static TextNodeMap unmarshall(final JsonNode json,
                                   final JsonNodeUnmarshallContext context) {
         return TextNodeMap.with1(
-                TextNodeMapEntrySet.unmarshall(
-                        json,
-                        context
-                )
+            TextNodeMapEntrySet.unmarshall(
+                json,
+                context
+            )
         );
     }
 

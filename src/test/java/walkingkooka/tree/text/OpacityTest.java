@@ -34,10 +34,10 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class OpacityTest implements ClassTesting2<Opacity>,
-        ComparableTesting2<Opacity>,
-        ConstantsTesting<Opacity>,
-        JsonNodeMarshallingTesting<Opacity>,
-        ToStringTesting<Opacity> {
+    ComparableTesting2<Opacity>,
+    ConstantsTesting<Opacity>,
+    JsonNodeMarshallingTesting<Opacity>,
+    ToStringTesting<Opacity> {
 
     private final static double VALUE = 0.25;
 
@@ -98,28 +98,28 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     @Test
     public void testUnmarshallTransparent() {
         this.unmarshallAndCheck(JsonNode.string("transparent"),
-                Opacity.TRANSPARENT);
+            Opacity.TRANSPARENT);
     }
 
     @Test
     public void testUnmarshallOpaque() {
         this.unmarshallAndCheck(JsonNode.string("opaque"),
-                Opacity.OPAQUE);
+            Opacity.OPAQUE);
     }
 
     @Test
     public void testUnmarshallOpaque2() {
         this.unmarshallAndCheck(JsonNode.array()
-                        .appendChild(JsonNode.string("opaque"))
-                        .get(0),
-                Opacity.OPAQUE);
+                .appendChild(JsonNode.string("opaque"))
+                .get(0),
+            Opacity.OPAQUE);
     }
 
     @Test
     public void testUnmarshallNumber() {
         final double value = 0.25;
         this.unmarshallAndCheck(JsonNode.number(value),
-                Opacity.with(value));
+            Opacity.with(value));
     }
 
     @Test

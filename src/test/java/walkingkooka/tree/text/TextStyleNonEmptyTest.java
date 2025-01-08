@@ -40,12 +40,12 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        final TextStyleNonEmpty textStyle = (TextStyleNonEmpty)TextStyle.EMPTY.setValues(map);
+        final TextStyleNonEmpty textStyle = (TextStyleNonEmpty) TextStyle.EMPTY.setValues(map);
         this.checkEquals(
-                TextNodeMap.class,
-                textStyle.value()
-                        .getClass(),
-                () -> "" + textStyle.value
+            TextNodeMap.class,
+            textStyle.value()
+                .getClass(),
+            () -> "" + textStyle.value
         );
     }
 
@@ -54,35 +54,35 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMergeNotEmptySubset() {
         this.mergeAndCheck(
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                this.property1(), this.value1(),
-                                this.property2(), this.value2()
-                        )
-                ),
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                this.property1(), this.value1()
-                        )
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    this.property1(), this.value1(),
+                    this.property2(), this.value2()
                 )
+            ),
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    this.property1(), this.value1()
+                )
+            )
         );
     }
 
     @Test
     public void testMergeNotEmptyCombined() {
         this.mergeAndCheck(
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                this.property1(), this.value1(),
-                                this.property2(), this.value2()
-                        )
-                ),
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                this.property1(), this.value1(),
-                                this.property3(), this.value3()
-                        )
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    this.property1(), this.value1(),
+                    this.property2(), this.value2()
                 )
+            ),
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    this.property1(), this.value1(),
+                    this.property3(), this.value3()
+                )
+            )
         );
     }
 
@@ -94,8 +94,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle();
 
         this.replaceAndCheck(textStyle,
-                TextNode.style(children),
-                TextStyleNode.with(children, TextNodeMap.with(textStyle.value())));
+            TextNode.style(children),
+            TextStyleNode.with(children, TextNodeMap.with(textStyle.value())));
     }
 
     @Test
@@ -104,8 +104,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextNode textStyle = TextStyleNode.with(children, this.createTextStyle().textStyleMap());
 
         this.replaceAndCheck(TextStyle.EMPTY,
-                textStyle,
-                TextNode.style(children));
+            textStyle,
+            TextNode.style(children));
     }
 
     @Test
@@ -115,8 +115,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle(this.property2(), this.value2());
 
         this.replaceAndCheck(textStyle,
-                this.makeStyleNameParent(textStyleNode),
-                this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
+            this.makeStyleNameParent(textStyleNode),
+            this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
     }
 
     @Test
@@ -126,8 +126,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle(this.property2(), this.value2());
 
         this.replaceAndCheck(textStyle,
-                this.makeStyleNameParent(textStyleNode.setAttributes(Maps.of(this.property1(), this.value1()))),
-                this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
+            this.makeStyleNameParent(textStyleNode.setAttributes(Maps.of(this.property1(), this.value1()))),
+            this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
     }
 
     @Test
@@ -141,13 +141,13 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle();
 
         this.replaceAndCheck(
-                textStyle,
-                this.makeStyleNameParent(styleName),
-                this.makeStyleNameParent(
-                        styleName.setAttributes(
-                                textStyle.value()
-                        )
+            textStyle,
+            this.makeStyleNameParent(styleName),
+            this.makeStyleNameParent(
+                styleName.setAttributes(
+                    textStyle.value()
                 )
+            )
         );
     }
 
@@ -175,13 +175,13 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle();
 
         this.replaceAndCheck(
-                textStyle,
-                this.makeStyleNameParent(textNode),
-                this.makeStyleNameParent(
-                        TextStyleNode.with(
-                                Lists.of(textNode),
-                                textStyle.textStyleMap())
-                )
+            textStyle,
+            this.makeStyleNameParent(textNode),
+            this.makeStyleNameParent(
+                TextStyleNode.with(
+                    Lists.of(textNode),
+                    textStyle.textStyleMap())
+            )
         );
     }
 
@@ -189,9 +189,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStyle textStyle = this.createTextStyle();
 
         this.replaceAndCheck(
-                textStyle,
-                textNode,
-                textNode.setAttributes(textStyle.value())
+            textStyle,
+            textNode,
+            textNode.setAttributes(textStyle.value())
         );
     }
 
@@ -200,15 +200,15 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testGet() {
         this.getAndCheck(this.createTextStyle(),
-                this.property1(),
-                this.value1());
+            this.property1(),
+            this.value1());
     }
 
     @Test
     public void testGet2() {
         this.getAndCheck(this.createTextStyle(),
-                this.property2(),
-                this.value2());
+            this.property2(),
+            this.value2());
     }
 
     // set..............................................................................................................
@@ -216,15 +216,15 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testSetExistingPropertyAndValue() {
         this.setAndCheck(this.createTextStyle(),
-                this.property1(),
-                this.value1());
+            this.property1(),
+            this.value1());
     }
 
     @Test
     public void testSetExistingPropertyAndValue2() {
         this.setAndCheck(this.createTextStyle(),
-                this.property2(),
-                this.value2());
+            this.property2(),
+            this.value2());
     }
 
     @Test
@@ -239,9 +239,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         assertNotSame(different, value1);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
-                property1,
-                different,
-                this.createTextStyle(property1, different, property2, value2));
+            property1,
+            different,
+            this.createTextStyle(property1, different, property2, value2));
     }
 
     @Test
@@ -256,9 +256,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         assertNotSame(different, value2);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
-                property2,
-                different,
-                this.createTextStyle(property1, value1, property2, different));
+            property2,
+            different,
+            this.createTextStyle(property1, value1, property2, different));
     }
 
     @Test
@@ -273,9 +273,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final WritingMode value3 = WritingMode.VERTICAL_LR;
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
-                property3,
-                value3,
-                this.createTextStyle(property1, value1, property2, value2, property3, value3));
+            property3,
+            value3,
+            this.createTextStyle(property1, value1, property2, value2, property3, value3));
     }
 
     @Test
@@ -290,17 +290,17 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Color value3 = Color.fromRgb(0x123456);
 
         this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
-                property3,
-                value3,
-                this.createTextStyle(property3, value3, property1, value1, property2, value2));
+            property3,
+            value3,
+            this.createTextStyle(property3, value3, property1, value1, property2, value2));
     }
 
     private <T> void setAndCheck(final TextStyle textStyle,
                                  final TextStylePropertyName<T> propertyName,
                                  final T value) {
         assertSame(textStyle,
-                textStyle.set(propertyName, value),
-                () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
+            textStyle.set(propertyName, value),
+            () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
     }
 
     // remove...........................................................................................................
@@ -313,8 +313,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final FontFamily value2 = this.value2();
 
         this.removeAndCheck(this.createTextStyle(property1, this.value1(), property2, value2),
-                property1,
-                this.createTextStyle(property2, value2));
+            property1,
+            this.createTextStyle(property2, value2));
     }
 
     @Test
@@ -325,8 +325,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<FontFamily> property2 = this.property2();
 
         this.removeAndCheck(this.createTextStyle(property1, value1, property2, this.value2()),
-                property2,
-                this.createTextStyle(property1, value1));
+            property2,
+            this.createTextStyle(property1, value1));
     }
 
     @Test
@@ -335,8 +335,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final WordWrap value1 = this.value1();
 
         this.removeAndCheck(this.createTextStyle(property1, value1),
-                property1,
-                TextStyle.EMPTY);
+            property1,
+            TextStyle.EMPTY);
     }
 
     // set & remove ...................................................................................................
@@ -347,26 +347,26 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
         final TextStyle textStyle1 = this.setAndCheck(TextStyle.EMPTY,
-                property1,
-                value1,
-                this.createTextStyle(property1, value1));
+            property1,
+            value1,
+            this.createTextStyle(property1, value1));
 
         //set
         final TextStylePropertyName<FontFamily> property2 = this.property2();
         final FontFamily value2 = this.value2();
         final TextStyle textStyle2 = this.setAndCheck(textStyle1,
-                property2,
-                value2,
-                this.createTextStyle(property1, value1, property2, value2));
+            property2,
+            value2,
+            this.createTextStyle(property1, value1, property2, value2));
 
         // remove1
         final TextStyle textStyle3 = this.removeAndCheck(textStyle2,
-                property1,
-                this.createTextStyle(property2, value2));
+            property1,
+            this.createTextStyle(property2, value2));
 
         this.removeAndCheck(textStyle3,
-                property2,
-                TextStyle.EMPTY);
+            property2,
+            TextStyle.EMPTY);
     }
 
     @Test
@@ -375,29 +375,29 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextStylePropertyName<WordWrap> property1 = this.property1();
         final WordWrap value1 = this.value1();
         final TextStyle textStyle1 = this.setAndCheck(TextStyle.EMPTY,
-                property1,
-                value1,
-                this.createTextStyle(property1, value1));
+            property1,
+            value1,
+            this.createTextStyle(property1, value1));
 
         //set
         final TextStylePropertyName<FontFamily> property2 = this.property2();
         final FontFamily value2 = this.value2();
         final TextStyle textStyle2 = this.setAndCheck(textStyle1,
-                property2,
-                value2,
-                this.createTextStyle(property1, value1, property2, value2));
+            property2,
+            value2,
+            this.createTextStyle(property1, value1, property2, value2));
 
         // remove1
         final TextStyle textStyle3 = this.removeAndCheck(textStyle2,
-                property1,
-                this.createTextStyle(property2, value2));
+            property1,
+            this.createTextStyle(property2, value2));
 
 
         //set property1 again
         this.setAndCheck(textStyle3,
-                property1,
-                value1,
-                this.createTextStyle(property1, value1, property2, value2));
+            property1,
+            value1,
+            this.createTextStyle(property1, value1, property2, value2));
     }
 
     // setBorder.......................................................................................................
@@ -411,26 +411,26 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> width = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.TEXT, text)
-                        .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
-                TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
-                        .setBorder(
-                                color,
-                                style,
-                                width
-                        )
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.TEXT, text)
+                .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
+            TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
+                .setBorder(
+                    color,
+                    style,
+                    width
+                )
         );
     }
 
@@ -443,19 +443,19 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> width = Length.pixel(123.5);
 
         final TextStyle textStyle = TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
-                .setBorder(
-                        color,
-                        style,
-                        width
-                );
+            .setBorder(
+                color,
+                style,
+                width
+            );
 
         assertSame(
-                textStyle,
-                textStyle.setBorder(
-                        color,
-                        style,
-                        width
-                )
+            textStyle,
+            textStyle.setBorder(
+                color,
+                style,
+                width
+            )
         );
     }
 
@@ -464,36 +464,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderColorGetMissing() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ),
-                TextStylePropertyName.BORDER_COLOR,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.BORDER_COLOR,
+            null
         );
     }
 
     @Test
     public void testBorderColorGetDifferent() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        Color.parse("#111")
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_COLOR,
-                        Color.parse("#222")
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_COLOR,
-                        Color.parse("#333")
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                        Color.parse("#444")
-                ),
-                TextStylePropertyName.BORDER_COLOR,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.parse("#111")
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_COLOR,
+                Color.parse("#222")
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                Color.parse("#333")
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                Color.parse("#444")
+            ),
+            TextStylePropertyName.BORDER_COLOR,
+            null
         );
     }
 
@@ -502,24 +502,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Color color = Color.BLACK;
 
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        color
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_COLOR,
-                        color
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_COLOR,
-                        color
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                        color
-                ),
-                TextStylePropertyName.BORDER_COLOR,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
                 color
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_COLOR,
+                color
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                color
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                color
+            ),
+            TextStylePropertyName.BORDER_COLOR,
+            color
         );
     }
 
@@ -528,28 +528,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderColorSet() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Color color = Color.WHITE;
 
         this.setAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_COLOR,
-                color,
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                color
-                        )
+            notEmpty,
+            TextStylePropertyName.BORDER_COLOR,
+            color,
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    color
                 )
+            )
         );
     }
 
@@ -558,60 +558,60 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderColorRemoveMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_COLOR,
-                notEmpty
+            notEmpty,
+            TextStylePropertyName.BORDER_COLOR,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderColorRemoveSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        Color.WHITE
-                ),
-                TextStylePropertyName.BORDER_COLOR,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.WHITE
+            ),
+            TextStylePropertyName.BORDER_COLOR,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderColorRemoveAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        Color.parse("#111")
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_COLOR,
-                        Color.parse("#222")
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_COLOR,
-                        Color.parse("#333")
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                        Color.parse("#444")
-                ),
-                TextStylePropertyName.BORDER_COLOR,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.parse("#111")
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_COLOR,
+                Color.parse("#222")
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                Color.parse("#333")
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                Color.parse("#444")
+            ),
+            TextStylePropertyName.BORDER_COLOR,
+            notEmpty
         );
     }
 
@@ -620,36 +620,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderStyleGetMissing() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ),
-                TextStylePropertyName.BORDER_STYLE,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.BORDER_STYLE,
+            null
         );
     }
 
     @Test
     public void testBorderStyleGetDifferent() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        BorderStyle.DOUBLE
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_STYLE,
-                        BorderStyle.DASHED
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_STYLE,
-                        BorderStyle.SOLID
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                        BorderStyle.DOTTED
-                ),
-                TextStylePropertyName.BORDER_STYLE,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_STYLE,
+                BorderStyle.DOUBLE
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_STYLE,
+                BorderStyle.DASHED
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                BorderStyle.SOLID
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                BorderStyle.DOTTED
+            ),
+            TextStylePropertyName.BORDER_STYLE,
+            null
         );
     }
 
@@ -658,24 +658,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final BorderStyle borderStyle = BorderStyle.DASHED;
 
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        borderStyle
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_STYLE,
-                        borderStyle
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_STYLE,
-                        borderStyle
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                        borderStyle
-                ),
-                TextStylePropertyName.BORDER_STYLE,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_STYLE,
                 borderStyle
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_STYLE,
+                borderStyle
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                borderStyle
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                borderStyle
+            ),
+            TextStylePropertyName.BORDER_STYLE,
+            borderStyle
         );
     }
 
@@ -684,28 +684,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderStyleSet() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final BorderStyle borderStyle = BorderStyle.DASHED;
 
         this.setAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_STYLE,
-                borderStyle,
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                borderStyle
-                        )
+            notEmpty,
+            TextStylePropertyName.BORDER_STYLE,
+            borderStyle,
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    borderStyle
                 )
+            )
         );
     }
 
@@ -714,60 +714,60 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderStyleRemoveMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_STYLE,
-                notEmpty
+            notEmpty,
+            TextStylePropertyName.BORDER_STYLE,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderStyleRemoveSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        BorderStyle.DOUBLE
-                ),
-                TextStylePropertyName.BORDER_STYLE,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.BORDER_TOP_STYLE,
+                BorderStyle.DOUBLE
+            ),
+            TextStylePropertyName.BORDER_STYLE,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderStyleRemoveAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        BorderStyle.DOUBLE
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_STYLE,
-                        BorderStyle.DASHED
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_STYLE,
-                        BorderStyle.DOTTED
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                        BorderStyle.SOLID
-                ),
-                TextStylePropertyName.BORDER_STYLE,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_STYLE,
+                BorderStyle.DOUBLE
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_STYLE,
+                BorderStyle.DASHED
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                BorderStyle.DOTTED
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                BorderStyle.SOLID
+            ),
+            TextStylePropertyName.BORDER_STYLE,
+            notEmpty
         );
     }
 
@@ -776,36 +776,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderWidthGetMissing() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ),
-                TextStylePropertyName.BORDER_WIDTH,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.BORDER_WIDTH,
+            null
         );
     }
 
     @Test
     public void testBorderWidthGetDifferent() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_WIDTH,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.BORDER_WIDTH,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.BORDER_WIDTH,
+            null
         );
     }
 
@@ -814,24 +814,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> width = Length.pixel(888.0);
 
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        width
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_WIDTH,
-                        width
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                        width
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                        width
-                ),
-                TextStylePropertyName.BORDER_WIDTH,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
                 width
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                width
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                width
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                width
+            ),
+            TextStylePropertyName.BORDER_WIDTH,
+            width
         );
     }
 
@@ -840,28 +840,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderWidthSet() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(888.0);
 
         this.setAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_WIDTH,
-                width,
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                width
-                        )
+            notEmpty,
+            TextStylePropertyName.BORDER_WIDTH,
+            width,
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    width
                 )
+            )
         );
     }
 
@@ -870,60 +870,60 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderWidthRemoveMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty,
-                TextStylePropertyName.BORDER_WIDTH,
-                notEmpty
+            notEmpty,
+            TextStylePropertyName.BORDER_WIDTH,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderWidthRemoveSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        Length.pixel(888.0)
-                ),
-                TextStylePropertyName.BORDER_WIDTH,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
+                Length.pixel(888.0)
+            ),
+            TextStylePropertyName.BORDER_WIDTH,
+            notEmpty
         );
     }
 
     @Test
     public void testBorderWidthRemoveAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.BORDER_LEFT_WIDTH,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                        Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.BORDER_WIDTH,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.BORDER_LEFT_WIDTH,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.BORDER_WIDTH,
+            notEmpty
         );
     }
 
@@ -932,36 +932,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMarginGetMissing() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ),
-                TextStylePropertyName.MARGIN,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.MARGIN,
+            null
         );
     }
 
     @Test
     public void testMarginGetDifferent() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.MARGIN_TOP,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_LEFT,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.MARGIN,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.MARGIN_TOP,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.MARGIN_LEFT,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.MARGIN_RIGHT,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.MARGIN_BOTTOM,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.MARGIN,
+            null
         );
     }
 
@@ -970,24 +970,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> width = Length.pixel(888.0);
 
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.MARGIN_TOP,
-                        width
-                ).set(
-                        TextStylePropertyName.MARGIN_LEFT,
-                        width
-                ).set(
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        width
-                ).set(
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        width
-                ),
-                TextStylePropertyName.MARGIN,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.MARGIN_TOP,
                 width
+            ).set(
+                TextStylePropertyName.MARGIN_LEFT,
+                width
+            ).set(
+                TextStylePropertyName.MARGIN_RIGHT,
+                width
+            ).set(
+                TextStylePropertyName.MARGIN_BOTTOM,
+                width
+            ),
+            TextStylePropertyName.MARGIN,
+            width
         );
     }
 
@@ -996,28 +996,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMarginSet() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(888.0);
 
         this.setAndCheck(
-                notEmpty,
-                TextStylePropertyName.MARGIN,
-                width,
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.MARGIN_TOP,
-                                width,
-                                TextStylePropertyName.MARGIN_LEFT,
-                                width,
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                width,
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                width
-                        )
+            notEmpty,
+            TextStylePropertyName.MARGIN,
+            width,
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.MARGIN_TOP,
+                    width,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    width,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    width,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    width
                 )
+            )
         );
     }
 
@@ -1026,60 +1026,60 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMarginRemoveMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty,
-                TextStylePropertyName.MARGIN,
-                notEmpty
+            notEmpty,
+            TextStylePropertyName.MARGIN,
+            notEmpty
         );
     }
 
     @Test
     public void testMarginRemoveSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.MARGIN_TOP,
-                        Length.pixel(888.0)
-                ),
-                TextStylePropertyName.MARGIN,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.MARGIN_TOP,
+                Length.pixel(888.0)
+            ),
+            TextStylePropertyName.MARGIN,
+            notEmpty
         );
     }
 
     @Test
     public void testMarginRemoveAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.MARGIN_TOP,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_LEFT,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.MARGIN,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.MARGIN_TOP,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.MARGIN_LEFT,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.MARGIN_RIGHT,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.MARGIN_BOTTOM,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.MARGIN,
+            notEmpty
         );
     }
 
@@ -1088,36 +1088,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testPaddingGetMissing() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ),
-                TextStylePropertyName.PADDING,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.PADDING,
+            null
         );
     }
 
     @Test
     public void testPaddingGetDifferent() {
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.PADDING_TOP,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.PADDING_LEFT,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.PADDING_RIGHT,
-                        Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.PADDING,
-                null
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.PADDING_TOP,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.PADDING_LEFT,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.PADDING_RIGHT,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.PADDING_BOTTOM,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.PADDING,
+            null
         );
     }
 
@@ -1126,24 +1126,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final Length<?> width = Length.pixel(888.0);
 
         this.getAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.PADDING_TOP,
-                        width
-                ).set(
-                        TextStylePropertyName.PADDING_LEFT,
-                        width
-                ).set(
-                        TextStylePropertyName.PADDING_RIGHT,
-                        width
-                ).set(
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        width
-                ),
-                TextStylePropertyName.PADDING,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.PADDING_TOP,
                 width
+            ).set(
+                TextStylePropertyName.PADDING_LEFT,
+                width
+            ).set(
+                TextStylePropertyName.PADDING_RIGHT,
+                width
+            ).set(
+                TextStylePropertyName.PADDING_BOTTOM,
+                width
+            ),
+            TextStylePropertyName.PADDING,
+            width
         );
     }
 
@@ -1152,28 +1152,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testPaddingSet() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(888.0);
 
         this.setAndCheck(
-                notEmpty,
-                TextStylePropertyName.PADDING,
-                width,
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.PADDING_TOP,
-                                width,
-                                TextStylePropertyName.PADDING_LEFT,
-                                width,
-                                TextStylePropertyName.PADDING_RIGHT,
-                                width,
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                width
-                        )
+            notEmpty,
+            TextStylePropertyName.PADDING,
+            width,
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.PADDING_TOP,
+                    width,
+                    TextStylePropertyName.PADDING_LEFT,
+                    width,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    width,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    width
                 )
+            )
         );
     }
 
@@ -1182,60 +1182,60 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testPaddingRemoveMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty,
-                TextStylePropertyName.PADDING,
-                notEmpty
+            notEmpty,
+            TextStylePropertyName.PADDING,
+            notEmpty
         );
     }
 
     @Test
     public void testPaddingRemoveSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.PADDING_TOP,
-                        Length.pixel(888.0)
-                ),
-                TextStylePropertyName.PADDING,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.PADDING_TOP,
+                Length.pixel(888.0)
+            ),
+            TextStylePropertyName.PADDING,
+            notEmpty
         );
     }
 
     @Test
     public void testPaddingRemoveAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         this.removeAndCheck(
-                notEmpty.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.LEFT
-                ).set(
-                        TextStylePropertyName.PADDING_TOP,
-                        Length.pixel(111.0)
-                ).set(
-                        TextStylePropertyName.PADDING_LEFT,
-                        Length.pixel(222.0)
-                ).set(
-                        TextStylePropertyName.PADDING_RIGHT,
-                        Length.pixel(333.0)
-                ).set(
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        Length.pixel(444.0)
-                ),
-                TextStylePropertyName.PADDING,
-                notEmpty
+            notEmpty.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(
+                TextStylePropertyName.PADDING_TOP,
+                Length.pixel(111.0)
+            ).set(
+                TextStylePropertyName.PADDING_LEFT,
+                Length.pixel(222.0)
+            ).set(
+                TextStylePropertyName.PADDING_RIGHT,
+                Length.pixel(333.0)
+            ).set(
+                TextStylePropertyName.PADDING_BOTTOM,
+                Length.pixel(444.0)
+            ),
+            TextStylePropertyName.PADDING,
+            notEmpty
         );
     }
 
@@ -1244,31 +1244,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderColorSetValues() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Color color = Color.WHITE;
 
         this.checkEquals(
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                color
-                        )
-                ),
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_COLOR,
-                                color
-                        )
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    color
                 )
+            ),
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_COLOR,
+                    color
+                )
+            )
         );
     }
 
@@ -1277,31 +1277,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderStyleSetValues() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final BorderStyle borderStyle = BorderStyle.DOUBLE;
 
         this.checkEquals(
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                borderStyle,
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                borderStyle
-                        )
-                ),
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_STYLE,
-                                borderStyle
-                        )
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    borderStyle
                 )
+            ),
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_STYLE,
+                    borderStyle
+                )
+            )
         );
     }
 
@@ -1310,31 +1310,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testBorderWidthSetValues() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(123.0);
 
         this.checkEquals(
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                width
-                        )
-                ),
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_WIDTH,
-                                width
-                        )
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    width
                 )
+            ),
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_WIDTH,
+                    width
+                )
+            )
         );
     }
 
@@ -1343,31 +1343,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMarginSetValues() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(123.0);
 
         this.checkEquals(
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.MARGIN_TOP,
-                                width,
-                                TextStylePropertyName.MARGIN_LEFT,
-                                width,
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                width,
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                width
-                        )
-                ),
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.MARGIN,
-                                width
-                        )
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.MARGIN_TOP,
+                    width,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    width,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    width,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    width
                 )
+            ),
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.MARGIN,
+                    width
+                )
+            )
         );
     }
 
@@ -1376,31 +1376,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testPaddingSetValues() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Length<?> width = Length.pixel(123.0);
 
         this.checkEquals(
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.PADDING_TOP,
-                                width,
-                                TextStylePropertyName.PADDING_LEFT,
-                                width,
-                                TextStylePropertyName.PADDING_RIGHT,
-                                width,
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                width
-                        )
-                ),
-                notEmpty.setValues(
-                        Maps.of(
-                                TextStylePropertyName.PADDING,
-                                width
-                        )
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.PADDING_TOP,
+                    width,
+                    TextStylePropertyName.PADDING_LEFT,
+                    width,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    width,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    width
                 )
+            ),
+            notEmpty.setValues(
+                Maps.of(
+                    TextStylePropertyName.PADDING,
+                    width
+                )
+            )
         );
     }
 
@@ -1409,38 +1409,38 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testText() {
         this.textAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.COLOR, Color.parse("#123456")
-                ),
-                "color: rgb(18, 52, 86);"
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR, Color.parse("#123456")
+            ),
+            "color: rgb(18, 52, 86);"
         );
     }
 
     @Test
     public void testTextSeveralProperties() {
         this.textAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.COLOR, Color.parse("#123456")
-                ).set(
-                        TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
-                ),
-                "color: rgb(18, 52, 86); text-align: left;"
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR, Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
+            ),
+            "color: rgb(18, 52, 86); text-align: left;"
         );
     }
 
     @Test
     public void testTextIncludesWebColorNameColor() {
         this.textAndCheck(
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.BACKGROUND_COLOR,
-                        Color.parse("#123456")
-                ).set(
-                        TextStylePropertyName.COLOR,
-                        WebColorName.RED.color()
-                ).set(
-                        TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
-                ),
-                "background-color: rgb(18, 52, 86); color: rgb(255, 0, 0); text-align: left;"
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.COLOR,
+                WebColorName.RED.color()
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
+            ),
+            "background-color: rgb(18, 52, 86); color: rgb(255, 0, 0); text-align: left;"
         );
     }
 
@@ -1449,10 +1449,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-                createTextStyle(),
-                "TextStyle\n" +
-                        "  font-family=Times News Roman (walkingkooka.tree.text.FontFamily)\n" +
-                        "  word-wrap=BREAK_WORD (walkingkooka.tree.text.WordWrap)\n"
+            createTextStyle(),
+            "TextStyle\n" +
+                "  font-family=Times News Roman (walkingkooka.tree.text.FontFamily)\n" +
+                "  word-wrap=BREAK_WORD (walkingkooka.tree.text.WordWrap)\n"
         );
     }
 
@@ -1461,40 +1461,40 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
-                TextStyle.EMPTY,
-                TextStyle.unmarshall(
-                        JsonNode.object(),
-                        this.unmarshallContext()
-                )
+            TextStyle.EMPTY,
+            TextStyle.unmarshall(
+                JsonNode.object(),
+                this.unmarshallContext()
+            )
         );
     }
 
     @Test
     public void testMarshallColor() {
         this.marshallAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.parse("#123456")),
-                JsonNode.object()
-                        .set(JsonPropertyName.with("color"), JsonNode.string("#123456"))
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.parse("#123456")),
+            JsonNode.object()
+                .set(JsonPropertyName.with("color"), JsonNode.string("#123456"))
         );
     }
 
     @Test
     public void testMarshallColorRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.parse("#123456"))
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.parse("#123456"))
         );
     }
 
     @Test
     public void testMarshallManyRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
-                        .set(TextStylePropertyName.COLOR, Color.parse("#abcdef"))
-                        .set(TextStylePropertyName.DIRECTION, Direction.LTR)
-                        .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+                .set(TextStylePropertyName.COLOR, Color.parse("#abcdef"))
+                .set(TextStylePropertyName.DIRECTION, Direction.LTR)
+                .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
         );
     }
 
@@ -1507,8 +1507,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         map.put(this.property2(), this.value2());
 
         this.toStringAndCheck(
-                TextStyle.EMPTY.setValues(map),
-                map.toString()
+            TextStyle.EMPTY.setValues(map),
+            map.toString()
         );
     }
 
@@ -1552,8 +1552,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     private TextStyleNonEmpty createTextStyle(final Map<TextStylePropertyName<?>, Object> map) {
-        return  TextStyleNonEmpty.with(
-                TextNodeMap.with(map)
+        return TextStyleNonEmpty.with(
+            TextNodeMap.with(map)
         );
     }
 

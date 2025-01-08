@@ -30,11 +30,11 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
  * A font family name, which are also case insensitive when compared.
  */
 public final class FontFamily implements Name,
-        Comparable<FontFamily> {
+    Comparable<FontFamily> {
 
     public static FontFamily with(final String name) {
         return new FontFamily(
-                CharSequences.failIfNullOrEmpty(name, "name")
+            CharSequences.failIfNullOrEmpty(name, "name")
         );
     }
 
@@ -65,9 +65,9 @@ public final class FontFamily implements Name,
 
     static {
         JsonNodeContext.register("font-family",
-                FontFamily::unmarshall,
-                FontFamily::marshall,
-                FontFamily.class);
+            FontFamily::unmarshall,
+            FontFamily::marshall,
+            FontFamily.class);
     }
 
     // Object..................................................................................................
@@ -79,8 +79,8 @@ public final class FontFamily implements Name,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof FontFamily &&
-                        this.equals0(Cast.to(other));
+            other instanceof FontFamily &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final FontFamily other) {

@@ -42,12 +42,12 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
-        HasTextTesting,
-        CanBeEmptyTesting,
-        HashCodeEqualsDefinedTesting2<TextStyle>,
-        JsonNodeMarshallingTesting<TextStyle>,
-        ToStringTesting<TextStyle>,
-        TreePrintableTesting {
+    HasTextTesting,
+    CanBeEmptyTesting,
+    HashCodeEqualsDefinedTesting2<TextStyle>,
+    JsonNodeMarshallingTesting<TextStyle>,
+    ToStringTesting<TextStyle>,
+    TreePrintableTesting {
 
     TextStyleTestCase() {
         super();
@@ -60,8 +60,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         final TextStyle textStyle = this.createObject();
 
         this.isEmptyAndCheck(
-                textStyle,
-                textStyle.value().isEmpty()
+            textStyle,
+            textStyle.value().isEmpty()
         );
     }
 
@@ -70,46 +70,46 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testSetValuesWithNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createObject().setValues(null)
+            NullPointerException.class,
+            () -> this.createObject().setValues(null)
         );
     }
 
     @Test
     public final void testSetValuesWithInvalidValueFails() {
         final IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
-                () -> this.createObject()
-                        .setValues(
-                                Maps.of(
-                                        TextStylePropertyName.BACKGROUND_COLOR,
-                                        "hello"
-                                )
-                        )
+            IllegalArgumentException.class,
+            () -> this.createObject()
+                .setValues(
+                    Maps.of(
+                        TextStylePropertyName.BACKGROUND_COLOR,
+                        "hello"
+                    )
+                )
         );
         this.checkEquals(
-                "Property \"background-color\" value \"hello\"(java.lang.String) is not a Color",
-                thrown.getMessage(),
-                () -> thrown.toString()
+            "Property \"background-color\" value \"hello\"(java.lang.String) is not a Color",
+            thrown.getMessage(),
+            () -> thrown.toString()
         );
     }
 
     @Test
     public final void testSetValuesWithAllFails() {
         final IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
-                () -> this.createObject()
-                        .setValues(
-                                Maps.of(
-                                        TextStylePropertyName.ALL,
-                                        "hello"
-                                )
-                        )
+            IllegalArgumentException.class,
+            () -> this.createObject()
+                .setValues(
+                    Maps.of(
+                        TextStylePropertyName.ALL,
+                        "hello"
+                    )
+                )
         );
         this.checkEquals(
-                "Values not supported for \"*\"",
-                thrown.getMessage(),
-                () -> thrown.toString()
+            "Values not supported for \"*\"",
+            thrown.getMessage(),
+            () -> thrown.toString()
         );
     }
 
@@ -117,10 +117,10 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     public final void testSetValuesSame() {
         final TextStyle textStyle = this.createObject();
         assertSame(
-                textStyle,
-                textStyle.setValues(
-                        textStyle.value()
-                )
+            textStyle,
+            textStyle.setValues(
+                textStyle.value()
+            )
         );
     }
 
@@ -130,22 +130,22 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
 
         final Map<TextStylePropertyName<?>, Object> newValues = Maps.of(
-                TextStylePropertyName.COLOR,
-                Color.parse("#234")
+            TextStylePropertyName.COLOR,
+            Color.parse("#234")
         );
 
         final Map<TextStylePropertyName<?>, Object> expected = Maps.sorted();
         expected.putAll(before.value());
         expected.putAll(
-                newValues
+            newValues
         );
 
         this.setValuesAndCheck(
-                before,
-                expected,
-                TextStyle.EMPTY.setValues(
-                        expected
-                )
+            before,
+            expected,
+            TextStyle.EMPTY.setValues(
+                expected
+            )
         );
     }
 
@@ -153,9 +153,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                    final Map<TextStylePropertyName<?>, Object> values,
                                    final TextStyle expected) {
         this.checkEquals(
-                expected,
-                textStyle.setValues(values),
-                () -> textStyle + " setValues " + values
+            expected,
+            textStyle.setValues(values),
+            () -> textStyle + " setValues " + values
         );
     }
 
@@ -171,8 +171,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         final TextStyle textStyle = this.createObject();
         final TextStyle empty = TextStyle.EMPTY;
         assertSame(textStyle,
-                textStyle.merge(empty),
-                () -> textStyle + " merge EMPTY");
+            textStyle.merge(empty),
+            () -> textStyle + " merge EMPTY");
     }
 
     final void mergeAndCheck(final TextStyle textStyle,
@@ -198,16 +198,16 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                 final TextStyle other,
                                 final TextStyle expected) {
         assertSame(expected,
-                textStyle.merge(other),
-                () -> textStyle + " merge " + other);
+            textStyle.merge(other),
+            () -> textStyle + " merge " + other);
     }
 
     private void mergeAndCheck1(final TextStyle textStyle,
                                 final TextStyle other,
                                 final TextStyle expected) {
         this.checkEquals(expected,
-                textStyle.merge(other),
-                () -> textStyle + " merge " + other);
+            textStyle.merge(other),
+            () -> textStyle + " merge " + other);
     }
 
     // replace...........................................................................................................
@@ -220,8 +220,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     final void replaceAndCheck(final TextStyle textStyle,
                                final TextNode textNode) {
         assertSame(textNode,
-                textStyle.replace(textNode),
-                () -> textStyle + " replace " + textNode);
+            textStyle.replace(textNode),
+            () -> textStyle + " replace " + textNode);
     }
 
     final void replaceAndCheck(final TextStyle textStyle,
@@ -229,8 +229,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                final TextNode expected) {
         final TextNode actual = textStyle.replace(textNode);
         this.checkEquals(expected,
-                actual,
-                () -> textStyle + " replace " + textNode + "\nEXPECTED.root\n" + expected.root() + "\nACTUAL.root\n" + actual.root() + '\n');
+            actual,
+            () -> textStyle + " replace " + textNode + "\nEXPECTED.root\n" + expected.root() + "\nACTUAL.root\n" + actual.root() + '\n');
     }
 
     // get..............................................................................................................
@@ -243,16 +243,16 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testGetUnknown() {
         this.getAndCheck(this.createObject(),
-                TextStylePropertyName.HYPHENS,
-                null);
+            TextStylePropertyName.HYPHENS,
+            null);
     }
 
     final <TT> void getAndCheck(final TextStyle textStyle,
                                 final TextStylePropertyName<TT> propertyName,
                                 final TT value) {
         this.checkEquals(Optional.ofNullable(value),
-                textStyle.get(propertyName),
-                () -> textStyle + " get " + propertyName);
+            textStyle.get(propertyName),
+            () -> textStyle + " get " + propertyName);
     }
 
     // set..............................................................................................................
@@ -265,34 +265,34 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testSetNullPropertyValueFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null)
+            NullPointerException.class,
+            () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null)
         );
     }
 
     @Test
     public final void testSetInvalidPropertyValueFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY;
-                    this.createObject().set(propertyName, Cast.to("invalid"));
-                }
+            IllegalArgumentException.class,
+            () -> {
+                final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY;
+                this.createObject().set(propertyName, Cast.to("invalid"));
+            }
         );
     }
 
     @Test
     public final void testSetAllFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    final TextStylePropertyName<?> propertyName = TextStylePropertyName.ALL;
-                    this.createObject()
-                            .set(
-                                    propertyName,
-                                    Cast.to("Invalid")
-                            );
-                }
+            IllegalArgumentException.class,
+            () -> {
+                final TextStylePropertyName<?> propertyName = TextStylePropertyName.ALL;
+                this.createObject()
+                    .set(
+                        propertyName,
+                        Cast.to("Invalid")
+                    );
+            }
         );
     }
 
@@ -302,8 +302,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                      final TextStyle expected) {
         final TextStyle set = textStyle.set(propertyName, value);
         this.checkEquals(expected,
-                set,
-                () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
+            set,
+            () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
         return set;
     }
 
@@ -325,8 +325,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                    final TextStyle expected) {
         final TextStyle removed = textStyle.remove(propertyName);
         this.checkEquals(expected,
-                removed,
-                () -> textStyle + " remove " + propertyName);
+            removed,
+            () -> textStyle + " remove " + propertyName);
         return removed;
     }
 
@@ -335,27 +335,27 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     @Test
     public final void testSetBorderWithNullColorFails() {
         this.setBorderWithNullFails(
-                null,
-                BorderStyle.DASHED,
-                Length.none()
+            null,
+            BorderStyle.DASHED,
+            Length.none()
         );
     }
 
     @Test
     public final void testSetBorderWithNullStyleFails() {
         this.setBorderWithNullFails(
-                Color.BLACK,
-                null,
-                Length.none()
+            Color.BLACK,
+            null,
+            Length.none()
         );
     }
 
     @Test
     public final void testSetBorderWithNullWidthFails() {
         this.setBorderWithNullFails(
-                Color.BLACK,
-                BorderStyle.DASHED,
-                null
+            Color.BLACK,
+            BorderStyle.DASHED,
+            null
         );
     }
 
@@ -363,12 +363,12 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                                         final BorderStyle style,
                                         final Length<?> length) {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createObject().setBorder(
-                        color,
-                        style,
-                        length
-                )
+            NullPointerException.class,
+            () -> this.createObject().setBorder(
+                color,
+                style,
+                length
+            )
         );
     }
 
@@ -376,10 +376,10 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     final <TT extends TextNode> TT makeStyleNameParent(final TT child) {
         return this.styleName("parent-style-123")
-                .setChildren(Lists.of(child))
-                .children()
-                .get(0)
-                .cast();
+            .setChildren(Lists.of(child))
+            .children()
+            .get(0)
+            .cast();
     }
 
     final TextPlaceholderNode placeholder(final String placeholderName) {

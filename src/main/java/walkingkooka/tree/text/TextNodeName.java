@@ -64,8 +64,8 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
 
     static {
         JsonNodeContext.register("text-node-name",
-                TextNodeName::unmarshall,
-                TextNodeName::marshall,
-                TextNodeName.class);
+            TextNodeName::unmarshall,
+            TextNodeName::marshall,
+            TextNodeName.class);
     }
 }

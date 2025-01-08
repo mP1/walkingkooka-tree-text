@@ -66,8 +66,8 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color value = Color.BLACK;
         final TextStyle textStyle = TextStyle.EMPTY.set(
-                propertyName,
-                value
+            propertyName,
+            value
         );
 
         new FakeTextStyleVisitor() {
@@ -654,7 +654,7 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             }
         }.accept(TextStylePropertyName.TEXT_DECORATION_THICKNESS, Length.parse("1px"));
     }
-    
+
     @Test
     public void testVisitTextDirection() {
         new TestTextStyleVisitor() {
@@ -816,8 +816,8 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
             this.expected = value;
 
             final TextStyle textStyle = TextStyle.EMPTY.set(
-                    propertyName,
-                    value
+                propertyName,
+                value
             );
 
             this.accept(textStyle);

@@ -55,7 +55,7 @@ public class FakeTextNodeVisitor extends TextNodeVisitor implements Fake {
     protected void endVisit(final Hyperlink node) {
         throw new UnsupportedOperationException();
     }
-    
+
     @Override
     protected Visiting startVisit(final TextStyleNameNode node) {
         throw new UnsupportedOperationException();

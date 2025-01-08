@@ -34,8 +34,8 @@ import java.math.MathContext;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ClassTesting<P>,
-        ToStringTesting<P>,
-        TypeNameTesting<P> {
+    ToStringTesting<P>,
+    TypeNameTesting<P> {
 
     TextStylePropertyValueHandlerTestCase() {
         super();
@@ -44,7 +44,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     @Test
     public final void testCheckNullValueFails() {
         this.checkFails(
-                "Property " + this.propertyName().inQuotes() + " missing value"
+            "Property " + this.propertyName().inQuotes() + " missing value"
         );
     }
 
@@ -56,17 +56,17 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final void checkFails(final String message) {
         this.checkFails(
-                null,
-                NullPointerException.class,
-                message
+            null,
+            NullPointerException.class,
+            message
         );
     }
 
     final void checkFails(final Object value, final String message) {
         this.checkFails(
-                value,
-                IllegalArgumentException.class,
-                message
+            value,
+            IllegalArgumentException.class,
+            message
         );
     }
 
@@ -74,19 +74,19 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
                                                          final Class<T> throwType,
                                                          final String message) {
         final T thrown = assertThrows(
-                throwType,
-                () -> this.check(value)
+            throwType,
+            () -> this.check(value)
         );
         this.checkEquals(message, thrown.getMessage(), "message");
 
         final T thrown2 = assertThrows(
-                throwType,
-                () -> this.propertyName().check(value)
+            throwType,
+            () -> this.propertyName().check(value)
         );
         this.checkEquals(
-                message,
-                thrown2.getMessage(),
-                "message"
+            message,
+            thrown2.getMessage(),
+            "message"
         );
     }
 
@@ -100,8 +100,8 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final JsonNodeUnmarshallContext unmarshallContext() {
         return JsonNodeUnmarshallContexts.basic(
-                ExpressionNumberKind.DEFAULT,
-                MathContext.DECIMAL32
+            ExpressionNumberKind.DEFAULT,
+            MathContext.DECIMAL32
         );
     }
 

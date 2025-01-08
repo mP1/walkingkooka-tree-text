@@ -39,8 +39,7 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
     public final void testParentWithoutChild() {
     }
 
-    @Override
-    final N createTextNode() {
+    @Override final N createTextNode() {
         return this.createTextNode(this.value());
     }
 

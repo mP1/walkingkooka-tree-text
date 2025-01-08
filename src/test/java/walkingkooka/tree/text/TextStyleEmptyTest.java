@@ -44,12 +44,12 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testMergeNotEmpty() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
-                TextStylePropertyName.FONT_STYLE,
-                FontStyle.ITALIC
+            TextStylePropertyName.FONT_STYLE,
+            FontStyle.ITALIC
         );
         assertSame(
-                notEmpty,
-                TextStyle.EMPTY.merge(notEmpty)
+            notEmpty,
+            TextStyle.EMPTY.merge(notEmpty)
         );
     }
 
@@ -75,8 +75,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final TextNode node = TextNode.style(children());
 
         this.replaceAndCheck(TextStyle.EMPTY,
-                node.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)),
-                node);
+            node.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)),
+            node);
     }
 
     @Test
@@ -84,8 +84,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final TextNode textStyleNode = TextNode.style(this.children());
 
         this.replaceAndCheck(TextStyle.EMPTY,
-                makeStyleNameParent(textStyleNode.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC))),
-                makeStyleNameParent(textStyleNode));
+            makeStyleNameParent(textStyleNode.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC))),
+            makeStyleNameParent(textStyleNode));
     }
 
     @Test
@@ -122,15 +122,15 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final FontFamily familyName = FontFamily.with("Antiqua");
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                propertyName,
-                familyName,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                propertyName,
-                                familyName
-                        )
+            TextStyle.EMPTY,
+            propertyName,
+            familyName,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    propertyName,
+                    familyName
                 )
+            )
         );
     }
 
@@ -143,24 +143,24 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> width = Length.pixel(123.5);
 
         this.checkEquals(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
-                        .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
-                        .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
-                        .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
-                TextStyle.EMPTY.setBorder(
-                        color,
-                        style,
-                        width
-                )
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
+            TextStyle.EMPTY.setBorder(
+                color,
+                style,
+                width
+            )
         );
     }
 
@@ -169,9 +169,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderColorGet() {
         this.getAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_COLOR,
-                null
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_COLOR,
+            null
         );
     }
 
@@ -182,21 +182,21 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Color color = Color.WHITE;
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_COLOR,
-                color,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                color,
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                color
-                        )
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_COLOR,
+            color,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    color
                 )
+            )
         );
     }
 
@@ -205,9 +205,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderColorRemove() {
         this.removeAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_COLOR,
-                TextStyle.EMPTY
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_COLOR,
+            TextStyle.EMPTY
         );
     }
 
@@ -216,9 +216,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderStyleGet() {
         this.getAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_STYLE,
-                null
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_STYLE,
+            null
         );
     }
 
@@ -229,21 +229,21 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final BorderStyle style = BorderStyle.DOUBLE;
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_STYLE,
-                style,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                style,
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                style,
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                style,
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                style
-                        )
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_STYLE,
+            style,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    style,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    style,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    style,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    style
                 )
+            )
         );
     }
 
@@ -252,9 +252,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderStyleRemove() {
         this.removeAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_STYLE,
-                TextStyle.EMPTY
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_STYLE,
+            TextStyle.EMPTY
         );
     }
 
@@ -263,9 +263,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderWidthGet() {
         this.getAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_WIDTH,
-                null
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_WIDTH,
+            null
         );
     }
 
@@ -276,21 +276,21 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> width = Length.pixel(123.0);
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_WIDTH,
-                width,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                width,
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                width
-                        )
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_WIDTH,
+            width,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    width,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    width
                 )
+            )
         );
     }
 
@@ -299,9 +299,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testBorderWidthRemove() {
         this.removeAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.BORDER_WIDTH,
-                TextStyle.EMPTY
+            TextStyle.EMPTY,
+            TextStylePropertyName.BORDER_WIDTH,
+            TextStyle.EMPTY
         );
     }
 
@@ -310,9 +310,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testMarginGet() {
         this.getAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.MARGIN,
-                null
+            TextStyle.EMPTY,
+            TextStylePropertyName.MARGIN,
+            null
         );
     }
 
@@ -323,21 +323,21 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> length = Length.pixel(100.0);
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.MARGIN,
-                length,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                TextStylePropertyName.MARGIN_TOP,
-                                length,
-                                TextStylePropertyName.MARGIN_LEFT,
-                                length,
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                length,
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                length
-                        )
+            TextStyle.EMPTY,
+            TextStylePropertyName.MARGIN,
+            length,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.MARGIN_TOP,
+                    length,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    length,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    length,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    length
                 )
+            )
         );
     }
 
@@ -346,9 +346,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testMarginRemove() {
         this.removeAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.MARGIN,
-                TextStyle.EMPTY
+            TextStyle.EMPTY,
+            TextStylePropertyName.MARGIN,
+            TextStyle.EMPTY
         );
     }
 
@@ -357,9 +357,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testPaddingGet() {
         this.getAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.PADDING,
-                null
+            TextStyle.EMPTY,
+            TextStylePropertyName.PADDING,
+            null
         );
     }
 
@@ -370,21 +370,21 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final Length<?> length = Length.pixel(100.0);
 
         this.setAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.PADDING,
-                length,
-                TextStyle.EMPTY.setValues(
-                        Maps.of(
-                                TextStylePropertyName.PADDING_TOP,
-                                length,
-                                TextStylePropertyName.PADDING_LEFT,
-                                length,
-                                TextStylePropertyName.PADDING_RIGHT,
-                                length,
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                length
-                        )
+            TextStyle.EMPTY,
+            TextStylePropertyName.PADDING,
+            length,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.PADDING_TOP,
+                    length,
+                    TextStylePropertyName.PADDING_LEFT,
+                    length,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    length,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    length
                 )
+            )
         );
     }
 
@@ -393,12 +393,12 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testPaddingRemove() {
         this.removeAndCheck(
-                TextStyle.EMPTY,
-                TextStylePropertyName.PADDING,
-                TextStyle.EMPTY
+            TextStyle.EMPTY,
+            TextStylePropertyName.PADDING,
+            TextStyle.EMPTY
         );
     }
-    
+
     // TextStyleVisitor.................................................................................................
 
     @Test
@@ -425,8 +425,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
         this.checkEquals("12", b.toString());
         this.checkEquals(Lists.of(textStyle, textStyle),
-                visited,
-                "visited");
+            visited,
+            "visited");
     }
 
     // HasText.......................................................................................................
@@ -434,8 +434,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testText() {
         this.textAndCheck(
-                TextStyleEmpty.instance(),
-                ""
+            TextStyleEmpty.instance(),
+            ""
         );
     }
 
@@ -456,14 +456,14 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     @Test
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
-                TextStyle.EMPTY,
-                TextStyle.unmarshall(
-                        JsonNode.object(),
-                        JsonNodeUnmarshallContexts.basic(
-                                ExpressionNumberKind.DEFAULT,
-                                MathContext.DECIMAL32
-                        )
+            TextStyle.EMPTY,
+            TextStyle.unmarshall(
+                JsonNode.object(),
+                JsonNodeUnmarshallContexts.basic(
+                    ExpressionNumberKind.DEFAULT,
+                    MathContext.DECIMAL32
                 )
+            )
         );
     }
 

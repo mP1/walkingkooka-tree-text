@@ -44,40 +44,40 @@ public class JunitTest {
     @Test
     public void testBuildAndPrintHtml() {
         final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
+            .appendChild(
+                TextNode.styleName(
+                    TextStyleName.with("head")
+                ).appendChild(
+                    TextNode.styleName(
+                        TextStyleName.with("TITLE")
+                    ).appendChild(
+                        TextNode.text("title123")
+                    )
+                )
+            ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
                 .appendChild(
-                        TextNode.styleName(
-                                TextStyleName.with("head")
-                        ).appendChild(
-                                TextNode.styleName(
-                                        TextStyleName.with("TITLE")
-                                ).appendChild(
-                                        TextNode.text("title123")
-                                )
+                    TextNode.hyperlink(
+                        Url.parseAbsolute("https://example.com/hello")
+                    ).appendChild(TextNode.text("hyper link text 123"))
+                ).appendChild(
+                    TextNode.image(
+                        Url.parse("https://example.com/image.png")
+                    )
+                ).appendChild(TextNode.text("before"))
+                .appendChild(TextNode.text("something gray")
+                    .setAttributes(
+                        Maps.of(
+                            TextStylePropertyName.COLOR,
+                            Color.parse("#678")
                         )
-                ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
-                        .appendChild(
-                                TextNode.hyperlink(
-                                        Url.parseAbsolute("https://example.com/hello")
-                                ).appendChild(TextNode.text("hyper link text 123"))
-                        ).appendChild(
-                                TextNode.image(
-                                        Url.parse("https://example.com/image.png")
-                                )
-                        ).appendChild(TextNode.text("before"))
-                        .appendChild(TextNode.text("something gray")
-                                .setAttributes(
-                                        Maps.of(
-                                                TextStylePropertyName.COLOR,
-                                                Color.parse("#678")
-                                        )
-                                )
-                        ).appendChild(TextNode.text("after"))
-                );
+                    )
+                ).appendChild(TextNode.text("after"))
+            );
 
         final StringBuilder html = new StringBuilder();
         final LineEnding eol = LineEnding.SYSTEM;
         final IndentingPrinter printer = Printers.stringBuilder(html, eol)
-                .indenting(Indentation.SPACES2);
+            .indenting(Indentation.SPACES2);
 
         // very simple html printer
         new FakeTextNodeVisitor() {
@@ -96,9 +96,9 @@ public class JunitTest {
                 printer.print("<SPAN style=\"");
 
                 node.attributes()
-                        .forEach((p, v) -> {
-                            printer.print(p + ": " + v + ";");
-                        });
+                    .forEach((p, v) -> {
+                        printer.print(p + ": " + v + ";");
+                    });
 
                 printer.print("\">" + eol);
                 printer.indent();
@@ -158,24 +158,24 @@ public class JunitTest {
         }.accept(node);
 
         Assert.assertEquals(
-                "<HTML>\n" +
-                        "  <head>\n" +
-                        "    <TITLE>\n" +
-                        "      title123\n" +
-                        "    </TITLE>\n" +
-                        "  </head>\n" +
-                        "  <BODY>\n" +
-                        "    <A href=\"https://example.com/hello\">\n" +
-                        "      hyper link text 123\n" +
-                        "    </A>\n" +
-                        "    <IMG src=\"https://example.com/image.png\"/>before\n" +
-                        "    <SPAN style=\"color: #667788;\">\n" +
-                        "      something gray\n" +
-                        "    </SPAN>\n" +
-                        "    after\n" +
-                        "  </BODY>\n" +
-                        "</HTML>\n",
-                html.toString()
+            "<HTML>\n" +
+                "  <head>\n" +
+                "    <TITLE>\n" +
+                "      title123\n" +
+                "    </TITLE>\n" +
+                "  </head>\n" +
+                "  <BODY>\n" +
+                "    <A href=\"https://example.com/hello\">\n" +
+                "      hyper link text 123\n" +
+                "    </A>\n" +
+                "    <IMG src=\"https://example.com/image.png\"/>before\n" +
+                "    <SPAN style=\"color: #667788;\">\n" +
+                "      something gray\n" +
+                "    </SPAN>\n" +
+                "    after\n" +
+                "  </BODY>\n" +
+                "</HTML>\n",
+            html.toString()
         );
     }
 }

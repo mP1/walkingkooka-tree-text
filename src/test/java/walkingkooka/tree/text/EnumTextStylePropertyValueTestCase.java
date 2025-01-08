@@ -31,8 +31,8 @@ public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> exte
     @Test
     public final void testParseValueInvalidFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.textStylePropertyName().parseValue("!invalid")
+            IllegalArgumentException.class,
+            () -> this.textStylePropertyName().parseValue("!invalid")
         );
     }
 
@@ -41,8 +41,8 @@ public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> exte
         final E enumValue = this.createTextStylePropertyValue();
 
         this.checkEquals(
-                enumValue,
-                this.textStylePropertyName().parseValue(enumValue.name())
+            enumValue,
+            this.textStylePropertyName().parseValue(enumValue.name())
         );
     }
 

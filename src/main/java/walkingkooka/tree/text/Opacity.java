@@ -32,7 +32,7 @@ import java.util.Objects;
  * Value class that holds an opacity value.
  */
 public final class Opacity implements Comparable<Opacity>,
-        Value<Double> {
+    Value<Double> {
 
     private final static double TRANSPARENT_VALUE = 0;
     private final static double OPAQUE_VALUE = 1;
@@ -61,10 +61,10 @@ public final class Opacity implements Comparable<Opacity>,
         }
 
         return TRANSPARENT_VALUE == value ?
-                TRANSPARENT :
-                OPAQUE_VALUE == value ?
-                        OPAQUE :
-                        new Opacity(value);
+            TRANSPARENT :
+            OPAQUE_VALUE == value ?
+                OPAQUE :
+                new Opacity(value);
     }
 
     /**
@@ -93,15 +93,15 @@ public final class Opacity implements Comparable<Opacity>,
     static Opacity unmarshall(final JsonNode node,
                               final JsonNodeUnmarshallContext context) {
         return node.isString() ?
-                unmarshallString(node.stringOrFail(), node) :
-                with(node.numberOrFail().doubleValue());
+            unmarshallString(node.stringOrFail(), node) :
+            with(node.numberOrFail().doubleValue());
     }
 
     private static Opacity unmarshallString(final String value,
                                             final JsonNode node) {
         return OPAQUE_TEXT.equals(value) ? OPAQUE :
-                TRANSPARENT_TEXT.equals(value) ? TRANSPARENT :
-                        failUnknownOpacity(value, node);
+            TRANSPARENT_TEXT.equals(value) ? TRANSPARENT :
+                failUnknownOpacity(value, node);
     }
 
     private static Opacity failUnknownOpacity(final String value, final JsonNode node) {
@@ -110,10 +110,10 @@ public final class Opacity implements Comparable<Opacity>,
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         return TRANSPARENT_VALUE == this.value ?
-                TRANSPARENT_JSON :
-                OPAQUE_VALUE == this.value ?
-                        OPAQUE_JSON :
-                        JsonNode.number(this.value);
+            TRANSPARENT_JSON :
+            OPAQUE_VALUE == this.value ?
+                OPAQUE_JSON :
+                JsonNode.number(this.value);
     }
 
     private final static JsonNode TRANSPARENT_JSON = JsonNode.string(TRANSPARENT_TEXT);
@@ -121,9 +121,9 @@ public final class Opacity implements Comparable<Opacity>,
 
     static {
         JsonNodeContext.register("opacity",
-                Opacity::unmarshall,
-                Opacity::marshall,
-                Opacity.class);
+            Opacity::unmarshall,
+            Opacity::marshall,
+            Opacity.class);
     }
 
     // Comparable ...................................................................................................
@@ -145,8 +145,8 @@ public final class Opacity implements Comparable<Opacity>,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof Opacity &&
-                        this.equals0(Cast.to(other));
+            other instanceof Opacity &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final Opacity other) {
@@ -159,16 +159,16 @@ public final class Opacity implements Comparable<Opacity>,
     @Override
     public String toString() {
         return TRANSPARENT == this ?
-                TRANSPARENT_TEXT :
-                OPAQUE == this ?
-                        OPAQUE_TEXT :
-                        formatPercentage();
+            TRANSPARENT_TEXT :
+            OPAQUE == this ?
+                OPAQUE_TEXT :
+                formatPercentage();
     }
 
     private String formatPercentage() {
         final String percentage = "" + PERCENTAGE_FACTOR * this.value;
         return (percentage.endsWith(".0") ?
-                percentage.substring(0, percentage.length() - 2) :
-                percentage).concat("%");
+            percentage.substring(0, percentage.length() - 2) :
+            percentage).concat("%");
     }
 }

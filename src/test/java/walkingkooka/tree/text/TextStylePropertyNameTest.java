@@ -44,12 +44,12 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testConstants() {
         this.checkEquals(Lists.empty(),
-                Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
-                        .filter(FieldAttributes.STATIC::is)
-                        .filter(f -> f.getType() == TextStylePropertyName.class)
-                        .filter(TextStylePropertyNameTest::constantNotCached)
-                        .collect(Collectors.toList()),
-                "");
+            Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
+                .filter(FieldAttributes.STATIC::is)
+                .filter(f -> f.getType() == TextStylePropertyName.class)
+                .filter(TextStylePropertyNameTest::constantNotCached)
+                .collect(Collectors.toList()),
+            "");
     }
 
     private static boolean constantNotCached(final Field field) {
@@ -64,15 +64,15 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testConstantValue() {
         this.checkEquals(
-                Lists.of("ALL=*"),
-                Arrays.stream(
-                        TextStylePropertyName.class.getDeclaredFields())
-                        .filter(FieldAttributes.STATIC::is)
-                        .filter(f -> f.getType() == TextStylePropertyName.class)
-                        .map(TextStylePropertyNameTest::checkConstantAndValueCompatible)
-                        .filter(v -> null != v)
-                        .collect(Collectors.toList()),
-                ""
+            Lists.of("ALL=*"),
+            Arrays.stream(
+                    TextStylePropertyName.class.getDeclaredFields())
+                .filter(FieldAttributes.STATIC::is)
+                .filter(f -> f.getType() == TextStylePropertyName.class)
+                .map(TextStylePropertyNameTest::checkConstantAndValueCompatible)
+                .filter(v -> null != v)
+                .collect(Collectors.toList()),
+            ""
         );
     }
 
@@ -86,8 +86,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             final TextStylePropertyName<?> constant = Cast.to(field.get(null));
             final String value = constant.value();
             return expectedConstantValue.equals(value) ?
-                    null :
-                    fieldName + "=" + value;
+                null :
+                fieldName + "=" + value;
 
         } catch (final Exception cause) {
             throw new Error(cause.getMessage(), cause);
@@ -97,12 +97,12 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testValues() {
         this.checkEquals(
-                TextStylePropertyName.values(),
-                Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
-                        .filter(FieldAttributes.STATIC::is)
-                        .filter(f -> f.getType() == TextStylePropertyName.class)
-                        .map(TextStylePropertyNameTest::getField)
-                        .collect(Collectors.toCollection(SortedSets::tree))
+            TextStylePropertyName.values(),
+            Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
+                .filter(FieldAttributes.STATIC::is)
+                .filter(f -> f.getType() == TextStylePropertyName.class)
+                .map(TextStylePropertyNameTest::getField)
+                .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 
@@ -135,23 +135,23 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     private void constantNameAndCheck(final TextStylePropertyName<?> property,
                                       final String constantName) {
         this.checkEquals(
-                constantName,
-                property.constantName(),
-                () -> property + ".constantName()"
+            constantName,
+            property.constantName(),
+            () -> property + ".constantName()"
         );
     }
 
     @Test
     public void testEnumType() {
         this.checkEquals((Object)
-                        TextStylePropertyName.values()
-                                .stream()
-                                .filter(n -> n.enumType().isPresent())
-                                .collect(Collectors.toCollection(SortedSets::tree)),
                 TextStylePropertyName.values()
-                        .stream()
-                        .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
-                        .collect(Collectors.toCollection(SortedSets::tree))
+                    .stream()
+                    .filter(n -> n.enumType().isPresent())
+                    .collect(Collectors.toCollection(SortedSets::tree)),
+            TextStylePropertyName.values()
+                .stream()
+                .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
+                .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 
@@ -159,8 +159,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     public void testUrlFragment() {
         for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
             this.checkEquals(
-                    UrlFragment.with(propertyName.name),
-                    propertyName.urlFragment()
+                UrlFragment.with(propertyName.name),
+                propertyName.urlFragment()
             );
         }
     }
@@ -169,45 +169,45 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testParseValueString() {
         this.parseValueAndCheck(
-                TextStylePropertyName.TEXT,
-                "abc123",
-                "abc123"
+            TextStylePropertyName.TEXT,
+            "abc123",
+            "abc123"
         );
     }
 
     @Test
     public void testParseValueColor() {
         this.parseValueAndCheck(
-                TextStylePropertyName.BACKGROUND_COLOR,
-                "#123456",
-                Color.parse("#123456")
+            TextStylePropertyName.BACKGROUND_COLOR,
+            "#123456",
+            Color.parse("#123456")
         );
     }
 
     @Test
     public void testParseValueEnum() {
         this.parseValueAndCheck(
-                TextStylePropertyName.TEXT_ALIGN,
-                "CENTER",
-                TextAlign.CENTER
+            TextStylePropertyName.TEXT_ALIGN,
+            "CENTER",
+            TextAlign.CENTER
         );
     }
 
     @Test
     public void testParseValueNone() {
         this.parseValueAndCheck(
-                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                "none",
-                Length.none()
+            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+            "none",
+            Length.none()
         );
     }
 
     @Test
     public void testParseValuePixels() {
         this.parseValueAndCheck(
-                TextStylePropertyName.WIDTH,
-                "100px",
-                Length.pixel(100.0)
+            TextStylePropertyName.WIDTH,
+            "100px",
+            Length.pixel(100.0)
         );
     }
 
@@ -215,9 +215,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                                         final String string,
                                         final T expectedValue) {
         this.checkEquals(
-                expectedValue,
-                propertyName.parseValue(string),
-                () -> propertyName + " parseValue " + CharSequences.quoteAndEscape(string)
+            expectedValue,
+            propertyName.parseValue(string),
+            () -> propertyName + " parseValue " + CharSequences.quoteAndEscape(string)
         );
     }
 
@@ -232,48 +232,48 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testStylePatchNonNullValue() {
         this.stylePatchAndCheck(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.RIGHT,
-                JsonNode.object()
-                        .set(
-                                JsonPropertyName.with("text-align"),
-                                JsonNode.string("RIGHT")
-                        )
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.RIGHT,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("text-align"),
+                    JsonNode.string("RIGHT")
+                )
         );
     }
 
     @Test
     public void testStylePatchNonNullValue2() {
         this.patchAndCheck(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.RIGHT,
+            TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.RIGHT,
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.JUSTIFY
-                ),
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.RIGHT
-                )
+                TextAlign.JUSTIFY
+            ),
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.RIGHT
+            )
         );
     }
 
     @Test
     public void testStylePatchNonNullValue3() {
         final TextStyle textStyle = TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
+            .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
 
         this.patchAndCheck(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.RIGHT,
+            textStyle.set(
                 TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.RIGHT,
-                textStyle.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.JUSTIFY
-                ),
-                textStyle.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.RIGHT
-                )
+                TextAlign.JUSTIFY
+            ),
+            textStyle.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.RIGHT
+            )
         );
     }
 
@@ -283,96 +283,96 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         final Color propertyValue = Color.parse("#123456");
 
         this.stylePatchAndCheck(
-                propertyName,
-                propertyValue,
-                JsonNode.object()
-                        .set(
-                                JsonPropertyName.with("border-color"),
-                                JsonNode.string(propertyValue.toString())
-                        )
+            propertyName,
+            propertyValue,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("border-color"),
+                    JsonNode.string(propertyValue.toString())
+                )
         );
 
         final TextStyle textStyle = TextStyle.EMPTY
-                .set(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        Color.BLACK
-                );
+            .set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.BLACK
+            );
 
         this.patchAndCheck(
+            propertyName,
+            propertyValue,
+            textStyle,
+            textStyle.set(
                 propertyName,
-                propertyValue,
-                textStyle,
-                textStyle.set(
-                        propertyName,
-                        propertyValue
-                )
+                propertyValue
+            )
         );
     }
 
     @Test
     public void testStylePatchNullValue() {
         this.stylePatchAndCheck(
-                TextStylePropertyName.TEXT_ALIGN,
-                null,
-                JsonNode.object()
-                        .set(
-                                JsonPropertyName.with("text-align"),
-                                JsonNode.nullNode()
-                        )
+            TextStylePropertyName.TEXT_ALIGN,
+            null,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("text-align"),
+                    JsonNode.nullNode()
+                )
         );
     }
 
     @Test
     public void testStylePatchNullValue2() {
         this.patchAndCheck(
+            TextStylePropertyName.TEXT_ALIGN,
+            null,
+            TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
-                null,
-                TextStyle.EMPTY.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.CENTER
-                ),
-                TextStyle.EMPTY
+                TextAlign.CENTER
+            ),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testStylePatchNullValue3() {
         final TextStyle textStyle = TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
+            .set(TextStylePropertyName.COLOR, Color.parse("#123456"));
 
         this.patchAndCheck(
+            TextStylePropertyName.TEXT_ALIGN,
+            null,
+            textStyle.set(
                 TextStylePropertyName.TEXT_ALIGN,
-                null,
-                textStyle.set(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        TextAlign.CENTER
-                ),
-                textStyle
+                TextAlign.CENTER
+            ),
+            textStyle
         );
     }
 
     @Test
     public void testStylePatchNullAllProperties() {
-        for(final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
             this.stylePatchAndCheck(
-                    propertyName,
-                    null,
-                    JsonNode.object()
-                            .set(
-                                    JsonPropertyName.with(propertyName.name),
-                                    JsonNode.nullNode()
-                            )
+                propertyName,
+                null,
+                JsonNode.object()
+                    .set(
+                        JsonPropertyName.with(propertyName.name),
+                        JsonNode.nullNode()
+                    )
             );
         }
     }
 
     private <T> void stylePatchAndCheck(final TextStylePropertyName<T> propertyName,
-                                       final T value,
-                                       final JsonNode expected) {
+                                        final T value,
+                                        final JsonNode expected) {
         this.checkEquals(
-                expected,
-                propertyName.stylePatch(value),
-                () -> propertyName + " patch " + value
+            expected,
+            propertyName.stylePatch(value),
+            () -> propertyName + " patch " + value
         );
     }
 
@@ -381,20 +381,20 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                                    final TextStyle initial,
                                    final TextStyle expected) {
         this.checkEquals(
-                expected,
-                initial.patch(
-                        propertyName.stylePatch(value),
-                        JsonNodeUnmarshallContexts.basic(
-                                ExpressionNumberKind.BIG_DECIMAL,
-                                MathContext.DECIMAL32
-                        )
-                ),
-                () -> initial + " patch " + propertyName + " patch " + value
+            expected,
+            initial.patch(
+                propertyName.stylePatch(value),
+                JsonNodeUnmarshallContexts.basic(
+                    ExpressionNumberKind.BIG_DECIMAL,
+                    MathContext.DECIMAL32
+                )
+            ),
+            () -> initial + " patch " + propertyName + " patch " + value
         );
     }
-    
+
     // helpers..........................................................................................................
-    
+
     @Override
     public TextStylePropertyName<?> createName(final String name) {
         return TextStylePropertyName.with(name);

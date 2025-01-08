@@ -28,13 +28,13 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
  * Base class of all {@link Name names} in this package.
  */
 abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> implements Name,
-        Comparable<N>{
+    Comparable<N> {
 
     static String checkName(final String name) {
         CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(name,
-                "name",
-                INITIAL,
-                PART);
+            "name",
+            INITIAL,
+            PART);
         return name;
     }
 
@@ -63,8 +63,8 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-                this.canBeEqual(other) &&
-                        this.equals0(Cast.to(other));
+            this.canBeEqual(other) &&
+                this.equals0(Cast.to(other));
     }
 
     abstract boolean canBeEqual(final Object other);

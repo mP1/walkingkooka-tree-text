@@ -40,10 +40,10 @@ import java.util.Optional;
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
 public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
-        Patchable<TextStyle>,
-        TreePrintable,
-        HasText,
-        CanBeEmpty {
+    Patchable<TextStyle>,
+    TreePrintable,
+    HasText,
+    CanBeEmpty {
 
     /**
      * A {@link TextStyle} with no styling.
@@ -130,7 +130,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      */
     public final <V> V getOrFail(final TextStylePropertyName<V> propertyName) {
         return this.get(propertyName)
-                .orElseThrow(() -> new IllegalArgumentException("Missing " + propertyName));
+            .orElseThrow(() -> new IllegalArgumentException("Missing " + propertyName));
     }
 
     // set..............................................................................................................
@@ -161,7 +161,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         final Map<TextStylePropertyName<?>, Object> colorStyleWidth = this.valuesMutableCopy();
 
         for (final BoxEdge boxEdge : BoxEdge.values()) {
-            if(BoxEdge.ALL == boxEdge) {
+            if (BoxEdge.ALL == boxEdge) {
                 continue;
             }
 
@@ -169,24 +169,24 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             colorPropertyName.check(color);
 
             colorStyleWidth.put(
-                    colorPropertyName,
-                    color
+                colorPropertyName,
+                color
             );
 
             final TextStylePropertyName<BorderStyle> stylePropertyName = boxEdge.borderStylePropertyName();
             stylePropertyName.check(style);
 
             colorStyleWidth.put(
-                    stylePropertyName,
-                    style
+                stylePropertyName,
+                style
             );
 
             final TextStylePropertyName<Length<?>> widthPropertyName = boxEdge.borderWidthPropertyName();
             widthPropertyName.check(width);
 
             colorStyleWidth.put(
-                    widthPropertyName,
-                    width
+                widthPropertyName,
+                width
             );
         }
 
@@ -221,98 +221,98 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 switch (propertyName.name) {
                     case BORDER_COLOR:
                         copy.put(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                value
+                            TextStylePropertyName.BORDER_TOP_COLOR,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                value
+                            TextStylePropertyName.BORDER_LEFT_COLOR,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                value
+                            TextStylePropertyName.BORDER_RIGHT_COLOR,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                value
+                            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                            value
                         );
                         break;
                     case BORDER_STYLE:
                         copy.put(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                value
+                            TextStylePropertyName.BORDER_TOP_STYLE,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                value
+                            TextStylePropertyName.BORDER_LEFT_STYLE,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                value
+                            TextStylePropertyName.BORDER_RIGHT_STYLE,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                value
+                            TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                            value
                         );
                         break;
                     case BORDER_WIDTH:
                         copy.put(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                value
+                            TextStylePropertyName.BORDER_TOP_WIDTH,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                value
+                            TextStylePropertyName.BORDER_LEFT_WIDTH,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                value
+                            TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                value
+                            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                            value
                         );
                         break;
                     case MARGIN:
                         copy.put(
-                                TextStylePropertyName.MARGIN_TOP,
-                                value
+                            TextStylePropertyName.MARGIN_TOP,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.MARGIN_LEFT,
-                                value
+                            TextStylePropertyName.MARGIN_LEFT,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                value
+                            TextStylePropertyName.MARGIN_RIGHT,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                value
+                            TextStylePropertyName.MARGIN_BOTTOM,
+                            value
                         );
                         break;
                     case PADDING:
                         copy.put(
-                                TextStylePropertyName.PADDING_TOP,
-                                value
+                            TextStylePropertyName.PADDING_TOP,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.PADDING_LEFT,
-                                value
+                            TextStylePropertyName.PADDING_LEFT,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.PADDING_RIGHT,
-                                value
+                            TextStylePropertyName.PADDING_RIGHT,
+                            value
                         );
                         copy.put(
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                value
+                            TextStylePropertyName.PADDING_BOTTOM,
+                            value
                         );
                         break;
                     default:
                         copy.put(
-                                propertyName,
-                                value
+                            propertyName,
+                            value
                         );
                         break;
                 }
@@ -320,8 +320,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         }
 
         return copy.isEmpty() ?
-                TextStyle.EMPTY :
-                this.setValuesWithCopy(copy);
+            TextStyle.EMPTY :
+            this.setValuesWithCopy(copy);
 
     }
 
@@ -340,8 +340,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         checkPropertyName(propertyName);
 
         return propertyName == TextStylePropertyName.ALL ?
-                TextStyle.EMPTY :
-                this.remove0(propertyName);
+            TextStyle.EMPTY :
+            this.remove0(propertyName);
     }
 
     abstract TextStyle remove0(final TextStylePropertyName<?> propertyName);
@@ -357,8 +357,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      */
     public final <V> TextStyle setOrRemove(final TextStylePropertyName<V> propertyName, final V value) {
         return null != value ?
-                this.set(propertyName, value) :
-                this.remove(propertyName);
+            this.set(propertyName, value) :
+            this.remove(propertyName);
     }
     // TextStyleVisitor.................................................................................................
 
@@ -380,8 +380,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-                this.canBeEquals(other) &&
-                        this.equals0(Cast.to(other));
+            this.canBeEquals(other) &&
+                this.equals0(Cast.to(other));
     }
 
     abstract boolean canBeEquals(final Object other);
@@ -403,7 +403,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         for (JsonNode child : node.objectOrFail().children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
             properties.put(name,
-                    name.handler.unmarshall(child, name, context));
+                name.handler.unmarshall(child, name, context));
         }
 
         return TextStyle.EMPTY.setValues(properties);
@@ -415,11 +415,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         TextStylePropertyName.BACKGROUND_COLOR.toString();
 
         JsonNodeContext.register("text-style",
-                TextStyle::unmarshall,
-                TextStyle::marshall,
-                TextStyle.class,
-                TextStyleNonEmpty.class,
-                TextStyleEmpty.class);
+            TextStyle::unmarshall,
+            TextStyle::marshall,
+            TextStyle.class,
+            TextStyleNonEmpty.class,
+            TextStyleEmpty.class);
     }
 
     // Patchable........................................................................................................
@@ -435,8 +435,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         Objects.requireNonNull(context, "context");
 
         return patch.isNull() ?
-                TextStyle.EMPTY :
-                this.patchNonNull(patch, context);
+            TextStyle.EMPTY :
+            this.patchNonNull(patch, context);
     }
 
     private TextStyle patchNonNull(final JsonNode patch,
@@ -446,12 +446,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         for (final JsonNode nameAndValue : patch.objectOrFail().children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(nameAndValue);
             result = result.setOrRemove(
-                    name,
-                    nameAndValue.isNull() ?
-                            null :
-                            Cast.to(
-                                    name.handler.unmarshall(nameAndValue, name, context)
-                            )
+                name,
+                nameAndValue.isNull() ?
+                    null :
+                    Cast.to(
+                        name.handler.unmarshall(nameAndValue, name, context)
+                    )
             );
         }
 

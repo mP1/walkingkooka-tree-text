@@ -25,8 +25,8 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
     @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
-                JsonNode.number(123),
-                FontSize.with(123)
+            JsonNode.number(123),
+            FontSize.with(123)
         );
     }
 
@@ -35,16 +35,16 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
         final FontSize fontSize = FontSize.with(123);
 
         this.marshallAndCheck(
-                fontSize,
-                JsonNode.number(fontSize.value().doubleValue())
+            fontSize,
+            JsonNode.number(fontSize.value().doubleValue())
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.handler(),
-                "FontSize"
+            this.handler(),
+            "FontSize"
         );
     }
 

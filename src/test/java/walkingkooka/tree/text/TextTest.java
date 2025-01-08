@@ -103,8 +103,8 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"), Text.with("b22")))
-                        .children().get(1),
-                2);
+                .children().get(1),
+            2);
     }
 
     // toHtml...........................................................................................................
@@ -122,16 +122,16 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testToHtmlAmpersand() {
         this.toHtmlAndCheck(
-                Text.with("&"),
-                "&amp;"
+            Text.with("&"),
+            "&amp;"
         );
     }
 
     @Test
     public void testToHtmlSpace() {
         this.toHtmlAndCheck(
-                Text.with(" "),
-                "&nbsp;"
+            Text.with(" "),
+            "&nbsp;"
         );
     }
 
@@ -140,8 +140,8 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         final String text = "abc 123<>&\"'";
 
         this.toHtmlAndCheck(
-                Text.with(text),
-                "abc&nbsp;123&lt;&gt;&amp;&amp;quot;'"
+            Text.with(text),
+            "abc&nbsp;123&lt;&gt;&amp;&amp;quot;'"
         );
     }
 
@@ -194,8 +194,8 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-                Text.with("abc\t123\n"),
-                "Text \"abc\\t123\\n\"\n"
+            Text.with("abc\t123\n"),
+            "Text \"abc\\t123\\n\"\n"
         );
     }
 

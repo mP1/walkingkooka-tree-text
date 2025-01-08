@@ -27,13 +27,13 @@ public final class TextStylePropertyValueHandlerVoidTest extends TextStyleProper
     @Test
     public void testUnmarshallFails() {
         assertThrows(
-                UnsupportedOperationException.class,
-                () -> this.handler()
-                        .unmarshall(
-                                JsonNode.nullNode(),
-                                this.propertyName(),
-                                this.unmarshallContext()
-                        )
+            UnsupportedOperationException.class,
+            () -> this.handler()
+                .unmarshall(
+                    JsonNode.nullNode(),
+                    this.propertyName(),
+                    this.unmarshallContext()
+                )
         );
     }
 

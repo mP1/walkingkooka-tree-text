@@ -76,7 +76,7 @@ final class TextStyleEmpty extends TextStyle {
     @Override
     TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
         return TextStyleNonEmpty.with(
-                TextNodeMap.with(values)
+            TextNodeMap.with(values)
         );
     }
 
@@ -120,118 +120,118 @@ final class TextStyleEmpty extends TextStyle {
         switch (propertyName.name) {
             case BORDER_COLOR:
                 entries = Lists.of(
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_LEFT_COLOR,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_RIGHT_COLOR,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                                value
-                        )
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_TOP_COLOR,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_LEFT_COLOR,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                        value
+                    )
                 );
                 break;
             case BORDER_STYLE:
                 entries = Lists.of(
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_LEFT_STYLE,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_RIGHT_STYLE,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                value
-                        )
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_TOP_STYLE,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_LEFT_STYLE,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_RIGHT_STYLE,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                        value
+                    )
                 );
                 break;
             case BORDER_WIDTH:
                 entries = Lists.of(
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_LEFT_WIDTH,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                value
-                        )
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_TOP_WIDTH,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_LEFT_WIDTH,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                        value
+                    )
                 );
                 break;
             case MARGIN:
                 entries = Lists.of(
-                        Maps.entry(
-                                TextStylePropertyName.MARGIN_TOP,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.MARGIN_LEFT,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.MARGIN_RIGHT,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.MARGIN_BOTTOM,
-                                value
-                        )
+                    Maps.entry(
+                        TextStylePropertyName.MARGIN_TOP,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.MARGIN_LEFT,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        value
+                    )
                 );
                 break;
             case PADDING:
                 entries = Lists.of(
-                        Maps.entry(
-                                TextStylePropertyName.PADDING_TOP,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.PADDING_LEFT,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.PADDING_RIGHT,
-                                value
-                        ),
-                        Maps.entry(
-                                TextStylePropertyName.PADDING_BOTTOM,
-                                value
-                        )
+                    Maps.entry(
+                        TextStylePropertyName.PADDING_TOP,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.PADDING_LEFT,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.PADDING_RIGHT,
+                        value
+                    ),
+                    Maps.entry(
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        value
+                    )
                 );
                 break;
             default:
                 entries = Lists.of(
-                        Maps.entry(
-                                propertyName,
-                                value
-                        )
+                    Maps.entry(
+                        propertyName,
+                        value
+                    )
                 );
                 break;
         }
 
         return TextStyleNonEmpty.with(
-                TextNodeMap.withTextStyleMapEntrySet(
-                        TextNodeMapEntrySet.withList(entries)
-                )
+            TextNodeMap.withTextStyleMapEntrySet(
+                TextNodeMapEntrySet.withList(entries)
+            )
         );
     }
 

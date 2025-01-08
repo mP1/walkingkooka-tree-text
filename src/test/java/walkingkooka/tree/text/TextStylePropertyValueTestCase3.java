@@ -21,7 +21,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
 public abstract class TextStylePropertyValueTestCase3<V> extends TextStylePropertyValueTestCase<V>
-        implements JsonNodeMarshallingTesting<V> {
+    implements JsonNodeMarshallingTesting<V> {
 
     TextStylePropertyValueTestCase3() {
         super();

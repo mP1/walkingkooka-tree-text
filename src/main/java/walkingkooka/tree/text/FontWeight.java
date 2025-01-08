@@ -31,7 +31,7 @@ import java.util.Objects;
  * Value class that holds a font weight.
  */
 public final class FontWeight implements Comparable<FontWeight>,
-        Value<Integer> {
+    Value<Integer> {
 
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;
@@ -59,10 +59,10 @@ public final class FontWeight implements Comparable<FontWeight>,
         }
 
         return NORMAL_VALUE == value ?
-                NORMAL :
-                BOLD_VALUE == value ?
-                        BOLD :
-                        new FontWeight(value);
+            NORMAL :
+            BOLD_VALUE == value ?
+                BOLD :
+                new FontWeight(value);
     }
 
     /**
@@ -91,14 +91,14 @@ public final class FontWeight implements Comparable<FontWeight>,
     static FontWeight unmarshall(final JsonNode node,
                                  final JsonNodeUnmarshallContext context) {
         return node.isString() ?
-                unmarshallString(node.stringOrFail()) :
-                with(node.numberOrFail().intValue());
+            unmarshallString(node.stringOrFail()) :
+            with(node.numberOrFail().intValue());
     }
 
     private static FontWeight unmarshallString(final String value) {
         return BOLD_TEXT.equals(value) ? BOLD :
-                NORMAL_TEXT.equals(value) ? NORMAL :
-                        unmarshallString0(value);
+            NORMAL_TEXT.equals(value) ? NORMAL :
+                unmarshallString0(value);
     }
 
     private static FontWeight unmarshallString0(final String value) {
@@ -107,10 +107,10 @@ public final class FontWeight implements Comparable<FontWeight>,
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         return NORMAL_VALUE == this.value ?
-                NORMAL_JSON :
-                BOLD_VALUE == this.value ?
-                        BOLD_JSON :
-                        JsonNode.number(this.value);
+            NORMAL_JSON :
+            BOLD_VALUE == this.value ?
+                BOLD_JSON :
+                JsonNode.number(this.value);
     }
 
     private final static JsonNode NORMAL_JSON = JsonNode.string(NORMAL_TEXT);
@@ -118,9 +118,9 @@ public final class FontWeight implements Comparable<FontWeight>,
 
     static {
         JsonNodeContext.register("font-weight",
-                FontWeight::unmarshall,
-                FontWeight::marshall,
-                FontWeight.class);
+            FontWeight::unmarshall,
+            FontWeight::marshall,
+            FontWeight.class);
     }
 
     // Comparable ...................................................................................................
@@ -142,8 +142,8 @@ public final class FontWeight implements Comparable<FontWeight>,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof FontWeight &&
-                        this.equals0(Cast.to(other));
+            other instanceof FontWeight &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final FontWeight other) {
@@ -157,9 +157,9 @@ public final class FontWeight implements Comparable<FontWeight>,
     public String toString() {
         final int value = this.value;
         return NORMAL_VALUE == value ?
-                NORMAL_TEXT :
-                BOLD_VALUE == value ?
-                        BOLD_TEXT :
-                        String.valueOf(value);
+            NORMAL_TEXT :
+            BOLD_VALUE == value ?
+                BOLD_TEXT :
+                String.valueOf(value);
     }
 }

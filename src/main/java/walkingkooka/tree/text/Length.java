@@ -40,10 +40,10 @@ public abstract class Length<V> {
         checkText(text);
 
         return NoneLength.TEXT.equals(text) ?
-                NoneLength.INSTANCE :
-                NormalLength.TEXT.equals(text) ?
-                        NormalLength.INSTANCE :
-                        LengthUnit.tryAllParse(text);
+            NoneLength.INSTANCE :
+            NormalLength.TEXT.equals(text) ?
+                NormalLength.INSTANCE :
+                LengthUnit.tryAllParse(text);
     }
 
     private static String checkText(final String text) {
@@ -196,8 +196,8 @@ public abstract class Length<V> {
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                this.canBeEqual(other) &&
-                        this.equals0(Cast.to(other));
+            this.canBeEqual(other) &&
+                this.equals0(Cast.to(other));
     }
 
     abstract boolean canBeEqual(final Object other);
@@ -255,8 +255,8 @@ public abstract class Length<V> {
 
     static {
         JsonNodeContext.register("length",
-                Length::unmarshall,
-                Length::marshall,
-                Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
+            Length::unmarshall,
+            Length::marshall,
+            Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
     }
 }

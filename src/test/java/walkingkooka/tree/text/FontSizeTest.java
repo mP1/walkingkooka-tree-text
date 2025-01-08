@@ -30,8 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize>
-        implements ComparableTesting2<FontSize>,
-        ConstantsTesting<FontSize> {
+    implements ComparableTesting2<FontSize>,
+    ConstantsTesting<FontSize> {
 
     private final static int VALUE = 10;
 
@@ -61,16 +61,16 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     @Test
     public void testParseValue() {
         this.checkEquals(
-                FontSize.with(1),
-                this.textStylePropertyName().parseValue("1")
+            FontSize.with(1),
+            this.textStylePropertyName().parseValue("1")
         );
     }
 
     @Test
     public void testParseValue2() {
         this.checkEquals(
-                FontSize.with(23),
-                this.textStylePropertyName().parseValue("23")
+            FontSize.with(23),
+            this.textStylePropertyName().parseValue("23")
         );
     }
 
@@ -105,7 +105,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     public void testUnmarshallNumber() {
         final int value = 20;
         this.unmarshallAndCheck(JsonNode.number(value),
-                FontSize.with(value));
+            FontSize.with(value));
     }
 
     @Test

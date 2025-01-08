@@ -40,8 +40,8 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"), this.createTextNode()))
-                        .children().get(1),
-                2);
+                .children().get(1),
+            2);
     }
 
     // toHtml...........................................................................................................
@@ -49,8 +49,8 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     @Test
     public void testToHtml() {
         assertThrows(
-                UnsupportedOperationException.class,
-                () -> this.createTextNode().toHtml()
+            UnsupportedOperationException.class,
+            () -> this.createTextNode().toHtml()
         );
     }
 
@@ -78,8 +78,8 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-                TextPlaceholderNode.with(TextPlaceholderName.with("placeholder1")),
-                "Placeholder \"placeholder1\"\n"
+            TextPlaceholderNode.with(TextPlaceholderName.with("placeholder1")),
+            "Placeholder \"placeholder1\"\n"
         );
     }
 

@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
-        implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight> {
+    implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight> {
 
     private final static int VALUE = 456;
 
@@ -61,16 +61,16 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     @Test
     public void testParseValueBold() {
         this.checkEquals(
-                FontWeight.BOLD,
-                this.textStylePropertyName().parseValue("bold")
+            FontWeight.BOLD,
+            this.textStylePropertyName().parseValue("bold")
         );
     }
 
     @Test
     public void testParseValueNumber() {
         this.checkEquals(
-                FontWeight.with(23),
-                this.textStylePropertyName().parseValue("23")
+            FontWeight.with(23),
+            this.textStylePropertyName().parseValue("23")
         );
     }
 
@@ -104,51 +104,51 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     @Test
     public void testUnmarshallBold() {
         this.unmarshallAndCheck(JsonNode.string("bold"),
-                FontWeight.BOLD);
+            FontWeight.BOLD);
     }
 
     @Test
     public void testUnmarshallNormal() {
         this.unmarshallAndCheck(JsonNode.string("normal"),
-                FontWeight.NORMAL);
+            FontWeight.NORMAL);
     }
 
     @Test
     public void testUnmarshallNormal2() {
         this.unmarshallAndCheck(JsonNode.array()
-                        .appendChild(JsonNode.string("normal"))
-                        .get(0),
-                FontWeight.NORMAL);
+                .appendChild(JsonNode.string("normal"))
+                .get(0),
+            FontWeight.NORMAL);
     }
 
     @Test
     public void testUnmarshallNumber() {
         final int value = 20;
         this.unmarshallAndCheck(JsonNode.number(value),
-                FontWeight.with(value));
+            FontWeight.with(value));
     }
 
     @Test
     public void testMarshall() {
         this.marshallAndCheck(
-                this.createComparable(),
-                JsonNode.number(VALUE)
+            this.createComparable(),
+            JsonNode.number(VALUE)
         );
     }
 
     @Test
     public void testMarshallBold() {
         this.marshallAndCheck(
-                FontWeight.BOLD,
-                JsonNode.string(FontWeight.BOLD_TEXT)
+            FontWeight.BOLD,
+            JsonNode.string(FontWeight.BOLD_TEXT)
         );
     }
 
     @Test
     public void testMarshallNormal() {
         this.marshallAndCheck(
-                FontWeight.NORMAL,
-                JsonNode.string(FontWeight.NORMAL_TEXT)
+            FontWeight.NORMAL,
+            JsonNode.string(FontWeight.NORMAL_TEXT)
         );
     }
 

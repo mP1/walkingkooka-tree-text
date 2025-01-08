@@ -26,14 +26,14 @@ public final class TextNodeVisitorTest implements TextNodeVisitorTesting<TextNod
     @Test
     public void testAcceptProperties() {
         this.createVisitor()
-                .accept(TextNode.style(Lists.of(TextNode.text("abc123"))));
+            .accept(TextNode.style(Lists.of(TextNode.text("abc123"))));
     }
 
     @Test
     public void testAcceptStyleName() {
         this.createVisitor()
-                .accept(TextNode.styleName(TextStyleName.with("styled123"))
-                        .setChildren(Lists.of(TextNode.text("abc123"))));
+            .accept(TextNode.styleName(TextStyleName.with("styled123"))
+                .setChildren(Lists.of(TextNode.text("abc123"))));
     }
 
     @Test

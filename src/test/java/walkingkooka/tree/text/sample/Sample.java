@@ -38,40 +38,40 @@ import walkingkooka.visit.Visiting;
 public final class Sample {
     public static void main(final String[] args) {
         final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
+            .appendChild(
+                TextNode.styleName(
+                    TextStyleName.with("head")
+                ).appendChild(
+                    TextNode.styleName(
+                        TextStyleName.with("TITLE")
+                    ).appendChild(
+                        TextNode.text("title123")
+                    )
+                )
+            ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
                 .appendChild(
-                        TextNode.styleName(
-                                TextStyleName.with("head")
-                        ).appendChild(
-                                TextNode.styleName(
-                                        TextStyleName.with("TITLE")
-                                ).appendChild(
-                                        TextNode.text("title123")
-                                )
+                    TextNode.hyperlink(
+                        Url.parseAbsolute("https://example.com/hello")
+                    ).appendChild(TextNode.text("hyper link text 123"))
+                ).appendChild(
+                    TextNode.image(
+                        Url.parse("https://example.com/image.png")
+                    )
+                ).appendChild(TextNode.text("before"))
+                .appendChild(TextNode.text("something gray")
+                    .setAttributes(
+                        Maps.of(
+                            TextStylePropertyName.COLOR,
+                            Color.parse("#678")
                         )
-                ).appendChild(TextNode.styleName(TextStyleName.with("BODY"))
-                        .appendChild(
-                                TextNode.hyperlink(
-                                        Url.parseAbsolute("https://example.com/hello")
-                                ).appendChild(TextNode.text("hyper link text 123"))
-                        ).appendChild(
-                                TextNode.image(
-                                        Url.parse("https://example.com/image.png")
-                                )
-                        ).appendChild(TextNode.text("before"))
-                        .appendChild(TextNode.text("something gray")
-                                .setAttributes(
-                                        Maps.of(
-                                                TextStylePropertyName.COLOR,
-                                                Color.parse("#678")
-                                        )
-                                )
-                        ).appendChild(TextNode.text("after"))
-                );
+                    )
+                ).appendChild(TextNode.text("after"))
+            );
 
         final StringBuilder html = new StringBuilder();
         final LineEnding eol = LineEnding.SYSTEM;
         final IndentingPrinter printer = Printers.stringBuilder(html, eol)
-                .indenting(Indentation.SPACES2);
+            .indenting(Indentation.SPACES2);
 
         // very simple html printer
         new FakeTextNodeVisitor() {
@@ -90,9 +90,9 @@ public final class Sample {
                 printer.print("<SPAN style=\"");
 
                 node.attributes()
-                        .forEach((p, v) -> {
-                            printer.print(p + ": " + v + ";");
-                        });
+                    .forEach((p, v) -> {
+                        printer.print(p + ": " + v + ";");
+                    });
 
                 printer.print("\">" + eol);
                 printer.indent();
