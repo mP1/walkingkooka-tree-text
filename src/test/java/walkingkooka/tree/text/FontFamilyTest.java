@@ -27,11 +27,11 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class FontFamilyTest implements ClassTesting2<FontFamily>,
-        NameTesting<FontFamily, FontFamily>,
-        JsonNodeMarshallingTesting<FontFamily> {
+    NameTesting<FontFamily, FontFamily>,
+    JsonNodeMarshallingTesting<FontFamily> {
 
     private final static String TEXT = "Times New Roman";
-    
+
     // TypeNaming.......................................................................................................
 
     @Override
@@ -48,7 +48,7 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     @Test
     public void testUnmarshallString() {
         this.unmarshallAndCheck(JsonNode.string(TEXT),
-                FontFamily.with(TEXT));
+            FontFamily.with(TEXT));
     }
 
     @Test

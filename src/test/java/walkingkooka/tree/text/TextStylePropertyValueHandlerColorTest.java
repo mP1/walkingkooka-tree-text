@@ -27,40 +27,40 @@ public final class TextStylePropertyValueHandlerColorTest extends TextStylePrope
     @Test
     public void testUnmarshallHashRgb() {
         this.unmarshallAndCheck(
-                JsonNode.string("#123"),
-                Color.parse("#123")
+            JsonNode.string("#123"),
+            Color.parse("#123")
         );
     }
 
     @Test
     public void testUnmarshallWebColorName() {
         this.unmarshallAndCheck(
-                JsonNode.string("red"),
-                WebColorName.RED.color()
+            JsonNode.string("red"),
+            WebColorName.RED.color()
         );
     }
 
     @Test
     public void testMarshallRed() {
         this.marshallAndCheck(
-                WebColorName.RED.color(),
-                JsonNode.string("red")
+            WebColorName.RED.color(),
+            JsonNode.string("red")
         );
     }
 
     @Test
     public void testMarshallNonWebColorNameColor() {
         this.marshallAndCheck(
-                Color.parse("#123456"),
-                JsonNode.string("#123456")
+            Color.parse("#123456"),
+            JsonNode.string("#123456")
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.handler(),
-                "Color"
+            this.handler(),
+            "Color"
         );
     }
 

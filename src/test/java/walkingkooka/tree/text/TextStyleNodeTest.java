@@ -198,11 +198,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         style.put(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT);
 
         final TextNode node = TextNode.style(TextNode.NO_CHILDREN)
-                .setAttributes(style);
+            .setAttributes(style);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(style),
-                node.textStyle(),
-                "textStyle"
+            TextStyle.EMPTY.setValues(style),
+            node.textStyle(),
+            "textStyle"
         );
     }
 
@@ -211,7 +211,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testText() {
         this.textAndCheck(TextNode.style(Lists.of(Text.with("a1"), Text.with("b2"))),
-                "a1b2");
+            "a1b2");
     }
 
     // HasTextOffset .....................................................................................................
@@ -219,9 +219,9 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"),
-                TextNode.style(Lists.of(Text.with("b22")))))
-                        .children().get(1),
-                2);
+                    TextNode.style(Lists.of(Text.with("b22")))))
+                .children().get(1),
+            2);
     }
 
     // toHtml...........................................................................................................
@@ -229,135 +229,135 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testToHtmlWithText() {
         this.toHtmlAndCheck(
-                TextNode.text("abc123")
-                        .setAttributes(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR,
-                                        Color.parse("#123456")
-                                )
-                        ),
-                "<SPAN style=\"color: rgb(18, 52, 86);\">abc123</SPAN>"
+            TextNode.text("abc123")
+                .setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#123456")
+                    )
+                ),
+            "<SPAN style=\"color: rgb(18, 52, 86);\">abc123</SPAN>"
         );
     }
 
     @Test
     public void testToHtmlWithText2() {
         this.toHtmlAndCheck(
-                TextStyleNode.with(
-                        Lists.of(
-                                TextNode.text("abc"),
-                                TextNode.text("xyz")
-                        ),
-                        TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR,
-                                        Color.parse("#123456")
-                                )
-                        )
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("abc"),
+                    TextNode.text("xyz")
                 ),
-                "<SPAN style=\"color: rgb(18, 52, 86);\">abcxyz</SPAN>"
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#123456")
+                    )
+                )
+            ),
+            "<SPAN style=\"color: rgb(18, 52, 86);\">abcxyz</SPAN>"
         );
     }
 
     @Test
     public void testToHtmlWithTextStyle() {
         this.toHtmlAndCheck(
-                TextStyleNode.with(
+            TextStyleNode.with(
+                Lists.of(
+                    TextStyleNode.with(
                         Lists.of(
-                                TextStyleNode.with(
-                                        Lists.of(
-                                                TextNode.text("middle")
-                                        ),
-                                        TextNodeMap.with(
-                                                Maps.of(
-                                                        TextStylePropertyName.COLOR,
-                                                        Color.parse("#222")
-                                                )
-                                        )
-                                )
+                            TextNode.text("middle")
                         ),
                         TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR,
-                                        Color.parse("#111")
-                                )
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                Color.parse("#222")
+                            )
                         )
+                    )
                 ),
-                "<SPAN style=\"color: rgb(17, 17, 17);\">" + LineEnding.NL +
-                        "  <SPAN style=\"color: rgb(34, 34, 34);\">middle</SPAN>" + LineEnding.NL +
-                        "</SPAN>"
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#111")
+                    )
+                )
+            ),
+            "<SPAN style=\"color: rgb(17, 17, 17);\">" + LineEnding.NL +
+                "  <SPAN style=\"color: rgb(34, 34, 34);\">middle</SPAN>" + LineEnding.NL +
+                "</SPAN>"
         );
     }
 
     @Test
     public void testToHtmlWithTextStyle2() {
         this.toHtmlAndCheck(
-                TextStyleNode.with(
+            TextStyleNode.with(
+                Lists.of(
+                    TextStyleNode.with(
                         Lists.of(
-                                TextStyleNode.with(
-                                        Lists.of(
-                                                TextNode.text("middle1")
-                                        ),
-                                        TextNodeMap.with(
-                                                Maps.of(
-                                                        TextStylePropertyName.COLOR,
-                                                        Color.parse("#222")
-                                                )
-                                        )
-                                ),
-                                TextStyleNode.with(
-                                        Lists.of(
-                                                TextNode.text("middle2")
-                                        ),
-                                        TextNodeMap.with(
-                                                Maps.of(
-                                                        TextStylePropertyName.COLOR,
-                                                        Color.parse("#333")
-                                                )
-                                        )
-                                )
+                            TextNode.text("middle1")
                         ),
                         TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR,
-                                        Color.parse("#111")
-                                )
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                Color.parse("#222")
+                            )
                         )
+                    ),
+                    TextStyleNode.with(
+                        Lists.of(
+                            TextNode.text("middle2")
+                        ),
+                        TextNodeMap.with(
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                Color.parse("#333")
+                            )
+                        )
+                    )
                 ),
-                "<SPAN style=\"color: rgb(17, 17, 17);\">" + LineEnding.NL +
-                        "  <SPAN style=\"color: rgb(34, 34, 34);\">middle1</SPAN>" + LineEnding.NL +
-                        "  <SPAN style=\"color: rgb(51, 51, 51);\">middle2</SPAN>" + LineEnding.NL +
-                        "</SPAN>"
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#111")
+                    )
+                )
+            ),
+            "<SPAN style=\"color: rgb(17, 17, 17);\">" + LineEnding.NL +
+                "  <SPAN style=\"color: rgb(34, 34, 34);\">middle1</SPAN>" + LineEnding.NL +
+                "  <SPAN style=\"color: rgb(51, 51, 51);\">middle2</SPAN>" + LineEnding.NL +
+                "</SPAN>"
         );
     }
 
     @Test
     public void testToHtmlWithTextAndTextStyleAndText() {
         this.toHtmlAndCheck(
-                TextStyleNode.with(
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("before"),
+                    TextStyleNode.with(
                         Lists.of(
-                                TextNode.text("before"),
-                                TextStyleNode.with(
-                                        Lists.of(
-                                                TextNode.text("middle")
-                                        ),
-                                        TextNodeMap.with(
-                                                Maps.of(
-                                                        TextStylePropertyName.COLOR,
-                                                        Color.parse("#222")
-                                                )
-                                        )
-                                ),
-                                TextNode.text("after")
+                            TextNode.text("middle")
                         ),
                         TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.COLOR,
-                                        Color.parse("#111")
-                                )
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                Color.parse("#222")
+                            )
                         )
+                    ),
+                    TextNode.text("after")
                 ),
-                "<SPAN style=\"color: rgb(17, 17, 17);\">before<SPAN style=\"color: rgb(34, 34, 34);\">middle</SPAN>after</SPAN>"
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#111")
+                    )
+                )
+            ),
+            "<SPAN style=\"color: rgb(17, 17, 17);\">before<SPAN style=\"color: rgb(34, 34, 34);\">middle</SPAN>after</SPAN>"
         );
     }
 
@@ -371,79 +371,79 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testMarshallWithChildren() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
-                "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
+            "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
     }
 
     @Test
     public void testMarshallWithChildren2() {
         this.marshallAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
-                "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
+            "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
     }
 
     @Test
     public void testMarshallWithStyleNode() {
         this.marshallAndCheck(textStyleNode()
-                        .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
-                "{\"styles\": {\"background-color\": \"#123456\"}}");
+                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
+            "{\"styles\": {\"background-color\": \"#123456\"}}");
     }
 
     @Test
     public void testMarshallWithStyleNodeAndChildren() {
         this.marshallAndCheck(
-                TextNode.text("text123")
-                        .setAttributes(
-                                Maps.of(
-                                        TextStylePropertyName.BACKGROUND_COLOR,
-                                        Color.fromRgb(0x123456)
-                                )
-                        ),
-                "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
+            TextNode.text("text123")
+                .setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.BACKGROUND_COLOR,
+                        Color.fromRgb(0x123456)
+                    )
+                ),
+            "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
         );
     }
 
     @Test
     public void testUnmarshallWithoutChildren() {
         this.unmarshallAndCheck("{}",
-                textStyleNode());
+            textStyleNode());
     }
 
     @Test
     public void testUnmarshallWithChildren() {
         this.unmarshallAndCheck("{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
-                textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
+            textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
     }
 
     @Test
     public void testJsonRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(textStyleNode(TextNode.text("text1"),
-                TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                textStyleNode(TextNode.text("text3"), TextNode.text("text4"))));
+            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
+            textStyleNode(TextNode.text("text3"), TextNode.text("text4"))));
     }
 
     @Test
     public void testJsonRoundtrip2() {
         this.marshallRoundTripTwiceAndCheck(textStyleNode(
-                TextNode.text("text1"),
-                textStyleNode(TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                        textStyleNode(TextNode.text("text3"), TextNode.text("text4")))));
+            TextNode.text("text1"),
+            textStyleNode(TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
+                textStyleNode(TextNode.text("text3"), TextNode.text("text4")))));
     }
 
     @Test
     public void testJsonRoundtripWithStyleNode() {
         this.marshallRoundTripTwiceAndCheck(textStyleNode(
-                TextNode.text("text1"),
-                TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                textStyleNode(TextNode.text("text3"), TextNode.text("text4")))
-                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))));
+            TextNode.text("text1"),
+            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
+            textStyleNode(TextNode.text("text3"), TextNode.text("text4")))
+            .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))));
     }
 
     @Test
     public void testJsonRoundtripWithStyleNode2() {
         this.marshallRoundTripTwiceAndCheck(textStyleNode(
-                TextNode.text("text1"),
-                TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                TextNode.style(Lists.of(TextNode.text("text3"))))
-                .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456), TextStylePropertyName.COLOR, Color.fromRgb(0x789abc))));
+            TextNode.text("text1"),
+            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
+            TextNode.style(Lists.of(TextNode.text("text3"))))
+            .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456), TextStylePropertyName.COLOR, Color.fromRgb(0x789abc))));
     }
 
     @Test
@@ -516,10 +516,10 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 
         this.marshallRoundTripTwiceAndCheck(textStyleNode(
-                TextNode.text("text1"),
-                TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                TextNode.style(Lists.of(TextNode.text("text3"))))
-                .setAttributes(styleNode));
+            TextNode.text("text1"),
+            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
+            TextNode.style(Lists.of(TextNode.text("text3"))))
+            .setAttributes(styleNode));
     }
 
     // TreePrintable....................................................................................................
@@ -527,28 +527,28 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testTreePrintable() {
         this.treePrintAndCheck(
-                TextStyleNode.with(
-                        Lists.of(
-                                TextNode.text("a1"),
-                                TextNode.text("b2")
-                        ),
-                        TextNodeMap.with(
-                                Maps.of(
-                                        TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456),
-                                        TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE,
-                                        TextStylePropertyName.BORDER_SPACING, Length.pixel(1.0),
-                                        TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED
-                                )
-                        )
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("a1"),
+                    TextNode.text("b2")
                 ),
-                "Style\n" +
-                        "  TextStyle\n" +
-                        "    background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
-                        "    border-bottom-style=DASHED (walkingkooka.tree.text.BorderStyle)\n" +
-                        "    border-collapse=SEPARATE (walkingkooka.tree.text.BorderCollapse)\n" +
-                        "    border-spacing=1px (walkingkooka.tree.text.PixelLength)\n" +
-                        "  Text \"a1\"\n" +
-                        "  Text \"b2\"\n"
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456),
+                        TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE,
+                        TextStylePropertyName.BORDER_SPACING, Length.pixel(1.0),
+                        TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED
+                    )
+                )
+            ),
+            "Style\n" +
+                "  TextStyle\n" +
+                "    background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
+                "    border-bottom-style=DASHED (walkingkooka.tree.text.BorderStyle)\n" +
+                "    border-collapse=SEPARATE (walkingkooka.tree.text.BorderCollapse)\n" +
+                "    border-spacing=1px (walkingkooka.tree.text.PixelLength)\n" +
+                "  Text \"a1\"\n" +
+                "  Text \"b2\"\n"
         );
     }
 
@@ -600,11 +600,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         }.accept(styleNode);
         this.checkEquals("1517217262", b.toString());
         this.checkEquals(Lists.of(styleNode, styleNode,
-                        text1, text1, text1,
-                        text2, text2, text2,
-                        styleNode, styleNode),
-                visited,
-                "visited");
+                text1, text1, text1,
+                text2, text2, text2,
+                styleNode, styleNode),
+            visited,
+            "visited");
     }
 
     // toString........................................................................................................
@@ -627,19 +627,19 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testToStringWithAttributes2() {
         this.toStringAndCheck(textStyleNode().setAttributes(Maps.of(TextStylePropertyName.with("abc"), "123", TextStylePropertyName.with("def"), "456")),
-                "{abc: \"123\", def: \"456\"}[]");
+            "{abc: \"123\", def: \"456\"}[]");
     }
 
     @Test
     public void testToStringWithChildrenAndAttributes() {
         this.toStringAndCheck(
-                text1().setAttributes(
-                        Maps.of(
-                                TextStylePropertyName.with("style-1"),
-                                "value-1"
-                        )
-                ),
-                "{style-1: \"value-1\"}[\"text-1a\"]"
+            text1().setAttributes(
+                Maps.of(
+                    TextStylePropertyName.with("style-1"),
+                    "value-1"
+                )
+            ),
+            "{style-1: \"value-1\"}[\"text-1a\"]"
         );
     }
 

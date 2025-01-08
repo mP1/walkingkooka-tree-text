@@ -33,8 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements ClassTesting2<T>,
-        HashCodeEqualsDefinedTesting2<T>,
-        ToStringTesting<T> {
+    HashCodeEqualsDefinedTesting2<T>,
+    ToStringTesting<T> {
 
     BorderMarginPaddingTestCase() {
         super();
@@ -135,8 +135,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
         final BoxEdge edge = BoxEdge.RIGHT;
         final T borderMarginPadding = this.createBorderMarginPadding(
-                edge,
-                TextStyle.EMPTY.setValues(properties)
+            edge,
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final Length<?> differentWidth = Length.pixel(99.0);
@@ -146,8 +146,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
         properties.put(this.widthPropertyName(edge), differentWidth);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -160,8 +160,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         properties.put(this.widthPropertyName(edge), Length.pixel(1.5));
 
         final T borderMarginPadding = this.createBorderMarginPadding(
-                edge,
-                TextStyle.EMPTY.setValues(properties)
+            edge,
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.empty());
@@ -170,8 +170,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
         properties.remove(this.widthPropertyName(edge));
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -181,14 +181,14 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     public final void testEqualsDifferentDirection() {
         final TextStyle textStyle = this.textStyle();
         this.checkNotEquals(this.createBorderMarginPadding(BoxEdge.LEFT, textStyle),
-                this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
+            this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
     }
 
     @Test
     public final void testEqualsDifferentTextStyle() {
         final BoxEdge edge = BoxEdge.RIGHT;
         this.checkNotEquals(this.createBorderMarginPadding(edge, TextStyle.EMPTY),
-                this.createBorderMarginPadding(edge, this.textStyle()));
+            this.createBorderMarginPadding(edge, this.textStyle()));
     }
 
     // helpers..........................................................................................................
@@ -204,10 +204,10 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     final <TT> TextStyle textStyle(final TextStylePropertyName<TT> propertyName, final TT value) {
         return TextStyle.EMPTY.setValues(
-                Maps.of(
-                        propertyName,
-                        value
-                )
+            Maps.of(
+                propertyName,
+                value
+            )
         );
     }
 

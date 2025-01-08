@@ -40,7 +40,7 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
     static NumberLength with(final Long value) {
         Objects.requireNonNull(value, "value");
 
-        if(value < 0) {
+        if (value < 0) {
             throw new IllegalArgumentException("Invalid value " + value);
         }
 

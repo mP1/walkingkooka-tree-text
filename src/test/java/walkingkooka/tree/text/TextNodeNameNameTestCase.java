@@ -24,9 +24,9 @@ import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>
-        implements NameTesting2<N, N>,
-        JsonNodeMarshallingTesting<N>,
-        TreePrintableTesting {
+    implements NameTesting2<N, N>,
+    JsonNodeMarshallingTesting<N>,
+    TreePrintableTesting {
 
     TextNodeNameNameTestCase() {
         super();
@@ -60,15 +60,15 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
     @Override
     public final String possibleValidChars(final int position) {
         return 0 == position ?
-                ASCII_LETTERS :
-                ASCII_LETTERS_DIGITS + "-.";
+            ASCII_LETTERS :
+            ASCII_LETTERS_DIGITS + "-.";
     }
 
     @Override
     public final String possibleInvalidChars(final int position) {
         return 0 == position ?
-                CONTROL + ASCII_DIGITS :
-                CONTROL;
+            CONTROL + ASCII_DIGITS :
+            CONTROL;
     }
 
     // ClassTesting.....................................................................................................

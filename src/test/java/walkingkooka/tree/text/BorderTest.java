@@ -68,7 +68,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         final BoxEdge edge = BoxEdge.RIGHT;
         final Border border = edge.border(
-                TextStyle.EMPTY.setValues(properties)
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final Color differentColor = Color.parse("yellow");
@@ -78,8 +78,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, differentColor);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -91,7 +91,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         final BoxEdge edge = BoxEdge.RIGHT;
         final Border border = edge.border(
-                TextStyle.EMPTY.setValues(properties)
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final Border different = border.setColor(Optional.empty());
@@ -100,8 +100,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_COLOR);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -144,7 +144,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         final BoxEdge edge = BoxEdge.RIGHT;
         final Border border = edge.border(
-                TextStyle.EMPTY.setValues(properties)
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final BorderStyle differentStyle = BorderStyle.INSET;
@@ -154,8 +154,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, differentStyle);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -167,7 +167,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         final BoxEdge edge = BoxEdge.RIGHT;
         final Border border = edge.border(
-                TextStyle.EMPTY.setValues(properties)
+            TextStyle.EMPTY.setValues(properties)
         );
 
         final Border different = border.setStyle(Optional.empty());
@@ -176,8 +176,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_STYLE);
         this.checkEquals(
-                TextStyle.EMPTY.setValues(properties),
-                different.textStyle()
+            TextStyle.EMPTY.setValues(properties),
+            different.textStyle()
         );
     }
 
@@ -186,14 +186,14 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                Border.with(BoxEdge.BOTTOM,
-                        TextStyle.EMPTY.setValues(
-                                Maps.of(
-                                        TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
-                                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
-                        )
-                ),
-                "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}"
+            Border.with(BoxEdge.BOTTOM,
+                TextStyle.EMPTY.setValues(
+                    Maps.of(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
+                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
+                )
+            ),
+            "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}"
         );
     }
 

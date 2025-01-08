@@ -48,16 +48,16 @@ import java.util.Objects;
  * </pre>
  */
 public final class TextNodeList extends AbstractList<TextNode>
-        implements ImmutableListDefaults<TextNodeList, TextNode> {
+    implements ImmutableListDefaults<TextNodeList, TextNode> {
 
     public static TextNodeList with(final List<TextNode> nodes) {
         Objects.requireNonNull(nodes, "nodes");
 
         return nodes instanceof TextNodeList ?
-                (TextNodeList) nodes :
-                new TextNodeList(
-                        Lists.immutable(nodes)
-                );
+            (TextNodeList) nodes :
+            new TextNodeList(
+                Lists.immutable(nodes)
+            );
     }
 
     private TextNodeList(final List<TextNode> nodes) {
@@ -80,8 +80,8 @@ public final class TextNodeList extends AbstractList<TextNode>
     public TextNodeList setElements(final List<TextNode> nodes) {
         final TextNodeList copy = with(nodes);
         return this.equals(copy) ?
-                this :
-                copy;
+            this :
+            copy;
     }
 
     // json.............................................................................................................
@@ -89,9 +89,9 @@ public final class TextNodeList extends AbstractList<TextNode>
     static TextNodeList unmarshall(final JsonNode node,
                                    final JsonNodeUnmarshallContext context) {
         return with(
-                Cast.to(
-                        context.unmarshallWithTypeList(node)
-                )
+            Cast.to(
+                context.unmarshallWithTypeList(node)
+            )
         );
     }
 
@@ -101,10 +101,10 @@ public final class TextNodeList extends AbstractList<TextNode>
 
     static {
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(TextNodeList.class),
-                TextNodeList::unmarshall,
-                TextNodeList::marshall,
-                TextNodeList.class
+            JsonNodeContext.computeTypeName(TextNodeList.class),
+            TextNodeList::unmarshall,
+            TextNodeList::marshall,
+            TextNodeList.class
         );
     }
 }

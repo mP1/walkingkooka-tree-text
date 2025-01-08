@@ -35,8 +35,8 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
     @Test
     public void testWithInvalidPropertyFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+            NullPointerException.class,
+            () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
         );
     }
 
@@ -86,11 +86,11 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
     @Test
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
-                TextNodeMap.EMPTY,
-                TextNodeMap.unmarshall(
-                        JsonNode.object(),
-                        JsonNodeUnmarshallContexts.fake()
-                )
+            TextNodeMap.EMPTY,
+            TextNodeMap.unmarshall(
+                JsonNode.object(),
+                JsonNodeUnmarshallContexts.fake()
+            )
         );
     }
 

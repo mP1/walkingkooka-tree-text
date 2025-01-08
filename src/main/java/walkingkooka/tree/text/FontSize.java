@@ -31,7 +31,7 @@ import java.util.stream.IntStream;
  * Value class that holds a font size.
  */
 public final class FontSize implements Comparable<FontSize>,
-        Value<Integer> {
+    Value<Integer> {
 
     private final static int CONSTANT_COUNT = 40;
 
@@ -45,8 +45,8 @@ public final class FontSize implements Comparable<FontSize>,
      */
     private static FontSize[] registerConstants() {
         return IntStream.rangeClosed(0, CONSTANT_COUNT)
-                .mapToObj(FontSize::new)
-                .toArray(FontSize[]::new);
+            .mapToObj(FontSize::new)
+            .toArray(FontSize[]::new);
     }
 
     /**
@@ -58,8 +58,8 @@ public final class FontSize implements Comparable<FontSize>,
         }
 
         return value < CONSTANT_COUNT ?
-                CONSTANTS[value] :
-                new FontSize(value);
+            CONSTANTS[value] :
+            new FontSize(value);
     }
 
     /**
@@ -96,9 +96,9 @@ public final class FontSize implements Comparable<FontSize>,
 
     static {
         JsonNodeContext.register("font-size",
-                FontSize::unmarshall,
-                FontSize::marshall,
-                FontSize.class);
+            FontSize::unmarshall,
+            FontSize::marshall,
+            FontSize.class);
     }
 
     // Comparable ...................................................................................................
@@ -120,8 +120,8 @@ public final class FontSize implements Comparable<FontSize>,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof FontSize &&
-                        this.equals0(Cast.to(other));
+            other instanceof FontSize &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final FontSize other) {

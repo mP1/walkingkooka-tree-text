@@ -70,15 +70,15 @@ final class TextStylePropertyValueHandlerJsonNode<T> extends TextStylePropertyVa
     @Override
     T parseValue(final String value) {
         return this.unmarshall(
-                JsonNode.string(value),
-                null,
-                CONTEXT
+            JsonNode.string(value),
+            null,
+            CONTEXT
         );
     }
 
     private final static JsonNodeUnmarshallContext CONTEXT = JsonNodeUnmarshallContexts.basic(
-            ExpressionNumberKind.DOUBLE,
-            MathContext.DECIMAL32
+        ExpressionNumberKind.DOUBLE,
+        MathContext.DECIMAL32
     );
 
     // JsonNodeContext..................................................................................................

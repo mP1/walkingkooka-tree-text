@@ -43,11 +43,11 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
-        HashCodeEqualsDefinedTesting2<TextStyle>,
-        HasTextTesting,
-        JsonNodeMarshallingTesting<TextStyle>,
-        PatchableTesting<TextStyle>,
-        ToStringTesting<TextStyle> {
+    HashCodeEqualsDefinedTesting2<TextStyle>,
+    HasTextTesting,
+    JsonNodeMarshallingTesting<TextStyle>,
+    PatchableTesting<TextStyle>,
+    ToStringTesting<TextStyle> {
 
     @Test
     public void testValue() {
@@ -57,9 +57,9 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         final TextStyle textStyle = TextStyle.EMPTY.setValues(map);
         this.checkEquals(
-                TextNodeMap.class,
-                textStyle.value().getClass(),
-                () -> "" + textStyle
+            TextNodeMap.class,
+            textStyle.value().getClass(),
+            () -> "" + textStyle
         );
     }
 
@@ -75,8 +75,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final List<TextNode> children = TextStyleNode.NO_CHILDREN;
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
-                children,
-                TextStyleNode.with(children, TextNodeMap.EMPTY));
+            children,
+            TextStyleNode.with(children, TextNodeMap.EMPTY));
     }
 
     @Test
@@ -85,8 +85,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final List<TextNode> children = TextStyleNode.NO_CHILDREN;
 
         this.setChildrenAndCheck(textStyle,
-                children,
-                TextNode.style(children).setAttributes(textStyle.value()));
+            children,
+            TextNode.style(children).setAttributes(textStyle.value()));
     }
 
     @Test
@@ -94,8 +94,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final List<TextNode> children = this.children();
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
-                children,
-                TextStyleNode.with(children, TextNodeMap.EMPTY));
+            children,
+            TextStyleNode.with(children, TextNodeMap.EMPTY));
     }
 
     @Test
@@ -104,8 +104,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final List<TextNode> children = this.children();
 
         this.setChildrenAndCheck(textStyle,
-                children,
-                TextNode.style(children).setAttributes(textStyle.value()));
+            children,
+            TextNode.style(children).setAttributes(textStyle.value()));
     }
 
     private List<TextNode> children() {
@@ -116,8 +116,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                      final List<TextNode> children,
                                      final TextNode textStyleNode) {
         this.checkEquals(textStyleNode,
-                properties.setChildren(children),
-                () -> properties + " setChildren " + children);
+            properties.setChildren(children),
+            () -> properties + " setChildren " + children);
     }
 
     // getOrFail.........................................................................................................
@@ -125,18 +125,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testGetOrFail() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.createObject()
-                        .getOrFail(TextStylePropertyName.WIDTH)
+            IllegalArgumentException.class,
+            () -> this.createObject()
+                .getOrFail(TextStylePropertyName.WIDTH)
         );
     }
 
     @Test
     public void testGetOrFailAll() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.createObject()
-                        .getOrFail(TextStylePropertyName.ALL)
+            IllegalArgumentException.class,
+            () -> this.createObject()
+                .getOrFail(TextStylePropertyName.ALL)
         );
     }
 
@@ -145,36 +145,36 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testSetOrRemoveNonNullValue() {
         final TextStyle style = TextStyle.EMPTY
-                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
         this.setOrRemoveAndCheck(
-                style,
-                TextStylePropertyName.COLOR,
-                Color.WHITE,
-                style.set(TextStylePropertyName.COLOR, Color.WHITE)
+            style,
+            TextStylePropertyName.COLOR,
+            Color.WHITE,
+            style.set(TextStylePropertyName.COLOR, Color.WHITE)
         );
     }
 
     @Test
     public void testSetOrRemoveAllNullValue() {
         final TextStyle style = TextStyle.EMPTY
-                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
         this.setOrRemoveAndCheck(
-                style,
-                TextStylePropertyName.BACKGROUND_COLOR,
-                null,
-                style.remove(TextStylePropertyName.BACKGROUND_COLOR)
+            style,
+            TextStylePropertyName.BACKGROUND_COLOR,
+            null,
+            style.remove(TextStylePropertyName.BACKGROUND_COLOR)
         );
     }
 
     @Test
     public void testSetOrRemoveNullValue() {
         final TextStyle style = TextStyle.EMPTY
-                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
         this.setOrRemoveAndCheck(
-                style,
-                TextStylePropertyName.BACKGROUND_COLOR,
-                null,
-                style.remove(TextStylePropertyName.BACKGROUND_COLOR)
+            style,
+            TextStylePropertyName.BACKGROUND_COLOR,
+            null,
+            style.remove(TextStylePropertyName.BACKGROUND_COLOR)
         );
     }
 
@@ -183,9 +183,9 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                                          final T value,
                                          final TextStyle expected) {
         this.checkEquals(
-                expected,
-                style.setOrRemove(name, value),
-                style + " setOrRemove " + name + " " + value
+            expected,
+            style.setOrRemove(name, value),
+            style + " setOrRemove " + name + " " + value
         );
     }
 
@@ -194,39 +194,39 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testJsonRoundtripAllPropertyTypes() {
         final TextStyle style = TextStyle.EMPTY
-                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
-                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
-                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
-                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
-                .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
-                .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
-                .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
-                .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
-                .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
-                .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
-                .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
-                .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
-                .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
-                .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
-                .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
-                .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
-                .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
-                .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
-                .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
-                .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
-                .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
-                .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
-                .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
-                .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
-                .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
-                .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
-                .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
-                .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
-                .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
-                .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
-                .set(TextStylePropertyName.WORD_SPACING, Length.normal())
-                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
-                .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
+            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+            .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
+            .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
+            .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
+            .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
+            .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
+            .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
+            .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
+            .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
+            .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
+            .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+            .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
+            .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
+            .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
+            .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
+            .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
+            .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
+            .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
+            .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+            .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
+            .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
+            .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
+            .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
+            .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
+            .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
+            .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
+            .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
+            .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
+            .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
+            .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
+            .set(TextStylePropertyName.WORD_SPACING, Length.normal())
+            .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+            .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
 
         this.marshallRoundTripTwiceAndCheck(style);
     }
@@ -236,200 +236,200 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testPatchJsonNull() {
         this.patchAndCheck(
-                TextStyle.EMPTY,
-                JsonNode.nullNode()
+            TextStyle.EMPTY,
+            JsonNode.nullNode()
         );
     }
 
     @Test
     public void testPatchJsonNull2() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.BLACK),
-                JsonNode.nullNode(),
-                TextStyle.EMPTY
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.BLACK),
+            JsonNode.nullNode(),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testPatchEmptyObject() {
         this.patchAndCheck(
-                TextStyle.EMPTY,
-                JsonNode.object()
+            TextStyle.EMPTY,
+            JsonNode.object()
         );
     }
 
     @Test
     public void testPatchEmptyObject2() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.BLACK),
-                JsonNode.object()
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.BLACK),
+            JsonNode.object()
         );
     }
 
     @Test
     public void testPatchSetAllWithNonNullFails() {
         final UnsupportedOperationException thrown = assertThrows(
-                UnsupportedOperationException.class,
-                () -> TextStyle.EMPTY.patch(
-                        JsonNode.object()
-                                .set(
-                                        JsonPropertyName.with(TextStylePropertyName.ALL.value()),
-                                        JsonNode.string("This must fail!")
-                                ),
-                        this.createPatchContext()
-                )
+            UnsupportedOperationException.class,
+            () -> TextStyle.EMPTY.patch(
+                JsonNode.object()
+                    .set(
+                        JsonPropertyName.with(TextStylePropertyName.ALL.value()),
+                        JsonNode.string("This must fail!")
+                    ),
+                this.createPatchContext()
+            )
         );
         this.checkEquals(
-                "Unmarshalling \"*\" with \"This must fail!\" is not supported",
-                thrown.getMessage(),
-                "message"
+            "Unmarshalling \"*\" with \"This must fail!\" is not supported",
+            thrown.getMessage(),
+            "message"
         );
     }
 
     @Test
     public void testPatchBorderColor() {
         final TextStyle style = TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
 
         final Color color = Color.WHITE;
 
         this.patchAndCheck(
-                style,
-                TextStylePropertyName.BORDER_COLOR.stylePatch(color),
-                style.setValues(
-                        Maps.of(
-                                TextStylePropertyName.BORDER_TOP_COLOR, color,
-                                TextStylePropertyName.BORDER_LEFT_COLOR, color,
-                                TextStylePropertyName.BORDER_RIGHT_COLOR, color,
-                                TextStylePropertyName.BORDER_BOTTOM_COLOR, color
-                        )
+            style,
+            TextStylePropertyName.BORDER_COLOR.stylePatch(color),
+            style.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_TOP_COLOR, color,
+                    TextStylePropertyName.BORDER_LEFT_COLOR, color,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR, color,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR, color
                 )
+            )
         );
     }
 
     @Test
     public void testPatchRemoveUnknownProperty() {
         this.patchAndCheck(
-                TextStyle.EMPTY,
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+            TextStyle.EMPTY,
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
         );
     }
 
     @Test
     public void testPatchRemoveUnknownProperty2() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
         );
     }
 
     @Test
     public void testPatchRemoveProperty() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JsonNode.nullNode()),
-                TextStyle.EMPTY
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JsonNode.nullNode()),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testPatchRemovePropertyAll() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
-                TextStyle.EMPTY
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testPatchRemovePropertyAllManyValues() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
-                        .set(TextStylePropertyName.COLOR, Color.WHITE),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
-                TextStyle.EMPTY
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                .set(TextStylePropertyName.COLOR, Color.WHITE),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testPatchRemovePropertyEnum() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.TEXT_ALIGN.value()), JsonNode.nullNode()),
-                TextStyle.EMPTY
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.TEXT_ALIGN.value()), JsonNode.nullNode()),
+            TextStyle.EMPTY
         );
     }
 
     @Test
     public void testPatchSetProperty() {
         this.patchAndCheck(
-                TextStyle.EMPTY,
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.BLACK)
+            TextStyle.EMPTY,
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.BLACK)
         );
     }
 
     @Test
     public void testPatchSetProperty2() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
-                        .set(TextStylePropertyName.COLOR, Color.BLACK)
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                .set(TextStylePropertyName.COLOR, Color.BLACK)
         );
     }
 
     @Test
     public void testPatchReplaceProperty() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.BLACK),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.WHITE)),
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.COLOR, Color.WHITE)
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.BLACK),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.WHITE)),
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.COLOR, Color.WHITE)
         );
     }
 
     @Test
     public void testPatchSetReplaceAndRemove() {
         this.patchAndCheck(
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
-                        .set(TextStylePropertyName.COLOR, Color.BLACK)
-                        .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD),
-                JsonNode.object()
-                        .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), marshall(Color.WHITE))
-                        .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode()),
-                TextStyle.EMPTY
-                        .set(TextStylePropertyName.BACKGROUND_COLOR, Color.WHITE)
-                        .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
+                .set(TextStylePropertyName.COLOR, Color.BLACK)
+                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD),
+            JsonNode.object()
+                .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), marshall(Color.WHITE))
+                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode()),
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.WHITE)
+                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
         );
     }
 
     private JsonNode marshall(final Object value) {
         return JsonNodeMarshallContexts.basic()
-                .marshall(value);
+            .marshall(value);
     }
 
     // text..............................................................................................................
@@ -437,147 +437,147 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testTextEmpty() {
         this.textAndCheck(
-                TextStyle.EMPTY,
-                ""
+            TextStyle.EMPTY,
+            ""
         );
     }
 
     @Test
     public void testTextStringValueWithoutSpaces() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.FONT_FAMILY,
-                                FontFamily.with("Banana")
-                        ),
-                "font-family: Banana;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.FONT_FAMILY,
+                    FontFamily.with("Banana")
+                ),
+            "font-family: Banana;"
         );
     }
 
     @Test
     public void testTextStringValueWithSpaces() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.FONT_FAMILY,
-                                FontFamily.with("Times New Roman")
-                        ),
-                "font-family: \"Times New Roman\";"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.FONT_FAMILY,
+                    FontFamily.with("Times New Roman")
+                ),
+            "font-family: \"Times New Roman\";"
         );
     }
 
     @Test
     public void testTextBorderBottomStyleEnum() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                                BorderStyle.DOTTED
-                        ),
-                "border-bottom-style: dotted;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    BorderStyle.DOTTED
+                ),
+            "border-bottom-style: dotted;"
         );
     }
 
     @Test
     public void testTextBorderBottomWidth() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                                Length.pixel(12.5)
-                        ),
-                "border-bottom-width: 12.5px;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    Length.pixel(12.5)
+                ),
+            "border-bottom-width: 12.5px;"
         );
     }
 
     @Test
     public void testTextColor() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.COLOR,
-                                Color.parse("#123456")
-                        ),
-                "color: rgb(18, 52, 86);"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.parse("#123456")
+                ),
+            "color: rgb(18, 52, 86);"
         );
     }
 
     @Test
     public void testTextFontSize() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.FONT_SIZE,
-                                FontSize.with(123)
-                        ),
-                "font-size: 123;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.FONT_SIZE,
+                    FontSize.with(123)
+                ),
+            "font-size: 123;"
         );
     }
 
     @Test
     public void testTextOverflowWrap() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.OVERFLOW_WRAP,
-                                OverflowWrap.BREAK_WORD
-                        ),
-                "overflow-wrap: break-word;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.OVERFLOW_WRAP,
+                    OverflowWrap.BREAK_WORD
+                ),
+            "overflow-wrap: break-word;"
         );
     }
 
     @Test
     public void testText() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.TEXT,
-                                "has-no-spaces"
-                        ),
-                "text: has-no-spaces;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.TEXT,
+                    "has-no-spaces"
+                ),
+            "text: has-no-spaces;"
         );
     }
 
     @Test
     public void testTextIncludesSpacesRequiresQuotes() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.TEXT,
-                                "has spaces"
-                        ),
-                "text: \"has spaces\";"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.TEXT,
+                    "has spaces"
+                ),
+            "text: \"has spaces\";"
         );
     }
 
     @Test
     public void testTextSeveralProperties() {
         this.textAndCheck(
-                TextStyle.EMPTY
-                        .set(
-                                TextStylePropertyName.BORDER_TOP_COLOR,
-                                Color.parse("#123456")
-                        ).set(
-                                TextStylePropertyName.BORDER_TOP_STYLE,
-                                BorderStyle.DOTTED
-                        ).set(
-                                TextStylePropertyName.BORDER_TOP_WIDTH,
-                                Length.pixel(123.0)
-                        ),
-                "border-top-color: rgb(18, 52, 86); border-top-style: dotted; border-top-width: 123px;"
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    Color.parse("#123456")
+                ).set(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    BorderStyle.DOTTED
+                ).set(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    Length.pixel(123.0)
+                ),
+            "border-top-color: rgb(18, 52, 86); border-top-style: dotted; border-top-width: 123px;"
         );
     }
 
     @Test
     public void testTextCached() {
         final TextStyle style = TextStyle.EMPTY
-                .set(
-                        TextStylePropertyName.TEXT,
-                        "has-no-spaces"
-                );
+            .set(
+                TextStylePropertyName.TEXT,
+                "has-no-spaces"
+            );
         assertSame(
-                style.text(),
-                style.text()
+            style.text(),
+            style.text()
         );
     }
 
@@ -590,19 +590,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         map.put(this.property2(), this.value2());
 
         this.toStringAndCheck(
-                TextStyle.EMPTY.setValues(map),
-                map.toString()
+            TextStyle.EMPTY.setValues(map),
+            map.toString()
         );
     }
 
     @Test
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
-                TextStyle.EMPTY,
-                TextStyle.unmarshall(
-                        JsonNode.object(),
-                        this.createPatchContext()
-                )
+            TextStyle.EMPTY,
+            TextStyle.unmarshall(
+                JsonNode.object(),
+                this.createPatchContext()
+            )
         );
     }
 
@@ -613,10 +613,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     private TextStyle textStyle() {
         return TextStyle.EMPTY.setValues(
-                Maps.of(
-                        this.property1(), this.value1(),
-                        this.property2(), this.value2()
-                )
+            Maps.of(
+                this.property1(), this.value1(),
+                this.property2(), this.value2()
+            )
         );
     }
 
@@ -676,8 +676,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public JsonNodeUnmarshallContext createPatchContext() {
         return JsonNodeUnmarshallContexts.basic(
-                ExpressionNumberKind.BIG_DECIMAL,
-                MathContext.UNLIMITED
+            ExpressionNumberKind.BIG_DECIMAL,
+            MathContext.UNLIMITED
         );
     }
 }

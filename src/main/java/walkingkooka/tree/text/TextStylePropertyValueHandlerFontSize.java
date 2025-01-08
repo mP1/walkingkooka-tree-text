@@ -61,7 +61,7 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     @Override
     FontSize parseValue(final String value) {
         return FontSize.with(
-                Integer.parseInt(value)
+            Integer.parseInt(value)
         );
     }
 
@@ -72,8 +72,8 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
                         final TextStylePropertyName<?> name,
                         final JsonNodeUnmarshallContext context) {
         return context.unmarshall(
-                node,
-                FontSize.class
+            node,
+            FontSize.class
         );
     }
 

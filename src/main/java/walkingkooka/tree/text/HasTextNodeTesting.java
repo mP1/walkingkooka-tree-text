@@ -24,7 +24,7 @@ public interface HasTextNodeTesting extends Testing {
     default void toTextNodeAndCheck(final HasTextNode has,
                                     final TextNode textNode) {
         this.checkEquals(textNode,
-                has.toTextNode(),
-                () -> "" + has);
+            has.toTextNode(),
+            () -> "" + has);
     }
 }

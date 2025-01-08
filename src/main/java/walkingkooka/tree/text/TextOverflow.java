@@ -91,12 +91,12 @@ public abstract class TextOverflow implements Value<Optional<String>> {
                                    final JsonNodeUnmarshallContext context) {
         final String value = node.stringOrFail();
         return value.startsWith(STRING_PREFIX) ?
-                string(value.substring(STRING_PREFIX.length())) :
-                CLIP_TEXT.equals(value) ?
-                        CLIP :
-                        ELLIPSIS_TEXT.equals(value) ?
-                                ELLIPSIS :
-                                failInvalidOverflow(value);
+            string(value.substring(STRING_PREFIX.length())) :
+            CLIP_TEXT.equals(value) ?
+                CLIP :
+                ELLIPSIS_TEXT.equals(value) ?
+                    ELLIPSIS :
+                    failInvalidOverflow(value);
     }
 
     private static TextOverflow failInvalidOverflow(final String value) {
@@ -107,8 +107,8 @@ public abstract class TextOverflow implements Value<Optional<String>> {
 
     static {
         JsonNodeContext.register("text-overflow",
-                TextOverflow::unmarshall,
-                TextOverflow::marshall,
-                TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
+            TextOverflow::unmarshall,
+            TextOverflow::marshall,
+            TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
     }
 }

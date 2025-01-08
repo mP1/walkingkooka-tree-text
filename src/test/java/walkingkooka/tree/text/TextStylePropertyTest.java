@@ -36,35 +36,35 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStylePropertyTest implements ClassTesting<TextStyleProperty<TextAlign>>,
-        HashCodeEqualsDefinedTesting2<TextStyleProperty<TextAlign>>,
-        HasNameTesting<TextStylePropertyName<TextAlign>>,
-        ToStringTesting<TextStyleProperty<TextAlign>>,
-        TreePrintableTesting,
-        ComparableTesting {
+    HashCodeEqualsDefinedTesting2<TextStyleProperty<TextAlign>>,
+    HasNameTesting<TextStylePropertyName<TextAlign>>,
+    ToStringTesting<TextStyleProperty<TextAlign>>,
+    TreePrintableTesting,
+    ComparableTesting {
 
     // with.............................................................................................................
 
     @Test
     public void testWithNullNameFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> TextStyleProperty.with(
-                        null,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
+            NullPointerException.class,
+            () -> TextStyleProperty.with(
+                null,
+                Optional.of(
+                    TextAlign.CENTER
                 )
+            )
         );
     }
 
     @Test
     public void testWithNullValueFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        null
-                )
+            NullPointerException.class,
+            () -> TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                null
+            )
         );
     }
 
@@ -72,23 +72,23 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     public void testWith() {
         final TextStylePropertyName<TextAlign> name = TextStylePropertyName.TEXT_ALIGN;
         final Optional<TextAlign> value = Optional.of(
-                TextAlign.CENTER
+            TextAlign.CENTER
         );
 
         final TextStyleProperty<TextAlign> property = TextStyleProperty.with(
-                name,
-                value
+            name,
+            value
         );
 
         this.nameAndCheck(
-                property,
-                name
+            property,
+            name
         );
 
         this.checkEquals(
-                value,
-                property.value(),
-                "value"
+            value,
+            property.value(),
+            "value"
         );
     }
 
@@ -97,120 +97,120 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     @Test
     public void testCompareSame() {
         this.compareToAndCheckEquals(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.CENTER
                 )
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.CENTER
+                )
+            )
         );
     }
 
     @Test
     public void testCompareSameEmptyValue() {
         this.compareToAndCheckEquals(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.empty()
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.empty()
-                )
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+            )
         );
     }
 
     @Test
     public void testCompareDifferentNames() {
         this.compareToAndCheckLess(
-                Cast.to(
-                    TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
-                    )
-                ),
+            Cast.to(
                 TextStyleProperty.with(
-                        TextStylePropertyName.VERTICAL_ALIGN,
-                        Optional.of(
-                                VerticalAlign.TOP
-                        )
+                    TextStylePropertyName.TEXT_ALIGN,
+                    Optional.of(
+                        TextAlign.CENTER
+                    )
                 )
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.VERTICAL_ALIGN,
+                Optional.of(
+                    VerticalAlign.TOP
+                )
+            )
         );
     }
 
     @Test
     public void testCompareDifferentValue() {
         this.compareToAndCheckLess(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.RIGHT
-                        )
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.CENTER
                 )
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.RIGHT
+                )
+            )
         );
     }
 
     @Test
     public void testCompareDifferentValueEmptyVNotEmpty() {
         this.compareToAndCheckLess(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.empty()
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.RIGHT
-                        )
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.RIGHT
                 )
+            )
         );
     }
 
     @Test
     public void testCompareSortArray() {
         final TextStyleProperty<Color> color = TextStyleProperty.with(
-                TextStylePropertyName.COLOR,
-                Optional.of(
-                        Color.BLACK
-                )
+            TextStylePropertyName.COLOR,
+            Optional.of(
+                Color.BLACK
+            )
         );
 
         final TextStyleProperty<TextAlign> textAlign = TextStyleProperty.with(
-                TextStylePropertyName.TEXT_ALIGN,
-                Optional.empty()
+            TextStylePropertyName.TEXT_ALIGN,
+            Optional.empty()
         );
 
         final TextStyleProperty<TextAlign> textAlignCenter = TextStyleProperty.with(
-                TextStylePropertyName.TEXT_ALIGN,
-                Optional.of(
-                        TextAlign.CENTER
-                )
+            TextStylePropertyName.TEXT_ALIGN,
+            Optional.of(
+                TextAlign.CENTER
+            )
         );
 
         final TextStyleProperty<TextAlign> textAlignRight = TextStyleProperty.with(
-                TextStylePropertyName.TEXT_ALIGN,
-                Optional.of(
-                        TextAlign.RIGHT
-                )
+            TextStylePropertyName.TEXT_ALIGN,
+            Optional.of(
+                TextAlign.RIGHT
+            )
         );
 
         final TextStyleProperty<VerticalAlign> verticalAlign = TextStyleProperty.with(
-                TextStylePropertyName.VERTICAL_ALIGN,
-                Optional.empty()
+            TextStylePropertyName.VERTICAL_ALIGN,
+            Optional.empty()
         );
 
         final List list = Lists.array();
@@ -223,14 +223,14 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
         list.sort(Comparator.naturalOrder());
 
         this.checkEquals(
-                Lists.of(
-                        color,
-                        textAlign,
-                        textAlignCenter,
-                        textAlignRight,
-                        verticalAlign
-                ),
-                list
+            Lists.of(
+                color,
+                textAlign,
+                textAlignCenter,
+                textAlignRight,
+                verticalAlign
+            ),
+            list
         );
     }
 
@@ -239,46 +239,46 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     @Test
     public void testEqualsDifferentName() {
         this.checkNotEquals(
-                TextStyleProperty.with(
-                        TextStylePropertyName.COLOR,
-                        Optional.of(
-                                Color.BLACK
-                        )
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.BACKGROUND_COLOR,
-                        Optional.of(
-                                Color.BLACK
-                        )
+            TextStyleProperty.with(
+                TextStylePropertyName.COLOR,
+                Optional.of(
+                    Color.BLACK
                 )
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Optional.of(
+                    Color.BLACK
+                )
+            )
         );
     }
 
     @Test
     public void testEqualsDifferentValue() {
         this.checkNotEquals(
-                TextStyleProperty.with(
-                        TextStylePropertyName.COLOR,
-                        Optional.of(
-                                Color.BLACK
-                        )
-                ),
-                TextStyleProperty.with(
-                        TextStylePropertyName.COLOR,
-                        Optional.of(
-                                Color.WHITE
-                        )
+            TextStyleProperty.with(
+                TextStylePropertyName.COLOR,
+                Optional.of(
+                    Color.BLACK
                 )
+            ),
+            TextStyleProperty.with(
+                TextStylePropertyName.COLOR,
+                Optional.of(
+                    Color.WHITE
+                )
+            )
         );
     }
 
     @Override
     public TextStyleProperty<TextAlign> createObject() {
         return TextStyleProperty.with(
-                TextStylePropertyName.TEXT_ALIGN,
-                Optional.of(
-                        TextAlign.CENTER
-                )
+            TextStylePropertyName.TEXT_ALIGN,
+            Optional.of(
+                TextAlign.CENTER
+            )
         );
     }
 
@@ -287,24 +287,24 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
-                ),
-                "text-align: CENTER"
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.CENTER
+                )
+            ),
+            "text-align: CENTER"
         );
     }
 
     @Test
     public void testToStringEmptyValue() {
         this.toStringAndCheck(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.empty()
-                ),
-                "text-align"
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+            ),
+            "text-align"
         );
     }
 
@@ -313,25 +313,25 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.of(
-                                TextAlign.CENTER
-                        )
-                ),
-                "text-align\n" +
-                        "  CENTER\n"
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.of(
+                    TextAlign.CENTER
+                )
+            ),
+            "text-align\n" +
+                "  CENTER\n"
         );
     }
 
     @Test
     public void testTreePrintEmptyValue() {
         this.treePrintAndCheck(
-                TextStyleProperty.with(
-                        TextStylePropertyName.TEXT_ALIGN,
-                        Optional.empty()
-                ),
-                "text-align\n"
+            TextStyleProperty.with(
+                TextStylePropertyName.TEXT_ALIGN,
+                Optional.empty()
+            ),
+            "text-align\n"
         );
     }
 

@@ -45,12 +45,12 @@ import java.util.function.Predicate;
  * Base class that may be used to represent rich text, some nodes with styling textStyle and others with plain text.
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
-        HasText,
-        HasHtml,
-        TreePrintable,
-        TraversableHasTextOffset<TextNode>,
-        UsesToStringBuilder {
-    
+    HasText,
+    HasHtml,
+    TreePrintable,
+    TraversableHasTextOffset<TextNode>,
+    UsesToStringBuilder {
+
     /**
      * No children constant
      */
@@ -147,8 +147,8 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     final TextNode removeParent0() {
         return this.isRoot() ?
-                this :
-                this.replace(NO_INDEX);
+            this :
+            this.replace(NO_INDEX);
     }
 
     /**
@@ -164,11 +164,11 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     final TextNode replaceChild(final Optional<TextNode> previousParent,
                                 final int childIndex) {
         return previousParent.isPresent() ?
-                previousParent.get()
-                        .setChild(this, childIndex)
-                        .children()
-                        .get(childIndex) :
-                this;
+            previousParent.get()
+                .setChild(this, childIndex)
+                .children()
+                .get(childIndex) :
+            this;
     }
 
     // index........................................................................................................
@@ -195,8 +195,8 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final TextNode setAttributes(final Map<TextStylePropertyName<?>, Object> attributes) {
         final TextNodeMap textStyleMap = TextNodeMap.with(attributes);
         return textStyleMap.isEmpty() ?
-                this.setAttributesEmptyTextStyleMap() :
-                this.setAttributesNonEmptyTextStyleMap(textStyleMap);
+            this.setAttributesEmptyTextStyleMap() :
+            this.setAttributesNonEmptyTextStyleMap(textStyleMap);
     }
 
     /**
@@ -281,8 +281,8 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-                this.canBeEqual(other) &&
-                        this.equals0(Cast.to(other));
+            this.canBeEqual(other) &&
+                this.equals0(Cast.to(other));
     }
 
     abstract boolean canBeEqual(final Object other);
@@ -342,10 +342,10 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public static NodeSelector<TextNode, TextNodeName, TextStylePropertyName<?>, Object> nodeSelectorExpressionParserToken(final NodeSelectorExpressionParserToken token,
                                                                                                                            final Predicate<ExpressionFunctionName> functions) {
         return NodeSelector.parserToken(
-                token,
-                n -> TextNodeName.with(n.value()),
-                functions,
-                TextNode.class
+            token,
+            n -> TextNodeName.with(n.value()),
+            functions,
+            TextNode.class
         );
     }
 
@@ -353,33 +353,33 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     static {
         JsonNodeContext.register("hyperlink",
-                Hyperlink::unmarshallHyperLink,
-                Hyperlink::marshall,
-                Hyperlink.class);
+            Hyperlink::unmarshallHyperLink,
+            Hyperlink::marshall,
+            Hyperlink.class);
 
         JsonNodeContext.register("image",
-                Image::unmarshallImage,
-                Image::marshall,
-                Image.class);
+            Image::unmarshallImage,
+            Image::marshall,
+            Image.class);
 
         JsonNodeContext.register("text",
-                Text::unmarshallText,
-                Text::marshall,
-                Text.class);
+            Text::unmarshallText,
+            Text::marshall,
+            Text.class);
 
         JsonNodeContext.register("text-placeholder",
-                TextPlaceholderNode::unmarshallTextPlaceholderNode,
-                TextPlaceholderNode::marshall,
-                TextPlaceholderNode.class);
+            TextPlaceholderNode::unmarshallTextPlaceholderNode,
+            TextPlaceholderNode::marshall,
+            TextPlaceholderNode.class);
 
         JsonNodeContext.register("text-style-node",
-                TextStyleNode::unmarshallTextStyleNode,
-                TextStyleNode::marshall,
-                TextStyleNode.class);
+            TextStyleNode::unmarshallTextStyleNode,
+            TextStyleNode::marshall,
+            TextStyleNode.class);
 
         JsonNodeContext.register("text-styleName",
-                TextStyleNameNode::unmarshallTextStyleNameNode,
-                TextStyleNameNode::marshall,
-                TextStyleNameNode.class);
+            TextStyleNameNode::unmarshallTextStyleNameNode,
+            TextStyleNameNode::marshall,
+            TextStyleNameNode.class);
     }
 }

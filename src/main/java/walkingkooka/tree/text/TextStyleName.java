@@ -49,9 +49,9 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
 
     static {
         JsonNodeContext.register("text-style-name",
-                TextStyleName::unmarshall,
-                TextStyleName::marshall,
-                TextStyleName.class);
+            TextStyleName::unmarshall,
+            TextStyleName::marshall,
+            TextStyleName.class);
     }
 
     // Object..........................................................................................................

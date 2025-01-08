@@ -28,7 +28,7 @@ final class TextOverflowString extends TextOverflow {
 
     static TextOverflowString with(final String value) {
         return new TextOverflowString(
-                CharSequences.failIfNullOrEmpty(value, "value")
+            CharSequences.failIfNullOrEmpty(value, "value")
         );
     }
 
@@ -72,8 +72,8 @@ final class TextOverflowString extends TextOverflow {
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof TextOverflowString &&
-                        this.equals0(Cast.to(other));
+            other instanceof TextOverflowString &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final TextOverflowString other) {

@@ -31,8 +31,8 @@ public final class LengthUnit<V, L extends Length<V>> {
      * Pixel length unit.
      */
     public final static LengthUnit<Double, PixelLength> PIXEL = new LengthUnit<>("px",
-            PixelLength::parsePixels,
-            Length::pixel);
+        PixelLength::parsePixels,
+        Length::pixel);
 
     /**
      * Returns all units.
@@ -44,10 +44,10 @@ public final class LengthUnit<V, L extends Length<V>> {
     // @see Length:parse
     static Length<?> tryAllParse(final String text) {
         return Arrays.stream(UNITS)
-                .filter(u -> u.unitPresent(text))
-                .map(u -> u.parse(text))
-                .findFirst()
-                .orElseGet(() -> NumberLength.parseNumber(text));
+            .filter(u -> u.unitPresent(text))
+            .map(u -> u.parse(text))
+            .findFirst()
+            .orElseGet(() -> NumberLength.parseNumber(text));
     }
 
     private final static LengthUnit[] UNITS = new LengthUnit[]{PIXEL};

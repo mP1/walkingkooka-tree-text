@@ -74,17 +74,16 @@ abstract class TextParentNode extends TextNode {
 
         final List<TextNode> copy = Lists.immutable(children);
         return this.children.equals(copy) ?
-                this :
-                this.replaceChildren(copy);
+            this :
+            this.replaceChildren(copy);
     }
 
-    @Override
-    final TextNode setChild(final TextNode newChild, final int index) {
+    @Override final TextNode setChild(final TextNode newChild, final int index) {
         //int index = newChild.index();
         final TextNode previous = this.children().get(index);
         return previous.equals(newChild) ?
-                this :
-                this.replaceChild0(newChild, index);
+            this :
+            this.replaceChild0(newChild, index);
     }
 
     private TextNode replaceChild0(final TextNode newChild, final int index) {
@@ -98,12 +97,11 @@ abstract class TextParentNode extends TextNode {
     private TextParentNode replaceChildren(final List<TextNode> children) {
         final int index = this.index;
         return this.replace0(index, children)
-                .replaceChild(this.parent(), index)
-                .cast();
+            .replaceChild(this.parent(), index)
+            .cast();
     }
 
-    @Override
-    final TextNode replace(final int index) {
+    @Override final TextNode replace(final int index) {
         return this.replace0(index, this.children());
     }
 
@@ -117,15 +115,15 @@ abstract class TextParentNode extends TextNode {
     @Override
     public String text() {
         return this.children().stream()
-                .map(HasText::text)
-                .collect(Collectors.joining());
+            .map(HasText::text)
+            .collect(Collectors.joining());
     }
 
     @Override
     public int textLength() {
         return this.children().stream()
-                .mapToInt(HasText::textLength)
-                .sum();
+            .mapToInt(HasText::textLength)
+            .sum();
     }
 
     // toHtml...........................................................................................................
@@ -139,8 +137,8 @@ abstract class TextParentNode extends TextNode {
 
         try (final IndentingPrinter printer = Printers.stringBuilder(html, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
             this.buildHtml(
-                    false, // shouldIndent
-                    printer
+                false, // shouldIndent
+                printer
             );
         }
 
@@ -153,8 +151,8 @@ abstract class TextParentNode extends TextNode {
 
         for (final TextNode child : this.children()) {
             i = child.buildHtml(
-                    i,
-                    html
+                i,
+                html
             );
 
             i = child.isStyle() || child.isStyleName();
@@ -169,11 +167,11 @@ abstract class TextParentNode extends TextNode {
      * Because there are multiple types of children each json representation must be wrapped with the actual type.
      */
     final JsonObject addChildrenValuesJson(final JsonObject node,
-                                               final JsonNodeMarshallContext context) {
+                                           final JsonNodeMarshallContext context) {
         final List<TextNode> children = this.children();
         return children.isEmpty() ?
-                node :
-                node.set(CHILDREN_PROPERTY, context.marshallWithTypeCollection(children));
+            node :
+            node.set(CHILDREN_PROPERTY, context.marshallWithTypeCollection(children));
     }
 
     final static String CHILDREN = "children";

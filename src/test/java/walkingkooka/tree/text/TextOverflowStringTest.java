@@ -65,9 +65,9 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
         final String value = "ABC123";
 
         this.checkEquals(
-                TextOverflow.string(value),
-                this.textStylePropertyName()
-                        .parseValue(TextOverflow.STRING_PREFIX + value)
+            TextOverflow.string(value),
+            this.textStylePropertyName()
+                .parseValue(TextOverflow.STRING_PREFIX + value)
         );
     }
 

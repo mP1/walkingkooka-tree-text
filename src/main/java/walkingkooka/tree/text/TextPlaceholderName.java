@@ -46,9 +46,9 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
 
     static {
         JsonNodeContext.register("text-placeholder-name",
-                TextPlaceholderName::unmarshall,
-                TextPlaceholderName::marshall,
-                TextPlaceholderName.class);
+            TextPlaceholderName::unmarshall,
+            TextPlaceholderName::marshall,
+            TextPlaceholderName.class);
     }
 
     // Object..........................................................................................................

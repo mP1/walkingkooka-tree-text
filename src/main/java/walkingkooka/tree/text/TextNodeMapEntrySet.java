@@ -61,8 +61,8 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
 
         sort(list);
         return list.isEmpty() ?
-                EMPTY :
-                withList(list);
+            EMPTY :
+            withList(list);
     }
 
     /**
@@ -105,7 +105,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
 
     void accept(final TextStyleVisitor visitor) {
         this.entries
-                .forEach(visitor::acceptPropertyAndValue);
+            .forEach(visitor::acceptPropertyAndValue);
     }
 
     // ImmutableSetDefaults.............................................................................................
@@ -133,7 +133,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
         for (final JsonNode child : json.children()) {
             final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
             properties.put(name,
-                    name.handler.unmarshall(child, name, context));
+                name.handler.unmarshall(child, name, context));
         }
 
         return with(properties);
@@ -153,6 +153,6 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
         }
 
         return JsonNode.object()
-                .setChildren(json);
+            .setChildren(json);
     }
 }

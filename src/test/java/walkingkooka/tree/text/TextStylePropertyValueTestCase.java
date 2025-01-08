@@ -39,23 +39,23 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
     @Test
     public final void testParseValueNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.textStylePropertyName().parseValue(null)
+            NullPointerException.class,
+            () -> this.textStylePropertyName().parseValue(null)
         );
     }
 
     @Test
     public final void testTextStylePropertyJsonRoundtrip() {
         final TextNode properties = TextNode.style(TextStyleNode.NO_CHILDREN)
-                .setAttributes(Maps.of(this.textStylePropertyName(), this.createTextStylePropertyValue()));
+            .setAttributes(Maps.of(this.textStylePropertyName(), this.createTextStylePropertyValue()));
         final JsonNode json = JsonNodeMarshallContexts.basic().marshallWithType(properties);
         this.checkEquals(
-                properties,
-                JsonNodeUnmarshallContexts.basic(
-                        ExpressionNumberKind.DEFAULT,
-                        MathContext.DECIMAL32
-                ).unmarshallWithType(json),
-                () -> "" + properties);
+            properties,
+            JsonNodeUnmarshallContexts.basic(
+                ExpressionNumberKind.DEFAULT,
+                MathContext.DECIMAL32
+            ).unmarshallWithType(json),
+            () -> "" + properties);
     }
 
     @Test

@@ -32,9 +32,9 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
-        ConstantsTesting<LengthUnit<?, ?>>,
-        ToStringTesting<LengthUnit<?, ?>>,
-        TypeNameTesting<LengthUnit<?, ?>> {
+    ConstantsTesting<LengthUnit<?, ?>>,
+    ToStringTesting<LengthUnit<?, ?>>,
+    TypeNameTesting<LengthUnit<?, ?>> {
 
     @Test
     public void testUnits() {

@@ -31,15 +31,15 @@ import java.util.Optional;
  * A pair that captures a {@link TextStylePropertyName} and an optional value for that property.
  */
 public final class TextStyleProperty<T> implements HasName<TextStylePropertyName<T>>,
-        Value<Optional<T>>,
-        TreePrintable,
-        Comparable<TextStyleProperty<T>> {
+    Value<Optional<T>>,
+    TreePrintable,
+    Comparable<TextStyleProperty<T>> {
 
     public static <T> TextStyleProperty<T> with(final TextStylePropertyName<T> name,
                                                 final Optional<T> value) {
         return new TextStyleProperty<T>(
-                Objects.requireNonNull(name, "name"),
-                Objects.requireNonNull(value, "value")
+            Objects.requireNonNull(name, "name"),
+            Objects.requireNonNull(value, "value")
         );
     }
 
@@ -68,21 +68,21 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
     @Override
     public int hashCode() {
         return Objects.hash(
-                this.name,
-                this.value
+            this.name,
+            this.value
         );
     }
 
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof TextStyleProperty &&
-                        this.equals0(Cast.to(other));
+            other instanceof TextStyleProperty &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final TextStyleProperty other) {
         return this.name.equals(other.name) &&
-                this.value.equals(other.value);
+            this.value.equals(other.value);
     }
 
     @Override
@@ -91,7 +91,7 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
         b.append(this.name);
 
         final Object value = this.value.orElse(null);
-        if(null != value) {
+        if (null != value) {
             b.append(": ");
             b.append(value);
         }
@@ -107,12 +107,12 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
 
         {
             final Optional<T> value = this.value;
-            if(value.isPresent()) {
+            if (value.isPresent()) {
                 printer.indent();
                 {
                     TreePrintable.printTreeOrToString(
-                            value.get(),
-                            printer
+                        value.get(),
+                        printer
                     );
 
                     printer.lineStart();
@@ -131,9 +131,9 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
         if (CompareResult.EQ.test(compare)) {
             // safest to compare values as Strings...
             final String leftValue = this.value.map(Object::toString)
-                    .orElse("");
+                .orElse("");
             final String rightValue = other.value.map(Object::toString)
-                    .orElse("");
+                .orElse("");
 
             compare = leftValue.compareTo(rightValue);
         }

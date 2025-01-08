@@ -25,8 +25,8 @@ public final class TextStylePropertyValueHandlerFontWeightTest extends TextStyle
     @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
-                JsonNode.number(123),
-                FontWeight.with(123)
+            JsonNode.number(123),
+            FontWeight.with(123)
         );
     }
 
@@ -35,16 +35,16 @@ public final class TextStylePropertyValueHandlerFontWeightTest extends TextStyle
         final FontWeight fontWeight = FontWeight.with(123);
 
         this.marshallAndCheck(
-                fontWeight,
-                JsonNode.number(123)
+            fontWeight,
+            JsonNode.number(123)
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.handler(),
-                "FontWeight"
+            this.handler(),
+            "FontWeight"
         );
     }
 

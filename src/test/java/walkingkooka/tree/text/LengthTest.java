@@ -27,8 +27,8 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class LengthTest implements ClassTesting2<Length<?>>,
-        JsonNodeMarshallingTesting<Length<?>>,
-        ParseStringTesting<Length<?>> {
+    JsonNodeMarshallingTesting<Length<?>>,
+    ParseStringTesting<Length<?>> {
 
     @Test
     public void testParseIncorrectUnitFails() {

@@ -231,7 +231,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
     protected void visitMinWidth(final Length<?> minWidth) {
         // nop
     }
-    
+
     protected void visitOpacity(final Opacity opacity) {
         // nop
     }

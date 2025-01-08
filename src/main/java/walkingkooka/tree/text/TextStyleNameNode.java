@@ -69,8 +69,8 @@ public final class TextStyleNameNode extends TextParentNode {
         checkStyleName(styleName);
 
         return this.styleName.equals(styleName) ?
-                this :
-                this.replace1(this.index, this.children, styleName);
+            this :
+            this.replace1(this.index, this.children, styleName);
     }
 
     private final TextStyleName styleName;
@@ -124,10 +124,10 @@ public final class TextStyleNameNode extends TextParentNode {
     @Override
     TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return TextStyleNode.with(
-                Lists.of(
-                        this
-                ),
-                textStyleMap
+            Lists.of(
+                this
+            ),
+            textStyleMap
         );
     }
 
@@ -165,8 +165,8 @@ public final class TextStyleNameNode extends TextParentNode {
         html.print("\">");
 
         final boolean i = this.buildChildNodesHtml(
-                true, // shouldIndent
-                html
+            true, // shouldIndent
+            html
         );
 
         html.print("</SPAN>");
@@ -227,18 +227,18 @@ public final class TextStyleNameNode extends TextParentNode {
         }
 
         return TextStyleNameNode.with(styleName)
-                .setChildren(children);
+            .setChildren(children);
     }
 
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return this.addChildrenValuesJson(JsonNode.object()
-                        .set(STYLE_NAME_PROPERTY, context.marshall(this.styleName)),
-                context);
+                .set(STYLE_NAME_PROPERTY, context.marshall(this.styleName)),
+            context);
     }
 
     private final static String STYLE_NAME = "style-name";
     private final static JsonPropertyName STYLE_NAME_PROPERTY = JsonPropertyName.with(STYLE_NAME);
-    
+
     // Visitor .................................................................................................
 
     @Override
@@ -263,7 +263,7 @@ public final class TextStyleNameNode extends TextParentNode {
 
     private boolean equals1(final TextStyleNameNode other) {
         return this.styleName.equals(other.styleName) &&
-                this.children.equals(other.children);
+            this.children.equals(other.children);
     }
 
     // UsesToStringBuilder..............................................................................................

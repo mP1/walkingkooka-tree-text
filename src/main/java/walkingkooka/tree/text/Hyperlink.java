@@ -43,8 +43,8 @@ public final class Hyperlink extends TextParentNode {
 
     static Hyperlink with(final Url url) {
         return with(
-                url,
-                NO_CHILDREN
+            url,
+            NO_CHILDREN
         );
     }
 
@@ -54,9 +54,9 @@ public final class Hyperlink extends TextParentNode {
         Objects.requireNonNull(url, "url");
 
         return new Hyperlink(
-                NO_INDEX,
-                children,
-                url
+            NO_INDEX,
+            children,
+            url
         );
     }
 
@@ -101,8 +101,8 @@ public final class Hyperlink extends TextParentNode {
         Objects.requireNonNull(url, "url");
 
         return this.url.equals(url) ?
-                this :
-                this.replaceUrl(url);
+            this :
+            this.replaceUrl(url);
     }
 
     /**
@@ -110,9 +110,9 @@ public final class Hyperlink extends TextParentNode {
      */
     private Hyperlink replaceUrl(final Url url) {
         return new Hyperlink(
-                this.index,
-                this.children,
-                url
+            this.index,
+            this.children,
+            url
         );
     }
 
@@ -128,28 +128,28 @@ public final class Hyperlink extends TextParentNode {
         Objects.requireNonNull(children, "children");
 
         return this.setChildren0(children)
-                .cast();
+            .cast();
     }
 
     @Override
     public Hyperlink appendChild(final TextNode child) {
         return super.appendChild(child)
-                .cast();
+            .cast();
     }
 
     @Override
     public Hyperlink replaceChild(final TextNode oldChild,
                                   final TextNode newChild) {
         return super.replaceChild(
-                oldChild,
-                newChild
+            oldChild,
+            newChild
         ).cast();
     }
 
     @Override
     public Hyperlink removeChild(final int child) {
         return super.removeChild(child)
-                .cast();
+            .cast();
     }
 
     // replace..........................................................................................................
@@ -158,9 +158,9 @@ public final class Hyperlink extends TextParentNode {
     Hyperlink replace0(final int index,
                        final List<TextNode> children) {
         return new Hyperlink(
-                index,
-                children,
-                this.url
+            index,
+            children,
+            this.url
         );
     }
 
@@ -184,8 +184,8 @@ public final class Hyperlink extends TextParentNode {
         } else {
             html.print(">");
             this.buildChildNodesHtml(
-                    true,
-                    html
+                true,
+                html
             );
             html.print("</A>");
         }
@@ -223,10 +223,10 @@ public final class Hyperlink extends TextParentNode {
     @Override
     TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return TextStyleNode.with(
-                Lists.of(
-                        this
-                ),
-                textStyleMap
+            Lists.of(
+                this
+            ),
+            textStyleMap
         );
     }
 
@@ -267,7 +267,7 @@ public final class Hyperlink extends TextParentNode {
 
     private boolean equals1(final Hyperlink other) {
         return this.url.equals(other.url) &&
-                this.children.equals(other.children);
+            this.children.equals(other.children);
     }
 
     // UsesToStringBuilder..............................................................................................
@@ -289,8 +289,8 @@ public final class Hyperlink extends TextParentNode {
             switch (child.name().value()) {
                 case URL:
                     url = context.unmarshall(
-                            child,
-                            Url.class
+                        child,
+                        Url.class
                     );
                     break;
                 case CHILDREN:
@@ -298,27 +298,27 @@ public final class Hyperlink extends TextParentNode {
                     break;
                 default:
                     NeverError.unhandledCase(
-                            child,
-                            URL_PROPERTY,
-                            CHILDREN_PROPERTY
+                        child,
+                        URL_PROPERTY,
+                        CHILDREN_PROPERTY
                     );
             }
         }
 
         return with(
-                url
+            url
         ).setChildren(children);
     }
 
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object()
-                .set(
-                        URL_PROPERTY,
-                        context.marshall(this.url)
-                );
+            .set(
+                URL_PROPERTY,
+                context.marshall(this.url)
+            );
         return this.addChildrenValuesJson(
-                json,
-                context
+            json,
+            context
         );
     }
 

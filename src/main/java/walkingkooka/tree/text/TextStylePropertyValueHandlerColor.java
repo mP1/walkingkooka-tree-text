@@ -66,15 +66,15 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     @Override
     Color parseValue(final String value) {
         return this.unmarshall(
-                JsonNode.string(value),
-                null,
-                CONTEXT
+            JsonNode.string(value),
+            null,
+            CONTEXT
         );
     }
 
     private final static JsonNodeUnmarshallContext CONTEXT = JsonNodeUnmarshallContexts.basic(
-            ExpressionNumberKind.DOUBLE,
-            MathContext.DECIMAL32
+        ExpressionNumberKind.DOUBLE,
+        MathContext.DECIMAL32
     );
 
     // JsonNodeContext..................................................................................................
@@ -84,8 +84,8 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
                      final TextStylePropertyName<?> name,
                      final JsonNodeUnmarshallContext context) {
         return context.unmarshall(
-                node,
-                Color.class
+            node,
+            Color.class
         );
     }
 
@@ -96,14 +96,14 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     JsonNode marshall(final Color color,
                       final JsonNodeMarshallContext context) {
         final WebColorName webColorName = color.toWebColorName()
-                .orElse(null);
+            .orElse(null);
         return null != webColorName ?
-                context.marshall(
-                        webColorName.value()
-                ) :
-                context.marshall(
-                        color
-                );
+            context.marshall(
+                webColorName.value()
+            ) :
+            context.marshall(
+                color
+            );
     }
 
     // Object ..........................................................................................................

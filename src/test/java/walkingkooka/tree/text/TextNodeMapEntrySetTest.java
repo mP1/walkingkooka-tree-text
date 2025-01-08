@@ -30,13 +30,13 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextNodeMapEntrySetTest implements ImmutableSetTesting<TextNodeMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
-        IteratorTesting {
+    IteratorTesting {
 
     @Test
     public void testWithInvalidPropertyFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> TextNodeMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+            NullPointerException.class,
+            () -> TextNodeMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
         );
     }
 

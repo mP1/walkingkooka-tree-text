@@ -61,10 +61,10 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     @Override
     FontWeight parseValue(final String value) {
         return FontWeight.BOLD_TEXT.equals(value) ?
-                FontWeight.BOLD :
-                FontWeight.NORMAL_TEXT.equals(value) ?
-                        FontWeight.NORMAL :
-                        FontWeight.with(Integer.parseInt(value));
+            FontWeight.BOLD :
+            FontWeight.NORMAL_TEXT.equals(value) ?
+                FontWeight.NORMAL :
+                FontWeight.with(Integer.parseInt(value));
     }
 
     // JsonNodeContext..................................................................................................
@@ -74,8 +74,8 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
                           final TextStylePropertyName<?> name,
                           final JsonNodeUnmarshallContext context) {
         return context.unmarshall(
-                node,
-                FontWeight.class
+            node,
+            FontWeight.class
         );
     }
 

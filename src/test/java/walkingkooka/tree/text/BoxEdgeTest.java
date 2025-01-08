@@ -33,108 +33,108 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     @Test
     public void testBorderColorPropertyName() {
         this.checkEquals(
-                Lists.empty(),
-                Arrays.stream(BoxEdge.values())
-                        .filter(v -> v != BoxEdge.ALL)
-                        .flatMap(b -> {
-                            final String name = b.borderColorPropertyName()
-                                    .value();
-                            final String boxEdgeName = "border-" +
-                                    b.name()
-                                            .toLowerCase() +
-                                    "-color";
-                            return Optional.ofNullable(
-                                    name.equals(boxEdgeName) ?
-                                            null :
-                                            b + " " + boxEdgeName + "!=" + name
-                            ).stream();
-                        }).collect(Collectors.toList())
+            Lists.empty(),
+            Arrays.stream(BoxEdge.values())
+                .filter(v -> v != BoxEdge.ALL)
+                .flatMap(b -> {
+                    final String name = b.borderColorPropertyName()
+                        .value();
+                    final String boxEdgeName = "border-" +
+                        b.name()
+                            .toLowerCase() +
+                        "-color";
+                    return Optional.ofNullable(
+                        name.equals(boxEdgeName) ?
+                            null :
+                            b + " " + boxEdgeName + "!=" + name
+                    ).stream();
+                }).collect(Collectors.toList())
         );
     }
 
     @Test
     public void testBorderStylePropertyName() {
         this.checkEquals(
-                Lists.empty(),
-                Arrays.stream(BoxEdge.values())
-                        .filter(v -> v != BoxEdge.ALL)
-                        .flatMap(b -> {
-                            final String name = b.borderStylePropertyName()
-                                    .value();
-                            final String boxEdgeName = "border-" +
-                                    b.name()
-                                            .toLowerCase() +
-                                    "-style";
-                            return Optional.ofNullable(
-                                    name.equals(boxEdgeName) ?
-                                            null :
-                                            b + " " + boxEdgeName + "!=" + name
-                            ).stream();
-                        }).collect(Collectors.toList())
+            Lists.empty(),
+            Arrays.stream(BoxEdge.values())
+                .filter(v -> v != BoxEdge.ALL)
+                .flatMap(b -> {
+                    final String name = b.borderStylePropertyName()
+                        .value();
+                    final String boxEdgeName = "border-" +
+                        b.name()
+                            .toLowerCase() +
+                        "-style";
+                    return Optional.ofNullable(
+                        name.equals(boxEdgeName) ?
+                            null :
+                            b + " " + boxEdgeName + "!=" + name
+                    ).stream();
+                }).collect(Collectors.toList())
         );
     }
 
     @Test
     public void testBorderWidthPropertyName() {
         this.checkEquals(
-                Lists.empty(),
-                Arrays.stream(BoxEdge.values())
-                        .filter(v -> v != BoxEdge.ALL)
-                        .flatMap(b -> {
-                            final String name = b.borderWidthPropertyName()
-                                    .value();
-                            final String boxEdgeName = "border-" +
-                                    b.name()
-                                            .toLowerCase() +
-                                    "-width";
-                            return Optional.ofNullable(
-                                    name.equals(boxEdgeName) ?
-                                            null :
-                                            b + " " + boxEdgeName + "!=" + name
-                            ).stream();
-                        }).collect(Collectors.toList())
+            Lists.empty(),
+            Arrays.stream(BoxEdge.values())
+                .filter(v -> v != BoxEdge.ALL)
+                .flatMap(b -> {
+                    final String name = b.borderWidthPropertyName()
+                        .value();
+                    final String boxEdgeName = "border-" +
+                        b.name()
+                            .toLowerCase() +
+                        "-width";
+                    return Optional.ofNullable(
+                        name.equals(boxEdgeName) ?
+                            null :
+                            b + " " + boxEdgeName + "!=" + name
+                    ).stream();
+                }).collect(Collectors.toList())
         );
     }
 
     @Test
     public void testMarginPropertyName() {
         this.checkEquals(
-                Lists.empty(),
-                Arrays.stream(BoxEdge.values())
-                        .filter(v -> v != BoxEdge.ALL)
-                        .flatMap(b -> {
-                            final String name = b.marginPropertyName()
-                                    .value();
-                            final String boxEdgeName = "margin-" +
-                                    b.name()
-                                            .toLowerCase();
-                            return Optional.ofNullable(
-                                    name.equals(boxEdgeName) ?
-                                            null :
-                                            b + " " + boxEdgeName + "!=" + name
-                            ).stream();
-                        }).collect(Collectors.toList())
+            Lists.empty(),
+            Arrays.stream(BoxEdge.values())
+                .filter(v -> v != BoxEdge.ALL)
+                .flatMap(b -> {
+                    final String name = b.marginPropertyName()
+                        .value();
+                    final String boxEdgeName = "margin-" +
+                        b.name()
+                            .toLowerCase();
+                    return Optional.ofNullable(
+                        name.equals(boxEdgeName) ?
+                            null :
+                            b + " " + boxEdgeName + "!=" + name
+                    ).stream();
+                }).collect(Collectors.toList())
         );
     }
 
     @Test
     public void testPaddingPropertyName() {
         this.checkEquals(
-                Lists.empty(),
-                Arrays.stream(BoxEdge.values())
-                        .filter(v -> v != BoxEdge.ALL)
-                        .flatMap(b -> {
-                            final String name = b.paddingPropertyName()
-                                    .value();
-                            final String boxEdgeName = "padding-" +
-                                    b.name()
-                                            .toLowerCase();
-                            return Optional.ofNullable(
-                                    name.equals(boxEdgeName) ?
-                                            null :
-                                            b + " " + boxEdgeName + "!=" + name
-                            ).stream();
-                        }).collect(Collectors.toList())
+            Lists.empty(),
+            Arrays.stream(BoxEdge.values())
+                .filter(v -> v != BoxEdge.ALL)
+                .flatMap(b -> {
+                    final String name = b.paddingPropertyName()
+                        .value();
+                    final String boxEdgeName = "padding-" +
+                        b.name()
+                            .toLowerCase();
+                    return Optional.ofNullable(
+                        name.equals(boxEdgeName) ?
+                            null :
+                            b + " " + boxEdgeName + "!=" + name
+                    ).stream();
+                }).collect(Collectors.toList())
         );
     }
 

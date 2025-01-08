@@ -60,18 +60,18 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
     @Test
     public void testParseValueClip() {
         this.checkEquals(
-                TextOverflow.CLIP,
-                this.textStylePropertyName()
-                        .parseValue(TextOverflow.CLIP_TEXT)
+            TextOverflow.CLIP,
+            this.textStylePropertyName()
+                .parseValue(TextOverflow.CLIP_TEXT)
         );
     }
 
     @Test
     public void testParseValueEllipsis() {
         this.checkEquals(
-                TextOverflow.ELLIPSIS,
-                this.textStylePropertyName()
-                        .parseValue(TextOverflow.ELLIPSIS_TEXT)
+            TextOverflow.ELLIPSIS,
+            this.textStylePropertyName()
+                .parseValue(TextOverflow.ELLIPSIS_TEXT)
         );
     }
 

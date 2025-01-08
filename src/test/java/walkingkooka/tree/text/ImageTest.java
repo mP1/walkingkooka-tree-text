@@ -32,8 +32,8 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testWithNullUrlFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> Image.with(null)
+            NullPointerException.class,
+            () -> Image.with(null)
         );
     }
 
@@ -49,8 +49,8 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"), this.createTextNode()))
-                        .children().get(1),
-                2);
+                .children().get(1),
+            2);
     }
 
     // toHtml...........................................................................................................
@@ -58,8 +58,8 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testToHtml() {
         this.toHtmlAndCheck(
-                Image.with(Url.parse("https://example.com/image.png")),
-                "<IMG src=\"https://example.com/image.png\"/>"
+            Image.with(Url.parse("https://example.com/image.png")),
+            "<IMG src=\"https://example.com/image.png\"/>"
         );
     }
 
@@ -88,8 +88,8 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-                this.createTextNode(),
-                "Image \"https://example.com\"\n"
+            this.createTextNode(),
+            "Image \"https://example.com\"\n"
         );
     }
 
@@ -135,8 +135,8 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.createNode(),
-                "https://example.com"
+            this.createNode(),
+            "https://example.com"
         );
     }
 

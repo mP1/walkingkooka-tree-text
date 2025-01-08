@@ -51,19 +51,18 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     final TextLeafNode<V> setValue0(final V value) {
         return Objects.equals(this.value(), value) ?
-                this :
-                this.replaceValue(value);
+            this :
+            this.replaceValue(value);
     }
 
     final TextLeafNode<V> replaceValue(final V value) {
         final int index = this.index;
         return this.replace1(index, value)
-                .replaceChild(this.parent(), index)
-                .cast();
+            .replaceChild(this.parent(), index)
+            .cast();
     }
 
-    @Override
-    final TextNode replace(final int index) {
+    @Override final TextNode replace(final int index) {
         return this.replace0(index);
     }
 
@@ -87,15 +86,14 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     public final TextNode setChildren(final List<TextNode> children) {
         Objects.requireNonNull(children, "children");
 
-        if(false == children.isEmpty()) {
+        if (false == children.isEmpty()) {
             throw new UnsupportedOperationException();
         }
 
         return this;
     }
 
-    @Override
-    final TextNode setChild(final TextNode newChild, final int index) {
+    @Override final TextNode setChild(final TextNode newChild, final int index) {
         return NeverError.unexpectedMethodCall(this, "setChild", newChild, index);
     }
 
@@ -114,13 +112,12 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     /**
      * Creates a new {@link TextStyleNode} with this leaf as its only child with the given attributes.
      */
-    @Override
-    final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    @Override final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return TextStyleNode.with(
-                Lists.of(
-                        this
-                ),
-                textStyleMap
+            Lists.of(
+                this
+            ),
+            textStyleMap
         );
     }
 
@@ -131,9 +128,8 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     // toHtml ..........................................................................................................
 
-    @Override
-    final boolean buildHtml(final boolean shouldIndent,
-                         final IndentingPrinter html) {
+    @Override final boolean buildHtml(final boolean shouldIndent,
+                                      final IndentingPrinter html) {
         html.print(this.toHtml());
         return false;
     }
@@ -145,11 +141,10 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return Objects.hash(this.value);
     }
 
-    @Override
-    final boolean equals0(final TextNode other) {
+    @Override final boolean equals0(final TextNode other) {
         final Value<?> hasValue = Cast.to(other);
         return this.value.equals(
-                hasValue.value()
+            hasValue.value()
         );
     }
 }

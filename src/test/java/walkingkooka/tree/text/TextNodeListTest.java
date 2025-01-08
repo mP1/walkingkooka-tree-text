@@ -32,21 +32,21 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
-        ClassTesting<TextNodeList>,
-        ImmutableListTesting<TextNodeList, TextNode>,
-        JsonNodeMarshallingTesting<TextNodeList> {
+    ClassTesting<TextNodeList>,
+    ImmutableListTesting<TextNodeList, TextNode>,
+    JsonNodeMarshallingTesting<TextNodeList> {
 
     private final static TextNode NODE1 = TextNode.text("Hello");
 
     private final static TextNode NODE2 = TextNode.hyperlink(
-            Url.parseAbsolute("https://example.com/link123")
+        Url.parseAbsolute("https://example.com/link123")
     );
 
     @Test
     public void testWithNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> TextNodeList.with(null)
+            NullPointerException.class,
+            () -> TextNodeList.with(null)
         );
     }
 
@@ -54,35 +54,35 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     public void testDoesntDoubleWrap() {
         final TextNodeList list = this.createList();
         assertSame(
-                list,
-                TextNodeList.with(list)
+            list,
+            TextNodeList.with(list)
         );
     }
 
     @Test
     public void testGet() {
         this.getAndCheck(
-                this.createList(),
-                0, // index
-                NODE1 // expected
+            this.createList(),
+            0, // index
+            NODE1 // expected
         );
     }
 
     @Test
     public void testGet2() {
         this.getAndCheck(
-                this.createList(),
-                1, // index
-                NODE2 // expected
+            this.createList(),
+            1, // index
+            NODE2 // expected
         );
     }
 
     @Test
     public void testSetFails() {
         this.setFails(
-                this.createList(),
-                0, // index
-                NODE1 // expected
+            this.createList(),
+            0, // index
+            NODE1 // expected
         );
     }
 
@@ -91,8 +91,8 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         final TextNodeList list = this.createList();
 
         this.removeIndexFails(
-                list,
-                0
+            list,
+            0
         );
     }
 
@@ -101,18 +101,18 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         final TextNodeList list = this.createList();
 
         this.removeFails(
-                list,
-                list.get(0)
+            list,
+            list.get(0)
         );
     }
 
     @Override
     public TextNodeList createList() {
         return TextNodeList.with(
-                Lists.of(
-                        NODE1,
-                        NODE2
-                )
+            Lists.of(
+                NODE1,
+                NODE2
+            )
         );
     }
 
@@ -131,47 +131,47 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     @Test
     public void testMarshall() {
         this.marshallAndCheck(
-                this.createList(),
-                "[\n" +
-                        "  {\n" +
-                        "    \"type\": \"text\",\n" +
-                        "    \"value\": \"Hello\"\n" +
-                        "  },\n" +
-                        "  {\n" +
-                        "    \"type\": \"hyperlink\",\n" +
-                        "    \"value\": {\n" +
-                        "      \"url\": \"https://example.com/link123\"\n" +
-                        "    }\n" +
-                        "  }\n" +
-                        "]"
+            this.createList(),
+            "[\n" +
+                "  {\n" +
+                "    \"type\": \"text\",\n" +
+                "    \"value\": \"Hello\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"type\": \"hyperlink\",\n" +
+                "    \"value\": {\n" +
+                "      \"url\": \"https://example.com/link123\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "]"
         );
     }
 
     @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
-                "[\n" +
-                        "  {\n" +
-                        "    \"type\": \"text\",\n" +
-                        "    \"value\": \"Hello\"\n" +
-                        "  },\n" +
-                        "  {\n" +
-                        "    \"type\": \"hyperlink\",\n" +
-                        "    \"value\": {\n" +
-                        "      \"url\": \"https://example.com/link123\"\n" +
-                        "    }\n" +
-                        "  }\n" +
-                        "]",
-                this.createList()
+            "[\n" +
+                "  {\n" +
+                "    \"type\": \"text\",\n" +
+                "    \"value\": \"Hello\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"type\": \"hyperlink\",\n" +
+                "    \"value\": {\n" +
+                "      \"url\": \"https://example.com/link123\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "]",
+            this.createList()
         );
     }
 
     @Override
     public TextNodeList unmarshall(final JsonNode json,
-                                                            final JsonNodeUnmarshallContext context) {
+                                   final JsonNodeUnmarshallContext context) {
         return TextNodeList.unmarshall(
-                json,
-                context
+            json,
+            context
         );
     }
 

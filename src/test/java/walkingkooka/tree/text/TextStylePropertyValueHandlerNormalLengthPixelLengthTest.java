@@ -48,21 +48,21 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     public void testCheckWrongValueTypeFails2() {
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
         this.checkFails(
-                fakeNode,
-                "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
+            fakeNode,
+            "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
         );
     }
 
     @Test
     public void testUnmarshallNoneFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.handler()
-                        .unmarshall(
-                                this.marshall(Length.none()),
-                                this.propertyName(),
-                                this.unmarshallContext()
-                        )
+            IllegalArgumentException.class,
+            () -> this.handler()
+                .unmarshall(
+                    this.marshall(Length.none()),
+                    this.propertyName(),
+                    this.unmarshallContext()
+                )
         );
     }
 
@@ -75,13 +75,13 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     @Test
     public void testUnmarshallNumberFails() {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> this.handler()
-                        .unmarshall(
-                                this.marshall(Length.number(1)),
-                                this.propertyName(),
-                                this.unmarshallContext()
-                        )
+            IllegalArgumentException.class,
+            () -> this.handler()
+                .unmarshall(
+                    this.marshall(Length.number(1)),
+                    this.propertyName(),
+                    this.unmarshallContext()
+                )
         );
     }
 

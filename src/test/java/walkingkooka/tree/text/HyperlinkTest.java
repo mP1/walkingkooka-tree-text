@@ -40,8 +40,8 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testWithNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> Hyperlink.with(null)
+            NullPointerException.class,
+            () -> Hyperlink.with(null)
         );
     }
 
@@ -52,19 +52,19 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         final TextNode child3 = this.text3();
 
         final Hyperlink parent = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                child1,
-                                child2
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    child1,
+                    child2
+                )
+            );
         final Hyperlink grandParent = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                parent,
-                                child3
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    parent,
+                    child3
+                )
+            );
 
         final TextNode parent2 = grandParent.children().get(0);
         this.parentPresentCheck(parent2);
@@ -95,30 +95,30 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         final TextNode child2 = this.text2();
 
         final Hyperlink parent = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                child1,
-                                child2
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    child1,
+                    child2
+                )
+            );
 
         final TextNode parent2 = this.text3();
         final Hyperlink grandParent = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                parent,
-                                parent2
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    parent,
+                    parent2
+                )
+            );
 
         final TextNode differentChild = TextNode.text("different");
         final TextNode different = grandParent.children()
-                .get(0)
-                .appendChild(differentChild);
+            .get(0)
+            .appendChild(differentChild);
         this.parentPresentCheck(different);
         this.childCountCheck(
-                different,
-                child1, child2, differentChild
+            different,
+            child1, child2, differentChild
         );
 
         final TextNode grandParent2 = different.parentOrFail();
@@ -129,12 +129,12 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testSetChildrenEmpty() {
         final Hyperlink node = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                text1(),
-                                text2()
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    text1(),
+                    text2()
+                )
+            );
         final List<TextNode> children = TextNode.NO_CHILDREN;
 
         final Hyperlink different = node.setChildren(children);
@@ -149,14 +149,14 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testText() {
         this.textAndCheck(
-                TextNode.hyperlink(URL)
-                        .setChildren(
-                                Lists.of(
-                                        Text.with("a1"),
-                                        Text.with("b2")
-                                )
-                        ),
-                "a1b2"
+            TextNode.hyperlink(URL)
+                .setChildren(
+                    Lists.of(
+                        Text.with("a1"),
+                        Text.with("b2")
+                    )
+                ),
+            "a1b2"
         );
     }
 
@@ -165,15 +165,15 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testTextOffsetWithParent() {
         this.textOffsetAndCheck(
-                TextNode.hyperlink(URL)
-                        .setChildren(
-                                Lists.of(
-                                        Text.with("a1"),
-                                        Text.with("b2")
-                                )
-                        ).children()
-                        .get(1),
-                2
+            TextNode.hyperlink(URL)
+                .setChildren(
+                    Lists.of(
+                        Text.with("a1"),
+                        Text.with("b2")
+                    )
+                ).children()
+                .get(1),
+            2
         );
     }
 
@@ -182,24 +182,24 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testToHtmlWithText() {
         this.toHtmlAndCheck(
-                Hyperlink.with(URL)
-                        .setChildren(
-                                Lists.of(
-                                        TextNode.text("hyper-link-text")
-                                )
-                        ),
-                "<A href=\"https://example.com/Hello123\">hyper-link-text</A>"
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("hyper-link-text")
+                    )
+                ),
+            "<A href=\"https://example.com/Hello123\">hyper-link-text</A>"
         );
     }
 
     @Override
     Hyperlink createTextNode() {
         return Hyperlink.with(
-                URL,
-                Lists.of(
-                    text1(),
-                    text2()
-                )
+            URL,
+            Lists.of(
+                text1(),
+                text2()
+            )
         );
     }
 
@@ -213,18 +213,18 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testTreePrintable() {
         this.treePrintAndCheck(
-                Hyperlink.with(
-                        URL
-                ).setChildren(
-                        Lists.of(
-                                TextNode.text("a1"),
-                                TextNode.text("b2")
-                        )
-                ),
-                "Hyperlink\n" +
-                        "  https://example.com/Hello123\n" +
-                        "  Text \"a1\"\n" +
-                        "  Text \"b2\"\n"
+            Hyperlink.with(
+                URL
+            ).setChildren(
+                Lists.of(
+                    TextNode.text("a1"),
+                    TextNode.text("b2")
+                )
+            ),
+            "Hyperlink\n" +
+                "  https://example.com/Hello123\n" +
+                "  Text \"a1\"\n" +
+                "  Text \"b2\"\n"
         );
     }
 
@@ -236,11 +236,11 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         final List<TextNode> visited = Lists.array();
 
         final Hyperlink hyperLink = Hyperlink.with(URL)
-                .setChildren(
-                        Lists.of(
-                                TextNode.text("text-a1")
-                        )
-                );
+            .setChildren(
+                Lists.of(
+                    TextNode.text("text-a1")
+                )
+            );
         final Text text1 = Cast.to(hyperLink.children().get(0));
 
         new FakeTextNodeVisitor() {
@@ -280,17 +280,17 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         }.accept(hyperLink);
         this.checkEquals("1517262", b.toString());
         this.checkEquals(
-                Lists.of(
-                        hyperLink,
-                        hyperLink,
-                        text1,
-                        text1,
-                        text1,
-                        hyperLink,
-                        hyperLink
-                ),
-                visited,
-                "visited"
+            Lists.of(
+                hyperLink,
+                hyperLink,
+                text1,
+                text1,
+                text1,
+                hyperLink,
+                hyperLink
+            ),
+            visited,
+            "visited"
         );
     }
 
@@ -299,22 +299,22 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                Hyperlink.with(URL),
-                "https://example.com/Hello123 []"
+            Hyperlink.with(URL),
+            "https://example.com/Hello123 []"
         );
     }
 
     @Test
     public void testToStringWithChildren() {
         this.toStringAndCheck(
-                Hyperlink.with(URL)
-                        .setChildren(
-                                Lists.of(
-                                        text1(),
-                                        text2()
-                                )
-                        ),
-                "https://example.com/Hello123 [\"text-1a\", \"text-2b\"]"
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        text1(),
+                        text2()
+                    )
+                ),
+            "https://example.com/Hello123 [\"text-1a\", \"text-2b\"]"
         );
     }
 
@@ -323,118 +323,118 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     @Test
     public void testMarshallWithoutChildren() {
         this.marshallAndCheck(
-                Hyperlink.with(URL),
-                "{\n" +
-                        "  \"url\": \"https://example.com/Hello123\"\n" +
-                        "}"
+            Hyperlink.with(URL),
+            "{\n" +
+                "  \"url\": \"https://example.com/Hello123\"\n" +
+                "}"
         );
     }
 
     @Test
     public void testMarshallWithChildren() {
         this.marshallAndCheck(
-                Hyperlink.with(URL)
-                        .setChildren(
-                                Lists.of(
-                                        TextNode.text("text-1a"),
-                                        TextNode.text("text-2b")
-                                )
-                        ),
-                "{\n" +
-                        "  \"url\": \"https://example.com/Hello123\",\n" +
-                        "  \"children\": [\n" +
-                        "    {\n" +
-                        "      \"type\": \"text\",\n" +
-                        "      \"value\": \"text-1a\"\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"type\": \"text\",\n" +
-                        "      \"value\": \"text-2b\"\n" +
-                        "    }\n" +
-                        "  ]\n" +
-                        "}"
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("text-1a"),
+                        TextNode.text("text-2b")
+                    )
+                ),
+            "{\n" +
+                "  \"url\": \"https://example.com/Hello123\",\n" +
+                "  \"children\": [\n" +
+                "    {\n" +
+                "      \"type\": \"text\",\n" +
+                "      \"value\": \"text-1a\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"type\": \"text\",\n" +
+                "      \"value\": \"text-2b\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}"
         );
     }
 
     @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
-                "{\n" +
-                        "  \"url\": \"https://example.com/Hello123\"\n" +
-                        "}",
-                Hyperlink.with(URL)
+            "{\n" +
+                "  \"url\": \"https://example.com/Hello123\"\n" +
+                "}",
+            Hyperlink.with(URL)
         );
     }
 
     @Test
     public void testUnmarshallWithChildren() {
         this.unmarshallAndCheck(
-                "{\n" +
-                        "  \"url\": \"https://example.com/Hello123\",\n" +
-                        "  \"children\": [\n" +
-                        "    {\n" +
-                        "      \"type\": \"text\",\n" +
-                        "      \"value\": \"text-1a\"\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"type\": \"text\",\n" +
-                        "      \"value\": \"text-2b\"\n" +
-                        "    }\n" +
-                        "  ]\n" +
-                        "}",
-                Hyperlink.with(URL)
-                        .setChildren(
-                                Lists.of(
-                                        TextNode.text("text-1a"),
-                                        TextNode.text("text-2b")
-                                )
-                        )
+            "{\n" +
+                "  \"url\": \"https://example.com/Hello123\",\n" +
+                "  \"children\": [\n" +
+                "    {\n" +
+                "      \"type\": \"text\",\n" +
+                "      \"value\": \"text-1a\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"type\": \"text\",\n" +
+                "      \"value\": \"text-2b\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}",
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("text-1a"),
+                        TextNode.text("text-2b")
+                    )
+                )
         );
     }
 
     @Test
     public void testJsonRoundtripAbsoluteUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                Hyperlink.with(
-                        Url.parse("https://example.com/123")
-                )
+            Hyperlink.with(
+                Url.parse("https://example.com/123")
+            )
         );
     }
 
     @Test
     public void testJsonRoundtripRelativeUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                Hyperlink.with(
-                        Url.parse("/123/page.html")
-                )
+            Hyperlink.with(
+                Url.parse("/123/page.html")
+            )
         );
     }
 
     @Test
     public void testJsonRoundtripDataUrl() {
         this.marshallRoundTripTwiceAndCheck(
-                Hyperlink.with(
-                        Url.parse("data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==")
-                )
+            Hyperlink.with(
+                Url.parse("data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==")
+            )
         );
     }
 
     @Test
     public void testJsonRoundtripWithChildren() {
         this.marshallRoundTripTwiceAndCheck(
-                Hyperlink.with(URL)
-                        .setChildren(
-                                Lists.of(
-                                        TextNode.text("text-1a"),
-                                        TextNode.text("text-2b")
-                                                .setAttributes(
-                                                        Maps.of(
-                                                                TextStylePropertyName.BACKGROUND_COLOR,
-                                                                Color.parse("#234")
-                                                        )
-                                                )
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("text-1a"),
+                        TextNode.text("text-2b")
+                            .setAttributes(
+                                Maps.of(
+                                    TextStylePropertyName.BACKGROUND_COLOR,
+                                    Color.parse("#234")
                                 )
-                        )
+                            )
+                    )
+                )
         );
     }
 
@@ -442,8 +442,8 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
     public Hyperlink unmarshall(final JsonNode from,
                                 final JsonNodeUnmarshallContext context) {
         return Hyperlink.unmarshallHyperLink(
-                from,
-                context
+            from,
+            context
         );
     }
 

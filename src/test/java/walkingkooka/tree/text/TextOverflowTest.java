@@ -29,8 +29,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Set;
 
 public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
-        ConstantsTesting<TextOverflow>,
-        JsonNodeMarshallingTesting<TextOverflow> {
+    ConstantsTesting<TextOverflow>,
+    JsonNodeMarshallingTesting<TextOverflow> {
 
     @Test
     public void testClipJsonRoundtrip() {

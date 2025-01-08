@@ -37,8 +37,8 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
     @Override
     TextStylePropertyValueHandlerEnum<TextWrapping> handler() {
         return TextStylePropertyValueHandlerEnum.with(TextWrapping::valueOf,
-                TextWrapping.class,
-                v -> v instanceof TextWrapping);
+            TextWrapping.class,
+            v -> v instanceof TextWrapping);
     }
 
     @Override

@@ -147,14 +147,14 @@ abstract class TextStylePropertyValueHandler<T> {
         }
 
         return new IllegalArgumentException(
-                "Property " +
-                        name.inQuotes() +
-                        " value " +
-                        CharSequences.quoteIfChars(value) +
-                        "(" +
-                        typeName +
-                        ") is not a " +
-                        this.expectedTypeName(type)
+            "Property " +
+                name.inQuotes() +
+                " value " +
+                CharSequences.quoteIfChars(value) +
+                "(" +
+                typeName +
+                ") is not a " +
+                this.expectedTypeName(type)
         );
     }
 

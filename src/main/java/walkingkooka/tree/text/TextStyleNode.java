@@ -51,8 +51,8 @@ public final class TextStyleNode extends TextParentNode {
                          final TextNodeMap properties) {
         final List<TextNode> copy = Lists.immutable(children);
         return properties.isEmpty() && copy.size() == 1 ?
-                copy.get(0) :
-                new TextStyleNode(NO_INDEX, copy, properties);
+            copy.get(0) :
+            new TextStyleNode(NO_INDEX, copy, properties);
     }
 
     /**
@@ -124,8 +124,8 @@ public final class TextStyleNode extends TextParentNode {
 
     private TextStyleNode setAttributesTextStyleMap(final TextNodeMap textStyleMap) {
         return this.attributes.equals(textStyleMap) ?
-                this :
-                this.replaceAttributes(textStyleMap);
+            this :
+            this.replaceAttributes(textStyleMap);
     }
 
     /**
@@ -165,8 +165,8 @@ public final class TextStyleNode extends TextParentNode {
         html.print("\">");
 
         this.buildChildNodesHtml(
-                true,
-                html
+            true,
+            html
         );
 
         html.print("</SPAN>");
@@ -193,10 +193,10 @@ public final class TextStyleNode extends TextParentNode {
             switch (child.name().value()) {
                 case STYLES:
                     textStyle = textStyle.setValues(
-                            TextNodeMap.unmarshall(
-                                    child,
-                                    context
-                            )
+                        TextNodeMap.unmarshall(
+                            child,
+                            context
+                        )
                     );
                     break;
                 case CHILDREN:
@@ -265,7 +265,7 @@ public final class TextStyleNode extends TextParentNode {
 
     private boolean equals1(final TextStyleNode other) {
         return this.attributes.equals(other.attributes) &&
-                this.children.equals(other.children);
+            this.children.equals(other.children);
     }
 
     // UsesToStringBuilder..............................................................................................
@@ -273,7 +273,7 @@ public final class TextStyleNode extends TextParentNode {
     @Override
     void buildToStringBefore(final ToStringBuilder b) {
         final Map<TextStylePropertyName<?>, Object> attributes = this.attributes;
-        if(false == attributes.isEmpty()) {
+        if (false == attributes.isEmpty()) {
             //b.valueSeparator(", ");
             b.surroundValues("{", "}");
             b.value(attributes);

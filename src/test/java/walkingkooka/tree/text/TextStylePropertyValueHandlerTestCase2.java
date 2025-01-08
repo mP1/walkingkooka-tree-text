@@ -40,20 +40,20 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
         final JsonNode json = handler.marshall(value, this.marshallContext());
 
         this.checkEquals(value,
-                handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
-                () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
+            handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
+            () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
     }
 
     final void unmarshallAndCheck(final JsonNode node, final T value) {
         this.checkEquals(value,
-                this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
-                () -> "from JsonNode " + node);
+            this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
+            () -> "from JsonNode " + node);
     }
 
     final void marshallAndCheck(final T value, final JsonNode node) {
         this.checkEquals(node,
-                this.handler().marshall(value, this.marshallContext()),
-                () -> "marshall " + CharSequences.quoteIfChars(value));
+            this.handler().marshall(value, this.marshallContext()),
+            () -> "marshall " + CharSequences.quoteIfChars(value));
     }
 
     // helper...........................................................................................................
