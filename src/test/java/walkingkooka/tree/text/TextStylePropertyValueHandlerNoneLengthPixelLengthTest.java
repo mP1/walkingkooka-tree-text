@@ -25,34 +25,37 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerNoneLengthPixelLength, Length<?>> {
 
     @Test
-    public void testCheckNone() {
-        this.check(Length.none());
+    public void testCheckValueWithNone() {
+        this.checkValue(Length.none());
     }
 
     @Test
-    public void testCheckNormalFails() {
-        this.checkFails(Length.normal(), "Property \"max-height\" value normal(NormalLength) is not a NoneLength|PixelLength");
+    public void testCheckValueWithNormalFails() {
+        this.checkValueFails(Length.normal(), "Property \"max-height\" value normal(NormalLength) is not a NoneLength|PixelLength");
     }
 
     @Test
-    public void testCheckNumberFails() {
-        this.checkFails(Length.number(1L), "Property \"max-height\" value 1(NumberLength) is not a NoneLength|PixelLength");
+    public void testCheckValueWithNumberFails() {
+        this.checkValueFails(Length.number(1L), "Property \"max-height\" value 1(NumberLength) is not a NoneLength|PixelLength");
     }
 
     @Test
-    public void testCheckPixel() {
-        this.check(Length.pixel(1.5));
+    public void testCheckValueWithPixel() {
+        this.checkValue(Length.pixel(1.5));
     }
 
     @Test
-    public void testCheckWrongValueTypeFails() {
-        this.checkFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType()
+        );
     }
 
     @Test
-    public void testCheckWrongValueTypeFails2() {
+    public void testCheckValueWithIncompatibleTypeFails2() {
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
-        this.checkFails(
+        this.checkValueFails(
             fakeNode,
             "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
         );

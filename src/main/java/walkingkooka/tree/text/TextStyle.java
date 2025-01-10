@@ -142,7 +142,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final <V> TextStyle set(final TextStylePropertyName<V> propertyName, final V value) {
         checkPropertyName(propertyName);
 
-        propertyName.check(value);
+        propertyName.checkValue(value);
         return this.set0(propertyName, value);
     }
 
@@ -166,7 +166,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             }
 
             final TextStylePropertyName<Color> colorPropertyName = boxEdge.borderColorPropertyName();
-            colorPropertyName.check(color);
+            colorPropertyName.checkValue(color);
 
             colorStyleWidth.put(
                 colorPropertyName,
@@ -174,7 +174,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             );
 
             final TextStylePropertyName<BorderStyle> stylePropertyName = boxEdge.borderStylePropertyName();
-            stylePropertyName.check(style);
+            stylePropertyName.checkValue(style);
 
             colorStyleWidth.put(
                 stylePropertyName,
@@ -182,7 +182,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             );
 
             final TextStylePropertyName<Length<?>> widthPropertyName = boxEdge.borderWidthPropertyName();
-            widthPropertyName.check(width);
+            widthPropertyName.checkValue(width);
 
             colorStyleWidth.put(
                 widthPropertyName,
@@ -216,7 +216,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
                 final Object value = propertyNameAndValue.getValue();
 
-                propertyName.check(value);
+                propertyName.checkValue(value);
 
                 switch (propertyName.name) {
                     case BORDER_COLOR:

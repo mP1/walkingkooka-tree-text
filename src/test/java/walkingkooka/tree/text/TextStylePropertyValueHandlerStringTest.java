@@ -24,12 +24,12 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
 
     @Test
     public void testCheckEmptyStringFails() {
-        this.checkFails("", "Property \"text\" contains an empty/whitespace value \"\"");
+        this.checkValueFails("", "Property \"text\" contains an empty/whitespace value \"\"");
     }
 
     @Test
     public void testCheckWhitespace() {
-        this.check(" \t");
+        this.checkValue(" \t");
     }
 
     @Test
