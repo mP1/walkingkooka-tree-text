@@ -54,7 +54,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : entries.entrySet()) {
             final TextStylePropertyName<?> property = propertyAndValue.getKey();
             final Object value = propertyAndValue.getValue();
-            property.check(value);
+            property.checkValue(value);
 
             list.add(Maps.entry(property, value));
         }

@@ -42,46 +42,47 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     }
 
     @Test
-    public final void testCheckNullValueFails() {
-        this.checkFails(
+    public final void testCheckValueWithNullFails() {
+        this.checkValueFails(
             "Property " + this.propertyName().inQuotes() + " missing value"
         );
     }
 
-    final void check(final Object value) {
+    final void checkValue(final Object value) {
         final TextStylePropertyName<?> propertyName = this.propertyName();
         this.handler().check(value, propertyName);
-        propertyName.check(value);
+        propertyName.checkValue(value);
     }
 
-    final void checkFails(final String message) {
-        this.checkFails(
+    final void checkValueFails(final String message) {
+        this.checkValueFails(
             null,
             NullPointerException.class,
             message
         );
     }
 
-    final void checkFails(final Object value, final String message) {
-        this.checkFails(
+    final void checkValueFails(final Object value,
+                               final String message) {
+        this.checkValueFails(
             value,
             IllegalArgumentException.class,
             message
         );
     }
 
-    private <T extends RuntimeException> void checkFails(final Object value,
-                                                         final Class<T> throwType,
-                                                         final String message) {
+    private <T extends RuntimeException> void checkValueFails(final Object value,
+                                                              final Class<T> throwType,
+                                                              final String message) {
         final T thrown = assertThrows(
             throwType,
-            () -> this.check(value)
+            () -> this.checkValue(value)
         );
         this.checkEquals(message, thrown.getMessage(), "message");
 
         final T thrown2 = assertThrows(
             throwType,
-            () -> this.propertyName().check(value)
+            () -> this.propertyName().checkValue(value)
         );
         this.checkEquals(
             message,

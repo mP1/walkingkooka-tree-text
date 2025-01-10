@@ -25,29 +25,29 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerNormalLengthPixelLength, Length<?>> {
 
     @Test
-    public void testCheckNormal() {
-        this.check(Length.normal());
+    public void testCheckValueWithNormal() {
+        this.checkValue(Length.normal());
     }
 
     @Test
     public void testCheckNumberFails() {
-        this.checkFails(Length.number(1L), "Property \"line-height\" value 1(NumberLength) is not a NormalLength|PixelLength");
+        this.checkValueFails(Length.number(1L), "Property \"line-height\" value 1(NumberLength) is not a NormalLength|PixelLength");
     }
 
     @Test
     public void testCheckPixel() {
-        this.check(Length.pixel(1.5));
+        this.checkValue(Length.pixel(1.5));
     }
 
     @Test
     public void testCheckWrongValueTypeFails() {
-        this.checkFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
+        this.checkValueFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
     }
 
     @Test
     public void testCheckWrongValueTypeFails2() {
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
-        this.checkFails(
+        this.checkValueFails(
             fakeNode,
             "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
         );

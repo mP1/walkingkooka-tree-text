@@ -60,7 +60,7 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
 
     @Test
     public final void testTextStylePropertyNameCheck() {
-        this.textStylePropertyName().check(this.createTextStylePropertyValue());
+        this.textStylePropertyName().checkValue(this.createTextStylePropertyValue());
     }
 
     abstract V createTextStylePropertyValue();
