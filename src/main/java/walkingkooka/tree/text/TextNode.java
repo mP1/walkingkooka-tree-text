@@ -34,7 +34,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.select.NodeSelector;
-import walkingkooka.tree.select.parser.NodeSelectorExpressionParserToken;
+import walkingkooka.tree.select.parser.ExpressionNodeSelectorParserToken;
 
 import java.util.List;
 import java.util.Map;
@@ -337,9 +337,9 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     }
 
     /**
-     * Creates a {@link NodeSelector} for {@link TextNode} from a {@link NodeSelectorExpressionParserToken}.
+     * Creates a {@link NodeSelector} for {@link TextNode} from a {@link ExpressionNodeSelectorParserToken}.
      */
-    public static NodeSelector<TextNode, TextNodeName, TextStylePropertyName<?>, Object> nodeSelectorExpressionParserToken(final NodeSelectorExpressionParserToken token,
+    public static NodeSelector<TextNode, TextNodeName, TextStylePropertyName<?>, Object> nodeSelectorExpressionParserToken(final ExpressionNodeSelectorParserToken token,
                                                                                                                            final Predicate<ExpressionFunctionName> functions) {
         return NodeSelector.parserToken(
             token,
