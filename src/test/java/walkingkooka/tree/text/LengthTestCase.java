@@ -96,18 +96,17 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
     }
 
     @Override
-    public final String isMethodTypeNamePrefix() {
-        return "";
-    }
-
-    @Override
-    public final String isMethodTypeNameSuffix() {
-        return Length.class.getSimpleName();
-    }
-
-    @Override
     public final Predicate<String> isMethodIgnoreMethodFilter() {
         return Predicates.never();
+    }
+
+    @Override
+    public final String toIsMethodName(final String typeName) {
+        return this.toIsMethodNameWithPrefixSuffix(
+            typeName,
+            "",
+            Length.class.getSimpleName()
+        );
     }
 
     // ParseStringTesting...............................................................................................
