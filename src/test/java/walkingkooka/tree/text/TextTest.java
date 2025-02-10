@@ -28,9 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextTest extends TextLeafNodeTestCase<Text, String> {
 
-    @Override
-    public void testTypeNaming() {
-    }
+    // with.............................................................................................................
 
     @Test
     public void testWithEmpty() {
@@ -43,14 +41,21 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testWith2() {
         final String value = "abc123";
-        this.checkText(Text.with(value), value);
+        this.checkText(
+            Text.with(value),
+            value
+        );
     }
 
     @Test
     public void testSetTextSame() {
         final String value = "abc123";
         final Text text = Text.with(value);
-        assertSame(text, text.setText(value));
+
+        assertSame(
+            text,
+            text.setText(value)
+        );
     }
 
     @Test
@@ -62,8 +67,14 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         final Text different = text.setText(value);
         assertNotSame(text, different);
 
-        this.checkText(different, value);
-        this.checkText(text, before);
+        this.checkText(
+            different,
+            value
+        );
+        this.checkText(
+            text,
+            before
+        );
     }
 
     @Test
@@ -75,19 +86,32 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         final String value = "different-text-789";
         final Text different = text1.setText(value);
 
-        this.checkText(different, value);
-        this.childCountCheck(different.parentOrFail(), different, text2);
+        this.checkText(
+            different,
+            value
+        );
+        this.childCountCheck(
+            different.parentOrFail(),
+            different,
+            text2
+        );
     }
 
-    private void checkText(final Text text, final String value) {
-        this.textAndCheck(text, value);
-        this.textLengthAndCheck(text, value);
-        this.checkEquals(value, text.value(), "value");
-    }
-
-    @Test
-    public void testEqualsDifferentValue() {
-        this.checkNotEquals(Text.with("ABC123"));
+    private void checkText(final Text text,
+                           final String value) {
+        this.textAndCheck(
+            text,
+            value
+        );
+        this.textLengthAndCheck(
+            text,
+            value
+        );
+        this.checkEquals(
+            value,
+            text.value(),
+            "value"
+        );
     }
 
     // IsXXXMethod .....................................................................................................
@@ -95,19 +119,43 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testIsMethods() {
         final Text text = Text.with("abc");
-        this.checkEquals(true, text.isText(), "isText");
-        this.checkEquals(false, text.isPlaceholder(), "isPlaceholder");
-        this.checkEquals(false, text.isStyle(), "isStyle");
-        this.checkEquals(false, text.isStyleName(), "isStyleName");
+
+        this.checkEquals(
+            true,
+            text.isText(),
+            "isText"
+        );
+        this.checkEquals(
+            false,
+            text.isPlaceholder(),
+            "isPlaceholder"
+        );
+        this.checkEquals(
+            false,
+            text.isStyle(),
+            "isStyle"
+        );
+        this.checkEquals(
+            false,
+            text.isStyleName(),
+            "isStyleName"
+        );
     }
 
-    // HasTextOffset .....................................................................................................
+    // HasTextOffset ...................................................................................................
 
     @Test
     public void testTextOffsetWithParent() {
-        this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"), Text.with("b22")))
-                .children().get(1),
-            2);
+        this.textOffsetAndCheck(
+            TextNode.style(
+                    Lists.of(
+                        Text.with("a1"),
+                        Text.with("b22")
+                    )
+                ).children()
+                .get(1),
+            2
+        );
     }
 
     // toHtml...........................................................................................................
@@ -148,21 +196,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         );
     }
 
-    // HasJsonNode .....................................................................................................
-
-    @Test
-    public void testMarshall() {
-        final String text = "abc123!\t";
-        this.marshallAndCheck(Text.with(text), JsonNode.string(text));
-    }
-
-    @Test
-    public void testUnmarshall() {
-        final String text = "abc123!\t";
-        this.unmarshallAndCheck(JsonNode.string(text), Text.with(text));
-    }
-
-    // Visitor ........................................................................................................
+    // Visitor .........................................................................................................
 
     @Test
     public void testAccept() {
@@ -192,6 +226,28 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         this.checkEquals("132", b.toString());
     }
 
+    @Override
+    Text createTextNode(final String value) {
+        return Text.with(value);
+    }
+
+    @Override
+    String value() {
+        return "abc123";
+    }
+
+    @Override
+    Class<Text> textNodeType() {
+        return Text.class;
+    }
+
+    // equals...........................................................................................................
+
+    @Test
+    public void testEqualsDifferentValue() {
+        this.checkNotEquals(Text.with("ABC123"));
+    }
+
     // TreePrintable....................................................................................................
 
     @Test
@@ -219,26 +275,29 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         this.toStringAndCheck(Text.with("abc\tdef"), "\"abc\\tdef\"");
     }
 
-    @Override
-    Text createTextNode(final String value) {
-        return Text.with(value);
+    // JsonNodeMarshallingTesting.......................................................................................
+
+    @Test
+    public void testMarshall() {
+        final String text = "abc123!\t";
+        this.marshallAndCheck(Text.with(text), JsonNode.string(text));
     }
 
-    @Override
-    String value() {
-        return "abc123";
+    @Test
+    public void testUnmarshall() {
+        final String text = "abc123!\t";
+        this.unmarshallAndCheck(JsonNode.string(text), Text.with(text));
     }
-
-    @Override
-    Class<Text> textNodeType() {
-        return Text.class;
-    }
-
-    // JsonNodeMarshallingTesting........................................................................................
 
     @Override
     public Text unmarshall(final JsonNode from,
                            final JsonNodeUnmarshallContext context) {
         return Text.unmarshallText(from, context);
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public void testTypeNaming() {
     }
 }
