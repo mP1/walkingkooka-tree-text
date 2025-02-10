@@ -23,6 +23,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
     @Test
@@ -48,6 +50,18 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
                 .named(Text.NAME)
                 .stream(node, (c) -> ExpressionEvaluationContexts.fake(), TextNode.class)
                 .count());
+    }
+
+    // root ............................................................................................................
+
+    @Test
+    public void testEmptyTextRoot() {
+        final TextNode node = TextNode.EMPTY_TEXT;
+
+        assertSame(
+            node,
+            node.root()
+        );
     }
 
     // ClassTesting.....................................................................................................

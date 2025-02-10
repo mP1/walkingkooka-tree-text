@@ -62,6 +62,12 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final static Map<TextStylePropertyName<?>, Object> NO_ATTRIBUTES = Maps.empty();
 
     /**
+     * Constant that represents no parent.
+     */
+    // must appear before EMPTY_TEXT otherwise EMPTY_TEXT.parent will be null (BAD)
+    private final static Optional<TextNode> NO_PARENT = Optional.empty();
+
+    /**
      * Constant that holds a {@link Text} with no text.
      */
     public final static Text EMPTY_TEXT = text("");
@@ -109,11 +115,6 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public static Text text(final String value) {
         return Text.with(value);
     }
-
-    /**
-     * Constant that represents no parent.
-     */
-    private final static Optional<TextNode> NO_PARENT = Optional.empty();
 
     /**
      * Package private ctor to limit sub classing.
