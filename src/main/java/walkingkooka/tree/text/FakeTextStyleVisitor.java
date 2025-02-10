@@ -268,7 +268,7 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
 
     @Override
     protected void visitOverflowWrap(final OverflowWrap overflowWrap) {
-        // nop
+        throw new UnsupportedOperationException();
     }
 
     @Override
