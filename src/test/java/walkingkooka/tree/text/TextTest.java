@@ -34,7 +34,10 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
 
     @Test
     public void testWithEmpty() {
-        this.createTextNodeAndCheck("");
+        assertSame(
+            TextNode.EMPTY_TEXT,
+            Text.with("")
+        );
     }
 
     @Test

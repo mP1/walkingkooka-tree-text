@@ -35,9 +35,23 @@ public final class Text extends TextLeafNode<String> implements HasText {
 
     public final static TextNodeName NAME = TextNodeName.with("Text");
 
+    // only called once by TextNode#EMPTY
+    static Text emptyText() {
+        return new Text(
+            NO_INDEX,
+            ""
+        );
+    }
+
     static Text with(final String value) {
         Objects.requireNonNull(value, "value");
-        return new Text(NO_INDEX, value);
+
+        return "".equals(value) ?
+            EMPTY_TEXT :
+            new Text(
+                NO_INDEX,
+                value
+            );
     }
 
     private Text(final int index, final String text) {

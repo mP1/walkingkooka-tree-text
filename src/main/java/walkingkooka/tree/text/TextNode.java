@@ -70,7 +70,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     /**
      * Constant that holds a {@link Text} with no text.
      */
-    public final static Text EMPTY_TEXT = text("");
+    public final static Text EMPTY_TEXT = Text.emptyText();
 
     // public factory methods..........................................................................................
 
