@@ -210,6 +210,7 @@ public final class TextStyleNode extends TextParentNode {
         return textStyle.setChildren(children).cast();
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object();
         if (this.attributes.isNotEmpty()) {

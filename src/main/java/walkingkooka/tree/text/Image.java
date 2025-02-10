@@ -121,7 +121,10 @@ public final class Image extends TextLeafNode<Url> {
         );
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
-        return context.marshall(this.value);
+        return context.marshall(
+            this.value
+        );
     }
 }

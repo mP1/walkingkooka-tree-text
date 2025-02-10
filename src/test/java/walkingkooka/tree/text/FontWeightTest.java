@@ -153,6 +153,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     }
 
     @Test
+    @Override
     public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }

@@ -61,6 +61,4 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
     // helper...........................................................................................................
 
     abstract T propertyValue();
-
-    abstract String propertyValueType();
 }

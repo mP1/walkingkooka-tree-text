@@ -69,6 +69,7 @@ public abstract class TextOverflow implements Value<Optional<String>> {
     /**
      * Getter that returns any text if present.
      */
+    @Override
     public abstract Optional<String> value();
 
     public abstract boolean isClip();

@@ -112,6 +112,7 @@ public final class Text extends TextLeafNode<String> implements HasText {
         return Text.with(node.stringOrFail());
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(this.value);
     }

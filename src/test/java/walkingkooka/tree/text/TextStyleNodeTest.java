@@ -95,6 +95,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     }
 
     @Test
+    @Override
     public void testSetDifferentChildren() {
         final TextStyleNode node = this.createTextNode();
         final List<TextNode> children = Lists.of(different());

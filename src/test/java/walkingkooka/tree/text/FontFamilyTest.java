@@ -57,6 +57,7 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     }
 
     @Test
+    @Override
     public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }

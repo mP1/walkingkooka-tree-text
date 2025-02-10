@@ -128,6 +128,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     @Test
+    @Override
     public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }

@@ -114,6 +114,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     }
 
     @Test
+    @Override
     public void testMarshallRoundtripTwice() {
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }

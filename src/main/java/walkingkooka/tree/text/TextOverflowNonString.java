@@ -85,6 +85,7 @@ final class TextOverflowNonString extends TextOverflow {
 
     // JsonNodeContext..................................................................................................
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return this.jsonNode;
     }
