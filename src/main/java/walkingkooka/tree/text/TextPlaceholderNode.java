@@ -84,6 +84,7 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return TextPlaceholderNode.with(context.unmarshall(node, TextPlaceholderName.class));
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return context.marshall(this.value);
     }

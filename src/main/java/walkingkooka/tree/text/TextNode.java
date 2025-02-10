@@ -257,6 +257,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     /**
      * Returns the HTML equivalent of this {@link TextNode}.
      */
+    @Override
     public abstract String toHtml();
 
     /**

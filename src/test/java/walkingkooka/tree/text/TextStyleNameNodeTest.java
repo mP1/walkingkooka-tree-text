@@ -67,6 +67,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     @Test
+    @Override
     public void testSetDifferentChildren() {
         final TextNode child1 = this.text1();
         final TextStyleNameNode node = this.styleName(STYLE_NAME, child1);
@@ -118,6 +119,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     @Test
+    @Override
     public void testReplaceChildDifferentParent() {
         assertThrows(IllegalArgumentException.class, () -> {
             final TextStyleNameNode parent1 = this.styleName("parent1", this.text1());
@@ -128,6 +130,7 @@ public final class TextStyleNameNodeTest extends TextParentNodeTestCase<TextStyl
     }
 
     @Test
+    @Override
     public void testReplaceChild() {
         final TextStyleNameNode parent1 = this.styleName("parent1", this.text1());
 

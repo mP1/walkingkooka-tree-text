@@ -31,8 +31,9 @@ public abstract class TextNodeVisitor extends Visitor<TextNode> {
         super();
     }
 
-    // TextNode.......................................................................
+    // TextNode.........................................................................................................
 
+    @Override
     public final void accept(final TextNode node) {
         Objects.requireNonNull(node, "node");
 

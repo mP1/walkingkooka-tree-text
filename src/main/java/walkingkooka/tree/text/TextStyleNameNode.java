@@ -230,6 +230,7 @@ public final class TextStyleNameNode extends TextParentNode {
             .setChildren(children);
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         return this.addChildrenValuesJson(JsonNode.object()
                 .set(STYLE_NAME_PROPERTY, context.marshall(this.styleName)),

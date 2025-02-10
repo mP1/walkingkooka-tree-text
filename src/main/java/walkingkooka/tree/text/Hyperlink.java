@@ -310,6 +310,7 @@ public final class Hyperlink extends TextParentNode {
         ).setChildren(children);
     }
 
+    @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object()
             .set(
