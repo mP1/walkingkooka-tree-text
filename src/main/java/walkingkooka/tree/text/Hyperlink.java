@@ -87,8 +87,6 @@ public final class Hyperlink extends TextParentNode {
 
     /**
      * Retrieves the mandatory url property.
-     *
-     * @return
      */
     public Url url() {
         return this.url;
