@@ -80,7 +80,7 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextStyleProperty other) {
+    private boolean equals0(final TextStyleProperty<?> other) {
         return this.name.equals(other.name) &&
             this.value.equals(other.value);
     }
