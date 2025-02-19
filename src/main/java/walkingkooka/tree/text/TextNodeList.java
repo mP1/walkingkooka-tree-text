@@ -96,7 +96,7 @@ public final class TextNodeList extends AbstractList<TextNode>
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return context.marshallWithTypeCollection(this);
+        return context.marshallCollectionWithType(this);
     }
 
     static {
