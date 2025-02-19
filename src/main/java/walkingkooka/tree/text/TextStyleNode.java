@@ -200,7 +200,7 @@ public final class TextStyleNode extends TextParentNode {
                     );
                     break;
                 case CHILDREN:
-                    children = context.unmarshallWithTypeList(child);
+                    children = context.unmarshallListWithType(child);
                     break;
                 default:
                     NeverError.unhandledCase(child, STYLES_PROPERTY, CHILDREN_PROPERTY);
