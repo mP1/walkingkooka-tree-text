@@ -90,7 +90,7 @@ public final class TextNodeList extends AbstractList<TextNode>
                                    final JsonNodeUnmarshallContext context) {
         return with(
             Cast.to(
-                context.unmarshallWithTypeList(node)
+                context.unmarshallListWithType(node)
             )
         );
     }

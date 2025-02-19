@@ -292,7 +292,7 @@ public final class Hyperlink extends TextParentNode {
                     );
                     break;
                 case CHILDREN:
-                    children = context.unmarshallWithTypeList(child);
+                    children = context.unmarshallListWithType(child);
                     break;
                 default:
                     NeverError.unhandledCase(
