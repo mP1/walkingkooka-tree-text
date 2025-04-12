@@ -47,7 +47,12 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
     @Test
     public final void testTextStylePropertyJsonRoundtrip() {
         final TextNode properties = TextNode.style(TextStyleNode.NO_CHILDREN)
-            .setAttributes(Maps.of(this.textStylePropertyName(), this.createTextStylePropertyValue()));
+            .setAttributes(
+                Maps.of(
+                    this.textStylePropertyName(),
+                    this.createTextStylePropertyValue()
+                )
+            );
         final JsonNode json = JsonNodeMarshallContexts.basic().marshallWithType(properties);
         this.checkEquals(
             properties,
