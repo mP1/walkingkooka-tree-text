@@ -25,6 +25,7 @@ import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.UrlFragment;
+import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
@@ -784,7 +785,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.visitor = visitor;
 
         this.urlFragment = UrlFragment.with(name);
-        this.jsonPropertyName = JsonPropertyName.with(this.name);
+        this.jsonPropertyName = JsonPropertyName.with(
+            CaseKind.KEBAB.change(
+                name,
+                CaseKind.CAMEL
+            )
+        );
         this.patchRemove = JsonNode.object()
             .set(
                 this.jsonPropertyName,
@@ -848,12 +854,26 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     // JsonNodeContext..................................................................................................
 
     static TextStylePropertyName<?> unmarshall(final JsonNode node) {
-        return with(node.name().value());
+        return unmarshall(
+            node.name()
+                .value()
+        );
     }
 
     static TextStylePropertyName<?> unmarshall(final JsonNode node,
                                                final JsonNodeUnmarshallContext context) {
-        return with(node.stringOrFail());
+        return unmarshall(
+            node.stringOrFail()
+        );
+    }
+
+    private static TextStylePropertyName<?> unmarshall(final String value) {
+        return with(
+            CaseKind.CAMEL.change(
+                value,
+                CaseKind.KEBAB
+            )
+        );
     }
 
     JsonPropertyName marshallName() {

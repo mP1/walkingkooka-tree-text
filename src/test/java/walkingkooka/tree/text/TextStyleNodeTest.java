@@ -385,7 +385,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     public void testMarshallWithStyleNode() {
         this.marshallAndCheck(textStyleNode()
                 .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))),
-            "{\"styles\": {\"background-color\": \"#123456\"}}");
+            "{\"styles\": {\"backgroundColor\": \"#123456\"}}");
     }
 
     @Test
@@ -398,7 +398,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Color.fromRgb(0x123456)
                     )
                 ),
-            "{\"styles\": {\"background-color\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
+            "{\"styles\": {\"backgroundColor\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
         );
     }
 

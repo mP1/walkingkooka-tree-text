@@ -24,6 +24,7 @@ import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
+import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -236,7 +237,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             TextAlign.RIGHT,
             JsonNode.object()
                 .set(
-                    JsonPropertyName.with("text-align"),
+                    JsonPropertyName.with("textAlign"),
                     JsonNode.string("RIGHT")
                 )
         );
@@ -287,7 +288,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             propertyValue,
             JsonNode.object()
                 .set(
-                    JsonPropertyName.with("border-color"),
+                    JsonPropertyName.with("borderColor"),
                     JsonNode.string(propertyValue.toString())
                 )
         );
@@ -316,7 +317,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             null,
             JsonNode.object()
                 .set(
-                    JsonPropertyName.with("text-align"),
+                    JsonPropertyName.with("textAlign"),
                     JsonNode.nullNode()
                 )
         );
@@ -359,7 +360,12 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 null,
                 JsonNode.object()
                     .set(
-                        JsonPropertyName.with(propertyName.name),
+                        JsonPropertyName.with(
+                            CaseKind.KEBAB.change(
+                                propertyName.name,
+                                CaseKind.CAMEL
+                            )
+                        ),
                         JsonNode.nullNode()
                     )
             );
