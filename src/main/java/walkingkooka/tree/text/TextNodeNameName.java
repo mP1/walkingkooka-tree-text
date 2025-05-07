@@ -31,11 +31,12 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     Comparable<N> {
 
     static String checkName(final String name) {
-        CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(name,
+        return CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
+            name,
             "name",
             INITIAL,
-            PART);
-        return name;
+            PART
+        );
     }
 
     private final static CharPredicate INITIAL = CharPredicates.letter();
