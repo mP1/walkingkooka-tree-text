@@ -111,6 +111,11 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     // ImmutableSetDefaults.............................................................................................
 
     @Override
+    public void elementCheck(final Entry<TextStylePropertyName<?>, Object> entry) {
+        Objects.requireNonNull(entry, "entry");
+    }
+
+    @Override
     public TextNodeMapEntrySet setElements(final Set<Entry<TextStylePropertyName<?>, Object>> elements) {
         Objects.requireNonNull(elements, "elements");
         throw new UnsupportedOperationException();
