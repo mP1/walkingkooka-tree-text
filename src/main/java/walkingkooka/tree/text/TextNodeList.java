@@ -77,6 +77,11 @@ public final class TextNodeList extends AbstractList<TextNode>
     private final List<TextNode> nodes;
 
     @Override
+    public void elementCheck(final TextNode node) {
+        Objects.requireNonNull(node, "node");
+    }
+
+    @Override
     public TextNodeList setElements(final List<TextNode> nodes) {
         final TextNodeList copy = with(nodes);
         return this.equals(copy) ?
