@@ -114,7 +114,7 @@ final class TextStyleNonEmpty extends TextStyle {
     // replace..........................................................................................................
 
     @Override
-    TextNode replace0(final TextNode textNode) {
+    TextNode replaceNonNull(final TextNode textNode) {
         return textNode.setAttributesNonEmptyTextStyleMap(this.value);
     }
 
@@ -128,7 +128,7 @@ final class TextStyleNonEmpty extends TextStyle {
     // get..............................................................................................................
 
     @Override //
-    <V> Optional<V> get0(final TextStylePropertyName<V> propertyName) {
+    <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName) {
         Object get = null;
 
         final TextNodeMap value = this.value;
@@ -212,8 +212,8 @@ final class TextStyleNonEmpty extends TextStyle {
     // set..............................................................................................................
 
     @Override //
-    <V> TextStyle set0(final TextStylePropertyName<V> propertyName,
-                       final V value) {
+    <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
+                             final V value) {
         TextStyle result;
 
         switch (propertyName.name) {
@@ -349,7 +349,7 @@ final class TextStyleNonEmpty extends TextStyle {
     // remove...........................................................................................................
 
     @Override
-    TextStyle remove0(final TextStylePropertyName<?> propertyName) {
+    TextStyle removeNonNull(final TextStylePropertyName<?> propertyName) {
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
         boolean removed = false;
 

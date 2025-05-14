@@ -107,10 +107,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextNode replace(final TextNode textNode) {
         Objects.requireNonNull(textNode, "textNode");
 
-        return this.replace0(textNode);
+        return this.replaceNonNull(textNode);
     }
 
-    abstract TextNode replace0(final TextNode textNode);
+    abstract TextNode replaceNonNull(final TextNode textNode);
 
     // get..............................................................................................................
 
@@ -118,12 +118,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Gets the value for the given {@link TextStylePropertyName}.
      */
     public final <V> Optional<V> get(final TextStylePropertyName<V> propertyName) {
-        checkPropertyName(propertyName);
+        Objects.requireNonNull((TextStylePropertyName<?>) propertyName, "propertyName");
 
-        return this.get0(propertyName);
+        return this.getNonNull(propertyName);
     }
 
-    abstract <V> Optional<V> get0(final TextStylePropertyName<V> propertyName);
+    abstract <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName);
 
     /**
      * Gets the given property or throws an {@link IllegalArgumentException}
@@ -139,14 +139,16 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Sets a possibly new property returning a {@link TextStyle} with the new definition which may or may not
      * require creating a new {@link TextStyle}.
      */
-    public final <V> TextStyle set(final TextStylePropertyName<V> propertyName, final V value) {
-        checkPropertyName(propertyName);
+    public final <V> TextStyle set(final TextStylePropertyName<V> propertyName,
+                                   final V value) {
+        Objects.requireNonNull((TextStylePropertyName<?>) propertyName, "propertyName");
 
         propertyName.checkValue(value);
-        return this.set0(propertyName, value);
+        return this.setNonNull(propertyName, value);
     }
 
-    abstract <V> TextStyle set0(final TextStylePropertyName<V> propertyName, final V value);
+    abstract <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
+                                      final V value);
 
     /**
      * Sets all border properties to the same given value.
@@ -337,18 +339,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * {@link TextStylePropertyName#ALL} is a special case and always returns a {@link #EMPTY}.
      */
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
-        checkPropertyName(propertyName);
+        Objects.requireNonNull(propertyName, "propertyName");
 
         return propertyName == TextStylePropertyName.ALL ?
             TextStyle.EMPTY :
-            this.remove0(propertyName);
+            this.removeNonNull(propertyName);
     }
 
-    abstract TextStyle remove0(final TextStylePropertyName<?> propertyName);
-
-    private static void checkPropertyName(final TextStylePropertyName<?> propertyName) {
-        Objects.requireNonNull(propertyName, "propertyName");
-    }
+    abstract TextStyle removeNonNull(final TextStylePropertyName<?> propertyName);
 
     // setOrRemove......................................................................................................
 
@@ -429,6 +427,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * A null patch will return a {@link #EMPTY} this is necessary to support something like clear formatting<br>
      * Null values will result in the property being removed.
      */
+    @Override
     public final TextStyle patch(final JsonNode patch,
                                  final JsonNodeUnmarshallContext context) {
         Objects.requireNonNull(patch, "patch");
