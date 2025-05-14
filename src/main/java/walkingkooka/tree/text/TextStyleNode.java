@@ -252,12 +252,7 @@ public final class TextStyleNode extends TextParentNode {
         }
     }
 
-    // Object .........................................................................................................
-
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof TextStyleNode;
-    }
+    // Object ..........................................................................................................
 
     @Override //
     boolean equals0(final TextNode other) {
