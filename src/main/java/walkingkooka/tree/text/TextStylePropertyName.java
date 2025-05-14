@@ -74,11 +74,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<BorderStyle> registerBorderStyle(final String property,
                                                                           final BiConsumer<BorderStyle, TextStyleVisitor> visitor) {
-        return registerEnumConstant(property,
+        return registerEnumConstant(
+            property,
             BorderStyle::valueOf,
             BorderStyle.class,
             v -> v instanceof BorderStyle,
-            visitor);
+            visitor
+        );
     }
 
     /**
@@ -101,9 +103,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                                                                                      final Class<E> type,
                                                                                      final Predicate<Object> typeChecker,
                                                                                      final BiConsumer<E, TextStyleVisitor> visitor) {
-        return registerConstant(property,
-            TextStylePropertyValueHandler.enumTextPropertyValueHandler(factory, type, typeChecker),
-            visitor);
+        return registerConstant(
+            property,
+            TextStylePropertyValueHandler.enumTextPropertyValueHandler(
+                factory,
+                type,
+                typeChecker
+            ),
+            visitor
+        );
     }
 
     /**
@@ -113,9 +121,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                                                                          final Class<V> type,
                                                                          final Predicate<Object> typeTester,
                                                                          final BiConsumer<V, TextStyleVisitor> visitor) {
-        return registerConstant(property,
-            TextStylePropertyValueHandler.jsonNode(type, typeTester),
-            visitor);
+        return registerConstant(
+            property,
+            TextStylePropertyValueHandler.jsonNode(
+                type,
+                typeTester
+            ),
+            visitor
+        );
     }
 
     /**
@@ -124,10 +137,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private static TextStylePropertyName<Length<?>> registerLength(final String property,
                                                                    final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
         final Class<Length<?>> length = Cast.to(Length.class);
-        return registerJsonNodeConstant(property,
+        return registerJsonNodeConstant(
+            property,
             length,
             v -> v instanceof Length,
-            visitor);
+            visitor
+        );
     }
 
     /**
@@ -135,9 +150,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<Length<?>> registerNoneLengthPixelLengthConstant(final String property,
                                                                                           final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        return registerConstant(property,
+        return registerConstant(
+            property,
             TextStylePropertyValueHandler.noneLengthPixelLength(),
-            visitor);
+            visitor
+        );
     }
 
     /**
@@ -145,9 +162,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<Length<?>> registerNormalLengthPixelLengthConstant(final String property,
                                                                                             final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        return registerConstant(property,
+        return registerConstant(
+            property,
             TextStylePropertyValueHandler.normalLengthPixelLength(),
-            visitor);
+            visitor
+        );
     }
 
     /**
@@ -155,7 +174,10 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<Length<?>> registerNumberLengthConstant(final String property,
                                                                                  final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        return registerLength(property, visitor);
+        return registerLength(
+            property,
+            visitor
+        );
     }
 
     /**
@@ -163,9 +185,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private static TextStylePropertyName<String> registerStringConstant(final String property,
                                                                         final BiConsumer<String, TextStyleVisitor> visitor) {
-        return registerConstant(property,
+        return registerConstant(
+            property,
             TextStylePropertyValueHandler.string(),
-            visitor);
+            visitor
+        );
     }
 
     /**
@@ -174,8 +198,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private static <T> TextStylePropertyName<T> registerConstant(final String property,
                                                                  final TextStylePropertyValueHandler<T> handler,
                                                                  final BiConsumer<T, TextStyleVisitor> visitor) {
-        final TextStylePropertyName<T> textStylePropertyName = new TextStylePropertyName<>(property, handler, visitor);
-        TextStylePropertyName.CONSTANTS.put(property, textStylePropertyName);
+        final TextStylePropertyName<T> textStylePropertyName = new TextStylePropertyName<>(
+            property,
+            handler,
+            visitor
+        );
+        TextStylePropertyName.CONSTANTS.put(
+            property,
+            textStylePropertyName
+        );
         return textStylePropertyName;
     }
 
@@ -192,35 +223,45 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * background-color
      */
-    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerColor("background-color",
-        (c, v) -> v.visitBackgroundColor(c));
+    public final static TextStylePropertyName<Color> BACKGROUND_COLOR = registerColor(
+        "background-color",
+        (c, v) -> v.visitBackgroundColor(c)
+    );
 
     /**
      * border-bottom-color
      */
-    public final static TextStylePropertyName<Color> BORDER_BOTTOM_COLOR = registerColor("border-bottom-color",
-        (c, v) -> v.visitBorderBottomColor(c));
+    public final static TextStylePropertyName<Color> BORDER_BOTTOM_COLOR = registerColor(
+        "border-bottom-color",
+        (c, v) -> v.visitBorderBottomColor(c)
+    );
 
     /**
      * border-bottom-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_BOTTOM_STYLE = registerBorderStyle("border-bottom-style",
-        (s, v) -> v.visitBorderBottomStyle(s));
+    public final static TextStylePropertyName<BorderStyle> BORDER_BOTTOM_STYLE = registerBorderStyle(
+        "border-bottom-style",
+        (s, v) -> v.visitBorderBottomStyle(s)
+    );
 
     /**
      * border-bottom-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_BOTTOM_WIDTH = registerNoneLengthPixelLengthConstant("border-bottom-width",
-        (l, v) -> v.visitBorderBottomWidth(l));
+    public final static TextStylePropertyName<Length<?>> BORDER_BOTTOM_WIDTH = registerNoneLengthPixelLengthConstant(
+        "border-bottom-width",
+        (l, v) -> v.visitBorderBottomWidth(l)
+    );
 
     /**
      * border-collapse
      */
-    public final static TextStylePropertyName<BorderCollapse> BORDER_COLLAPSE = registerEnumConstant("border-collapse",
+    public final static TextStylePropertyName<BorderCollapse> BORDER_COLLAPSE = registerEnumConstant(
+        "border-collapse",
         BorderCollapse::valueOf,
         BorderCollapse.class,
         v -> v instanceof BorderCollapse,
-        (b, v) -> v.visitBorderCollapse(b));
+        (b, v) -> v.visitBorderCollapse(b)
+    );
 
     /**
      * border-color
@@ -237,44 +278,58 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-left-color
      */
-    public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerColor("border-left-color",
-        (c, v) -> v.visitBorderLeftColor(c));
+    public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerColor(
+        "border-left-color",
+        (c, v) -> v.visitBorderLeftColor(c)
+    );
 
     /**
      * border-left-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_LEFT_STYLE = registerBorderStyle("border-left-style",
-        (s, v) -> v.visitBorderLeftStyle(s));
+    public final static TextStylePropertyName<BorderStyle> BORDER_LEFT_STYLE = registerBorderStyle(
+        "border-left-style",
+        (s, v) -> v.visitBorderLeftStyle(s)
+    );
 
     /**
      * border-left-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_LEFT_WIDTH = registerNoneLengthPixelLengthConstant("border-left-width",
-        (l, v) -> v.visitBorderLeftWidth(l));
+    public final static TextStylePropertyName<Length<?>> BORDER_LEFT_WIDTH = registerNoneLengthPixelLengthConstant(
+        "border-left-width",
+        (l, v) -> v.visitBorderLeftWidth(l)
+    );
 
     /**
      * border-space
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_SPACING = registerNormalLengthPixelLengthConstant("border-spacing",
-        (l, v) -> v.visitBorderSpacing(l));
+    public final static TextStylePropertyName<Length<?>> BORDER_SPACING = registerNormalLengthPixelLengthConstant(
+        "border-spacing",
+        (l, v) -> v.visitBorderSpacing(l)
+    );
 
     /**
      * border-right-color
      */
-    public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerColor("border-right-color",
-        (c, v) -> v.visitBorderRightColor(c));
+    public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerColor(
+        "border-right-color",
+        (c, v) -> v.visitBorderRightColor(c)
+    );
 
     /**
      * border-right-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_RIGHT_STYLE = registerBorderStyle("border-right-style",
-        (s, v) -> v.visitBorderRightStyle(s));
+    public final static TextStylePropertyName<BorderStyle> BORDER_RIGHT_STYLE = registerBorderStyle(
+        "border-right-style",
+        (s, v) -> v.visitBorderRightStyle(s)
+    );
 
     /**
      * border-right-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_RIGHT_WIDTH = registerNoneLengthPixelLengthConstant("border-right-width",
-        (l, v) -> v.visitBorderRightWidth(l));
+    public final static TextStylePropertyName<Length<?>> BORDER_RIGHT_WIDTH = registerNoneLengthPixelLengthConstant(
+        "border-right-width",
+        (l, v) -> v.visitBorderRightWidth(l)
+    );
 
     /**
      * border-style
@@ -292,20 +347,26 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-top-color
      */
-    public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerColor("border-top-color",
-        (c, v) -> v.visitBorderTopColor(c));
+    public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerColor(
+        "border-top-color",
+        (c, v) -> v.visitBorderTopColor(c)
+    );
 
     /**
      * border-top-style
      */
-    public final static TextStylePropertyName<BorderStyle> BORDER_TOP_STYLE = registerBorderStyle("border-top-style",
-        (s, v) -> v.visitBorderTopStyle(s));
+    public final static TextStylePropertyName<BorderStyle> BORDER_TOP_STYLE = registerBorderStyle(
+        "border-top-style",
+        (s, v) -> v.visitBorderTopStyle(s)
+    );
 
     /**
      * border-top-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_TOP_WIDTH = registerNoneLengthPixelLengthConstant("border-top-width",
-        (l, v) -> v.visitBorderTopWidth(l));
+    public final static TextStylePropertyName<Length<?>> BORDER_TOP_WIDTH = registerNoneLengthPixelLengthConstant(
+        "border-top-width",
+        (l, v) -> v.visitBorderTopWidth(l)
+    );
 
     /**
      * border-width
@@ -319,34 +380,42 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * color
      */
-    public final static TextStylePropertyName<Color> COLOR = registerColor("color",
-        (c, v) -> v.visitColor(c));
+    public final static TextStylePropertyName<Color> COLOR = registerColor(
+        "color",
+        (c, v) -> v.visitColor(c)
+    );
 
     /**
      * direction
      */
-    public final static TextStylePropertyName<Direction> DIRECTION = registerEnumConstant("direction",
+    public final static TextStylePropertyName<Direction> DIRECTION = registerEnumConstant(
+        "direction",
         Direction::valueOf,
         Direction.class,
         v -> v instanceof Direction,
-        (d, v) -> v.visitDirection(d));
+        (d, v) -> v.visitDirection(d)
+    );
 
     /**
      * font-family
      */
-    public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant("font-family",
+    public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant(
+        "font-family",
         FontFamily.class,
         v -> v instanceof FontFamily,
-        (f, v) -> v.visitFontFamily(f));
+        (f, v) -> v.visitFontFamily(f)
+    );
 
     /**
      * font-kerning
      */
-    public final static TextStylePropertyName<FontKerning> FONT_KERNING = registerEnumConstant("font-kerning",
+    public final static TextStylePropertyName<FontKerning> FONT_KERNING = registerEnumConstant(
+        "font-kerning",
         FontKerning::valueOf,
         FontKerning.class,
         v -> v instanceof FontKerning,
-        (f, v) -> v.visitFontKerning(f));
+        (f, v) -> v.visitFontKerning(f)
+    );
 
     /**
      * font-size
@@ -360,29 +429,35 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-stretch
      */
-    public final static TextStylePropertyName<FontStretch> FONT_STRETCH = registerEnumConstant("font-stretch",
+    public final static TextStylePropertyName<FontStretch> FONT_STRETCH = registerEnumConstant(
+        "font-stretch",
         FontStretch::valueOf,
         FontStretch.class,
         v -> v instanceof FontStretch,
-        (f, v) -> v.visitFontStretch(f));
+        (f, v) -> v.visitFontStretch(f)
+    );
 
     /**
      * font-style
      */
-    public final static TextStylePropertyName<FontStyle> FONT_STYLE = registerEnumConstant("font-style",
+    public final static TextStylePropertyName<FontStyle> FONT_STYLE = registerEnumConstant(
+        "font-style",
         FontStyle::valueOf,
         FontStyle.class,
         v -> v instanceof FontStyle,
-        (f, v) -> v.visitFontStyle(f));
+        (f, v) -> v.visitFontStyle(f)
+    );
 
     /**
      * font-variant
      */
-    public final static TextStylePropertyName<FontVariant> FONT_VARIANT = registerEnumConstant("font-variant",
+    public final static TextStylePropertyName<FontVariant> FONT_VARIANT = registerEnumConstant(
+        "font-variant",
         FontVariant::valueOf,
         FontVariant.class,
         v -> v instanceof FontVariant,
-        (f, v) -> v.visitFontVariant(f));
+        (f, v) -> v.visitFontVariant(f)
+    );
 
     /**
      * font-weight
@@ -396,56 +471,69 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * hanging-punctuation
      */
-    public final static TextStylePropertyName<HangingPunctuation> HANGING_PUNCTUATION = registerEnumConstant("hanging-punctuation",
+    public final static TextStylePropertyName<HangingPunctuation> HANGING_PUNCTUATION = registerEnumConstant(
+        "hanging-punctuation",
         HangingPunctuation::valueOf,
         HangingPunctuation.class,
         v -> v instanceof HangingPunctuation,
-        (h, v) -> v.visitHangingPunctuation(h));
+        (h, v) -> v.visitHangingPunctuation(h)
+    );
 
     /**
      * height
      */
-    public final static TextStylePropertyName<Length<?>> HEIGHT = registerNoneLengthPixelLengthConstant("height",
+    public final static TextStylePropertyName<Length<?>> HEIGHT = registerNoneLengthPixelLengthConstant(
+        "height",
         (l, v) -> v.visitHeight(l));
 
     /**
      * hyphens
      */
-    public final static TextStylePropertyName<Hyphens> HYPHENS = registerEnumConstant("hyphens",
+    public final static TextStylePropertyName<Hyphens> HYPHENS = registerEnumConstant(
+        "hyphens",
         Hyphens::valueOf,
         Hyphens.class,
         v -> v instanceof Hyphens,
-        (h, v) -> v.visitHyphens(h));
+        (h, v) -> v.visitHyphens(h)
+    );
 
     /**
      * letter-space
      */
-    public final static TextStylePropertyName<Length<?>> LETTER_SPACING = registerNormalLengthPixelLengthConstant("letter-spacing",
-        (l, v) -> v.visitLetterSpacing(l));
+    public final static TextStylePropertyName<Length<?>> LETTER_SPACING = registerNormalLengthPixelLengthConstant(
+        "letter-spacing",
+        (l, v) -> v.visitLetterSpacing(l)
+    );
 
     /**
      * line-height
      */
-    public final static TextStylePropertyName<Length<?>> LINE_HEIGHT = registerNormalLengthPixelLengthConstant("line-height",
-        (l, v) -> v.visitLineHeight(l));
+    public final static TextStylePropertyName<Length<?>> LINE_HEIGHT = registerNormalLengthPixelLengthConstant(
+        "line-height",
+        (l, v) -> v.visitLineHeight(l)
+    );
 
     /**
      * list-style-position
      */
-    public final static TextStylePropertyName<ListStylePosition> LIST_STYLE_POSITION = registerEnumConstant("list-style-position",
+    public final static TextStylePropertyName<ListStylePosition> LIST_STYLE_POSITION = registerEnumConstant(
+        "list-style-position",
         ListStylePosition::valueOf,
         ListStylePosition.class,
         v -> v instanceof ListStylePosition,
-        (p, v) -> v.visitListStylePosition(p));
+        (p, v) -> v.visitListStylePosition(p)
+    );
 
     /**
      * list-style-type
      */
-    public final static TextStylePropertyName<ListStyleType> LIST_STYLE_TYPE = registerEnumConstant("list-style-type",
+    public final static TextStylePropertyName<ListStyleType> LIST_STYLE_TYPE = registerEnumConstant(
+        "list-style-type",
         ListStyleType::valueOf,
         ListStyleType.class,
         v -> v instanceof ListStyleType,
-        (t, v) -> v.visitListStyleType(t));
+        (t, v) -> v.visitListStyleType(t)
+    );
 
     /**
      * margin
@@ -459,114 +547,145 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin-bottom
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_BOTTOM = registerNoneLengthPixelLengthConstant("margin-bottom",
-        (l, v) -> v.visitMarginBottom(l));
+    public final static TextStylePropertyName<Length<?>> MARGIN_BOTTOM = registerNoneLengthPixelLengthConstant(
+        "margin-bottom",
+        (l, v) -> v.visitMarginBottom(l)
+    );
 
     /**
      * margin-left
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_LEFT = registerNoneLengthPixelLengthConstant("margin-left",
-        (l, v) -> v.visitMarginLeft(l));
+    public final static TextStylePropertyName<Length<?>> MARGIN_LEFT = registerNoneLengthPixelLengthConstant(
+        "margin-left",
+        (l, v) -> v.visitMarginLeft(l)
+    );
 
     /**
      * margin-right
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_RIGHT = registerNoneLengthPixelLengthConstant("margin-right",
-        (l, v) -> v.visitMarginRight(l));
+    public final static TextStylePropertyName<Length<?>> MARGIN_RIGHT = registerNoneLengthPixelLengthConstant(
+        "margin-right",
+        (l, v) -> v.visitMarginRight(l)
+    );
 
     /**
      * margin-top
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_TOP = registerNoneLengthPixelLengthConstant("margin-top",
-        (l, v) -> v.visitMarginTop(l));
+    public final static TextStylePropertyName<Length<?>> MARGIN_TOP = registerNoneLengthPixelLengthConstant(
+        "margin-top",
+        (l, v) -> v.visitMarginTop(l)
+    );
 
     /**
      * max-height
      */
-    public final static TextStylePropertyName<Length<?>> MAX_HEIGHT = registerNoneLengthPixelLengthConstant("max-height",
-        (m, v) -> v.visitMaxHeight(m));
+    public final static TextStylePropertyName<Length<?>> MAX_HEIGHT = registerNoneLengthPixelLengthConstant(
+        "max-height",
+        (m, v) -> v.visitMaxHeight(m)
+    );
 
     /**
      * max-width
      */
-    public final static TextStylePropertyName<Length<?>> MAX_WIDTH = registerNoneLengthPixelLengthConstant("max-width",
-        (m, v) -> v.visitMaxWidth(m));
+    public final static TextStylePropertyName<Length<?>> MAX_WIDTH = registerNoneLengthPixelLengthConstant(
+        "max-width",
+        (m, v) -> v.visitMaxWidth(m)
+    );
 
     /**
      * min-height
      */
-    public final static TextStylePropertyName<Length<?>> MIN_HEIGHT = registerNoneLengthPixelLengthConstant("min-height",
-        (m, v) -> v.visitMinHeight(m));
+    public final static TextStylePropertyName<Length<?>> MIN_HEIGHT = registerNoneLengthPixelLengthConstant(
+        "min-height",
+        (m, v) -> v.visitMinHeight(m)
+    );
 
     /**
      * min-width
      */
-    public final static TextStylePropertyName<Length<?>> MIN_WIDTH = registerNoneLengthPixelLengthConstant("min-width",
-        (m, v) -> v.visitMinWidth(m));
+    public final static TextStylePropertyName<Length<?>> MIN_WIDTH = registerNoneLengthPixelLengthConstant(
+        "min-width",
+        (m, v) -> v.visitMinWidth(m)
+    );
 
     /**
      * opacity
      */
-    public final static TextStylePropertyName<Opacity> OPACITY = registerJsonNodeConstant("opacity",
+    public final static TextStylePropertyName<Opacity> OPACITY = registerJsonNodeConstant(
+        "opacity",
         Opacity.class,
         v -> v instanceof Opacity,
-        (o, v) -> v.visitOpacity(o));
+        (o, v) -> v.visitOpacity(o)
+    );
 
     /**
      * outline-color
      */
-    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerColor("outline-color",
-        (t, v) -> v.visitOutlineColor(t));
+    public final static TextStylePropertyName<Color> OUTLINE_COLOR = registerColor(
+        "outline-color",
+        (t, v) -> v.visitOutlineColor(t)
+    );
 
     /**
      * outline-offset
      */
-    public final static TextStylePropertyName<Length<?>> OUTLINE_OFFSET = registerNoneLengthPixelLengthConstant("outline-offset",
-        (l, v) -> v.visitOutlineOffset(l));
+    public final static TextStylePropertyName<Length<?>> OUTLINE_OFFSET = registerNoneLengthPixelLengthConstant(
+        "outline-offset",
+        (l, v) -> v.visitOutlineOffset(l)
+    );
 
     /**
      * outline-style
      */
-    public final static TextStylePropertyName<OutlineStyle> OUTLINE_STYLE = registerEnumConstant("outline-style",
+    public final static TextStylePropertyName<OutlineStyle> OUTLINE_STYLE = registerEnumConstant(
+        "outline-style",
         OutlineStyle::valueOf,
         OutlineStyle.class,
         v -> v instanceof OutlineStyle,
-        (s, v) -> v.visitOutlineStyle(s));
+        (s, v) -> v.visitOutlineStyle(s)
+    );
 
     /**
      * outline-width
      */
-    public final static TextStylePropertyName<Length<?>> OUTLINE_WIDTH = registerNoneLengthPixelLengthConstant("outline-width",
-        (l, v) -> v.visitOutlineWidth(l));
+    public final static TextStylePropertyName<Length<?>> OUTLINE_WIDTH = registerNoneLengthPixelLengthConstant(
+        "outline-width",
+        (l, v) -> v.visitOutlineWidth(l)
+    );
 
 
     /**
      * overflow-wrap
      */
-    public final static TextStylePropertyName<OverflowWrap> OVERFLOW_WRAP = registerEnumConstant("overflow-wrap",
+    public final static TextStylePropertyName<OverflowWrap> OVERFLOW_WRAP = registerEnumConstant(
+        "overflow-wrap",
         OverflowWrap::valueOf,
         OverflowWrap.class,
         v -> v instanceof OverflowWrap,
-        (o, v) -> v.visitOverflowWrap(o));
-
+        (o, v) -> v.visitOverflowWrap(o)
+    );
 
     /**
      * overflow-x
      */
-    public final static TextStylePropertyName<Overflow> OVERFLOW_X = registerEnumConstant("overflow-x",
+    public final static TextStylePropertyName<Overflow> OVERFLOW_X = registerEnumConstant(
+        "overflow-x",
         Overflow::valueOf,
         Overflow.class,
         v -> v instanceof Overflow,
-        (o, v) -> v.visitOverflowX(o));
+        (o, v) -> v.visitOverflowX(o)
+    );
 
     /**
      * overflow-y
      */
-    public final static TextStylePropertyName<Overflow> OVERFLOW_Y = registerEnumConstant("overflow-y",
+    public final static TextStylePropertyName<Overflow> OVERFLOW_Y = registerEnumConstant(
+        "overflow-y",
         Overflow::valueOf,
         Overflow.class,
         v -> v instanceof Overflow,
-        (o, v) -> v.visitOverflowY(o));
+        (o, v) -> v.visitOverflowY(o)
+    );
 
     /**
      * padding
@@ -580,184 +699,232 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding-bottom
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_BOTTOM = registerNoneLengthPixelLengthConstant("padding-bottom",
-        (l, v) -> v.visitPaddingBottom(l));
+    public final static TextStylePropertyName<Length<?>> PADDING_BOTTOM = registerNoneLengthPixelLengthConstant(
+        "padding-bottom",
+        (l, v) -> v.visitPaddingBottom(l)
+    );
 
     /**
      * padding-left
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_LEFT = registerNoneLengthPixelLengthConstant("padding-left",
-        (l, v) -> v.visitPaddingLeft(l));
+    public final static TextStylePropertyName<Length<?>> PADDING_LEFT = registerNoneLengthPixelLengthConstant(
+        "padding-left",
+        (l, v) -> v.visitPaddingLeft(l)
+    );
 
     /**
      * padding-right
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_RIGHT = registerNoneLengthPixelLengthConstant("padding-right",
-        (l, v) -> v.visitPaddingRight(l));
+    public final static TextStylePropertyName<Length<?>> PADDING_RIGHT = registerNoneLengthPixelLengthConstant(
+        "padding-right",
+        (l, v) -> v.visitPaddingRight(l)
+    );
 
     /**
      * padding-top
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_TOP = registerNoneLengthPixelLengthConstant("padding-top",
-        (l, v) -> v.visitPaddingTop(l));
+    public final static TextStylePropertyName<Length<?>> PADDING_TOP = registerNoneLengthPixelLengthConstant(
+        "padding-top",
+        (l, v) -> v.visitPaddingTop(l)
+    );
 
     /**
      * tab-size
      */
-    public final static TextStylePropertyName<Length<?>> TAB_SIZE = registerNumberLengthConstant("tab-size",
-        (l, v) -> v.visitTabSize(l));
+    public final static TextStylePropertyName<Length<?>> TAB_SIZE = registerNumberLengthConstant(
+        "tab-size",
+        (l, v) -> v.visitTabSize(l)
+    );
 
     /**
      * text
      */
-    public final static TextStylePropertyName<String> TEXT = registerStringConstant("text",
-        (t, v) -> v.visitText(t));
+    public final static TextStylePropertyName<String> TEXT = registerStringConstant(
+        "text",
+        (t, v) -> v.visitText(t)
+    );
 
     /**
      * text-align
      */
-    public final static TextStylePropertyName<TextAlign> TEXT_ALIGN = registerEnumConstant("text-align",
+    public final static TextStylePropertyName<TextAlign> TEXT_ALIGN = registerEnumConstant(
+        "text-align",
         TextAlign::valueOf,
         TextAlign.class,
         v -> v instanceof TextAlign,
-        (t, v) -> v.visitTextAlign(t));
+        (t, v) -> v.visitTextAlign(t)
+    );
 
     /**
      * text-decoration-color
      */
-    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerColor("text-decoration-color",
-        (t, v) -> v.visitTextDecorationColor(t));
+    public final static TextStylePropertyName<Color> TEXT_DECORATION_COLOR = registerColor(
+        "text-decoration-color",
+        (t, v) -> v.visitTextDecorationColor(t)
+    );
 
     /**
      * text-decoration-line: UNDERLINE, OVERLINE, LINE_THROUGH
      */
-    public final static TextStylePropertyName<TextDecorationLine> TEXT_DECORATION_LINE = registerEnumConstant("text-decoration-line",
+    public final static TextStylePropertyName<TextDecorationLine> TEXT_DECORATION_LINE = registerEnumConstant(
+        "text-decoration-line",
         TextDecorationLine::valueOf,
         TextDecorationLine.class,
         v -> v instanceof TextDecorationLine,
-        (t, v) -> v.visitTextDecorationLine(t));
+        (t, v) -> v.visitTextDecorationLine(t)
+    );
 
     /**
      * text-decoration-style
      */
-    public final static TextStylePropertyName<TextDecorationStyle> TEXT_DECORATION_STYLE = registerEnumConstant("text-decoration-style",
+    public final static TextStylePropertyName<TextDecorationStyle> TEXT_DECORATION_STYLE = registerEnumConstant(
+        "text-decoration-style",
         TextDecorationStyle::valueOf,
         TextDecorationStyle.class,
         v -> v instanceof TextDecorationStyle,
-        (t, v) -> v.visitTextDecorationStyle(t));
+        (t, v) -> v.visitTextDecorationStyle(t)
+    );
 
     /**
      * text-decoration-thickness
      */
-    public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerNoneLengthPixelLengthConstant("text-decoration-thickness",
-        (l, v) -> v.visitTextDecorationThickness(l));
+    public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerNoneLengthPixelLengthConstant(
+        "text-decoration-thickness",
+        (l, v) -> v.visitTextDecorationThickness(l)
+    );
 
     /**
      * text-indent
      */
-    public final static TextStylePropertyName<Length<?>> TEXT_INDENT = registerNoneLengthPixelLengthConstant("text-indent",
-        (l, v) -> v.visitTextIndent(l));
+    public final static TextStylePropertyName<Length<?>> TEXT_INDENT = registerNoneLengthPixelLengthConstant(
+        "text-indent",
+        (l, v) -> v.visitTextIndent(l)
+    );
 
     /**
      * text-justify
      */
-    public final static TextStylePropertyName<TextJustify> TEXT_JUSTIFY = registerEnumConstant("text-justify",
+    public final static TextStylePropertyName<TextJustify> TEXT_JUSTIFY = registerEnumConstant(
+        "text-justify",
         TextJustify::valueOf,
         TextJustify.class,
         v -> v instanceof TextJustify,
-        (t, v) -> v.visitTextJustify(t));
+        (t, v) -> v.visitTextJustify(t)
+    );
 
     /**
      * text-overflow
      */
-    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerJsonNodeConstant("text-overflow",
+    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerJsonNodeConstant(
+        "text-overflow",
         TextOverflow.class,
         v -> v instanceof TextOverflow,
-        (t, v) -> v.visitTextOverflow(t));
+        (t, v) -> v.visitTextOverflow(t)
+    );
 
     /**
      * text-transform
      */
-    public final static TextStylePropertyName<TextTransform> TEXT_TRANSFORM = registerEnumConstant("text-transform",
+    public final static TextStylePropertyName<TextTransform> TEXT_TRANSFORM = registerEnumConstant(
+        "text-transform",
         TextTransform::valueOf,
         TextTransform.class,
         v -> v instanceof TextTransform,
-        (t, v) -> v.visitTextTransform(t));
+        (t, v) -> v.visitTextTransform(t)
+    );
 
     /**
      * text-wrapping
      */
-    public final static TextStylePropertyName<TextWrapping> TEXT_WRAPPING = registerEnumConstant("text-wrapping",
+    public final static TextStylePropertyName<TextWrapping> TEXT_WRAPPING = registerEnumConstant(
+        "text-wrapping",
         TextWrapping::valueOf,
         TextWrapping.class,
         v -> v instanceof TextWrapping,
-        (t, v) -> v.visitTextWrapping(t));
+        (t, v) -> v.visitTextWrapping(t)
+    );
 
     /**
      * vertical-align
      */
-    public final static TextStylePropertyName<VerticalAlign> VERTICAL_ALIGN = registerEnumConstant("vertical-align",
+    public final static TextStylePropertyName<VerticalAlign> VERTICAL_ALIGN = registerEnumConstant(
+        "vertical-align",
         VerticalAlign::valueOf,
         VerticalAlign.class,
         v -> v instanceof VerticalAlign,
-        (va, v) -> v.visitVerticalAlign(va));
+        (va, v) -> v.visitVerticalAlign(va)
+    );
 
     /**
      * visibility
      */
-    public final static TextStylePropertyName<Visibility> VISIBILITY = registerEnumConstant("visibility",
+    public final static TextStylePropertyName<Visibility> VISIBILITY = registerEnumConstant(
+        "visibility",
         Visibility::valueOf,
         Visibility.class,
         v -> v instanceof Visibility,
-        (o, v) -> v.visitVisibility(o));
+        (o, v) -> v.visitVisibility(o)
+    );
 
     /**
      * white-space
      */
-    public final static TextStylePropertyName<TextWhitespace> WHITE_SPACE = registerEnumConstant("white-space",
+    public final static TextStylePropertyName<TextWhitespace> WHITE_SPACE = registerEnumConstant(
+        "white-space",
         TextWhitespace::valueOf,
         TextWhitespace.class,
         v -> v instanceof TextWhitespace,
-        (w, v) -> v.visitWhitespace(w));
+        (w, v) -> v.visitWhitespace(w)
+    );
 
     /**
      * width
      */
-    public final static TextStylePropertyName<Length<?>> WIDTH = registerNoneLengthPixelLengthConstant("width",
-        (w, v) -> v.visitWidth(w));
+    public final static TextStylePropertyName<Length<?>> WIDTH = registerNoneLengthPixelLengthConstant(
+        "width",
+        (w, v) -> v.visitWidth(w)
+    );
 
     /**
      * word-break
      */
-    public final static TextStylePropertyName<WordBreak> WORD_BREAK = registerEnumConstant("word-break",
+    public final static TextStylePropertyName<WordBreak> WORD_BREAK = registerEnumConstant(
+        "word-break",
         WordBreak::valueOf,
         WordBreak.class,
         v -> v instanceof WordBreak,
-        (w, v) -> v.visitWordBreak(w));
+        (w, v) -> v.visitWordBreak(w)
+    );
 
     /**
      * word-spacing
      */
-    public final static TextStylePropertyName<Length<?>> WORD_SPACING = registerNormalLengthPixelLengthConstant("word-spacing",
-        (w, v) -> v.visitWordSpacing(w));
+    public final static TextStylePropertyName<Length<?>> WORD_SPACING = registerNormalLengthPixelLengthConstant(
+        "word-spacing",
+        (w, v) -> v.visitWordSpacing(w)
+    );
 
     /**
      * word-wrap
      */
-    public final static TextStylePropertyName<WordWrap> WORD_WRAP = registerEnumConstant("word-wrap",
+    public final static TextStylePropertyName<WordWrap> WORD_WRAP = registerEnumConstant(
+        "word-wrap",
         WordWrap::valueOf,
         WordWrap.class,
         v -> v instanceof WordWrap,
-        (w, v) -> v.visitWordWrap(w));
+        (w, v) -> v.visitWordWrap(w)
+    );
 
     /**
      * writing-mode
      */
-    public final static TextStylePropertyName<WritingMode> WRITING_MODE = registerEnumConstant("writing-mode",
+    public final static TextStylePropertyName<WritingMode> WRITING_MODE = registerEnumConstant(
+        "writing-mode",
         WritingMode::valueOf,
         WritingMode.class,
         v -> v instanceof WritingMode,
-        (w, v) -> v.visitWritingMode(w));
+        (w, v) -> v.visitWritingMode(w)
+    );
 
     /**
      * Factory that retrieves an existing property or if unknown a property that assumes non empty string value.
@@ -773,7 +940,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                 TextStylePropertyName::acceptUnknown);
     }
 
-    private static void acceptUnknown(final Object value, final TextStyleVisitor visitor) {
+    private static void acceptUnknown(final Object value,
+                                      final TextStyleVisitor visitor) {
         visitor.visitUnknown(value);
     }
 
