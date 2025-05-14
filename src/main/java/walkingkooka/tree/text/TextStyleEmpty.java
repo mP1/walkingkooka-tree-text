@@ -284,20 +284,6 @@ final class TextStyleEmpty extends TextStyle {
     // Object..........................................................................................................
 
     @Override
-    public int hashCode() {
-        return System.identityHashCode(this);
-    }
-
-    @Override boolean canBeEquals(final Object other) {
-        return other instanceof TextStyleEmpty;
-    }
-
-    @Override
-    boolean equals0(final TextStyle other) {
-        return true; // singleton
-    }
-
-    @Override
     public String toString() {
         return "";
     }
