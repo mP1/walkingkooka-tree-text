@@ -92,13 +92,6 @@ public final class Image extends TextLeafNode<Url> {
         printer.println("Image " + CharSequences.quote(this.value().value()));
     }
 
-    // Object .........................................................................................................
-
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof Image;
-    }
-
     // UsesToStringBuilder..............................................................................................
 
     @Override

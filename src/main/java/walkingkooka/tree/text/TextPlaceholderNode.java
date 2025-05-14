@@ -103,13 +103,6 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         printer.println("Placeholder " + CharSequences.quote(this.value().value()));
     }
 
-    // Object .........................................................................................................
-
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof TextPlaceholderNode;
-    }
-
     // UsesToStringBuilder..............................................................................................
 
     @Override

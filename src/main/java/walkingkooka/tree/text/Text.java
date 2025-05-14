@@ -131,13 +131,6 @@ public final class Text extends TextLeafNode<String> implements HasText {
         printer.println("Text " + CharSequences.quoteAndEscape(this.text()));
     }
 
-    // Object .........................................................................................................
-
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof Text;
-    }
-
     // UsesToStringBuilder..............................................................................................
 
     @Override

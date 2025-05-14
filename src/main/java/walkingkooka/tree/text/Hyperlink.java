@@ -251,12 +251,7 @@ public final class Hyperlink extends TextParentNode {
         printer.outdent();
     }
 
-    // Object .........................................................................................................
-
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof Hyperlink;
-    }
+    // Object ..........................................................................................................
 
     @Override //
     boolean equals0(final TextNode other) {
