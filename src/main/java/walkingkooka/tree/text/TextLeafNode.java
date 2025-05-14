@@ -62,15 +62,20 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
             .cast();
     }
 
-    @Override final TextNode replace(final int index) {
+    @Override //
+    final TextNode replace(final int index) {
         return this.replace0(index);
     }
 
     final TextLeafNode<V> replace0(final int index) {
-        return this.replace1(index, this.value);
+        return this.replace1(
+            index,
+            this.value
+        );
     }
 
-    abstract TextLeafNode<V> replace1(final int index, final V value);
+    abstract TextLeafNode<V> replace1(final int index,
+                                      final V value);
 
     // children.........................................................................................................
 
@@ -93,19 +98,25 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return this;
     }
 
-    @Override final TextNode setChild(final TextNode newChild, final int index) {
-        return NeverError.unexpectedMethodCall(this, "setChild", newChild, index);
+    @Override //
+    final TextNode setChild(final TextNode newChild,
+                            final int index) {
+        return NeverError.unexpectedMethodCall(
+            this,
+            "setChild",
+            newChild,
+            index
+        );
     }
 
     // attributes.......................................................................................................
 
     @Override
-    public Map<TextStylePropertyName<?>, Object> attributes() {
+    public final Map<TextStylePropertyName<?>, Object> attributes() {
         return Maps.empty();
     }
 
-    @Override
-    TextNode setAttributesEmptyTextStyleMap() {
+    @Override final TextNode setAttributesEmptyTextStyleMap() {
         return this;
     }
 
@@ -141,7 +152,8 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return Objects.hash(this.value);
     }
 
-    @Override final boolean equals0(final TextNode other) {
+    @Override //
+    final boolean equals0(final TextNode other) {
         final Value<?> hasValue = Cast.to(other);
         return this.value.equals(
             hasValue.value()
