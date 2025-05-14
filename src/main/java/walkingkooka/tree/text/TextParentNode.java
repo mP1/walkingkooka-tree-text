@@ -78,15 +78,18 @@ abstract class TextParentNode extends TextNode {
             this.replaceChildren(copy);
     }
 
-    @Override final TextNode setChild(final TextNode newChild, final int index) {
-        //int index = newChild.index();
-        final TextNode previous = this.children().get(index);
+    @Override
+    final TextNode setChild(final TextNode newChild,
+                            final int index) {
+        final TextNode previous = this.children()
+            .get(index);
         return previous.equals(newChild) ?
             this :
             this.replaceChild0(newChild, index);
     }
 
-    private TextNode replaceChild0(final TextNode newChild, final int index) {
+    private TextNode replaceChild0(final TextNode newChild,
+                                   final int index) {
         final List<TextNode> newChildren = Lists.array();
         newChildren.addAll(this.children());
         newChildren.set(index, newChild);
@@ -101,11 +104,16 @@ abstract class TextParentNode extends TextNode {
             .cast();
     }
 
-    @Override final TextNode replace(final int index) {
-        return this.replace0(index, this.children());
+    @Override
+    final TextNode replace(final int index) {
+        return this.replace0(
+            index,
+            this.children()
+        );
     }
 
-    abstract TextParentNode replace0(final int index, final List<TextNode> children);
+    abstract TextParentNode replace0(final int index,
+                                     final List<TextNode> children);
 
     // HasTextOffset...................................................................................................
 
@@ -113,14 +121,14 @@ abstract class TextParentNode extends TextNode {
      * Combine the text of all children(descendants). Note property names and indices will not be included.
      */
     @Override
-    public String text() {
+    public final String text() {
         return this.children().stream()
             .map(HasText::text)
             .collect(Collectors.joining());
     }
 
     @Override
-    public int textLength() {
+    public final int textLength() {
         return this.children().stream()
             .mapToInt(HasText::textLength)
             .sum();
@@ -135,7 +143,11 @@ abstract class TextParentNode extends TextNode {
     public final String toHtml() {
         final StringBuilder html = new StringBuilder();
 
-        try (final IndentingPrinter printer = Printers.stringBuilder(html, LineEnding.SYSTEM).indenting(Indentation.SPACES2)) {
+        try (final IndentingPrinter printer = Printers.stringBuilder
+                (html,
+                    LineEnding.SYSTEM)
+            .indenting(Indentation.SPACES2)
+        ) {
             this.buildHtml(
                 false, // shouldIndent
                 printer
