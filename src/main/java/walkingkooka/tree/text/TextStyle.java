@@ -373,18 +373,21 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // Object...........................................................................................................
 
     @Override
-    abstract public int hashCode();
+    public final int hashCode() {
+        return this.value()
+            .hashCode();
+    }
 
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-            this.canBeEquals(other) &&
+            null != other && this.getClass() == other.getClass() &&
                 this.equals0(Cast.to(other));
     }
 
-    abstract boolean canBeEquals(final Object other);
-
-    abstract boolean equals0(final TextStyle other);
+    private boolean equals0(final TextStyle other) {
+        return this.value().equals(other.value());
+    }
 
     @Override
     abstract public String toString();
