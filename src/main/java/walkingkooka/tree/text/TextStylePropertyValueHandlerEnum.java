@@ -79,6 +79,13 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     private final Class<E> type;
 
     @Override
+    E parseValue(final TextStyleParser parser) {
+        return this.parseValueText(
+            parser.token()
+        );
+    }
+
+    @Override
     E parseValueText(final String text) {
         return this.values.stream()
             .filter(v -> v.name().equalsIgnoreCase(text))

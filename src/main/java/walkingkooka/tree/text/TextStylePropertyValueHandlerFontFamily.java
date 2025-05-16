@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -63,6 +64,23 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
     @Override
     FontFamily parseValueText(final String value) {
         return FontFamily.with(value);
+    }
+
+    @Override
+    FontFamily parseValue(final TextStyleParser parser) {
+        return this.parseValueText(
+            parser.quotedText()
+                .map(TextStylePropertyValueHandlerFontFamily::unquote)
+                .orElseGet(parser::token)
+        );
+    }
+
+    private static String unquote(final String text) {
+        return CharSequences.subSequence(
+            text,
+            1,
+            -1
+        ).toString();
     }
 
     // JsonNodeContext..................................................................................................

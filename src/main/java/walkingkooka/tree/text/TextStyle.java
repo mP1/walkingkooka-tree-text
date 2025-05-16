@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
@@ -65,6 +66,66 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final static CharacterConstant ASSIGNMENT = CharacterConstant.with(':');
 
     public final static CharacterConstant SEPARATOR = CharacterConstant.with(';');
+
+    // parse............................................................................................................
+
+    /**
+     * Parses an almost CSS like declaration into a {@link TextStyle}.
+     * Passing the text from {@link #text()} to parse will give an equal {@link TextStyle}.
+     */
+    public static TextStyle parse(final String text) {
+        Objects.requireNonNull(text, "text");
+
+        // WHITESPACE, TextStylePropertyName, WHITESPACE, COLON,
+        // WHITESPACE VALUE WHITESPACE
+        // COMMA | SEMI-COLON
+
+        final TextStyleParser parser = TextStyleParser.with(text);
+        TextStyle style = EMPTY;
+
+        while(parser.isNotEmpty()) {
+            parser.skipSpaces();
+
+            final Optional<TextStylePropertyName<?>> maybeName = parser.name();
+            if(false == maybeName.isPresent()) {
+                break;
+            }
+
+            final TextStylePropertyName<?> name = maybeName.get();
+
+            parser.skipSpaces();
+
+            parser.assignment();
+
+            parser.skipSpaces();
+
+            final Object value;
+
+            final int position = parser.cursor.lineInfo()
+                .textOffset();
+            try {
+                value = name.handler.parseValue(parser);
+            } catch (final InvalidCharacterException ice) {
+                throw ice.setTextAndPosition(
+                    text,
+                    position + ice.position() - 1
+                );
+            }
+
+            style = style.set(
+                name,
+                Cast.to(value)
+            );
+
+            parser.skipSpaces();
+
+            if(false == parser.separator()) {
+                break;
+            }
+        }
+
+        return style;
+    }
 
     /**
      * Private ctor to limit sub classes.

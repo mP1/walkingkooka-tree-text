@@ -65,6 +65,14 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
         return TextOverflow.parse(value);
     }
 
+    @Override
+    TextOverflow parseValue(final TextStyleParser parser) {
+        return this.parseValueText(
+            parser.quotedText()
+                .orElseGet(parser::token)
+        );
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override
