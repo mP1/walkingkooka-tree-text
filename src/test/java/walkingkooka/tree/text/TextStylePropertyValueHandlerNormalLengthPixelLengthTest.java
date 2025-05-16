@@ -30,12 +30,12 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     }
 
     @Test
-    public void testCheckNumberFails() {
+    public void testCheckValueNumberFails() {
         this.checkValueFails(Length.number(1L), "Property \"line-height\" value 1(NumberLength) is not a NormalLength|PixelLength");
     }
 
     @Test
-    public void testCheckPixel() {
+    public void testCheckValuePixel() {
         this.checkValue(Length.pixel(1.5));
     }
 

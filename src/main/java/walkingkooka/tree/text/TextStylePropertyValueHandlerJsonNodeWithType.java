@@ -47,7 +47,7 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
     }
 
     @Override

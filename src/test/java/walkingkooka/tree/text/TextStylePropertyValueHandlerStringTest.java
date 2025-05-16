@@ -23,7 +23,7 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerStringTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerString, String> {
 
     @Test
-    public void testCheckEmptyStringFails() {
+    public void testCheckValueEmptyStringFails() {
         this.checkValueFails("", "Property \"text\" contains an empty/whitespace value \"\"");
     }
 

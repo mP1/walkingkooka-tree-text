@@ -28,7 +28,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
     }
 
     @Test
-    public final void testCheckValue() {
+    public final void testCheckValueValue() {
         this.checkValue(
             this.propertyValue()
         );

@@ -47,7 +47,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
         final String string = this.checkType(value,
             v -> v instanceof String,
             name);
