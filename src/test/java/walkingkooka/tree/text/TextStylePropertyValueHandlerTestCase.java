@@ -50,7 +50,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final void checkValue(final Object value) {
         final TextStylePropertyName<?> propertyName = this.propertyName();
-        this.handler().check(value, propertyName);
+        this.handler().checkValue(value, propertyName);
         propertyName.checkValue(value);
     }
 

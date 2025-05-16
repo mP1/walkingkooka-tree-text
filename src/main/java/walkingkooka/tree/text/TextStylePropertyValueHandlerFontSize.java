@@ -46,8 +46,8 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
-    void check0(final Object value,
-                final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value,
+                           final TextStylePropertyName<?> name) {
         if (false == value instanceof FontSize) {
             throw this.reportInvalidValueType(value, name);
         }

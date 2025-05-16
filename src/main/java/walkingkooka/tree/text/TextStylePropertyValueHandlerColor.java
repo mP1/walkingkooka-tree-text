@@ -51,8 +51,8 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
-    void check0(final Object value,
-                final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value,
+                           final TextStylePropertyName<?> name) {
         if (false == value instanceof Color) {
             throw this.reportInvalidValueType(value, name);
         }

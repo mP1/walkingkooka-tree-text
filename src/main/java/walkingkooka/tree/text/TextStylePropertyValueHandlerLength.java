@@ -40,7 +40,7 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
         return Optional.empty();
     }
 
-    @Override final void check0(final Object value, final TextStylePropertyName<?> name) {
+    @Override final void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
         final Length<?> length = this.checkType(value,
             (v) -> v instanceof Length,
             name);
@@ -62,7 +62,7 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
                                          final TextStylePropertyName<?> name,
                                          final JsonNodeUnmarshallContext context) {
         final Length<?> length = context.unmarshall(node, Length.class);
-        this.check0(length, name);
+        this.checkNonNullValue(length, name);
         return length;
     }
 

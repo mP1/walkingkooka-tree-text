@@ -995,7 +995,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * Verifies that a value is legal for this {@link TextStylePropertyName}
      */
     public void checkValue(final Object value) {
-        this.handler.check(value, this);
+        this.handler.checkValue(value, this);
     }
 
     /**

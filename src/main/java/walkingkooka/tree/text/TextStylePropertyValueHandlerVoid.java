@@ -47,8 +47,8 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     }
 
     @Override
-    void check0(final Object value,
-                final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value,
+                           final TextStylePropertyName<?> name) {
         throw new IllegalArgumentException("Values not supported for " + name.inQuotes());
     }
 

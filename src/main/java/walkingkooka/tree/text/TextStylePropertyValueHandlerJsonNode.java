@@ -56,7 +56,7 @@ final class TextStylePropertyValueHandlerJsonNode<T> extends TextStylePropertyVa
     }
 
     @Override
-    void check0(final Object value, final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
         this.checkType(value, this.typeChecker, name);
     }
 

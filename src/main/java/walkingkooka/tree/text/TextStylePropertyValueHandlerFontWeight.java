@@ -46,8 +46,8 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
-    void check0(final Object value,
-                final TextStylePropertyName<?> name) {
+    void checkNonNullValue(final Object value,
+                           final TextStylePropertyName<?> name) {
         if (false == value instanceof FontWeight) {
             throw this.reportInvalidValueType(value, name);
         }
