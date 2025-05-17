@@ -32,28 +32,41 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     ConstantsTesting<TextOverflow>,
     JsonNodeMarshallingTesting<TextOverflow> {
 
+    // json.............................................................................................................
+
+    @Override
+    public TextOverflow unmarshall(final JsonNode from,
+                                   final JsonNodeUnmarshallContext context) {
+        return TextOverflow.unmarshall(from, context);
+    }
+
+    @Override
+    public TextOverflow createJsonNodeMarshallingValue() {
+        return TextOverflow.string("hello-123");
+    }
+
     @Test
-    public void testClipJsonRoundtrip() {
+    public void testJsonClipRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(TextOverflow.CLIP);
     }
 
     @Test
-    public void testEllipsisJsonRoundtrip() {
+    public void testJsonEllipsisRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(TextOverflow.ELLIPSIS);
     }
 
     @Test
-    public void testStringJsonRoundtrip() {
+    public void testJsonStringRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(TextOverflow.string("abc123"));
     }
 
     @Test
-    public void testStringJsonRoundtrip2() {
+    public void testJsonStringRoundtrip2() {
         this.marshallRoundTripTwiceAndCheck(TextOverflow.string("clip"));
     }
 
     @Test
-    public void testStringJsonRoundtrip3() {
+    public void testJsonStringRoundtrip3() {
         this.marshallRoundTripTwiceAndCheck(TextOverflow.string("ellipsis"));
     }
 
@@ -74,18 +87,5 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     @Override
     public Set<TextOverflow> intentionalDuplicateConstants() {
         return Sets.empty();
-    }
-
-    // HasJsonNodeTesting...............................................................................................
-
-    @Override
-    public TextOverflow unmarshall(final JsonNode from,
-                                   final JsonNodeUnmarshallContext context) {
-        return TextOverflow.unmarshall(from, context);
-    }
-
-    @Override
-    public TextOverflow createJsonNodeMarshallingValue() {
-        return TextOverflow.string("hello-123");
     }
 }
