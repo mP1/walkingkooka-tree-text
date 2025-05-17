@@ -43,12 +43,28 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
 
     @Test
     public void testWithNegativeValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> Opacity.with(-0.1));
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> Opacity.with(-0.1)
+        );
+
+        this.checkEquals(
+            "Invalid value -0.1 not between 0.0 and 1.0",
+            thrown.getMessage()
+        );
     }
 
     @Test
     public void testWithGreaterValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> Opacity.with(1.01));
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> Opacity.with(1.01)
+        );
+
+        this.checkEquals(
+            "Invalid value 1.01 not between 0.0 and 1.0",
+            thrown.getMessage()
+        );
     }
 
     @Test
