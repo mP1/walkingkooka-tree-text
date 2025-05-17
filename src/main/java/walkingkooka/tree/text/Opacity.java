@@ -57,7 +57,7 @@ public final class Opacity implements Comparable<Opacity>,
      */
     public static Opacity with(final double value) {
         if (value < 0 || value > 1.0) {
-            throw new IllegalArgumentException("Value " + value + " out of range 0.0 - 1.0");
+            throw new IllegalArgumentException("Invalid value " + value + " not between 0.0 and 1.0");
         }
 
         return TRANSPARENT_VALUE == value ?
