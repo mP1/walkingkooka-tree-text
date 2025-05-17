@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -60,6 +61,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     static final String MARGIN = "margin";
 
     static final String PADDING = "padding";
+
+    public final static CharacterConstant ASSIGNMENT = CharacterConstant.with(':');
+
+    public final static CharacterConstant SEPARATOR = CharacterConstant.with(';');
 
     /**
      * Private ctor to limit sub classes.
