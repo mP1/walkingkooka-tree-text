@@ -171,7 +171,7 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * Parses the text form of a value into an actual value instance.
      */
-    abstract T parseValue(final String value);
+    abstract T parseValueText(final String value);
 
     // unmarshall ....................................................................................................
 
