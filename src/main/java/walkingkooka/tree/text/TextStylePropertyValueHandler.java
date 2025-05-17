@@ -50,6 +50,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerFontFamily}
+     */
+    static TextStylePropertyValueHandler<FontFamily> fontFamily() {
+        return TextStylePropertyValueHandlerFontFamily.INSTANCE;
+    }    
+
+    /**
      * {@see TextStylePropertyValueHandlerFontSize}
      */
     static TextStylePropertyValueHandler<FontSize> fontSize() {
