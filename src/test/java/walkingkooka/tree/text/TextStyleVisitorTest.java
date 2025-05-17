@@ -146,6 +146,45 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
     }
 
     @Test
+    public void testVisitBorderColor() {
+        final StringBuilder v = new StringBuilder();
+
+        new TestTextStyleVisitor() {
+            @Override
+            protected void visitBorderLeftColor(final Color color) {
+                v.append("borderLeftColor=" + color + "\n");
+            }
+
+            @Override
+            protected void visitBorderTopColor(final Color color) {
+                v.append("borderTopColor=" + color + "\n");
+            }
+
+            @Override
+            protected void visitBorderRightColor(final Color color) {
+                v.append("borderRightColor=" + color + "\n");
+            }
+
+            @Override
+            protected void visitBorderBottomColor(final Color color) {
+                v.append("borderBottomColor=" + color + "\n");
+                this.visited = color;
+            }
+        }.accept(
+            TextStylePropertyName.BORDER_COLOR,
+            Color.BLACK
+        );
+
+        this.checkEquals(
+            "borderTopColor=#000000\n" +
+                "borderLeftColor=#000000\n" +
+                "borderRightColor=#000000\n" +
+                "borderBottomColor=#000000\n",
+            v.toString()
+        );
+    }
+
+    @Test
     public void testVisitBorderLeftColor() {
         new TestTextStyleVisitor() {
             @Override
