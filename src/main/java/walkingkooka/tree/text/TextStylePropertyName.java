@@ -266,12 +266,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-color
      */
-    public final static TextStylePropertyName<Color> BORDER_COLOR = registerConstant(
+    public final static TextStylePropertyName<Color> BORDER_COLOR = registerColor(
         "border-color", // property name
-        TextStylePropertyValueHandler.jsonNode(
-            Color.class, // type
-            v -> v instanceof Color // type checker
-        ), // handler
         null // visitor should NEVER happen
     );
 
