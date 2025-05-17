@@ -85,11 +85,6 @@ public final class NoneLength extends Length<Void> implements Value<Void> {
     }
 
     @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof NoneLength;
-    }
-
-    @Override
     boolean equals0(final Length<?> other) {
         return true;
     }
