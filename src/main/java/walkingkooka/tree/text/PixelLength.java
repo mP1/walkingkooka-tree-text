@@ -82,21 +82,6 @@ public final class PixelLength extends Length<Double> implements Value<Double> {
 
     private final static Optional<LengthUnit<Double, Length<Double>>> UNIT_OPTIONAL = Cast.to(Optional.of(UNIT));
 
-    @Override
-    void pixelOrFail() {
-        // pixel
-    }
-
-    @Override
-    void normalOrPixelOrFail() {
-        // pixel
-    }
-
-    @Override
-    void numberFail() {
-        this.numberFail0();
-    }
-
     // LengthVisitor....................................................................................................
 
     @Override

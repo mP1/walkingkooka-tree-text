@@ -81,21 +81,6 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
         return Optional.empty();
     }
 
-    @Override
-    void pixelOrFail() {
-        this.pixelOrFail0();
-    }
-
-    @Override
-    void normalOrPixelOrFail() {
-        this.normalOrPixelOrFail0();
-    }
-
-    @Override
-    void numberFail() {
-        // number
-    }
-
     // LengthVisitor....................................................................................................
 
     @Override

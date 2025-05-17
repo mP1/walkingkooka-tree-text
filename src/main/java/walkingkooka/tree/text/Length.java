@@ -164,26 +164,6 @@ public abstract class Length<V> {
         return this instanceof PixelLength;
     }
 
-    // parameter checking...............................................................................................
-
-    abstract void pixelOrFail();
-
-    final void pixelOrFail0() {
-        throw new IllegalArgumentException("Expected pixel length but got " + this);
-    }
-
-    abstract void normalOrPixelOrFail();
-
-    final void normalOrPixelOrFail0() {
-        throw new IllegalArgumentException("Expected normal or pixel length but got " + this);
-    }
-
-    abstract void numberFail();
-
-    final void numberFail0() {
-        throw new IllegalArgumentException("Expected number but got " + this);
-    }
-
     // LengthVisitor....................................................................................................
 
     abstract void accept(final LengthVisitor visitor);
