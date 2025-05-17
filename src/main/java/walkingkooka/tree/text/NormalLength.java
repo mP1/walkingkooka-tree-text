@@ -70,21 +70,6 @@ public final class NormalLength extends Length<Void> implements Value<Void> {
         return Optional.empty();
     }
 
-    @Override
-    void pixelOrFail() {
-        this.pixelOrFail0();
-    }
-
-    @Override
-    void normalOrPixelOrFail() {
-        // normal
-    }
-
-    @Override
-    void numberFail() {
-        this.numberFail0();
-    }
-
     // LengthVisitor....................................................................................................
 
     @Override
