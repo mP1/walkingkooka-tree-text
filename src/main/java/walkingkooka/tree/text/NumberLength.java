@@ -41,7 +41,7 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
         Objects.requireNonNull(value, "value");
 
         if (value < 0) {
-            throw new IllegalArgumentException("Invalid value " + value);
+            throw new IllegalArgumentException("Invalid length " + value + " < 0");
         }
 
         return new NumberLength(value);
