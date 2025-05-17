@@ -68,7 +68,7 @@ final class TextStylePropertyValueHandlerJsonNode<T> extends TextStylePropertyVa
     }
 
     @Override
-    T parseValue(final String value) {
+    T parseValueText(final String value) {
         return this.unmarshall(
             JsonNode.string(value),
             null,

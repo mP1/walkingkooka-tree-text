@@ -66,7 +66,7 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
-    Color parseValue(final String value) {
+    Color parseValueText(final String value) {
         return this.unmarshall(
             JsonNode.string(value),
             null,

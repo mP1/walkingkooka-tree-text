@@ -62,7 +62,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     }
 
     @Override
-    String parseValue(final String value) {
+    String parseValueText(final String value) {
         return value;
     }
 

@@ -988,7 +988,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public T parseValue(final String value) {
         Objects.requireNonNull(value, "value");
 
-        return this.handler.parseValue(value);
+        return this.handler.parseValueText(value);
     }
 
     /**

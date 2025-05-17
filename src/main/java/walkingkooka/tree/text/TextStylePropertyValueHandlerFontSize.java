@@ -61,7 +61,7 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
-    FontSize parseValue(final String value) {
+    FontSize parseValueText(final String value) {
         return FontSize.with(
             Integer.parseInt(value)
         );
