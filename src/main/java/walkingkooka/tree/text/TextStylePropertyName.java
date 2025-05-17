@@ -395,10 +395,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * font-family
      */
-    public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerJsonNodeConstant(
+    public final static TextStylePropertyName<FontFamily> FONT_FAMILY = registerConstant(
         "font-family",
-        FontFamily.class,
-        v -> v instanceof FontFamily,
+        TextStylePropertyValueHandler.fontFamily(),
         (f, v) -> v.visitFontFamily(f)
     );
 
