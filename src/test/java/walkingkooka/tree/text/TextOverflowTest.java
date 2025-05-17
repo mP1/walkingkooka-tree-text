@@ -22,6 +22,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -30,7 +31,97 @@ import java.util.Set;
 
 public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     ConstantsTesting<TextOverflow>,
-    JsonNodeMarshallingTesting<TextOverflow> {
+    JsonNodeMarshallingTesting<TextOverflow>,
+    ParseStringTesting<TextOverflow> {
+
+    // parse............................................................................................................
+
+    @Test
+    public void testParseUnknownConstant() {
+        this.parseStringFails(
+            "abc",
+            new IllegalArgumentException("Invalid text")
+        );
+    }
+
+    @Test
+    public void testParseMissingClosingQuote() {
+        this.parseStringFails(
+            "\"abc",
+            new IllegalArgumentException("Missing closing quote")
+        );
+    }
+
+    @Test
+    public void testParseEarlyClosingQuote() {
+        this.parseStringInvalidCharacterFails(
+            "\"abc\" ",
+            1 + 3
+        );
+    }
+
+    @Test
+    public void testParseClipWrongCaseFails() {
+        this.parseStringFails(
+            "CLIP",
+            new IllegalArgumentException("Invalid text")
+        );
+    }
+
+    @Test
+    public void testParseEllipseWrongCaseFails() {
+        this.parseStringFails(
+            "ELLIPSE",
+            new IllegalArgumentException("Invalid text")
+        );
+    }
+
+    @Test
+    public void testParseClip() {
+        this.parseStringAndCheck(
+            "clip",
+            TextOverflow.CLIP
+        );
+    }
+
+    @Test
+    public void testParseEllipsis() {
+        this.parseStringAndCheck(
+            "ellipsis",
+            TextOverflow.ELLIPSIS
+        );
+    }
+
+    @Test
+    public void testParseQuotedText() {
+        this.parseStringAndCheck(
+            "\"Hello\"",
+            TextOverflow.string("Hello")
+        );
+    }
+
+    @Test
+    public void testParseQuotedTextIncludesEscaping() {
+        this.parseStringAndCheck(
+            "\"Hello\t\"Good\'bye\"\"",
+            TextOverflow.string("Hello\t\"Good'bye\"")
+        );
+    }
+
+    @Override
+    public TextOverflow parseString(final String text) {
+        return TextOverflow.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
+    }
 
     // json.............................................................................................................
 

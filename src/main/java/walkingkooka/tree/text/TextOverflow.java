@@ -17,6 +17,8 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.InvalidCharacterException;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
@@ -54,6 +56,66 @@ public abstract class TextOverflow implements Value<Optional<String>>,
      */
     final static String STRING_PREFIX = "string-";
 
+    /**
+     * The inverse of {@link #text()}, parses the text and returns a {@link TextOverflow}.
+     */
+    public static TextOverflow parse(final String text) {
+        CharSequences.failIfNullOrEmpty(text, "text");
+
+        TextOverflow textOverflow;
+
+        final int openQuote = text.indexOf('\"');
+        switch (openQuote) {
+            case 0:
+                InvalidTextLengthException.throwIfFail(
+                    "text",
+                    text,
+                    2,
+                    Integer.MAX_VALUE
+                );
+
+                final int closeQuote = text.indexOf(
+                    '\"',
+                    openQuote + 1
+                );
+
+                if(-1 == closeQuote) {
+                    throw new IllegalArgumentException("Missing closing quote");
+                }
+
+                final int lastCharIndex = text.length() - 1;
+                if ('\"' != text.charAt(lastCharIndex)) {
+                    throw new InvalidCharacterException(
+                        text,
+                        closeQuote
+                    );
+                }
+
+                textOverflow = TextOverflow.string(
+                    CharSequences.unescape(
+                        text.substring(
+                            1,
+                            lastCharIndex
+                        )
+                    ).toString()
+                );
+                break;
+            default:
+                switch (text) {
+                    case CLIP_TEXT:
+                        textOverflow = TextOverflow.CLIP;
+                        break;
+                    case ELLIPSIS_TEXT:
+                        textOverflow = TextOverflow.ELLIPSIS;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid text");
+                }
+        }
+
+        return textOverflow;
+    }
+    
     /**
      * Factory that creates a {@link TextOverflow}.
      */
