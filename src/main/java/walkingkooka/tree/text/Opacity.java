@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -32,7 +33,8 @@ import java.util.Objects;
  * Value class that holds an opacity value.
  */
 public final class Opacity implements Comparable<Opacity>,
-    Value<Double> {
+    Value<Double>,
+    HasText {
 
     private final static double TRANSPARENT_VALUE = 0;
     private final static double OPAQUE_VALUE = 1;
@@ -84,6 +86,13 @@ public final class Opacity implements Comparable<Opacity>,
     }
 
     private final double value;
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.marshall(null).text();
+    }
 
     // JsonNodeContext..................................................................................................
 

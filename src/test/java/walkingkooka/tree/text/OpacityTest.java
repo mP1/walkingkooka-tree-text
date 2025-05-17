@@ -24,6 +24,7 @@ import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -36,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class OpacityTest implements ClassTesting2<Opacity>,
     ComparableTesting2<Opacity>,
     ConstantsTesting<Opacity>,
+    HasTextTesting,
     JsonNodeMarshallingTesting<Opacity>,
     ToStringTesting<Opacity> {
 
@@ -82,6 +84,32 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     @Test
     public void testOpaque() {
         assertSame(Opacity.OPAQUE, Opacity.with(Opacity.OPAQUE.value()));
+    }
+
+    // HasText..........................................................................................................
+
+    @Test
+    public void testTextWithOpaque() {
+        this.textAndCheck(
+            Opacity.OPAQUE,
+            "opaque"
+        );
+    }
+
+    @Test
+    public void testTextWithTransparent() {
+        this.textAndCheck(
+            Opacity.TRANSPARENT,
+            "transparent"
+        );
+    }
+
+    @Test
+    public void testTextWithValue() {
+        this.textAndCheck(
+            Opacity.with(0.5),
+            "0.5"
+        );
     }
 
     // HasJsonNode......................................................................................
