@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -29,7 +30,8 @@ import java.util.Optional;
 /**
  * Value class that holds a text-overflow
  */
-public abstract class TextOverflow implements Value<Optional<String>> {
+public abstract class TextOverflow implements Value<Optional<String>>,
+    HasText {
 
     final static String CLIP_TEXT = "clip";
 
@@ -79,8 +81,6 @@ public abstract class TextOverflow implements Value<Optional<String>> {
     public final boolean isString() {
         return this instanceof TextOverflowString;
     }
-
-    abstract String toCss();
 
     @Override
     public abstract String toString();
