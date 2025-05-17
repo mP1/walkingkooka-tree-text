@@ -73,17 +73,27 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     public void testWith() {
         final double value = 0.5;
         final Opacity size = Opacity.with(value);
-        this.checkEquals(value, size.value(), "value");
+        this.checkEquals(
+            value,
+            size.value(),
+            "value"
+        );
     }
 
     @Test
-    public void testTransparent() {
-        assertSame(Opacity.TRANSPARENT, Opacity.with(Opacity.TRANSPARENT.value()));
+    public void testWithTransparentValue() {
+        assertSame(
+            Opacity.TRANSPARENT,
+            Opacity.with(Opacity.TRANSPARENT.value())
+        );
     }
 
     @Test
-    public void testOpaque() {
-        assertSame(Opacity.OPAQUE, Opacity.with(Opacity.OPAQUE.value()));
+    public void testWithOpaqueValue() {
+        assertSame(
+            Opacity.OPAQUE,
+            Opacity.with(Opacity.OPAQUE.value())
+        );
     }
 
     // HasText..........................................................................................................
@@ -112,7 +122,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         );
     }
 
-    // HasJsonNode......................................................................................
+    // json.............................................................................................................
 
     @Test
     public void testUnmarshallBooleanFails() {
@@ -187,45 +197,6 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
         this.marshallRoundTripTwiceAndCheck(Opacity.OPAQUE);
     }
 
-    // Object...........................................................................................................
-
-    @Test
-    public void testToStringOpaque() {
-        this.toStringAndCheck(Opacity.OPAQUE, "opaque");
-    }
-
-    @Test
-    public void testToStringTransparent() {
-        this.toStringAndCheck(Opacity.TRANSPARENT, "transparent");
-    }
-
-    @Test
-    public void testToString() {
-        this.toStringAndCheck(Opacity.with(0.25), "25%");
-    }
-
-    @Override
-    public Set<Opacity> intentionalDuplicateConstants() {
-        return Sets.empty();
-    }
-
-    @Override
-    public Opacity createComparable() {
-        return Opacity.with(VALUE);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
-    @Override
-    public Class<Opacity> type() {
-        return Opacity.class;
-    }
-
-    // JsonNodeMarshallTesting..........................................................................................
-
     @Override
     public Opacity createJsonNodeMarshallingValue() {
         return this.createObject();
@@ -235,5 +206,57 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     public Opacity unmarshall(final JsonNode jsonNode,
                               final JsonNodeUnmarshallContext context) {
         return Opacity.unmarshall(jsonNode, context);
+    }
+
+    // Comparable.......................................................................................................
+
+    @Override
+    public Opacity createComparable() {
+        return Opacity.with(VALUE);
+    }
+
+    // toString.........................................................................................................
+
+    @Test
+    public void testToStringOpaque() {
+        this.toStringAndCheck(
+            Opacity.OPAQUE,
+            "opaque"
+        );
+    }
+
+    @Test
+    public void testToStringTransparent() {
+        this.toStringAndCheck(
+            Opacity.TRANSPARENT,
+            "transparent"
+        );
+    }
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            Opacity.with(0.25),
+            "25%"
+        );
+    }
+
+    // constants........................................................................................................
+
+    @Override
+    public Set<Opacity> intentionalDuplicateConstants() {
+        return Sets.empty();
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PUBLIC;
+    }
+
+    @Override
+    public Class<Opacity> type() {
+        return Opacity.class;
     }
 }
