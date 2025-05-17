@@ -176,11 +176,9 @@ public abstract class Length<V> {
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            this.canBeEqual(other) &&
+            null != other && this.getClass() == other.getClass() &&
                 this.equals0(Cast.to(other));
     }
-
-    abstract boolean canBeEqual(final Object other);
 
     abstract boolean equals0(final Length<?> other);
 

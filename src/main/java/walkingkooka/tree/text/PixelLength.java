@@ -97,11 +97,6 @@ public final class PixelLength extends Length<Double> implements Value<Double> {
     }
 
     @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof PixelLength;
-    }
-
-    @Override
     boolean equals0(final Length<?> other) {
         return 0 == Double.compare(this.value, other.doubleValue());
     }
