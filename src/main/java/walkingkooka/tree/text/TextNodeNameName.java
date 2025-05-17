@@ -18,6 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidCharacterException;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.naming.Name;
 import walkingkooka.predicate.character.CharPredicate;
 import walkingkooka.predicate.character.CharPredicates;
@@ -30,17 +32,40 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> implements Name,
     Comparable<N> {
 
+    /**
+     * Verifies that the given name has valid characters and a valid length.
+     */
     static String checkName(final String name) {
-        return CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
+        CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
             name,
             "name",
             INITIAL,
             PART
         );
+
+        final int dashDash = name.indexOf("--");
+        if (dashDash != -1) {
+            throw new InvalidCharacterException(
+                name,
+                dashDash + 1
+            );
+        }
+
+        return InvalidTextLengthException.throwIfFail(
+            "name",
+            name,
+            MIN_LENGTH,
+            MAX_LENGTH
+        );
     }
 
-    private final static CharPredicate INITIAL = CharPredicates.letter();
-    private final static CharPredicate PART = CharPredicates.letterOrDigit().or(CharPredicates.any("-"));
+    public final static CharPredicate INITIAL = CharPredicates.letter();
+
+    public final static CharPredicate PART = CharPredicates.letterOrDigit().or(CharPredicates.any("-"));
+
+    public final static int MIN_LENGTH = 1;
+
+    public final static int MAX_LENGTH = 255;
 
     TextNodeNameName(final String name) {
         super();

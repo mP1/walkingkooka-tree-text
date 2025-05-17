@@ -17,11 +17,15 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>
     implements NameTesting2<N, N>,
@@ -30,6 +34,19 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
 
     TextNodeNameNameTestCase() {
         super();
+    }
+
+    @Test
+    public final void testWithDashDashFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> this.createName("abc-def--ghi")
+        );
+
+        this.checkEquals(
+            "Invalid character '-' at 8",
+            thrown.getMessage()
+        );
     }
 
     @Override
@@ -49,19 +66,19 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
 
     @Override
     public final int minLength() {
-        return 1;
+        return TextNodeNameName.MIN_LENGTH;
     }
 
     @Override
     public final int maxLength() {
-        return Integer.MAX_VALUE;
+        return TextNodeNameName.MAX_LENGTH;
     }
 
     @Override
     public final String possibleValidChars(final int position) {
         return 0 == position ?
             ASCII_LETTERS :
-            ASCII_LETTERS_DIGITS + "-.";
+            ASCII_LETTERS_DIGITS + "-";
     }
 
     @Override
