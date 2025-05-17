@@ -67,7 +67,7 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
         this.checkEquals(
             TextOverflow.string(value),
             this.textStylePropertyName()
-                .parseValue(TextOverflow.STRING_PREFIX + value)
+                .parseValue("\"ABC123\"")
         );
     }
 
@@ -88,12 +88,18 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
 
     @Test
     public void testUnmarshall() {
-        this.unmarshallAndCheck(JsonNode.string("string-abc123"), this.createTextStylePropertyValue());
+        this.unmarshallAndCheck(
+            JsonNode.string("\"abc123\""),
+            this.createTextStylePropertyValue()
+        );
     }
 
     @Test
     public void testMarshall() {
-        this.marshallAndCheck(this.createTextStylePropertyValue(), JsonNode.string("string-abc123"));
+        this.marshallAndCheck(
+            this.createTextStylePropertyValue(),
+            JsonNode.string("\"abc123\"")
+        );
     }
 
     @Override
