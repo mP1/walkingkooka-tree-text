@@ -491,6 +491,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testTextBorderColor() {
+        this.textAndCheck(
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.BORDER_COLOR,
+                    Color.BLACK
+                ),
+            "border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"
+        );
+    }
+
+    @Test
     public void testTextColor() {
         this.textAndCheck(
             TextStyle.EMPTY
