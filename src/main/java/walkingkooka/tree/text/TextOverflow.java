@@ -52,11 +52,6 @@ public abstract class TextOverflow implements Value<Optional<String>>,
     public final static TextOverflow ELLIPSIS = TextOverflowNonString.constant(ELLIPSIS_TEXT);
 
     /**
-     * Prefix added to {@link TextOverflowString}.
-     */
-    final static String STRING_PREFIX = "string-";
-
-    /**
      * The inverse of {@link #text()}, parses the text and returns a {@link TextOverflow}.
      */
     public static TextOverflow parse(final String text) {
@@ -154,18 +149,9 @@ public abstract class TextOverflow implements Value<Optional<String>>,
      */
     static TextOverflow unmarshall(final JsonNode node,
                                    final JsonNodeUnmarshallContext context) {
-        final String value = node.stringOrFail();
-        return value.startsWith(STRING_PREFIX) ?
-            string(value.substring(STRING_PREFIX.length())) :
-            CLIP_TEXT.equals(value) ?
-                CLIP :
-                ELLIPSIS_TEXT.equals(value) ?
-                    ELLIPSIS :
-                    failInvalidOverflow(value);
-    }
-
-    private static TextOverflow failInvalidOverflow(final String value) {
-        throw new IllegalArgumentException("Unknown text-overflow " + CharSequences.quote(value));
+        return parse(
+            node.stringOrFail()
+        );
     }
 
     abstract JsonNode marshall(final JsonNodeMarshallContext context);

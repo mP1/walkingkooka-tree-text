@@ -97,6 +97,6 @@ final class TextOverflowString extends TextOverflow {
 
     @Override
     JsonNode marshall(final JsonNodeMarshallContext context) {
-        return JsonNode.string(STRING_PREFIX + this.value);
+        return JsonNode.string(this.text());
     }
 }
