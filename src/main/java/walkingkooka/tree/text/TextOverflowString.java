@@ -50,6 +50,12 @@ final class TextOverflowString extends TextOverflow {
 
     private final String value;
 
+    @Override
+    String toCss() {
+        return CharSequences.quoteAndEscape(this.value)
+            .toString();
+    }
+
     // isXXX............................................................................................................
 
     @Override

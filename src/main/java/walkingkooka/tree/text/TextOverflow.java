@@ -80,6 +80,8 @@ public abstract class TextOverflow implements Value<Optional<String>> {
         return this instanceof TextOverflowString;
     }
 
+    abstract String toCss();
+
     @Override
     public abstract String toString();
 
