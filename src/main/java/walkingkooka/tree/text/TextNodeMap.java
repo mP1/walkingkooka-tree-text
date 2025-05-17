@@ -125,13 +125,14 @@ final class TextNodeMap extends AbstractMap<TextStylePropertyName<?>, Object> im
 
                 final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
                 css.print(propertyName.value());
-                css.print(": ");
+                css.print(TextStyle.ASSIGNMENT);
+                css.print(" ");
 
                 final Object value = propertyAndValue.getValue();
                 final CharSequence valueCss = valueToCss(value);
 
                 css.print(valueCss);
-                css.print(";");
+                css.print(TextStyle.SEPARATOR.string());
 
                 separator = " ";
             }
