@@ -46,6 +46,12 @@ final class TextOverflowNonString extends TextOverflow {
         return Optional.empty();
     }
 
+    // not quoted
+    @Override
+    String toCss() {
+        return this.value;
+    }
+
     // isXXX............................................................................................................
 
     @Override

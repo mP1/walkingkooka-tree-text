@@ -563,6 +563,42 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testTextOverflowClip() {
+        this.textAndCheck(
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.TEXT_OVERFLOW,
+                    TextOverflow.CLIP
+                ),
+            "text-overflow: clip;"
+        );
+    }
+
+    @Test
+    public void testTextOverflowEllipsis() {
+        this.textAndCheck(
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.TEXT_OVERFLOW,
+                    TextOverflow.ELLIPSIS
+                ),
+            "text-overflow: ellipsis;"
+        );
+    }
+
+    @Test
+    public void testTextOverflowString() {
+        this.textAndCheck(
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.TEXT_OVERFLOW,
+                    TextOverflow.string("Hello")
+                ),
+            "text-overflow: \"Hello\";"
+        );
+    }
+
+    @Test
     public void testTextSeveralProperties() {
         this.textAndCheck(
             TextStyle.EMPTY
