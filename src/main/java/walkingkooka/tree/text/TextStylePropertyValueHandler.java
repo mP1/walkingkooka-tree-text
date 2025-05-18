@@ -86,6 +86,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength}
+     */
+    static TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength noneLengthNumberLengthPixelLength() {
+        return TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength.INSTANCE;
+    }
+
+    /**
      * {@see TextStylePropertyValueHandlerLengthNoneLengthPixelLength}
      */
     static TextStylePropertyValueHandlerLengthNoneLengthPixelLength noneLengthPixelLength() {
