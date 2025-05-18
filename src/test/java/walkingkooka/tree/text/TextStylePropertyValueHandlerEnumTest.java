@@ -40,6 +40,17 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
     }
 
     @Test
+    public void testParseValueTextDifferentCase() {
+        this.checkEquals(
+            TextAlign.LEFT,
+            TextStylePropertyValueHandlerEnum.with(
+                    TextAlign.values(),
+                    TextAlign.class
+                ).parseValueText("leFT")
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         final TextWrapping textWrapping = TextWrapping.CLIP;
         this.unmarshallAndCheck(JsonNode.string(textWrapping.name()), textWrapping);

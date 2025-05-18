@@ -81,7 +81,7 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     @Override
     E parseValueText(final String text) {
         return this.values.stream()
-            .filter(v -> v.name().equals(text))
+            .filter(v -> v.name().equalsIgnoreCase(text))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("Unknown value " + CharSequences.quoteAndEscape(text)));
     }
