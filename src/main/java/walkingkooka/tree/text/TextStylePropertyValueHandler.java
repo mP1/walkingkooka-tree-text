@@ -71,14 +71,6 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
-     * {@see TextStylePropertyValueHandlerJsonNode}
-     */
-    static <V> TextStylePropertyValueHandler<V> jsonNode(final Class<V> type,
-                                                         final Predicate<Object> typeChecker) {
-        return TextStylePropertyValueHandlerJsonNode.with(type, typeChecker);
-    }
-
-    /**
      * {@see TextStylePropertyValueHandlerJsonNodeWithType}
      */
     static TextStylePropertyValueHandlerJsonNodeWithType jsonNodeWithType() {

@@ -115,23 +115,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Creates and adds a new {@link TextStylePropertyName} that handles {@link Enum} values.
-     */
-    private static <V> TextStylePropertyName<V> registerJsonNodeConstant(final String property,
-                                                                         final Class<V> type,
-                                                                         final Predicate<Object> typeTester,
-                                                                         final BiConsumer<V, TextStyleVisitor> visitor) {
-        return registerConstant(
-            property,
-            TextStylePropertyValueHandler.jsonNode(
-                type,
-                typeTester
-            ),
-            visitor
-        );
-    }
-
-    /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link NoneLength} or {@link PixelLength} values.
      */
     private static TextStylePropertyName<Length<?>> registerNoneLengthPixelLengthConstant(final String property,
