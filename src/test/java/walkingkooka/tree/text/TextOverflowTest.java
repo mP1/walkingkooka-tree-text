@@ -53,10 +53,12 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     }
 
     @Test
-    public void testParseEarlyClosingQuote() {
+    public void testParseTwoQuoteStringsFails() {
+        final String text = "\"abc\" \"def\"";
+
         this.parseStringInvalidCharacterFails(
-            "\"abc\" ",
-            1 + 3
+            text,
+            text.indexOf("d") - 1
         );
     }
 
@@ -101,10 +103,50 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     }
 
     @Test
+    public void testParseQuotedTextIgnoresLeadingSpaces() {
+        this.parseStringAndCheck(
+            " \"Hello\"",
+            TextOverflow.string("Hello")
+        );
+    }
+
+    @Test
+    public void testParseQuotedTextIgnoresTrailingSpaces() {
+        this.parseStringAndCheck(
+            "\"Hello\" ",
+            TextOverflow.string("Hello")
+        );
+    }
+
+    @Test
+    public void testParseQuotedTextIgnoresSurroundingSpaces() {
+        this.parseStringAndCheck(
+            " \"Hello\" ",
+            TextOverflow.string("Hello")
+        );
+    }
+
+    @Test
+    public void testParseQuotedTextIncludesSpace() {
+        this.parseStringAndCheck(
+            "\"Hello Goodbye\"",
+            TextOverflow.string("Hello Goodbye")
+        );
+    }
+
+    @Test
+    public void testParseQuotedTextIncludesEscapedDoubleQuote() {
+        this.parseStringAndCheck(
+            "\"Hello\\\"Goodbye\"",
+            TextOverflow.string("Hello\"Goodbye")
+        );
+    }
+
+    @Test
     public void testParseQuotedTextIncludesEscaping() {
         this.parseStringAndCheck(
-            "\"Hello\t\"Good\'bye\"\"",
-            TextOverflow.string("Hello\t\"Good'bye\"")
+            "\"Hello\t\\\"Good\'bye\"",
+            TextOverflow.string("Hello\t\"Good'bye")
         );
     }
 

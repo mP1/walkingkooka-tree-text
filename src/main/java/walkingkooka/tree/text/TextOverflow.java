@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.InvalidCharacterException;
-import walkingkooka.InvalidTextLengthException;
+import walkingkooka.NeverError;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
@@ -53,49 +53,82 @@ public abstract class TextOverflow implements Value<Optional<String>>,
 
     /**
      * The inverse of {@link #text()}, parses the text and returns a {@link TextOverflow}.
+     * <br>
+     * This supports a token holding "clip" or "eclipse" without the quotes or a single quoted string.
      */
     public static TextOverflow parse(final String text) {
         CharSequences.failIfNullOrEmpty(text, "text");
 
-        TextOverflow textOverflow;
+        final int MODE_SKIP_INITIAL_WHITESPACE = 1;
 
-        final int openQuote = text.indexOf('\"');
-        switch (openQuote) {
-            case 0:
-                InvalidTextLengthException.throwIfFail(
-                    "text",
-                    text,
-                    2,
-                    Integer.MAX_VALUE
-                );
+        final int MODE_UNQUOTED_TOKEN = 2;
 
-                final int closeQuote = text.indexOf(
-                    '\"',
-                    openQuote + 1
-                );
+        final int MODE_QUOTED_INSIDE = 3;
+        final int MODE_QUOTED_ESCAPING = 4;
+        final int MODE_QUOTED_OUTSIDE = 5;
 
-                if(-1 == closeQuote) {
-                    throw new IllegalArgumentException("Missing closing quote");
-                }
+        int mode = MODE_SKIP_INITIAL_WHITESPACE;
 
-                final int lastCharIndex = text.length() - 1;
-                if ('\"' != text.charAt(lastCharIndex)) {
+        final StringBuilder b = new StringBuilder();
+
+        int i = 0;
+        for (char c : text.toCharArray()) {
+            switch (mode) {
+                case MODE_SKIP_INITIAL_WHITESPACE:
+                    if (Character.isWhitespace(c)) {
+                        break;
+                    }
+                    switch (c) {
+                        case '\"':
+                            mode = MODE_QUOTED_INSIDE;
+                            break;
+                        default:
+                            mode = MODE_UNQUOTED_TOKEN;
+                            b.append(c);
+                            break;
+                    }
+                    break;
+                case MODE_UNQUOTED_TOKEN:
+                    b.append(c);
+                    break;
+                case MODE_QUOTED_INSIDE:
+                    switch (c) {
+                        case '\\':
+                            mode = MODE_QUOTED_ESCAPING;
+                            break;
+                        case '\"':
+                            mode = MODE_QUOTED_OUTSIDE;
+                            break;
+                        default:
+                            b.append(c);
+                            break;
+                    }
+                    break;
+                case MODE_QUOTED_ESCAPING:
+                    mode = MODE_QUOTED_INSIDE;
+                    b.append(c);
+                    break;
+                case MODE_QUOTED_OUTSIDE:
+                    if (Character.isWhitespace(c)) {
+                        break;
+                    }
                     throw new InvalidCharacterException(
                         text,
-                        closeQuote
+                        i
                     );
-                }
+                default:
+                    NeverError.unhandledCase(
+                        mode
+                    );
+            }
 
-                textOverflow = TextOverflow.string(
-                    CharSequences.unescape(
-                        text.substring(
-                            1,
-                            lastCharIndex
-                        )
-                    ).toString()
-                );
-                break;
-            default:
+            i++;
+        }
+
+        final TextOverflow textOverflow;
+
+        switch (mode) {
+            case MODE_UNQUOTED_TOKEN:
                 switch (text) {
                     case CLIP_TEXT:
                         textOverflow = TextOverflow.CLIP;
@@ -106,6 +139,25 @@ public abstract class TextOverflow implements Value<Optional<String>>,
                     default:
                         throw new IllegalArgumentException("Invalid text");
                 }
+                break;
+            case MODE_QUOTED_INSIDE:
+            case MODE_QUOTED_ESCAPING:
+                throw new IllegalArgumentException("Missing closing quote");
+            case MODE_QUOTED_OUTSIDE:
+                textOverflow = TextOverflow.string(
+                    b.toString()
+                );
+                break;
+            default:
+                textOverflow = null;
+                NeverError.unhandledCase(
+                    mode,
+                    MODE_SKIP_INITIAL_WHITESPACE,
+                    MODE_UNQUOTED_TOKEN,
+                    MODE_QUOTED_INSIDE,
+                    MODE_QUOTED_ESCAPING,
+                    MODE_QUOTED_OUTSIDE
+                );
         }
 
         return textOverflow;
