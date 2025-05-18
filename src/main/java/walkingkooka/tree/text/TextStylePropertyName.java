@@ -40,8 +40,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * The {@link Name} of an {@link TextStyle} property.
@@ -76,9 +74,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                                                                           final BiConsumer<BorderStyle, TextStyleVisitor> visitor) {
         return registerEnumConstant(
             property,
-            BorderStyle::valueOf,
+            BorderStyle.values(),
             BorderStyle.class,
-            v -> v instanceof BorderStyle,
             visitor
         );
     }
@@ -99,16 +96,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link Enum} values.
      */
     private static <E extends Enum<E>> TextStylePropertyName<E> registerEnumConstant(final String property,
-                                                                                     final Function<String, E> factory,
+                                                                                     final E[] values,
                                                                                      final Class<E> type,
-                                                                                     final Predicate<Object> typeChecker,
                                                                                      final BiConsumer<E, TextStyleVisitor> visitor) {
         return registerConstant(
             property,
             TextStylePropertyValueHandler.enumTextPropertyValueHandler(
-                factory,
-                type,
-                typeChecker
+                values,
+                type
             ),
             visitor
         );
@@ -227,9 +222,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<BorderCollapse> BORDER_COLLAPSE = registerEnumConstant(
         "border-collapse",
-        BorderCollapse::valueOf,
+        BorderCollapse.values(),
         BorderCollapse.class,
-        v -> v instanceof BorderCollapse,
         (b, v) -> v.visitBorderCollapse(b)
     );
 
@@ -303,9 +297,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public final static TextStylePropertyName<BorderStyle> BORDER_STYLE = registerConstant(
         "border-style", // property name
         TextStylePropertyValueHandler.enumTextPropertyValueHandler(
-            BorderStyle::valueOf,
-            BorderStyle.class,
-            v -> v instanceof BorderStyle
+            BorderStyle.values(),
+            BorderStyle.class
         ), // handler
         null // visitor should NEVER happen
     );
@@ -356,9 +349,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Direction> DIRECTION = registerEnumConstant(
         "direction",
-        Direction::valueOf,
+        Direction.values(),
         Direction.class,
-        v -> v instanceof Direction,
         (d, v) -> v.visitDirection(d)
     );
 
@@ -376,9 +368,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontKerning> FONT_KERNING = registerEnumConstant(
         "font-kerning",
-        FontKerning::valueOf,
+        FontKerning.values(),
         FontKerning.class,
-        v -> v instanceof FontKerning,
         (f, v) -> v.visitFontKerning(f)
     );
 
@@ -396,9 +387,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontStretch> FONT_STRETCH = registerEnumConstant(
         "font-stretch",
-        FontStretch::valueOf,
+        FontStretch.values(),
         FontStretch.class,
-        v -> v instanceof FontStretch,
         (f, v) -> v.visitFontStretch(f)
     );
 
@@ -407,9 +397,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontStyle> FONT_STYLE = registerEnumConstant(
         "font-style",
-        FontStyle::valueOf,
+        FontStyle.values(),
         FontStyle.class,
-        v -> v instanceof FontStyle,
         (f, v) -> v.visitFontStyle(f)
     );
 
@@ -418,9 +407,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<FontVariant> FONT_VARIANT = registerEnumConstant(
         "font-variant",
-        FontVariant::valueOf,
+        FontVariant.values(),
         FontVariant.class,
-        v -> v instanceof FontVariant,
         (f, v) -> v.visitFontVariant(f)
     );
 
@@ -438,9 +426,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<HangingPunctuation> HANGING_PUNCTUATION = registerEnumConstant(
         "hanging-punctuation",
-        HangingPunctuation::valueOf,
+        HangingPunctuation.values(),
         HangingPunctuation.class,
-        v -> v instanceof HangingPunctuation,
         (h, v) -> v.visitHangingPunctuation(h)
     );
 
@@ -456,9 +443,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Hyphens> HYPHENS = registerEnumConstant(
         "hyphens",
-        Hyphens::valueOf,
+        Hyphens.values(),
         Hyphens.class,
-        v -> v instanceof Hyphens,
         (h, v) -> v.visitHyphens(h)
     );
 
@@ -483,9 +469,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ListStylePosition> LIST_STYLE_POSITION = registerEnumConstant(
         "list-style-position",
-        ListStylePosition::valueOf,
+        ListStylePosition.values(),
         ListStylePosition.class,
-        v -> v instanceof ListStylePosition,
         (p, v) -> v.visitListStylePosition(p)
     );
 
@@ -494,9 +479,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<ListStyleType> LIST_STYLE_TYPE = registerEnumConstant(
         "list-style-type",
-        ListStyleType::valueOf,
+        ListStyleType.values(),
         ListStyleType.class,
-        v -> v instanceof ListStyleType,
         (t, v) -> v.visitListStyleType(t)
     );
 
@@ -603,9 +587,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<OutlineStyle> OUTLINE_STYLE = registerEnumConstant(
         "outline-style",
-        OutlineStyle::valueOf,
+        OutlineStyle.values(),
         OutlineStyle.class,
-        v -> v instanceof OutlineStyle,
         (s, v) -> v.visitOutlineStyle(s)
     );
 
@@ -623,9 +606,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<OverflowWrap> OVERFLOW_WRAP = registerEnumConstant(
         "overflow-wrap",
-        OverflowWrap::valueOf,
+        OverflowWrap.values(),
         OverflowWrap.class,
-        v -> v instanceof OverflowWrap,
         (o, v) -> v.visitOverflowWrap(o)
     );
 
@@ -634,9 +616,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Overflow> OVERFLOW_X = registerEnumConstant(
         "overflow-x",
-        Overflow::valueOf,
+        Overflow.values(),
         Overflow.class,
-        v -> v instanceof Overflow,
         (o, v) -> v.visitOverflowX(o)
     );
 
@@ -645,9 +626,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Overflow> OVERFLOW_Y = registerEnumConstant(
         "overflow-y",
-        Overflow::valueOf,
+        Overflow.values(),
         Overflow.class,
-        v -> v instanceof Overflow,
         (o, v) -> v.visitOverflowY(o)
     );
 
@@ -713,9 +693,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextAlign> TEXT_ALIGN = registerEnumConstant(
         "text-align",
-        TextAlign::valueOf,
+        TextAlign.values(),
         TextAlign.class,
-        v -> v instanceof TextAlign,
         (t, v) -> v.visitTextAlign(t)
     );
 
@@ -732,9 +711,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextDecorationLine> TEXT_DECORATION_LINE = registerEnumConstant(
         "text-decoration-line",
-        TextDecorationLine::valueOf,
+        TextDecorationLine.values(),
         TextDecorationLine.class,
-        v -> v instanceof TextDecorationLine,
         (t, v) -> v.visitTextDecorationLine(t)
     );
 
@@ -743,9 +721,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextDecorationStyle> TEXT_DECORATION_STYLE = registerEnumConstant(
         "text-decoration-style",
-        TextDecorationStyle::valueOf,
+        TextDecorationStyle.values(),
         TextDecorationStyle.class,
-        v -> v instanceof TextDecorationStyle,
         (t, v) -> v.visitTextDecorationStyle(t)
     );
 
@@ -770,9 +747,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextJustify> TEXT_JUSTIFY = registerEnumConstant(
         "text-justify",
-        TextJustify::valueOf,
+        TextJustify.values(),
         TextJustify.class,
-        v -> v instanceof TextJustify,
         (t, v) -> v.visitTextJustify(t)
     );
 
@@ -790,9 +766,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextTransform> TEXT_TRANSFORM = registerEnumConstant(
         "text-transform",
-        TextTransform::valueOf,
+        TextTransform.values(),
         TextTransform.class,
-        v -> v instanceof TextTransform,
         (t, v) -> v.visitTextTransform(t)
     );
 
@@ -801,9 +776,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextWrapping> TEXT_WRAPPING = registerEnumConstant(
         "text-wrapping",
-        TextWrapping::valueOf,
+        TextWrapping.values(),
         TextWrapping.class,
-        v -> v instanceof TextWrapping,
         (t, v) -> v.visitTextWrapping(t)
     );
 
@@ -812,9 +786,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<VerticalAlign> VERTICAL_ALIGN = registerEnumConstant(
         "vertical-align",
-        VerticalAlign::valueOf,
+        VerticalAlign.values(),
         VerticalAlign.class,
-        v -> v instanceof VerticalAlign,
         (va, v) -> v.visitVerticalAlign(va)
     );
 
@@ -823,9 +796,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Visibility> VISIBILITY = registerEnumConstant(
         "visibility",
-        Visibility::valueOf,
+        Visibility.values(),
         Visibility.class,
-        v -> v instanceof Visibility,
         (o, v) -> v.visitVisibility(o)
     );
 
@@ -834,9 +806,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<TextWhitespace> WHITE_SPACE = registerEnumConstant(
         "white-space",
-        TextWhitespace::valueOf,
+        TextWhitespace.values(),
         TextWhitespace.class,
-        v -> v instanceof TextWhitespace,
         (w, v) -> v.visitWhitespace(w)
     );
 
@@ -853,9 +824,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<WordBreak> WORD_BREAK = registerEnumConstant(
         "word-break",
-        WordBreak::valueOf,
+        WordBreak.values(),
         WordBreak.class,
-        v -> v instanceof WordBreak,
         (w, v) -> v.visitWordBreak(w)
     );
 
@@ -872,9 +842,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<WordWrap> WORD_WRAP = registerEnumConstant(
         "word-wrap",
-        WordWrap::valueOf,
+        WordWrap.values(),
         WordWrap.class,
-        v -> v instanceof WordWrap,
         (w, v) -> v.visitWordWrap(w)
     );
 
@@ -883,9 +852,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<WritingMode> WRITING_MODE = registerEnumConstant(
         "writing-mode",
-        WritingMode::valueOf,
+        WritingMode.values(),
         WritingMode.class,
-        v -> v instanceof WritingMode,
         (w, v) -> v.visitWritingMode(w)
     );
 
