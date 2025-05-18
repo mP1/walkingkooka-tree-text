@@ -20,17 +20,17 @@ package walkingkooka.tree.text;
 /**
  * A {@link TextStylePropertyValueHandler} that only allows {@link NormalLength} and {@link PixelLength} values.
  */
-final class TextStylePropertyValueHandlerNormalLengthPixelLength extends TextStylePropertyValueHandlerLength {
+final class TextStylePropertyValueHandlerLengthNormalLengthPixelLength extends TextStylePropertyValueHandlerLength {
 
     /**
      * Singleton
      */
-    final static TextStylePropertyValueHandlerNormalLengthPixelLength INSTANCE = new TextStylePropertyValueHandlerNormalLengthPixelLength();
+    final static TextStylePropertyValueHandlerLengthNormalLengthPixelLength INSTANCE = new TextStylePropertyValueHandlerLengthNormalLengthPixelLength();
 
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerNormalLengthPixelLength() {
+    private TextStylePropertyValueHandlerLengthNormalLengthPixelLength() {
         super();
     }
 

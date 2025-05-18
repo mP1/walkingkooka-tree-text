@@ -22,7 +22,7 @@ import walkingkooka.tree.FakeNode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerNormalLengthPixelLength, Length<?>> {
+public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerLengthNormalLengthPixelLength, Length<?>> {
 
     @Test
     public void testCheckValueWithNormal() {
@@ -109,8 +109,8 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     }
 
     @Override
-    TextStylePropertyValueHandlerNormalLengthPixelLength handler() {
-        return TextStylePropertyValueHandlerNormalLengthPixelLength.INSTANCE;
+    TextStylePropertyValueHandlerLengthNormalLengthPixelLength handler() {
+        return TextStylePropertyValueHandlerLengthNormalLengthPixelLength.INSTANCE;
     }
 
     @Override
@@ -134,7 +134,7 @@ public final class TextStylePropertyValueHandlerNormalLengthPixelLengthTest exte
     }
 
     @Override
-    public Class<TextStylePropertyValueHandlerNormalLengthPixelLength> type() {
-        return TextStylePropertyValueHandlerNormalLengthPixelLength.class;
+    public Class<TextStylePropertyValueHandlerLengthNormalLengthPixelLength> type() {
+        return TextStylePropertyValueHandlerLengthNormalLengthPixelLength.class;
     }
 }
