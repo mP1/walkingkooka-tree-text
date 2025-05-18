@@ -22,7 +22,7 @@ import walkingkooka.tree.FakeNode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerNoneLengthPixelLength, Length<?>> {
+public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerLengthNoneLengthPixelLength, Length<?>> {
 
     @Test
     public void testCheckValueWithNone() {
@@ -121,8 +121,8 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
     }
 
     @Override
-    TextStylePropertyValueHandlerNoneLengthPixelLength handler() {
-        return TextStylePropertyValueHandlerNoneLengthPixelLength.INSTANCE;
+    TextStylePropertyValueHandlerLengthNoneLengthPixelLength handler() {
+        return TextStylePropertyValueHandlerLengthNoneLengthPixelLength.INSTANCE;
     }
 
     @Override
@@ -146,7 +146,7 @@ public final class TextStylePropertyValueHandlerNoneLengthPixelLengthTest extend
     }
 
     @Override
-    public Class<TextStylePropertyValueHandlerNoneLengthPixelLength> type() {
-        return TextStylePropertyValueHandlerNoneLengthPixelLength.class;
+    public Class<TextStylePropertyValueHandlerLengthNoneLengthPixelLength> type() {
+        return TextStylePropertyValueHandlerLengthNoneLengthPixelLength.class;
     }
 }
