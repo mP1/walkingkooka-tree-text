@@ -25,6 +25,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
@@ -45,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     HasTextTesting,
+    ParseStringTesting<TextStyle>,
     JsonNodeMarshallingTesting<TextStyle>,
     PatchableTesting<TextStyle>,
     ToStringTesting<TextStyle> {
@@ -627,6 +629,338 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             style.text(),
             style.text()
         );
+    }
+
+    // parseString......................................................................................................
+
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseStringEmpty() {
+        this.parseStringAndCheck(
+            "",
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testParseColorInvalidCharacterFails() {
+        this.parseStringFails(
+            "color: #123XYZ",
+            new IllegalArgumentException("Invalid rgb \"#123XYZ\"")
+        );
+    }
+
+    @Test
+    public void testParseColorHash6() {
+        this.parseStringAndCheck(
+            "color: #123456",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            )
+        );
+    }
+
+    @Test
+    public void testParseColorRgbWithSpaces() {
+        final String text = "rgb(214, 122, 127)";
+
+        this.parseStringAndCheck(
+            "color: " + text,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.parse(text)
+            )
+        );
+    }
+
+    @Test
+    public void testParseColorRgbWithSpacesSeparator() {
+        final String text = "rgb(214, 122, 127)";
+
+        this.parseStringAndCheck(
+            "color: " + text + ";",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.parse(text)
+            )
+        );
+    }
+
+    @Test
+    public void testParseEnumTextAlignFail() {
+        this.parseStringFails(
+            "text-align: BAD",
+            new IllegalArgumentException("Unknown value \"BAD\"")
+        );
+    }
+
+    @Test
+    public void testParseEnumTextAlign() {
+        this.parseStringAndCheck(
+            "text-align: LEFT",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testParseFontFamilyQuoted() {
+        this.parseStringAndCheck(
+            "font-family: \"Hello 123\"",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_FAMILY,
+                FontFamily.with("Hello 123")
+            )
+        );
+    }
+
+    @Test
+    public void testParseFontFamilyUnquoted() {
+        this.parseStringAndCheck(
+            "font-family: Hello",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_FAMILY,
+                FontFamily.with("Hello")
+            )
+        );
+    }
+
+    @Test
+    public void testParseFontSize() {
+        this.parseStringAndCheck(
+            "font-size: 123",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_SIZE,
+                FontSize.with(123)
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthPixelLengthWithNone() {
+        this.parseStringAndCheck(
+            "border-top-width: none",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthPixelLengthWithPixels() {
+        this.parseStringAndCheck(
+            "border-top-width: 12px",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.BORDER_TOP_WIDTH,
+                Length.pixel(12.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNumberLengthPixelLengthWithNone() {
+        this.parseStringAndCheck(
+            "tab-size: none",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TAB_SIZE,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNumberLengthPixelLengthWithNumber() {
+        this.parseStringAndCheck(
+            "tab-size: 12",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TAB_SIZE,
+                Length.number(12)
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNumberLengthPixelLengthWithPixels() {
+        this.parseStringAndCheck(
+            "tab-size: 12px",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TAB_SIZE,
+                Length.pixel(12.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNormalLengthPixelLengthWithNone() {
+        this.parseStringFails(
+            "word-spacing: none",
+            new IllegalArgumentException("Property \"word-spacing\" value none(NoneLength) is not a NormalLength|PixelLength")
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNormalLengthPixelLengthWithNumber() {
+        this.parseStringFails(
+            "word-spacing: 12",
+            new IllegalArgumentException("Property \"word-spacing\" value 12(NumberLength) is not a NormalLength|PixelLength")
+        );
+    }
+
+    @Test
+    public void testParseNoneLengthNormalLengthPixelLengthWithPixels() {
+        this.parseStringAndCheck(
+            "word-spacing: 12px",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.WORD_SPACING,
+                Length.pixel(12.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseOpacityOpaque() {
+        this.parseStringAndCheck(
+            "opacity: opaque",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.OPACITY,
+                Opacity.OPAQUE
+            )
+        );
+    }
+
+    @Test
+    public void testParseOpacityNumber() {
+        this.parseStringAndCheck(
+            "opacity: 0.25",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.OPACITY,
+                Opacity.with(0.25)
+            )
+        );
+    }
+
+    @Test
+    public void testParseString2() {
+        this.parseStringAndCheck(
+            "text: \"Hello 123\"",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello 123"
+            )
+        );
+    }
+
+    @Test
+    public void testParseTextOverflowClip() {
+        this.parseStringAndCheck(
+            "text-overflow: clip",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_OVERFLOW,
+                TextOverflow.CLIP
+            )
+        );
+    }
+
+    @Test
+    public void testParseTextOverflowString() {
+        this.parseStringAndCheck(
+            "text-overflow: \"Hello 123\"",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_OVERFLOW,
+                TextOverflow.string("Hello 123")
+            )
+        );
+    }
+
+    @Test
+    public void testParseSeveral() {
+        this.parseStringAndCheck(
+            "text: \"Hello\"; color: #123456",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            )
+        );
+    }
+
+    @Test
+    public void testParseSeveral2() {
+        this.parseStringAndCheck(
+            "text: \"Hello\"; color: #123456; text-align: LEFT",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testParseAndTextRoundtrip() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.parse("#123456")
+        ).set(
+            TextStylePropertyName.BACKGROUND_COLOR,
+            Color.parse("#123456").toHsl()
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        ).set(
+            TextStylePropertyName.FONT_FAMILY,
+            FontFamily.with("Hello 123")
+        ).set(
+            TextStylePropertyName.FONT_SIZE,
+            FontSize.with(1234)
+        ).set(
+            TextStylePropertyName.FONT_WEIGHT,
+            FontWeight.BOLD
+        ).set(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            Length.pixel(456.0)
+        ).set(
+            TextStylePropertyName.OPACITY,
+            Opacity.with(0.25)
+        ).set(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.CLIP
+        );
+
+        this.parseStringAndCheck(
+            textStyle.text(),
+            textStyle
+        );
+    }
+
+    @Override
+    public TextStyle parseString(final String text) {
+        return TextStyle.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
     }
 
     // toString.........................................................................................................

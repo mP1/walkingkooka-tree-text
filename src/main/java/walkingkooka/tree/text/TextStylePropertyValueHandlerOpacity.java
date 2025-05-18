@@ -65,6 +65,13 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
         return Opacity.parse(value);
     }
 
+    @Override
+    Opacity parseValue(final TextStyleParser parser) {
+        return this.parseValueText(
+            parser.token()
+        );
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

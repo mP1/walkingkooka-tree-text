@@ -56,6 +56,11 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
+    Object parseValue(final TextStyleParser parser) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     Object parseValueText(final String value) {
         throw new UnsupportedOperationException();
     }

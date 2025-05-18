@@ -58,6 +58,11 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     }
 
     @Override
+    Void parseValue(final TextStyleParser parser) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     Void parseValueText(final String value) {
         if (value.length() > 0) {
             throw new IllegalArgumentException("Only empty values allowed: " + CharSequences.quoteAndEscape(value));

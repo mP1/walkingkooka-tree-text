@@ -61,6 +61,13 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
+    FontWeight parseValue(final TextStyleParser parser) {
+        return this.parseValueText(
+            parser.token()
+        );
+    }
+
+    @Override
     FontWeight parseValueText(final String value) {
         return FontWeight.BOLD_TEXT.equals(value) ?
             FontWeight.BOLD :
