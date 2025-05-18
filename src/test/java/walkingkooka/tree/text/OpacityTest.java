@@ -24,6 +24,7 @@ import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
@@ -38,6 +39,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     ComparableTesting2<Opacity>,
     ConstantsTesting<Opacity>,
     HasTextTesting,
+    ParseStringTesting<Opacity>,
     JsonNodeMarshallingTesting<Opacity>,
     ToStringTesting<Opacity> {
 
@@ -94,6 +96,47 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
             Opacity.OPAQUE,
             Opacity.with(Opacity.OPAQUE.value())
         );
+    }
+
+    // parseString......................................................................................................
+
+    @Test
+    public void testParseOpaque() {
+        this.parseStringAndCheck(
+            Opacity.OPAQUE_TEXT,
+            Opacity.OPAQUE
+        );
+    }
+
+    @Test
+    public void testParseTransparent() {
+        this.parseStringAndCheck(
+            Opacity.TRANSPARENT_TEXT,
+            Opacity.TRANSPARENT
+        );
+    }
+
+    @Test
+    public void testParseNumber() {
+        this.parseStringAndCheck(
+            "0.5",
+            Opacity.with(0.5)
+        );
+    }
+
+    @Override
+    public Opacity parseString(final String text) {
+        return Opacity.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
     }
 
     // HasText..........................................................................................................

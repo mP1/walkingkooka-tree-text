@@ -39,8 +39,8 @@ public final class Opacity implements Comparable<Opacity>,
     private final static double TRANSPARENT_VALUE = 0;
     private final static double OPAQUE_VALUE = 1;
 
-    private final static String TRANSPARENT_TEXT = "transparent";
-    private final static String OPAQUE_TEXT = "opaque";
+    final static String TRANSPARENT_TEXT = "transparent";
+    final static String OPAQUE_TEXT = "opaque";
 
     private final static double PERCENTAGE_FACTOR = 100;
 
@@ -53,6 +53,18 @@ public final class Opacity implements Comparable<Opacity>,
      * A constant holding the opacity of OPAQUE text
      */
     public final static Opacity OPAQUE = new Opacity(OPAQUE_VALUE);
+
+    public static Opacity parse(final String text) {
+        CharSequences.failIfNullOrEmpty(text, "text");
+
+        return with(
+            TRANSPARENT_TEXT.equals(text) ?
+                TRANSPARENT_VALUE :
+                OPAQUE_TEXT.equals(text) ?
+                    OPAQUE_VALUE :
+                    Double.parseDouble(text)
+        );
+    }
 
     /**
      * Factory that creates a {@link Opacity}.
