@@ -132,20 +132,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Creates and adds a new {@link TextStylePropertyName} that handles {@link Length} values.
-     */
-    private static TextStylePropertyName<Length<?>> registerLength(final String property,
-                                                                   final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        final Class<Length<?>> length = Cast.to(Length.class);
-        return registerJsonNodeConstant(
-            property,
-            length,
-            v -> v instanceof Length,
-            visitor
-        );
-    }
-
-    /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link NoneLength} or {@link PixelLength} values.
      */
     private static TextStylePropertyName<Length<?>> registerNoneLengthPixelLengthConstant(final String property,
@@ -170,12 +156,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Creates and adds a new {@link TextStylePropertyName} that handles {@link NumberLength} values.
+     * Creates and adds a new {@link TextStylePropertyName} that handles {@link NoneLength}, {@link NumberLength} and {@link PixelLength} values.
      */
-    private static TextStylePropertyName<Length<?>> registerNumberLengthConstant(final String property,
-                                                                                 final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        return registerLength(
+    private static TextStylePropertyName<Length<?>> registerNoneLengthNumberLengthPixelLengthConstant(final String property,
+                                                                                                      final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
+        return registerConstant(
             property,
+            TextStylePropertyValueHandler.noneLengthNumberLengthPixelLength(),
             visitor
         );
     }
@@ -725,7 +712,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * tab-size
      */
-    public final static TextStylePropertyName<Length<?>> TAB_SIZE = registerNumberLengthConstant(
+    public final static TextStylePropertyName<Length<?>> TAB_SIZE = registerNoneLengthNumberLengthPixelLengthConstant(
         "tab-size",
         (l, v) -> v.visitTabSize(l)
     );
