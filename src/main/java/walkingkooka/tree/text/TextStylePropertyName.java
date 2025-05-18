@@ -606,10 +606,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * opacity
      */
-    public final static TextStylePropertyName<Opacity> OPACITY = registerJsonNodeConstant(
+    public final static TextStylePropertyName<Opacity> OPACITY = registerConstant(
         "opacity",
-        Opacity.class,
-        v -> v instanceof Opacity,
+        TextStylePropertyValueHandler.opacity(),
         (o, v) -> v.visitOpacity(o)
     );
 

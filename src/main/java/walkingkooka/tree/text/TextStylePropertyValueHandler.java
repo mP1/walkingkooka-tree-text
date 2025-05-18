@@ -100,6 +100,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerOpacity}
+     */
+    static TextStylePropertyValueHandler<Opacity> opacity() {
+        return TextStylePropertyValueHandlerOpacity.INSTANCE;
+    }
+    
+    /**
      * {@see TextStylePropertyValueHandlerString}
      */
     static TextStylePropertyValueHandler<String> string() {
