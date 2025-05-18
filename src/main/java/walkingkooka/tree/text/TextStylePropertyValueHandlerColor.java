@@ -19,13 +19,10 @@ package walkingkooka.tree.text;
 
 import walkingkooka.color.Color;
 import walkingkooka.color.WebColorName;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
-import java.math.MathContext;
 import java.util.Optional;
 
 /**
@@ -66,18 +63,9 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
-    Color parseValueText(final String value) {
-        return this.unmarshall(
-            JsonNode.string(value),
-            null,
-            CONTEXT
-        );
+    Color parseValueText(final String text) {
+        return Color.parse(text);
     }
-
-    private final static JsonNodeUnmarshallContext CONTEXT = JsonNodeUnmarshallContexts.basic(
-        ExpressionNumberKind.DOUBLE,
-        MathContext.DECIMAL32
-    );
 
     // JsonNodeContext..................................................................................................
 
