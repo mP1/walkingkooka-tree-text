@@ -21,7 +21,23 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class TextStylePropertyValueHandlerEnumTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerEnum<TextWrapping>, TextWrapping> {
+
+    @Test
+    public void testParseValueTextWithUnknownFails() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> this.handler()
+                .parseValueText("BAD")
+        );
+
+        this.checkEquals(
+            "Unknown value \"BAD\"",
+            thrown.getMessage()
+        );
+    }
 
     @Test
     public void testUnmarshall() {
@@ -36,9 +52,10 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
 
     @Override
     TextStylePropertyValueHandlerEnum<TextWrapping> handler() {
-        return TextStylePropertyValueHandlerEnum.with(TextWrapping::valueOf,
-            TextWrapping.class,
-            v -> v instanceof TextWrapping);
+        return TextStylePropertyValueHandlerEnum.with(
+            TextWrapping.values(),
+            TextWrapping.class
+        );
     }
 
     @Override

@@ -25,7 +25,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -43,10 +42,12 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * {@see TextStylePropertyValueHandlerEnum}
      */
-    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextPropertyValueHandler(final Function<String, E> factory,
-                                                                                                 final Class<E> type,
-                                                                                                 final Predicate<Object> typeChecker) {
-        return TextStylePropertyValueHandlerEnum.with(factory, type, typeChecker);
+    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextPropertyValueHandler(final E[] values,
+                                                                                                 final Class<E> type) {
+        return TextStylePropertyValueHandlerEnum.with(
+            values,
+            type
+        );
     }
 
     /**
