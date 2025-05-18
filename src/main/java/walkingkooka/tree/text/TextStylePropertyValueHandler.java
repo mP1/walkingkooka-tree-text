@@ -107,6 +107,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerTextOverflow}
+     */
+    static TextStylePropertyValueHandler<TextOverflow> textOverflow() {
+        return TextStylePropertyValueHandlerTextOverflow.INSTANCE;
+    }
+
+    /**
      * Package private to limit sub classing.
      */
     TextStylePropertyValueHandler() {

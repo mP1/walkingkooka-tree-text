@@ -810,10 +810,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-overflow
      */
-    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerJsonNodeConstant(
+    public final static TextStylePropertyName<TextOverflow> TEXT_OVERFLOW = registerConstant(
         "text-overflow",
-        TextOverflow.class,
-        v -> v instanceof TextOverflow,
+        TextStylePropertyValueHandler.textOverflow(),
         (t, v) -> v.visitTextOverflow(t)
     );
 
