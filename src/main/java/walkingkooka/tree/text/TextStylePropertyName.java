@@ -59,15 +59,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
 
     /**
-     * Returns all {@link TextStylePropertyName}.
-     */
-    public static Set<TextStylePropertyName<?>> values() {
-        final Set<TextStylePropertyName<?>> values = SortedSets.tree();
-        values.addAll(CONSTANTS.values());
-        return Sets.readOnly(values);
-    }
-
-    /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link BorderStyle} values.
      */
     private static TextStylePropertyName<BorderStyle> registerBorderStyle(final String property,
@@ -856,6 +847,18 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         WritingMode.class,
         (w, v) -> v.visitWritingMode(w)
     );
+
+    static {
+        final Set<TextStylePropertyName<?>> values = SortedSets.tree();
+        values.addAll(CONSTANTS.values());
+        values.remove(WILDCARD);
+        VALUES = Sets.readOnly(values);
+    }
+
+    /**
+     * Returns all {@link TextStylePropertyName} except {@link #WILDCARD}.
+     */
+    public static Set<TextStylePropertyName<?>> VALUES;
 
     /**
      * Factory that retrieves an existing property or if unknown a property that assumes non empty string value.
