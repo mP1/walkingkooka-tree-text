@@ -17,9 +17,18 @@
 
 package walkingkooka.tree.text.convert;
 
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
 import walkingkooka.reflect.PublicStaticHelper;
 
 public final class TreeTextConverters implements PublicStaticHelper{
+
+    /**
+     * {@see TextToTextStyleConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> textToTextStyle() {
+        return TextToTextStyleConverter.instance();
+    }
 
     /**
      * Stop creation
