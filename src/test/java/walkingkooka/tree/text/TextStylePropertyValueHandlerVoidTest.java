@@ -49,7 +49,7 @@ public final class TextStylePropertyValueHandlerVoidTest extends TextStyleProper
 
     @Override
     TextStylePropertyName<Void> propertyName() {
-        return TextStylePropertyName.ALL;
+        return TextStylePropertyName.WILDCARD;
     }
 
     @Override

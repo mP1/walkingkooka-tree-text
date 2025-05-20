@@ -65,7 +65,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testConstantValue() {
         this.checkEquals(
-            Lists.of("ALL=*"),
+            Lists.of("WILDCARD=*"),
             Arrays.stream(
                     TextStylePropertyName.class.getDeclaredFields())
                 .filter(FieldAttributes.STATIC::is)
