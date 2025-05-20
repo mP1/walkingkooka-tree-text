@@ -98,12 +98,22 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testValues() {
         this.checkEquals(
-            TextStylePropertyName.values(),
+            TextStylePropertyName.VALUES,
             Arrays.stream(TextStylePropertyName.class.getDeclaredFields())
                 .filter(FieldAttributes.STATIC::is)
                 .filter(f -> f.getType() == TextStylePropertyName.class)
                 .map(TextStylePropertyNameTest::getField)
+                .filter(n -> n != TextStylePropertyName.WILDCARD)
                 .collect(Collectors.toCollection(SortedSets::tree))
+        );
+    }
+
+    @Test
+    public void testValuesToString() {
+        this.checkEquals(
+            false,
+            TextStylePropertyName.VALUES.contains(TextStylePropertyName.WILDCARD),
+            TextStylePropertyName.VALUES::toString
         );
     }
 
@@ -145,11 +155,11 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testEnumType() {
         this.checkEquals((Object)
-                TextStylePropertyName.values()
+                TextStylePropertyName.VALUES
                     .stream()
                     .filter(n -> n.enumType().isPresent())
                     .collect(Collectors.toCollection(SortedSets::tree)),
-            TextStylePropertyName.values()
+            TextStylePropertyName.VALUES
                 .stream()
                 .filter(n -> n.handler instanceof TextStylePropertyValueHandlerEnum)
                 .collect(Collectors.toCollection(SortedSets::tree))
@@ -158,7 +168,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testUrlFragment() {
-        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.VALUES) {
             this.checkEquals(
                 UrlFragment.with(propertyName.name),
                 propertyName.urlFragment()
@@ -354,7 +364,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Test
     public void testStylePatchNullAllProperties() {
-        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.values()) {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.VALUES) {
             this.stylePatchAndCheck(
                 propertyName,
                 null,
