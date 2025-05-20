@@ -24,6 +24,13 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class TreeTextConverters implements PublicStaticHelper{
 
     /**
+     * {@see TextToTextConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> textToText() {
+        return TextToTextConverter.instance();
+    }
+
+    /**
      * {@see TextToTextStyleConverter}
      */
     public static <C extends ConverterContext> Converter<C> textToTextStyle() {
