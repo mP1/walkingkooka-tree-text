@@ -134,11 +134,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testGetOrFailAll() {
+    public void testGetOrFailWildcard() {
         assertThrows(
             IllegalArgumentException.class,
             () -> this.createObject()
-                .getOrFail(TextStylePropertyName.ALL)
+                .getOrFail(TextStylePropertyName.WILDCARD)
         );
     }
 
@@ -271,13 +271,13 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchSetAllWithNonNullFails() {
+    public void testPatchSetWildcardWithNonNullFails() {
         final UnsupportedOperationException thrown = assertThrows(
             UnsupportedOperationException.class,
             () -> TextStyle.EMPTY.patch(
                 JsonNode.object()
                     .set(
-                        JsonPropertyName.with(TextStylePropertyName.ALL.value()),
+                        JsonPropertyName.with(TextStylePropertyName.WILDCARD.value()),
                         JsonNode.string("This must fail!")
                     ),
                 this.createPatchContext()
@@ -344,24 +344,33 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchRemovePropertyAll() {
+    public void testPatchRemovePropertyWildcard() {
         this.patchAndCheck(
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
+                .set(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.WILDCARD.value()
+                    ),
+                    JsonNode.nullNode()
+                ),
             TextStyle.EMPTY
         );
     }
 
     @Test
-    public void testPatchRemovePropertyAllManyValues() {
+    public void testPatchRemovePropertyWildcardManyValues() {
         this.patchAndCheck(
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
                 .set(TextStylePropertyName.COLOR, Color.WHITE),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.ALL.value()), JsonNode.nullNode()),
+                .set(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.WILDCARD.value())
+                    , JsonNode.nullNode()
+                ),
             TextStyle.EMPTY
         );
     }

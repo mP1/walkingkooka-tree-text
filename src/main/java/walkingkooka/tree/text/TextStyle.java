@@ -402,12 +402,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     /**
      * Removes a possibly existing property returning a {@link TextStyle} without.
-     * {@link TextStylePropertyName#ALL} is a special case and always returns a {@link #EMPTY}.
+     * {@link TextStylePropertyName#WILDCARD} is a special case and always returns a {@link #EMPTY}.
      */
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
         Objects.requireNonNull(propertyName, "propertyName");
 
-        return propertyName == TextStylePropertyName.ALL ?
+        return propertyName == TextStylePropertyName.WILDCARD ?
             TextStyle.EMPTY :
             this.removeNonNull(propertyName);
     }
