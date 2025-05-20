@@ -31,6 +31,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
+     * {@see UrlToHyperlinkConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> urlToHyperlink() {
+        return UrlToHyperlinkConverter.instance();
+    }
+
+    /**
      * Stop creation
      */
     private TreeTextConverters() {
