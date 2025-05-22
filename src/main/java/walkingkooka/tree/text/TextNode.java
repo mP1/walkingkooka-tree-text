@@ -46,6 +46,7 @@ import java.util.function.Predicate;
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
     HasText,
+    HasTextNode,
     HasHtml,
     TreePrintable,
     TraversableHasTextOffset<TextNode>,
@@ -381,5 +382,12 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
             TextStyleNameNode::unmarshallTextStyleNameNode,
             TextStyleNameNode::marshall,
             TextStyleNameNode.class);
+    }
+
+    // HasTextNode......................................................................................................
+
+    @Override
+    public final TextNode toTextNode() {
+        return this;
     }
 }

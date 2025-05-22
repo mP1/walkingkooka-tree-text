@@ -20,11 +20,15 @@ package walkingkooka.tree.text.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.HasTextNode;
+import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextStylePropertyName;
 
 public final class HasTextNodeToTextNodeConverterTest implements ConverterTesting2<HasTextNodeToTextNodeConverter<FakeConverterContext>, FakeConverterContext>,
     ToStringTesting<HasTextNodeToTextNodeConverter<FakeConverterContext>> {
@@ -38,9 +42,26 @@ public final class HasTextNodeToTextNodeConverterTest implements ConverterTestin
     }
 
     @Test
-    public void testTextNodeToTextNodeFails() {
-        this.convertFails(
+    public void testTextToTextNode() {
+        this.convertAndCheck(
             TextNode.text("hello"),
+            TextNode.class
+        );
+    }
+
+    @Test
+    public void testTextStyleNodeToTextNode() {
+        this.convertAndCheck(
+            TextNode.style(
+                Lists.of(
+                    TextNode.text("hello")
+                )
+            ).setAttributes(
+                Maps.of(
+                    TextStylePropertyName.TEXT_ALIGN,
+                    TextAlign.LEFT
+                )
+            ),
             TextNode.class
         );
     }
