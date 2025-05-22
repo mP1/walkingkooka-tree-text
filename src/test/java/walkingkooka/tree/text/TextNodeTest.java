@@ -20,10 +20,14 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
+import walkingkooka.net.Url;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
@@ -61,6 +65,50 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
         assertSame(
             node,
             node.root()
+        );
+    }
+
+    // setTextStyle.....................................................................................................
+
+    @Test
+    public void testSetTextStyleWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextNode.EMPTY_TEXT.setTextStyle(null)
+        );
+    }
+
+    @Test
+    public void testSetTextStyleWithEmpty() {
+        final TextNode node = TextNode.image(Url.parseAbsolute("https://example.com/image.gif"));
+
+        assertSame(
+            node,
+            node.setTextStyle(TextStyle.EMPTY)
+        );
+    }
+
+    @Test
+    public void testSetTextStyleWithNonEmpty() {
+        final TextNode image = TextNode.image(Url.parseAbsolute("https://example.com/image.gif"));
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color color = Color.parse("#123");
+
+        this.checkEquals(
+            TextNode.style(
+                Lists.of(image)
+            ).setAttributes(
+                Maps.of(
+                    propertyName,
+                    color
+                )
+            ),
+            image.setTextStyle(
+                TextStyle.EMPTY.set(
+                    propertyName,
+                    color
+                )
+            )
         );
     }
 

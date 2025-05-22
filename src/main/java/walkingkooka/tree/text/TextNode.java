@@ -38,6 +38,7 @@ import walkingkooka.tree.select.parser.ExpressionNodeSelectorParserToken;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -210,6 +211,16 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Factory that accepts a non empty {@link TextStyleNode} either wrapping or replacing (for {@link TextStyleNode}.
      */
     abstract TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap);
+
+    /**
+     * Would be setter that adds the given {@link TextStyle}.
+     */
+    public final TextNode setTextStyle(final TextStyle textStyle) {
+        return this.setAttributes(
+            Objects.requireNonNull(textStyle, "textStyle")
+                .textStyleMap()
+        );
+    }
 
     /**
      * Getter that returns a {@link TextStyle} view over attributes.
