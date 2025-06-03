@@ -45,6 +45,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
+     * {@see TextToTextStylePropertyNameConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> textToTextStylePropertyName() {
+        return TextToTextStylePropertyNameConverter.instance();
+    }
+
+    /**
      * {@see UrlToHyperlinkConverter}
      */
     public static <C extends ConverterContext> Converter<C> urlToHyperlink() {
