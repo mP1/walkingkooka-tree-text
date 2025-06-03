@@ -37,7 +37,7 @@ public final class TextStyleProperty<T> implements HasName<TextStylePropertyName
 
     public static <T> TextStyleProperty<T> with(final TextStylePropertyName<T> name,
                                                 final Optional<T> value) {
-        return new TextStyleProperty<T>(
+        return new TextStyleProperty<>(
             Objects.requireNonNull(name, "name"),
             Objects.requireNonNull(value, "value")
         );
