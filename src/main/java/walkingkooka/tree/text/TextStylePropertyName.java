@@ -858,7 +858,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Returns all {@link TextStylePropertyName} except {@link #WILDCARD}.
      */
-    public static Set<TextStylePropertyName<?>> VALUES;
+    public static final Set<TextStylePropertyName<?>> VALUES;
 
     /**
      * Factory that retrieves an existing property or if unknown a property that assumes non empty string value.
