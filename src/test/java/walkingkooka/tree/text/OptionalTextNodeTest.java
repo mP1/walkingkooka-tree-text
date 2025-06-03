@@ -140,6 +140,14 @@ public final class OptionalTextNodeTest implements ClassTesting<OptionalTextNode
     }
 
     @Test
+    public void testJsonUnmarshallNull() {
+        this.unmarshallAndCheck(
+            JsonNode.nullNode(),
+            OptionalTextNode.EMPTY
+        );
+    }
+
+    @Test
     public void testJsonRoundtripEmpty() {
         this.marshallRoundTripTwiceAndCheck(
                 OptionalTextNode.EMPTY
