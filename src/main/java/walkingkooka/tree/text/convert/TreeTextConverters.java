@@ -31,10 +31,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see TextToTextConverter}
+     * {@see TextToTextNodeConverter}
      */
-    public static <C extends ConverterContext> Converter<C> textToText() {
-        return TextToTextConverter.instance();
+    public static <C extends ConverterContext> Converter<C> textToTextNode() {
+        return TextToTextNodeConverter.instance();
     }
 
     /**

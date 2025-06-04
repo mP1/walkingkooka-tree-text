@@ -22,15 +22,18 @@ import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 
-final class TextToTextConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+/**
+ * Converts a String to a {@link Text}
+ */
+final class TextToTextNodeConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
-    static <C extends ConverterContext> TextToTextConverter<C> instance() {
+    static <C extends ConverterContext> TextToTextNodeConverter<C> instance() {
         return INSTANCE;
     }
 
-    private final static TextToTextConverter INSTANCE = new TextToTextConverter();
+    private final static TextToTextNodeConverter INSTANCE = new TextToTextNodeConverter();
 
-    private TextToTextConverter() {
+    private TextToTextNodeConverter() {
         super();
     }
 
@@ -38,7 +41,7 @@ final class TextToTextConverter<C extends ConverterContext> implements TextToTry
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return Text.class == type;
+        return Text.class == type || TextNode.class == type;
     }
 
     @Override
@@ -50,6 +53,6 @@ final class TextToTextConverter<C extends ConverterContext> implements TextToTry
 
     @Override
     public String toString() {
-        return "Text to Text";
+        return "Text to TextNode";
     }
 }
