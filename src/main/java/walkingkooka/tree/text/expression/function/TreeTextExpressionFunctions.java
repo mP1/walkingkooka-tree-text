@@ -21,6 +21,7 @@ import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextStyle;
 
 /**
  * A collection of helpers for getting {@link ExpressionFunction}.
@@ -40,6 +41,14 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<Object, C> textStyleGet() {
         return TreeTextExpressionFunctionTextStyleGet.instance();
     }
+
+    /**
+     * {@see TreeTextExpressionFunctionTextStyleRemove}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> textStyleRemove() {
+        return TreeTextExpressionFunctionTextStyleRemove.instance();
+    }
+    
     /**
      * Stop creation
      */
