@@ -18,15 +18,124 @@
 package walkingkooka.tree.text.expression.function;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.color.Color;
+import walkingkooka.convert.ConverterContexts;
+import walkingkooka.convert.Converters;
+import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.printer.TreePrintableTesting;
+import walkingkooka.tree.expression.Expression;
+import walkingkooka.tree.expression.ExpressionEvaluationContexts;
+import walkingkooka.tree.expression.ExpressionFunctionName;
+import walkingkooka.tree.expression.ExpressionNumberKind;
+import walkingkooka.tree.expression.ExpressionReference;
+import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.convert.TreeTextConverters;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
         TreePrintableTesting {
+
+    @Test
+    public void testTextStyledWithStringAndString() {
+        final TextNode text = TextNode.text("Hello");
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.evaluateAndCheck(
+            "styledText",
+            Lists.of(
+                text.text(),
+                style.text()
+            ),
+            text.setTextStyle(style)
+        );
+    }
+
+    @Test
+    public void testTextStyledWithTextNodeAndTextStyle() {
+        final TextNode text = TextNode.text("Hello");
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.evaluateAndCheck(
+            "styledText",
+            Lists.of(
+                text,
+                style
+            ),
+            text.setTextStyle(style)
+        );
+    }
+
+    private void evaluateAndCheck(final String functionName,
+                                  final List<Object> parameters,
+                                  final Object expected) {
+        this.checkEquals(
+            expected,
+            Expression.call(
+                    Expression.namedFunction(
+                        ExpressionFunctionName.with(functionName)
+                    ),
+                    parameters.stream()
+                        .map(Expression::value)
+                        .collect(Collectors.toList())
+            ).toValue(
+                ExpressionEvaluationContexts.basic(
+                    ExpressionNumberKind.BIG_DECIMAL,
+                    (name) -> {
+                        switch(name.value()) {
+                            case "styledText":
+                                return TreeTextExpressionFunctions.styledText();
+                            default:
+                                throw new UnknownExpressionFunctionException(name);
+                        }
+                    }, // name -> function
+                    (final RuntimeException cause) -> {
+                        throw cause;
+                    },
+                    (ExpressionReference reference) -> {
+                        throw new UnsupportedOperationException();
+                    },
+                    (ExpressionReference reference) -> {
+                        throw new UnsupportedOperationException();
+                    },
+                    CaseSensitivity.SENSITIVE,
+                    ConverterContexts.basic(
+                        Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
+                        Converters.collection(
+                            Lists.of(
+                                Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                                Converters.simple(), // handles Text -> TextNode
+                                TreeTextConverters.textToTextNode(),
+                                TreeTextConverters.textToTextStyle(),
+                                TreeTextConverters.textToTextStylePropertyName(),
+                                TreeTextConverters.urlToHyperlink(),
+                                TreeTextConverters.urlToImage()
+                            )
+                        ),
+                        DateTimeContexts.fake(),
+                        DecimalNumberContexts.fake()
+                    )
+                )
+            )
+        );
+    }
 
     // PublicStaticHelperTesting........................................................................................
 
