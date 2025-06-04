@@ -18,12 +18,21 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.text.TextNode;
 
 /**
  * A collection of helpers for getting {@link ExpressionFunction}.
  */
 public final class TreeTextExpressionFunctions implements PublicStaticHelper {
+
+    /**
+     * {@see TreeTextExpressionFunctionStyledText}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
+        return TreeTextExpressionFunctionStyledText.instance();
+    }
 
     /**
      * Stop creation
