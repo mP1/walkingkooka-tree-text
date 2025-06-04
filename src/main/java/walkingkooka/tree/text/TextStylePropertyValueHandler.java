@@ -127,6 +127,11 @@ abstract class TextStylePropertyValueHandler<T> {
         super();
     }
 
+    /**
+     * {@link TextStylePropertyName#valueType()}
+     */
+    abstract Class<T> valueType();
+
     abstract Optional<Class<Enum<?>>> enumType();
 
     // checkValue.......................................................................................................

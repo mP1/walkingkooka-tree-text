@@ -43,6 +43,11 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
+    Class<Color> valueType() {
+        return Color.class;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

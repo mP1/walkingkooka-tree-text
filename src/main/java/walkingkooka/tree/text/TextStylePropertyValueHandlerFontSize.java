@@ -41,6 +41,11 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
+    Class<FontSize> valueType() {
+        return FontSize.class;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

@@ -42,6 +42,11 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
     }
 
     @Override
+    Class<FontFamily> valueType() {
+        return FontFamily.class;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }
