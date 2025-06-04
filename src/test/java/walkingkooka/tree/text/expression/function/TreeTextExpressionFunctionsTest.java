@@ -48,7 +48,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         TreePrintableTesting {
 
     @Test
-    public void testTextStyledWithStringAndString() {
+    public void testStyledTextWithStringAndString() {
         final TextNode text = TextNode.text("Hello");
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.COLOR,
@@ -66,7 +66,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyledWithTextNodeAndTextStyle() {
+    public void testStyledTextWithTextNodeAndTextStyle() {
         final TextNode text = TextNode.text("Hello");
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.COLOR,
