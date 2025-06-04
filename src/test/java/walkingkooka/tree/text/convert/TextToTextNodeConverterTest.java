@@ -27,7 +27,18 @@ import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 
-public final class TextToTextConverterTest implements ConverterTesting2<TextToTextConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TextToTextNodeConverterTest implements ConverterTesting2<TextToTextNodeConverter<FakeConverterContext>, FakeConverterContext> {
+
+    @Test
+    public void testConvertCharSequenceToTextNode() {
+        final String text = "Hello";
+
+        this.convertAndCheck(
+            new StringBuilder(text),
+            TextNode.class,
+            TextNode.text(text)
+        );
+    }
 
     @Test
     public void testConvertCharSequenceToText() {
@@ -41,8 +52,8 @@ public final class TextToTextConverterTest implements ConverterTesting2<TextToTe
     }
 
     @Override
-    public TextToTextConverter<FakeConverterContext> createConverter() {
-        return TextToTextConverter.instance();
+    public TextToTextNodeConverter<FakeConverterContext> createConverter() {
+        return TextToTextNodeConverter.instance();
     }
 
     @Override
@@ -74,7 +85,7 @@ public final class TextToTextConverterTest implements ConverterTesting2<TextToTe
     }
 
     @Override
-    public Class<TextToTextConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToTextConverter.class);
+    public Class<TextToTextNodeConverter<FakeConverterContext>> type() {
+        return Cast.to(TextToTextNodeConverter.class);
     }
 }
