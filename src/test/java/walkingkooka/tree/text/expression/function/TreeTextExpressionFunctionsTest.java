@@ -83,6 +83,44 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
     }
 
+    @Test
+    public void testTextStyleGetWithTextStyleAndTextStylePropertyName() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        this.evaluateAndCheck(
+            "textStyleGet",
+            Lists.of(
+                TextStyle.EMPTY.set(
+                    property,
+                    color
+                ),
+                property
+            ),
+            color
+        );
+    }
+
+    @Test
+    public void testTextStyleGetWithStringAndString() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            property,
+            color
+        );
+
+        this.evaluateAndCheck(
+            "textStyleGet",
+            Lists.of(
+                style.text(),
+                property.text()
+            ),
+            color
+        );
+    }
+
     private void evaluateAndCheck(final String functionName,
                                   final List<Object> parameters,
                                   final Object expected) {
@@ -102,6 +140,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         switch(name.value()) {
                             case "styledText":
                                 return TreeTextExpressionFunctions.styledText();
+                            case "textStyleGet":
+                                return TreeTextExpressionFunctions.textStyleGet();
                             default:
                                 throw new UnknownExpressionFunctionException(name);
                         }

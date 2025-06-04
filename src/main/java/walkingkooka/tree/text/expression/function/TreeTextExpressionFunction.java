@@ -26,6 +26,7 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.TextStylePropertyName;
 
 import java.util.Optional;
 
@@ -36,6 +37,10 @@ abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationConte
 
     final static ExpressionFunctionParameter<TextStyle> TEXT_STYLE = ExpressionFunctionParameterName.with("textStyle")
         .required(TextStyle.class)
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
+
+    final static ExpressionFunctionParameter<TextStylePropertyName> TEXT_STYLE_PROPERTY_NAME = ExpressionFunctionParameterName.with("propertyName")
+        .required(TextStylePropertyName.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
     final static ExpressionFunctionParameter<TextNode> TEXT_NODE = ExpressionFunctionParameterName.with("textNode")

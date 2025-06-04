@@ -35,6 +35,12 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     }
 
     /**
+     * {@see TreeTextExpressionFunctionTextStyleGet}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Object, C> textStyleGet() {
+        return TreeTextExpressionFunctionTextStyleGet.instance();
+    }
+    /**
      * Stop creation
      */
     private TreeTextExpressionFunctions() {
