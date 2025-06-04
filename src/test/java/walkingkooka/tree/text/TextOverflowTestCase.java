@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -32,21 +33,34 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
         super();
     }
 
+    // Object...........................................................................................................
+
+    @Override
+    public final TextOverflow createObject() {
+        return this.createTextStylePropertyValue();
+    }
+
+    // json.............................................................................................................
+
     @Test
     public final void testUnmarshallStringEmptyFails() {
         this.unmarshallFails(JsonNode.string(""));
     }
 
-    @Override final TextStylePropertyName<TextOverflow> textStylePropertyName() {
+    @Override
+    final TextStylePropertyName<TextOverflow> textStylePropertyName() {
         return TextStylePropertyName.TEXT_OVERFLOW;
     }
-
-    // JsonNodeMarshallingTesting.......................................................................................
 
     @Override
     public TextOverflow unmarshall(final JsonNode from,
                                    final JsonNodeUnmarshallContext context) {
         return TextOverflow.unmarshall(from, context);
+    }
+
+    @Override
+    public final T createJsonNodeMarshallingValue() {
+        return (T)this.createTextStylePropertyValue();
     }
 
     // ClassTesting.....................................................................................................
@@ -58,14 +72,10 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
 
     abstract Class<T> textOverflowType();
 
-    // HashCodeEqualsDefinedTesting.....................................................................................
-
     @Override
-    public final TextOverflow createObject() {
-        return this.createTextStylePropertyValue();
+    public final JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
-
-    // TypeNameTesting..................................................................................................
 
     @Override
     public final String typeNamePrefix() {
