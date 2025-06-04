@@ -41,6 +41,11 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
     }
 
     @Override
+    Class<TextOverflow> valueType() {
+        return TextOverflow.class;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -33,6 +34,11 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
      */
     TextStylePropertyValueHandlerLength() {
         super();
+    }
+
+    @Override
+    final Class<Length<?>> valueType() {
+        return Cast.to(Length.class);
     }
 
     @Override

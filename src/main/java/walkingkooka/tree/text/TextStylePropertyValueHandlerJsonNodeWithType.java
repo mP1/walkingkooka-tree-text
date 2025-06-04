@@ -42,6 +42,11 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
+    Class<Object> valueType() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }
