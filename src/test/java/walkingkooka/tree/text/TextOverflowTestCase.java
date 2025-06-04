@@ -23,11 +23,13 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase3<TextOverflow>
+public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase<TextOverflow>
     implements HashCodeEqualsDefinedTesting2<TextOverflow>,
-    TypeNameTesting<TextOverflow> {
+    TypeNameTesting<TextOverflow>,
+    JsonNodeMarshallingTesting<TextOverflow> {
 
     TextOverflowTestCase() {
         super();
