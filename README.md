@@ -149,3 +149,14 @@ prints
   </BODY>
 </HTML>
 ```
+
+### [Converters](https://github.com/mP1/walkingkooka-convert/blob/master/src/main/java/walkingkooka/convert/Converter.java)
+
+These `Converters` that convert function parameter that may be `String` to other types like [TextStyle](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/TextStyle.java)
+
+- [text-to-text-node](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TextToTextConverter.java)
+- [text-to-text-style](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TextToTextStyleConverter.java)
+- [text-to-text-style-property-name](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TextToTextStylePropertyNameConverter.java)
+- [to-text-node](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/HasTextNodeToTextNodeConverter.java)
+- [url-to-hyperlink](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/UrlToHyperlinkConverter.java)
+- [url-to-image](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/UrlToImageConverter.java)
