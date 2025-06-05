@@ -56,18 +56,8 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof FontSize,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return FontSize.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected FontSize but got " + value.getClass().getSimpleName();
     }
 
     @Override

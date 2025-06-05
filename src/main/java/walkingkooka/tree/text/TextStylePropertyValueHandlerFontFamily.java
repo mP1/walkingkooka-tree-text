@@ -57,18 +57,8 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof FontFamily,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return FontFamily.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected FontFamily but got " + value.getClass().getSimpleName();
     }
 
     @Override

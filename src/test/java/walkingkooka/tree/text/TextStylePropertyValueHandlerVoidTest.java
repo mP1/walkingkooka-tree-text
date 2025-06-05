@@ -53,11 +53,6 @@ public final class TextStylePropertyValueHandlerVoidTest extends TextStyleProper
     }
 
     @Override
-    String propertyValueType() {
-        return Void.class.getSimpleName();
-    }
-
-    @Override
     public String typeNameSuffix() {
         return Void.class.getSimpleName();
     }

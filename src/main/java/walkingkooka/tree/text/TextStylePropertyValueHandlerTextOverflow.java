@@ -56,18 +56,8 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof TextOverflow,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return TextOverflow.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected TextOverflow got " + value.getClass().getSimpleName();
     }
 
     @Override

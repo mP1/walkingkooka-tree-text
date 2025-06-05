@@ -23,6 +23,15 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerFontSize, FontSize> {
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"font-size\": Expected FontSize but got TextStylePropertyValueHandlerFontSizeTest"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.number(123),
@@ -61,11 +70,6 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
     @Override
     FontSize propertyValue() {
         return FontSize.with(123);
-    }
-
-    @Override
-    String propertyValueType() {
-        return FontSize.class.getSimpleName();
     }
 
     @Override

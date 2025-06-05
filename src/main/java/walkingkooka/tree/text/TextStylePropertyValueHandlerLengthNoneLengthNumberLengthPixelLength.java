@@ -42,8 +42,8 @@ final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength
     }
 
     @Override
-    String expectedTypeName(final Class<?> type) {
-        return "NoneLength|NumberLength|PixelLength";
+    String invalidValueMessage(final Object value) {
+        return "Expected NoneLength | NumberLength | PixelLength got " + value.getClass().getSimpleName();
     }
 
     // Object ..........................................................................................................

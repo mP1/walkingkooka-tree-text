@@ -25,6 +25,15 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerColorTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerColor, Color> {
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"color\": Expected color but got TextStylePropertyValueHandlerColorTest"
+        );
+    }
+
+    @Test
     public void testUnmarshallHashRgb() {
         this.unmarshallAndCheck(
             JsonNode.string("#123"),
@@ -77,11 +86,6 @@ public final class TextStylePropertyValueHandlerColorTest extends TextStylePrope
     @Override
     Color propertyValue() {
         return Color.parse("#123");
-    }
-
-    @Override
-    String propertyValueType() {
-        return Color.class.getSimpleName();
     }
 
     @Override

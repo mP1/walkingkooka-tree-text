@@ -25,6 +25,15 @@ public final class TextStylePropertyValueHandlerTextOverflowTest extends TextSty
     private final static String STRING = "Hello";
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"text-overflow\": Expected TextOverflow got TextStylePropertyValueHandlerTextOverflowTest"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string("\"" + STRING + "\""),
@@ -63,11 +72,6 @@ public final class TextStylePropertyValueHandlerTextOverflowTest extends TextSty
     @Override
     TextOverflow propertyValue() {
         return TextOverflow.string(STRING);
-    }
-
-    @Override
-    String propertyValueType() {
-        return TextOverflow.class.getSimpleName();
     }
 
     @Override

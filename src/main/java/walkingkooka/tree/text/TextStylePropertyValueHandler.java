@@ -19,13 +19,11 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.color.Color;
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 
 /**
  * Base converter that provides support for handling property values.
@@ -147,55 +145,25 @@ abstract class TextStylePropertyValueHandler<T> {
             throw new NullPointerException("Property " + name.inQuotes() + " missing value");
         }
 
-        this.checkNonNullValue(value, name);
-        return Cast.to(value);
-    }
-
-    abstract void checkNonNullValue(final Object value, final TextStylePropertyName<?> name);
-
-    /**
-     * Checks the type of the given value and throws a {@link IllegalArgumentException} if this test fails.
-     */
-    final <U> U checkType(final Object value,
-                          final Predicate<Object> type,
-                          final TextStylePropertyName<?> name) {
-        if (!type.test(value)) {
-            throw this.reportInvalidValueType(value, name);
-        }
-        return Cast.to(value);
-    }
-
-    /**
-     * Creates a {@link IllegalArgumentException} used to report an invalid value.
-     */
-    final IllegalArgumentException reportInvalidValueType(final Object value,
-                                                          final TextStylePropertyName<?> name) {
-        final Class<?> type = value.getClass();
-
-        String typeName = type.getName();
-        if (textStylePropertyType(typeName)) {
-            typeName = typeName.substring(1 + typeName.lastIndexOf('.'));
-        }
-
-        return new IllegalArgumentException(
-            "Property " +
+        if (false == this.testValue(value)) {
+            // Property "tab-size" value normal(NormalLength) is not a NoneLength|NumberLength|PixelLength
+            throw new IllegalArgumentException(
+                "Property " +
                 name.inQuotes() +
-                " value " +
-                CharSequences.quoteIfChars(value) +
-                "(" +
-                typeName +
-                ") is not a " +
-                this.expectedTypeName(type)
-        );
+                    ": " +
+                    this.invalidValueMessage(
+                        value
+                    )
+            );
+        }
+
+        return Cast.to(value);
     }
 
-    abstract String expectedTypeName(final Class<?> type);
-
-    private boolean textStylePropertyType(final String type) {
-        return type.startsWith(PACKAGE) && type.indexOf('.', 1 + PACKAGE.length()) == -1;
-    }
-
-    private final static String PACKAGE = "walkingkooka.tree.text";
+    /**
+     * The message that will appear when {@link #checkValue(Object, TextStylePropertyName)} fails.
+     */
+    abstract String invalidValueMessage(final Object value);
 
     // parseValue.......................................................................................................
 

@@ -56,18 +56,8 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof FontWeight,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return FontWeight.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected FontWeight but got " + value.getClass().getSimpleName();
     }
 
     @Override

@@ -23,12 +23,24 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerStringTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerString, String> {
 
     @Test
-    public void testCheckValueEmptyStringFails() {
-        this.checkValueFails("", "Property \"text\" contains an empty/whitespace value \"\"");
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"text\": Expected non empty String got TextStylePropertyValueHandlerStringTest"
+        );
     }
 
     @Test
-    public void testCheckWhitespace() {
+    public void testCheckValueWithEmptyStringFails() {
+        this.checkValueFails(
+            "",
+            "Property \"text\": Expected non empty String got String"
+        );
+    }
+
+    @Test
+    public void testCheckValueWithWhitespace() {
         this.checkValue(" \t");
     }
 
@@ -62,11 +74,6 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
     @Override
     String propertyValue() {
         return "abc123";
-    }
-
-    @Override
-    String propertyValueType() {
-        return String.class.getSimpleName();
     }
 
     @Override

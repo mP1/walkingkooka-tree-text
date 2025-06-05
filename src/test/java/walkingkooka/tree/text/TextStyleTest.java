@@ -808,18 +808,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseNoneLengthNormalLengthPixelLengthWithNone() {
+    public void testParseNoneLengthNormalLengthPixelLengthWithNoneFails() {
         this.parseStringFails(
             "word-spacing: none",
-            new IllegalArgumentException("Property \"word-spacing\" value none(NoneLength) is not a NormalLength|PixelLength")
+            new IllegalArgumentException("Property \"word-spacing\": Expected NoneLength | PixelLength got NoneLength")
         );
     }
 
     @Test
-    public void testParseNoneLengthNormalLengthPixelLengthWithNumber() {
+    public void testParseNoneLengthNormalLengthPixelLengthWithNumberFails() {
         this.parseStringFails(
             "word-spacing: 12",
-            new IllegalArgumentException("Property \"word-spacing\" value 12(NumberLength) is not a NormalLength|PixelLength")
+            new IllegalArgumentException("Property \"word-spacing\": Expected NoneLength | PixelLength got NumberLength")
         );
     }
 
