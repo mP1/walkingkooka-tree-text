@@ -132,6 +132,11 @@ abstract class TextStylePropertyValueHandler<T> {
      */
     abstract Class<T> valueType();
 
+    /**
+     * Sub-classes should do an instanceof check etc.
+     */
+    abstract boolean testValue(final Object value);
+
     abstract Optional<Class<Enum<?>>> enumType();
 
     // checkValue.......................................................................................................

@@ -47,6 +47,11 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     }
 
     @Override
+    boolean testValue(final Object value) {
+        return false;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

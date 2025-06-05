@@ -940,6 +940,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
+     * Returns true if the given value (which may be null) is compatible with the expected type for this property.
+     */
+    public boolean testValue(final Object value) {
+        return this.handler.testValue(value);
+    }
+
+    /**
      * Used to handle/validate property values.
      */
     final TextStylePropertyValueHandler<T> handler;

@@ -46,6 +46,11 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
     }
 
     @Override
+    boolean testValue(final Object value) {
+        return value instanceof Opacity;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }
