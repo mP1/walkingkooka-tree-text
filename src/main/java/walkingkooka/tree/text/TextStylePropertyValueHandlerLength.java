@@ -54,15 +54,6 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
         return Optional.empty();
     }
 
-    @Override final void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
-        final Length<?> length = this.checkType(value,
-            (v) -> v instanceof Length,
-            name);
-        if (false == this.lengthCheck(length)) {
-            throw this.reportInvalidValueType(value, name);
-        }
-    }
-
     abstract boolean lengthCheck(final Length<?> length);
 
     @Override
@@ -79,16 +70,21 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
 
     // unmarshall ....................................................................................................
 
-    @Override final Length<?> unmarshall(final JsonNode node,
+    @Override
+    final Length<?> unmarshall(final JsonNode node,
                                          final TextStylePropertyName<?> name,
                                          final JsonNodeUnmarshallContext context) {
-        final Length<?> length = context.unmarshall(node, Length.class);
-        this.checkNonNullValue(length, name);
+        final Length<?> length = context.unmarshall(
+            node,
+            Length.class
+        );
+        name.checkValue(length);
         return length;
     }
 
-    @Override final JsonNode marshall(final Length<?> value,
-                                      final JsonNodeMarshallContext context) {
+    @Override
+    final JsonNode marshall(final Length<?> value,
+                            final JsonNodeMarshallContext context) {
         return context.marshall(value);
     }
 }

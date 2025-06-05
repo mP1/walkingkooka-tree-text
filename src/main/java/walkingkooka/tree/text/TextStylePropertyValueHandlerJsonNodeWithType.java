@@ -48,7 +48,7 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
 
     @Override
     boolean testValue(final Object value) {
-        return false; // always
+        return true; // always
     }
 
     @Override
@@ -57,12 +57,8 @@ final class TextStylePropertyValueHandlerJsonNodeWithType extends TextStylePrope
     }
 
     @Override
-    void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return "supported type";
+    String invalidValueMessage(final Object value) {
+        return "Invalid value got " + value.getClass().getSimpleName();
     }
 
     @Override

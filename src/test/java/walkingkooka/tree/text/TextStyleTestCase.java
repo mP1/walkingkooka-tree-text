@@ -88,7 +88,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 )
         );
         this.checkEquals(
-            "Property \"background-color\" value \"hello\"(java.lang.String) is not a Color",
+            "Property \"background-color\": Expected color but got String",
             thrown.getMessage(),
             () -> thrown.toString()
         );
@@ -107,7 +107,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 )
         );
         this.checkEquals(
-            "Values not supported for \"*\"",
+            "Property \"*\": Values not supported",
             thrown.getMessage(),
             () -> thrown.toString()
         );

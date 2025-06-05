@@ -25,6 +25,15 @@ public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStyle
     private final static String TIMES_NEW_ROMAN = "Times New Roman";
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"font-family\": Expected FontFamily but got TextStylePropertyValueHandlerFontFamilyTest"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string(TIMES_NEW_ROMAN),
@@ -63,11 +72,6 @@ public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStyle
     @Override
     FontFamily propertyValue() {
         return FontFamily.with(TIMES_NEW_ROMAN);
-    }
-
-    @Override
-    String propertyValueType() {
-        return FontFamily.class.getSimpleName();
     }
 
     @Override

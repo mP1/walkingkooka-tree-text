@@ -23,6 +23,15 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerOpacity, Opacity> {
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"opacity\": Expected Opacity got TextStylePropertyValueHandlerOpacityTest"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string(Opacity.OPAQUE_TEXT),
@@ -61,11 +70,6 @@ public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePro
     @Override
     Opacity propertyValue() {
         return Opacity.with(0.5);
-    }
-
-    @Override
-    String propertyValueType() {
-        return Opacity.class.getSimpleName();
     }
 
     @Override

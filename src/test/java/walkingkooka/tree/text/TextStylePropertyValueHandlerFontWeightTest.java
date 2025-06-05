@@ -23,6 +23,15 @@ import walkingkooka.tree.json.JsonNode;
 public final class TextStylePropertyValueHandlerFontWeightTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerFontWeight, FontWeight> {
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"font-weight\": Expected FontWeight but got TextStylePropertyValueHandlerFontWeightTest"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.number(123),
@@ -61,11 +70,6 @@ public final class TextStylePropertyValueHandlerFontWeightTest extends TextStyle
     @Override
     FontWeight propertyValue() {
         return FontWeight.with(123);
-    }
-
-    @Override
-    String propertyValueType() {
-        return FontWeight.class.getSimpleName();
     }
 
     @Override

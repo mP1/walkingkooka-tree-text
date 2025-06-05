@@ -56,18 +56,8 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof Opacity,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return Opacity.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected Opacity got " + value.getClass().getSimpleName();
     }
 
     @Override

@@ -17,29 +17,11 @@
 
 package walkingkooka.tree.text;
 
-import org.junit.jupiter.api.Test;
-import walkingkooka.tree.FakeNode;
-
 public abstract class TextStylePropertyValueHandlerTestCase3<P extends TextStylePropertyValueHandler<T>, T> extends TextStylePropertyValueHandlerTestCase2<P, T> {
 
     TextStylePropertyValueHandlerTestCase3() {
         super();
     }
 
-    @Test
-    public final void testCheckValueWithIncompatibleTypeFails() {
-        this.checkValueFails(
-            this,
-            "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType()
-        );
-    }
-
-    @Test
-    public final void testCheckValueWithIncompatibleTypeFails2() {
-        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
-        this.checkValueFails(
-            fakeNode,
-            "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
-        );
-    }
+    public abstract void testCheckValueWithIncompatibleTypeFails();
 }

@@ -34,7 +34,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     public void testCheckValueWithNormalFails() {
         this.checkValueFails(
             Length.normal(),
-            "Property \"tab-size\" value normal(NormalLength) is not a NoneLength|NumberLength|PixelLength"
+            "Property \"tab-size\": Expected NoneLength | NumberLength | PixelLength got NormalLength"
         );
     }
 
@@ -54,7 +54,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     public void testCheckWrongValueTypeFails() {
         this.checkValueFails(
             this,
-            "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType()
+            "Property \"tab-size\": Expected NoneLength | NumberLength | PixelLength got TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLengthTest"
         );
     }
 
@@ -146,11 +146,6 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     @Override
     Length<?> propertyValue() {
         return Length.pixel(1.0);
-    }
-
-    @Override
-    String propertyValueType() {
-        return "NoneLength|NumberLength|PixelLength";
     }
 
     @Override

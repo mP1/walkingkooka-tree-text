@@ -58,18 +58,8 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            (v) -> v instanceof Color,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return Color.class.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected color but got " + value.getClass().getSimpleName();
     }
 
     @Override

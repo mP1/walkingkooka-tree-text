@@ -73,18 +73,8 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     }
 
     @Override
-    void checkNonNullValue(final Object value,
-                           final TextStylePropertyName<?> name) {
-        this.checkType(
-            value,
-            this.values::contains,
-            name
-        );
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return this.type.getSimpleName();
+    String invalidValueMessage(final Object value) {
+        return "Expected " + this.type.getSimpleName() + " but got " + value.getClass().getSimpleName();
     }
 
     private final Class<E> type;

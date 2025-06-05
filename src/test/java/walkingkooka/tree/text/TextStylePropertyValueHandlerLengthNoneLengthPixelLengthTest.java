@@ -31,12 +31,17 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
 
     @Test
     public void testCheckValueWithNormalFails() {
-        this.checkValueFails(Length.normal(), "Property \"max-height\" value normal(NormalLength) is not a NoneLength|PixelLength");
+        this.checkValueFails(
+            Length.normal(),
+            "Property \"max-height\": Expected NoneLength | PixelLength got NormalLength"
+        );
     }
 
     @Test
     public void testCheckValueWithNumberFails() {
-        this.checkValueFails(Length.number(1L), "Property \"max-height\" value 1(NumberLength) is not a NoneLength|PixelLength");
+        this.checkValueFails(
+            Length.number(1L),
+            "Property \"max-height\": Expected NoneLength | PixelLength got NumberLength");
     }
 
     @Test
@@ -48,7 +53,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType()
+            "Property \"max-height\": Expected NoneLength | PixelLength got TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest"
         );
     }
 
@@ -57,7 +62,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
         this.checkValueFails(
             fakeNode,
-            "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
+            "Property \"max-height\": Expected NoneLength | PixelLength got FakeNode"
         );
     }
 
@@ -133,11 +138,6 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
     @Override
     Length<?> propertyValue() {
         return Length.pixel(1.0);
-    }
-
-    @Override
-    String propertyValueType() {
-        return "NoneLength|PixelLength";
     }
 
     @Override

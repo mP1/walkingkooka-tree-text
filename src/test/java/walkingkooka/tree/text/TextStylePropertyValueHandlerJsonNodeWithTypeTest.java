@@ -64,11 +64,6 @@ public final class TextStylePropertyValueHandlerJsonNodeWithTypeTest extends Tex
     }
 
     @Override
-    String propertyValueType() {
-        return "supported type";
-    }
-
-    @Override
     public String typeNameSuffix() {
         return JsonNode.class.getSimpleName() + "WithType";
     }

@@ -26,6 +26,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStylePropertyValueHandlerEnumTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerEnum<TextWrapping>, TextWrapping> {
 
     @Test
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
+        this.checkValueFails(
+            this,
+            "Property \"text-wrapping\": Expected TextWrapping but got TextStylePropertyValueHandlerEnumTest"
+        );
+    }
+
+    @Test
     public void testParseValueTextWithUnknownFails() {
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
@@ -77,11 +86,6 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
     @Override
     TextWrapping propertyValue() {
         return TextWrapping.CLIP;
-    }
-
-    @Override
-    String propertyValueType() {
-        return TextWrapping.class.getSimpleName();
     }
 
     @Override

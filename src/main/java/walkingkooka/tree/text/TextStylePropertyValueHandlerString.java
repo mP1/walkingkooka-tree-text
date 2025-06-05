@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -48,7 +47,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
 
     @Override
     boolean testValue(final Object value) {
-        return value instanceof String;
+        return value instanceof String && false == "".equals(value);
     }
 
     @Override
@@ -57,18 +56,8 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     }
 
     @Override
-    void checkNonNullValue(final Object value, final TextStylePropertyName<?> name) {
-        final String string = this.checkType(value,
-            v -> v instanceof String,
-            name);
-        if (string.isEmpty()) {
-            throw new IllegalArgumentException("Property " + name.inQuotes() + " contains an empty/whitespace value " + CharSequences.quoteAndEscape(string));
-        }
-    }
-
-    @Override
-    String expectedTypeName(final Class<?> type) {
-        return "String";
+    String invalidValueMessage(final Object value) {
+        return "Expected non empty String got " + value.getClass().getSimpleName();
     }
 
     @Override

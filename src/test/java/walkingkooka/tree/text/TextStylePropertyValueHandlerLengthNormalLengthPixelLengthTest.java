@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.tree.FakeNode;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -31,7 +30,10 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
 
     @Test
     public void testCheckValueNumberFails() {
-        this.checkValueFails(Length.number(1L), "Property \"line-height\" value 1(NumberLength) is not a NormalLength|PixelLength");
+        this.checkValueFails(
+            Length.number(1L),
+            "Property \"line-height\": Expected NoneLength | PixelLength got NumberLength"
+        );
     }
 
     @Test
@@ -41,15 +43,9 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
 
     @Test
     public void testCheckWrongValueTypeFails() {
-        this.checkValueFails(this, "Property " + this.propertyName().inQuotes() + " value " + this + "(" + this.getClass().getSimpleName() + ") is not a " + this.propertyValueType());
-    }
-
-    @Test
-    public void testCheckWrongValueTypeFails2() {
-        final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
         this.checkValueFails(
-            fakeNode,
-            "Property " + this.propertyName().inQuotes() + " value " + fakeNode + "(" + FakeNode.class.getName() + ") is not a " + this.propertyValueType()
+            this,
+            "Property \"line-height\": Expected NoneLength | PixelLength got TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTest"
         );
     }
 
@@ -121,11 +117,6 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
     @Override
     Length<?> propertyValue() {
         return Length.pixel(1.0);
-    }
-
-    @Override
-    String propertyValueType() {
-        return "NormalLength|PixelLength";
     }
 
     @Override
