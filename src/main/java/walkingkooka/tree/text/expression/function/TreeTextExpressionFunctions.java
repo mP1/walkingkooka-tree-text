@@ -48,6 +48,13 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> textStyleRemove() {
         return TreeTextExpressionFunctionTextStyleRemove.instance();
     }
+
+    /**
+     * {@see TreeTextExpressionFunctionTextStyleSet}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> textStyleSet() {
+        return TreeTextExpressionFunctionTextStyleSet.instance();
+    }
     
     /**
      * Stop creation

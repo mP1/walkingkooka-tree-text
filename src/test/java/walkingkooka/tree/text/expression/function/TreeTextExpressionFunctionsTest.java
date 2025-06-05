@@ -18,6 +18,7 @@
 package walkingkooka.tree.text.expression.function;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.convert.ConverterContexts;
@@ -34,7 +35,14 @@ import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.text.FontFamily;
+import walkingkooka.tree.text.FontSize;
+import walkingkooka.tree.text.FontWeight;
+import walkingkooka.tree.text.Length;
+import walkingkooka.tree.text.Opacity;
+import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextOverflow;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 import walkingkooka.tree.text.convert.TreeTextConverters;
@@ -121,6 +129,120 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
     }
 
+    @Test
+    public void testTextStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        this.evaluateAndCheck(
+            "textStyleSet",
+            Lists.of(
+                style,
+                property,
+                color
+            ),
+            style.set(
+                property,
+                color
+            )
+        );
+    }
+
+    @Test
+    public void testTextStyleSetWithStringAndStringAndString() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        this.evaluateAndCheck(
+            "textStyleSet",
+            Lists.of(
+                style.text(),
+                property.text(),
+                color.toString()
+            ),
+            style.set(
+                property,
+                color
+            )
+        );
+    }
+
+    @Test
+    public void testTextStyleSetWithStringAndStringAndString2() throws Exception {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.VALUES) {
+            final TextStyle style = TextStyle.EMPTY;
+
+            final Object propertyValue;
+
+            final Class<?> valueType = propertyName.valueType();
+            switch (valueType.getSimpleName()) {
+                case "Color":
+                    propertyValue = Color.BLACK;
+                    break;
+                case "FontFamily":
+                    propertyValue = FontFamily.with("Times New Roman");
+                    break;
+                case "FontSize":
+                    propertyValue = FontSize.with(10);
+                    break;
+                case "FontWeight":
+                    propertyValue = FontWeight.with(10);
+                    break;
+                case "Length":
+                    propertyValue = Length.pixel(1.0);
+                    break;
+                case "Opacity":
+                    propertyValue = Opacity.with(0.5);
+                    break;
+                case "String":
+                    propertyValue = "Hello";
+                    break;
+                case "TextOverflow":
+                    propertyValue = TextOverflow.string("TextOverflowString");
+                    break;
+
+                default:
+                    if (valueType.isEnum()) {
+                        final Enum[] enums = (Enum[])
+                            valueType.getMethod("values")
+                                .invoke(null);
+                        propertyValue = enums[0];
+                        break;
+                    }
+
+                    throw new UnsupportedOperationException(propertyName + " " + propertyName.valueType().getSimpleName());
+            }
+
+            String propertyValueText = propertyValue.toString();
+            if (valueType == Opacity.class) {
+                propertyValueText = Opacity.with(0.5).text();
+            }
+
+            this.evaluateAndCheck(
+                "textStyleSet",
+                Lists.of(
+                    style.text(),
+                    propertyName.text(),
+                    propertyValueText
+                ),
+                TextStyle.EMPTY.set(
+                    propertyName,
+                    Cast.to(propertyValue)
+                )
+            );
+        }
+    }
+
     private void evaluateAndCheck(final String functionName,
                                   final List<Object> parameters,
                                   final Object expected) {
@@ -142,6 +264,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.styledText();
                             case "textStyleGet":
                                 return TreeTextExpressionFunctions.textStyleGet();
+                            case "textStyleSet":
+                                return TreeTextExpressionFunctions.textStyleSet();
                             default:
                                 throw new UnknownExpressionFunctionException(name);
                         }
