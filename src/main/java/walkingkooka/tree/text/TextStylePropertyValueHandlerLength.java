@@ -42,6 +42,14 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
     }
 
     @Override
+    final boolean testValue(final Object value) {
+        return value instanceof Length &&
+            this.lengthCheck(
+            (Length<?>) value
+        );
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

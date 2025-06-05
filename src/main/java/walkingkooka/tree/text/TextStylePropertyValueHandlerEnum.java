@@ -63,6 +63,11 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     }
 
     @Override
+    boolean testValue(final Object value) {
+        return this.values.contains(value);
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.of(Cast.to(this.type));
     }

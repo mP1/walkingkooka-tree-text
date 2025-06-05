@@ -46,6 +46,11 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
+    boolean testValue(final Object value) {
+        return value instanceof FontWeight;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }

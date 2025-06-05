@@ -48,6 +48,11 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
+    boolean testValue(final Object value) {
+        return value instanceof Color;
+    }
+
+    @Override
     Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }
