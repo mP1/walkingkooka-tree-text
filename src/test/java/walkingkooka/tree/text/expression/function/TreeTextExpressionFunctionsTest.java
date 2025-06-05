@@ -130,6 +130,50 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testTextStyleRemoveWithTextStyleAndTextStylePropertyName() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            property,
+            Color.BLACK
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "textStyleRemove",
+            Lists.of(
+                style,
+                property
+            ),
+            style.remove(property)
+        );
+    }
+
+    @Test
+    public void testTextStyleRemoveWithStringAndString() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            property,
+            Color.BLACK
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "textStyleRemove",
+            Lists.of(
+                style.text(),
+                property.text()
+            ),
+            style.remove(property)
+        );
+    }
+
+    @Test
     public void testTextStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
@@ -264,6 +308,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.styledText();
                             case "textStyleGet":
                                 return TreeTextExpressionFunctions.textStyleGet();
+                            case "textStyleRemove":
+                                return TreeTextExpressionFunctions.textStyleRemove();
                             case "textStyleSet":
                                 return TreeTextExpressionFunctions.textStyleSet();
                             default:
