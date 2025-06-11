@@ -116,14 +116,16 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
         return Maps.empty();
     }
 
-    @Override final TextNode setAttributesEmptyTextStyleMap() {
+    @Override //
+    final TextNode setAttributesEmptyTextStyleMap() {
         return this;
     }
 
     /**
      * Creates a new {@link TextStyleNode} with this leaf as its only child with the given attributes.
      */
-    @Override final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    @Override //
+    final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return TextStyleNode.with(
             Lists.of(
                 this
@@ -139,8 +141,9 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     // toHtml ..........................................................................................................
 
-    @Override final boolean buildHtml(final boolean shouldIndent,
-                                      final IndentingPrinter html) {
+    @Override //
+    final boolean buildHtml(final boolean shouldIndent,
+                            final IndentingPrinter html) {
         html.print(this.toHtml());
         return false;
     }
