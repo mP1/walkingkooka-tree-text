@@ -83,6 +83,11 @@ public final class Hyperlink extends TextParentNode {
         return this.removeParent0().cast();
     }
 
+    @Override
+    public Hyperlink setText(final String text) {
+        return this.replaceChildrenWithText(text);
+    }
+
     // url.......................................................................................................
 
     /**

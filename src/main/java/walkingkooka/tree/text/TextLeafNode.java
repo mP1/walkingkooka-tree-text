@@ -52,7 +52,9 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     final TextLeafNode<V> setValue0(final V value) {
         return Objects.equals(this.value(), value) ?
             this :
-            this.replaceValue(value);
+            this.replaceValue(
+                Objects.requireNonNull(value)
+            );
     }
 
     final TextLeafNode<V> replaceValue(final V value) {

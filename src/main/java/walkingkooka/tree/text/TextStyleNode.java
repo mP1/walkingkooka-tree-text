@@ -78,6 +78,11 @@ public final class TextStyleNode extends TextParentNode {
         return this.removeParent0().cast();
     }
 
+    @Override
+    public TextStyleNode setText(final String text) {
+        return this.replaceChildrenWithText(text);
+    }
+
     // children.........................................................................................................
 
     /**

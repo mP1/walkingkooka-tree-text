@@ -144,6 +144,41 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         this.childCountCheck(node, text1(), text2());
     }
 
+    // SetText..........................................................................................................
+
+    @Test
+    public void testSetTextWithEmpty() {
+        final Hyperlink hyperlink = Hyperlink.with(Url.parse("http://example.com"))
+            .appendChild(
+                TextNode.text("lost")
+            );
+        final String text = "";
+
+        this.setTextAndCheck(
+            hyperlink,
+            text,
+            hyperlink.setChildren(
+                TextNode.NO_CHILDREN
+            )
+        );
+    }
+
+    @Test
+    public void testSetTextWithNotEmpty() {
+        final Hyperlink hyperlink = Hyperlink.with(Url.parse("http://example.com"));
+        final String text = "Text123";
+
+        this.setTextAndCheck(
+            hyperlink,
+            text,
+            hyperlink.setChildren(
+                Lists.of(
+                    TextNode.text(text)
+                )
+            )
+        );
+    }
+    
     // HasText..........................................................................................................
 
     @Test

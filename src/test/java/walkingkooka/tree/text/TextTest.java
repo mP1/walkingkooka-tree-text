@@ -50,11 +50,10 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
     @Test
     public void testSetTextSame() {
         final String value = "abc123";
-        final Text text = Text.with(value);
 
-        assertSame(
-            text,
-            text.setText(value)
+        this.setTextAndCheck(
+            Text.with(value),
+            value
         );
     }
 

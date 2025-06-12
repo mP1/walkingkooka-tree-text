@@ -32,6 +32,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTestCase<TextNode>
     implements NodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
@@ -43,6 +44,34 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
 
     TextNodeTestCase2() {
         super();
+    }
+
+    // setText..........................................................................................................
+
+    @Test
+    public void testSetTextWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createTextNode()
+                .setText(null)
+        );
+    }
+
+    final void setTextAndCheck(final N textNode,
+                               final String text) {
+        assertSame(
+            textNode,
+            textNode.setText(text)
+        );
+    }
+
+    final void setTextAndCheck(final N textNode,
+                               final String text,
+                               final TextNode expected) {
+        this.checkEquals(
+            expected,
+            textNode.setText(text)
+        );
     }
 
     // SetAttributes....................................................................................................

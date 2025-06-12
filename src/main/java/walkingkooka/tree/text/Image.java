@@ -68,6 +68,11 @@ public final class Image extends TextLeafNode<Url> {
         return "";
     }
 
+    @Override
+    public Image setText(final String text) {
+        return this.replaceChildrenWithText(text);
+    }
+
     // toHtml...........................................................................................................
 
     /**
