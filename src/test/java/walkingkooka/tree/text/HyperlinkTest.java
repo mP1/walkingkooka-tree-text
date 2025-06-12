@@ -144,6 +144,45 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         this.childCountCheck(node, text1(), text2());
     }
 
+    // SetStyle.........................................................................................................
+
+    @Test
+    public void testSetStyle() {
+        final Hyperlink hyperlink = Hyperlink.with(
+            Url.parse("http://example.com")
+        );
+        final TextStyle style = TextStyle.parse("color: red");
+
+        this.treePrintAndCheck(
+            hyperlink.setTextStyle(style),
+            "Style\n" +
+                "  TextStyle\n" +
+                "    color=#ff0000 (walkingkooka.color.OpaqueRgbColor)\n" +
+                "  Hyperlink\n" +
+                "    http://example.com\n"
+        );
+    }
+
+    @Test
+    public void testSetStyle2() {
+        final Hyperlink hyperlink = Hyperlink.with(
+            Url.parse("http://example.com")
+        );
+        final TextStyle style = TextStyle.parse("color: #111");
+
+        this.treePrintAndCheck(
+            hyperlink.setTextStyle(style)
+                .setTextStyle(
+                    TextStyle.parse("color: #222")
+                ),
+            "Style\n" +
+                "  TextStyle\n" +
+                "    color=#222222 (walkingkooka.color.OpaqueRgbColor)\n" +
+                "  Hyperlink\n" +
+                "    http://example.com\n"
+        );
+    }
+
     // SetText..........................................................................................................
 
     @Test
