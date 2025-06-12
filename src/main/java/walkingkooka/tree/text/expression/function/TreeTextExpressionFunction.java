@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text.expression.function;
 
+import walkingkooka.net.Url;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
@@ -51,6 +52,9 @@ abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationConte
         .required(TextNode.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
+    final static ExpressionFunctionParameter<Url> URL = ExpressionFunctionParameterName.with("url")
+        .required(Url.class)
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
     TreeTextExpressionFunction(final String name) {
         super();

@@ -26,6 +26,7 @@ import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
+import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
@@ -56,6 +57,21 @@ import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
         TreePrintableTesting {
+
+    @Test
+    public void testHyperlinkWithString() {
+        final String url = "https://www.example.com";
+
+        this.evaluateAndCheck(
+            "hyperlink",
+            Lists.of(
+                url
+            ),
+            TextNode.hyperlink(
+                Url.parseAbsolute(url)
+            )
+        );
+    }
 
     @Test
     public void testSetTextWithTextAndString() {
@@ -353,6 +369,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     ExpressionNumberKind.BIG_DECIMAL,
                     (name) -> {
                         switch(name.value()) {
+                            case "hyperlink":
+                                return TreeTextExpressionFunctions.hyperlink();
                             case "setText":
                                 return TreeTextExpressionFunctions.setText();
                             case "styledText":
@@ -386,6 +404,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 TreeTextConverters.textToTextNode(),
                                 TreeTextConverters.textToTextStyle(),
                                 TreeTextConverters.textToTextStylePropertyName(),
+                                NetConverters.textToUrl(),
                                 TreeTextConverters.urlToHyperlink(),
                                 TreeTextConverters.urlToImage()
                             )

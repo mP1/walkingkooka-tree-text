@@ -20,6 +20,7 @@ package walkingkooka.tree.text.expression.function;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 
@@ -27,6 +28,13 @@ import walkingkooka.tree.text.TextStyle;
  * A collection of helpers for getting {@link ExpressionFunction}.
  */
 public final class TreeTextExpressionFunctions implements PublicStaticHelper {
+
+    /**
+     * {@see TreeTextExpressionFunctionHyperlink}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Hyperlink, C> hyperlink() {
+        return TreeTextExpressionFunctionHyperlink.instance();
+    }
 
     /**
      * {@see TreeTextExpressionFunctionSetText}
