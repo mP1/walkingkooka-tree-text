@@ -136,6 +136,29 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testSetStyleWithTextNodeAndStringBuilder() {
+        final Hyperlink hyperlink = TextNode.hyperlink(
+            Url.parseAbsolute("https://example.com")
+        );
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.CENTER
+        );
+
+        this.evaluateAndCheck(
+            "setStyle",
+            Lists.of(
+                hyperlink,
+                new StringBuilder(style.text())
+            ),
+            hyperlink.setTextStyle(style)
+        );
+    }
+
+    @Test
     public void testStyleGetWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
@@ -390,6 +413,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.image();
                             case "setText":
                                 return TreeTextExpressionFunctions.setText();
+                            case "setStyle":
+                                return TreeTextExpressionFunctions.setStyle();
                             case "styleGet":
                                 return TreeTextExpressionFunctions.styleGet();
                             case "styleRemove":
