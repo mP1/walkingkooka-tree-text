@@ -83,7 +83,7 @@ public final class TreeTextExpressionFunctionTextStyleGetTest implements Express
     public void testToString() {
         this.toStringAndCheck(
             this.createBiFunction(),
-            "textStyleGet"
+            "styleGet"
         );
     }
 

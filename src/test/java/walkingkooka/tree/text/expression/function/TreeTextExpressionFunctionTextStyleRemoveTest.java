@@ -74,7 +74,7 @@ public final class TreeTextExpressionFunctionTextStyleRemoveTest implements Expr
     public void testToString() {
         this.toStringAndCheck(
             this.createBiFunction(),
-            "textStyleRemove"
+            "styleRemove"
         );
     }
 

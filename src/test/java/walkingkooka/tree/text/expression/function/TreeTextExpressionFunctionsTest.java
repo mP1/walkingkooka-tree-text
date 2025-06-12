@@ -177,7 +177,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         final Color color = Color.BLACK;
 
         this.evaluateAndCheck(
-            "textStyleGet",
+            "styleGet",
             Lists.of(
                 TextStyle.EMPTY.set(
                     property,
@@ -200,7 +200,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
 
         this.evaluateAndCheck(
-            "textStyleGet",
+            "styleGet",
             Lists.of(
                 style.text(),
                 property.text()
@@ -222,7 +222,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
 
         this.evaluateAndCheck(
-            "textStyleRemove",
+            "styleRemove",
             Lists.of(
                 style,
                 property
@@ -244,7 +244,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
 
         this.evaluateAndCheck(
-            "textStyleRemove",
+            "styleRemove",
             Lists.of(
                 style.text(),
                 property.text()
@@ -264,7 +264,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
 
         this.evaluateAndCheck(
-            "textStyleSet",
+            "styleSet",
             Lists.of(
                 style,
                 property,
@@ -288,7 +288,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         );
 
         this.evaluateAndCheck(
-            "textStyleSet",
+            "styleSet",
             Lists.of(
                 style.text(),
                 property.text(),
@@ -353,7 +353,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             }
 
             this.evaluateAndCheck(
-                "textStyleSet",
+                "styleSet",
                 Lists.of(
                     style.text(),
                     propertyName.text(),
@@ -390,14 +390,14 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.image();
                             case "setText":
                                 return TreeTextExpressionFunctions.setText();
+                            case "styleGet":
+                                return TreeTextExpressionFunctions.styleGet();
+                            case "styleRemove":
+                                return TreeTextExpressionFunctions.styleRemove();
+                            case "styleSet":
+                                return TreeTextExpressionFunctions.styleSet();
                             case "styledText":
                                 return TreeTextExpressionFunctions.styledText();
-                            case "textStyleGet":
-                                return TreeTextExpressionFunctions.textStyleGet();
-                            case "textStyleRemove":
-                                return TreeTextExpressionFunctions.textStyleRemove();
-                            case "textStyleSet":
-                                return TreeTextExpressionFunctions.textStyleSet();
                             default:
                                 throw new UnknownExpressionFunctionException(name);
                         }

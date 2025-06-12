@@ -44,7 +44,7 @@ final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluatio
     private final static TreeTextExpressionFunctionTextStyleSet<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleSet<>();
 
     private TreeTextExpressionFunctionTextStyleSet() {
-        super("textStyleSet");
+        super("styleSet");
     }
 
     @Override

@@ -138,7 +138,7 @@ public final class TreeTextExpressionFunctionTextStyleSetTest implements Express
     public void testToString() {
         this.toStringAndCheck(
             this.createBiFunction(),
-            "textStyleSet"
+            "styleSet"
         );
     }
 

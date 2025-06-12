@@ -40,7 +40,7 @@ final class TreeTextExpressionFunctionTextStyleGet<C extends ExpressionEvaluatio
     private final static TreeTextExpressionFunctionTextStyleGet<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleGet<>();
 
     private TreeTextExpressionFunctionTextStyleGet() {
-        super("textStyleGet");
+        super("styleGet");
     }
 
     @Override
