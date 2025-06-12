@@ -74,6 +74,21 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testImageWithString() {
+        final String url = "https://www.example.com";
+
+        this.evaluateAndCheck(
+            "image",
+            Lists.of(
+                url
+            ),
+            TextNode.image(
+                Url.parseAbsolute(url)
+            )
+        );
+    }
+
+    @Test
     public void testSetTextWithTextAndString() {
         final TextNode textNode = TextNode.text("Hello");
         final String text = "HelloText123";
@@ -371,6 +386,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         switch(name.value()) {
                             case "hyperlink":
                                 return TreeTextExpressionFunctions.hyperlink();
+                            case "image":
+                                return TreeTextExpressionFunctions.image();
                             case "setText":
                                 return TreeTextExpressionFunctions.setText();
                             case "styledText":
