@@ -134,45 +134,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             hyperlink.setText(text)
         );
     }
-    
-    @Test
-    public void testStyledTextWithStringAndString() {
-        final TextNode text = TextNode.text("Hello");
-        final TextStyle style = TextStyle.EMPTY.set(
-            TextStylePropertyName.COLOR,
-            Color.BLACK
-        );
-
-        this.evaluateAndCheck(
-            "styledText",
-            Lists.of(
-                text.text(),
-                style.text()
-            ),
-            text.setTextStyle(style)
-        );
-    }
 
     @Test
-    public void testStyledTextWithTextNodeAndTextStyle() {
-        final TextNode text = TextNode.text("Hello");
-        final TextStyle style = TextStyle.EMPTY.set(
-            TextStylePropertyName.COLOR,
-            Color.BLACK
-        );
-
-        this.evaluateAndCheck(
-            "styledText",
-            Lists.of(
-                text,
-                style
-            ),
-            text.setTextStyle(style)
-        );
-    }
-
-    @Test
-    public void testTextStyleGetWithTextStyleAndTextStylePropertyName() {
+    public void testStyleGetWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -190,7 +154,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleGetWithStringAndString() {
+    public void testStyleGetWithStringAndString() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -210,7 +174,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleRemoveWithTextStyleAndTextStylePropertyName() {
+    public void testStyleRemoveWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
 
         final TextStyle style = TextStyle.EMPTY.set(
@@ -232,7 +196,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleRemoveWithStringAndString() {
+    public void testStyleRemoveWithStringAndString() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
 
         final TextStyle style = TextStyle.EMPTY.set(
@@ -254,7 +218,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
+    public void testStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -278,7 +242,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleSetWithStringAndStringAndString() {
+    public void testStyleSetWithStringAndStringAndString() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -302,7 +266,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testTextStyleSetWithStringAndStringAndString2() throws Exception {
+    public void testStyleSetWithStringAndStringAndString2() throws Exception {
         for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.VALUES) {
             final TextStyle style = TextStyle.EMPTY;
 
@@ -365,6 +329,42 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                 )
             );
         }
+    }
+
+    @Test
+    public void testStyledTextWithStringAndString() {
+        final TextNode text = TextNode.text("Hello");
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.evaluateAndCheck(
+            "styledText",
+            Lists.of(
+                text.text(),
+                style.text()
+            ),
+            text.setTextStyle(style)
+        );
+    }
+
+    @Test
+    public void testStyledTextWithTextNodeAndTextStyle() {
+        final TextNode text = TextNode.text("Hello");
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.evaluateAndCheck(
+            "styledText",
+            Lists.of(
+                text,
+                style
+            ),
+            text.setTextStyle(style)
+        );
     }
 
     private void evaluateAndCheck(final String functionName,
