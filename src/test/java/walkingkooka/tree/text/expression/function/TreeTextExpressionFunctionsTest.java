@@ -407,6 +407,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     ExpressionNumberKind.BIG_DECIMAL,
                     (name) -> {
                         switch(name.value()) {
+                            case "getStyle":
+                                return TreeTextExpressionFunctions.getStyle();
                             case "hyperlink":
                                 return TreeTextExpressionFunctions.hyperlink();
                             case "image":
