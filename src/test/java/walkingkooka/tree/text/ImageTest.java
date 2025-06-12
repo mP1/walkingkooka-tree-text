@@ -37,6 +37,25 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
         );
     }
 
+    // SetText..........................................................................................................
+
+    @Test
+    public void testSetTextWithEmpty() {
+        this.setTextAndCheck(
+            this.createTextNode(),
+            ""
+        );
+    }
+
+    @Test
+    public void testSetTextWithNotEmptyFails() {
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> this.createTextNode()
+                .setText("NotEmptyFails")
+        );
+    }
+
     // HasText ........................................................................................................
 
     @Test

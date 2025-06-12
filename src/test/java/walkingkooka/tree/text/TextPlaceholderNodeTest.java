@@ -28,6 +28,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlaceholderNode, TextPlaceholderName> {
 
+    // SetText..........................................................................................................
+
+    @Test
+    public void testSetTextWithEmpty() {
+        this.setTextAndCheck(
+            this.createTextNode(),
+            ""
+        );
+    }
+
+    @Test
+    public void testSetTextWithNotEmptyFails() {
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> this.createTextNode()
+                .setText("NotEmptyFails")
+        );
+    }
+
     // HasText ........................................................................................................
 
     @Test

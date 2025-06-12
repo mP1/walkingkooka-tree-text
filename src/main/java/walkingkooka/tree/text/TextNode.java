@@ -126,6 +126,25 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
         this.index = index;
     }
 
+    /**
+     * Sets or replace the current {@link String text}.
+     */
+    public abstract TextNode setText(final String text);
+
+    /**
+     * Helper used by most sub-classes to replace any children with a new {@link TextNode}.
+     * If the text is empty the children are cleared.
+     */
+    final <T extends TextNode> T replaceChildrenWithText(final String text) {
+        return (T) this.setChildren(
+            text.isEmpty() ?
+                NO_CHILDREN :
+                Lists.of(
+                    TextNode.text(text)
+                )
+        );
+    }
+
     // parent .........................................................................................................
 
     @Override

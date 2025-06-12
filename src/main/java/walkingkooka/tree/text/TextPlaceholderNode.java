@@ -64,6 +64,11 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
         return "";
     }
 
+    @Override
+    public TextPlaceholderNode setText(final String text) {
+        return this.replaceChildrenWithText(text);
+    }
+
     // toHtml...........................................................................................................
 
     /**

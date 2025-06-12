@@ -207,6 +207,44 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
+    // SetText..........................................................................................................
+
+    @Test
+    public void testSetTextWithEmpty() {
+        final TextStyleNode textStyleNode = this.createTextNode()
+            .appendChild(
+                TextNode.text("lost")
+            );
+        final String text = "";
+
+        this.setTextAndCheck(
+            textStyleNode,
+            text,
+            textStyleNode.setChildren(
+                TextNode.NO_CHILDREN
+            )
+        );
+    }
+
+    @Test
+    public void testSetTextWithNotEmpty() {
+        final TextStyleNode textStyleNode = this.createTextNode()
+            .appendChild(
+                TextNode.text("lost")
+            );
+        final String text = "Text123";
+
+        this.setTextAndCheck(
+            textStyleNode,
+            text,
+            textStyleNode.setChildren(
+                Lists.of(
+                    TextNode.text(text)
+                )
+            )
+        );
+    }
+
     // HasText..........................................................................................................
 
     @Test
