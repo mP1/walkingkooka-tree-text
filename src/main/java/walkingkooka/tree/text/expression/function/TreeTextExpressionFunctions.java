@@ -29,6 +29,13 @@ import walkingkooka.tree.text.TextStyle;
 public final class TreeTextExpressionFunctions implements PublicStaticHelper {
 
     /**
+     * {@see TreeTextExpressionFunctionSetText}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> setText() {
+        return TreeTextExpressionFunctionSetText.instance();
+    }
+
+    /**
      * {@see TreeTextExpressionFunctionStyledText}
      */
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
