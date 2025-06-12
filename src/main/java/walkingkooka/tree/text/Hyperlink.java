@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Represents a hyperlink with children.
+ * Represents a hyperlink potentially with child {@link TextNode} holding text and more.
  */
 public final class Hyperlink extends TextParentNode {
 
