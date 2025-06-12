@@ -52,31 +52,31 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     }
 
     /**
-     * {@see TreeTextExpressionFunctionStyledText}
-     */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
-        return TreeTextExpressionFunctionStyledText.instance();
-    }
-
-    /**
      * {@see TreeTextExpressionFunctionTextStyleGet}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Object, C> textStyleGet() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Object, C> styleGet() {
         return TreeTextExpressionFunctionTextStyleGet.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleRemove}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> textStyleRemove() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> styleRemove() {
         return TreeTextExpressionFunctionTextStyleRemove.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleSet}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> textStyleSet() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> styleSet() {
         return TreeTextExpressionFunctionTextStyleSet.instance();
+    }
+
+    /**
+     * {@see TreeTextExpressionFunctionStyledText}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
+        return TreeTextExpressionFunctionStyledText.instance();
     }
     
     /**

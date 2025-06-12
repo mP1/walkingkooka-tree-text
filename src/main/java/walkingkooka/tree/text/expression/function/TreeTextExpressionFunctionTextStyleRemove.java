@@ -40,7 +40,7 @@ final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvalua
     private final static TreeTextExpressionFunctionTextStyleRemove<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleRemove<>();
 
     private TreeTextExpressionFunctionTextStyleRemove() {
-        super("textStyleRemove");
+        super("styleRemove");
     }
 
     @Override
