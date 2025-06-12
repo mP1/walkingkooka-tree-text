@@ -35,6 +35,10 @@ import java.util.Optional;
  */
 abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationContext> implements ExpressionFunction<T, C> {
 
+    final static ExpressionFunctionParameter<String> TEXT = ExpressionFunctionParameterName.with("text")
+        .required(String.class)
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
+
     final static ExpressionFunctionParameter<TextStyle> TEXT_STYLE = ExpressionFunctionParameterName.with("textStyle")
         .required(TextStyle.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);

@@ -25,6 +25,7 @@ import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.net.Url;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
@@ -38,6 +39,7 @@ import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
 import walkingkooka.tree.text.FontFamily;
 import walkingkooka.tree.text.FontSize;
 import walkingkooka.tree.text.FontWeight;
+import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Opacity;
 import walkingkooka.tree.text.TextAlign;
@@ -55,6 +57,53 @@ import java.util.stream.Collectors;
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
         TreePrintableTesting {
 
+    @Test
+    public void testSetTextWithTextAndString() {
+        final TextNode textNode = TextNode.text("Hello");
+        final String text = "HelloText123";
+
+        this.evaluateAndCheck(
+            "setText",
+            Lists.of(
+                textNode,
+                text
+            ),
+            textNode.setText(text)
+        );
+    }
+
+    @Test
+    public void testSetTextWithStringAndString() {
+        final TextNode textNode = TextNode.text("Hello");
+        final String text = "HelloText123";
+
+        this.evaluateAndCheck(
+            "setText",
+            Lists.of(
+                textNode.text(),
+                text
+            ),
+            textNode.setText(text)
+        );
+    }
+
+    @Test
+    public void testSetTextWithTextNodeAndStringBuilder() {
+        final Hyperlink hyperlink = TextNode.hyperlink(
+            Url.parseAbsolute("https://example.com")
+        );
+        final String text = "HelloText123";
+
+        this.evaluateAndCheck(
+            "setText",
+            Lists.of(
+                hyperlink,
+                new StringBuilder(text)
+            ),
+            hyperlink.setText(text)
+        );
+    }
+    
     @Test
     public void testStyledTextWithStringAndString() {
         final TextNode text = TextNode.text("Hello");
@@ -304,6 +353,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     ExpressionNumberKind.BIG_DECIMAL,
                     (name) -> {
                         switch(name.value()) {
+                            case "setText":
+                                return TreeTextExpressionFunctions.setText();
                             case "styledText":
                                 return TreeTextExpressionFunctions.styledText();
                             case "textStyleGet":
