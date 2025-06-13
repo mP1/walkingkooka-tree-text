@@ -171,6 +171,19 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testStyleWithString() {
+        final TextStyle textStyle = TextStyle.parse("color: #111; text-align: left");
+
+        this.evaluateAndCheck(
+            "style",
+            Lists.of(
+                textStyle.text()
+            ),
+            textStyle
+        );
+    }
+
+    @Test
     public void testStyleGetWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
@@ -431,6 +444,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.setText();
                             case "setStyle":
                                 return TreeTextExpressionFunctions.setStyle();
+                            case "style":
+                                return TreeTextExpressionFunctions.style();
                             case "styleGet":
                                 return TreeTextExpressionFunctions.styleGet();
                             case "styleRemove":
