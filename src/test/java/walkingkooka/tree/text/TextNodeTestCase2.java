@@ -39,6 +39,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     JsonNodeMarshallingTesting<TextNode>,
     HasTextLengthTesting,
     HasTextOffsetTesting,
+    HasTextStyleTesting,
     HasTextTesting,
     TreePrintableTesting {
 
