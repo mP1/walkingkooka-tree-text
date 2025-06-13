@@ -17,10 +17,14 @@
 
 package walkingkooka.tree.text.convert;
 
+import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.tree.text.TextStyle;
 
+/**
+ * A {@link Converter} that accepts text and parses it into a {@link TextStyle}.
+ */
 final class TextToTextStyleConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     static <C extends ConverterContext> TextToTextStyleConverter<C> instance() {
