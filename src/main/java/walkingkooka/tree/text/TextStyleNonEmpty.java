@@ -95,9 +95,9 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    TextStyle merge1(final TextStyleNonEmpty textStyle) {
-        final Map<TextStylePropertyName<?>, Object> otherBefore = this.value; // because of double dispatch params are reversed.
-        final Map<TextStylePropertyName<?>, Object> before = textStyle.value;
+    TextStyle merge1(final TextStyleNonEmpty other) {
+        final Map<TextStylePropertyName<?>, Object> otherBefore = other.value; // because of double dispatch params are reversed.
+        final Map<TextStylePropertyName<?>, Object> before = this.value;
 
 
         final Map<TextStylePropertyName<?>, Object> merged = Maps.sorted();
@@ -107,7 +107,7 @@ final class TextStyleNonEmpty extends TextStyle {
         return merged.equals(otherBefore) ?
             this :
             merged.equals(before) ?
-                textStyle :
+                other :
                 new TextStyleNonEmpty(TextNodeMap.with(merged));
     }
 

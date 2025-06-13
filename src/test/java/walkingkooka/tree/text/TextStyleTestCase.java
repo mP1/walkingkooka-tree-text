@@ -159,55 +159,36 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
     }
 
-    // merge.............................................................................................................
+    // merge............................................................................................................
 
     @Test
     public final void testMergeNullFails() {
-        assertThrows(NullPointerException.class, () -> this.createObject().merge(null));
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject()
+                .merge(null)
+        );
     }
 
     @Test
     public final void testMergeEmpty() {
         final TextStyle textStyle = this.createObject();
         final TextStyle empty = TextStyle.EMPTY;
-        assertSame(textStyle,
+        assertSame(
+            textStyle,
             textStyle.merge(empty),
-            () -> textStyle + " merge EMPTY");
+            () -> textStyle + " merge EMPTY"
+        );
     }
 
     final void mergeAndCheck(final TextStyle textStyle,
-                             final TextStyle other) {
-        final Map<TextStylePropertyName<?>, Object> expected = Maps.ordered();
-        expected.putAll(other.value());
-        expected.putAll(textStyle.value());
-
-        if (expected.equals(textStyle.value())) {
-            this.mergeAndCheck0(textStyle, other, textStyle);
-        } else {
-            if (expected.equals(other.value())) {
-                this.mergeAndCheck0(textStyle, other, other);
-            } else {
-                final TextStyle expectedTextStyle = TextStyle.EMPTY.setValues(expected);
-                this.mergeAndCheck1(textStyle, other, expectedTextStyle);
-                this.mergeAndCheck1(other, textStyle, expectedTextStyle);
-            }
-        }
-    }
-
-    private void mergeAndCheck0(final TextStyle textStyle,
-                                final TextStyle other,
-                                final TextStyle expected) {
-        assertSame(expected,
+                             final TextStyle other,
+                             final TextStyle expected) {
+        this.checkEquals(
+            expected,
             textStyle.merge(other),
-            () -> textStyle + " merge " + other);
-    }
-
-    private void mergeAndCheck1(final TextStyle textStyle,
-                                final TextStyle other,
-                                final TextStyle expected) {
-        this.checkEquals(expected,
-            textStyle.merge(other),
-            () -> textStyle + " merge " + other);
+            () -> textStyle + " merge " + other
+        );
     }
 
     // replace...........................................................................................................
