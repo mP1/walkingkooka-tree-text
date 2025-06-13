@@ -439,6 +439,24 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
+    @Override
+    public TextStyle createPatchable() {
+        return this.createObject();
+    }
+
+    @Override
+    public JsonNode createPatch() {
+        return JsonNode.object();
+    }
+
+    @Override
+    public JsonNodeUnmarshallContext createPatchContext() {
+        return JsonNodeUnmarshallContexts.basic(
+            ExpressionNumberKind.BIG_DECIMAL,
+            MathContext.UNLIMITED
+        );
+    }
+
     private JsonNode marshall(final Object value) {
         return JsonNodeMarshallContexts.basic()
             .marshall(value);
@@ -973,6 +991,13 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         return thrown;
     }
 
+    // hashCode/equals..................................................................................................
+
+    @Override
+    public TextStyle createObject() {
+        return this.textStyle();
+    }
+
     // toString.........................................................................................................
 
     @Test
@@ -987,6 +1012,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
+    // json.............................................................................................................
+
     @Test
     public void testUnmarshallEmptyJsonObject() {
         assertSame(
@@ -999,9 +1026,17 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Override
-    public TextStyle createObject() {
-        return this.textStyle();
+    public TextStyle unmarshall(final JsonNode from,
+                                final JsonNodeUnmarshallContext context) {
+        return TextStyle.unmarshall(from, context);
     }
+
+    @Override
+    public TextStyle createJsonNodeMarshallingValue() {
+        return this.createObject();
+    }
+
+    // helpers..........................................................................................................
 
     private TextStyle textStyle() {
         return TextStyle.EMPTY.setValues(
@@ -1050,38 +1085,5 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public JavaVisibility typeVisibility() {
         return JavaVisibility.PUBLIC;
-    }
-
-    // JsonNodeMarshallingTesting...........................................................................................
-
-    @Override
-    public TextStyle unmarshall(final JsonNode from,
-                                final JsonNodeUnmarshallContext context) {
-        return TextStyle.unmarshall(from, context);
-    }
-
-    @Override
-    public TextStyle createJsonNodeMarshallingValue() {
-        return this.createObject();
-    }
-
-    // PatchableTesting.................................................................................................
-
-    @Override
-    public TextStyle createPatchable() {
-        return this.createObject();
-    }
-
-    @Override
-    public JsonNode createPatch() {
-        return JsonNode.object();
-    }
-
-    @Override
-    public JsonNodeUnmarshallContext createPatchContext() {
-        return JsonNodeUnmarshallContexts.basic(
-            ExpressionNumberKind.BIG_DECIMAL,
-            MathContext.UNLIMITED
-        );
     }
 }
