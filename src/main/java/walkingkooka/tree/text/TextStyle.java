@@ -152,11 +152,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // merge............................................................................................................
 
     /**
-     * Merges the two {@link TextStyle}, with the value from this having priority when both have the same
-     * {@link TextStylePropertyName}.
+     * Merges the two {@link TextStyle}, with the value from the second {@link TextStyle} replacing those in this.
      */
     public final TextStyle merge(final TextStyle textStyle) {
         Objects.requireNonNull(textStyle, "textStyle");
+
 
         return this.merge0(textStyle);
     }

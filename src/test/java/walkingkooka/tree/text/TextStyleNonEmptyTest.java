@@ -52,37 +52,23 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // merge............................................................................................................
 
     @Test
-    public void testMergeNotEmptySubset() {
-        this.mergeAndCheck(
-            TextStyle.EMPTY.setValues(
-                Maps.of(
-                    this.property1(), this.value1(),
-                    this.property2(), this.value2()
-                )
-            ),
-            TextStyle.EMPTY.setValues(
-                Maps.of(
-                    this.property1(), this.value1()
-                )
+    public void testMergeWithEmpty() {
+        final TextStyle textStyle = TextStyle.parse("background-color: #111; color: #222");
+
+        assertSame(
+            textStyle,
+            textStyle.merge(
+                TextStyle.EMPTY
             )
         );
     }
 
     @Test
-    public void testMergeNotEmptyCombined() {
+    public void testMergeWithNotEmpty() {
         this.mergeAndCheck(
-            TextStyle.EMPTY.setValues(
-                Maps.of(
-                    this.property1(), this.value1(),
-                    this.property2(), this.value2()
-                )
-            ),
-            TextStyle.EMPTY.setValues(
-                Maps.of(
-                    this.property1(), this.value1(),
-                    this.property3(), this.value3()
-                )
-            )
+            TextStyle.parse("background-color: #111; color: #222"),
+            TextStyle.parse("background-color: #999; text-align: left"),
+            TextStyle.parse("background-color: #999; color: #222; text-align: left")
         );
     }
 
