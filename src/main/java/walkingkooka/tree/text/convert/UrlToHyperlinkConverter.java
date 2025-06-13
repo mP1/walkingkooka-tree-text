@@ -23,6 +23,9 @@ import walkingkooka.net.Url;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
 
+/**
+ * Converts {@link Url}, creating a {@link Hyperlink} with the given {@link Url}.
+ */
 final class UrlToHyperlinkConverter <C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
     static <C extends ConverterContext> UrlToHyperlinkConverter<C> instance() {
