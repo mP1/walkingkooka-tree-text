@@ -31,10 +31,10 @@ import walkingkooka.tree.text.TextStyle;
 public final class TreeTextExpressionFunctions implements PublicStaticHelper {
 
     /**
-     * {@see TreeTextExpressionFunctionStyleGet}
+     * {@see TreeTextExpressionFunctionGetStyle}
      */
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> getStyle() {
-        return TreeTextExpressionFunctionStyleGet.instance();
+        return TreeTextExpressionFunctionGetStyle.instance();
     }
     
     /**
