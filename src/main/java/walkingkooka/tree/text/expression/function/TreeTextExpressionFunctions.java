@@ -52,6 +52,13 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     }
 
     /**
+     * {@see TreeTextExpressionFunctionMergeStyle}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> mergeStyle() {
+        return TreeTextExpressionFunctionMergeStyle.instance();
+    }
+
+    /**
      * {@see TreeTextExpressionFunctionSetText}
      */
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> setText() {
