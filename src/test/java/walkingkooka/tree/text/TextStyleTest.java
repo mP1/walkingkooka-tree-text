@@ -46,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     HasTextTesting,
+    HasTextStyleTesting,
     ParseStringTesting<TextStyle>,
     JsonNodeMarshallingTesting<TextStyle>,
     PatchableTesting<TextStyle>,
@@ -1025,6 +1026,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     private Object value2() {
         return FontFamily.with("Times News Roman");
+    }
+
+    // HasTextStyle.....................................................................................................
+
+    @Test
+    public void testTextStyle() {
+        final TextStyle textStyle = this.textStyle();
+
+        assertSame(
+            textStyle,
+            textStyle.textStyle()
+        );
     }
 
     // ClassTesting.....................................................................................................

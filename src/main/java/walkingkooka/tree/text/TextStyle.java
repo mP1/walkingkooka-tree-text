@@ -45,6 +45,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     Patchable<TextStyle>,
     TreePrintable,
     HasText,
+    HasTextStyle,
     CanBeEmpty {
 
     /**
@@ -524,5 +525,15 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         }
 
         return result;
+    }
+
+    // HasTextStyle.....................................................................................................
+
+    /**
+     * Always returns this.
+     */
+    @Override
+    public TextStyle textStyle() {
+        return this;
     }
 }
