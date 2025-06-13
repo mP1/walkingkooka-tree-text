@@ -28,18 +28,18 @@ import java.util.List;
 /**
  * A function that may be used to get the {@link TextStyle} from a given {@link TextNode}.
  */
-final class TreeTextExpressionFunctionGetStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionStyleGet<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionGetStyle<C> instance() {
+    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionStyleGet<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionGetStyle<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionGetStyle<>();
+    private final static TreeTextExpressionFunctionStyleGet<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionStyleGet<>();
 
-    private TreeTextExpressionFunctionGetStyle() {
+    private TreeTextExpressionFunctionStyleGet() {
         super("getStyle");
     }
 
