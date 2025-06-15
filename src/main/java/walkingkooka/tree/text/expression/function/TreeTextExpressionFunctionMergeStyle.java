@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
+import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 
 import java.util.List;
@@ -48,9 +49,9 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
         return PARAMETERS;
     }
 
-    final static ExpressionFunctionParameter<TextStyle> FIRST_TEXT_STYLE = TEXT_STYLE.setName(ExpressionFunctionParameterName.with("firstStyle"));
+    final static ExpressionFunctionParameter<HasTextStyle> FIRST_TEXT_STYLE = HAS_TEXT_STYLE.setName(ExpressionFunctionParameterName.with("firstStyle"));
 
-    final static ExpressionFunctionParameter<TextStyle> SECOND_TEXT_STYLE = TEXT_STYLE.setName(ExpressionFunctionParameterName.with("secondStyle"));
+    final static ExpressionFunctionParameter<HasTextStyle> SECOND_TEXT_STYLE = HAS_TEXT_STYLE.setName(ExpressionFunctionParameterName.with("secondStyle"));
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
         FIRST_TEXT_STYLE,
@@ -65,9 +66,12 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
     @Override
     public TextStyle apply(final List<Object> parameters,
                            final C context) {
-        final TextStyle first = FIRST_TEXT_STYLE.getOrFail(parameters, 0);
-        final TextStyle second = FIRST_TEXT_STYLE.getOrFail(parameters, 1);
+        final HasTextStyle first = FIRST_TEXT_STYLE.getOrFail(parameters, 0);
+        final HasTextStyle second = FIRST_TEXT_STYLE.getOrFail(parameters, 1);
 
-        return first.merge(second);
+        return first.textStyle()
+            .merge(
+                second.textStyle()
+            );
     }
 }
