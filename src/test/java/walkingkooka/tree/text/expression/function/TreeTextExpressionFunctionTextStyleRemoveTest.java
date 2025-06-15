@@ -25,6 +25,7 @@ import walkingkooka.color.Color;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.tree.text.TextAlign;
+import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
@@ -32,7 +33,32 @@ public final class TreeTextExpressionFunctionTextStyleRemoveTest implements Expr
     ToStringTesting<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApply() {
+    public void testApplyTextNodeAndTextStylePropertyName() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        this.applyAndCheck(
+            Lists.of(
+                TextNode.text("Text that is ignored")
+                    .setTextStyle(
+                        textStyle.set(
+                            propertyName,
+                            color
+                        )
+                    ),
+                propertyName
+            ),
+            textStyle
+        );
+    }
+
+    @Test
+    public void testApplyTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
