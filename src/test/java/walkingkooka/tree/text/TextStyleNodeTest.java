@@ -400,6 +400,24 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
+    // HasTextStyle.....................................................................................................
+
+    @Test
+    public void testHasTextStyle() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        final TextStyleNode textStyleNode = (TextStyleNode)TextNode.text("HelloText")
+            .setTextStyle(textStyle);
+
+        this.textStyleAndCheck(
+            textStyleNode,
+            textStyle
+        );
+    }
+
     // HasJsonNode .....................................................................................................
 
     @Test
