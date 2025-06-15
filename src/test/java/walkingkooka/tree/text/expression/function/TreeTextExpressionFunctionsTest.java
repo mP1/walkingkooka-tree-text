@@ -59,6 +59,40 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         TreePrintableTesting {
 
     @Test
+    public void testGetTextWithString() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "getStyle",
+            Lists.of(
+                textStyle.text()
+            ),
+            textStyle
+        );
+    }
+
+    @Test
+    public void testGetTextWithStringBuilder() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "getStyle",
+            Lists.of(
+                new StringBuilder(
+                    textStyle.text()
+                )
+            ),
+            textStyle
+        );
+    }
+
+    @Test
     public void testGetTextWithTextNode() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
