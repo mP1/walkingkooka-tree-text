@@ -20,8 +20,8 @@ package walkingkooka.tree.text.expression.function;
 import walkingkooka.Cast;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextNode;
-import walkingkooka.tree.text.TextStyle;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ final class TreeTextExpressionFunctionSetStyle<C extends ExpressionEvaluationCon
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
         TEXT_NODE,
-        TEXT_STYLE
+        HAS_TEXT_STYLE
     );
 
     @Override
@@ -63,8 +63,10 @@ final class TreeTextExpressionFunctionSetStyle<C extends ExpressionEvaluationCon
     public TextNode apply(final List<Object> parameters,
                           final C context) {
         final TextNode textNode = TEXT_NODE.getOrFail(parameters, 0);
-        final TextStyle style = TEXT_STYLE.getOrFail(parameters, 1);
+        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 1);
 
-        return textNode.setTextStyle(style);
+        return textNode.setTextStyle(
+            hasTextStyle.textStyle()
+        );
     }
 }
