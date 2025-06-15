@@ -277,6 +277,27 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testStyleGetWithTextNodeAndTextStylePropertyName() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        this.evaluateAndCheck(
+            "styleGet",
+            Lists.of(
+                TextNode.text("Text that is ignored")
+                    .setTextStyle(
+                        TextStyle.EMPTY.set(
+                            property,
+                            color
+                        )
+                    ),
+                property
+            ),
+            color
+        );
+    }
+
+    @Test
     public void testStyleGetWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;

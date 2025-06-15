@@ -20,6 +20,7 @@ package walkingkooka.tree.text.expression.function;
 import walkingkooka.Cast;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
@@ -49,7 +50,7 @@ final class TreeTextExpressionFunctionTextStyleGet<C extends ExpressionEvaluatio
     }
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        TEXT_STYLE,
+        HAS_TEXT_STYLE,
         TEXT_STYLE_PROPERTY_NAME
     );
 
@@ -61,11 +62,12 @@ final class TreeTextExpressionFunctionTextStyleGet<C extends ExpressionEvaluatio
     @Override
     public Object apply(final List<Object> parameters,
                           final C context) {
-        final TextStyle textStyle = TEXT_STYLE.getOrFail(parameters, 0);
+        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 0);
         final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
 
 
-        return textStyle.get(propertyName)
+        return hasTextStyle.textStyle()
+            .get(propertyName)
             .orElse(null);
     }
 }
