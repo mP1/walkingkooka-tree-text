@@ -240,6 +240,30 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testSetStyleWithTextNodeAndTextNode() {
+        final Hyperlink hyperlink = TextNode.hyperlink(
+            Url.parseAbsolute("https://example.com")
+        );
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.parse("#123456")
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        this.evaluateAndCheck(
+            "setStyle",
+            Lists.of(
+                hyperlink,
+                TextNode.text("Text ignored")
+                    .setTextStyle(style)
+            ),
+            hyperlink.setTextStyle(style)
+        );
+    }
+
+    @Test
     public void testStyleWithString() {
         final TextStyle textStyle = TextStyle.parse("color: #111; text-align: left");
 
