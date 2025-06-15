@@ -30,14 +30,25 @@ public final class TreeTextExpressionFunctionGetStyleTest implements ExpressionF
     ToStringTesting<TreeTextExpressionFunctionGetStyle<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApply() {
+    public void testApplyWithTextNode() {
         final TextStyle textStyle = TextStyle.parse("color: #123456");
         final TextNode textNode = TextNode.text("HelloText123")
             .setTextStyle(textStyle);
 
         this.applyAndCheck(
             Lists.of(
-                textNode,
+                textNode
+            ),
+            textStyle
+        );
+    }
+
+    @Test
+    public void testApplyWithTextStyle() {
+        final TextStyle textStyle = TextStyle.parse("color: #123456");
+
+        this.applyAndCheck(
+            Lists.of(
                 textStyle
             ),
             textStyle

@@ -59,6 +59,41 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         TreePrintableTesting {
 
     @Test
+    public void testGetTextWithTextNode() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        final Hyperlink hyperlink = TextNode.hyperlink(
+            Url.parseAbsolute("https://example.com")
+        );
+        this.evaluateAndCheck(
+            "getStyle",
+            Lists.of(
+                hyperlink.setTextStyle(textStyle)
+            ),
+            textStyle
+        );
+    }
+
+    @Test
+    public void testGetTextWithTextStyle() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "getStyle",
+            Lists.of(
+                textStyle
+            ),
+            textStyle
+        );
+    }
+
+    @Test
     public void testHyperlinkWithString() {
         final String url = "https://www.example.com";
 
@@ -474,6 +509,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             Lists.of(
                                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
                                 Converters.simple(), // handles Text -> TextNode
+                                TreeTextConverters.hasTextStyleToTextStyle(),
                                 TreeTextConverters.textToTextNode(),
                                 TreeTextConverters.textToTextStyle(),
                                 TreeTextConverters.textToTextStylePropertyName(),
