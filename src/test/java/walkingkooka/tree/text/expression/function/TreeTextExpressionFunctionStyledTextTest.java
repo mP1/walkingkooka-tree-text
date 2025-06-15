@@ -32,7 +32,7 @@ public final class TreeTextExpressionFunctionStyledTextTest implements Expressio
     ToStringTesting<TreeTextExpressionFunctionStyledText<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApply() {
+    public void testApplyWithTextAndTextStyle() {
         final TextNode text = TextNode.text("HelloText123");
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.COLOR,
