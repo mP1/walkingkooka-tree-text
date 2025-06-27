@@ -24,6 +24,7 @@ import walkingkooka.color.Color;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
@@ -641,7 +642,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         ),
                         DateTimeContexts.fake(),
                         DecimalNumberContexts.fake()
-                    )
+                    ),
+                    LocaleContexts.fake()
                 )
             )
         );
