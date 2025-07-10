@@ -45,7 +45,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     Patchable<TextStyle>,
     TreePrintable,
     HasText,
-    HasTextStyle,
+    Styleable,
     CanBeEmpty {
 
     /**
@@ -155,11 +155,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * Merges the two {@link TextStyle}, with the value from the second {@link TextStyle} replacing those in this.
      */
-    public final TextStyle merge(final TextStyle textStyle) {
+    @Override
+    public final TextStyle merge(final Styleable textStyle) {
         Objects.requireNonNull(textStyle, "textStyle");
 
 
-        return this.merge0(textStyle);
+        return this.merge0(
+            textStyle.textStyle()
+        );
     }
 
     abstract TextStyle merge0(final TextStyle textStyle);

@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
     HasTextTesting,
+    StyleableTesting<TextStyle>,
     CanBeEmptyTesting,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     JsonNodeMarshallingTesting<TextStyle>,
@@ -373,6 +374,13 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     final List<TextNode> children() {
         return Lists.of(TextNode.text("a1"), TextNode.text("b2"));
+    }
+
+    // Styleable........................................................................................................
+
+    @Override
+    public final TextStyle createStyleable() {
+        return this.createObject();
     }
 
     // ClassTesting.....................................................................................................
