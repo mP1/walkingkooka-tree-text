@@ -17,7 +17,20 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesting {
+
+    @Test
+    default void testMergeWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .merge(null)
+        );
+    }
 
     default void mergeAndCheck(final T styleable,
                                final Styleable hasTextStyle,
@@ -28,4 +41,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
             styleable::toString
         );
     }
+
+    T createStyleable();
 }
