@@ -183,6 +183,18 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         );
     }
 
+    // setStyleable.....................................................................................................
+
+    @Test
+    public void testMergeWithEmpty() {
+        final Hyperlink hyperlink = this.createStyleable();
+
+        assertSame(
+            hyperlink,
+            hyperlink.merge(TextStyle.EMPTY)
+        );
+    }
+
     // SetText..........................................................................................................
 
     @Test
