@@ -48,7 +48,7 @@ import java.util.function.Predicate;
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
     HasText,
     HasTextNode,
-    HasTextStyle,
+    Styleable,
     HasHtml,
     TreePrintable,
     TraversableHasTextOffset<TextNode>,
@@ -247,6 +247,18 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     @Override
     public abstract TextStyle textStyle();
+
+    // Styleable........................................................................................................
+
+    @Override
+    public final TextNode merge(final Styleable other) {
+        Objects.requireNonNull(other, "other");
+
+        return this.setTextStyle(
+            this.textStyle()
+                .merge(other)
+        );
+    }
 
     // is...............................................................................................................
 

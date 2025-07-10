@@ -418,6 +418,27 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
+    // setStyleable.....................................................................................................
+
+    @Test
+    public void testMergeWithSameTextStyle() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+        final TextNode textStyleNode = TextStyleNode.with(
+            Lists.of(
+                TextNode.text("Hello")
+            ),
+            textStyle.textStyleMap()
+        );
+
+        assertSame(
+            textStyleNode,
+            textStyleNode.merge(textStyle)
+        );
+    }
+
     // HasJsonNode .....................................................................................................
 
     @Test

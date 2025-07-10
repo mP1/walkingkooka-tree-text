@@ -39,7 +39,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     JsonNodeMarshallingTesting<TextNode>,
     HasTextLengthTesting,
     HasTextOffsetTesting,
-    HasTextStyleTesting,
+    StyleableTesting<N>,
     HasTextTesting,
     TreePrintableTesting {
 
@@ -149,6 +149,11 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     }
 
     abstract N createTextNode();
+
+    @Override
+    public final N createStyleable() {
+        return this.createTextNode();
+    }
 
     // ClassTesting.....................................................................................................
 
