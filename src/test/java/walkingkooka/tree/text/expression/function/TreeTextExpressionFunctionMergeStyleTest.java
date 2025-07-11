@@ -38,8 +38,7 @@ public final class TreeTextExpressionFunctionMergeStyleTest implements Expressio
             Lists.of(
                 TextNode.text("Text1")
                     .setTextStyle(textStyle1),
-                TextNode.text("Text2")
-                    .setTextStyle(textStyle2)
+                textStyle2
             ),
             TextStyle.parse("background-color: #111; color: #333; text-align: left;")
         );

@@ -33,11 +33,11 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
     }
 
     default void mergeAndCheck(final T styleable,
-                               final Styleable hasTextStyle,
+                               final TextStyle textStyle,
                                final Styleable expected) {
         this.checkEquals(
             expected,
-            styleable.merge(hasTextStyle),
+            styleable.merge(textStyle),
             styleable::toString
         );
     }

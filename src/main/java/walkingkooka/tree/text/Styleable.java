@@ -23,7 +23,7 @@ package walkingkooka.tree.text;
 public interface Styleable extends HasTextStyle {
 
     /**
-     * Merges this with the given style
+     * Merges this with the given {@link TextStyle}.
      */
-    Styleable merge(final Styleable styleable);
+    Styleable merge(final TextStyle textStyle);
 }

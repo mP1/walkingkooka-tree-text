@@ -51,7 +51,7 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
 
     final static ExpressionFunctionParameter<HasTextStyle> FIRST_TEXT_STYLE = HAS_TEXT_STYLE.setName(ExpressionFunctionParameterName.with("firstStyle"));
 
-    final static ExpressionFunctionParameter<HasTextStyle> SECOND_TEXT_STYLE = HAS_TEXT_STYLE.setName(ExpressionFunctionParameterName.with("secondStyle"));
+    final static ExpressionFunctionParameter<TextStyle> SECOND_TEXT_STYLE = TEXT_STYLE.setName(ExpressionFunctionParameterName.with("secondStyle"));
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
         FIRST_TEXT_STYLE,
@@ -67,11 +67,9 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
     public TextStyle apply(final List<Object> parameters,
                            final C context) {
         final HasTextStyle first = FIRST_TEXT_STYLE.getOrFail(parameters, 0);
-        final HasTextStyle second = FIRST_TEXT_STYLE.getOrFail(parameters, 1);
+        final TextStyle mergeTextStyle = SECOND_TEXT_STYLE.getOrFail(parameters, 1);
 
         return first.textStyle()
-            .merge(
-                second.textStyle()
-            );
+            .merge(mergeTextStyle);
     }
 }
