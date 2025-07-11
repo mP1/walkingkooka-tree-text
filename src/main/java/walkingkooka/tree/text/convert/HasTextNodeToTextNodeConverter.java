@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text.convert;
 
+import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
 import walkingkooka.tree.text.HasTextNode;
@@ -28,10 +29,10 @@ import walkingkooka.tree.text.TextNode;
 final class HasTextNodeToTextNodeConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
     static <C extends ConverterContext> HasTextNodeToTextNodeConverter<C> instance() {
-        return INSTANCE;
+        return Cast.to(INSTANCE);
     }
 
-    private final static HasTextNodeToTextNodeConverter INSTANCE = new HasTextNodeToTextNodeConverter();
+    private final static HasTextNodeToTextNodeConverter<?> INSTANCE = new HasTextNodeToTextNodeConverter<>();
 
     private HasTextNodeToTextNodeConverter() {
         super();
