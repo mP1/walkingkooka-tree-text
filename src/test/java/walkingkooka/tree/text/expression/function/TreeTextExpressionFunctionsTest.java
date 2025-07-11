@@ -159,7 +159,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testMergeStyleWithTextAndTextNodeWithStyle() {
+    public void testMergeStyleWithTextAndTextNodeWithStyleAndTextStyle() {
         final TextNode textNode = TextNode.text("HelloText123")
             .setTextStyle(
                 TextStyle.parse("background-color: #111;")
@@ -173,19 +173,23 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                 mergeWithTextStyle
             ),
             textNode.merge(mergeWithTextStyle)
-                .textStyle()
         );
     }
 
     @Test
     public void testMergeStyleWithStringAndString() {
+        final TextNode text = TextNode.text("HelloText123");
+        final String style = "text-align: left; color: #999;";
+
         this.evaluateAndCheck(
             "mergeStyle",
             Lists.of(
-                "background-color: #111; color: #222;",
-                "text-align: left; color: #999;"
+                text,
+                style
             ),
-            TextStyle.parse("background-color: #111; color: #999; text-align: left;")
+            text.setTextStyle(
+                TextStyle.parse(style)
+            )
         );
     }
 
@@ -655,6 +659,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 TreeTextConverters.textToTextStyle(),
                                 TreeTextConverters.textToTextStylePropertyName(),
                                 NetConverters.textToUrl(),
+                                TreeTextConverters.toStyleable(),
                                 TreeTextConverters.urlToHyperlink(),
                                 TreeTextConverters.urlToImage()
                             )
