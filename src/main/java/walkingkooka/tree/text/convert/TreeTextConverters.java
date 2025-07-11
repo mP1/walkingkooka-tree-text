@@ -59,6 +59,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
+     * {@see ToStyleableConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> toStyleable() {
+        return ToStyleableConverter.instance();
+    }
+
+    /**
      * {@see UrlToHyperlinkConverter}
      */
     public static <C extends ConverterContext> Converter<C> urlToHyperlink() {
