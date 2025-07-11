@@ -22,6 +22,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
 import walkingkooka.tree.text.Styleable;
+import walkingkooka.tree.text.TextStyle;
 
 /**
  * A {@link Converter} that accepts converts an object if it implements {@link Styleable}.
@@ -48,7 +49,11 @@ final class ToStyleableConverter<C extends ConverterContext> implements TryingSh
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return value instanceof Styleable && Styleable.class == type;
+        return value instanceof Styleable && Styleable.class == type ||
+            value instanceof CharSequence && context.canConvert(
+                value,
+                TextStyle.class
+            );
     }
 
 
@@ -56,7 +61,12 @@ final class ToStyleableConverter<C extends ConverterContext> implements TryingSh
     public Styleable tryConvertOrFail(final Object value,
                                       final Class<?> type,
                                       final C context) {
-        return (Styleable) value;
+        return value instanceof CharSequence ?
+            context.convertOrFail(
+                value,
+                TextStyle.class
+            ) :
+            (Styleable) value;
     }
 
     // Object...........................................................................................................

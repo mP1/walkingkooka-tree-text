@@ -19,9 +19,12 @@ package walkingkooka.tree.text.convert;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
-import walkingkooka.convert.ConverterContexts;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterTesting2;
+import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
@@ -34,9 +37,12 @@ public final class ToStyleableConverterTest implements ConverterTesting2<ToStyle
 
     @Test
     public void testStringToStyleable() {
-        this.convertFails(
-            "Hello",
-            Styleable.class
+        final String text = "color: #111";
+
+        this.convertAndCheck(
+            text,
+            Styleable.class,
+            TextStyle.parse(text)
         );
     }
 
@@ -68,7 +74,35 @@ public final class ToStyleableConverterTest implements ConverterTesting2<ToStyle
 
     @Override
     public FakeConverterContext createContext() {
-        return (FakeConverterContext) ConverterContexts.fake();
+        return new FakeConverterContext() {
+
+            @Override
+            public boolean canConvert(final Object value,
+                                      final Class<?> type) {
+                return this.converter.canConvert(
+                    value,
+                    type,
+                    this
+                );
+            }
+
+            @Override
+            public <T> Either<T, String> convert(final Object value,
+                                                 final Class<T> target) {
+                return this.converter.convert(
+                    value,
+                    target,
+                    this
+                );
+            }
+
+            private final Converter<FakeConverterContext> converter = Converters.collection(
+                Lists.of(
+                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                    TreeTextConverters.textToTextStyle()
+                )
+            );
+        };
     }
 
     // toString.........................................................................................................
