@@ -49,13 +49,15 @@ final class ToStyleableConverter<C extends ConverterContext> implements TryingSh
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return value instanceof Styleable && Styleable.class == type ||
-            value instanceof CharSequence && context.canConvert(
-                value,
-                TextStyle.class
+        return Styleable.class == type &&
+            (
+                value instanceof Styleable ||
+                    value instanceof CharSequence && context.canConvert(
+                        value,
+                        TextStyle.class
+                    )
             );
     }
-
 
     @Override
     public Styleable tryConvertOrFail(final Object value,
