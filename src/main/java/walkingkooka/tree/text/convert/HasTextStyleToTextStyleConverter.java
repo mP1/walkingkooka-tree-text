@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text.convert;
 
+import walkingkooka.Cast;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
@@ -29,10 +30,10 @@ import walkingkooka.tree.text.TextStyle;
 final class HasTextStyleToTextStyleConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
     static <C extends ConverterContext> HasTextStyleToTextStyleConverter<C> instance() {
-        return INSTANCE;
+        return Cast.to(INSTANCE);
     }
 
-    private final static HasTextStyleToTextStyleConverter INSTANCE = new HasTextStyleToTextStyleConverter();
+    private final static HasTextStyleToTextStyleConverter<?> INSTANCE = new HasTextStyleToTextStyleConverter<>();
 
     private HasTextStyleToTextStyleConverter() {
         super();
