@@ -177,6 +177,21 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testMergeStyleWithStringAndString() {
+        final String style1 = "background-color: #111;";
+        final String style2 = "color: #222;";
+
+        this.evaluateAndCheck(
+            "mergeStyle",
+            Lists.of(
+                style1,
+                style2
+            ),
+            TextStyle.parse(style1 + style2)
+        );
+    }
+
+    @Test
     public void testMergeStyleWithTextAndTextStyleAndTextStyle() {
         final TextStyle textStyle = TextStyle.parse("background-color: #111;");
         final TextStyle mergeWithTextStyle = TextStyle.parse("color: #222;");
@@ -192,7 +207,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testMergeStyleWithStringAndString() {
+    public void testMergeStyleWithTextNodeAndString() {
         final TextNode text = TextNode.text("HelloText123");
         final String style = "text-align: left; color: #999;";
 
