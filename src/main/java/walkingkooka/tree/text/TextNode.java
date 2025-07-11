@@ -251,12 +251,12 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // Styleable........................................................................................................
 
     @Override
-    public final TextNode merge(final Styleable other) {
-        Objects.requireNonNull(other, "other");
+    public final TextNode merge(final TextStyle textStyle) {
+        Objects.requireNonNull(textStyle, "textStyle");
 
         return this.setTextStyle(
             this.textStyle()
-                .merge(other)
+                .merge(textStyle)
         );
     }
 
