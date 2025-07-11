@@ -36,6 +36,14 @@ public final class ToStyleableConverterTest implements ConverterTesting2<ToStyle
     ToStringTesting<ToStyleableConverter<FakeConverterContext>> {
 
     @Test
+    public void testStringToStringFails() {
+        this.convertFails(
+            "color: #111;",
+            String.class
+        );
+    }
+
+    @Test
     public void testStringToStyleable() {
         final String text = "color: #111";
 
