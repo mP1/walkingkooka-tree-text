@@ -21,7 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
-import walkingkooka.tree.text.HasTextStyle;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
 
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * A function that merges two {@link TextStyle} into one.
  */
-final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
     static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionMergeStyle<C> instance() {
         return Cast.to(INSTANCE);
@@ -49,27 +49,26 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
         return PARAMETERS;
     }
 
-    final static ExpressionFunctionParameter<HasTextStyle> FIRST_TEXT_STYLE = HAS_TEXT_STYLE.setName(ExpressionFunctionParameterName.with("firstStyle"));
+    final static ExpressionFunctionParameter<Styleable> FIRST_STYLEABLE = STYLEABLE.setName(ExpressionFunctionParameterName.with("styleable"));
 
-    final static ExpressionFunctionParameter<TextStyle> SECOND_TEXT_STYLE = TEXT_STYLE.setName(ExpressionFunctionParameterName.with("secondStyle"));
+    final static ExpressionFunctionParameter<TextStyle> SECOND_TEXT_STYLE = TEXT_STYLE.setName(ExpressionFunctionParameterName.with("textStyle"));
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        FIRST_TEXT_STYLE,
+        FIRST_STYLEABLE,
         SECOND_TEXT_STYLE
     );
 
     @Override
-    public Class<TextStyle> returnType() {
-        return TextStyle.class;
+    public Class<Styleable> returnType() {
+        return Styleable.class;
     }
 
     @Override
-    public TextStyle apply(final List<Object> parameters,
+    public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final HasTextStyle first = FIRST_TEXT_STYLE.getOrFail(parameters, 0);
+        final Styleable first = STYLEABLE.getOrFail(parameters, 0);
         final TextStyle mergeTextStyle = SECOND_TEXT_STYLE.getOrFail(parameters, 1);
 
-        return first.textStyle()
-            .merge(mergeTextStyle);
+        return first.merge(mergeTextStyle);
     }
 }

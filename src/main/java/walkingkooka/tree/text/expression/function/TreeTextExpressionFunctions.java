@@ -22,6 +22,7 @@ import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 
@@ -54,7 +55,7 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     /**
      * {@see TreeTextExpressionFunctionMergeStyle}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> mergeStyle() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> mergeStyle() {
         return TreeTextExpressionFunctionMergeStyle.instance();
     }
 

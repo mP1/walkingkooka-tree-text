@@ -23,10 +23,11 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 
-public final class TreeTextExpressionFunctionMergeStyleTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext>, TextStyle, FakeExpressionEvaluationContext>,
+public final class TreeTextExpressionFunctionMergeStyleTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext>, Styleable, FakeExpressionEvaluationContext>,
     ToStringTesting<TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext>> {
 
     @Test
@@ -34,13 +35,16 @@ public final class TreeTextExpressionFunctionMergeStyleTest implements Expressio
         final TextStyle textStyle1 = TextStyle.parse("background-color: #111; color: #222;");
         final TextStyle textStyle2 = TextStyle.parse("color: #333; text-align: left;");
 
+        final TextNode text = TextNode.text("Text1");
+
         this.applyAndCheck(
             Lists.of(
-                TextNode.text("Text1")
-                    .setTextStyle(textStyle1),
+                text.setTextStyle(textStyle1),
                 textStyle2
             ),
-            TextStyle.parse("background-color: #111; color: #333; text-align: left;")
+            text.setTextStyle(
+                TextStyle.parse("background-color: #111; color: #333; text-align: left;")
+            )
         );
     }
 
