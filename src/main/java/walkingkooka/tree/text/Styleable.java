@@ -33,4 +33,9 @@ public interface Styleable extends HasTextStyle {
      */
     <T> Styleable set(final TextStylePropertyName<T> propertyName,
                       final T propertyValue);
+
+    /**
+     * Removes the existing {@link TextStylePropertyName}.
+     */
+    Styleable remove(final TextStylePropertyName<?> propertyName);
 }

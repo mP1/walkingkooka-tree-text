@@ -135,6 +135,45 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         );
     }
 
+    // remove...........................................................................................................
+
+    @Test
+    public void testRemove() {
+        final Text text = Text.with("Hello");
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color propertyValue = Color.parse("#123");
+
+        this.removeAndCheck(
+            text.set(
+                propertyName,
+                propertyValue
+            ),
+            propertyName,
+            text
+        );
+    }
+
+
+    @Test
+    public void testRemove2() {
+        final TextNode text = Text.with("Hello")
+            .set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.parse("#111")
+            );
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color propertyValue = Color.parse("#222");
+
+        this.removeAndCheck(
+            text.set(
+                propertyName,
+                propertyValue
+            ),
+            propertyName,
+            text
+        );
+    }
+
     // IsXXXMethod .....................................................................................................
 
     @Test

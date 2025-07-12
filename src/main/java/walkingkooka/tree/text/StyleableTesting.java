@@ -87,5 +87,34 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
         return (S) set;
     }
 
+    // remove...........................................................................................................
+
+    @Test
+    default void testRemoveWithNullPropertyNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .remove(
+                    null
+                )
+        );
+    }
+
+    default <S extends Styleable> S removeAndCheck(final S styleable,
+                                                   final TextStylePropertyName<?> propertyName,
+                                                   final S expected) {
+        final Styleable set = styleable.remove(
+            propertyName
+        );
+
+        this.checkEquals(
+            expected,
+            set,
+            styleable + " remove " + propertyName
+        );
+
+        return (S) set;
+    }
+
     T createStyleable();
 }
