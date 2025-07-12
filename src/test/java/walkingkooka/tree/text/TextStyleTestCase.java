@@ -277,16 +277,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         assertSame(textStyle, textStyle.remove(TextStylePropertyName.HYPHENS));
     }
 
-    final TextStyle removeAndCheck(final TextStyle textStyle,
-                                   final TextStylePropertyName<?> propertyName,
-                                   final TextStyle expected) {
-        final TextStyle removed = textStyle.remove(propertyName);
-        this.checkEquals(expected,
-            removed,
-            () -> textStyle + " remove " + propertyName);
-        return removed;
-    }
-
     // setBorder........................................................................................................
 
     @Test

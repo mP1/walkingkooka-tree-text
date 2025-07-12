@@ -406,6 +406,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Removes a possibly existing property returning a {@link TextStyle} without.
      * {@link TextStylePropertyName#WILDCARD} is a special case and always returns a {@link #EMPTY}.
      */
+    @Override
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
         Objects.requireNonNull(propertyName, "propertyName");
 
