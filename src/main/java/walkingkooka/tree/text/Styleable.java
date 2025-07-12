@@ -26,4 +26,11 @@ public interface Styleable extends HasTextStyle {
      * Merges this with the given {@link TextStyle}.
      */
     Styleable merge(final TextStyle textStyle);
+
+    /**
+     * Sets or replaces a single {@link TextStylePropertyName}.
+     * Note a null propertyValue will throw a {@link IllegalArgumentException}.
+     */
+    <T> Styleable set(final TextStylePropertyName<T> propertyName,
+                      final T propertyValue);
 }

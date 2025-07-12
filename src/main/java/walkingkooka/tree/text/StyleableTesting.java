@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.color.Color;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,6 +41,50 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
             styleable.merge(textStyle),
             styleable::toString
         );
+    }
+
+    // set..............................................................................................................
+
+    @Test
+    default void testSetWithNullPropertyNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .set(
+                    null,
+                    Color.BLACK
+                )
+        );
+    }
+
+    @Test
+    default void testSetWithNullPropertyValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .set(
+                    TextStylePropertyName.COLOR,
+                    null
+                )
+        );
+    }
+
+    default <S extends Styleable, PV> S setAndCheck(final S styleable,
+                                                    final TextStylePropertyName<PV> propertyName,
+                                                    final PV propertyValue,
+                                                    final S expected) {
+        final Styleable set = styleable.set(
+            propertyName,
+            propertyValue
+        );
+
+        this.checkEquals(
+            expected,
+            set,
+            styleable + " set " + propertyName + " " + propertyValue
+        );
+
+        return (S) set;
     }
 
     T createStyleable();

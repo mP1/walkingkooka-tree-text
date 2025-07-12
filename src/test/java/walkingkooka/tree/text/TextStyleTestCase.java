@@ -27,7 +27,6 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -240,19 +239,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     // set..............................................................................................................
 
     @Test
-    public final void testSetNullPropertyNameFails() {
-        assertThrows(NullPointerException.class, () -> this.createObject().set(null, "value"));
-    }
-
-    @Test
-    public final void testSetNullPropertyValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createObject().set(TextStylePropertyName.FONT_FAMILY, null)
-        );
-    }
-
-    @Test
     public final void testSetInvalidPropertyValueFails() {
         assertThrows(
             IllegalArgumentException.class,
@@ -276,17 +262,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                     );
             }
         );
-    }
-
-    final <TT> TextStyle setAndCheck(final TextStyle textStyle,
-                                     final TextStylePropertyName<TT> propertyName,
-                                     final TT value,
-                                     final TextStyle expected) {
-        final TextStyle set = textStyle.set(propertyName, value);
-        this.checkEquals(expected,
-            set,
-            () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
-        return set;
     }
 
     // remove...........................................................................................................

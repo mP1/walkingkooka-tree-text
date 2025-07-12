@@ -206,6 +206,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Sets a possibly new property returning a {@link TextStyle} with the new definition which may or may not
      * require creating a new {@link TextStyle}.
      */
+    @Override
     public final <V> TextStyle set(final TextStylePropertyName<V> propertyName,
                                    final V value) {
         Objects.requireNonNull((TextStylePropertyName<?>) propertyName, "propertyName");
@@ -425,6 +426,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             this.set(propertyName, value) :
             this.remove(propertyName);
     }
+
     // TextStyleVisitor.................................................................................................
 
     abstract void accept(final TextStyleVisitor visitor);

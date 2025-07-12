@@ -260,6 +260,18 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
         );
     }
 
+    @Override
+    public <T> TextNode set(final TextStylePropertyName<T> propertyName,
+                            final T propertyValue) {
+        return this.setTextStyle(
+            this.textStyle()
+                .set(
+                    propertyName,
+                    propertyValue
+                )
+        );
+    }
+
     // is...............................................................................................................
 
     /**
