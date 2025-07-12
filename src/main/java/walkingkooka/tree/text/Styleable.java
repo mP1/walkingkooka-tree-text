@@ -35,6 +35,13 @@ public interface Styleable extends HasTextStyle {
                       final T propertyValue);
 
     /**
+     * Sets or replaces or remove a single {@link TextStylePropertyName}.
+     * When the value is null that property will be removed if it exists.
+     */
+    <T> Styleable setOrRemove(final TextStylePropertyName<T> propertyName,
+                              final T propertyValue);
+
+    /**
      * Removes the existing {@link TextStylePropertyName}.
      */
     Styleable remove(final TextStylePropertyName<?> propertyName);

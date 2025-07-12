@@ -422,6 +422,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * Does a set or remove if the value is null.
      */
+    @Override
     public final <V> TextStyle setOrRemove(final TextStylePropertyName<V> propertyName, final V value) {
         return null != value ?
             this.set(propertyName, value) :

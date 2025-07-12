@@ -610,6 +610,41 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
+    @Test
+    public void testSetOrRemove() {
+        final TextStyleNode textStyleNode = (TextStyleNode)
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("Text123")
+                ),
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK
+                    )
+                )
+            );
+
+        this.setOrRemoveAndCheck(
+            textStyleNode,
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT,
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("Text123")
+                ),
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK,
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                    )
+                )
+            )
+        );
+    }
+
     // HasJsonNode .....................................................................................................
 
     @Test
