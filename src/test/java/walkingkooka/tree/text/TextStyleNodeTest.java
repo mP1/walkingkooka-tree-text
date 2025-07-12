@@ -38,28 +38,61 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testWithNullFails() {
-        assertThrows(NullPointerException.class, () -> TextStyleNode.with(null, TextStyleNode.NO_ATTRIBUTES_MAP));
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyleNode.with(
+                null,
+                TextStyleNode.NO_ATTRIBUTES_MAP
+            )
+        );
     }
 
     @Test
     public void testWithOneChildNoAttributes() {
         final TextNode child = TextNode.text("child1");
-        assertSame(child, TextStyleNode.with(Lists.of(child), TextStyleNode.NO_ATTRIBUTES_MAP));
+        assertSame(
+            child,
+            TextStyleNode.with(
+                Lists.of(child),
+                TextStyleNode.NO_ATTRIBUTES_MAP
+            )
+        );
     }
 
     @Test
     public void testWithOneChildAndAttributes() {
         final TextNode child = TextNode.text("child");
-        final TextNode styleNode = TextStyleNode.with(Lists.of(child), TextNodeMap.with(Maps.of(TextStylePropertyName.WIDTH, Length.pixel(1.0))));
-        this.childCountCheck(styleNode, child);
+        final TextNode styleNode = TextStyleNode.with(
+            Lists.of(child),
+            TextNodeMap.with(
+                Maps.of(
+                    TextStylePropertyName.WIDTH,
+                    Length.pixel(1.0)
+                )
+            )
+        );
+        this.childCountCheck(
+            styleNode,
+            child
+        );
     }
 
     @Test
     public void testWithSeveralChildrenNoAttributes() {
         final TextNode child1 = TextNode.text("child1");
         final TextNode child2 = TextNode.text("child2");
-        final TextNode styleNode = TextStyleNode.with(Lists.of(child1, child2), TextStyleNode.NO_ATTRIBUTES_MAP);
-        this.childCountCheck(styleNode, child1, child2);
+        final TextNode styleNode = TextStyleNode.with(
+            Lists.of(
+                child1,
+                child2
+            ),
+            TextStyleNode.NO_ATTRIBUTES_MAP
+        );
+        this.childCountCheck(
+            styleNode,
+            child1,
+            child2
+        );
     }
 
     @Test
@@ -71,9 +104,16 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         children.add(child1);
         children.add(child2);
 
-        final TextNode styleNode = TextStyleNode.with(children, TextStyleNode.NO_ATTRIBUTES_MAP);
+        final TextNode styleNode = TextStyleNode.with(
+            children,
+            TextStyleNode.NO_ATTRIBUTES_MAP
+        );
         children.clear();
-        this.childCountCheck(styleNode, child1, child2);
+        this.childCountCheck(
+            styleNode,
+            child1,
+            child2
+        );
     }
 
     @Test
@@ -90,7 +130,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         this.childCountCheck(parent2, child1, child2);
 
         final TextNode grandParent2 = parent2.parentOrFail();
-        this.childCountCheck(grandParent2, parent, child3);
+        this.childCountCheck(
+            grandParent2,
+            parent,
+            child3
+        );
         this.parentMissingCheck(grandParent2);
     }
 
@@ -103,8 +147,15 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final TextStyleNode different = node.setChildren(children);
         assertNotSame(different, node);
 
-        this.childCountCheck(different, different());
-        this.childCountCheck(node, text1(), text2());
+        this.childCountCheck(
+            different,
+            different()
+        );
+        this.childCountCheck(
+            node,
+            text1(),
+            text2()
+        );
     }
 
     @Test
@@ -118,12 +169,24 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final TextStyleNode grandParent = textStyleNode(parent, parent2);
 
         final TextNode differentChild = TextNode.text("different");
-        final TextNode different = grandParent.children().get(0).appendChild(differentChild);
+        final TextNode different = grandParent.children()
+            .get(0)
+            .appendChild(differentChild);
+
         this.parentPresentCheck(different);
-        this.childCountCheck(different, child1, child2, differentChild);
+        this.childCountCheck(
+            different,
+            child1,
+            child2,
+            differentChild
+        );
 
         final TextNode grandParent2 = different.parentOrFail();
-        this.childCountCheck(grandParent2, different, parent2);
+        this.childCountCheck(
+            grandParent2,
+            different,
+            parent2
+        );
         this.parentMissingCheck(grandParent2);
     }
 
@@ -142,30 +205,39 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     @Test
     public void testSetDifferentAttributes() {
         final TextStyleNode node = this.createTextNode();
-        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(TextStylePropertyName.with("abc"), "xyz");
+        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(
+            TextStylePropertyName.with("abc"),
+            "xyz"
+        );
 
         final TextNode different = node.setAttributes(attributes);
         assertNotSame(different, node);
-        checkAttributes(different, attributes);
+        this.checkAttributes(different, attributes);
 
-        checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
+        this.checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
     }
 
     @Test
     public void testSetDifferentAttributesTwice() {
         final TextStyleNode node = this.createTextNode();
-        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(TextStylePropertyName.with("abc"), "xyz");
+        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(
+            TextStylePropertyName.with("abc"),
+            "xyz"
+        );
 
         final TextNode different = node.setAttributes(attributes);
         assertNotSame(different, node);
 
-        final Map<TextStylePropertyName<?>, Object> attributes2 = Maps.of(TextStylePropertyName.with("def"), "qrs");
+        final Map<TextStylePropertyName<?>, Object> attributes2 = Maps.of(
+            TextStylePropertyName.with("def"),
+            "qrs"
+        );
         final TextNode different2 = different.setAttributes(attributes2);
         assertNotSame(different, different2);
 
-        checkAttributes(different, attributes);
-        checkAttributes(different2, attributes2);
-        checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
+        this.checkAttributes(different, attributes);
+        this.checkAttributes(different2, attributes2);
+        this.checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
     }
 
     @Test
@@ -181,10 +253,10 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
         final TextNode different2 = node.setAttributes(attributes);
         assertNotSame(different2, different);
-        checkAttributes(different2, attributes);
+        this.checkAttributes(different2, attributes);
 
         this.childCountCheck(node, text1(), text2());
-        checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
+        this.checkAttributes(node, TextStyleNode.NO_ATTRIBUTES);
     }
 
     private void checkAttributes(final TextNode node, final Map<TextStylePropertyName<?>, Object> attributes) {
@@ -249,18 +321,34 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testText() {
-        this.textAndCheck(TextNode.style(Lists.of(Text.with("a1"), Text.with("b2"))),
-            "a1b2");
+        this.textAndCheck(
+            TextNode.style(
+                Lists.of(
+                    Text.with("a1"),
+                    Text.with("b2")
+                )
+            ),
+            "a1b2"
+        );
     }
 
-    // HasTextOffset .....................................................................................................
+    // HasTextOffset ....................................................................................................
 
     @Test
     public void testTextOffsetWithParent() {
-        this.textOffsetAndCheck(TextNode.style(Lists.of(Text.with("a1"),
-                    TextNode.style(Lists.of(Text.with("b22")))))
-                .children().get(1),
-            2);
+        this.textOffsetAndCheck(
+            TextNode.style(
+                Lists.of(
+                    Text.with("a1"),
+                    TextNode.style(
+                        Lists.of(
+                            Text.with("b22")
+                        )
+                    )
+                )
+            ).children().get(1),
+            2
+        );
     }
 
     // setTextStyleEmpty................................................................................................
@@ -433,7 +521,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             TextAlign.LEFT
         );
 
-        final TextStyleNode textStyleNode = (TextStyleNode)TextNode.text("HelloText")
+        final TextStyleNode textStyleNode = (TextStyleNode) TextNode.text("HelloText")
             .setTextStyle(textStyle);
 
         this.textStyleAndCheck(
@@ -526,19 +614,32 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testMarshallWithoutChildren() {
-        this.marshallAndCheck(textStyleNode(), "{}");
+        this.marshallAndCheck(
+            textStyleNode(),
+            "{}"
+        );
     }
 
     @Test
     public void testMarshallWithChildren() {
-        this.marshallAndCheck(textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")),
-            "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}");
+        this.marshallAndCheck(
+            textStyleNode(
+                TextNode.text("text-1a"),
+                TextNode.text("text-2b")
+            ),
+            "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}"
+        );
     }
 
     @Test
     public void testMarshallWithChildren2() {
-        this.marshallAndCheck(textStyleNode(TextNode.text("text123"), TextNode.text("text456")),
-            "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}");
+        this.marshallAndCheck(
+            textStyleNode(
+                TextNode.text("text123"),
+                TextNode.text("text456")
+            ),
+            "{\"children\": [{\"type\": \"text\", \"value\": \"text123\"}, {\"type\": \"text\", \"value\": \"text456\"}]}"
+        );
     }
 
     @Test
@@ -570,41 +671,94 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testUnmarshallWithChildren() {
-        this.unmarshallAndCheck("{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
-            textStyleNode(TextNode.text("text-1a"), TextNode.text("text-2b")));
+        this.unmarshallAndCheck(
+            "{\"children\": [{\"type\": \"text\", \"value\": \"text-1a\"}, {\"type\": \"text\", \"value\": \"text-2b\"}]}",
+            textStyleNode(
+                TextNode.text(
+                    "text-1a"
+                ),
+                TextNode.text("text-2b")
+            )
+        );
     }
 
     @Test
     public void testJsonRoundtrip() {
-        this.marshallRoundTripTwiceAndCheck(textStyleNode(TextNode.text("text1"),
-            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-            textStyleNode(TextNode.text("text3"), TextNode.text("text4"))));
+        this.marshallRoundTripTwiceAndCheck(
+            textStyleNode(
+                TextNode.text("text1"),
+                TextNode.placeholder(
+                    TextPlaceholderName.with("placeholder2")
+                ),
+                textStyleNode(
+                    TextNode.text("text3"),
+                    TextNode.text("text4")
+                )
+            )
+        );
     }
 
     @Test
     public void testJsonRoundtrip2() {
-        this.marshallRoundTripTwiceAndCheck(textStyleNode(
-            TextNode.text("text1"),
-            textStyleNode(TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-                textStyleNode(TextNode.text("text3"), TextNode.text("text4")))));
+        this.marshallRoundTripTwiceAndCheck(
+            textStyleNode(
+                TextNode.text("text1"),
+                textStyleNode(
+                    TextNode.placeholder(
+                        TextPlaceholderName.with("placeholder2")
+                    ),
+                    textStyleNode(
+                        TextNode.text("text3"),
+                        TextNode.text("text4")
+                    )
+                )
+            )
+        );
     }
 
     @Test
     public void testJsonRoundtripWithStyleNode() {
-        this.marshallRoundTripTwiceAndCheck(textStyleNode(
-            TextNode.text("text1"),
-            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-            textStyleNode(TextNode.text("text3"), TextNode.text("text4")))
-            .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456))));
+        this.marshallRoundTripTwiceAndCheck(
+            textStyleNode(
+                TextNode.text("text1"),
+                TextNode.placeholder(
+                    TextPlaceholderName.with("placeholder2")
+                ),
+                textStyleNode(
+                    TextNode.text("text3"),
+                    TextNode.text("text4")
+                )
+            ).setAttributes(
+                Maps.of(
+                    TextStylePropertyName.BACKGROUND_COLOR,
+                    Color.fromRgb(0x123456)
+                )
+            )
+        );
     }
 
     @Test
     public void testJsonRoundtripWithStyleNode2() {
-        this.marshallRoundTripTwiceAndCheck(textStyleNode(
-            TextNode.text("text1"),
-            TextNode.placeholder(TextPlaceholderName.with("placeholder2")),
-            TextNode.style(Lists.of(TextNode.text("text3"))))
-            .setAttributes(Maps.of(TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456), TextStylePropertyName.COLOR, Color.fromRgb(0x789abc))));
+        this.marshallRoundTripTwiceAndCheck(
+            textStyleNode(
+                TextNode.text("text1"),
+                TextNode.placeholder(
+                    TextPlaceholderName.with("placeholder2")
+                ),
+                TextNode.style(
+                    Lists.of(
+                        TextNode.text("text3")
+                    )
+                )
+            ).setAttributes(
+                Maps.of(
+                    TextStylePropertyName.BACKGROUND_COLOR,
+                    Color.fromRgb(0x123456),
+                    TextStylePropertyName.COLOR,
+                    Color.fromRgb(0x789abc)
+                )
+            )
+        );
     }
 
     @Test
@@ -720,9 +874,18 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final StringBuilder b = new StringBuilder();
         final List<TextNode> visited = Lists.array();
 
-        final TextStyleNode styleNode = textStyleNode(TextNode.text("a1"), TextNode.text("b2"));
-        final Text text1 = Cast.to(styleNode.children().get(0));
-        final Text text2 = Cast.to(styleNode.children().get(1));
+        final TextStyleNode styleNode = textStyleNode(
+            TextNode.text("a1"),
+            TextNode.text("b2")
+        );
+        final Text text1 = Cast.to(
+            styleNode.children()
+                .get(0)
+        );
+        final Text text2 = Cast.to(
+            styleNode.children()
+                .get(1)
+        );
 
         new FakeTextNodeVisitor() {
             @Override
@@ -768,27 +931,55 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             "visited");
     }
 
-    // toString........................................................................................................
+    // toString.........................................................................................................
 
     @Test
     public void testToStringEmpty() {
-        this.toStringAndCheck(textStyleNode(), "[]");
+        this.toStringAndCheck(
+            textStyleNode(),
+            "[]"
+        );
     }
 
     @Test
     public void testToStringWithChildren() {
-        this.toStringAndCheck(textStyleNode(text1(), text2()), "[\"text-1a\", \"text-2b\"]");
+        this.toStringAndCheck(
+            textStyleNode(
+                text1(),
+                text2()
+            ),
+            "[\"text-1a\", \"text-2b\"]"
+        );
     }
 
     @Test
     public void testToStringWithAttributesWithoutChildren() {
-        this.toStringAndCheck(textStyleNode().setAttributes(Maps.of(TextStylePropertyName.with("abc"), "123")), "{abc: \"123\"}[]");
+        this.toStringAndCheck(
+            textStyleNode()
+                .setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.with("abc"),
+                        "123"
+                    )
+                ),
+            "{abc: \"123\"}[]"
+        );
     }
 
     @Test
     public void testToStringWithAttributes2() {
-        this.toStringAndCheck(textStyleNode().setAttributes(Maps.of(TextStylePropertyName.with("abc"), "123", TextStylePropertyName.with("def"), "456")),
-            "{abc: \"123\", def: \"456\"}[]");
+        this.toStringAndCheck(
+            textStyleNode()
+                .setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.with("abc"),
+                        "123",
+                        TextStylePropertyName.with("def"),
+                        "456"
+                    )
+                ),
+            "{abc: \"123\", def: \"456\"}[]"
+        );
     }
 
     @Test
@@ -806,12 +997,24 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
 
     @Test
     public void testToStringWithStyleNodeWithChildren() {
-        this.toStringAndCheck(textStyleNode(text1(), textStyleNode(text2(), text3())), "[\"text-1a\", [\"text-2b\", \"text-3c\"]]");
+        this.toStringAndCheck(
+            textStyleNode(
+                text1(),
+                textStyleNode(
+                    text2(),
+                    text3()
+                )
+            ),
+            "[\"text-1a\", [\"text-2b\", \"text-3c\"]]"
+        );
     }
 
     @Override
     TextStyleNode createTextNode() {
-        return textStyleNode(text1(), text2());
+        return textStyleNode(
+            text1(),
+            text2()
+        );
     }
 
     private TextStyleNode textStyleNode(final TextNode... children) {
@@ -819,8 +1022,17 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     }
 
     private TextStyleNode textStyleNode(final List<TextNode> children) {
-        this.checkNotEquals(1, children.size(), () -> "children must not be 1=" + children);
-        return Cast.to(TextStyleNode.with(children, TextStyleNode.NO_ATTRIBUTES_MAP));
+        this.checkNotEquals(
+            1,
+            children.size(),
+            () -> "children must not be 1=" + children
+        );
+        return Cast.to(
+            TextStyleNode.with(
+                children,
+                TextStyleNode.NO_ATTRIBUTES_MAP
+            )
+        );
     }
 
     @Override
@@ -831,8 +1043,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
-    public TextStyleNode unmarshall(final JsonNode from,
+    public TextStyleNode unmarshall(final JsonNode json,
                                     final JsonNodeUnmarshallContext context) {
-        return TextStyleNode.unmarshallTextStyleNode(from, context);
+        return TextStyleNode.unmarshallTextStyleNode(
+            json,
+            context
+        );
     }
 }
