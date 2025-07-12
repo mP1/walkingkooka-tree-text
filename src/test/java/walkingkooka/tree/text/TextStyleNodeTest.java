@@ -418,7 +418,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
-    // setStyleable.....................................................................................................
+    // Styleable........................................................................................................
 
     @Test
     public void testMergeWithSameTextStyle() {
@@ -436,6 +436,65 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         assertSame(
             textStyleNode,
             textStyleNode.merge(textStyle)
+        );
+    }
+
+    @Test
+    public void testSetWithExistingProperty() {
+        final TextStyleNode textStyleNode = (TextStyleNode)
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("Text123")
+                ),
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK
+                    )
+                )
+            );
+
+        assertSame(
+            textStyleNode,
+            textStyleNode.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            )
+        );
+    }
+
+    @Test
+    public void testSet() {
+        final TextStyleNode textStyleNode = (TextStyleNode)
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("Text123")
+                ),
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK
+                    )
+                )
+            );
+
+        this.setAndCheck(
+            textStyleNode,
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT,
+            TextStyleNode.with(
+                Lists.of(
+                    TextNode.text("Text123")
+                ),
+                TextNodeMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK,
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
+                    )
+                )
+            )
         );
     }
 

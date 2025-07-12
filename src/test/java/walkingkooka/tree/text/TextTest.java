@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.color.Color;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
@@ -110,6 +111,27 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
             value,
             text.value(),
             "value"
+        );
+    }
+
+    // set..............................................................................................................
+
+    @Test
+    public void testSet() {
+        final Text text = Text.with("Hello");
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color propertyValue = Color.parse("#123");
+
+        this.setAndCheck(
+            text,
+            propertyName,
+            propertyValue,
+            text.setTextStyle(
+                TextStyle.EMPTY.set(
+                    propertyName,
+                    propertyValue
+                )
+            )
         );
     }
 
