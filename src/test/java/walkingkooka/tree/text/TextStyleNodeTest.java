@@ -263,6 +263,30 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             2);
     }
 
+    // setTextStyleEmpty................................................................................................
+
+    @Test
+    public void testSetTextStyleWithEmpty() {
+        final Text text = Text.with("TextText123");
+
+        final TextNode textStyleNode = TextStyleNode.with(
+            Lists.of(
+                text
+            ),
+            TextNodeMap.with(
+                Maps.of(
+                    TextStylePropertyName.COLOR,
+                    Color.BLACK
+                )
+            )
+        );
+
+        this.checkEquals(
+            text,
+            textStyleNode.setTextStyle(TextStyle.EMPTY)
+        );
+    }
+
     // toHtml...........................................................................................................
 
     @Test

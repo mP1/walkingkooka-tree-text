@@ -123,21 +123,28 @@ public final class TextStyleNode extends TextParentNode {
     }
 
     @Override
-    TextStyleNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
         return this.setAttributesTextStyleMap(textStyleMap);
     }
 
-    private TextStyleNode setAttributesTextStyleMap(final TextNodeMap textStyleMap) {
+    private TextNode setAttributesTextStyleMap(final TextNodeMap textStyleMap) {
         return this.attributes.equals(textStyleMap) ?
             this :
             this.replaceAttributes(textStyleMap);
     }
 
-    /**
-     * Create a new {@link TextStylePropertyName}.
-     */
-    private TextStyleNode replaceAttributes(final TextNodeMap attributes) {
-        return new TextStyleNode(this.index, this.children, attributes);
+    private TextNode replaceAttributes(final TextNodeMap attributes) {
+        final List<TextNode> children = this.children;
+
+        // eg might need to unwrap the only child if attributes is TextStyle#EMPTY
+        return attributes.isEmpty() && children.size() == 1 ?
+            children.get(0)
+                .removeParent() :
+            new TextStyleNode(
+                this.index,
+                children,
+                attributes
+            );
     }
 
     @Override
