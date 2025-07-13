@@ -20,7 +20,7 @@ package walkingkooka.tree.text.expression.function;
 import walkingkooka.Cast;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
-import walkingkooka.tree.text.HasTextStyle;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * A function that may be used to remove an individual property from a {@link TextStyle} return result.
  */
-final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
     static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleRemove<C> instance() {
         return Cast.to(INSTANCE);
@@ -50,22 +50,21 @@ final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvalua
     }
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        HAS_TEXT_STYLE,
+        STYLEABLE,
         TEXT_STYLE_PROPERTY_NAME
     );
 
     @Override
-    public Class<TextStyle> returnType() {
-        return TextStyle.class;
+    public Class<Styleable> returnType() {
+        return Styleable.class;
     }
 
     @Override
-    public TextStyle apply(final List<Object> parameters,
+    public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 0);
+        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0);
         final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
 
-        return hasTextStyle.textStyle()
-            .remove(propertyName);
+        return styleable.remove(propertyName);
     }
 }
