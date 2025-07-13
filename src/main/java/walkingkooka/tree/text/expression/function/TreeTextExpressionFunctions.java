@@ -97,7 +97,7 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     /**
      * {@see TreeTextExpressionFunctionTextStyleSet}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> styleSet() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleSet() {
         return TreeTextExpressionFunctionTextStyleSet.instance();
     }
 

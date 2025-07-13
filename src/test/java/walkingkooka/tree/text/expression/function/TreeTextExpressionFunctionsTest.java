@@ -483,6 +483,34 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testStyleSetWithTextNodeAndTextStylePropertyNameAndColor() {
+        final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        final TextNode textNode = TextNode.text("Text123");
+
+        this.evaluateAndCheck(
+            "styleSet",
+            Lists.of(
+                textNode.setTextStyle(style),
+                property,
+                color
+            ),
+            textNode.setTextStyle(
+                style.set(
+                    property,
+                    color
+                )
+            )
+        );
+    }
+
+    @Test
     public void testStyleSetWithStringAndStringAndString() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;

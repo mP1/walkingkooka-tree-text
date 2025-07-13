@@ -25,15 +25,17 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
+import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextExpressionFunctionTextStyleSetTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>, TextStyle, FakeExpressionEvaluationContext>,
+public final class TreeTextExpressionFunctionTextStyleSetTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>, Styleable, FakeExpressionEvaluationContext>,
     ToStringTesting<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApplySetsNewProperty() {
+    public void testApplyWithTextStyleAndTextStylePropertyNameWhenNewProperty() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -56,7 +58,7 @@ public final class TreeTextExpressionFunctionTextStyleSetTest implements Express
     }
 
     @Test
-    public void testApplySetsNewPropertyWithString() {
+    public void testApplyWithTextStyleAndStringWhenNewProperty() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -79,7 +81,7 @@ public final class TreeTextExpressionFunctionTextStyleSetTest implements Express
     }
 
     @Test
-    public void testApplyNullRemovesProperty() {
+    public void testApplyWithTextStyleAndTextStylePropertyNameAndNullValueWhichRemovesProperty() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -99,6 +101,38 @@ public final class TreeTextExpressionFunctionTextStyleSetTest implements Express
             ),
             textStyle.remove(
                 propertyName
+            )
+        );
+    }
+
+    @Test
+    public void testApplyWithTextNodeAndTextStylePropertyNameAndNullValueWhichRemovesProperty() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color color = Color.BLACK;
+
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        final TextNode textNode = TextNode.text("HelloText")
+            .setTextStyle(textStyle);
+
+        this.applyAndCheck(
+            Lists.of(
+                textNode.setTextStyle(
+                    textStyle.set(
+                        propertyName,
+                        color
+                    )
+                ),
+                propertyName,
+                null
+            ),
+            textNode.setTextStyle(
+                textStyle.remove(
+                    propertyName
+                )
             )
         );
     }

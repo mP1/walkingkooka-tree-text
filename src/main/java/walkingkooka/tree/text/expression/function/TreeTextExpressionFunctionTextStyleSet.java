@@ -22,6 +22,7 @@ import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * already the correct type it will attempt to parse string values using {@link TextStylePropertyName#parseValue(String)}.
  * If the value is null it will be removed.
  */
-final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
     static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleSet<C> instance() {
         return Cast.to(INSTANCE);
@@ -57,20 +58,20 @@ final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluatio
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        TEXT_STYLE,
+        STYLEABLE,
         TEXT_STYLE_PROPERTY_NAME,
         VALUE
     );
 
     @Override
-    public Class<TextStyle> returnType() {
-        return TextStyle.class;
+    public Class<Styleable> returnType() {
+        return Styleable.class;
     }
 
     @Override
-    public TextStyle apply(final List<Object> parameters,
+    public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final TextStyle textStyle = TEXT_STYLE.getOrFail(parameters, 0);
+        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0);
         final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
         Object value = VALUE.getOrFail(parameters, 2);
 
@@ -86,7 +87,7 @@ final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluatio
             }
         }
 
-        return textStyle.setOrRemove(
+        return styleable.setOrRemove(
             propertyName,
             Cast.to(value)
         );
