@@ -90,7 +90,7 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     /**
      * {@see TreeTextExpressionFunctionTextStyleRemove}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> styleRemove() {
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleRemove() {
         return TreeTextExpressionFunctionTextStyleRemove.instance();
     }
 

@@ -24,16 +24,17 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextExpressionFunctionTextStyleRemoveTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>, TextStyle, FakeExpressionEvaluationContext>,
+public final class TreeTextExpressionFunctionTextStyleRemoveTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>, Styleable, FakeExpressionEvaluationContext>,
     ToStringTesting<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApplyTextNodeAndTextStylePropertyName() {
+    public void testApplyWithTextNodeAndTextStylePropertyName() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
@@ -42,23 +43,25 @@ public final class TreeTextExpressionFunctionTextStyleRemoveTest implements Expr
             TextAlign.CENTER
         );
 
+        final TextNode textNode = TextNode.text("Text123")
+            .setTextStyle(textStyle);
+
         this.applyAndCheck(
             Lists.of(
-                TextNode.text("Text that is ignored")
-                    .setTextStyle(
-                        textStyle.set(
-                            propertyName,
-                            color
-                        )
-                    ),
+                textNode.setTextStyle(
+                    textStyle.set(
+                        propertyName,
+                        color
+                    )
+                ),
                 propertyName
             ),
-            textStyle
+            textNode
         );
     }
 
     @Test
-    public void testApplyTextStyleAndTextStylePropertyName() {
+    public void testApplyWithTextStyleAndTextStylePropertyName() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
 
