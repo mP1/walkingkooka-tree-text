@@ -54,8 +54,4 @@ public final class Margin extends BorderMarginPadding {
 
     // Object...........................................................................................................
 
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof Margin;
-    }
 }
