@@ -46,7 +46,7 @@ public final class Text extends TextLeafNode<String> implements HasText {
     static Text with(final String value) {
         Objects.requireNonNull(value, "value");
 
-        return "".equals(value) ?
+        return value.isEmpty() ?
             EMPTY_TEXT :
             new Text(
                 NO_INDEX,
