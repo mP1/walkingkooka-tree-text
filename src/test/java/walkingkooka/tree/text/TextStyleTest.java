@@ -1012,6 +1012,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
+    @Test
+    public void testToStringWithRgbColorProperty() {
+        this.toStringAndCheck(
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.COLOR,
+                    Color.parse("#123456")
+                )
+            ),
+            "{color=#123456}"
+        );
+    }
+
     // json.............................................................................................................
 
     @Test
