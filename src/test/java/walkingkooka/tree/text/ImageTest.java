@@ -164,7 +164,12 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
     @Test
     public void testMarshall() {
         final String value = "abc123";
-        this.marshallAndCheck(Image.with(Url.parse(value)), JsonNode.string(value));
+        this.marshallAndCheck(
+            Image.with(
+                Url.parse(value)
+            ),
+            JsonNode.string("/" + value)
+        );
     }
 
     @Test
