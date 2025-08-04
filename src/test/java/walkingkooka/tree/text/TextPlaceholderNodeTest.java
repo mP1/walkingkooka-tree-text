@@ -161,6 +161,16 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
         return TextPlaceholderNode.class;
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmptyWhenEMPTY() {
+        this.isEmptyAndCheck(
+            this.createTextNode(),
+            false
+        );
+    }
+
     // JsonNodeMarshallingTesting........................................................................................
 
     @Override
