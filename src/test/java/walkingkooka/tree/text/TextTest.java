@@ -395,6 +395,24 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         return Text.unmarshallText(from, context);
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmptyWhenEMPTY() {
+        this.isEmptyAndCheck(
+            Text.EMPTY_TEXT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsEmptyWhenNonEmptyString() {
+        this.isEmptyAndCheck(
+            Text.with("Hello"),
+            false
+        );
+    }
+
     // class............................................................................................................
 
     @Override

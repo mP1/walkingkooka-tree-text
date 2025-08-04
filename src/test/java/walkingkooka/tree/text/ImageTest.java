@@ -184,6 +184,16 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
         return Image.unmarshallImage(from, context);
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmptyWhenEMPTY() {
+        this.isEmptyAndCheck(
+            this.createTextNode(),
+            false
+        );
+    }
+
     // typeNaming.......................................................................................................
 
     @Override

@@ -164,4 +164,14 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
             hasValue.value()
         );
     }
+
+    // CanBeEmpty.......................................................................................................
+
+    /**
+     * Sub-classes like {@link Image} are not empty, {@link Text} is only empty if it has no text.
+     */
+    @Override
+    public final boolean isEmpty() {
+        return "".equals(this.value); // only empty string is considered empty, Image etc are not
+    }
 }
