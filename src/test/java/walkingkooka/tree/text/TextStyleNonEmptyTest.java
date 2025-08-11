@@ -1442,6 +1442,22 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testTreePrintIncludingColorWithWebColorNames() {
+        this.treePrintAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            ).set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.parse("#123456")
+            ),
+            "TextStyle\n" +
+                "  background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
+                "  color=black (walkingkooka.color.OpaqueRgbColor)\n"
+        );
+    }
+
     // json.............................................................................................................
 
     @Test
