@@ -176,10 +176,10 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         );
 
         this.checkEquals(
-            "borderTopColor=#000000\n" +
-                "borderLeftColor=#000000\n" +
-                "borderRightColor=#000000\n" +
-                "borderBottomColor=#000000\n",
+            "borderTopColor=black\n" +
+                "borderLeftColor=black\n" +
+                "borderRightColor=black\n" +
+                "borderBottomColor=black\n",
             v.toString()
         );
     }
