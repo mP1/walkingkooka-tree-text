@@ -41,7 +41,7 @@ public final class HasTextStyleToTextStyleConverterTest implements ConverterTest
     }
 
     @Test
-    public void testConvertTextStyleToTextStyle() {
+    public void testConvertTextStyleToHasTextStyle() {
         this.convertAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -52,14 +52,35 @@ public final class HasTextStyleToTextStyleConverterTest implements ConverterTest
     }
 
     @Test
-    public void testConvertTextWithTextStyleToTextStyle() {
+    public void testConvertTextStyleToTextStyle() {
+        this.convertAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.CENTER
+            ),
+            TextStyle.class
+        );
+    }
+
+    @Test
+    public void testConvertTextStyleToTextStyleNotEmpty() {
+        this.convertAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.CENTER
+            )
+        );
+    }
+
+    @Test
+    public void testConvertTextNodeWithTextStyleToTextStyle() {
         final TextStyle textStyle = TextStyle.parse("text-align: left");
         final TextNode textNode = TextNode.text("Hello")
             .setTextStyle(textStyle);
 
         this.convertAndCheck(
             textNode,
-            HasTextStyle.class,
+            TextStyle.class,
             textStyle
         );
     }
