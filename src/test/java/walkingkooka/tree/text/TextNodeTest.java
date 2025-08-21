@@ -31,6 +31,59 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
+    //isTextNodeClass...................................................................................................
+
+    @Test
+    public void testIsTextNodeClassWithNull() {
+        this.isTextNodeClassAndCheck(
+            null,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextNodeClassWithTextNode() {
+        this.isTextNodeClassAndCheck(
+            TextNode.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextNodeClassWithHyperlink() {
+        this.isTextNodeClassAndCheck(
+            Hyperlink.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextNodeClassWithText() {
+        this.isTextNodeClassAndCheck(
+            Text.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextNodeClassWithThis() {
+        this.isTextNodeClassAndCheck(
+            this.getClass(),
+            false
+        );
+    }
+
+    private void isTextNodeClassAndCheck(final Class<?> klass,
+                                         final boolean expected) {
+        this.checkEquals(
+            expected,
+            TextNode.isTextNodeClass(klass),
+            () -> null != klass ? klass.getName() : null
+        );
+    }
+    
+    //..................................................................................................................
+    
     @Test
     public void testBuildAndCheckToString() {
         this.toStringAndCheck(
