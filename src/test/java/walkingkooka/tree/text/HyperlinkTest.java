@@ -177,7 +177,7 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
                 ),
             "Style\n" +
                 "  TextStyle\n" +
-                "    color=#222222 (walkingkooka.color.OpaqueRgbColor)\n" +
+                "    color=#222 (walkingkooka.color.OpaqueRgbColor)\n" +
                 "  Hyperlink\n" +
                 "    http://example.com\n"
         );
