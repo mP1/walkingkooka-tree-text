@@ -43,7 +43,11 @@ final class HasTextStyleToTextStyleConverter<C extends ConverterContext> impleme
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return value instanceof HasTextStyle && HasTextStyle.class == type;
+        return value instanceof HasTextStyle &&
+            (
+                HasTextStyle.class == type ||
+                    TextStyle.isStyleClass(type)
+            );
     }
 
 
