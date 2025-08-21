@@ -43,7 +43,10 @@ final class HasTextNodeToTextNodeConverter<C extends ConverterContext> implement
                               final Class<?> type,
                               final C context) {
         return (null == value || value instanceof HasTextNode) &&
-            type == TextNode.class;
+            (
+                type == HasTextNode.class ||
+                    TextNode.isTextNodeClass(type)
+            );
     }
 
     @Override
