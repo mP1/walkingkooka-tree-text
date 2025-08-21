@@ -55,6 +55,19 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     UsesToStringBuilder {
 
     /**
+     * Returns if the given {@link Class} is a {@link TextNode} or subclass.
+     */
+    public static boolean isTextNodeClass(final Class<?> clazz) {
+        return TextNode.class == clazz ||
+          Image.class == clazz ||
+          Text.class == clazz ||
+          TextPlaceholderNode.class == clazz ||
+          Hyperlink.class == clazz ||
+          TextStyleNameNode.class == clazz ||
+          TextStyleNode.class == clazz;
+    }
+
+    /**
      * No children constant
      */
     public final static List<TextNode> NO_CHILDREN = Lists.empty();
