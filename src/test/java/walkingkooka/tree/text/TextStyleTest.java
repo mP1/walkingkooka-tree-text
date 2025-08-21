@@ -528,7 +528,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_COLOR,
                     Color.BLACK
                 ),
-            "border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"
+            "border-top-color: black; border-left-color: black; border-right-color: black; border-bottom-color: black;"
         );
     }
 
@@ -540,7 +540,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.COLOR,
                     Color.parse("#123456")
                 ),
-            "color: rgb(18, 52, 86);"
+            "color: #123456;"
         );
     }
 
@@ -642,7 +642,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_TOP_WIDTH,
                     Length.pixel(123.0)
                 ),
-            "border-top-color: rgb(18, 52, 86); border-top-style: dotted; border-top-width: 123px;"
+            "border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;"
         );
     }
 
