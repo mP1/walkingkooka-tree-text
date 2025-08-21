@@ -43,7 +43,7 @@ final class TextToTextStyleConverter<C extends ConverterContext> implements Text
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return HasTextStyle.class == type || TextStyle.class == type;
+        return HasTextStyle.class == type || TextStyle.isStyleClass(type);
     }
 
     @Override

@@ -24,6 +24,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 
 public final class TextToTextStyleConverterTest implements ConverterTesting2<TextToTextStyleConverter<FakeConverterContext>, FakeConverterContext> {
@@ -36,6 +37,40 @@ public final class TextToTextStyleConverterTest implements ConverterTesting2<Tex
             new StringBuilder(text),
             TextStyle.class,
             TextStyle.parse(text)
+        );
+    }
+
+    @Test
+    public void testConvertStringToHasTextStyle() {
+        final String text = "color: #123456; text-align: left;";
+
+        this.convertAndCheck(
+            text,
+            HasTextStyle.class,
+            TextStyle.parse(text)
+        );
+    }
+
+    @Test
+    public void testConvertStringToTextStyle() {
+        final String text = "color: #123456; text-align: left;";
+
+        this.convertAndCheck(
+            text,
+            TextStyle.class,
+            TextStyle.parse(text)
+        );
+    }
+
+    @Test
+    public void testConvertStringToTextStyleNonEmpty() {
+        final String text = "color: #123456; text-align: left;";
+        final TextStyle textStyle = TextStyle.parse(text);
+
+        this.convertAndCheck(
+            text,
+            (Class<TextStyle>)textStyle.getClass(),
+            textStyle
         );
     }
 
