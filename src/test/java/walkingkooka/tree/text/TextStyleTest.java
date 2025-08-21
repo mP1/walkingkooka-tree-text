@@ -52,6 +52,54 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     PatchableTesting<TextStyle>,
     ToStringTesting<TextStyle> {
 
+    // isStyleClass.....................................................................................................
+
+    @Test
+    public void testIsStyleClassWithNull() {
+        this.isStyleClassAndCheck(
+            null,
+            false
+        );
+    }
+
+    @Test
+    public void testIsStyleClassWithTextStyle() {
+        this.isStyleClassAndCheck(
+            TextStyle.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsStyleClassWithTextStyleEmpty() {
+        this.isStyleClassAndCheck(
+            TextStyle.EMPTY.getClass(),
+            true
+        );
+    }
+
+    @Test
+    public void testIsStyleClassWithTextStyleNotEmpty() {
+        this.isStyleClassAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            ).getClass(),
+            true
+        );
+    }
+
+    private void isStyleClassAndCheck(final Class<?> klass,
+                                      final boolean expected) {
+        this.checkEquals(
+            expected,
+            TextStyle.isStyleClass(klass),
+            () -> null != klass ? klass.getName() : null
+        );
+    }
+
+    // value............................................................................................................
+
     @Test
     public void testValue() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();

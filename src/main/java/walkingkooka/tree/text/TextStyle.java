@@ -49,6 +49,15 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     CanBeEmpty {
 
     /**
+     * Tests if the given {@link Class} is for a {@link TextStyle}.
+     */
+    public static boolean isStyleClass(final Class<?> klass) {
+        return TextStyle.class == klass ||
+            TextStyleEmpty.class == klass ||
+            TextStyleNonEmpty.class == klass;
+    }
+
+    /**
      * A {@link TextStyle} with no styling.
      */
     @SuppressWarnings("StaticInitializerReferencesSubClass")
