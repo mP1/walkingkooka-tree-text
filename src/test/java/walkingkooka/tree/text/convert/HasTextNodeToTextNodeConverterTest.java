@@ -42,6 +42,14 @@ public final class HasTextNodeToTextNodeConverterTest implements ConverterTestin
     }
 
     @Test
+    public void testTextToHasTextNode() {
+        this.convertAndCheck(
+            TextNode.text("hello"),
+            HasTextNode.class
+        );
+    }
+
+    @Test
     public void testTextToTextNode() {
         this.convertAndCheck(
             TextNode.text("hello"),
