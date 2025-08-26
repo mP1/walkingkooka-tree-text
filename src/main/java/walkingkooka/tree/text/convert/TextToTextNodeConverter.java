@@ -41,7 +41,8 @@ final class TextToTextNodeConverter<C extends ConverterContext> implements TextT
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return Text.class == type || TextNode.class == type;
+        return false == value instanceof TextNode &&
+            (Text.class == type || TextNode.class == type);
     }
 
     @Override

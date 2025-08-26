@@ -81,6 +81,17 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
 
         this.convertAndCheck(
             text.text(),
+            TextNode.class,
+            text
+        );
+    }
+
+    @Test
+    public void testConvertStringToText() {
+        final Text text = TextNode.text( "Hello World 123");
+
+        this.convertAndCheck(
+            text.text(),
             Text.class,
             text
         );
