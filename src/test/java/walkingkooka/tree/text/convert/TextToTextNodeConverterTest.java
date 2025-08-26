@@ -30,11 +30,38 @@ import walkingkooka.tree.text.TextNode;
 public final class TextToTextNodeConverterTest implements ConverterTesting2<TextToTextNodeConverter<FakeConverterContext>, FakeConverterContext> {
 
     @Test
+    public void testConvertTextNodeToTextNodeFails() {
+        this.convertFails(
+            TextNode.text("Hello"),
+            TextNode.class
+        );
+    }
+
+    @Test
+    public void testConvertTextNodeToTextFails() {
+        this.convertFails(
+            TextNode.text("Hello"),
+            Text.class
+        );
+    }
+
+    @Test
     public void testConvertCharSequenceToTextNode() {
         final String text = "Hello";
 
         this.convertAndCheck(
             new StringBuilder(text),
+            TextNode.class,
+            TextNode.text(text)
+        );
+    }
+
+    @Test
+    public void testConvertStringToTextNode() {
+        final String text = "Hello";
+
+        this.convertAndCheck(
+            text,
             TextNode.class,
             TextNode.text(text)
         );
