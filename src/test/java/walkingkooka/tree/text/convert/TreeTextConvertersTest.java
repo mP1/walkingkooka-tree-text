@@ -117,6 +117,30 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
         );
     }
 
+    @Test
+    public void testConvertHyperlinkToTextNode() {
+        final Hyperlink hyperlink = TextNode.hyperlink(
+            Url.parseAbsolute("https://www.example.com")
+        );
+        this.convertAndCheck(
+            hyperlink,
+            TextNode.class,
+            hyperlink
+        );
+    }
+
+    @Test
+    public void testConvertImageToTextNode() {
+        final Image image = TextNode.image(
+            Url.parseAbsolute("https://www.example.com")
+        );
+        this.convertAndCheck(
+            image,
+            TextNode.class,
+            image
+        );
+    }
+
     private <T> void convertAndCheck(final Object value,
                                      final Class<T> type,
                                      final T expected) {
