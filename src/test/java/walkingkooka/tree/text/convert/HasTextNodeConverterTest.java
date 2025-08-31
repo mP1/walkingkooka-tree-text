@@ -30,8 +30,8 @@ import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class HasTextNodeToTextNodeConverterTest implements ConverterTesting2<HasTextNodeToTextNodeConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<HasTextNodeToTextNodeConverter<FakeConverterContext>> {
+public final class HasTextNodeConverterTest implements ConverterTesting2<HasTextNodeConverter<FakeConverterContext>, FakeConverterContext>,
+    ToStringTesting<HasTextNodeConverter<FakeConverterContext>> {
 
     @Test
     public void testStringToString() {
@@ -100,8 +100,8 @@ public final class HasTextNodeToTextNodeConverterTest implements ConverterTestin
     }
 
     @Override
-    public HasTextNodeToTextNodeConverter<FakeConverterContext> createConverter() {
-        return HasTextNodeToTextNodeConverter.instance();
+    public HasTextNodeConverter<FakeConverterContext> createConverter() {
+        return HasTextNodeConverter.instance();
     }
 
     @Override
@@ -115,14 +115,14 @@ public final class HasTextNodeToTextNodeConverterTest implements ConverterTestin
     public void testToString() {
         this.toStringAndCheck(
             this.createConverter(),
-            "HasTextNode to TextNode"
+            "HasTextNode"
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<HasTextNodeToTextNodeConverter<FakeConverterContext>> type() {
-        return Cast.to(HasTextNodeToTextNodeConverter.class);
+    public Class<HasTextNodeConverter<FakeConverterContext>> type() {
+        return Cast.to(HasTextNodeConverter.class);
     }
 }
