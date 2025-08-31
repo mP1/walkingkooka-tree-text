@@ -27,15 +27,15 @@ import walkingkooka.tree.text.TextStyle;
 /**
  * A {@link Converter} that accepts converts a {@link walkingkooka.tree.text.HasTextStyle} into a {@link TextStyle}.
  */
-final class HasTextStyleToTextStyleConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
+final class HasTextStyleConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
-    static <C extends ConverterContext> HasTextStyleToTextStyleConverter<C> instance() {
+    static <C extends ConverterContext> HasTextStyleConverter<C> instance() {
         return Cast.to(INSTANCE);
     }
 
-    private final static HasTextStyleToTextStyleConverter<?> INSTANCE = new HasTextStyleToTextStyleConverter<>();
+    private final static HasTextStyleConverter<?> INSTANCE = new HasTextStyleConverter<>();
 
-    private HasTextStyleToTextStyleConverter() {
+    private HasTextStyleConverter() {
         super();
     }
 
