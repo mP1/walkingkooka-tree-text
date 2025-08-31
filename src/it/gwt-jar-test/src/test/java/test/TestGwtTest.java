@@ -162,7 +162,7 @@ public class TestGwtTest extends GWTTestCase {
                 "      hyper link text 123\n" +
                 "    </A>\n" +
                 "    <IMG src=\"https://example.com/image.png\"/>before\n" +
-                "    <SPAN style=\"color: #667788;\">\n" +
+                "    <SPAN style=\"color: #678;\">\n" +
                 "      something gray\n" +
                 "    </SPAN>\n" +
                 "    after\n" +
