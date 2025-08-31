@@ -26,7 +26,7 @@ public final class TreeTextConverters implements PublicStaticHelper{
     /**
      * {@see HasTextStyleToTextStyleConverter}
      */
-    public static <C extends ConverterContext> Converter<C> hasTextStyleToTextStyle() {
+    public static <C extends ConverterContext> Converter<C> hasTextStyle() {
         return HasTextStyleToTextStyleConverter.instance();
     }
     
