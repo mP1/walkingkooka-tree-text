@@ -29,8 +29,8 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class HasTextStyleToTextStyleConverterTest implements ConverterTesting2<HasTextStyleToTextStyleConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<HasTextStyleToTextStyleConverter<FakeConverterContext>> {
+public final class HasTextStyleConverterTest implements ConverterTesting2<HasTextStyleConverter<FakeConverterContext>, FakeConverterContext>,
+    ToStringTesting<HasTextStyleConverter<FakeConverterContext>> {
 
     @Test
     public void testConvertStringToString() {
@@ -86,8 +86,8 @@ public final class HasTextStyleToTextStyleConverterTest implements ConverterTest
     }
 
     @Override
-    public HasTextStyleToTextStyleConverter<FakeConverterContext> createConverter() {
-        return HasTextStyleToTextStyleConverter.instance();
+    public HasTextStyleConverter<FakeConverterContext> createConverter() {
+        return HasTextStyleConverter.instance();
     }
 
     @Override
@@ -108,7 +108,7 @@ public final class HasTextStyleToTextStyleConverterTest implements ConverterTest
     // class............................................................................................................
 
     @Override
-    public Class<HasTextStyleToTextStyleConverter<FakeConverterContext>> type() {
-        return Cast.to(HasTextStyleToTextStyleConverter.class);
+    public Class<HasTextStyleConverter<FakeConverterContext>> type() {
+        return Cast.to(HasTextStyleConverter.class);
     }
 }
