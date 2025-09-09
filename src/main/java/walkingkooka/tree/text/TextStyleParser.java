@@ -161,7 +161,7 @@ final class TextStyleParser implements CanBeEmpty {
      * Singleton which can be reused.
      */
     private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
-        false, // isGroupSeparatorWithinNumbersSupported
+        false, // canNumbersHaveGroupSeparator
         InvalidCharacterExceptionFactory.POSITION,
         DateTimeContexts.fake(), // dates are not supported
         DecimalNumberContexts.american(MathContext.UNLIMITED) // only the decimal char is actually required.
