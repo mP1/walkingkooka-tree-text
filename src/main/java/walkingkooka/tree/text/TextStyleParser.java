@@ -168,14 +168,6 @@ final class TextStyleParser implements CanBeEmpty {
         DecimalNumberContexts.american(MathContext.UNLIMITED) // only the decimal char is actually required.
     );
 
-//    /**
-//     * Helper that reports an invalid character.
-//     */
-//    IllegalArgumentException invalidCharacter() {
-//        return this.cursor.lineInfo()
-//            .emptyTextOrInvalidCharacterExceptionOrLast("text");
-//    }
-
     // CanBeEmpty.......................................................................................................
 
     @Override
