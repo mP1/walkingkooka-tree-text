@@ -709,6 +709,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     },
                     CaseSensitivity.SENSITIVE,
                     ConverterContexts.basic(
+                        false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
                         Converters.collection(
                             Lists.of(
