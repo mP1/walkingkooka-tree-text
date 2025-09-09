@@ -163,6 +163,7 @@ final class TextStyleParser implements CanBeEmpty {
     private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
         false, // canNumbersHaveGroupSeparator
         InvalidCharacterExceptionFactory.POSITION,
+        ',', // valueSeparator
         DateTimeContexts.fake(), // dates are not supported
         DecimalNumberContexts.american(MathContext.UNLIMITED) // only the decimal char is actually required.
     );
