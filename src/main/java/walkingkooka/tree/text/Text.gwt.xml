@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
     <inherits name="walkingkooka.color.Color"/>
-    <inherits name="walkingkooka.net.convert.WalkingkookaNetConvert"/>
+    <inherits name="walkingkooka.net.Net"/>
     <inherits name="walkingkooka.tree.json.patch.Patch"/>
 
     <source path=""/>
