@@ -68,7 +68,7 @@
 
         <dependency>
             <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-net-convert-gwt</artifactId>
+            <artifactId>walkingkooka-net-gwt</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
