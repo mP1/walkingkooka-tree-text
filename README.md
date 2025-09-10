@@ -165,7 +165,7 @@ These `Converters` that convert function parameter that may be `String` to other
 
 ### [Functions](https://github.com/mP1/walkingkooka-tree/blob/master/src/main/java/walkingkooka/tree/expression/function/ExpressionFunction.java)
 
-Functions that will be useful to create a rich text
+Functions that will be useful to create a rich text display, by building individual components with text, styling and more.
 
 - [badge](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/expression/function/TreeTextExpressionFunctionBadge.java)
 - [getStyle](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/expression/function/TreeTextExpressionFunctionGetStyle.java)
