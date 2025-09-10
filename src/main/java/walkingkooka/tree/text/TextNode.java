@@ -62,6 +62,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
           Image.class == clazz ||
           Text.class == clazz ||
           TextPlaceholderNode.class == clazz ||
+          Badge.class == clazz ||
           Hyperlink.class == clazz ||
           TextStyleNameNode.class == clazz ||
           TextStyleNode.class == clazz;
@@ -89,6 +90,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final static Text EMPTY_TEXT = Text.emptyText();
 
     // public factory methods..........................................................................................
+
+    /**
+     * {@see Hyperlink}
+     */
+    public static Badge badge(final String badgeText) {
+        return Badge.with(badgeText);
+    }
 
     /**
      * {@see Hyperlink}
@@ -171,6 +179,10 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * It is only ever called by a parent node and is used to adopt new children.
      */
     final TextNode setParent(final Optional<TextNode> parent, final int index) {
+        if (this.isBadge() && parent.isPresent()) {
+            throw new IllegalArgumentException("Badges cannot have a parent");
+        }
+
         final TextNode copy = this.replace(index);
         copy.parent = parent;
         return copy;
@@ -308,6 +320,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // is...............................................................................................................
 
     /**
+     * Only {@link Badge} returns true
+     */
+    public final boolean isBadge() {
+        return this instanceof Badge;
+    }
+
+    /**
      * Only {@link Hyperlink} returns true
      */
     public final boolean isHyperlink() {
@@ -442,6 +461,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // JsonNode.........................................................................................................
 
     static {
+        JsonNodeContext.register(
+            "badge",
+            Badge::unmarshallBadge,
+            Badge::marshall,
+            Badge.class
+        );
+
         JsonNodeContext.register("hyperlink",
             Hyperlink::unmarshallHyperLink,
             Hyperlink::marshall,

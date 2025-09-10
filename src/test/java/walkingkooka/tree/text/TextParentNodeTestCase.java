@@ -39,11 +39,15 @@ public abstract class TextParentNodeTestCase<T extends TextParentNode> extends T
 
     @Test
     public final void testSetChildrenReadOnly() {
-        final List<TextNode> children = Lists.of(this.text3(), this.text2(), this.text1());
+        final List<TextNode> children = Lists.of(this.text1());
 
         final TextNode parent = this.createTextNode()
             .setChildren(children);
-        assertThrows(UnsupportedOperationException.class, () -> parent.children().add(this.different()));
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> parent.children()
+                .add(this.text2())
+        );
     }
 
     final Text text1() {
