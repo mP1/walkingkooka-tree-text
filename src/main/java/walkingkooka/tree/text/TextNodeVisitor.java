@@ -63,6 +63,14 @@ public abstract class TextNodeVisitor extends Visitor<TextNode> {
         // nop
     }
 
+    protected Visiting startVisit(final Badge node) {
+        return Visiting.CONTINUE;
+    }
+
+    protected void endVisit(final Badge node) {
+        // nop
+    }
+    
     protected Visiting startVisit(final Hyperlink node) {
         return Visiting.CONTINUE;
     }

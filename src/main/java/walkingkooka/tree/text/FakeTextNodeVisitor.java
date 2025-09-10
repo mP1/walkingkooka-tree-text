@@ -47,6 +47,16 @@ public class FakeTextNodeVisitor extends TextNodeVisitor implements Fake {
     }
 
     @Override
+    protected Visiting startVisit(final Badge node) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected void endVisit(final Badge node) {
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
     protected Visiting startVisit(final Hyperlink node) {
         throw new UnsupportedOperationException();
     }

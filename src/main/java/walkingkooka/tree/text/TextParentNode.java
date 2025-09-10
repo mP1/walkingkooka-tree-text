@@ -98,6 +98,13 @@ abstract class TextParentNode extends TextNode {
     }
 
     private TextParentNode replaceChildren(final List<TextNode> children) {
+        if (this instanceof Badge) {
+            final int badgeChildCount = children.size();
+            if (badgeChildCount > 1) {
+                throw new IllegalArgumentException("Badge child count " + badgeChildCount + " > 1");
+            }
+        }
+
         final int index = this.index;
         return this.replace0(index, children)
             .replaceChild(this.parent(), index)
