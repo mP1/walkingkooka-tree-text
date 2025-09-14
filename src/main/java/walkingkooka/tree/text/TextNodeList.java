@@ -19,13 +19,14 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListDefaults;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,13 +51,13 @@ import java.util.Objects;
 public final class TextNodeList extends AbstractList<TextNode>
     implements ImmutableListDefaults<TextNodeList, TextNode> {
 
-    public static TextNodeList with(final List<TextNode> nodes) {
+    public static TextNodeList with(final Collection<TextNode> nodes) {
         Objects.requireNonNull(nodes, "nodes");
 
         return nodes instanceof TextNodeList ?
             (TextNodeList) nodes :
             new TextNodeList(
-                Lists.immutable(nodes)
+                new ArrayList<>(nodes)
             );
     }
 
@@ -82,7 +83,7 @@ public final class TextNodeList extends AbstractList<TextNode>
     }
 
     @Override
-    public TextNodeList setElements(final List<TextNode> nodes) {
+    public TextNodeList setElements(final Collection<TextNode> nodes) {
         final TextNodeList copy = with(nodes);
         return this.equals(copy) ?
             this :
