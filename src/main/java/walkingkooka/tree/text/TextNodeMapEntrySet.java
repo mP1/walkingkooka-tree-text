@@ -27,6 +27,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractSet;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -116,7 +117,7 @@ final class TextNodeMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<
     }
 
     @Override
-    public TextNodeMapEntrySet setElements(final Set<Entry<TextStylePropertyName<?>, Object>> elements) {
+    public TextNodeMapEntrySet setElements(final Collection<Entry<TextStylePropertyName<?>, Object>> elements) {
         Objects.requireNonNull(elements, "elements");
         throw new UnsupportedOperationException();
     }
