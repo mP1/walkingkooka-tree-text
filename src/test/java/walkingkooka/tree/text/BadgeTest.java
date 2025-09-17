@@ -183,7 +183,7 @@ public final class BadgeTest extends TextParentNodeTestCase<Badge> {
     // SetStyle.........................................................................................................
 
     @Test
-    public void testSetStyle() {
+    public void testSetTextStyleFails() {
         final Badge badge = Badge.with(BADGE_TEXT);
         final TextStyle style = TextStyle.parse("color: red");
 
