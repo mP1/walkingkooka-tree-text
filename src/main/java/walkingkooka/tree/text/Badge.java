@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -33,6 +32,7 @@ import walkingkooka.visit.Visiting;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents a badge and a child {@link TextNode}.
@@ -199,16 +199,36 @@ public final class Badge extends TextParentNode {
 
     @Override
     TextNode setAttributesEmptyTextStyleMap() {
-        return this;
+        final TextNode child = this.childOrEmpty()
+            .orElse(null);
+
+        return null != child ?
+            this.setChild(
+                child.setAttributesEmptyTextStyleMap(),
+                0
+            ) :
+            this;
     }
 
     @Override
     TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
-        return TextStyleNode.with(
-            Lists.of(
-                this
-            ),
-            textStyleMap
+        final TextNode child = this.childOrEmpty()
+            .orElse(null);
+
+        return null != child ?
+            this.setChild(
+                child.setAttributesNonEmptyTextStyleMap(textStyleMap),
+                0
+            ) :
+            this;
+    }
+
+    private Optional<TextNode> childOrEmpty() {
+        final List<TextNode> children = this.children;
+        return Optional.ofNullable(
+            children.isEmpty() ?
+                null :
+                children.get(0)
         );
     }
 

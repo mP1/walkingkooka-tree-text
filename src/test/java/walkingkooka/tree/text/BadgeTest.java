@@ -183,18 +183,41 @@ public final class BadgeTest extends TextParentNodeTestCase<Badge> {
     // SetStyle.........................................................................................................
 
     @Test
-    public void testSetTextStyleFails() {
+    public void testSetStyleWithEmptyWhenWithoutChild() {
+        final Badge badge = Badge.with(BADGE_TEXT);
+        final TextStyle style = TextStyle.EMPTY;
+
+        this.setTextStyleAndCheck(
+            badge,
+            style,
+            badge
+        );
+    }
+
+    @Test
+    public void testSetStyleWhenWithoutChild() {
         final Badge badge = Badge.with(BADGE_TEXT);
         final TextStyle style = TextStyle.parse("color: red");
 
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> badge.setTextStyle(style)
+        this.setTextStyleAndCheck(
+            badge,
+            style,
+            badge
         );
+    }
 
-        this.checkEquals(
-            "Badges cannot have a parent",
-            thrown.getMessage()
+    @Test
+    public void testSetStyleWithChild() {
+        final Badge badge = Badge.with(BADGE_TEXT);
+        final Text text = TextNode.text("text123");
+        final TextStyle style = TextStyle.parse("color: red");
+
+        this.setTextStyleAndCheck(
+            badge.appendChild(text),
+            style,
+            badge.appendChild(
+                text.setTextStyle(style)
+            )
         );
     }
 
