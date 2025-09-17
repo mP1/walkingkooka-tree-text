@@ -259,6 +259,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
 
     /**
      * Would be setter that adds the given {@link TextStyle}.
+     * Note for a {@link Badge} the given style will actually be applied to the Badge child if one is present.
      */
     public final TextNode setTextStyle(final TextStyle textStyle) {
         return this.setAttributes(
