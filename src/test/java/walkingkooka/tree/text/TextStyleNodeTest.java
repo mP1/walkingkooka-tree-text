@@ -369,9 +369,10 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             )
         );
 
-        this.checkEquals(
-            text,
-            textStyleNode.setTextStyle(TextStyle.EMPTY)
+        this.setTextStyleAndCheck(
+            textStyleNode,
+            TextStyle.EMPTY,
+            text
         );
     }
 
