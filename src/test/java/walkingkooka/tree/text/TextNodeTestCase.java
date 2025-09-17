@@ -25,4 +25,14 @@ public abstract class TextNodeTestCase<T> implements ClassTesting2<T> {
     TextNodeTestCase() {
         super();
     }
+
+    final void setTextStyleAndCheck(final TextNode node,
+                                    final TextStyle style,
+                                    final TextNode expected) {
+        this.checkEquals(
+            expected,
+            node.setTextStyle(style),
+            () -> node + " setTextStyle " + style
+        );
+    }
 }

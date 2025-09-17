@@ -147,17 +147,16 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
         final Color color = Color.parse("#123");
 
-        this.checkEquals(
+        this.setTextStyleAndCheck(
+            image,
+            TextStyle.EMPTY.set(
+                propertyName,
+                color
+            ),
             TextNode.style(
                 Lists.of(image)
             ).setAttributes(
                 Maps.of(
-                    propertyName,
-                    color
-                )
-            ),
-            image.setTextStyle(
-                TextStyle.EMPTY.set(
                     propertyName,
                     color
                 )
