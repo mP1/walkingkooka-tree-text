@@ -47,13 +47,11 @@ public final class TextToTextNodeConverterTest implements ConverterTesting2<Text
     }
 
     @Test
-    public void testConvertCharSequenceToTextNode() {
-        final String text = "Hello";
-
+    public void testConvertNullToHasTextNode() {
         this.convertAndCheck(
-            new StringBuilder(text),
-            TextNode.class,
-            TextNode.text(text)
+            null,
+            HasTextNode.class,
+            (TextNode)null
         );
     }
 
@@ -64,6 +62,26 @@ public final class TextToTextNodeConverterTest implements ConverterTesting2<Text
         this.convertAndCheck(
             text,
             HasTextNode.class,
+            TextNode.text(text)
+        );
+    }
+
+    @Test
+    public void testConvertNullToTextNode() {
+        this.convertAndCheck(
+            null,
+            TextNode.class,
+            (TextNode)null
+        );
+    }
+
+    @Test
+    public void testConvertCharSequenceToTextNode() {
+        final String text = "Hello";
+
+        this.convertAndCheck(
+            new StringBuilder(text),
+            TextNode.class,
             TextNode.text(text)
         );
     }
