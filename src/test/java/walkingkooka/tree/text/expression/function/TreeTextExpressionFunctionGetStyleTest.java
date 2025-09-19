@@ -67,7 +67,7 @@ public final class TreeTextExpressionFunctionGetStyleTest implements ExpressionF
 
     @Override
     public int minimumParameterCount() {
-        return 2;
+        return 1;
     }
 
     // toString.........................................................................................................
