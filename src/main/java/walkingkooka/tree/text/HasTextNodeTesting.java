@@ -21,10 +21,12 @@ import walkingkooka.test.Testing;
 
 public interface HasTextNodeTesting extends Testing {
 
-    default void toTextNodeAndCheck(final HasTextNode has,
-                                    final TextNode textNode) {
-        this.checkEquals(textNode,
-            has.toTextNode(),
-            () -> "" + has);
+    default void textNodeAndCheck(final HasTextNode has,
+                                  final TextNode textNode) {
+        this.checkEquals(
+            textNode,
+            has.textNode(),
+            () -> "" + has
+        );
     }
 }

@@ -503,7 +503,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // HasTextNode......................................................................................................
 
     @Override
-    public final TextNode toTextNode() {
+    public final TextNode textNode() {
         return this;
     }
 }

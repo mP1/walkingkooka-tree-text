@@ -22,5 +22,5 @@ package walkingkooka.tree.text;
  */
 public interface HasTextNode {
 
-    TextNode toTextNode();
+    TextNode textNode();
 }

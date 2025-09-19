@@ -54,7 +54,7 @@ final class HasTextNodeConverter<C extends ConverterContext> implements TryingSh
                                    final Class<?> type,
                                    final C context) {
         return null != value ?
-            ((HasTextNode)value).toTextNode() :
+            ((HasTextNode)value).textNode() :
             null;
     }
 
