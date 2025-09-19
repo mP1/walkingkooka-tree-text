@@ -24,6 +24,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 
@@ -52,6 +53,17 @@ public final class TextToTextNodeConverterTest implements ConverterTesting2<Text
         this.convertAndCheck(
             new StringBuilder(text),
             TextNode.class,
+            TextNode.text(text)
+        );
+    }
+
+    @Test
+    public void testConvertStringToHasTextNode() {
+        final String text = "Hello";
+
+        this.convertAndCheck(
+            text,
+            HasTextNode.class,
             TextNode.text(text)
         );
     }

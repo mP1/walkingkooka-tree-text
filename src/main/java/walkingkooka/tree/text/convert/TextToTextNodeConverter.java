@@ -19,11 +19,12 @@ package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
+import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 
 /**
- * Converts a String to a {@link Text}
+ * Converts several sources such as {@link String} or {@link HasTextNode} or {@link TextNode} to a {@link TextNode}
  */
 final class TextToTextNodeConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
@@ -42,7 +43,7 @@ final class TextToTextNodeConverter<C extends ConverterContext> implements TextT
                                 final Class<?> type,
                                 final C context) {
         return false == value instanceof TextNode &&
-            (Text.class == type || TextNode.class == type);
+            (Text.class == type || HasTextNode.class == type || TextNode.class == type);
     }
 
     @Override
