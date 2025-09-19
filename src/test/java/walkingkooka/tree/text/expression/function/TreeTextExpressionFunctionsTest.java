@@ -61,7 +61,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         TreePrintableTesting {
 
     @Test
-    public void testGetTextWithString() {
+    public void testGetStyleWithString() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -77,7 +77,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testGetTextWithStringBuilder() {
+    public void testGetStyleWithStringBuilder() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -95,7 +95,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testGetTextWithTextNode() {
+    public void testGetStyleWithTextNode() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
