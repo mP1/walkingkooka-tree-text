@@ -90,7 +90,7 @@ public final class HasTextNodeConverterTest implements ConverterTesting2<HasText
         this.convertAndCheck(
             new HasTextNode() {
                 @Override
-                public TextNode toTextNode() {
+                public TextNode textNode() {
                     return textNode;
                 }
             },
