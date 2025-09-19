@@ -42,7 +42,7 @@ final class TextToTextNodeConverter<C extends ConverterContext> implements TextT
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return false == value instanceof TextNode &&
+        return (null == value || false == value instanceof TextNode) &&
             (Text.class == type || HasTextNode.class == type || TextNode.class == type);
     }
 
@@ -50,7 +50,9 @@ final class TextToTextNodeConverter<C extends ConverterContext> implements TextT
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return TextNode.text(text);
+        return null == text ?
+            null :
+            TextNode.text(text);
     }
 
     @Override
