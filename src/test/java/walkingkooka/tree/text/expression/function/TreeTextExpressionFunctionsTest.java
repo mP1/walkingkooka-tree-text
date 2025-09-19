@@ -41,6 +41,7 @@ import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
 import walkingkooka.tree.text.FontFamily;
 import walkingkooka.tree.text.FontSize;
 import walkingkooka.tree.text.FontWeight;
+import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Opacity;
@@ -113,18 +114,33 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
-    public void testGetTextWithTextStyle() {
-        final TextStyle textStyle = TextStyle.EMPTY.set(
-            TextStylePropertyName.TEXT_ALIGN,
-            TextAlign.LEFT
-        );
+    public void testGetTextNodeWithHasTextNode() {
+        final TextNode textNode = TextNode.text("text123");
 
         this.evaluateAndCheck(
-            "getStyle",
+            "getTextNode",
             Lists.of(
-                textStyle
+                new HasTextNode() {
+                    @Override
+                    public TextNode textNode() {
+                        return textNode;
+                    }
+                }
             ),
-            textStyle
+            textNode
+        );
+    }
+
+    @Test
+    public void testGetTextNodeWithTextNode() {
+        final TextNode textNode = TextNode.text("text123");
+
+        this.evaluateAndCheck(
+            "getTextNode",
+            Lists.of(
+                textNode
+            ),
+            textNode
         );
     }
 
@@ -674,6 +690,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         switch(name.value()) {
                             case "getStyle":
                                 return TreeTextExpressionFunctions.getStyle();
+                            case "getTextNode":
+                                return TreeTextExpressionFunctions.getTextNode();
                             case "hyperlink":
                                 return TreeTextExpressionFunctions.hyperlink();
                             case "image":
@@ -717,6 +735,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
                                 Converters.simple(), // handles Text -> TextNode
                                 TreeTextConverters.hasTextStyle(),
+                                TreeTextConverters.hasTextNode(),
                                 TreeTextConverters.textToTextNode(),
                                 TreeTextConverters.textToTextStyle(),
                                 TreeTextConverters.textToTextStylePropertyName(),
