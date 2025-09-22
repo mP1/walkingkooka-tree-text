@@ -327,7 +327,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 JsonNode.object()
                     .set(
                         JsonPropertyName.with(TextStylePropertyName.WILDCARD.value()),
-                        JsonNode.string("This must fail!")
+                        "This must fail!"
                     ),
                 this.createPatchContext()
             )
