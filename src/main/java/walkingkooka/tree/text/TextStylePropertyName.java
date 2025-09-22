@@ -894,9 +894,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             )
         );
         this.patchRemove = JsonNode.object()
-            .set(
-                this.jsonPropertyName,
-                JsonNode.nullNode()
+            .setNull(
+                this.jsonPropertyName
             );
     }
 
