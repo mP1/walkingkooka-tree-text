@@ -326,9 +326,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             TextStylePropertyName.TEXT_ALIGN,
             null,
             JsonNode.object()
-                .set(
-                    JsonPropertyName.with("textAlign"),
-                    JsonNode.nullNode()
+                .setNull(
+                    JsonPropertyName.with("textAlign")
                 )
         );
     }
@@ -369,14 +368,13 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 propertyName,
                 null,
                 JsonNode.object()
-                    .set(
+                    .setNull(
                         JsonPropertyName.with(
                             CaseKind.KEBAB.change(
                                 propertyName.name,
                                 CaseKind.CAMEL
                             )
-                        ),
-                        JsonNode.nullNode()
+                        )
                     )
             );
         }
