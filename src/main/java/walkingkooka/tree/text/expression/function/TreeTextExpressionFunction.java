@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text.expression.function;
 
+import walkingkooka.Cast;
 import walkingkooka.net.Url;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -59,8 +60,8 @@ abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationConte
         .required(TextStyle.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
-    final static ExpressionFunctionParameter<TextStylePropertyName> TEXT_STYLE_PROPERTY_NAME = ExpressionFunctionParameterName.with("propertyName")
-        .required(TextStylePropertyName.class)
+    final static ExpressionFunctionParameter<TextStylePropertyName<?>> TEXT_STYLE_PROPERTY_NAME = ExpressionFunctionParameterName.with("propertyName")
+        .required(Cast.<Class<TextStylePropertyName<?>>>to(TextStylePropertyName.class))
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
     final static ExpressionFunctionParameter<TextNode> TEXT_NODE = ExpressionFunctionParameterName.with("textNode")
