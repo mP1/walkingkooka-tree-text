@@ -87,7 +87,7 @@ abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationConte
     private final Optional<ExpressionFunctionName> name;
 
     /**
-     * All functions are pure except for cell.
+     * All functions are pure
      */
     @Override
     public final boolean isPure(final ExpressionPurityContext context) {
