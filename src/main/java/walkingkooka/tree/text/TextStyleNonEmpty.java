@@ -41,13 +41,13 @@ import java.util.function.Predicate;
 final class TextStyleNonEmpty extends TextStyle {
 
     /**
-     * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextNodeMap}.
+     * Factory that creates a {@link TextStyleNonEmpty} from a {@link TextStylePropertiesMap}.
      */
-    static TextStyleNonEmpty with(final TextNodeMap value) {
+    static TextStyleNonEmpty with(final TextStylePropertiesMap value) {
         return new TextStyleNonEmpty(value);
     }
 
-    private TextStyleNonEmpty(final TextNodeMap value) {
+    private TextStyleNonEmpty(final TextStylePropertiesMap value) {
         super();
         this.value = value;
     }
@@ -81,11 +81,11 @@ final class TextStyleNonEmpty extends TextStyle {
         return oldValuesMap.equals(values) ?
             this :
             TextStyleNonEmpty.with(
-                TextNodeMap.with(values)
+                TextStylePropertiesMap.with(values)
             );
     }
 
-    final TextNodeMap value;
+    final TextStylePropertiesMap value;
 
     // merge............................................................................................................
 
@@ -108,20 +108,20 @@ final class TextStyleNonEmpty extends TextStyle {
             this :
             merged.equals(before) ?
                 other :
-                new TextStyleNonEmpty(TextNodeMap.with(merged));
+                new TextStyleNonEmpty(TextStylePropertiesMap.with(merged));
     }
 
     // replace..........................................................................................................
 
     @Override
     TextNode replaceNonNull(final TextNode textNode) {
-        return textNode.setAttributesNonEmptyTextStyleMap(this.value);
+        return textNode.setAttributesNonEmpty(this.value);
     }
 
     // setChildren......................................................................................................
 
     @Override
-    TextNodeMap textStyleMap() {
+    TextStylePropertiesMap textStyleMap() {
         return this.value;
     }
 
@@ -131,7 +131,7 @@ final class TextStyleNonEmpty extends TextStyle {
     <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName) {
         Object get = null;
 
-        final TextNodeMap value = this.value;
+        final TextStylePropertiesMap value = this.value;
 
         switch (propertyName.name) {
             case BORDER_COLOR:
@@ -310,7 +310,7 @@ final class TextStyleNonEmpty extends TextStyle {
 
     private <V> TextStyleNonEmpty set1(final TextStylePropertyName<V> propertyName,
                                        final V value) {
-        TextNodeMap map = this.value;
+        TextStylePropertiesMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
         int mode = 0; // new property added.
@@ -334,14 +334,14 @@ final class TextStyleNonEmpty extends TextStyle {
         // replace didnt happen
         if (0 == mode) {
             list.add(Maps.entry(propertyName, value));
-            TextNodeMapEntrySet.sort(list);
+            TextStylePropertiesMapEntrySet.sort(list);
         }
 
         return 1 == mode ?
             this :
             new TextStyleNonEmpty(
-                TextNodeMap.withTextStyleMapEntrySet(
-                    TextNodeMapEntrySet.withList(list)
+                TextStylePropertiesMap.withTextStyleMapEntrySet(
+                    TextStylePropertiesMapEntrySet.withList(list)
                 )
             );
     }
@@ -456,7 +456,7 @@ final class TextStyleNonEmpty extends TextStyle {
     private TextStyle remove1(List<Entry<TextStylePropertyName<?>, Object>> list) {
         return list.isEmpty() ?
             TextStyle.EMPTY :
-            new TextStyleNonEmpty(TextNodeMap.withTextStyleMapEntrySet(TextNodeMapEntrySet.withList(list))); // no need to sort after a delete
+            new TextStyleNonEmpty(TextStylePropertiesMap.withTextStyleMapEntrySet(TextStylePropertiesMapEntrySet.withList(list))); // no need to sort after a delete
     }
 
     // TextStyleVisitor.................................................................................................

@@ -18,80 +18,49 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.map.MapTesting2;
+import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
+import walkingkooka.collect.set.ImmutableSetTesting;
 
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStylePropertyName<?>, Object> {
+public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTesting<TextStylePropertiesMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
+    IteratorTesting {
 
     @Test
     public void testWithInvalidPropertyFails() {
         assertThrows(
             NullPointerException.class,
-            () -> TextNodeMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+            () -> TextStylePropertiesMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
         );
     }
 
     @Test
-    public void testWithMapCopied() {
-        final Map<TextStylePropertyName<?>, Object> from = Maps.sorted();
-        from.put(this.property1(), this.value1());
-        from.put(this.property2(), this.value2());
-
-        final TextNodeMap map = TextNodeMap.with(from);
-
-        from.clear();
-        this.sizeAndCheck(map, 2);
-    }
-
-    @Test
-    public void testGet() {
-        this.getAndCheck(this.property1(), this.value1());
-    }
-
-    @Test
-    public void testGetUnknown() {
-        this.getAndCheckAbsent(TextStylePropertyName.DIRECTION);
+    public void testEmpty() {
+        assertSame(TextStylePropertiesMapEntrySet.EMPTY, TextStylePropertiesMapEntrySet.with(Maps.empty()));
     }
 
     @Test
     public void testSize() {
-        this.sizeAndCheck(this.createMap(), 2);
+        this.sizeAndCheck(this.createSet(), 2);
     }
 
     @Test
-    public void testPutFails() {
-        assertThrows(UnsupportedOperationException.class, () -> this.createMap().put(this.property1(), this.value1()));
+    public void testAddFails() {
+        this.addFails(this.createSet(), Maps.entry(this.property1(), this.value1()));
     }
 
     @Test
-    public void testKeySet() {
-        final List<TextStylePropertyName<?>> keys = Lists.array();
+    public void testIteratorRemoveFails() {
+        final Iterator<?> iterator = this.createSet().iterator();
+        iterator.next();
 
-        for (TextStylePropertyName<?> key : this.createMap().keySet()) {
-            keys.add(key);
-        }
-
-        this.checkEquals(Lists.of(this.property2(), this.property1()), keys);
-    }
-
-    @Test
-    public void testUnmarshallEmptyJsonObject() {
-        assertSame(
-            TextNodeMap.EMPTY,
-            TextNodeMap.unmarshall(
-                JsonNode.object(),
-                JsonNodeUnmarshallContexts.fake()
-            )
-        );
+        assertThrows(UnsupportedOperationException.class, iterator::remove);
     }
 
     @Test
@@ -100,15 +69,15 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        this.toStringAndCheck(this.createMap(), map.toString());
+        this.toStringAndCheck(this.createSet(), map.entrySet().toString());
     }
 
     @Override
-    public TextNodeMap createMap() {
+    public TextStylePropertiesMapEntrySet createSet() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.ordered();
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
-        return TextNodeMap.with(map);
+        return TextStylePropertiesMapEntrySet.with(map);
     }
 
     private TextStylePropertyName<?> property1() {
@@ -127,8 +96,27 @@ public final class TextNodeMapTest implements MapTesting2<TextNodeMap, TextStyle
         return FontFamily.with("Times News Roman");
     }
 
+    // ImmutableSetTesting..............................................................................................
+
     @Override
-    public Class<TextNodeMap> type() {
-        return TextNodeMap.class;
+    public void testSetElementsNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetElementsSame() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testDeleteIfWithNeverPredicate() {
+        throw new UnsupportedOperationException();
+    }
+
+    // Class............................................................................................................
+
+    @Override
+    public Class<TextStylePropertiesMapEntrySet> type() {
+        return TextStylePropertiesMapEntrySet.class;
     }
 }

@@ -119,7 +119,7 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
     }
 
     @Override //
-    final TextNode setAttributesEmptyTextStyleMap() {
+    final TextNode setAttributesEmpty() {
         return this;
     }
 
@@ -127,12 +127,12 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
      * Creates a new {@link TextStyleNode} with this leaf as its only child with the given attributes.
      */
     @Override //
-    final TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    final TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap) {
         return TextStyleNode.with(
             Lists.of(
                 this
             ),
-            textStyleMap
+            textStylePropertiesMap
         );
     }
 

@@ -76,7 +76,7 @@ final class TextStyleEmpty extends TextStyle {
     @Override
     TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
         return TextStyleNonEmpty.with(
-            TextNodeMap.with(values)
+            TextStylePropertiesMap.with(values)
         );
     }
 
@@ -96,14 +96,14 @@ final class TextStyleEmpty extends TextStyle {
 
     @Override
     TextNode replaceNonNull(final TextNode textNode) {
-        return textNode.setAttributesEmptyTextStyleMap();
+        return textNode.setAttributesEmpty();
     }
 
     // setChildren......................................................................................................
 
     @Override
-    TextNodeMap textStyleMap() {
-        return TextNodeMap.EMPTY;
+    TextStylePropertiesMap textStyleMap() {
+        return TextStylePropertiesMap.EMPTY;
     }
 
     // get/set/remove...................................................................................................
@@ -229,8 +229,8 @@ final class TextStyleEmpty extends TextStyle {
         }
 
         return TextStyleNonEmpty.with(
-            TextNodeMap.withTextStyleMapEntrySet(
-                TextNodeMapEntrySet.withList(entries)
+            TextStylePropertiesMap.withTextStyleMapEntrySet(
+                TextStylePropertiesMapEntrySet.withList(entries)
             )
         );
     }

@@ -119,7 +119,7 @@ public final class TextStyleNameNode extends TextParentNode {
     }
 
     @Override
-    TextNode setAttributesEmptyTextStyleMap() {
+    TextNode setAttributesEmpty() {
         return this;
     }
 
@@ -127,12 +127,12 @@ public final class TextStyleNameNode extends TextParentNode {
      * Factory that creates a new {@link TextStyleNode} with the given attributes and this as the only child.
      */
     @Override
-    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap) {
         return TextStyleNode.with(
             Lists.of(
                 this
             ),
-            textStyleMap
+            textStylePropertiesMap
         );
     }
 

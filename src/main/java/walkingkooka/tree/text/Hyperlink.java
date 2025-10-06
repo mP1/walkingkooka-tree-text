@@ -219,17 +219,17 @@ public final class Hyperlink extends TextParentNode {
     }
 
     @Override
-    TextNode setAttributesEmptyTextStyleMap() {
+    TextNode setAttributesEmpty() {
         return this;
     }
 
     @Override
-    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap) {
         return TextStyleNode.with(
             Lists.of(
                 this
             ),
-            textStyleMap
+            textStylePropertiesMap
         );
     }
 

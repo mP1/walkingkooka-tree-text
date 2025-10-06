@@ -64,7 +64,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         final TextNode child = TextNode.text("child");
         final TextNode styleNode = TextStyleNode.with(
             Lists.of(child),
-            TextNodeMap.with(
+            TextStylePropertiesMap.with(
                 Maps.of(
                     TextStylePropertyName.WIDTH,
                     Length.pixel(1.0)
@@ -361,7 +361,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             Lists.of(
                 text
             ),
-            TextNodeMap.with(
+            TextStylePropertiesMap.with(
                 Maps.of(
                     TextStylePropertyName.COLOR,
                     Color.BLACK
@@ -400,7 +400,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     TextNode.text("abc"),
                     TextNode.text("xyz")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.parse("#123456")
@@ -420,7 +420,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Lists.of(
                             TextNode.text("middle")
                         ),
-                        TextNodeMap.with(
+                        TextStylePropertiesMap.with(
                             Maps.of(
                                 TextStylePropertyName.COLOR,
                                 Color.parse("#222")
@@ -428,7 +428,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         )
                     )
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.parse("#111")
@@ -450,7 +450,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Lists.of(
                             TextNode.text("middle1")
                         ),
-                        TextNodeMap.with(
+                        TextStylePropertiesMap.with(
                             Maps.of(
                                 TextStylePropertyName.COLOR,
                                 Color.parse("#222")
@@ -461,7 +461,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Lists.of(
                             TextNode.text("middle2")
                         ),
-                        TextNodeMap.with(
+                        TextStylePropertiesMap.with(
                             Maps.of(
                                 TextStylePropertyName.COLOR,
                                 Color.parse("#333")
@@ -469,7 +469,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         )
                     )
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.parse("#111")
@@ -493,7 +493,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Lists.of(
                             TextNode.text("middle")
                         ),
-                        TextNodeMap.with(
+                        TextStylePropertiesMap.with(
                             Maps.of(
                                 TextStylePropertyName.COLOR,
                                 Color.parse("#222")
@@ -502,7 +502,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     ),
                     TextNode.text("after")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.parse("#111")
@@ -559,7 +559,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 Lists.of(
                     TextNode.text("Text123")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.BLACK
@@ -583,7 +583,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 Lists.of(
                     TextNode.text("Text123")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.BLACK
@@ -599,7 +599,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 Lists.of(
                     TextNode.text("Text123")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.BLACK,
@@ -618,7 +618,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 Lists.of(
                     TextNode.text("Text123")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.BLACK
@@ -634,7 +634,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 Lists.of(
                     TextNode.text("Text123")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.COLOR,
                         Color.BLACK,
@@ -883,7 +883,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     TextNode.text("a1"),
                     TextNode.text("b2")
                 ),
-                TextNodeMap.with(
+                TextStylePropertiesMap.with(
                     Maps.of(
                         TextStylePropertyName.BACKGROUND_COLOR, Color.fromRgb(0x123456),
                         TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.SEPARATE,

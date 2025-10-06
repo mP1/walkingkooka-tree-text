@@ -42,7 +42,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
         final TextStyleNonEmpty textStyle = (TextStyleNonEmpty) TextStyle.EMPTY.setValues(map);
         this.checkEquals(
-            TextNodeMap.class,
+            TextStylePropertiesMap.class,
             textStyle.value()
                 .getClass(),
             () -> "" + textStyle.value
@@ -81,7 +81,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
         this.replaceAndCheck(textStyle,
             TextNode.style(children),
-            TextStyleNode.with(children, TextNodeMap.with(textStyle.value())));
+            TextStyleNode.with(children, TextStylePropertiesMap.with(textStyle.value())));
     }
 
     @Test
@@ -1555,7 +1555,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     private TextStyleNonEmpty createTextStyle(final Map<TextStylePropertyName<?>, Object> map) {
         return TextStyleNonEmpty.with(
-            TextNodeMap.with(map)
+            TextStylePropertiesMap.with(map)
         );
     }
 

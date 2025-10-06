@@ -40,7 +40,7 @@ public final class TextStyleNode extends TextParentNode {
 
     public final static TextNodeName NAME = TextNodeName.fromClass(TextStyleNode.class);
 
-    final static TextNodeMap NO_ATTRIBUTES_MAP = TextNodeMap.with(Maps.empty());
+    final static TextStylePropertiesMap NO_ATTRIBUTES_MAP = TextStylePropertiesMap.with(Maps.empty());
 
     /**
      * Factory that creates a {@link TextStyleNode} with the given children and style.
@@ -48,7 +48,7 @@ public final class TextStyleNode extends TextParentNode {
      */
     // TextStyle.setTextNodes
     static TextNode with(final List<TextNode> children,
-                         final TextNodeMap properties) {
+                         final TextStylePropertiesMap properties) {
         final List<TextNode> copy = Lists.immutable(children);
         return properties.isEmpty() && copy.size() == 1 ?
             copy.get(0) :
@@ -60,7 +60,7 @@ public final class TextStyleNode extends TextParentNode {
      */
     private TextStyleNode(final int index,
                           final List<TextNode> children,
-                          final TextNodeMap attributes) {
+                          final TextStylePropertiesMap attributes) {
         super(index, children);
         this.attributes = attributes;
     }
@@ -118,22 +118,22 @@ public final class TextStyleNode extends TextParentNode {
     }
 
     @Override
-    TextNode setAttributesEmptyTextStyleMap() {
-        return this.setAttributesTextStyleMap(TextNodeMap.EMPTY);
+    TextNode setAttributesEmpty() {
+        return this.setAttributesTextStyleMap(TextStylePropertiesMap.EMPTY);
     }
 
     @Override
-    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
-        return this.setAttributesTextStyleMap(textStyleMap);
+    TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap) {
+        return this.setAttributesTextStyleMap(textStylePropertiesMap);
     }
 
-    private TextNode setAttributesTextStyleMap(final TextNodeMap textStyleMap) {
+    private TextNode setAttributesTextStyleMap(final TextStylePropertiesMap textStyleMap) {
         return this.attributes.equals(textStyleMap) ?
             this :
             this.replaceAttributes(textStyleMap);
     }
 
-    private TextNode replaceAttributes(final TextNodeMap attributes) {
+    private TextNode replaceAttributes(final TextStylePropertiesMap attributes) {
         final List<TextNode> children = this.children;
 
         // eg might need to unwrap the only child if attributes is TextStyle#EMPTY
@@ -152,7 +152,7 @@ public final class TextStyleNode extends TextParentNode {
         return TextStyle.EMPTY.setValues(this.attributes);
     }
 
-    private final TextNodeMap attributes;
+    private final TextStylePropertiesMap attributes;
 
     // replace.........................................................................................................
 
@@ -205,7 +205,7 @@ public final class TextStyleNode extends TextParentNode {
             switch (child.name().value()) {
                 case STYLES:
                     textStyle = textStyle.setValues(
-                        TextNodeMap.unmarshall(
+                        TextStylePropertiesMap.unmarshall(
                             child,
                             context
                         )

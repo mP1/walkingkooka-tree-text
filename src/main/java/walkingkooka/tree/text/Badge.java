@@ -198,26 +198,26 @@ public final class Badge extends TextParentNode {
     }
 
     @Override
-    TextNode setAttributesEmptyTextStyleMap() {
+    TextNode setAttributesEmpty() {
         final TextNode child = this.childOrEmpty()
             .orElse(null);
 
         return null != child ?
             this.setChild(
-                child.setAttributesEmptyTextStyleMap(),
+                child.setAttributesEmpty(),
                 0
             ) :
             this;
     }
 
     @Override
-    TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap) {
+    TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap) {
         final TextNode child = this.childOrEmpty()
             .orElse(null);
 
         return null != child ?
             this.setChild(
-                child.setAttributesNonEmptyTextStyleMap(textStyleMap),
+                child.setAttributesNonEmpty(textStylePropertiesMap),
                 0
             ) :
             this;
