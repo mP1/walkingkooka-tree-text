@@ -241,21 +241,21 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     @Override
     public final TextNode setAttributes(final Map<TextStylePropertyName<?>, Object> attributes) {
-        final TextNodeMap textStyleMap = TextNodeMap.with(attributes);
+        final TextStylePropertiesMap textStyleMap = TextStylePropertiesMap.with(attributes);
         return textStyleMap.isEmpty() ?
-            this.setAttributesEmptyTextStyleMap() :
-            this.setAttributesNonEmptyTextStyleMap(textStyleMap);
+            this.setAttributesEmpty() :
+            this.setAttributesNonEmpty(textStyleMap);
     }
 
     /**
      * Factory called when no attributes.
      */
-    abstract TextNode setAttributesEmptyTextStyleMap();
+    abstract TextNode setAttributesEmpty();
 
     /**
      * Factory that accepts a non empty {@link TextStyleNode} either wrapping or replacing (for {@link TextStyleNode}.
      */
-    abstract TextNode setAttributesNonEmptyTextStyleMap(final TextNodeMap textStyleMap);
+    abstract TextNode setAttributesNonEmpty(final TextStylePropertiesMap textStylePropertiesMap);
 
     /**
      * Would be setter that adds the given {@link TextStyle}.

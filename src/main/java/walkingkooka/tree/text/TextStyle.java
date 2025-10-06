@@ -157,7 +157,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * A {@link Map} holding the {@link TextStylePropertyName} and values.
      */
-    abstract TextNodeMap textStyleMap();
+    abstract TextStylePropertiesMap textStyleMap();
 
     // merge............................................................................................................
 
@@ -286,7 +286,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
         final Map<TextStylePropertyName<?>, Object> copy;
 
-        if (values instanceof TextNodeMap) {
+        if (values instanceof TextStylePropertiesMap) {
             copy = values;
         } else {
             copy = this.valuesMutableCopy();

@@ -108,7 +108,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         final TextStyle textStyle = TextStyle.EMPTY.setValues(map);
         this.checkEquals(
-            TextNodeMap.class,
+            TextStylePropertiesMap.class,
             textStyle.value().getClass(),
             () -> "" + textStyle
         );
@@ -127,7 +127,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
             children,
-            TextStyleNode.with(children, TextNodeMap.EMPTY));
+            TextStyleNode.with(children, TextStylePropertiesMap.EMPTY));
     }
 
     @Test
@@ -146,7 +146,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setChildrenAndCheck(TextStyle.EMPTY,
             children,
-            TextStyleNode.with(children, TextNodeMap.EMPTY));
+            TextStyleNode.with(children, TextStylePropertiesMap.EMPTY));
     }
 
     @Test
