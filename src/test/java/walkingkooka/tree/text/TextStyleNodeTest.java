@@ -206,8 +206,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     public void testSetDifferentAttributes() {
         final TextStyleNode node = this.createTextNode();
         final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(
-            TextStylePropertyName.with("abc"),
-            "xyz"
+            TextStylePropertyName.COLOR,
+            Color.BLACK
         );
 
         final TextNode different = node.setAttributes(attributes);
@@ -221,16 +221,16 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     public void testSetDifferentAttributesTwice() {
         final TextStyleNode node = this.createTextNode();
         final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(
-            TextStylePropertyName.with("abc"),
-            "xyz"
+            TextStylePropertyName.COLOR,
+            Color.BLACK
         );
 
         final TextNode different = node.setAttributes(attributes);
         assertNotSame(different, node);
 
         final Map<TextStylePropertyName<?>, Object> attributes2 = Maps.of(
-            TextStylePropertyName.with("def"),
-            "qrs"
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
         );
         final TextNode different2 = different.setAttributes(attributes2);
         assertNotSame(different, different2);
@@ -249,7 +249,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         assertNotSame(different, node);
         this.childCountCheck(different, different());
 
-        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(TextStylePropertyName.with("abc"), "xyz");
+        final Map<TextStylePropertyName<?>, Object> attributes = Maps.of(TextStylePropertyName.COLOR, Color.BLACK);
 
         final TextNode different2 = node.setAttributes(attributes);
         assertNotSame(different2, different);
@@ -994,11 +994,11 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             textStyleNode()
                 .setAttributes(
                     Maps.of(
-                        TextStylePropertyName.with("abc"),
-                        "123"
+                        TextStylePropertyName.COLOR,
+                        Color.WHITE
                     )
                 ),
-            "{abc: \"123\"}[]"
+            "{color: white}[]"
         );
     }
 
@@ -1008,26 +1008,27 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             textStyleNode()
                 .setAttributes(
                     Maps.of(
-                        TextStylePropertyName.with("abc"),
-                        "123",
-                        TextStylePropertyName.with("def"),
-                        "456"
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK,
+                        TextStylePropertyName.TEXT_ALIGN,
+                        TextAlign.LEFT
                     )
                 ),
-            "{abc: \"123\", def: \"456\"}[]"
+            "{color: black, text-align: LEFT}[]"
         );
     }
 
     @Test
     public void testToStringWithChildrenAndAttributes() {
         this.toStringAndCheck(
-            text1().setAttributes(
-                Maps.of(
-                    TextStylePropertyName.with("style-1"),
-                    "value-1"
-                )
-            ),
-            "{style-1: \"value-1\"}[\"text-1a\"]"
+            text1()
+                .setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.BLACK
+                    )
+                ),
+            "{color: black}[\"text-1a\"]"
         );
     }
 

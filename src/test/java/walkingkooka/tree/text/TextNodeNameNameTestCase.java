@@ -38,30 +38,32 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
 
     @Test
     public final void testWithDashDashFails() {
-        final InvalidCharacterException thrown = assertThrows(
-            InvalidCharacterException.class,
-            () -> this.createName("abc-def--ghi")
-        );
+        if(false == this instanceof TextStylePropertyNameTest) {
+            final InvalidCharacterException thrown = assertThrows(
+                InvalidCharacterException.class,
+                () -> this.createName("abc-def--ghi")
+            );
 
-        this.checkEquals(
-            "Invalid character '-' at 8",
-            thrown.getMessage()
-        );
+            this.checkEquals(
+                "Invalid character '-' at 8",
+                thrown.getMessage()
+            );
+        }
     }
 
     @Override
     public final String nameText() {
-        return "xyz";
+        return "color";
     }
 
     @Override
     public final String differentNameText() {
-        return "different";
+        return "text-align";
     }
 
     @Override
     public final String nameTextLess() {
-        return "before";
+        return "background-color";
     }
 
     @Override

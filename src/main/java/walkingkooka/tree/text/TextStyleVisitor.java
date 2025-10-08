@@ -359,10 +359,4 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
     protected void visitWritingMode(final WritingMode writingMode) {
         // nop
     }
-
-    // unknown..........................................................................................................
-
-    protected void visitUnknown(final Object value) {
-        // nop
-    }
 }
