@@ -89,11 +89,10 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     @Override
     public final boolean equals(final Object other) {
         return this == other ||
-            this.canBeEqual(other) &&
+            null != other &&
+                this.getClass() == other.getClass() &&
                 this.equals0(Cast.to(other));
     }
-
-    abstract boolean canBeEqual(final Object other);
 
     private boolean equals0(final N other) {
         return caseSensitivity().equals(this.name, other.name);

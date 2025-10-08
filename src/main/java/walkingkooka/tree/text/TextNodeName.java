@@ -44,11 +44,6 @@ public final class TextNodeName extends TextNodeNameName<TextNodeName> {
     }
 
     @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof TextNodeName;
-    }
-
-    @Override
     public CaseSensitivity caseSensitivity() {
         return CASE_SENSITIVITY;
     }
