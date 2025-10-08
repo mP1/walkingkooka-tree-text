@@ -56,11 +56,6 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
 
     // Object..........................................................................................................
 
-    @Override
-    boolean canBeEqual(final Object other) {
-        return other instanceof TextStyleName;
-    }
-
     // HasCaseSensitivity................................................................................................
 
     @Override
