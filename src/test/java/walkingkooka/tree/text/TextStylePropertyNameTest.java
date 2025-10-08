@@ -410,6 +410,26 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     // helpers..........................................................................................................
 
     @Override
+    public void testCompareDifferentCase() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testNameInvalidCharFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testNameMaxLength() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testNameValidChars() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TextStylePropertyName<?> createName(final String name) {
         return TextStylePropertyName.with(name);
     }

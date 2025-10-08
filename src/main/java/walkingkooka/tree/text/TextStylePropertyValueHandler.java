@@ -70,13 +70,6 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
-     * {@see TextStylePropertyValueHandlerJsonNodeWithType}
-     */
-    static TextStylePropertyValueHandlerJsonNodeWithType jsonNodeWithType() {
-        return TextStylePropertyValueHandlerJsonNodeWithType.INSTANCE;
-    }
-
-    /**
      * {@see TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength}
      */
     static TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength noneLengthNumberLengthPixelLength() {

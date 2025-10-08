@@ -42,7 +42,8 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 /**
- * The {@link Name} of an {@link TextStyle} property.
+ * The {@link Name} of an {@link TextStyle} property. Note only supported property names are allowed, and each has a
+ * constant. Attempts to call {@link #with(String)} with an unknown name will result in an {@link IllegalArgumentException}.
  */
 public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> implements HasUrlFragment {
 
@@ -867,16 +868,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         Objects.requireNonNull(name, "name");
 
         final TextStylePropertyName<?> textStylePropertyName = CONSTANTS.get(name);
-        return null != textStylePropertyName ?
-            textStylePropertyName :
-            new TextStylePropertyName<>(checkName(name),
-                TextStylePropertyValueHandler.jsonNodeWithType(),
-                TextStylePropertyName::acceptUnknown);
-    }
+        if(null == textStylePropertyName) {
+            throw new IllegalArgumentException("Unknown text style property name: " + name);
+        }
 
-    private static void acceptUnknown(final Object value,
-                                      final TextStyleVisitor visitor) {
-        visitor.visitUnknown(value);
+        return textStylePropertyName;
     }
 
     private TextStylePropertyName(final String name,

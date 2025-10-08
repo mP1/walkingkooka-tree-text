@@ -400,9 +400,4 @@ public class FakeTextStyleVisitor extends TextStyleVisitor {
     protected void visitWritingMode(final WritingMode writingMode) {
         throw new UnsupportedOperationException();
     }
-
-    @Override
-    protected void visitUnknown(final Object value) {
-        throw new UnsupportedOperationException();
-    }
 }
