@@ -83,7 +83,8 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
 
     @Override
     public final int hashCode() {
-        return this.caseSensitivity().hash(this.name);
+        return this.caseSensitivity()
+            .hash(this.name);
     }
 
     @Override
@@ -95,7 +96,11 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     }
 
     private boolean equals0(final N other) {
-        return caseSensitivity().equals(this.name, other.name);
+        return caseSensitivity()
+            .equals(
+                this.name,
+                other.name
+            );
     }
 
     @Override
@@ -107,7 +112,12 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
 
     @Override
     public final int compareTo(final N other) {
-        return this.caseSensitivity().comparator().compare(this.name, other.name);
+        return this.caseSensitivity()
+            .comparator()
+            .compare(
+                this.name,
+                other.name
+            );
     }
 
     // JsonNodeContext..................................................................................................
