@@ -1051,8 +1051,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     private final static JsonNodeMarshallContext MARSHALL_CONTEXT = JsonNodeMarshallContexts.basic();
 
-    // Object..........................................................................................................
-
     // HasCaseSensitivity................................................................................................
 
     @Override

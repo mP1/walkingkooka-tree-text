@@ -54,8 +54,6 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
             TextStyleName.class);
     }
 
-    // Object..........................................................................................................
-
     // HasCaseSensitivity................................................................................................
 
     @Override
