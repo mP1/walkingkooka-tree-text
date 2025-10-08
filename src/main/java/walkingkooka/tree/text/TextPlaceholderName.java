@@ -51,8 +51,6 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
             TextPlaceholderName.class);
     }
 
-    // Object..........................................................................................................
-
     // HasCaseSensitivity................................................................................................
 
     @Override
