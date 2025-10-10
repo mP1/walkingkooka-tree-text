@@ -17,8 +17,8 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.color.ColorStartup;
 import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.tree.json.TreeJsonStartup;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 
 /**
@@ -27,7 +27,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 public final class TreeTextStartup implements PublicStaticHelper {
 
     static {
-        TreeJsonStartup.init();
+        ColorStartup.init();
 
         // register json marshallers/unmarshallers.
         Text.EMPTY_TEXT.textOffset();
