@@ -18,12 +18,14 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -43,24 +45,48 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
     static final TextStylePropertiesMap EMPTY = new TextStylePropertiesMap(TextStylePropertiesMapEntrySet.EMPTY);
 
     /**
-     * Factory that takes a copy if the given {@link Map} is not a {@link TextStylePropertiesMap}.
+     * Factory that returns a {@link TextStylePropertiesMap} taking a copy of the values inside the {@link Map}.
      */
     static TextStylePropertiesMap with(final Map<TextStylePropertyName<?>, Object> map) {
         Objects.requireNonNull(map, "map");
 
-        TextStylePropertiesMap textStylePropertiesMap;
+        final TextStylePropertiesMap textStylePropertiesMap;
 
         if (map instanceof TextStylePropertiesMap) {
             textStylePropertiesMap = (TextStylePropertiesMap) map;
         } else {
+            int count = 0;
+            final List<Object> values = Lists.autoExpandArray();
+
+            for (final Entry<TextStylePropertyName<?>, Object> entry : map.entrySet()) {
+                final TextStylePropertyName<?> propertyName = entry.getKey();
+                final int index = propertyName.index();
+
+                final Object value = entry.getValue();
+                propertyName.checkValue(value);
+
+                values.set(
+                    index,
+                    entry.getValue()
+                );
+
+                count++;
+            }
+
             textStylePropertiesMap = withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.with(map)
+                TextStylePropertiesMapEntrySet.with(
+                    values.toArray(),
+                    count
+                )
             );
         }
 
         return textStylePropertiesMap;
     }
 
+    /**
+     * Factory that returns a {@link TextStylePropertiesMap} with the given entries.
+     */
     static TextStylePropertiesMap withTextStyleMapEntrySet(final TextStylePropertiesMapEntrySet entrySet) {
         return entrySet.isEmpty() ?
             EMPTY :
@@ -70,6 +96,26 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
     private TextStylePropertiesMap(final TextStylePropertiesMapEntrySet entries) {
         super();
         this.entries = entries;
+    }
+
+    @Override
+    public Object get(final Object key) {
+        return key instanceof TextStylePropertyName ?
+            this.getValue(
+                (TextStylePropertyName<?>) key
+            ) :
+            null;
+    }
+
+    Object getValue(final TextStylePropertyName<?> name) {
+        Objects.requireNonNull(name, "name");
+
+        final Object[] values = this.entries.values;
+        final int index = name.index();
+
+        return index >= values.length ?
+            null :
+            values[index];
     }
 
     @Override
@@ -85,7 +131,7 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         this.entries.accept(visitor);
     }
 
-    // JsonNodeContext..................................................................................................
+    // json.............................................................................................................
 
     static TextStylePropertiesMap unmarshall(final JsonNode json,
                                              final JsonNodeUnmarshallContext context) {

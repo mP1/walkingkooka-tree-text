@@ -184,10 +184,29 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     final void mergeAndCheck(final TextStyle textStyle,
                              final TextStyle other,
                              final TextStyle expected) {
+        final TextStyle merged = textStyle.merge(other);
+
         this.checkEquals(
             expected,
-            textStyle.merge(other),
+            merged,
             () -> textStyle + " merge " + other
+        );
+
+        final Map<TextStylePropertyName<?>, Object> mergedMap = Maps.sorted();
+        mergedMap.putAll(textStyle.value());
+        mergedMap.putAll(other.value());
+
+        this.checkEquals(
+            mergedMap.size(),
+            merged.value()
+                .size(),
+            merged::toString
+        );
+
+        this.checkEquals(
+            mergedMap,
+            merged.value(),
+            merged::toString
         );
     }
 

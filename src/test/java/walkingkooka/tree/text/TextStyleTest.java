@@ -576,7 +576,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_COLOR,
                     Color.BLACK
                 ),
-            "border-top-color: black; border-left-color: black; border-right-color: black; border-bottom-color: black;"
+            "border-bottom-color: black; border-left-color: black; border-right-color: black; border-top-color: black;"
         );
     }
 

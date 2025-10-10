@@ -72,7 +72,34 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testMergeWithNotEmpty() {
+    public void testMergeWithNotEmptyReplaces() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111;"),
+            TextStyle.parse("background-color: #999;"),
+            TextStyle.parse("background-color: #999;")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111;"),
+            TextStyle.parse("color: #222;"),
+            TextStyle.parse("background-color: #111; color: #222;")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent2() {
+        this.mergeAndCheck(
+            TextStyle.parse("color: #111;"),
+            TextStyle.parse("background-color: #222;"),
+            TextStyle.parse("background-color: #222; color: #111;")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyReplacesAndDifferent() {
         this.mergeAndCheck(
             TextStyle.parse("background-color: #111; color: #222"),
             TextStyle.parse("background-color: #999; text-align: left"),
@@ -322,7 +349,37 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testSetNewPropertyAndValue() {
+    public void testSetNewPropertyAndValue1() {
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
+
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
+
+        final TextStyle after = this.setAndCheck(
+            this.createTextStyle(
+                property1,
+                value1
+            ),
+            property2,
+            value2,
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            )
+        );
+
+        this.checkEquals(
+            2,
+            after.value().size(),
+            after::toString
+        );
+    }
+
+    @Test
+    public void testSetNewPropertyAndValue2() {
         final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
         final WordWrap value1 = VALUE1;
 
@@ -353,7 +410,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testSetNewPropertyAndValue2() {
+    public void testSetNewPropertyAndValue3() {
         final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
         final WordWrap value1 = VALUE1;
 
@@ -394,6 +451,20 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     // remove...........................................................................................................
+
+    @Test
+    public void testRemoveOnly() {
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+
+        this.removeAndCheck(
+            this.createTextStyle(
+                property1,
+                VALUE1
+            ),
+            property1,
+            TextStyleEmpty.instance()
+        );
+    }
 
     @Test
     public void testRemove() {

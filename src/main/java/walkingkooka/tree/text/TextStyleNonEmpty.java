@@ -20,9 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.naming.Name;
-import walkingkooka.predicate.Predicates;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
@@ -37,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
@@ -101,19 +98,64 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     TextStyle merge1(final TextStyleNonEmpty other) {
-        final Map<TextStylePropertyName<?>, Object> otherBefore = other.value; // because of double dispatch params are reversed.
-        final Map<TextStylePropertyName<?>, Object> before = this.value;
+        final TextStylePropertiesMapEntrySet before = other.value.entries;
+        final TextStylePropertiesMapEntrySet after = this.value.entries;
 
+        final Object[] beforeValues = before.values;
+        final Object[] afterValues = after.values;
 
-        final Map<TextStylePropertyName<?>, Object> merged = Maps.sorted();
-        merged.putAll(otherBefore);
-        merged.putAll(before);
+        final int beforeSize = beforeValues.length;
+        final int afterSize = afterValues.length;
+        final int newSize = Math.max(
+            beforeSize,
+            afterSize
+        );
 
-        return merged.equals(otherBefore) ?
-            this :
-            merged.equals(before) ?
-                other :
-                new TextStyleNonEmpty(TextStylePropertiesMap.with(merged));
+        final Object[] newValues = new Object[newSize];
+
+        // copy before
+        System.arraycopy(
+            beforeValues,
+            0,
+            newValues,
+            0,
+            beforeSize
+        );
+
+        boolean different = false;
+        int newCount = before.count;
+
+        for (int i = 0; i < afterSize; i++) {
+            final Object afterValue = afterValues[i];
+            if(null == afterValue) {
+                continue;
+            }
+
+            if(i < beforeSize) {
+                final Object beforeValue = newValues[i];
+                if (afterValue.equals(beforeValue)) {
+                    continue;
+                }
+                if(null != beforeValue) {
+                    newCount--;
+                }
+            }
+
+            different = true;
+            newValues[i] = afterValue;
+            newCount++;
+        }
+
+        return different ?
+            TextStyleNonEmpty.with(
+                TextStylePropertiesMap.withTextStyleMapEntrySet(
+                    TextStylePropertiesMapEntrySet.with(
+                        newValues,
+                        newCount
+                    )
+                )
+            ) :
+            this;
     }
 
     // replace..........................................................................................................
@@ -222,174 +264,187 @@ final class TextStyleNonEmpty extends TextStyle {
                                         final TextStylePropertyName<T> rightName,
                                         final TextStylePropertyName<T> bottomName,
                                         final T value) {
-        return this.setValues(
-            Maps.of(
-                topName,
-                value,
-                leftName,
-                value,
-                rightName,
-                value,
-                bottomName,
-                value
-            )
+        return this.setValue(
+            topName,
+            value
+        ).setValue(
+            leftName,
+            value
+        ).setValue(
+            rightName,
+            value
+        ).setValue(
+            bottomName,
+            value
         );
     }
 
     @Override
     <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
                                    final V value) {
-        TextStylePropertiesMap map = this.value;
-        final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
+        final TextStyleNonEmpty set;
 
-        int mode = 0; // new property added.
+        final TextStylePropertiesMap map = this.value;
+        final Object previousValue = map.getValue(propertyName);
 
-        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : map.entries) {
-            final TextStylePropertyName<?> property = propertyAndValue.getKey();
+        if (value.equals(previousValue)) {
+            set = this;
+        } else {
+            final TextStylePropertiesMapEntrySet entries = map.entries;
 
-            if (propertyName.equals(property)) {
-                if (propertyAndValue.getValue().equals(value)) {
-                    mode = 1; // no change
-                    break;
-                } else {
-                    list.add(Maps.entry(property, value));
-                    mode = 2; // replaced
-                }
-            } else {
-                list.add(propertyAndValue);
-            }
-        }
+            final int index = propertyName.index();
+            final int oldSize = entries.values.length;
+            final int newSize = Math.max(
+                index + 1,
+                oldSize
+            );
 
-        // replace didnt happen
-        if (0 == mode) {
-            list.add(Maps.entry(propertyName, value));
-            TextStylePropertiesMapEntrySet.sort(list);
-        }
+            final Object[] oldValues = entries.values;
 
-        return 1 == mode ?
-            this :
-            new TextStyleNonEmpty(
+            final Object[] newValues = new Object[newSize];
+            System.arraycopy(
+                oldValues,
+                0,
+                newValues,
+                0,
+                oldSize
+            );
+            newValues[index] = value;
+
+            set = TextStyleNonEmpty.with(
                 TextStylePropertiesMap.withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.withList(list)
+                    TextStylePropertiesMapEntrySet.with(
+                        newValues,
+                        entries.count +
+                            (
+                                null == previousValue ?
+                                1 :
+                                0
+                            )
+                    )
                 )
             );
+        }
+
+        return set;
     }
 
     // remove...........................................................................................................
 
     @Override
     TextStyle removeNonNull(final TextStylePropertyName<?> propertyName) {
-        final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
-        boolean removed = false;
-
-        Predicate<TextStylePropertyName<?>> removeIf;
+        final TextStyle removed;
 
         switch (propertyName.name) {
             case BORDER_COLOR:
-                removeIf = BORDER_XXX_COLOR;
+                removed = this.removeValues(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR
+                );
                 break;
             case BORDER_STYLE:
-                removeIf = BORDER_XXX_STYLE;
+                removed = this.removeValues(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE
+                );
                 break;
             case BORDER_WIDTH:
-                removeIf = BORDER_XXX_WIDTH;
+                removed = this.removeValues(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH
+                );
                 break;
             case MARGIN:
-                removeIf = MARGIN_XXX;
+                removed = this.removeValues(
+                    TextStylePropertyName.MARGIN_TOP,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    TextStylePropertyName.MARGIN_BOTTOM
+                );
                 break;
             case PADDING:
-                removeIf = PADDING_XXX;
+                removed = this.removeValues(
+                    TextStylePropertyName.PADDING_TOP,
+                    TextStylePropertyName.PADDING_LEFT,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    TextStylePropertyName.PADDING_BOTTOM
+                );
                 break;
             default:
-                removeIf = propertyName::equals;
+                final int index = propertyName.index();
+
+                final TextStylePropertiesMapEntrySet entries = this.value.entries;
+                final Object[] oldValues = entries.values;
+                final int oldArraySize = oldValues.length;
+
+                // remove index outside values, never existed
+                if(index >= oldArraySize) {
+                    removed = this;
+                } else {
+                    final Object previousValue = oldValues[index];
+
+                    // value was already null, nothing to remove
+                    if(null == previousValue) {
+                        removed = this;
+                    } else {
+                        final int count = entries.count - 1;
+
+                        // removed only value return EMPTY
+                        if(0 == count) {
+                            removed = TextStyle.EMPTY;
+                        } else {
+                            int newArraySize = oldArraySize;
+
+                            // value being removed is the last value in array, need to compact
+                            if(index == oldArraySize) {
+                                // find previous non null value
+                                while(null == oldValues[newArraySize]) {
+                                    newArraySize--;
+                                }
+                            }
+
+                            // copy old array into new
+                            final Object[] newValues = new Object[newArraySize];
+                            for(int i = 0; i < oldArraySize; i++) {
+                                newValues[i] = oldValues[i];
+                            }
+
+                            // didnt remove last element of array, need to clear value in new array
+                            if(index < newArraySize) {
+                                newValues[index] = null;
+                            }
+
+                            removed = TextStyleNonEmpty.with(
+                                TextStylePropertiesMap.withTextStyleMapEntrySet(
+                                    TextStylePropertiesMapEntrySet.with(
+                                        newValues,
+                                        count
+                                    )
+                                )
+                            );
+                        }
+                    }
+                }
                 break;
         }
 
-        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entries) {
-            final TextStylePropertyName<?> property = propertyAndValue.getKey();
-            if (removeIf.test(property)) {
-                removed = true;
-            } else {
-                list.add(propertyAndValue);
-            }
-        }
-
-        return removed ?
-            this.removeNonNull0(list) :
-            this;
+        return removed;
     }
 
-    /**
-     * Used to remove any of the 4 BORDER_XXX_COLOR properties.
-     */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_COLOR = Predicates.setContains(
-        Sets.of(
-            TextStylePropertyName.BORDER_TOP_COLOR,
-            TextStylePropertyName.BORDER_LEFT_COLOR,
-            TextStylePropertyName.BORDER_RIGHT_COLOR,
-            TextStylePropertyName.BORDER_BOTTOM_COLOR
-        )
-    );
-
-    /**
-     * Used to remove any of the 4 BORDER_XXX_STYLE properties.
-     */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_STYLE = Predicates.setContains(
-        Sets.of(
-            TextStylePropertyName.BORDER_TOP_STYLE,
-            TextStylePropertyName.BORDER_LEFT_STYLE,
-            TextStylePropertyName.BORDER_RIGHT_STYLE,
-            TextStylePropertyName.BORDER_BOTTOM_STYLE
-        )
-    );
-
-    /**
-     * Used to remove any of the 4 BORDER_XXX_WIDTH properties.
-     */
-    private static final Predicate<TextStylePropertyName<?>> BORDER_XXX_WIDTH = Predicates.setContains(
-        Sets.of(
-            TextStylePropertyName.BORDER_TOP_WIDTH,
-            TextStylePropertyName.BORDER_LEFT_WIDTH,
-            TextStylePropertyName.BORDER_RIGHT_WIDTH,
-            TextStylePropertyName.BORDER_BOTTOM_WIDTH
-        )
-    );
-
-    /**
-     * Used to remove any of the 4 MARGIN_XXX properties.
-     */
-    private static final Predicate<TextStylePropertyName<?>> MARGIN_XXX = Predicates.setContains(
-        Sets.of(
-            TextStylePropertyName.MARGIN_TOP,
-            TextStylePropertyName.MARGIN_LEFT,
-            TextStylePropertyName.MARGIN_RIGHT,
-            TextStylePropertyName.MARGIN_BOTTOM
-        )
-    );
-
-    /**
-     * Used to remove any of the 4 PADDING_XXX properties.
-     */
-    private static final Predicate<TextStylePropertyName<?>> PADDING_XXX = Predicates.setContains(
-        Sets.of(
-            TextStylePropertyName.PADDING_TOP,
-            TextStylePropertyName.PADDING_LEFT,
-            TextStylePropertyName.PADDING_RIGHT,
-            TextStylePropertyName.PADDING_BOTTOM
-        )
-    );
-
-    /**
-     * Accepts a list after removing a property, special casing if the list is empty.
-     */
-    private TextStyle removeNonNull0(final List<Entry<TextStylePropertyName<?>, Object>> list) {
-        return list.isEmpty() ?
-            TextStyle.EMPTY :
-            new TextStyleNonEmpty(
-                TextStylePropertiesMap.withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.withList(list)
-                )
-            ); // no need to sort after a delete
+    private <T> TextStyle removeValues(final TextStylePropertyName<T> top,
+                                       final TextStylePropertyName<T> left,
+                                       final TextStylePropertyName<T> right,
+                                       final TextStylePropertyName<T> bottom) {
+        return this.remove(top)
+            .remove(left)
+            .remove(right)
+            .remove(bottom); // replace with more efficient later
     }
 
     // TextStyleVisitor.................................................................................................
@@ -534,7 +589,12 @@ final class TextStyleNonEmpty extends TextStyle {
 
         for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
             final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.marshall(Cast.to(propertyAndValue.getValue()), context);
+            final JsonNode value = propertyName.handler.marshall(
+                Cast.to(
+                    propertyAndValue.getValue()
+                ),
+                context
+            );
 
             json.add(value.setName(propertyName.marshallName()));
         }

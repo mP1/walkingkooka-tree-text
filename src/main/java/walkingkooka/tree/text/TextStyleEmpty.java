@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
@@ -106,7 +105,8 @@ final class TextStyleEmpty extends TextStyle {
 
     // get/set/remove...................................................................................................
 
-    @Override <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName) {
+    @Override //
+    <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName) {
         return Optional.empty();
     }
 
@@ -116,27 +116,21 @@ final class TextStyleEmpty extends TextStyle {
                                                 final TextStylePropertyName<T> right,
                                                 final TextStylePropertyName<T> bottom,
                                                 final T value) {
+        final int topIndex = top.index();
+        ;
+        final int size = topIndex + 1;
+        final Object[] values = new Object[size];
+
+        values[topIndex] = value;
+        values[left.index()] = value;
+        values[right.index()] = value;
+        values[bottom.index()] = value;
+
         return TextStyleNonEmpty.with(
             TextStylePropertiesMap.withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.withList(
-                    Lists.of(
-                        Maps.entry(
-                            top,
-                            value
-                        ),
-                        Maps.entry(
-                            left,
-                            value
-                        ),
-                        Maps.entry(
-                            right,
-                            value
-                        ),
-                        Maps.entry(
-                            bottom,
-                            value
-                        )
-                    )
+                TextStylePropertiesMapEntrySet.with(
+                    values,
+                    4
                 )
             )
         );
@@ -145,15 +139,18 @@ final class TextStyleEmpty extends TextStyle {
     @Override
     <T> TextStyleNonEmpty setValue(final TextStylePropertyName<T> propertyName,
                                    final T value) {
+        final int index = propertyName.index();
+        ;
+        final int size = index + 1;
+        final Object[] values = new Object[size];
+
+        values[index] = value;
+
         return TextStyleNonEmpty.with(
             TextStylePropertiesMap.withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.withList(
-                    Lists.of(
-                        Map.entry(
-                            propertyName,
-                            value
-                        )
-                    )
+                TextStylePropertiesMapEntrySet.with(
+                    values,
+                    1
                 )
             )
         );
@@ -161,7 +158,7 @@ final class TextStyleEmpty extends TextStyle {
 
     @Override
     TextStyle removeNonNull(final TextStylePropertyName<?> propertyName) {
-        return this;
+        return this; // empty nothing to remove
     }
 
     // TextStyleVisitor.................................................................................................
