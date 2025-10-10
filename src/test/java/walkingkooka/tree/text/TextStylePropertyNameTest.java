@@ -42,6 +42,35 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>> {
 
+    // index............................................................................................................
+
+    @Test
+    public void testIndexWithWildcard() {
+        this.indexAndCheck(
+            TextStylePropertyName.WILDCARD,
+            -1
+        );
+    }
+
+    @Test
+    public void testIndexWithBackgroundColor() {
+        this.indexAndCheck(
+            TextStylePropertyName.BACKGROUND_COLOR,
+            0
+        );
+    }
+
+    private void indexAndCheck(final TextStylePropertyName<?> propertyName,
+                               final int expected) {
+        this.checkEquals(
+            expected,
+            propertyName.index,
+            propertyName::toString
+        );
+    }
+
+    // constants........................................................................................................
+
     @Test
     public void testConstants() {
         this.checkEquals(Lists.empty(),

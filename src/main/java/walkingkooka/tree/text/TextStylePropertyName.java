@@ -158,7 +158,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         final TextStylePropertyName<T> textStylePropertyName = new TextStylePropertyName<>(
             property,
             handler,
-            visitor
+            visitor,
+            TextStylePropertyName.CONSTANTS.size() - 1// index wildcard will be given a value of -1, BACKGROUND_COLOR=0 etc.
         );
         TextStylePropertyName.CONSTANTS.put(
             property,
@@ -877,7 +878,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     private TextStylePropertyName(final String name,
                                   final TextStylePropertyValueHandler<T> handler,
-                                  final BiConsumer<T, TextStyleVisitor> visitor) {
+                                  final BiConsumer<T, TextStyleVisitor> visitor,
+                                  final int index) {
         super(name);
         this.handler = handler;
         this.visitor = visitor;
@@ -893,6 +895,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             .setNull(
                 this.jsonPropertyName
             );
+
+        this.index = index;
     }
 
     /**
@@ -952,6 +956,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     CharSequence inQuotes() {
         return CharSequences.quoteAndEscape(this.name);
     }
+
+    /**
+     * Unique index allocated to each {@link TextStylePropertyName} intended to be used as an index into an array of values
+     * {@link TextStylePropertyName}.
+     */
+    final int index;
 
     // HasUrlFragment...................................................................................................
 
