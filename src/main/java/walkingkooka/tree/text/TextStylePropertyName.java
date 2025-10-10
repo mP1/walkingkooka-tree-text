@@ -60,6 +60,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
 
     /**
+     * Used to allocate unique index for each constant except for synthetic properties such as {@link #WILDCARD} or {@link #BORDER_COLOR}.
+     */
+    static int NEXT_INDEX = 0;
+
+    /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link BorderStyle} values.
      */
     private static TextStylePropertyName<BorderStyle> registerBorderStyle(final String property,
@@ -159,7 +164,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             property,
             handler,
             visitor,
-            TextStylePropertyName.CONSTANTS.size() - 1// index wildcard will be given a value of -1, BACKGROUND_COLOR=0 etc.
+            null != visitor ?
+                NEXT_INDEX++ :
+                -1 // WILDCARD, BORDER_COLOR
         );
         TextStylePropertyName.CONSTANTS.put(
             property,
