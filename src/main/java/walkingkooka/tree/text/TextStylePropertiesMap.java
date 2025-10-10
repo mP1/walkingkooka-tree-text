@@ -19,13 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.naming.Name;
-import walkingkooka.text.CaseKind;
-import walkingkooka.text.CharSequences;
-import walkingkooka.text.HasText;
-import walkingkooka.text.LineEnding;
-import walkingkooka.text.printer.Printer;
-import walkingkooka.text.printer.Printers;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -90,83 +83,6 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
 
     void accept(final TextStyleVisitor visitor) {
         this.entries.accept(visitor);
-    }
-
-    // css..............................................................................................................
-
-    String css() {
-        if (null == this.css) {
-            this.css = this.buildCss();
-        }
-
-        return this.css;
-    }
-
-    /**
-     * A lazily populated cache of the css
-     */
-    private String css;
-
-    /**
-     * Prints each property and value with spaces after each separator.
-     *
-     * <pre>
-     * border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;
-     * </pre>
-     */
-    private String buildCss() {
-        final StringBuilder cssStringBuilder = new StringBuilder();
-
-        try (final Printer css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM)) {
-            String separator = "";
-
-            for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entrySet()) {
-                css.print(separator);
-
-                final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-                css.print(propertyName.value());
-                css.print(TextStyle.ASSIGNMENT);
-                css.print(" ");
-
-                final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss = valueToCss(value);
-
-                css.print(valueCss);
-                css.print(TextStyle.SEPARATOR.string());
-
-                separator = " ";
-            }
-        }
-
-        return cssStringBuilder.toString();
-    }
-
-    private static CharSequence valueToCss(final Object value) {
-        final CharSequence css;
-
-        // dont want to handle values such as FontFamily (which implements Name) here.
-        // Name extends HasText
-        if (value instanceof HasText && false == value instanceof Name) {
-            final HasText hasText = (HasText) value;
-            css = hasText.text();
-        } else {
-            if (value instanceof Enum) {
-                final Enum<?> enumEnum = (Enum<?>) value;
-                css = CaseKind.SNAKE.change(
-                    enumEnum.name().toLowerCase(),
-                    CaseKind.KEBAB
-                );
-            } else {
-                final String stringValue = value.toString();
-                if (stringValue.indexOf(' ') >= 0) {
-                    css = CharSequences.quoteAndEscape(stringValue);
-                } else {
-                    css = stringValue;
-                }
-            }
-        }
-
-        return css;
     }
 
     // JsonNodeContext..................................................................................................
