@@ -69,7 +69,7 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
-        Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
+        final Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
         copy.putAll(this.value);
         return copy;
     }
@@ -298,7 +298,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 );
                 break;
             default:
-                result = this.set1(
+                result = this.setNonNull0(
                     propertyName,
                     value
                 );
@@ -308,8 +308,8 @@ final class TextStyleNonEmpty extends TextStyle {
         return result;
     }
 
-    private <V> TextStyleNonEmpty set1(final TextStylePropertyName<V> propertyName,
-                                       final V value) {
+    private <V> TextStyleNonEmpty setNonNull0(final TextStylePropertyName<V> propertyName,
+                                              final V value) {
         TextStylePropertiesMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
@@ -386,7 +386,7 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return removed ?
-            this.remove1(list) :
+            this.removeNonNull0(list) :
             this;
     }
 
@@ -453,10 +453,14 @@ final class TextStyleNonEmpty extends TextStyle {
     /**
      * Accepts a list after removing a property, special casing if the list is empty.
      */
-    private TextStyle remove1(List<Entry<TextStylePropertyName<?>, Object>> list) {
+    private TextStyle removeNonNull0(final List<Entry<TextStylePropertyName<?>, Object>> list) {
         return list.isEmpty() ?
             TextStyle.EMPTY :
-            new TextStyleNonEmpty(TextStylePropertiesMap.withTextStyleMapEntrySet(TextStylePropertiesMapEntrySet.withList(list))); // no need to sort after a delete
+            new TextStyleNonEmpty(
+                TextStylePropertiesMap.withTextStyleMapEntrySet(
+                    TextStylePropertiesMapEntrySet.withList(list)
+                )
+            ); // no need to sort after a delete
     }
 
     // TextStyleVisitor.................................................................................................
