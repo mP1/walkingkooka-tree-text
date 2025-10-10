@@ -48,23 +48,23 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
     static TextStylePropertiesMap with(final Map<TextStylePropertyName<?>, Object> map) {
         Objects.requireNonNull(map, "map");
 
-        return map instanceof TextStylePropertiesMap ?
-            (TextStylePropertiesMap) map :
-            with0(map);
-    }
+        TextStylePropertiesMap textStylePropertiesMap;
 
-    private static TextStylePropertiesMap with0(final Map<TextStylePropertyName<?>, Object> map) {
-        return with1(TextStylePropertiesMapEntrySet.with(map));
-    }
+        if (map instanceof TextStylePropertiesMap) {
+            textStylePropertiesMap = (TextStylePropertiesMap) map;
+        } else {
+            textStylePropertiesMap = withTextStyleMapEntrySet(
+                TextStylePropertiesMapEntrySet.with(map)
+            );
+        }
 
-    private static TextStylePropertiesMap with1(final TextStylePropertiesMapEntrySet entrySet) {
-        return entrySet.isEmpty() ?
-            EMPTY :
-            withTextStyleMapEntrySet(entrySet);
+        return textStylePropertiesMap;
     }
 
     static TextStylePropertiesMap withTextStyleMapEntrySet(final TextStylePropertiesMapEntrySet entrySet) {
-        return new TextStylePropertiesMap(entrySet);
+        return entrySet.isEmpty() ?
+            EMPTY :
+            new TextStylePropertiesMap(entrySet);
     }
 
     private TextStylePropertiesMap(final TextStylePropertiesMapEntrySet entries) {
@@ -89,7 +89,7 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
 
     static TextStylePropertiesMap unmarshall(final JsonNode json,
                                              final JsonNodeUnmarshallContext context) {
-        return TextStylePropertiesMap.with1(
+        return withTextStyleMapEntrySet(
             TextStylePropertiesMapEntrySet.unmarshall(
                 json,
                 context
