@@ -60,6 +60,14 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         );
     }
 
+    @Test
+    public void testIndexWithBorderBottomColor() {
+        this.indexAndCheck(
+            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+            1
+        );
+    }
+
     private void indexAndCheck(final TextStylePropertyName<?> propertyName,
                                final int expected) {
         this.checkEquals(
