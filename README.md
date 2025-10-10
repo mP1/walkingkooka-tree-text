@@ -6,11 +6,16 @@
 ![](https://tokei.rs/b1/github/mP1/walkingkooka-tree-text)
 [![J2CL compatible](https://img.shields.io/badge/J2CL-compatible-brightgreen.svg)](https://github.com/mP1/j2cl-central)
 
+A rich graph representation of a document along with styling of individual nodes, similar to the DOM concepts used by a life HTML document within a browser.  Some powerful extras include immutability and significant helpers to assist with querying and modifications. The representation is technology agnostic but translate to representing a browser DOM easily.
 
+Additional converters to assist converting simple types like String to [TextNode](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/TextNode.java) or [TextStyle](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/TextStyle.java) are available, along with functions enabling CRUD operations and more.
 
-A [walkingkooka/tree.Node](https://github.com/mP1/walkingkooka/blob/master/Node.md) implementation representing rich text in a tree graph.
+- Note that many but not all CSS properties are represented as this is intentional, and more may be added in the future, see [TextStylePropertyName](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/TextStylePropertyName.java)
+- Because [TextNode](https://github.com/mP1/walkingkooka/blob/master/Node.md) is a [Node], technologies found in other repos support XPATH, XPOINTER etc.
 
 ## Java sample
+
+A simple sample below is presented which demonstrates building of a TextNode graph and conversion to HTML.
 
 ```text
 final TextNode node = TextNode.styleName(TextStyleName.with("HTML"))
@@ -166,6 +171,7 @@ These `Converters` that convert function parameter that may be `String` to other
 ### [Functions](https://github.com/mP1/walkingkooka-tree/blob/master/src/main/java/walkingkooka/tree/expression/function/ExpressionFunction.java)
 
 Functions that will be useful to create a rich text display, by building individual components with text, styling and more.
+These functions are intended to support creation of custom HTML for individual cell formatting in [walkingkooka-spreadsheet](https://github.com/mP1/walkingkooka-spreadsheet)
 
 - [badge](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/expression/function/TreeTextExpressionFunctionBadge.java)
 - [getStyle](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/expression/function/TreeTextExpressionFunctionGetStyle.java)
