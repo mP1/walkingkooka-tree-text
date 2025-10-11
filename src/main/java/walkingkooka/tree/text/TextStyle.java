@@ -224,8 +224,75 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return this.setNonNull(propertyName, value);
     }
 
-    abstract <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
-                                      final V value);
+    private <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
+                                     final V value) {
+        final TextStyle set;
+
+        switch (propertyName.name) {
+            case BORDER_COLOR:
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    (Color) value
+                );
+                break;
+            case BORDER_STYLE:
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    (BorderStyle) value
+                );
+                break;
+            case BORDER_WIDTH:
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    (Length<?>) value
+                );
+                break;
+            case MARGIN:
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.MARGIN_TOP,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    (Length<?>) value
+                );
+                break;
+            case PADDING:
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.PADDING_TOP,
+                    TextStylePropertyName.PADDING_LEFT,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    (Length<?>) value
+                );
+                break;
+            default:
+                set = this.setValue(
+                    propertyName,
+                    value
+                );
+                break;
+        }
+
+        return set;
+    }
+
+    abstract <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> top,
+                                                 final TextStylePropertyName<T> left,
+                                                 final TextStylePropertyName<T> right,
+                                                 final TextStylePropertyName<T> bottom,
+                                                 final T value);
+
+    abstract <T> TextStyle setValue(final TextStylePropertyName<T> propertyName,
+                                    final T value);
 
     /**
      * Sets all border properties to the same given value.
