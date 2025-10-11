@@ -17,8 +17,9 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.collect.map.Maps;
+
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
@@ -61,7 +62,7 @@ final class TextStylePropertiesMapEntrySetIterator implements Iterator<Entry<Tex
 
         final int nextIndex = this.nextIndex;
 
-        final Entry<TextStylePropertyName<?>, Object> next = Map.entry(
+        final Entry<TextStylePropertyName<?>, Object> next = Maps.entry(
             TextStylePropertyName.NAMES[nextIndex],
             this.values[nextIndex]
         );
