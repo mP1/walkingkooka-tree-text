@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.ImmutableSetTesting;
@@ -33,23 +34,13 @@ public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTes
     IteratorTesting {
 
     @Test
-    public void testWithInvalidPropertyFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextStylePropertiesMapEntrySet.with(
-                Maps.of(
-                    TextStylePropertyName.WORD_BREAK,
-                    null
-                )
-            )
-        );
-    }
-
-    @Test
     public void testWithEmpty() {
         assertSame(
             TextStylePropertiesMapEntrySet.EMPTY,
-            TextStylePropertiesMapEntrySet.with(Maps.empty())
+            TextStylePropertiesMapEntrySet.with(
+                new Object[0],
+                0
+            )
         );
     }
 
@@ -108,7 +99,10 @@ public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTes
             this.value2()
         );
 
-        return TextStylePropertiesMapEntrySet.with(map);
+        return Cast.to(
+            TextStylePropertiesMap.with(map)
+                .entrySet()
+        );
     }
 
     private TextStylePropertyName<?> property1() {

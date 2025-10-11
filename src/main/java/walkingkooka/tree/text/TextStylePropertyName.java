@@ -857,6 +857,24 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         (w, v) -> v.visitWritingMode(w)
     );
 
+    private static TextStylePropertyName<?>[] fillNamesArray() {
+        final TextStylePropertyName<?>[] names = new TextStylePropertyName<?>[NEXT_INDEX];
+
+        for (final TextStylePropertyName<?> name : CONSTANTS.values()) {
+            final int index = name.index;
+            if(-1 != index) {
+                names[index] = name;
+            }
+        }
+
+        return names;
+    }
+
+    /**
+     * An array of {@link TextStylePropertyName} that hold a single value.
+     */
+    final static TextStylePropertyName<?>[] NAMES = fillNamesArray();
+
     static {
         final Set<TextStylePropertyName<?>> values = SortedSets.tree();
         values.addAll(CONSTANTS.values());
@@ -962,6 +980,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     CharSequence inQuotes() {
         return CharSequences.quoteAndEscape(this.name);
+    }
+
+    int index() {
+        final int index = this.index;
+        if(-1 == index) {
+            throw new IllegalArgumentException("Invalid property name: " + this.inQuotes());
+        }
+        return index;
     }
 
     /**
