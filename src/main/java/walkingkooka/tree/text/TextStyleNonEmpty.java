@@ -226,85 +226,75 @@ final class TextStyleNonEmpty extends TextStyle {
             case BORDER_COLOR:
                 final Color color = Cast.to(value);
 
-                result = this.setValues(
-                    Maps.of(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        color,
-                        TextStylePropertyName.BORDER_LEFT_COLOR,
-                        color,
-                        TextStylePropertyName.BORDER_RIGHT_COLOR,
-                        color,
-                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                        color
-                    )
+                result = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    color,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    color
                 );
                 break;
             case BORDER_STYLE:
                 final BorderStyle borderStyle = Cast.to(value);
 
-                result = this.setValues(
-                    Maps.of(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        borderStyle,
-                        TextStylePropertyName.BORDER_LEFT_STYLE,
-                        borderStyle,
-                        TextStylePropertyName.BORDER_RIGHT_STYLE,
-                        borderStyle,
-                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                        borderStyle
-                    )
+                result = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    borderStyle,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    borderStyle
                 );
                 break;
             case BORDER_WIDTH:
                 final Length<?> borderWidth = Cast.to(value);
 
-                result = this.setValues(
-                    Maps.of(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        borderWidth,
-                        TextStylePropertyName.BORDER_LEFT_WIDTH,
-                        borderWidth,
-                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                        borderWidth,
-                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                        borderWidth
-                    )
+                result = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    borderWidth,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    borderWidth,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    borderWidth,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    borderWidth
                 );
                 break;
             case MARGIN:
                 final Length<?> margin = Cast.to(value);
 
-                result = this.setValues(
-                    Maps.of(
-                        TextStylePropertyName.MARGIN_TOP,
-                        margin,
-                        TextStylePropertyName.MARGIN_LEFT,
-                        margin,
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        margin,
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        margin
-                    )
+                result = this.setTopLeftRightBottom(
+                    TextStylePropertyName.MARGIN_TOP,
+                    margin,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    margin,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    margin,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    margin
                 );
                 break;
             case PADDING:
                 final Length<?> padding = Cast.to(value);
 
-                result = this.setValues(
-                    Maps.of(
-                        TextStylePropertyName.PADDING_TOP,
-                        padding,
-                        TextStylePropertyName.PADDING_LEFT,
-                        padding,
-                        TextStylePropertyName.PADDING_RIGHT,
-                        padding,
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        padding
-                    )
+                result = this.setTopLeftRightBottom(
+                    TextStylePropertyName.PADDING_TOP,
+                    padding,
+                    TextStylePropertyName.PADDING_LEFT,
+                    padding,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    padding,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    padding
                 );
                 break;
             default:
-                result = this.setNonNull0(
+                result = this.setValue(
                     propertyName,
                     value
                 );
@@ -314,8 +304,30 @@ final class TextStyleNonEmpty extends TextStyle {
         return result;
     }
 
-    private <V> TextStyleNonEmpty setNonNull0(final TextStylePropertyName<V> propertyName,
-                                              final V value) {
+    private <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
+                                                final T topValue,
+                                                final TextStylePropertyName<T> leftName,
+                                                final T leftValue,
+                                                final TextStylePropertyName<T> rightName,
+                                                final T rightValue,
+                                                final TextStylePropertyName<T> bottomName,
+                                                final T bottomValue) {
+        return this.setValues(
+            Maps.of(
+                topName,
+                topValue,
+                leftName,
+                leftValue,
+                rightName,
+                rightValue,
+                bottomName,
+                bottomValue
+            )
+        );
+    }
+
+    private <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
+                                           final V value) {
         TextStylePropertiesMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
