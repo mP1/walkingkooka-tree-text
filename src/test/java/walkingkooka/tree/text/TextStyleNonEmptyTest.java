@@ -34,11 +34,19 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonEmpty> {
 
+    private final static TextStylePropertyName<WordWrap> PROPERTY1 = TextStylePropertyName.WORD_WRAP;
+
+    private final static WordWrap VALUE1 = WordWrap.BREAK_WORD;
+
+    private final static TextStylePropertyName<FontFamily> PROPERTY2 = TextStylePropertyName.FONT_FAMILY;
+
+    private final static FontFamily VALUE2 = FontFamily.with("Times News Roman");
+
     @Test
     public void testValue() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
+        map.put(PROPERTY1, VALUE1);
+        map.put(PROPERTY2, VALUE2);
 
         final TextStyleNonEmpty textStyle = (TextStyleNonEmpty) TextStyle.EMPTY.setValues(map);
         this.checkEquals(
@@ -79,41 +87,75 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final List<TextNode> children = this.children();
         final TextStyle textStyle = this.createTextStyle();
 
-        this.replaceAndCheck(textStyle,
+        this.replaceAndCheck(
+            textStyle,
             TextNode.style(children),
-            TextStyleNode.with(children, TextStylePropertiesMap.with(textStyle.value())));
+            TextStyleNode.with(
+                children,
+                TextStylePropertiesMap.with(textStyle.value())
+            )
+        );
     }
 
     @Test
     public void testReplaceTextStyleWithAttributes() {
         final List<TextNode> children = this.children();
-        final TextNode textStyle = TextStyleNode.with(children, this.createTextStyle().textStyleMap());
+        final TextNode textStyle = TextStyleNode.with(
+            children,
+            this.createTextStyle()
+                .textStyleMap()
+        );
 
-        this.replaceAndCheck(TextStyle.EMPTY,
+        this.replaceAndCheck(
+            TextStyle.EMPTY,
             textStyle,
-            TextNode.style(children));
+            TextNode.style(children)
+        );
     }
 
     @Test
     public void testReplaceTextStyleWithParent() {
         final TextNode textStyleNode = TextNode.style(this.children());
 
-        final TextStyle textStyle = this.createTextStyle(this.property2(), this.value2());
+        final TextStyle textStyle = this.createTextStyle(
+            PROPERTY2,
+            VALUE2
+        );
 
-        this.replaceAndCheck(textStyle,
+        this.replaceAndCheck(
+            textStyle,
             this.makeStyleNameParent(textStyleNode),
-            this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
+            this.makeStyleNameParent(
+                textStyleNode.setAttributes(textStyle.value())
+            )
+        );
     }
 
     @Test
     public void testReplaceTextStyleWithParent2() {
         final TextNode textStyleNode = TextNode.style(this.children());
 
-        final TextStyle textStyle = this.createTextStyle(this.property2(), this.value2());
+        final TextStyle textStyle = this.createTextStyle(
+            PROPERTY2,
+            VALUE2
+        );
 
-        this.replaceAndCheck(textStyle,
-            this.makeStyleNameParent(textStyleNode.setAttributes(Maps.of(this.property1(), this.value1()))),
-            this.makeStyleNameParent(textStyleNode.setAttributes(textStyle.value())));
+        this.replaceAndCheck(
+            textStyle,
+            this.makeStyleNameParent(
+                textStyleNode.setAttributes(
+                    Maps.of(
+                        PROPERTY1,
+                        VALUE1
+                    )
+                )
+            ),
+            this.makeStyleNameParent(
+                textStyleNode.setAttributes(
+                    textStyle.value()
+                )
+            )
+        );
     }
 
     @Test
@@ -185,144 +227,230 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testGet() {
-        this.getAndCheck(this.createTextStyle(),
-            this.property1(),
-            this.value1());
+        this.getAndCheck(
+            this.createTextStyle(),
+            PROPERTY1,
+            VALUE1
+        );
     }
 
     @Test
     public void testGet2() {
-        this.getAndCheck(this.createTextStyle(),
-            this.property2(),
-            this.value2());
+        this.getAndCheck(
+            this.createTextStyle(),
+            PROPERTY2,
+            VALUE2
+        );
     }
 
     // set..............................................................................................................
 
     @Test
     public void testSetExistingPropertyAndValue() {
-        this.setAndCheck(this.createTextStyle(),
-            this.property1(),
-            this.value1());
+        this.setAndCheck(
+            this.createTextStyle(),
+            PROPERTY1,
+            VALUE1
+        );
     }
 
     @Test
     public void testSetExistingPropertyAndValue2() {
-        this.setAndCheck(this.createTextStyle(),
-            this.property2(),
-            this.value2());
+        this.setAndCheck(
+            this.createTextStyle(),
+            PROPERTY2,
+            VALUE2
+        );
     }
 
     @Test
     public void testSetReplacePropertyAndValue() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
 
         final WordWrap different = WordWrap.NORMAL;
         assertNotSame(different, value1);
 
-        this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
+        this.setAndCheck(
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            ),
             property1,
             different,
-            this.createTextStyle(property1, different, property2, value2));
+            this.createTextStyle(
+                property1,
+                different,
+                property2,
+                value2
+            )
+        );
     }
 
     @Test
     public void testSetReplacePropertyAndValue2() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
 
         final FontFamily different = FontFamily.with("different");
         assertNotSame(different, value2);
 
-        this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
+        this.setAndCheck(
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            ),
             property2,
             different,
-            this.createTextStyle(property1, value1, property2, different));
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                different
+            )
+        );
     }
 
     @Test
     public void testSetNewPropertyAndValue() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
 
         final TextStylePropertyName<WritingMode> property3 = TextStylePropertyName.WRITING_MODE;
         final WritingMode value3 = WritingMode.VERTICAL_LR;
 
-        this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
+        this.setAndCheck(
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            ),
             property3,
             value3,
-            this.createTextStyle(property1, value1, property2, value2, property3, value3));
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2,
+                property3,
+                value3
+            )
+        );
     }
 
     @Test
     public void testSetNewPropertyAndValue2() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
 
         final TextStylePropertyName<Color> property3 = TextStylePropertyName.BACKGROUND_COLOR;
         final Color value3 = Color.fromRgb(0x123456);
 
-        this.setAndCheck(this.createTextStyle(property1, value1, property2, value2),
+        this.setAndCheck(
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            ),
             property3,
             value3,
-            this.createTextStyle(property3, value3, property1, value1, property2, value2));
+            this.createTextStyle(
+                property3,
+                value3,
+                property1,
+                value1,
+                property2,
+                value2
+            )
+        );
     }
 
     private <T> void setAndCheck(final TextStyle textStyle,
                                  final TextStylePropertyName<T> propertyName,
                                  final T value) {
-        assertSame(textStyle,
+        assertSame(
+            textStyle,
             textStyle.set(propertyName, value),
-            () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value));
+            () -> textStyle + " set " + propertyName + " and " + CharSequences.quoteIfChars(value)
+        );
     }
 
     // remove...........................................................................................................
 
     @Test
     public void testRemove() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
 
-        this.removeAndCheck(this.createTextStyle(property1, this.value1(), property2, value2),
+        this.removeAndCheck(
+            this.createTextStyle(
+                property1,
+                VALUE1,
+                property2,
+                value2
+            ),
             property1,
-            this.createTextStyle(property2, value2));
+            this.createTextStyle(
+                property2,
+                value2
+            )
+        );
     }
 
     @Test
     public void testRemove2() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
 
-        this.removeAndCheck(this.createTextStyle(property1, value1, property2, this.value2()),
+        this.removeAndCheck(this.createTextStyle(
+            property1,
+                value1,
+                property2,
+                VALUE2
+            ),
             property2,
-            this.createTextStyle(property1, value1));
+            this.createTextStyle(
+                property1,
+                value1
+            )
+        );
     }
 
     @Test
     public void testRemoveBecomesEmpty() {
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
 
-        this.removeAndCheck(this.createTextStyle(property1, value1),
+        this.removeAndCheck(
+            this.createTextStyle(
+                property1,
+                value1
+            ),
             property1,
-            TextStyle.EMPTY);
+            TextStyle.EMPTY
+        );
     }
 
     // set & remove ...................................................................................................
@@ -330,60 +458,102 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testSetSetRemoveRemove() {
         //set
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
-        final TextStyle textStyle1 = this.setAndCheck(TextStyle.EMPTY,
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
+        final TextStyle textStyle1 = this.setAndCheck(
+            TextStyle.EMPTY,
             property1,
             value1,
-            this.createTextStyle(property1, value1));
+            this.createTextStyle(
+                property1,
+                value1
+            )
+        );
 
         //set
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
-        final TextStyle textStyle2 = this.setAndCheck(textStyle1,
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
+        final TextStyle textStyle2 = this.setAndCheck(
+            textStyle1,
             property2,
             value2,
-            this.createTextStyle(property1, value1, property2, value2));
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            )
+        );
 
         // remove1
-        final TextStyle textStyle3 = this.removeAndCheck(textStyle2,
+        final TextStyle textStyle3 = this.removeAndCheck(
+            textStyle2,
             property1,
-            this.createTextStyle(property2, value2));
+            this.createTextStyle(
+                property2,
+                value2
+            )
+        );
 
-        this.removeAndCheck(textStyle3,
+        this.removeAndCheck(
+            textStyle3,
             property2,
-            TextStyle.EMPTY);
+            TextStyle.EMPTY
+        );
     }
 
     @Test
     public void testSetSetRemoveSet() {
         //set
-        final TextStylePropertyName<WordWrap> property1 = this.property1();
-        final WordWrap value1 = this.value1();
-        final TextStyle textStyle1 = this.setAndCheck(TextStyle.EMPTY,
+        final TextStylePropertyName<WordWrap> property1 = PROPERTY1;
+        final WordWrap value1 = VALUE1;
+        final TextStyle textStyle1 = this.setAndCheck(
+            TextStyle.EMPTY,
             property1,
             value1,
-            this.createTextStyle(property1, value1));
+            this.createTextStyle(
+                property1,
+                value1
+            )
+        );
 
         //set
-        final TextStylePropertyName<FontFamily> property2 = this.property2();
-        final FontFamily value2 = this.value2();
-        final TextStyle textStyle2 = this.setAndCheck(textStyle1,
+        final TextStylePropertyName<FontFamily> property2 = PROPERTY2;
+        final FontFamily value2 = VALUE2;
+        final TextStyle textStyle2 = this.setAndCheck(
+            textStyle1,
             property2,
             value2,
-            this.createTextStyle(property1, value1, property2, value2));
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            )
+        );
 
         // remove1
-        final TextStyle textStyle3 = this.removeAndCheck(textStyle2,
+        final TextStyle textStyle3 = this.removeAndCheck(
+            textStyle2,
             property1,
-            this.createTextStyle(property2, value2));
-
+            this.createTextStyle(
+                property2,
+                value2
+            )
+        );
 
         //set property1 again
-        this.setAndCheck(textStyle3,
+        this.setAndCheck(
+            textStyle3,
             property1,
             value1,
-            this.createTextStyle(property1, value1, property2, value2));
+            this.createTextStyle(
+                property1,
+                value1,
+                property2,
+                value2
+            )
+        );
     }
 
     // setBorder.......................................................................................................
@@ -1505,8 +1675,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testToString() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
+        map.put(PROPERTY1, VALUE1);
+        map.put(PROPERTY2, VALUE2);
 
         this.toStringAndCheck(
             TextStyle.EMPTY.setValues(map),
@@ -1522,7 +1692,12 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     private TextStyleNonEmpty createTextStyle() {
-        return this.createTextStyle(this.property1(), this.value1(), this.property2(), this.value2());
+        return this.createTextStyle(
+            PROPERTY1,
+            VALUE1, 
+            PROPERTY2, 
+            VALUE2
+        );
     }
 
     private <X> TextStyleNonEmpty createTextStyle(final TextStylePropertyName<X> property1,
@@ -1559,33 +1734,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
-    private TextStylePropertyName<WordWrap> property1() {
-        return TextStylePropertyName.WORD_WRAP;
-    }
-
-    private WordWrap value1() {
-        return WordWrap.BREAK_WORD;
-    }
-
-    private TextStylePropertyName<FontFamily> property2() {
-        return TextStylePropertyName.FONT_FAMILY;
-    }
-
-    private FontFamily value2() {
-        return FontFamily.with("Times News Roman");
-    }
-
-    private TextStylePropertyName<FontSize> property3() {
-        return TextStylePropertyName.FONT_SIZE;
-    }
-
-    private FontSize value3() {
-        return FontSize.with(12);
-    }
+    // class............................................................................................................
 
     @Override
     Class<TextStyleNonEmpty> textStyleType() {
         return TextStyleNonEmpty.class;
     }
-
 }
