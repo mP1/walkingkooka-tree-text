@@ -36,23 +36,40 @@ public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTes
     public void testWithInvalidPropertyFails() {
         assertThrows(
             NullPointerException.class,
-            () -> TextStylePropertiesMapEntrySet.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
+            () -> TextStylePropertiesMapEntrySet.with(
+                Maps.of(
+                    TextStylePropertyName.WORD_BREAK,
+                    null
+                )
+            )
         );
     }
 
     @Test
-    public void testEmpty() {
-        assertSame(TextStylePropertiesMapEntrySet.EMPTY, TextStylePropertiesMapEntrySet.with(Maps.empty()));
+    public void testWithEmpty() {
+        assertSame(
+            TextStylePropertiesMapEntrySet.EMPTY,
+            TextStylePropertiesMapEntrySet.with(Maps.empty())
+        );
     }
 
     @Test
     public void testSize() {
-        this.sizeAndCheck(this.createSet(), 2);
+        this.sizeAndCheck(
+            this.createSet(),
+            2
+        );
     }
 
     @Test
     public void testAddFails() {
-        this.addFails(this.createSet(), Maps.entry(this.property1(), this.value1()));
+        this.addFails(
+            this.createSet(),
+            Maps.entry(
+                this.property1(),
+                this.value1()
+            )
+        );
     }
 
     @Test
@@ -60,7 +77,10 @@ public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTes
         final Iterator<?> iterator = this.createSet().iterator();
         iterator.next();
 
-        assertThrows(UnsupportedOperationException.class, iterator::remove);
+        assertThrows(
+            UnsupportedOperationException.class,
+            iterator::remove
+        );
     }
 
     @Test
@@ -69,14 +89,25 @@ public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTes
         map.put(this.property1(), this.value1());
         map.put(this.property2(), this.value2());
 
-        this.toStringAndCheck(this.createSet(), map.entrySet().toString());
+        this.toStringAndCheck(
+            this.createSet(),
+            map.entrySet()
+                .toString()
+        );
     }
 
     @Override
     public TextStylePropertiesMapEntrySet createSet() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.ordered();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
+        map.put(
+            this.property1(),
+            this.value1()
+        );
+        map.put(
+            this.property2(),
+            this.value2()
+        );
+
         return TextStylePropertiesMapEntrySet.with(map);
     }
 
