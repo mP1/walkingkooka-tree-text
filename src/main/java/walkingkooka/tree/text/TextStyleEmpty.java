@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.color.Color;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -111,81 +110,12 @@ final class TextStyleEmpty extends TextStyle {
         return Optional.empty();
     }
 
-    @Override //
-    <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
-                             final V value) {
-        final TextStyleNonEmpty set;
-
-        switch (propertyName.name) {
-            case BORDER_COLOR:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_COLOR,
-                    TextStylePropertyName.BORDER_LEFT_COLOR,
-                    TextStylePropertyName.BORDER_RIGHT_COLOR,
-                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                    (Color) value
-                );
-                break;
-            case BORDER_STYLE:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_STYLE,
-                    TextStylePropertyName.BORDER_LEFT_STYLE,
-                    TextStylePropertyName.BORDER_RIGHT_STYLE,
-                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                    (BorderStyle) value
-                );
-                break;
-            case BORDER_WIDTH:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_WIDTH,
-                    TextStylePropertyName.BORDER_LEFT_WIDTH,
-                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                    (Length<?>) value
-                );
-                break;
-            case MARGIN:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.MARGIN_TOP,
-                    TextStylePropertyName.MARGIN_LEFT,
-                    TextStylePropertyName.MARGIN_RIGHT,
-                    TextStylePropertyName.MARGIN_BOTTOM,
-                    (Length<?>) value
-                );
-                break;
-            case PADDING:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.PADDING_TOP,
-                    TextStylePropertyName.PADDING_LEFT,
-                    TextStylePropertyName.PADDING_RIGHT,
-                    TextStylePropertyName.PADDING_BOTTOM,
-                    (Length<?>) value
-                );
-                break;
-            default:
-                set = TextStyleNonEmpty.with(
-                    TextStylePropertiesMap.withTextStyleMapEntrySet(
-                        TextStylePropertiesMapEntrySet.withList(
-                            Lists.of(
-                                Map.entry(
-                                    propertyName,
-                                    value
-                                )
-                            )
-                        )
-                    )
-                );
-                break;
-        }
-
-        return set;
-    }
-
-    private <T> TextStyleNonEmpty setTopLeftRightBottom(final TextStylePropertyName<T> top,
-                                                        final TextStylePropertyName<T> left,
-                                                        final TextStylePropertyName<T> right,
-                                                        final TextStylePropertyName<T> bottom,
-                                                        final T value) {
+    @Override
+    <T> TextStyleNonEmpty setTopLeftRightBottom(final TextStylePropertyName<T> top,
+                                                final TextStylePropertyName<T> left,
+                                                final TextStylePropertyName<T> right,
+                                                final TextStylePropertyName<T> bottom,
+                                                final T value) {
         return TextStyleNonEmpty.with(
             TextStylePropertiesMap.withTextStyleMapEntrySet(
                 TextStylePropertiesMapEntrySet.withList(
@@ -204,6 +134,23 @@ final class TextStyleEmpty extends TextStyle {
                         ),
                         Maps.entry(
                             bottom,
+                            value
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+    @Override
+    <T> TextStyleNonEmpty setValue(final TextStylePropertyName<T> propertyName,
+                                   final T value) {
+        return TextStyleNonEmpty.with(
+            TextStylePropertiesMap.withTextStyleMapEntrySet(
+                TextStylePropertiesMapEntrySet.withList(
+                    Lists.of(
+                        Map.entry(
+                            propertyName,
                             value
                         )
                     )

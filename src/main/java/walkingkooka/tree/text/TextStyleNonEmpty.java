@@ -21,7 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
 import walkingkooka.predicate.Predicates;
 import walkingkooka.text.CaseKind;
@@ -217,117 +216,29 @@ final class TextStyleNonEmpty extends TextStyle {
 
     // set..............................................................................................................
 
-    @Override //
-    <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
-                             final V value) {
-        TextStyle result;
-
-        switch (propertyName.name) {
-            case BORDER_COLOR:
-                final Color color = Cast.to(value);
-
-                result = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_COLOR,
-                    color,
-                    TextStylePropertyName.BORDER_LEFT_COLOR,
-                    color,
-                    TextStylePropertyName.BORDER_RIGHT_COLOR,
-                    color,
-                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                    color
-                );
-                break;
-            case BORDER_STYLE:
-                final BorderStyle borderStyle = Cast.to(value);
-
-                result = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_STYLE,
-                    borderStyle,
-                    TextStylePropertyName.BORDER_LEFT_STYLE,
-                    borderStyle,
-                    TextStylePropertyName.BORDER_RIGHT_STYLE,
-                    borderStyle,
-                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                    borderStyle
-                );
-                break;
-            case BORDER_WIDTH:
-                final Length<?> borderWidth = Cast.to(value);
-
-                result = this.setTopLeftRightBottom(
-                    TextStylePropertyName.BORDER_TOP_WIDTH,
-                    borderWidth,
-                    TextStylePropertyName.BORDER_LEFT_WIDTH,
-                    borderWidth,
-                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                    borderWidth,
-                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                    borderWidth
-                );
-                break;
-            case MARGIN:
-                final Length<?> margin = Cast.to(value);
-
-                result = this.setTopLeftRightBottom(
-                    TextStylePropertyName.MARGIN_TOP,
-                    margin,
-                    TextStylePropertyName.MARGIN_LEFT,
-                    margin,
-                    TextStylePropertyName.MARGIN_RIGHT,
-                    margin,
-                    TextStylePropertyName.MARGIN_BOTTOM,
-                    margin
-                );
-                break;
-            case PADDING:
-                final Length<?> padding = Cast.to(value);
-
-                result = this.setTopLeftRightBottom(
-                    TextStylePropertyName.PADDING_TOP,
-                    padding,
-                    TextStylePropertyName.PADDING_LEFT,
-                    padding,
-                    TextStylePropertyName.PADDING_RIGHT,
-                    padding,
-                    TextStylePropertyName.PADDING_BOTTOM,
-                    padding
-                );
-                break;
-            default:
-                result = this.setValue(
-                    propertyName,
-                    value
-                );
-                break;
-        }
-
-        return result;
-    }
-
-    private <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
-                                                final T topValue,
-                                                final TextStylePropertyName<T> leftName,
-                                                final T leftValue,
-                                                final TextStylePropertyName<T> rightName,
-                                                final T rightValue,
-                                                final TextStylePropertyName<T> bottomName,
-                                                final T bottomValue) {
+    @Override
+    <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
+                                        final TextStylePropertyName<T> leftName,
+                                        final TextStylePropertyName<T> rightName,
+                                        final TextStylePropertyName<T> bottomName,
+                                        final T value) {
         return this.setValues(
             Maps.of(
                 topName,
-                topValue,
+                value,
                 leftName,
-                leftValue,
+                value,
                 rightName,
-                rightValue,
+                value,
                 bottomName,
-                bottomValue
+                value
             )
         );
     }
 
-    private <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
-                                           final V value) {
+    @Override
+    <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
+                                   final V value) {
         TextStylePropertiesMap map = this.value;
         final List<Entry<TextStylePropertyName<?>, Object>> list = Lists.array();
 
