@@ -36,7 +36,10 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testValue() {
-        assertSame(TextStyle.EMPTY.value(), TextStyle.EMPTY.value());
+        assertSame(
+            TextStyle.EMPTY.value(),
+            TextStyle.EMPTY.value()
+        );
     }
 
     // merge............................................................................................................
@@ -74,28 +77,50 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testReplaceTextStyle2() {
         final TextNode node = TextNode.style(children());
 
-        this.replaceAndCheck(TextStyle.EMPTY,
-            node.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)),
-            node);
+        this.replaceAndCheck(
+            TextStyle.EMPTY,
+            node.setAttributes(
+                Maps.of(
+                    TextStylePropertyName.FONT_STYLE,
+                    FontStyle.ITALIC
+                )
+            ),
+            node
+        );
     }
 
     @Test
     public void testReplaceTextStyleNodeWithParent() {
         final TextNode textStyleNode = TextNode.style(this.children());
 
-        this.replaceAndCheck(TextStyle.EMPTY,
-            makeStyleNameParent(textStyleNode.setAttributes(Maps.of(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC))),
-            makeStyleNameParent(textStyleNode));
+        this.replaceAndCheck(
+            TextStyle.EMPTY,
+            makeStyleNameParent(
+                textStyleNode.setAttributes(
+                    Maps.of(
+                        TextStylePropertyName.FONT_STYLE,
+                        FontStyle.ITALIC
+                    )
+                )
+            ),
+            makeStyleNameParent(textStyleNode)
+        );
     }
 
     @Test
     public void testReplaceTextStyleName() {
-        this.replaceAndCheck2(TextNode.styleName(TextStyleName.with("style123")));
+        this.replaceAndCheck2(
+            TextNode.styleName(
+                TextStyleName.with("style123")
+            )
+        );
     }
 
     @Test
     public void testReplaceTextStyleWithParent() {
-        final TextStyleNameNode styled = makeStyleNameParent(this.styleName("child-style-456"));
+        final TextStyleNameNode styled = makeStyleNameParent(
+            this.styleName("child-style-456")
+        );
 
         this.replaceAndCheck2(styled);
     }
@@ -111,7 +136,10 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     }
 
     private void replaceAndCheck2(final TextNode textNode) {
-        this.replaceAndCheck(TextStyle.EMPTY, textNode);
+        this.replaceAndCheck(
+            TextStyle.EMPTY,
+            textNode
+        );
     }
 
     // set..............................................................................................................
@@ -200,7 +228,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // removeBorderColor...................................................................................................
+    // removeBorderColor.................................................................................................
 
     @Test
     public void testBorderColorRemove() {
@@ -294,7 +322,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // removeBorderWidth...................................................................................................
+    // removeBorderWidth................................................................................................
 
     @Test
     public void testBorderWidthRemove() {
@@ -305,7 +333,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // getMargin...................................................................................................
+    // getMargin........................................................................................................
 
     @Test
     public void testMarginGet() {
@@ -316,7 +344,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // setMargin...................................................................................................
+    // setMargin........................................................................................................
 
     @Test
     public void testMarginSet() {
@@ -341,7 +369,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // removeMargin...................................................................................................
+    // removeMargin.....................................................................................................
 
     @Test
     public void testMarginRemove() {
@@ -429,7 +457,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             "visited");
     }
 
-    // HasText.......................................................................................................
+    // HasText..........................................................................................................
 
     @Test
     public void testText() {
