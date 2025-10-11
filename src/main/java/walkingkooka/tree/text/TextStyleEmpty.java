@@ -19,13 +19,12 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 /**
@@ -115,122 +114,100 @@ final class TextStyleEmpty extends TextStyle {
     @Override //
     <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
                              final V value) {
-        List<Entry<TextStylePropertyName<?>, Object>> entries;
+        final TextStyleNonEmpty set;
 
         switch (propertyName.name) {
             case BORDER_COLOR:
-                entries = Lists.of(
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_TOP_COLOR,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_LEFT_COLOR,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_RIGHT_COLOR,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                        value
-                    )
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    (Color) value
                 );
                 break;
             case BORDER_STYLE:
-                entries = Lists.of(
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_TOP_STYLE,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_LEFT_STYLE,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_RIGHT_STYLE,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                        value
-                    )
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_STYLE,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    (BorderStyle) value
                 );
                 break;
             case BORDER_WIDTH:
-                entries = Lists.of(
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_TOP_WIDTH,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_LEFT_WIDTH,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                        value
-                    )
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.BORDER_TOP_WIDTH,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
+                    TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                    TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    (Length<?>) value
                 );
                 break;
             case MARGIN:
-                entries = Lists.of(
-                    Maps.entry(
-                        TextStylePropertyName.MARGIN_TOP,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.MARGIN_LEFT,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        value
-                    )
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.MARGIN_TOP,
+                    TextStylePropertyName.MARGIN_LEFT,
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    (Length<?>) value
                 );
                 break;
             case PADDING:
-                entries = Lists.of(
-                    Maps.entry(
-                        TextStylePropertyName.PADDING_TOP,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.PADDING_LEFT,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.PADDING_RIGHT,
-                        value
-                    ),
-                    Maps.entry(
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        value
-                    )
+                set = this.setTopLeftRightBottom(
+                    TextStylePropertyName.PADDING_TOP,
+                    TextStylePropertyName.PADDING_LEFT,
+                    TextStylePropertyName.PADDING_RIGHT,
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    (Length<?>) value
                 );
                 break;
             default:
-                entries = Lists.of(
-                    Maps.entry(
-                        propertyName,
-                        value
+                set = TextStyleNonEmpty.with(
+                    TextStylePropertiesMap.withTextStyleMapEntrySet(
+                        TextStylePropertiesMapEntrySet.withList(
+                            Lists.of(
+                                Map.entry(
+                                    propertyName,
+                                    value
+                                )
+                            )
+                        )
                     )
                 );
                 break;
         }
 
+        return set;
+    }
+
+    private <T> TextStyleNonEmpty setTopLeftRightBottom(final TextStylePropertyName<T> top,
+                                                        final TextStylePropertyName<T> left,
+                                                        final TextStylePropertyName<T> right,
+                                                        final TextStylePropertyName<T> bottom,
+                                                        final T value) {
         return TextStyleNonEmpty.with(
             TextStylePropertiesMap.withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.withList(entries)
+                TextStylePropertiesMapEntrySet.withList(
+                    Lists.of(
+                        Maps.entry(
+                            top,
+                            value
+                        ),
+                        Maps.entry(
+                            left,
+                            value
+                        ),
+                        Maps.entry(
+                            right,
+                            value
+                        ),
+                        Maps.entry(
+                            bottom,
+                            value
+                        )
+                    )
+                )
             )
         );
     }
