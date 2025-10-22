@@ -111,39 +111,34 @@ final class TextStyleNonEmpty extends TextStyle {
             afterSize
         );
 
+        boolean different = false;
+        int newCount = 0;
+
         final Object[] newValues = new Object[newSize];
 
-        // copy before
-        System.arraycopy(
-            beforeValues,
-            0,
-            newValues,
-            0,
-            beforeSize
-        );
+        for(int i = 0; i < newSize; i++) {
+            final Object beforeValue = i < beforeSize ?
+                beforeValues[i] :
+                null;
 
-        boolean different = false;
-        int newCount = before.count;
+            final Object afterValue = i < afterSize ?
+                afterValues[i] :
+                null;
 
-        for (int i = 0; i < afterSize; i++) {
-            final Object afterValue = afterValues[i];
-            if(null == afterValue) {
-                continue;
-            }
+            Object newValue = afterValue;
+            if(null != newValue) {
+                different = different | false == newValue.equals(beforeValue);
+                newCount++;
+            } else {
+                newValue = beforeValue;
 
-            if(i < beforeSize) {
-                final Object beforeValue = newValues[i];
-                if (afterValue.equals(beforeValue)) {
-                    continue;
-                }
-                if(null != beforeValue) {
-                    newCount--;
+                if(null != newValue) {
+                    newCount++;
+                    different = true;
                 }
             }
 
-            different = true;
-            newValues[i] = afterValue;
-            newCount++;
+            newValues[i] = newValue;
         }
 
         return different ?
