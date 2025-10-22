@@ -92,12 +92,12 @@ final class TextStyleNonEmpty extends TextStyle {
     // merge............................................................................................................
 
     @Override
-    TextStyle merge0(final TextStyle textStyle) {
-        return textStyle.merge1(this);
+    TextStyle mergeNonNull(final TextStyle textStyle) {
+        return textStyle.mergeNonEmpty(this);
     }
 
     @Override
-    TextStyle merge1(final TextStyleNonEmpty other) {
+    TextStyle mergeNonEmpty(final TextStyleNonEmpty other) {
         final TextStylePropertiesMapEntrySet before = other.value.entries;
         final TextStylePropertiesMapEntrySet after = this.value.entries;
 

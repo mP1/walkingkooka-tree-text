@@ -80,12 +80,12 @@ final class TextStyleEmpty extends TextStyle {
     // merge............................................................................................................
 
     @Override
-    TextStyle merge0(final TextStyle other) {
-        return other;
+    TextStyle mergeNonNull(final TextStyle other) {
+        return other; // EMPTY merge other gives other.
     }
 
     @Override
-    TextStyle merge1(final TextStyleNonEmpty textStyle) {
+    TextStyle mergeNonEmpty(final TextStyleNonEmpty textStyle) {
         return textStyle; // EMPTY merge NOTEMPTY -> NOTEMPTY
     }
 
