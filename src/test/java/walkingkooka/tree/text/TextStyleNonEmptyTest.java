@@ -152,6 +152,24 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testMergeWithNotEmptyWithDifferent9() {
+        this.mergeAndCheck(
+            TextStyle.parse("font-weight: bold;"),
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left"),
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent10() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left"),
+            TextStyle.parse("font-weight: bold;"),
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left")
+        );
+    }
+
     // replace...........................................................................................................
 
     @Test
