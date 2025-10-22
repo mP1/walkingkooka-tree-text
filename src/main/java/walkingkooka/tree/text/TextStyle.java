@@ -168,12 +168,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextStyle merge(final TextStyle textStyle) {
         Objects.requireNonNull(textStyle, "textStyle");
 
-        return this.merge0(textStyle);
+        return this.mergeNonNull(textStyle);
     }
 
-    abstract TextStyle merge0(final TextStyle textStyle);
+    abstract TextStyle mergeNonNull(final TextStyle textStyle);
 
-    abstract TextStyle merge1(final TextStyleNonEmpty textStyle);
+    abstract TextStyle mergeNonEmpty(final TextStyleNonEmpty textStyle);
 
     // replace............................................................................................................
 
