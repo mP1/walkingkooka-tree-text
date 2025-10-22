@@ -83,27 +83,72 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testMergeWithNotEmptyWithDifferent() {
         this.mergeAndCheck(
-            TextStyle.parse("background-color: #111;"),
-            TextStyle.parse("color: #222;"),
-            TextStyle.parse("background-color: #111; color: #222;")
+            TextStyle.parse("background-color: #999;"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left")
         );
     }
 
     @Test
     public void testMergeWithNotEmptyWithDifferent2() {
         this.mergeAndCheck(
-            TextStyle.parse("color: #111;"),
-            TextStyle.parse("background-color: #222;"),
-            TextStyle.parse("background-color: #222; color: #111;")
+            TextStyle.parse("color: #999;"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left")
         );
     }
 
     @Test
-    public void testMergeWithNotEmptyReplacesAndDifferent() {
+    public void testMergeWithNotEmptyWithDifferent3() {
         this.mergeAndCheck(
-            TextStyle.parse("background-color: #111; color: #222"),
-            TextStyle.parse("background-color: #999; text-align: left"),
+            TextStyle.parse("text-align: right;"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent4() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("background-color: #999;"),
             TextStyle.parse("background-color: #999; color: #222; text-align: left")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent5() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("color: #999;"),
+            TextStyle.parse("background-color: #111; color: #999; text-align: left")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent6() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("text-align: right;"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: right")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent7() {
+        this.mergeAndCheck(
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("font-weight: bold;"),
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left")
+        );
+    }
+
+    @Test
+    public void testMergeWithNotEmptyWithDifferent8() {
+        this.mergeAndCheck(
+            TextStyle.parse("font-weight: bold;"),
+            TextStyle.parse("background-color: #111; color: #222; text-align: left"),
+            TextStyle.parse("background-color: #111; color: #222; font-weight: bold; text-align: left")
         );
     }
 
