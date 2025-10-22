@@ -613,7 +613,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Always returns this.
      */
     @Override
-    public TextStyle textStyle() {
+    public final TextStyle textStyle() {
         return this;
     }
 }
