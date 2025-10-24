@@ -959,7 +959,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Returns the {@link Class} of the value type. This can be used an an argument to a {@link walkingkooka.convert.Converter}.
      */
-    public Class<T> valueType() {
+    public Class<T> type() {
         return this.handler.valueType();
     }
 

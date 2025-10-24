@@ -557,8 +557,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
 
             final Object propertyValue;
 
-            final Class<?> valueType = propertyName.valueType();
-            switch (valueType.getSimpleName()) {
+            final Class<?> type = propertyName.type();
+            switch (type.getSimpleName()) {
                 case "Color":
                     propertyValue = Color.BLACK;
                     break;
@@ -585,19 +585,19 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     break;
 
                 default:
-                    if (valueType.isEnum()) {
+                    if (type.isEnum()) {
                         final Enum[] enums = (Enum[])
-                            valueType.getMethod("values")
+                            type.getMethod("values")
                                 .invoke(null);
                         propertyValue = enums[0];
                         break;
                     }
 
-                    throw new UnsupportedOperationException(propertyName + " " + propertyName.valueType().getSimpleName());
+                    throw new UnsupportedOperationException(propertyName + " " + propertyName.type().getSimpleName());
             }
 
             String propertyValueText = propertyValue.toString();
-            if (valueType == Opacity.class) {
+            if (type == Opacity.class) {
                 propertyValueText = Opacity.with(0.5).text();
             }
 
