@@ -23,6 +23,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.naming.Name;
+import walkingkooka.naming.ValueName;
 import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.text.CaseKind;
@@ -45,7 +46,8 @@ import java.util.function.BiConsumer;
  * The {@link Name} of an {@link TextStyle} property. Note only supported property names are allowed, and each has a
  * constant. Attempts to call {@link #with(String)} with an unknown name will result in an {@link IllegalArgumentException}.
  */
-public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> implements HasUrlFragment {
+public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> implements HasUrlFragment,
+    ValueName<T> {
 
     /**
      * First because required by {@link #CONSTANTS} init.
@@ -959,6 +961,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * Returns the {@link Class} of the value type. This can be used an an argument to a {@link walkingkooka.convert.Converter}.
      */
+    @Override
     public Class<T> type() {
         return this.handler.valueType();
     }
