@@ -119,7 +119,7 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
-     * {@link TextStylePropertyName#valueType()}
+     * {@link TextStylePropertyName#type()}
      */
     abstract Class<T> valueType();
 
