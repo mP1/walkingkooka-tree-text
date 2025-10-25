@@ -20,10 +20,12 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.reflect.FieldAttributes;
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
@@ -36,12 +38,51 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import java.lang.reflect.Field;
 import java.math.MathContext;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>> {
 
+    // calling TextStylePropertyName.with constant#value should return constant
+    @Test
+    public void testWithUsingConstants() throws Exception {
+        final Set<TextStylePropertyName<?>> names = SortedSets.tree();
+
+        int i = 0;
+
+        for (final Field field : TextStylePropertyName.class.getFields()) {
+            if (false == FieldAttributes.STATIC.is(field)) {
+                continue;
+            }
+            if (TextStylePropertyName.class != field.getType()) {
+                continue;
+            }
+            if (false == JavaVisibility.PUBLIC.equals(JavaVisibility.of(field))) {
+                continue;
+            }
+
+            final TextStylePropertyName<?> constant = (TextStylePropertyName<?>) field.get(null);
+            final TextStylePropertyName<?> got = TextStylePropertyName.with(constant.value());
+            if (constant != got) {
+                names.add(got);
+            }
+
+            i++;
+        }
+
+        this.checkNotEquals(
+            0,
+            i
+        );
+
+        this.checkEquals(
+            Sets.empty(),
+            names
+        );
+    }
+    
     // index............................................................................................................
 
     @Test
