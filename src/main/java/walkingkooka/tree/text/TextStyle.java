@@ -560,8 +560,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     static {
-        TextStylePropertyName.BACKGROUND_COLOR.toString();
-
         JsonNodeContext.register("text-style",
             TextStyle::unmarshall,
             TextStyle::marshall,
