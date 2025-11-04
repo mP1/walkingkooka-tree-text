@@ -40,7 +40,6 @@ final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePr
     /**
      * An empty {@link TextStylePropertiesMap}.
      */
-    //static final TextStylePropertiesMapEntrySet EMPTY = new TextStylePropertiesMapEntrySet(Lists.empty());
     static final TextStylePropertiesMapEntrySet EMPTY = new TextStylePropertiesMapEntrySet(
         new Object[0],
         0
