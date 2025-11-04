@@ -34,6 +34,11 @@ import java.util.Set;
 
 /**
  * A read only {@link Set} sorted view of properties that have had their values checked.
+ * <br>
+ * For performance reasons an array of fixed size is kept, with the {@link TextStylePropertyName#index()} used to
+ * get a value.
+ * <br>
+ * A simple performance test TextStylePerfTest shows this to be at least 10x faster than a sorted map.
  */
 final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> implements ImmutableSetDefaults<TextStylePropertiesMapEntrySet, Entry<TextStylePropertyName<?>, Object>> {
 
