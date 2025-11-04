@@ -76,7 +76,7 @@ final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePr
     }
 
     /**
-     * The actual number of values in this set.
+     * The actual number of NON NULL values in this set.
      */
     final int count;
 
