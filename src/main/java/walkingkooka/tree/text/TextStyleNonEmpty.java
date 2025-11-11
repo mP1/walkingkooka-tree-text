@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.map.Maps;
 import walkingkooka.naming.Name;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CharSequences;
@@ -71,8 +70,18 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
-        final Map<TextStylePropertyName<?>, Object> copy = Maps.sorted();
-        copy.putAll(this.value);
+        final TextStylePropertiesMapEntrySet entries = this.value.entries;
+
+        // "clone" the values faster than putAll
+        final TextStylePropertiesMapMutable copy = TextStylePropertiesMapMutable.empty();
+        copy.size = entries.count;
+        System.arraycopy(
+            entries.values,
+            0,
+            copy.values,
+            0,
+            entries.values.length
+        );
         return copy;
     }
 

@@ -55,30 +55,52 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         if (map instanceof TextStylePropertiesMap) {
             textStylePropertiesMap = (TextStylePropertiesMap) map;
         } else {
-            int count = 0;
-            final List<Object> values = Lists.autoExpandArray();
+            if(map instanceof TextStylePropertiesMapMutable) {
+                final TextStylePropertiesMapMutable textStylePropertiesMapMutable = (TextStylePropertiesMapMutable) map;
 
-            for (final Entry<TextStylePropertyName<?>, Object> entry : map.entrySet()) {
-                final TextStylePropertyName<?> propertyName = entry.getKey();
-                final int index = propertyName.index();
-
-                final Object value = entry.getValue();
-                propertyName.checkValue(value);
-
-                values.set(
-                    index,
-                    entry.getValue()
+                // not required, but taking a copy just to be safe
+                final Object[] array = textStylePropertiesMapMutable.values;
+                final Object[] copy = new Object[array.length];
+                System.arraycopy(
+                    array,
+                    0,
+                    copy,
+                    0,
+                    array.length
                 );
 
-                count++;
-            }
+                textStylePropertiesMap = TextStylePropertiesMap.withTextStyleMapEntrySet(
+                    TextStylePropertiesMapEntrySet.with(
+                        copy,
+                        textStylePropertiesMapMutable.size()
+                    )
+                );
+            } else {
+                int count = 0;
+                final List<Object> values = Lists.autoExpandArray();
 
-            textStylePropertiesMap = withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.with(
-                    values.toArray(),
-                    count
-                )
-            );
+                for (final Entry<TextStylePropertyName<?>, Object> entry : map.entrySet()) {
+                    final TextStylePropertyName<?> propertyName = entry.getKey();
+                    final int index = propertyName.index();
+
+                    final Object value = entry.getValue();
+                    propertyName.checkValue(value);
+
+                    values.set(
+                        index,
+                        entry.getValue()
+                    );
+
+                    count++;
+                }
+
+                textStylePropertiesMap = withTextStyleMapEntrySet(
+                    TextStylePropertiesMapEntrySet.with(
+                        values.toArray(),
+                        count
+                    )
+                );
+            }
         }
 
         return textStylePropertiesMap;
