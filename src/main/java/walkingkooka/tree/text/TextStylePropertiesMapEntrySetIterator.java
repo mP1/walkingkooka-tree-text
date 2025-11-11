@@ -24,7 +24,8 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 /**
- * Iterator that returns all non-null values in the given array.
+ * A read-only {@link Iterator} that returns all non-null values in the given array which is shared from the parent
+ * {@link TextStylePropertiesMapEntrySet}.
  */
 final class TextStylePropertiesMapEntrySetIterator implements Iterator<Entry<TextStylePropertyName<?>, Object>> {
 
