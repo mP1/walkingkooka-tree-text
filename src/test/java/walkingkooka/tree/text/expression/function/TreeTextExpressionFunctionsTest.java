@@ -24,6 +24,7 @@ import walkingkooka.color.Color;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
@@ -748,6 +749,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         DateTimeContexts.fake(),
                         DecimalNumberContexts.fake()
                     ),
+                    EnvironmentContexts.fake(),
                     LocaleContexts.fake()
                 )
             )
