@@ -61,7 +61,7 @@ final class TreeTextExpressionFunctionHyperlink<C extends ExpressionEvaluationCo
     @Override
     public Hyperlink apply(final List<Object> parameters,
                           final C context) {
-        final Url url = URL.getOrFail(parameters, 0);
+        final Url url = URL.getOrFail(parameters, 0, context);
         return TextNode.hyperlink(url);
     }
 }

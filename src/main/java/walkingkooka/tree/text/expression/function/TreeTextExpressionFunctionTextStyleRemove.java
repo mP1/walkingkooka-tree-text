@@ -62,8 +62,8 @@ final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvalua
     @Override
     public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0);
-        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
+        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0, context);
+        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1, context);
 
         return styleable.remove(propertyName);
     }
