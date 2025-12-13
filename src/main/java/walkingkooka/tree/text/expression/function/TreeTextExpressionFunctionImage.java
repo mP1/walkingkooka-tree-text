@@ -61,7 +61,7 @@ final class TreeTextExpressionFunctionImage<C extends ExpressionEvaluationContex
     @Override
     public Image apply(final List<Object> parameters,
                           final C context) {
-        final Url url = URL.getOrFail(parameters, 0);
+        final Url url = URL.getOrFail(parameters, 0, context);
         return TextNode.image(url);
     }
 }
