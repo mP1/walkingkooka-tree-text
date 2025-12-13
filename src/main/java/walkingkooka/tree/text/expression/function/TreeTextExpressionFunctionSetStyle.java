@@ -62,8 +62,8 @@ final class TreeTextExpressionFunctionSetStyle<C extends ExpressionEvaluationCon
     @Override
     public TextNode apply(final List<Object> parameters,
                           final C context) {
-        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 0, context);
-        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 1, context);
+        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 0);
+        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 1);
 
         return textNode.setTextStyle(
             hasTextStyle.textStyle()

@@ -62,8 +62,7 @@ final class TreeTextExpressionFunctionTextStyle<C extends ExpressionEvaluationCo
                            final C context) {
         return TEXT_STYLE.getOrFail(
             parameters,
-            0,
-            context
+            0
         );
     }
 }

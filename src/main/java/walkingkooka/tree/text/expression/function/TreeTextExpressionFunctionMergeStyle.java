@@ -66,8 +66,8 @@ final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationC
     @Override
     public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final Styleable first = STYLEABLE.getOrFail(parameters, 0, context);
-        final TextStyle mergeTextStyle = SECOND_TEXT_STYLE.getOrFail(parameters, 1, context);
+        final Styleable first = STYLEABLE.getOrFail(parameters, 0);
+        final TextStyle mergeTextStyle = SECOND_TEXT_STYLE.getOrFail(parameters, 1);
 
         return first.merge(mergeTextStyle);
     }

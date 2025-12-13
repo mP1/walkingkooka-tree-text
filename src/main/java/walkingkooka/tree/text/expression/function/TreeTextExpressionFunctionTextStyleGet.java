@@ -62,8 +62,8 @@ final class TreeTextExpressionFunctionTextStyleGet<C extends ExpressionEvaluatio
     @Override
     public Object apply(final List<Object> parameters,
                           final C context) {
-        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 0, context);
-        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1, context);
+        final HasTextStyle hasTextStyle = HAS_TEXT_STYLE.getOrFail(parameters, 0);
+        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
 
 
         return hasTextStyle.textStyle()

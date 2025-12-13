@@ -61,8 +61,8 @@ final class TreeTextExpressionFunctionSetText<C extends ExpressionEvaluationCont
     @Override
     public TextNode apply(final List<Object> parameters,
                           final C context) {
-        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 0, context);
-        final String text = TEXT.getOrFail(parameters, 1, context);
+        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 0);
+        final String text = TEXT.getOrFail(parameters, 1);
 
         return textNode.setText(text);
     }
