@@ -60,7 +60,7 @@ final class TreeTextExpressionFunctionGetTextNode<C extends ExpressionEvaluation
     @Override
     public TextNode apply(final List<Object> parameters,
                            final C context) {
-        final HasTextNode has = HAS_TEXT_NODE.getOrFail(parameters, 0, context);
+        final HasTextNode has = HAS_TEXT_NODE.getOrFail(parameters, 0);
 
         return has.textNode();
     }

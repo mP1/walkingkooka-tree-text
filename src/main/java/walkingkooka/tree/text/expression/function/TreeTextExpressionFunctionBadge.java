@@ -62,8 +62,8 @@ final class TreeTextExpressionFunctionBadge<C extends ExpressionEvaluationContex
     @Override
     public Badge apply(final List<Object> parameters,
                        final C context) {
-        final String badgeText = TEXT.getOrFail(parameters, 0, context);
-        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 1, context);
+        final String badgeText = TEXT.getOrFail(parameters, 0);
+        final TextNode textNode = TEXT_NODE.getOrFail(parameters, 1);
 
         return TextNode.badge(badgeText)
             .appendChild(textNode);

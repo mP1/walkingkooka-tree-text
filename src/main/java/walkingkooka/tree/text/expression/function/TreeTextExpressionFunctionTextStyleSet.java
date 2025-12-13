@@ -71,9 +71,9 @@ final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluatio
     @Override
     public Styleable apply(final List<Object> parameters,
                            final C context) {
-        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0, context);
-        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1, context);
-        Object value = VALUE.getOrFail(parameters, 2, context);
+        final Styleable styleable = STYLEABLE.getOrFail(parameters, 0);
+        final TextStylePropertyName<?> propertyName = TEXT_STYLE_PROPERTY_NAME.getOrFail(parameters, 1);
+        Object value = VALUE.getOrFail(parameters, 2);
 
         if (null != value) {
             // GWT doesnt support Class.instanceof
