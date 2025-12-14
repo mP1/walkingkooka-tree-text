@@ -687,6 +687,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             ).toValue(
                 ExpressionEvaluationContexts.basic(
                     ExpressionNumberKind.BIG_DECIMAL,
+                    (e, c) -> {
+                        throw new UnsupportedOperationException();
+                    },
                     (name) -> {
                         switch(name.value()) {
                             case "getStyle":
