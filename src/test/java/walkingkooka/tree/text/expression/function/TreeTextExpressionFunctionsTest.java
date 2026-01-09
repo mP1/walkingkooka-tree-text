@@ -32,6 +32,7 @@ import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
@@ -733,6 +734,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     ConverterContexts.basic(
                         false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
+                        LineEnding.NL,
                         ',', // valueSeparator
                         Converters.collection(
                             Lists.of(
