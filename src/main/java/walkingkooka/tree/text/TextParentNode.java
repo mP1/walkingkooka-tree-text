@@ -126,17 +126,21 @@ abstract class TextParentNode extends TextNode {
 
     // normalize........................................................................................................
 
-    final List<TextNode> normalizeChildren() {;
+    final List<TextNode> normalizeChildren() {
         final List<TextNode> children = this.children();
-        final Iterator<TextNode> following = children.iterator();
-        final List<TextNode> normalized = Lists.array();
+        List<TextNode> normalized = children;
 
-        while(following.hasNext()) {
-            following.next()
-                .normalizeSiblings(
-                    following,
-                    normalized::add
-                );
+        if (false == children.isEmpty()) {
+            final Iterator<TextNode> following = children.iterator();
+            normalized = Lists.array();
+
+            while (following.hasNext()) {
+                following.next()
+                    .normalizeSiblings(
+                        following,
+                        normalized::add
+                    );
+            }
         }
 
         return normalized;
