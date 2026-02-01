@@ -48,6 +48,29 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         super();
     }
 
+    // normalize........................................................................................................
+
+    final void normalizeAndCheck(final N node) {
+        assertSame(
+            node,
+            node.normalize(),
+            node::toString
+        );
+    }
+
+    final void normalizeAndCheck(final N node,
+                                 final TextNode expected) {
+        if (node.equals(expected)) {
+            this.normalizeAndCheck(node);
+        } else {
+            this.checkEquals(
+                expected,
+                node.normalize(),
+                node::toString
+            );
+        }
+    }
+
     // setText..........................................................................................................
 
     @Test

@@ -111,6 +111,15 @@ public final class TextStyleNameNode extends TextParentNode {
         return super.removeChild(child).cast();
     }
 
+    // normalize........................................................................................................
+
+    @Override
+    public TextStyleNameNode normalize() {
+        return this.setChildren(
+            this.normalizeChildren()
+        );
+    }
+
     // attribute........................................................................................................
 
     @Override

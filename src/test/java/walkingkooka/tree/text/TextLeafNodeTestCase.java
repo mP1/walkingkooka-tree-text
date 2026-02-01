@@ -53,6 +53,15 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
         );
     }
 
+    // normalize........................................................................................................
+
+    @Test
+    public final void testNormalize() {
+        this.normalizeAndCheck(
+            this.createTextNode()
+        );
+    }
+
     @Override final N createTextNode() {
         return this.createTextNode(this.value());
     }

@@ -155,6 +155,15 @@ public final class Hyperlink extends TextParentNode {
             .cast();
     }
 
+    // normalize........................................................................................................
+
+    @Override
+    public Hyperlink normalize() {
+        return this.setChildren(
+            this.normalizeChildren()
+        );
+    }
+
     // replace..........................................................................................................
 
     @Override

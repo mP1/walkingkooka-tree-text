@@ -167,6 +167,15 @@ public final class Badge extends TextParentNode {
         );
     }
 
+    // normalize........................................................................................................
+
+    @Override
+    public Badge normalize() {
+        return this.setChildren(
+            this.normalizeChildren()
+        );
+    }
+
     // toHtml...........................................................................................................
 
     @Override

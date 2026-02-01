@@ -25,7 +25,9 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Holds a link to an image.
@@ -59,6 +61,19 @@ public final class Image extends TextLeafNode<Url> {
             index,
             value
         );
+    }
+
+    // normalize........................................................................................................
+
+    @Override
+    public Image normalize() {
+        return this;
+    }
+
+    @Override
+    void normalizeSiblings(final Iterator<TextNode> following,
+                           final Consumer<TextNode> siblings) {
+        siblings.accept(this);
     }
 
     // HasText..........................................................................................................

@@ -24,7 +24,9 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * A placeholder which should be replaced by actual text during rendering, but does not contain any text by itself.
@@ -55,6 +57,19 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
     @Override
     TextPlaceholderNode replace1(final int index, final TextPlaceholderName value) {
         return new TextPlaceholderNode(index, value);
+    }
+
+    // normalize........................................................................................................
+
+    @Override
+    public TextPlaceholderNode normalize() {
+        return this;
+    }
+
+    @Override
+    void normalizeSiblings(final Iterator<TextNode> following,
+                           final Consumer<TextNode> siblings) {
+        siblings.accept(this);
     }
 
     // HasText..........................................................................................................
