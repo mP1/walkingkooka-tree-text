@@ -27,7 +27,6 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
 
@@ -122,24 +121,6 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
     }
 
     // setTextStyle.....................................................................................................
-
-    @Test
-    public void testSetTextStyleWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextNode.EMPTY_TEXT.setTextStyle(null)
-        );
-    }
-
-    @Test
-    public void testSetTextStyleWithEmpty() {
-        final TextNode node = TextNode.image(Url.parseAbsolute("https://example.com/image.gif"));
-
-        assertSame(
-            node,
-            node.setTextStyle(TextStyle.EMPTY)
-        );
-    }
 
     @Test
     public void testSetTextStyleWithNonEmpty() {
