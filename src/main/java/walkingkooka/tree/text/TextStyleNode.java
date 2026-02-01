@@ -162,6 +162,16 @@ public final class TextStyleNode extends TextParentNode {
         return new TextStyleNode(index, children, this.attributes);
     }
 
+
+    // normalize........................................................................................................
+
+    @Override
+    public TextStyleNode normalize() {
+        return this.setChildren(
+            this.normalizeChildren()
+        );
+    }
+
     // toHtml...........................................................................................................
 
     @Override

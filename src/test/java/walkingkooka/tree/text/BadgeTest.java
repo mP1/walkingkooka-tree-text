@@ -180,6 +180,33 @@ public final class BadgeTest extends TextParentNodeTestCase<Badge> {
         );
     }
 
+    // normalize........................................................................................................
+
+    @Test
+    public void testNormalize() {
+        this.normalizeAndCheck(
+            Badge.with(BADGE_TEXT)
+        );
+    }
+
+    @Test
+    public void testNormalizeWithEmptyText() {
+        final Badge badge = Badge.with(BADGE_TEXT);
+
+        this.normalizeAndCheck(
+            badge.setText(""),
+            badge
+        );
+    }
+
+    @Test
+    public void testNormalizeWithText() {
+        this.normalizeAndCheck(
+            Badge.with(BADGE_TEXT)
+                .setText("Hello")
+        );
+    }
+
     // SetStyle.........................................................................................................
 
     @Test

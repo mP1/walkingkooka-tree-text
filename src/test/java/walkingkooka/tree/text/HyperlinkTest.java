@@ -263,6 +263,169 @@ public final class HyperlinkTest extends TextParentNodeTestCase<Hyperlink> {
         );
     }
 
+    // normalize........................................................................................................
+
+    @Test
+    public void testNormalize() {
+        this.normalizeAndCheck(
+            Hyperlink.with(URL)
+        );
+    }
+
+    @Test
+    public void testNormalizeWithEmptyText() {
+        final Hyperlink hyperlink = Hyperlink.with(URL);
+
+        this.normalizeAndCheck(
+            hyperlink.setChildren(
+                Lists.of(
+                    TextNode.EMPTY_TEXT
+                )
+            ),
+            hyperlink
+        );
+    }
+
+    @Test
+    public void testNormalizeWithText() {
+        this.normalizeAndCheck(
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("Hello")
+                    )
+                )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithImageAndText() {
+        this.normalizeAndCheck(
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.image(URL),
+                        TextNode.text("222")
+                    )
+                )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithTextAndImage() {
+        this.normalizeAndCheck(
+            Hyperlink.with(URL)
+                .setChildren(
+                    Lists.of(
+                        TextNode.text("111"),
+                        TextNode.image(URL)
+                    )
+                )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithSeveralText() {
+        final Hyperlink hyperlink = Hyperlink.with(URL);
+
+        this.normalizeAndCheck(
+            hyperlink.setChildren(
+                Lists.of(
+                    TextNode.text("111"),
+                    TextNode.text("222"),
+                    TextNode.text("333")
+                )
+            ),
+            hyperlink.setChildren(
+                Lists.of(
+                    TextNode.text("111222333")
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithImageAndSeveralText() {
+        final Hyperlink hyperlink = Hyperlink.with(URL);
+        final Image image = Image.with(URL);
+
+        this.normalizeAndCheck(
+            hyperlink.setChildren(
+                Lists.of(
+                    image,
+                    TextNode.text("111"),
+                    TextNode.text("222"),
+                    TextNode.text("333")
+                )
+            ),
+            hyperlink.setChildren(
+                Lists.of(
+                    image,
+                    TextNode.text("111222333")
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithHyperlinkAndText() {
+        this.normalizeAndCheck(
+            Hyperlink.with(
+                Url.parseAbsolute("https://example.com/2")
+            ).appendChild(
+                Hyperlink.with(URL)
+                    .appendChild(
+                        Image.with(URL)
+                    ).appendChild(
+                        TextNode.text("text333")
+                    )
+            )
+        );
+    }
+
+    @Test
+    public void testNormalizeWithHyperlinkAndManyText() {
+        final Hyperlink hyperlink = Hyperlink.with(URL);
+
+        final Hyperlink hyperlink2 = Hyperlink.with(
+            Url.parseAbsolute("https://example.com/2")
+        );
+
+        final Image image = Image.with(
+            Url.parse("https://example.com/3")
+        );
+
+        final Text text1 = TextNode.text("text1");
+        final Text text2 = TextNode.text("text2");
+        final Text text3 = TextNode.text("text3");
+        final Text text4 = TextNode.text("text4");
+
+        this.normalizeAndCheck(
+            hyperlink.appendChild(
+                text1
+            ).appendChild(
+                text2
+            ).appendChild(
+                hyperlink2.appendChild(
+                    image
+                ).appendChild(
+                    text3
+                ).appendChild(
+                    text4
+                )
+            ),
+            hyperlink.appendChild(
+                TextNode.text("text1text2")
+            ).appendChild(
+                hyperlink2.appendChild(
+                    image
+                ).appendChild(
+                    TextNode.text("text3text4")
+                )
+            )
+        );
+    }
+
     // toHtml...........................................................................................................
 
     @Test

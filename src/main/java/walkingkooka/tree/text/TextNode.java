@@ -36,10 +36,12 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.select.NodeSelector;
 import walkingkooka.tree.select.parser.ExpressionNodeSelectorParserToken;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -232,6 +234,19 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Replaces the index, retaining other textStyle.
      */
     abstract TextNode replace(final int index);
+
+    // normalize........................................................................................................
+
+    /**
+     * Similar to HTML DOM normalize, adjacent {@link Text} are merged into one and empty {@link Text} removed.
+     */
+    public abstract TextNode normalize();
+
+    /**
+     * Internal helper, used to during the normalization process.
+     */
+    abstract void normalizeSiblings(final Iterator<TextNode> following,
+                                    final Consumer<TextNode> siblings);
 
     // setAttributes....................................................................................................
 

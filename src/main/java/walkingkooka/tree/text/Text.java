@@ -26,7 +26,9 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Holds plain text which may be empty.
@@ -79,6 +81,50 @@ public final class Text extends TextLeafNode<String> implements HasText {
     @Override
     Text replace1(final int index, final String value) {
         return new Text(index, value);
+    }
+
+    // normalize........................................................................................................
+
+    @Override
+    public Text normalize() {
+        return this;
+    }
+
+    /**
+     * Try and combine multiple consecutive {@link Text} or removing empty text nodes.
+     */
+    @Override
+    void normalizeSiblings(final Iterator<TextNode> following,
+                           final Consumer<TextNode> siblings) {
+        final StringBuilder text = new StringBuilder();
+        text.append(this.value);
+
+        TextNode next = null;
+
+        while (following.hasNext()) {
+            next = following.next();
+            if (false == next.isText()) {
+                break;
+            }
+
+            text.append(
+                next.text()
+            );
+            next = null;
+        }
+
+        if (text.length() > 0) {
+            siblings.accept(
+                this.setText(text.toString())
+            );
+        }
+
+        if (null != next) {
+            next.normalizeSiblings(
+                following,
+                siblings
+            );
+        }
     }
 
     // HasText.........................................................................................................

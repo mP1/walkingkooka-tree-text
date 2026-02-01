@@ -28,9 +28,11 @@ import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -121,6 +123,32 @@ abstract class TextParentNode extends TextNode {
 
     abstract TextParentNode replace0(final int index,
                                      final List<TextNode> children);
+
+    // normalize........................................................................................................
+
+    final List<TextNode> normalizeChildren() {;
+        final List<TextNode> children = this.children();
+        final Iterator<TextNode> following = children.iterator();
+        final List<TextNode> normalized = Lists.array();
+
+        while(following.hasNext()) {
+            following.next()
+                .normalizeSiblings(
+                    following,
+                    normalized::add
+                );
+        }
+
+        return normalized;
+    }
+
+    @Override
+    final void normalizeSiblings(final Iterator<TextNode> following,
+                                 final Consumer<TextNode> normalized) {
+        normalized.accept(
+            this.normalize()
+        );
+    }
 
     // HasTextOffset...................................................................................................
 
