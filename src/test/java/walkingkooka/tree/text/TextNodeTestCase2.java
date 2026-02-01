@@ -51,7 +51,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     // setText..........................................................................................................
 
     @Test
-    public void testSetTextWithNullFails() {
+    public final void testSetTextWithNullFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createTextNode()
