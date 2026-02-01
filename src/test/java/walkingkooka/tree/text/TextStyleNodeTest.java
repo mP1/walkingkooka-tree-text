@@ -354,7 +354,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
     // setTextStyleEmpty................................................................................................
 
     @Test
-    public void testSetTextStyleWithEmpty() {
+    public void testSetTextStyleWithEmpty2() {
         final Text text = Text.with("TextText123");
 
         final TextNode textStyleNode = TextStyleNode.with(

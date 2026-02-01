@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.net.Url;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
 import walkingkooka.text.HasTextTesting;
@@ -112,6 +113,26 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
                 textNode.attributes()
             ),
             textNode.textStyle()
+        );
+    }
+
+    // setTextStyle.....................................................................................................
+
+    @Test
+    public final void testSetTextStyleWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextNode.EMPTY_TEXT.setTextStyle(null)
+        );
+    }
+
+    @Test
+    public final void testSetTextStyleWithEmpty() {
+        final TextNode node = TextNode.image(Url.parseAbsolute("https://example.com/image.gif"));
+
+        assertSame(
+            node,
+            node.setTextStyle(TextStyle.EMPTY)
         );
     }
 
