@@ -500,6 +500,9 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public JsonNodeUnmarshallContext createPatchContext() {
         return JsonNodeUnmarshallContexts.basic(
+            (String cc) -> {
+                throw new UnsupportedOperationException();
+            },
             ExpressionNumberKind.BIG_DECIMAL,
             MathContext.UNLIMITED
         );

@@ -99,6 +99,9 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final JsonNodeUnmarshallContext unmarshallContext() {
         return JsonNodeUnmarshallContexts.basic(
+            (String cc) -> {
+                throw new UnsupportedOperationException();
+            },
             ExpressionNumberKind.DEFAULT,
             MathContext.DECIMAL32
         );

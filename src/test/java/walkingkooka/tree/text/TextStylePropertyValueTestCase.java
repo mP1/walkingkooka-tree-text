@@ -57,6 +57,9 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
         this.checkEquals(
             properties,
             JsonNodeUnmarshallContexts.basic(
+                (String cc) -> {
+                    throw new UnsupportedOperationException();
+                },
                 ExpressionNumberKind.DEFAULT,
                 MathContext.DECIMAL32
             ).unmarshallWithType(json),
