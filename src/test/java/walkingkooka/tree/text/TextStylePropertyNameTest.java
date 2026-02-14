@@ -477,6 +477,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             initial.patch(
                 propertyName.stylePatch(value),
                 JsonNodeUnmarshallContexts.basic(
+                    (String cc) -> {
+                        throw new UnsupportedOperationException();
+                    },
                     ExpressionNumberKind.BIG_DECIMAL,
                     MathContext.DECIMAL32
                 )

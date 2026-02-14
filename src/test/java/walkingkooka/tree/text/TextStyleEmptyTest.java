@@ -488,6 +488,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             TextStyle.unmarshall(
                 JsonNode.object(),
                 JsonNodeUnmarshallContexts.basic(
+                    (String cc) -> {
+                        throw new UnsupportedOperationException();
+                    },
                     ExpressionNumberKind.DEFAULT,
                     MathContext.DECIMAL32
                 )
