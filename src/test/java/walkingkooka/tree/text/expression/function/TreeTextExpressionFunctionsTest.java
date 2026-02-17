@@ -58,6 +58,7 @@ import walkingkooka.tree.text.convert.TreeTextConverters;
 import java.lang.reflect.Method;
 import java.math.MathContext;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
@@ -733,6 +734,14 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     },
                     CaseSensitivity.SENSITIVE,
                     ConverterContexts.basic(
+                        (l) -> {
+                            Objects.requireNonNull(l, "locale");
+                            throw new UnsupportedOperationException();
+                        }, // canDateTimeSymbolsForLocale
+                        (l) -> {
+                            Objects.requireNonNull(l, "locale");
+                            throw new UnsupportedOperationException();
+                        }, // canDecimalNumberSymbolsForLocale
                         false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
                         Indentation.SPACES2,
