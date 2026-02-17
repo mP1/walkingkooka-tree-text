@@ -735,6 +735,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     CaseSensitivity.SENSITIVE,
                     ConverterContexts.basic(
                         (l) -> {
+                            throw new UnsupportedOperationException();
+                        }, // canCurrencyForLocale
+                        (l) -> {
                             Objects.requireNonNull(l, "locale");
                             throw new UnsupportedOperationException();
                         }, // canDateTimeSymbolsForLocale
