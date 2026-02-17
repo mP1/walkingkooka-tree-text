@@ -745,6 +745,10 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             Objects.requireNonNull(l, "locale");
                             throw new UnsupportedOperationException();
                         }, // canDecimalNumberSymbolsForLocale
+                        (lt) -> {
+                            Objects.requireNonNull(lt, "languageTag");
+                            throw new UnsupportedOperationException();
+                        }, // canLocaleForLanguageTag
                         false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
                         Indentation.SPACES2,
