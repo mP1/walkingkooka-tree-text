@@ -491,6 +491,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                     (String cc) -> {
                         throw new UnsupportedOperationException();
                     },
+                    (String lt) -> {
+                        throw new UnsupportedOperationException();
+                    },
                     ExpressionNumberKind.DEFAULT,
                     MathContext.DECIMAL32
                 )
