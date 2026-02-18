@@ -60,6 +60,9 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
                 (String cc) -> {
                     throw new UnsupportedOperationException();
                 },
+                (String lt) -> {
+                    throw new UnsupportedOperationException();
+                },
                 ExpressionNumberKind.DEFAULT,
                 MathContext.DECIMAL32
             ).unmarshallWithType(json),

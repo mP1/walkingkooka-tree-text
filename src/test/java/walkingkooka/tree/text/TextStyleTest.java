@@ -503,6 +503,9 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             (String cc) -> {
                 throw new UnsupportedOperationException();
             },
+            (String lt) -> {
+                throw new UnsupportedOperationException();
+            },
             ExpressionNumberKind.BIG_DECIMAL,
             MathContext.UNLIMITED
         );
