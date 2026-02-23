@@ -23,7 +23,6 @@ import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
@@ -31,7 +30,7 @@ import walkingkooka.net.Url;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.TextNode;
 
-public final class UrlToImageConverterTest implements ConverterTesting2<UrlToImageConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterUrlToImageTest extends TreeTextConverterUrlToTestCase<TreeTextConverterUrlToImage<FakeConverterContext>, Image, FakeConverterContext> {
 
     @Test
     public void testConvertCharSequenceToImage() {
@@ -58,8 +57,8 @@ public final class UrlToImageConverterTest implements ConverterTesting2<UrlToIma
     }
 
     @Override
-    public UrlToImageConverter<FakeConverterContext> createConverter() {
-        return UrlToImageConverter.instance();
+    public TreeTextConverterUrlToImage<FakeConverterContext> createConverter() {
+        return TreeTextConverterUrlToImage.instance();
     }
 
     @Override
@@ -115,7 +114,7 @@ public final class UrlToImageConverterTest implements ConverterTesting2<UrlToIma
     }
 
     @Override
-    public Class<UrlToImageConverter<FakeConverterContext>> type() {
-        return Cast.to(UrlToImageConverter.class);
+    public Class<TreeTextConverterUrlToImage<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterUrlToImage.class);
     }
 }
