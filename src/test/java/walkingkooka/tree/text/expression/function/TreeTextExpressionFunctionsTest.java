@@ -41,6 +41,7 @@ import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.FontFamily;
 import walkingkooka.tree.text.FontSize;
 import walkingkooka.tree.text.FontWeight;
@@ -62,6 +63,28 @@ import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
     TreePrintableTesting {
+
+    @Test
+    public void testFlagWithString() {
+        final String flag = "AU";
+
+        this.evaluateAndCheck(
+            "flag",
+            Lists.of(flag),
+            TextNode.flag(flag)
+        );
+    }
+
+    @Test
+    public void testFlagWithFlag() {
+        final Flag flag = TextNode.flag("AU");
+
+        this.evaluateAndCheck(
+            "flag",
+            Lists.of(flag),
+            flag
+        );
+    }
 
     @Test
     public void testGetStyleWithString() {
@@ -694,6 +717,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     },
                     (name) -> {
                         switch (name.value()) {
+                            case "flag":
+                                return TreeTextExpressionFunctions.flag();
                             case "getStyle":
                                 return TreeTextExpressionFunctions.getStyle();
                             case "getTextNode":
@@ -747,6 +772,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 Converters.simple(), // handles Text -> TextNode
                                 TreeTextConverters.hasTextStyle(),
                                 TreeTextConverters.hasTextNode(),
+                                TreeTextConverters.textToFlag(),
                                 TreeTextConverters.textToTextNode(),
                                 TreeTextConverters.textToTextStyle(),
                                 TreeTextConverters.textToTextStylePropertyName(),

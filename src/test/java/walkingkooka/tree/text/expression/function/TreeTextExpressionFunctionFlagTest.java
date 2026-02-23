@@ -30,12 +30,12 @@ public final class TreeTextExpressionFunctionFlagTest implements ExpressionFunct
     ToStringTesting<TreeTextExpressionFunctionFlag<FakeExpressionEvaluationContext>> {
 
     @Test
-    public void testApplyWithString() {
-        final String countryCode = "AU";
+    public void testApplyWithFlag() {
+        final Flag flag = TextNode.flag("AU");
 
         this.applyAndCheck(
-            Lists.of(countryCode),
-            TextNode.flag(countryCode)
+            Lists.of(flag),
+            flag
         );
     }
 

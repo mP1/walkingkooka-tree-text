@@ -22,7 +22,6 @@ import walkingkooka.net.Url;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Flag;
-import walkingkooka.tree.text.TextNode;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ final class TreeTextExpressionFunctionFlag<C extends ExpressionEvaluationContext
     }
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        TEXT
+        FLAG
     );
 
     @Override
@@ -61,7 +60,6 @@ final class TreeTextExpressionFunctionFlag<C extends ExpressionEvaluationContext
     @Override
     public Flag apply(final List<Object> parameters,
                           final C context) {
-        final String countryCode = TEXT.getOrFail(parameters, 0);
-        return TextNode.flag(countryCode);
+        return FLAG.getOrFail(parameters, 0);
     }
 }
