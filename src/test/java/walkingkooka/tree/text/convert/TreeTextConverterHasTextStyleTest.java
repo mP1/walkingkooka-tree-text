@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 import walkingkooka.convert.ConverterContexts;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextAlign;
@@ -29,8 +28,8 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class HasTextStyleConverterTest implements ConverterTesting2<HasTextStyleConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<HasTextStyleConverter<FakeConverterContext>> {
+public final class TreeTextConverterHasTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterHasTextStyle<FakeConverterContext>, FakeConverterContext>
+    implements ToStringTesting<TreeTextConverterHasTextStyle<FakeConverterContext>> {
 
     @Test
     public void testConvertStringToString() {
@@ -86,8 +85,8 @@ public final class HasTextStyleConverterTest implements ConverterTesting2<HasTex
     }
 
     @Override
-    public HasTextStyleConverter<FakeConverterContext> createConverter() {
-        return HasTextStyleConverter.instance();
+    public TreeTextConverterHasTextStyle<FakeConverterContext> createConverter() {
+        return TreeTextConverterHasTextStyle.instance();
     }
 
     @Override
@@ -108,7 +107,7 @@ public final class HasTextStyleConverterTest implements ConverterTesting2<HasTex
     // class............................................................................................................
 
     @Override
-    public Class<HasTextStyleConverter<FakeConverterContext>> type() {
-        return Cast.to(HasTextStyleConverter.class);
+    public Class<TreeTextConverterHasTextStyle<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterHasTextStyle.class);
     }
 }
