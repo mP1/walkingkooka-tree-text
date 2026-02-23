@@ -107,7 +107,7 @@
                             </formatting>
                             <java-compiler-arguments>
                                 <param>-Awalkingkooka.j2cl.java.util.Currency=XXX</param>
-                                <param>-Awalkingkooka.j2cl.java.util.Locale=EN-AU</param>
+                                <param>-Awalkingkooka.j2cl.java.util.Locale=EN,EN-AU</param>
                                 <param>-Awalkingkooka.j2cl.java.util.Locale.DEFAULT=en-AU</param>
                                 <param>-Awalkingkooka.j2cl.java.util.TimeZone=Australia/*</param>
                                 <param>-Awalkingkooka.j2cl.java.util.TimeZone.DEFAULT=Australia/Sydney</param>

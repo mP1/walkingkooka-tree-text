@@ -133,9 +133,7 @@ public final class Flag extends TextLeafNode<String> {
         return "&#x" +
             Integer.toHexString(
                 REGIONAL_INDICATOR_SYMBOL + ((int) Character.toUpperCase(c) - 'A')
-            ).toUpperCase(
-                Locale.ENGLISH
-            ) +
+            ).toUpperCase(ENGLISH) +
             ";";
     }
 
