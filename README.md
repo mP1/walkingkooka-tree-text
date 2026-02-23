@@ -110,6 +110,11 @@ new FakeTextNodeVisitor() {
     }
 
     @Override
+    protected void visit(final Flag node) {
+        printer.print(node.toHtml()); // prints flag emoji
+    }
+    
+    @Override
     protected void visit(final Image node) {
         printer.print(node.toHtml());
     }
