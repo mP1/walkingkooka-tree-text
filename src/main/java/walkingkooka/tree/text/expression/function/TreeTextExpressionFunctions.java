@@ -21,6 +21,7 @@ import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.text.Badge;
+import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Styleable;
@@ -39,6 +40,13 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
         return TreeTextExpressionFunctionBadge.instance();
     }
 
+    /**
+     * {@see TreeTextExpressionFunctionFlag}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Flag, C> flag() {
+        return TreeTextExpressionFunctionFlag.instance();
+    }
+    
     /**
      * {@see TreeTextExpressionFunctionGetTextNode}
      */
