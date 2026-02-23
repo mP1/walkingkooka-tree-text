@@ -94,7 +94,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     // public factory methods..........................................................................................
 
     /**
-     * {@see Hyperlink}
+     * {@see Badge}
      */
     public static Badge badge(final String badgeText) {
         return Badge.with(badgeText);
