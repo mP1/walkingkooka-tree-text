@@ -493,7 +493,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
         );
 
         JsonNodeContext.register(
-            "emoji",
+            "flag",
             Flag::unmarshallFlag,
             Flag::marshall,
             Flag.class
