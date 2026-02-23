@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
-        TreePrintableTesting {
+    TreePrintableTesting {
 
     @Test
     public void testGetStyleWithString() {
@@ -297,9 +297,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.COLOR,
             Color.parse("#123456")
-            ).set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.CENTER
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
         );
 
         this.evaluateAndCheck(
@@ -680,12 +680,12 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
         this.checkEquals(
             expected,
             Expression.call(
-                    Expression.namedFunction(
-                        ExpressionFunctionName.with(functionName)
-                    ),
-                    parameters.stream()
-                        .map(Expression::value)
-                        .collect(Collectors.toList())
+                Expression.namedFunction(
+                    ExpressionFunctionName.with(functionName)
+                ),
+                parameters.stream()
+                    .map(Expression::value)
+                    .collect(Collectors.toList())
             ).toValue(
                 ExpressionEvaluationContexts.basic(
                     ExpressionNumberKind.BIG_DECIMAL,
@@ -693,7 +693,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         throw new UnsupportedOperationException();
                     },
                     (name) -> {
-                        switch(name.value()) {
+                        switch (name.value()) {
                             case "getStyle":
                                 return TreeTextExpressionFunctions.getStyle();
                             case "getTextNode":
