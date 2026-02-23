@@ -45,10 +45,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see TextToTextStyleConverter}
+     * {@see TreeTextConverterTextToTextStyle}
      */
     public static <C extends ConverterContext> Converter<C> textToTextStyle() {
-        return TextToTextStyleConverter.instance();
+        return TreeTextConverterTextToTextStyle.instance();
     }
 
     /**
