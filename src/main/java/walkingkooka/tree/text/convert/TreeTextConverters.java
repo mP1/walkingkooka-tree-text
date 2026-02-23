@@ -31,10 +31,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see HasTextStyleConverter}
+     * {@see TreeTextConverterHasTextStyle}
      */
     public static <C extends ConverterContext> Converter<C> hasTextStyle() {
-        return HasTextStyleConverter.instance();
+        return TreeTextConverterHasTextStyle.instance();
     }
 
     /**
