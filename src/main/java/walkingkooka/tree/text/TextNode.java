@@ -61,6 +61,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     public static boolean isTextNodeClass(final Class<?> clazz) {
         return TextNode.class == clazz ||
+          Flag.class == clazz ||
           Image.class == clazz ||
           Text.class == clazz ||
           TextPlaceholderNode.class == clazz ||
@@ -98,6 +99,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     public static Badge badge(final String badgeText) {
         return Badge.with(badgeText);
+    }
+
+    /**
+     * {@see Flag}
+     */
+    public static Flag flag(final String countryCode) {
+        return Flag.with(countryCode);
     }
 
     /**
@@ -482,6 +490,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
             Badge::unmarshallBadge,
             Badge::marshall,
             Badge.class
+        );
+
+        JsonNodeContext.register(
+            "emoji",
+            Flag::unmarshallFlag,
+            Flag::marshall,
+            Flag.class
         );
 
         JsonNodeContext.register("hyperlink",

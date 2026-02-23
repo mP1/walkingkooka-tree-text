@@ -51,6 +51,10 @@ public abstract class TextNodeVisitor extends Visitor<TextNode> {
         // nop
     }
 
+    protected void visit(final Flag flag) {
+        // nop
+    }
+
     protected void visit(final Image node) {
         // nop
     }
