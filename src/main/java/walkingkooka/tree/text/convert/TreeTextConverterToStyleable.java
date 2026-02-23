@@ -27,21 +27,22 @@ import walkingkooka.tree.text.TextStyle;
 /**
  * A {@link Converter} that accepts converts an object if it implements {@link Styleable}.
  */
-final class ToStyleableConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
+final class TreeTextConverterToStyleable<C extends ConverterContext> extends TreeTextConverter<C>
+    implements TryingShortCircuitingConverter<C> {
 
     /**
      * Type-safe getter.
      */
-    static <C extends ConverterContext> ToStyleableConverter<C> instance() {
+    static <C extends ConverterContext> TreeTextConverterToStyleable<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Private singleton
      */
-    private final static ToStyleableConverter<?> INSTANCE = new ToStyleableConverter<>();
+    private final static TreeTextConverterToStyleable<?> INSTANCE = new TreeTextConverterToStyleable<>();
 
-    private ToStyleableConverter() {
+    private TreeTextConverterToStyleable() {
         super();
     }
 
