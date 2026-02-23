@@ -21,14 +21,13 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
 
-public final class TextToTextNodeConverterTest implements ConverterTesting2<TextToTextNodeConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToTextNodeTest extends TreeTextConverterTestCase<TreeTextConverterTextToTextNode<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertTextNodeToTextNodeFails() {
@@ -109,8 +108,8 @@ public final class TextToTextNodeConverterTest implements ConverterTesting2<Text
     }
 
     @Override
-    public TextToTextNodeConverter<FakeConverterContext> createConverter() {
-        return TextToTextNodeConverter.instance();
+    public TreeTextConverterTextToTextNode<FakeConverterContext> createConverter() {
+        return TreeTextConverterTextToTextNode.instance();
     }
 
     @Override
@@ -142,7 +141,7 @@ public final class TextToTextNodeConverterTest implements ConverterTesting2<Text
     }
 
     @Override
-    public Class<TextToTextNodeConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToTextNodeConverter.class);
+    public Class<TreeTextConverterTextToTextNode<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterTextToTextNode.class);
     }
 }
