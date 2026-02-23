@@ -73,10 +73,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see UrlToImageConverter}
+     * {@see TreeTextConverterUrlToImage}
      */
     public static <C extends ConverterContext> Converter<C> urlToImage() {
-        return UrlToImageConverter.instance();
+        return TreeTextConverterUrlToImage.instance();
     }
 
     /**
