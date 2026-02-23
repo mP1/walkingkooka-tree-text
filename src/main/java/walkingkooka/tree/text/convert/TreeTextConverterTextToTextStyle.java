@@ -19,7 +19,6 @@ package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 
@@ -27,15 +26,15 @@ import walkingkooka.tree.text.TextStyle;
  * A {@link Converter} that accepts text and parses it into a {@link TextStyle}. Note a type of {@link HasTextStyle}
  * is also accepted and will return a {@link TextStyle}.
  */
-final class TextToTextStyleConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class TreeTextConverterTextToTextStyle<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TextToTextStyleConverter<C> instance() {
+    static <C extends ConverterContext> TreeTextConverterTextToTextStyle<C> instance() {
         return INSTANCE;
     }
 
-    private final static TextToTextStyleConverter INSTANCE = new TextToTextStyleConverter();
+    private final static TreeTextConverterTextToTextStyle INSTANCE = new TreeTextConverterTextToTextStyle();
 
-    private TextToTextStyleConverter() {
+    private TreeTextConverterTextToTextStyle() {
         super();
     }
 

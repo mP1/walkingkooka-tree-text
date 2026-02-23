@@ -21,13 +21,12 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 
-public final class TextToTextStyleConverterTest implements ConverterTesting2<TextToTextStyleConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToTextStyleTest extends TreeTextConverterTextToTestCase<TreeTextConverterTextToTextStyle<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertCharSequenceToTextStyle() {
@@ -75,8 +74,8 @@ public final class TextToTextStyleConverterTest implements ConverterTesting2<Tex
     }
 
     @Override
-    public TextToTextStyleConverter<FakeConverterContext> createConverter() {
-        return TextToTextStyleConverter.instance();
+    public TreeTextConverterTextToTextStyle<FakeConverterContext> createConverter() {
+        return TreeTextConverterTextToTextStyle.instance();
     }
 
     @Override
@@ -108,7 +107,7 @@ public final class TextToTextStyleConverterTest implements ConverterTesting2<Tex
     }
 
     @Override
-    public Class<TextToTextStyleConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToTextStyleConverter.class);
+    public Class<TreeTextConverterTextToTextStyle<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterTextToTextStyle.class);
     }
 }
