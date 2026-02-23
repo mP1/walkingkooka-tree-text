@@ -23,7 +23,6 @@ import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Styleable;
@@ -32,8 +31,8 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class ToStyleableConverterTest implements ConverterTesting2<ToStyleableConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<ToStyleableConverter<FakeConverterContext>> {
+public final class TreeTextConverterToStyleableTest extends TreeTextConverterTestCase<TreeTextConverterToStyleable<FakeConverterContext>, FakeConverterContext>
+    implements ToStringTesting<TreeTextConverterToStyleable<FakeConverterContext>> {
 
     @Test
     public void testStringToStringFails() {
@@ -76,8 +75,8 @@ public final class ToStyleableConverterTest implements ConverterTesting2<ToStyle
     }
 
     @Override
-    public ToStyleableConverter<FakeConverterContext> createConverter() {
-        return ToStyleableConverter.instance();
+    public TreeTextConverterToStyleable<FakeConverterContext> createConverter() {
+        return TreeTextConverterToStyleable.instance();
     }
 
     @Override
@@ -126,7 +125,7 @@ public final class ToStyleableConverterTest implements ConverterTesting2<ToStyle
     // class............................................................................................................
 
     @Override
-    public Class<ToStyleableConverter<FakeConverterContext>> type() {
-        return Cast.to(ToStyleableConverter.class);
+    public Class<TreeTextConverterToStyleable<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterToStyleable.class);
     }
 }

@@ -59,10 +59,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see ToStyleableConverter}
+     * {@see TreeTextConverterToStyleable}
      */
     public static <C extends ConverterContext> Converter<C> toStyleable() {
-        return ToStyleableConverter.instance();
+        return TreeTextConverterToStyleable.instance();
     }
 
     /**
