@@ -21,12 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TextToTextStylePropertyNameConverterTest implements ConverterTesting2<TextToTextStylePropertyNameConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToTextStylePropertyNameTest extends TreeTextConverterTextToTestCase<TreeTextConverterTextToTextStylePropertyName<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertCharSequenceToTextStylePropertyName() {
@@ -40,8 +39,8 @@ public final class TextToTextStylePropertyNameConverterTest implements Converter
     }
 
     @Override
-    public TextToTextStylePropertyNameConverter<FakeConverterContext> createConverter() {
-        return TextToTextStylePropertyNameConverter.instance();
+    public TreeTextConverterTextToTextStylePropertyName<FakeConverterContext> createConverter() {
+        return TreeTextConverterTextToTextStylePropertyName.instance();
     }
 
     @Override
@@ -73,7 +72,7 @@ public final class TextToTextStylePropertyNameConverterTest implements Converter
     }
 
     @Override
-    public Class<TextToTextStylePropertyNameConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToTextStylePropertyNameConverter.class);
+    public Class<TreeTextConverterTextToTextStylePropertyName<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterTextToTextStylePropertyName.class);
     }
 }

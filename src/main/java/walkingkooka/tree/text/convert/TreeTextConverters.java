@@ -52,10 +52,10 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see TextToTextStylePropertyNameConverter}
+     * {@see TreeTextConverterTextToTextStylePropertyName}
      */
     public static <C extends ConverterContext> Converter<C> textToTextStylePropertyName() {
-        return TextToTextStylePropertyNameConverter.instance();
+        return TreeTextConverterTextToTextStylePropertyName.instance();
     }
 
     /**

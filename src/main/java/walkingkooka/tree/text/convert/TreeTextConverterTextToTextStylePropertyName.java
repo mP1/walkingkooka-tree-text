@@ -18,21 +18,20 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.tree.text.TextStylePropertyName;
 
 /**
  * Useful to convert string parameters to a function that requires a {@link TextStylePropertyName}.
  */
-final class TextToTextStylePropertyNameConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class TreeTextConverterTextToTextStylePropertyName<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TextToTextStylePropertyNameConverter<C> instance() {
+    static <C extends ConverterContext> TreeTextConverterTextToTextStylePropertyName<C> instance() {
         return INSTANCE;
     }
 
-    private final static TextToTextStylePropertyNameConverter INSTANCE = new TextToTextStylePropertyNameConverter();
+    private final static TreeTextConverterTextToTextStylePropertyName INSTANCE = new TreeTextConverterTextToTextStylePropertyName();
 
-    private TextToTextStylePropertyNameConverter() {
+    private TreeTextConverterTextToTextStylePropertyName() {
         super();
     }
 
