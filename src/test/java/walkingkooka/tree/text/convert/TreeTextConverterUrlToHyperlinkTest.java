@@ -23,7 +23,6 @@ import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
@@ -31,7 +30,7 @@ import walkingkooka.net.Url;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
 
-public final class UrlToHyperlinkConverterTest implements ConverterTesting2<UrlToHyperlinkConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverterUrlToTestCase<TreeTextConverterUrlToHyperlink<FakeConverterContext>, Hyperlink, FakeConverterContext> {
 
     @Test
     public void testConvertCharSequenceToHyperlink() {
@@ -58,8 +57,8 @@ public final class UrlToHyperlinkConverterTest implements ConverterTesting2<UrlT
     }
 
     @Override
-    public UrlToHyperlinkConverter<FakeConverterContext> createConverter() {
-        return UrlToHyperlinkConverter.instance();
+    public TreeTextConverterUrlToHyperlink<FakeConverterContext> createConverter() {
+        return TreeTextConverterUrlToHyperlink.instance();
     }
 
     @Override
@@ -115,7 +114,7 @@ public final class UrlToHyperlinkConverterTest implements ConverterTesting2<UrlT
     }
 
     @Override
-    public Class<UrlToHyperlinkConverter<FakeConverterContext>> type() {
-        return Cast.to(UrlToHyperlinkConverter.class);
+    public Class<TreeTextConverterUrlToHyperlink<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterUrlToHyperlink.class);
     }
 }
