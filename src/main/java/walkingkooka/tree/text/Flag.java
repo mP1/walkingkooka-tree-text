@@ -102,8 +102,11 @@ public final class Flag extends TextLeafNode<String> {
             throw new IllegalArgumentException("Invalid flag country code: " + CharSequences.quoteAndEscape(countryCode) + " not 2 letters");
         }
 
-        return countryCode.toUpperCase(Locale.ENGLISH); // always upper-cased
+        return countryCode.toUpperCase(ENGLISH); // always upper-cased
     }
+
+    // Locale.ENGLISH constant absent from GWT's Locale
+    private final static Locale ENGLISH = Locale.forLanguageTag("EN");
 
     // toHtml...........................................................................................................
 
