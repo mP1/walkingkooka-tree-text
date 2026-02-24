@@ -23,6 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.locale.LocaleContexts;
@@ -758,9 +759,6 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     },
                     CaseSensitivity.SENSITIVE,
                     ConverterContexts.basic(
-                        (l) -> {
-                            throw new UnsupportedOperationException();
-                        }, // canCurrencyForLocale
                         false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
                         Indentation.SPACES2,
@@ -782,9 +780,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 TreeTextConverters.urlToImage()
                             )
                         ),
+                        CurrencyLocaleContexts.fake(),
                         DateTimeContexts.fake(),
-                        DecimalNumberContexts.fake(),
-                        LocaleContexts.fake()
+                        DecimalNumberContexts.fake()
                     ),
                     EnvironmentContexts.fake(),
                     LocaleContexts.fake()
