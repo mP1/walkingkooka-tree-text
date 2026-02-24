@@ -24,6 +24,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
+import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CaseKind;
@@ -43,7 +44,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>> {
+public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>>
+    implements ConstantsTesting<TextStylePropertyName<?>> {
+
+    // constants........................................................................................................
 
     // calling TextStylePropertyName.with constant#value should return constant
     @Test
@@ -82,7 +86,12 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             names
         );
     }
-    
+
+    @Override
+    public Set<TextStylePropertyName<?>> intentionalDuplicateConstants() {
+        return Sets.empty();
+    }
+
     // index............................................................................................................
 
     @Test
