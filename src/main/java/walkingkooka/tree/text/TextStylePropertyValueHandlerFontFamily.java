@@ -83,6 +83,11 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
         ).toString();
     }
 
+    @Override
+    String makeString(final FontFamily value) {
+        return value.toString();
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

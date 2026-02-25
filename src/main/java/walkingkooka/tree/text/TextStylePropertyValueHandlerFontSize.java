@@ -74,6 +74,11 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
         );
     }
 
+    @Override
+    String makeString(final FontSize value) {
+        return value.toString();
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

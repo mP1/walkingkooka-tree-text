@@ -25,6 +25,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.props.HasPropertiesTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextTesting;
@@ -44,6 +45,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     HasTextTesting,
     StyleableTesting<TextStyle>,
     CanBeEmptyTesting,
+    HasPropertiesTesting,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     JsonNodeMarshallingTesting<TextStyle>,
     ToStringTesting<TextStyle>,

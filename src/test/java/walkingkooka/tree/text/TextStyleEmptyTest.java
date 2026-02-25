@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.props.Properties;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
@@ -498,6 +499,16 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                     MathContext.DECIMAL32
                 )
             )
+        );
+    }
+
+    // HasProperties....................................................................................................
+
+    @Test
+    public void testProperties() {
+        this.propertiesAndCheck(
+            TextStyleEmpty.instance(),
+            Properties.EMPTY
         );
     }
 

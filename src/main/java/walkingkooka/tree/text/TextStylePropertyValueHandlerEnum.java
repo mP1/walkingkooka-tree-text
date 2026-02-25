@@ -96,6 +96,11 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
 
     private final List<E> values;
 
+    @Override
+    String makeString(final E value) {
+        return value.toString();
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override

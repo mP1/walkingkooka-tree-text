@@ -76,6 +76,11 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
                 FontWeight.with(Integer.parseInt(value));
     }
 
+    @Override
+    String makeString(final FontWeight value) {
+        return value.toString();
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override
