@@ -70,8 +70,6 @@ final class TextStyleParser implements CanBeEmpty {
         TextStylePropertyName.MAX_LENGTH
     );
 
-    //private final BiFunction<TextCursor, ParserContext, Optional<Name>> nameParser;
-
     /**
      * Consumes any whitespace, don't really care how many or if any were skipped.
      */
