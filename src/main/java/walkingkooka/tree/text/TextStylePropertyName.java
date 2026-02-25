@@ -100,7 +100,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
                                                                                      final BiConsumer<E, TextStyleVisitor> visitor) {
         return registerConstant(
             property,
-            TextStylePropertyValueHandler.enumTextPropertyValueHandler(
+            TextStylePropertyValueHandler.enumTextStylePropertyValueHandler(
                 values,
                 type
             ),
@@ -298,7 +298,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<BorderStyle> BORDER_STYLE = registerConstant(
         "border-style", // property name
-        TextStylePropertyValueHandler.enumTextPropertyValueHandler(
+        TextStylePropertyValueHandler.enumTextStylePropertyValueHandler(
             BorderStyle.values(),
             BorderStyle.class
         ), // handler
