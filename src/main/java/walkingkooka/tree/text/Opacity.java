@@ -176,6 +176,11 @@ public final class Opacity implements Comparable<Opacity>,
 
     /**
      * Dumps the opacity as a percentage.
+     * <pre>
+     * opaque
+     * transparent
+     * 25%
+     * </pre>
      */
     @Override
     public String toString() {
