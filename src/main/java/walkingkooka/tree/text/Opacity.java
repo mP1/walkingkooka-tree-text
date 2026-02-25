@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
@@ -54,16 +55,68 @@ public final class Opacity implements Comparable<Opacity>,
      */
     public final static Opacity OPAQUE = new Opacity(OPAQUE_VALUE);
 
+    /**
+     * Parses the opacity which includes support as a percentage.
+     * <pre>
+     * opaque
+     * transparent
+     * 25%
+     * 0.25
+     * </pre>
+     */
     public static Opacity parse(final String text) {
-        CharSequences.failIfNullOrEmpty(text, "text");
+        final Opacity opacity;
 
-        return with(
-            TRANSPARENT_TEXT.equals(text) ?
-                TRANSPARENT_VALUE :
-                OPAQUE_TEXT.equals(text) ?
-                    OPAQUE_VALUE :
-                    Double.parseDouble(text)
-        );
+        if (TRANSPARENT_TEXT.equals(text)) {
+            opacity = TRANSPARENT;
+        } else {
+            if (OPAQUE_TEXT.equals(text)) {
+                opacity = OPAQUE;
+            } else {
+                CharSequences.failIfNullOrEmpty(text, "text");
+
+                final int length = text.length();
+                final int last = length - 1;
+
+                if ('%' == text.charAt(last)) {
+                    opacity = with(
+                        parseDouble(
+                            text.substring(
+                                0,
+                                last
+                            )
+                        ) / PERCENTAGE_FACTOR
+                    );
+                } else {
+                    opacity = with(
+                        parseDouble(text)
+                    );
+                }
+            }
+        }
+
+        return opacity;
+    }
+
+    private static Double parseDouble(final String text) {
+        try {
+            return Double.parseDouble(text);
+        } catch (final NumberFormatException cause) {
+            final int length = text.length();
+
+            for (int i = 0; i < length; i++) {
+                final char c = text.charAt(i);
+                if (c >= '0' && c <= '9') {
+                    continue;
+                }
+                if ('.' == c) {
+                    continue;
+                }
+                throw new InvalidCharacterException(text, i);
+            }
+
+            throw new InvalidCharacterException(text, 0);
+        }
     }
 
     /**
