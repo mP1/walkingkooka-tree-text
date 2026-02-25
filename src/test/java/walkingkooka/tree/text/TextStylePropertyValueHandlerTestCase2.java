@@ -28,7 +28,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
     }
 
     @Test
-    public final void testCheckValueValue() {
+    public final void testCheckValueWithValue() {
         this.checkValue(
             this.propertyValue()
         );
@@ -37,27 +37,51 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
     public abstract void testCheckValueWithIncompatibleTypeFails();
 
     @Test
-    public final void testRoundtripJson() {
+    public final void testMarshallUnmarshallJsonRoundtrip() {
         final T value = this.propertyValue();
         final P handler = this.handler();
 
-        final JsonNode json = handler.marshall(value, this.marshallContext());
+        final JsonNode json = handler.marshall(
+            value,
+            this.marshallContext()
+        );
 
-        this.checkEquals(value,
-            handler.unmarshall(json, this.propertyName(), this.unmarshallContext()),
-            () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json);
+        this.checkEquals(
+            value,
+            handler.unmarshall(
+                json,
+                this.propertyName(),
+                this.unmarshallContext()
+            ),
+            () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json
+        );
     }
 
-    final void unmarshallAndCheck(final JsonNode node, final T value) {
-        this.checkEquals(value,
-            this.handler().unmarshall(node, this.propertyName(), this.unmarshallContext()),
-            () -> "from JsonNode " + node);
+    final void unmarshallAndCheck(final JsonNode node,
+                                  final T value) {
+        this.checkEquals(
+            value,
+            this.handler()
+                .unmarshall(
+                    node,
+                    this.propertyName(),
+                    this.unmarshallContext()
+                ),
+            () -> "from JsonNode " + node
+        );
     }
 
-    final void marshallAndCheck(final T value, final JsonNode node) {
-        this.checkEquals(node,
-            this.handler().marshall(value, this.marshallContext()),
-            () -> "marshall " + CharSequences.quoteIfChars(value));
+    final void marshallAndCheck(final T value,
+                                final JsonNode node) {
+        this.checkEquals(
+            node,
+            this.handler()
+                .marshall(
+                    value,
+                    this.marshallContext()
+                ),
+            () -> "marshall " + CharSequences.quoteIfChars(value)
+        );
     }
 
     // helper...........................................................................................................
