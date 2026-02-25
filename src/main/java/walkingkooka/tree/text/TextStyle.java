@@ -85,6 +85,22 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     /**
      * Parses an almost CSS like declaration into a {@link TextStyle}.
+     * Note that enclosing the entries with open and close braces will result in an {@link InvalidCharacterException}.
+     * <pre>
+     * border-bottom-color: white;
+     * border-bottom-style: dashed;
+     * border-bottom-width: 34px;
+     * border-left-color: white;
+     * border-left-style: dashed;
+     * border-left-width: 34px;
+     * border-right-color: white;
+     * border-right-style: dashed;
+     * border-right-width: 34px;
+     * border-top-color: white;
+     * border-top-style: dashed;
+     * border-top-width: 34px;
+     * </pre>
+     * Note that whitespace after the semi-colon separator is optional.
      * Passing the text from {@link #text()} to parse will give an equal {@link TextStyle}.
      */
     public static TextStyle parse(final String text) {
