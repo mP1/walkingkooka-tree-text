@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -55,6 +56,8 @@ public final class Opacity implements Comparable<Opacity>,
      */
     public final static Opacity OPAQUE = new Opacity(OPAQUE_VALUE);
 
+    private static final CharacterConstant PERCENT = CharacterConstant.with('%');
+
     /**
      * Parses the opacity which includes support as a percentage.
      * <pre>
@@ -78,7 +81,7 @@ public final class Opacity implements Comparable<Opacity>,
                 final int length = text.length();
                 final int last = length - 1;
 
-                if ('%' == text.charAt(last)) {
+                if (PERCENT.character() == text.charAt(last)) {
                     opacity = with(
                         parseDouble(
                             text.substring(
@@ -248,6 +251,6 @@ public final class Opacity implements Comparable<Opacity>,
         final String percentage = "" + PERCENTAGE_FACTOR * this.value;
         return (percentage.endsWith(".0") ?
             percentage.substring(0, percentage.length() - 2) :
-            percentage).concat("%");
+            percentage).concat(PERCENT.string());
     }
 }
