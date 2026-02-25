@@ -729,6 +729,22 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testParseInvalidEntryFails() {
+        this.parseStringInvalidCharacterFails(
+            "color=white",
+            '='
+        );
+    }
+
+    @Test
+    public void testParseInvalidEntryFails2() {
+        this.parseStringInvalidCharacterFails(
+            "color: white;text-align=left",
+            '='
+        );
+    }
+
+    @Test
     public void testParseColorInvalidCharacterFails() {
         this.parseStringFails(
             "color: #123XYZ",
