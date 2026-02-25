@@ -41,8 +41,8 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * {@see TextStylePropertyValueHandlerEnum}
      */
-    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextPropertyValueHandler(final E[] values,
-                                                                                                 final Class<E> type) {
+    static <E extends Enum<E>> TextStylePropertyValueHandlerEnum<E> enumTextStylePropertyValueHandler(final E[] values,
+                                                                                                      final Class<E> type) {
         return TextStylePropertyValueHandlerEnum.with(
             values,
             type
