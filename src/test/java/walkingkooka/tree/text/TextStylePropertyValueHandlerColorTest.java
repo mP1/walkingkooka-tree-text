@@ -22,7 +22,7 @@ import walkingkooka.color.Color;
 import walkingkooka.color.WebColorName;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerColorTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerColor, Color> {
+public final class TextStylePropertyValueHandlerColorTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerColor, Color> {
 
     @Test
     @Override

@@ -51,7 +51,8 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     }
 
     @Test
-    public void testCheckWrongValueTypeFails() {
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
             "Property \"tab-size\": Expected NoneLength | NumberLength | PixelLength got TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLengthTest"

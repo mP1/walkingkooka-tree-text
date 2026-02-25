@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerTextOverflowTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerTextOverflow, TextOverflow> {
+public final class TextStylePropertyValueHandlerTextOverflowTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerTextOverflow, TextOverflow> {
 
     private final static String STRING = "Hello";
 
