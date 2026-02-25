@@ -78,7 +78,11 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
             throwType,
             () -> this.checkValue(value)
         );
-        this.checkEquals(message, thrown.getMessage(), "message");
+        this.checkEquals(
+            message,
+            thrown.getMessage(),
+            "message"
+        );
 
         final T thrown2 = assertThrows(
             throwType,
