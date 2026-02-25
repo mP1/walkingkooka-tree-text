@@ -24,6 +24,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.net.UrlFragment;
+import walkingkooka.props.PropertiesPath;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
@@ -179,6 +180,53 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             throw new Error(cause.getMessage(), cause);
         }
     }
+
+    // propertiesPath...................................................................................................
+
+    @Test
+    public void testPropertiesPathWithColor() {
+        this.propertiesPathAndCheck(
+            TextStylePropertyName.COLOR,
+            "color"
+        );
+    }
+
+    @Test
+    public void testPropertiesPathWithBorderTopWidth() {
+        this.propertiesPathAndCheck(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            "border-top-width"
+        );
+    }
+
+    @Test
+    public void testPropertiesPathWithAll() {
+        for (final TextStylePropertyName<?> propertyName : TextStylePropertyName.NAMES) {
+            this.checkNotEquals(
+                null,
+                propertyName.propertiesPath
+            );
+        }
+    }
+
+    private void propertiesPathAndCheck(final TextStylePropertyName<?> textStylePropertyName,
+                                        final String expected) {
+        this.propertiesPathAndCheck(
+            textStylePropertyName,
+            PropertiesPath.parse(expected)
+        );
+    }
+
+    private void propertiesPathAndCheck(final TextStylePropertyName<?> textStylePropertyName,
+                                        final PropertiesPath expected) {
+        this.checkEquals(
+            expected,
+            textStylePropertyName.propertiesPath,
+            () -> textStylePropertyName + " propertiesPath"
+        );
+    }
+
+    // values...........................................................................................................
 
     @Test
     public void testValues() {

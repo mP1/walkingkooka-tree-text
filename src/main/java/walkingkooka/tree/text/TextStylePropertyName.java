@@ -25,6 +25,7 @@ import walkingkooka.naming.Name;
 import walkingkooka.naming.ValueName;
 import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.UrlFragment;
+import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
@@ -923,6 +924,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             );
 
         this.index = index;
+
+        this.propertiesPath = PropertiesPath.parse(name);
     }
 
     /**
@@ -971,6 +974,11 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public boolean testValue(final Object value) {
         return this.handler.testValue(value);
     }
+
+    /**
+     * Cached copy of this {@link TextStylePropertyName} as a {@link PropertiesPath}.
+     */
+    PropertiesPath propertiesPath;
 
     /**
      * Used to handle/validate property values.
