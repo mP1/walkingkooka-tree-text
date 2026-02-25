@@ -55,7 +55,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
 
     @Test
     public void testConvertStringToTextStyle() {
-        final TextStyle textStyle = TextStyle.parse("{color:red};");
+        final TextStyle textStyle = TextStyle.parse("color:red;");
 
         this.convertAndCheck(
             textStyle.text(),
@@ -66,7 +66,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
 
     @Test
     public void testConvertTextStyleToTextStyle() {
-        final TextStyle textStyle = TextStyle.parse("{color:red};");
+        final TextStyle textStyle = TextStyle.parse("color:red;");
 
         this.convertAndCheck(
             textStyle,

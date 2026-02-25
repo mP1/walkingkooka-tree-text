@@ -722,6 +722,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testParseToStringFails() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+        this.parseStringInvalidCharacterFails(
+            style.toString(),
+            '{'
+        );
+    }
+
+    @Test
     public void testParseStringEmpty() {
         this.parseStringAndCheck(
             "",

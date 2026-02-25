@@ -102,6 +102,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
             final Optional<TextStylePropertyName<?>> maybeName = parser.name();
             if(false == maybeName.isPresent()) {
+                if(parser.isNotEmpty()) {
+                    throw parser.cursor.lineInfo()
+                        .invalidCharacterException()
+                        .get();
+                }
                 break;
             }
 
