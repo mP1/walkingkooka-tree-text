@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.color.WebColorName;
+import walkingkooka.props.Properties;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -1801,6 +1802,179 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 .set(TextStylePropertyName.COLOR, Color.parse("#abcdef"))
                 .set(TextStylePropertyName.DIRECTION, Direction.LTR)
                 .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+        );
+    }
+
+    // HasProperties....................................................................................................
+
+    @Test
+    public void testPropertiesWithColor() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.COLOR,
+            Color.BLACK,
+            "color: black\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithEnum() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.BORDER_COLLAPSE,
+            BorderCollapse.COLLAPSE,
+            "border-collapse: COLLAPSE\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithFontFamily() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.FONT_FAMILY,
+            FontFamily.with("Times New Roman"),
+            "font-family: Times New Roman\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithFontSize() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.FONT_SIZE,
+            FontSize.with(10),
+            "font-size: 10\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithFontWeight() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.FONT_WEIGHT,
+            FontWeight.with(123),
+            "font-weight: 123\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithFontWeightBold() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.FONT_WEIGHT,
+            FontWeight.BOLD,
+            "font-weight: bold\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithLengthNumberNone() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+            Length.none(),
+            "border-bottom-width: none\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithLengthNumberNormal() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.BORDER_SPACING,
+            Length.normal(),
+            "border-spacing: normal\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithLengthNumberPixel() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+            Length.pixel(123.5),
+            "border-bottom-width: 123.5px\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithOpacity() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.with(0.5),
+            "opacity: 50%\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithOpacityOpaque() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.OPAQUE,
+            "opacity: opaque\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithTextOverflowClip() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.CLIP,
+            "text-overflow: clip\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithTextOverflowString() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.string("Hello"),
+            "text-overflow: \"Hello\"\r\n"
+        );
+    }
+
+    @Test
+    public void testPropertiesWithOpacityTransparent() {
+        this.propertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.TRANSPARENT,
+            "opacity: transparent\r\n"
+        );
+    }
+
+    private <T> void propertiesAndCheck2(final TextStylePropertyName<T> propertyName,
+                                         final T value,
+                                         final String expected) {
+        this.propertiesAndCheck2(
+            propertyName,
+            value,
+            Properties.parse(expected)
+        );
+    }
+
+    private <T> void propertiesAndCheck2(final TextStylePropertyName<T> propertyName,
+                                         final T value,
+                                         final Properties expected) {
+        this.propertiesAndCheck(
+            TextStyleNonEmpty.EMPTY.set(
+                propertyName,
+                value
+            ),
+            expected
+        );
+    }
+
+    @Test
+    public void testPropertiesWithBorder() {
+        this.propertiesAndCheck(
+            TextStyleNonEmpty.EMPTY.setBorder(
+                Color.WHITE,
+                BorderStyle.DASHED,
+                Length.pixel(34.0)
+            ),
+            "border-bottom-color=white\n" +
+                "border-bottom-style=DASHED\n" +
+                "border-bottom-width=34px\n" +
+                "border-left-color=white\n" +
+                "border-left-style=DASHED\n" +
+                "border-left-width=34px\n" +
+                "border-right-color=white\n" +
+                "border-right-style=DASHED\n" +
+                "border-right-width=34px\n" +
+                "border-top-color=white\n" +
+                "border-top-style=DASHED\n" +
+                "border-top-width=34px"
         );
     }
 

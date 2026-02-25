@@ -23,6 +23,8 @@ import walkingkooka.InvalidCharacterException;
 import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.props.HasProperties;
+import walkingkooka.props.Properties;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
@@ -46,7 +48,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     TreePrintable,
     HasText,
     Styleable,
-    CanBeEmpty {
+    CanBeEmpty,
+    HasProperties {
 
     /**
      * Tests if the given {@link Class} is for a {@link TextStyle}.
@@ -613,5 +616,26 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     @Override
     public final TextStyle textStyle() {
         return this;
+    }
+
+    // HasProperties....................................................................................................
+
+    @Override
+    public final Properties properties() {
+        Properties properties = Properties.EMPTY;
+
+        for(final Entry<TextStylePropertyName<?>, ?> nameAndValue : this.textStyleMap().entries ) {
+            final TextStylePropertyName<?> name = nameAndValue.getKey();
+            properties = properties.set(
+                name.propertiesPath,
+                name.handler.makeString(
+                    Cast.to(
+                        nameAndValue.getValue()
+                    )
+                )
+            );
+        }
+
+        return properties;
     }
 }

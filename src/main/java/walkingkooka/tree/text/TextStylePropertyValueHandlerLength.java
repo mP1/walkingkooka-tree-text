@@ -68,6 +68,11 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
         return Length.parse(value);
     }
 
+    @Override
+    String makeString(final Length<?> value) {
+        return value.toString();
+    }
+
     // unmarshall ....................................................................................................
 
     @Override

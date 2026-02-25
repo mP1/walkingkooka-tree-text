@@ -74,6 +74,11 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
         return null;
     }
 
+    @Override
+    String makeString(final Void value) {
+        throw new UnsupportedOperationException();
+    }
+
     // JsonNodeContext..................................................................................................
 
     @Override
