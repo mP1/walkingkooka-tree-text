@@ -600,7 +600,11 @@ final class TextStyleNonEmpty extends TextStyle {
                 context
             );
 
-            json.add(value.setName(propertyName.marshallName()));
+            json.add(
+                value.setName(
+                    propertyName.jsonPropertyName
+                )
+            );
         }
 
         return JsonNode.object()

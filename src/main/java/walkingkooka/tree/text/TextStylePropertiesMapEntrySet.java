@@ -170,7 +170,11 @@ final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePr
                 context
             );
 
-            json.add(value.setName(propertyName.marshallName()));
+            json.add(
+                value.setName(
+                    propertyName.jsonPropertyName
+                )
+            );
         }
 
         return JsonNode.object()

@@ -1033,11 +1033,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         );
     }
 
-    JsonPropertyName marshallName() {
-        return this.jsonPropertyName;
-    }
-
-    private final JsonPropertyName jsonPropertyName;
+    final JsonPropertyName jsonPropertyName;
 
     static {
         JsonNodeContext.register("text-style-property-name",

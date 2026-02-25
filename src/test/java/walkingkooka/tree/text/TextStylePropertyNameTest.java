@@ -42,8 +42,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>>
     implements ConstantsTesting<TextStylePropertyName<?>> {
 
@@ -317,12 +315,6 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             propertyName.parseValue(string),
             () -> propertyName + " parseValue " + CharSequences.quoteAndEscape(string)
         );
-    }
-
-    @Test
-    public void testJsonNodeNameCached() {
-        final TextStylePropertyName<?> propertyName = this.createObject();
-        assertSame(propertyName.marshallName(), propertyName.marshallName());
     }
 
     // stylePatch.......................................................................................................
