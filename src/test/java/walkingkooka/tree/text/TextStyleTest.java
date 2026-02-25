@@ -23,6 +23,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.props.Properties;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
@@ -1206,6 +1207,205 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         assertSame(
             textStyle,
             textStyle.textStyle()
+        );
+    }
+
+    // fromProperties...................................................................................................
+
+    @Test
+    public void testFromPropertiesWithNull() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyle.fromProperties(null)
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithEmpty() {
+        this.fromPropertiesAndCheck(
+            Properties.EMPTY,
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithColor() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.COLOR,
+            Color.WHITE
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithEnum() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.BORDER_COLLAPSE,
+            BorderCollapse.COLLAPSE
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithFontFamily() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.FONT_FAMILY,
+            FontFamily.with("Times New Roman")
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithFontSize() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.FONT_SIZE,
+            FontSize.with(10)
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithFontWeight() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.FONT_WEIGHT,
+            FontWeight.with(10)
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithLengthNone() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            Length.none()
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithLengthNormal() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.WORD_SPACING,
+            Length.normal()
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithLengthPixels() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            Length.pixel(123.5)
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithOpacity() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.with(0.25)
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithOpacityOpaque() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.OPAQUE
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithOpacityTransparent() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.OPACITY,
+            Opacity.TRANSPARENT
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithTextOverflowClip() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.CLIP
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithTextOverflowEllipsis() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.ELLIPSIS
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithTextOverflowString() {
+        this.fromPropertiesAndCheck2(
+            TextStylePropertyName.TEXT_OVERFLOW,
+            TextOverflow.string("Hello World")
+        );
+    }
+
+    private <T> void fromPropertiesAndCheck2(final TextStylePropertyName<T> name,
+                                             final T value) {
+        this.fromPropertiesAndCheck(
+            Properties.EMPTY.set(
+                name.propertiesPath,
+                value.toString()
+            ),
+            TextStyle.EMPTY.set(
+                name,
+                value
+            )
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithNotEmpty() {
+        this.fromPropertiesAndCheck(
+            "color=white\n" +
+                "text-align=LEFT\n",
+            TextStyleNonEmpty.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.WHITE
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).text()
+        );
+    }
+
+    @Test
+    public void testFromPropertiesWithNotEmpty2() {
+        this.fromPropertiesAndCheck(
+            "border-bottom-color=white\n" +
+                "border-bottom-style=DASHED\n" +
+                "border-bottom-width=34px\n" +
+                "border-left-color=white\n" +
+                "border-left-style=DASHED\n" +
+                "border-left-width=34px\n" +
+                "border-right-color=white\n" +
+                "border-right-style=DASHED\n" +
+                "border-right-width=34px\n" +
+                "border-top-color=white\n" +
+                "border-top-style=DASHED\n" +
+                "border-top-width=34px",
+            TextStyleNonEmpty.EMPTY.setBorder(
+                Color.WHITE,
+                BorderStyle.DASHED,
+                Length.pixel(34.0)
+            ).text()
+        );
+    }
+
+    private void fromPropertiesAndCheck(final String properties,
+                                        final String expected) {
+        this.fromPropertiesAndCheck(
+            Properties.parse(properties),
+            TextStyle.parse(expected)
+        );
+    }
+
+    private void fromPropertiesAndCheck(final Properties properties,
+                                        final TextStyle expected) {
+        this.checkEquals(
+            expected,
+            TextStyle.fromProperties(properties),
+            properties::toString
         );
     }
 

@@ -25,6 +25,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
+import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
@@ -138,6 +139,33 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         }
 
         return style;
+    }
+
+    /**
+     * Returns a {@link TextStyle} with the entries within the given {@link Properties}.
+     */
+    public static TextStyle fromProperties(final Properties properties) {
+        Objects.requireNonNull(properties, "properties");
+
+        TextStyle textStyle = EMPTY;
+
+        for (final Entry<PropertiesPath, String> nameAndValue : properties.entries()) {
+            final TextStylePropertyName<?> textStylePropertyName = TextStylePropertyName.with(
+                nameAndValue.getKey()
+                    .value()
+            );
+
+            textStyle = textStyle.set(
+                textStylePropertyName,
+                Cast.to(
+                    textStylePropertyName.handler.parseValueText(
+                        nameAndValue.getValue()
+                    )
+                )
+            );
+        }
+
+        return textStyle;
     }
 
     /**
