@@ -1010,6 +1010,57 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testParseSeveralCR() {
+        this.parseStringAndCheck(
+            "text: \"Hello\";\rcolor: #123456;\rtext-align: LEFT\r",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testParseSeveralCRNL() {
+        this.parseStringAndCheck(
+            "text: \"Hello\";\r\ncolor: #123456;\r\ntext-align: LEFT\r\n",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testParseSeveralNL() {
+        this.parseStringAndCheck(
+            "text: \"Hello\";\ncolor: #123456;\ntext-align: LEFT\n",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT,
+                "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
     public void testParseAndTextRoundtrip() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.COLOR,
