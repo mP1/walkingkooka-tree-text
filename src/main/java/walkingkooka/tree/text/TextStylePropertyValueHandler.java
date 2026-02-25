@@ -27,7 +27,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Optional;
 
 /**
- * Base converter that provides support for handling property values.
+ * Base class that contains abstract methods with sub-classes for each fo the different type of {@link TextStylePropertyName}
+ * properties.
  */
 abstract class TextStylePropertyValueHandler<T> {
 
