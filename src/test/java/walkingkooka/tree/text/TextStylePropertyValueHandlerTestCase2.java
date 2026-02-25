@@ -34,6 +34,8 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
         );
     }
 
+    public abstract void testCheckValueWithIncompatibleTypeFails();
+
     @Test
     public final void testRoundtripJson() {
         final T value = this.propertyValue();

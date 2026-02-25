@@ -42,7 +42,8 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
     }
 
     @Test
-    public void testCheckWrongValueTypeFails() {
+    @Override
+    public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
             "Property \"line-height\": Expected NoneLength | PixelLength got TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTest"

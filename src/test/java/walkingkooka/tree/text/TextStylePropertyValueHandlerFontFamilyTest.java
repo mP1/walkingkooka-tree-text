@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerFontFamily, FontFamily> {
+public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerFontFamily, FontFamily> {
 
     private final static String TIMES_NEW_ROMAN = "Times New Roman";
 

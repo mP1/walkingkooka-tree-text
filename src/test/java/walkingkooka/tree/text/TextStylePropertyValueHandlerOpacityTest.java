@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.tree.json.JsonNode;
 
-public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePropertyValueHandlerTestCase3<TextStylePropertyValueHandlerOpacity, Opacity> {
+public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerOpacity, Opacity> {
 
     @Test
     @Override

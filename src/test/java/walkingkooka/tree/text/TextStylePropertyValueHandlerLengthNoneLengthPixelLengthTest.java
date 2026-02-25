@@ -50,6 +50,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
     }
 
     @Test
+    @Override
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
