@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
@@ -1045,16 +1044,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     // TextStyleVisitor.................................................................................................
 
     /**
-     * Dispatches to the appropriate {@link TextStyleVisitor} visit method.
-     */
-    void accept(final Object value, final TextStyleVisitor visitor) {
-        this.visitor.accept(Cast.to(value), visitor);
-    }
-
-    /**
      * Calls the appropriate {@link TextStyleVisitor} visit method
      */
-    private final BiConsumer<T, TextStyleVisitor> visitor;
+    final BiConsumer<T, TextStyleVisitor> visitor;
 
     // patch............................................................................................................
 
