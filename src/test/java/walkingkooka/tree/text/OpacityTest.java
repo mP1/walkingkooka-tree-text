@@ -101,6 +101,30 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     // parseString......................................................................................................
 
     @Test
+    public void testParseWithInvalidNumberFails() {
+        this.parseStringInvalidCharacterFails(
+            "A0.5",
+            'A'
+        );
+    }
+
+    @Test
+    public void testParseWithInvalidNumberFails2() {
+        this.parseStringInvalidCharacterFails(
+            "0.5A",
+            'A'
+        );
+    }
+
+    @Test
+    public void testParseNumberWithoutPercentageSign() {
+        this.parseStringAndCheck(
+            "0.5",
+            Opacity.with(0.5)
+        );
+    }
+
+    @Test
     public void testParseOpaque() {
         this.parseStringAndCheck(
             Opacity.OPAQUE_TEXT,
@@ -117,9 +141,17 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     @Test
-    public void testParseNumber() {
+    public void testParseNumberPercent() {
         this.parseStringAndCheck(
-            "0.5",
+            "50%",
+            Opacity.with(0.5)
+        );
+    }
+
+    @Test
+    public void testParseNumberPercentWithDecimal() {
+        this.parseStringAndCheck(
+            "50.000%",
             Opacity.with(0.5)
         );
     }
