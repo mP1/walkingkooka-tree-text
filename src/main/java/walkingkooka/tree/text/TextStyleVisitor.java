@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.Cast;
 import walkingkooka.color.Color;
 import walkingkooka.visit.Visiting;
 import walkingkooka.visit.Visitor;
@@ -69,10 +70,7 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
     final <T> void acceptPropertyAndValue(final TextStylePropertyName<T> name,
                                           final T value) {
         if (Visiting.CONTINUE == this.startVisit(name, value)) {
-            name.accept(
-                value,
-                this
-            );
+            name.visitor.accept(Cast.to(value), this);
         }
         this.endVisit(
             name,
