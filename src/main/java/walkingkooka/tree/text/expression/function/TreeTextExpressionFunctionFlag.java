@@ -59,7 +59,7 @@ final class TreeTextExpressionFunctionFlag<C extends ExpressionEvaluationContext
 
     @Override
     public Flag apply(final List<Object> parameters,
-                          final C context) {
+                      final C context) {
         return FLAG.getOrFail(parameters, 0);
     }
 }
