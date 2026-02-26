@@ -19,16 +19,13 @@ package walkingkooka.tree.text.expression.function;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
 
-public final class TreeTextExpressionFunctionHyperlinkTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>, Hyperlink, FakeExpressionEvaluationContext>,
-    ToStringTesting<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>> {
+public final class TreeTextExpressionFunctionHyperlinkTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>, Hyperlink> {
 
     @Test
     public void testApplyWithString() {
@@ -74,10 +71,5 @@ public final class TreeTextExpressionFunctionHyperlinkTest implements Expression
     @Override
     public Class<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionHyperlink.class);
-    }
-
-    @Override
-    public void testTypeNaming() {
-        throw new UnsupportedOperationException();
     }
 }

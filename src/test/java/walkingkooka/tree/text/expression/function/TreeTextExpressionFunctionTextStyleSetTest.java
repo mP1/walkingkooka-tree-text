@@ -20,19 +20,16 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
-import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextExpressionFunctionTextStyleSetTest implements ExpressionFunctionTesting<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>, Styleable, FakeExpressionEvaluationContext>,
-    ToStringTesting<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>> {
+public final class TreeTextExpressionFunctionTextStyleSetTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextStyleAndTextStylePropertyNameWhenNewProperty() {
@@ -181,10 +178,5 @@ public final class TreeTextExpressionFunctionTextStyleSetTest implements Express
     @Override
     public Class<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleSet.class);
-    }
-
-    @Override
-    public void testTypeNaming() {
-        throw new UnsupportedOperationException();
     }
 }
