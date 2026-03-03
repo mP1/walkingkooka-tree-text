@@ -23,6 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.props.PropertiesPath;
 import walkingkooka.reflect.ConstantsTesting;
@@ -526,13 +527,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             initial.patch(
                 propertyName.stylePatch(value),
                 JsonNodeUnmarshallContexts.basic(
-                    (String cc) -> {
-                        throw new UnsupportedOperationException();
-                    },
-                    (String lt) -> {
-                        throw new UnsupportedOperationException();
-                    },
                     ExpressionNumberKind.BIG_DECIMAL,
+                    CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
                     MathContext.DECIMAL32
                 )
             ),

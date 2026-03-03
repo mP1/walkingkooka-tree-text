@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
@@ -103,13 +104,8 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final JsonNodeUnmarshallContext unmarshallContext() {
         return JsonNodeUnmarshallContexts.basic(
-            (String cc) -> {
-                throw new UnsupportedOperationException();
-            },
-            (String lt) -> {
-                throw new UnsupportedOperationException();
-            },
             ExpressionNumberKind.DEFAULT,
+            CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
             MathContext.DECIMAL32
         );
     }

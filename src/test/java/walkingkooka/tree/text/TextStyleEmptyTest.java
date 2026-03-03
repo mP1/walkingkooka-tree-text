@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.props.Properties;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
@@ -489,13 +490,8 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             TextStyle.unmarshall(
                 JsonNode.object(),
                 JsonNodeUnmarshallContexts.basic(
-                    (String cc) -> {
-                        throw new UnsupportedOperationException();
-                    },
-                    (String lt) -> {
-                        throw new UnsupportedOperationException();
-                    },
                     ExpressionNumberKind.DEFAULT,
+                    CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
                     MathContext.DECIMAL32
                 )
             )
