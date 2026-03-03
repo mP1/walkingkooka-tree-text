@@ -23,6 +23,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.props.Properties;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
@@ -501,13 +502,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Override
     public JsonNodeUnmarshallContext createPatchContext() {
         return JsonNodeUnmarshallContexts.basic(
-            (String cc) -> {
-                throw new UnsupportedOperationException();
-            },
-            (String lt) -> {
-                throw new UnsupportedOperationException();
-            },
             ExpressionNumberKind.BIG_DECIMAL,
+            CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
             MathContext.UNLIMITED
         );
     }

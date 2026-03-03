@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
@@ -57,13 +58,8 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
         this.checkEquals(
             properties,
             JsonNodeUnmarshallContexts.basic(
-                (String cc) -> {
-                    throw new UnsupportedOperationException();
-                },
-                (String lt) -> {
-                    throw new UnsupportedOperationException();
-                },
                 ExpressionNumberKind.DEFAULT,
+                CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
                 MathContext.DECIMAL32
             ).unmarshallWithType(json),
             () -> "" + properties);
