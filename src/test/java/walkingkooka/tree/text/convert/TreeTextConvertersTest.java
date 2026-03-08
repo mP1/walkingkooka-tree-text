@@ -43,6 +43,29 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
     ConverterTesting {
 
     @Test
+    public void testConvertPropertiesToTextStyle() {
+        final TextStyle textStyle = TextStyle.parse("color:red; text-align: left");
+
+        this.convertAndCheck(
+            textStyle.properties(),
+            TextStyle.class,
+            textStyle
+        );
+    }
+
+    @Test
+    public void testConvertStringPropertiesToTextStyle() {
+        final TextStyle textStyle = TextStyle.parse("color:red; text-align: left");
+
+        this.convertAndCheck(
+            textStyle.properties()
+                .toString(),
+            TextStyle.class,
+            textStyle
+        );
+    }
+
+    @Test
     public void testConvertStringToTextStylePropertyName() {
         final TextStylePropertyName<?> propertyName = TextStylePropertyName.COLOR;
 
@@ -159,6 +182,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
             Lists.of(
                 Converters.simple(),
                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                Converters.textToProperties(),
                 Converters.numberToNumber(),
                 NetConverters.textToUrl(),
                 ColorConverters.colorToColor(),
@@ -170,7 +194,8 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
                 TreeTextConverters.textToTextStyle(),
                 TreeTextConverters.textToTextStylePropertyName(),
                 TreeTextConverters.urlToHyperlink(),
-                TreeTextConverters.urlToImage()
+                TreeTextConverters.urlToImage(),
+                TreeTextConverters.propertiesToTextStyle() // must be after Converters.textToProperties
             )
         );
 

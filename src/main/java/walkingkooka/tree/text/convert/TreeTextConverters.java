@@ -38,6 +38,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
+     * {@see TreeTextConverterPropertiesToTextStyle}
+     */
+    public static <C extends ConverterContext> Converter<C> propertiesToTextStyle() {
+        return TreeTextConverterPropertiesToTextStyle.instance();
+    }
+
+    /**
      * {@see TreeTextConverterTextToFlag}
      */
     public static <C extends ConverterContext> Converter<C> textToFlag() {
