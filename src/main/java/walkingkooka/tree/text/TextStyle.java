@@ -393,6 +393,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return this.setValuesWithCopy(colorStyleWidth);
     }
 
+    public final TextStyle setMargin(final Length<?> length) {
+        return this.set(
+            TextStylePropertyName.MARGIN,
+            length
+        );
+    }
+
     /**
      * Returns a mutable copy of the current properties for modification.
      */
