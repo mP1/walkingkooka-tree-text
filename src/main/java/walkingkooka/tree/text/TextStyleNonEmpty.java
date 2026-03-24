@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
@@ -463,7 +464,9 @@ final class TextStyleNonEmpty extends TextStyle {
     @Override
     public String text() {
         if (null == this.css) {
-            this.css = this.buildCss();
+            this.css = this.toText(
+                TextStylePropertyName::value
+            );
         }
 
         return this.css;
@@ -475,13 +478,15 @@ final class TextStyleNonEmpty extends TextStyle {
     private String css;
 
     /**
-     * Prints each property and value with spaces after each separator.
+     * Prints each property and value with spaces after each separator. The provider {@link Function} may be used to
+     * modify each {@link TextStylePropertyName}, such as removing a common prefix.
      *
      * <pre>
      * border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;
      * </pre>
      */
-    private String buildCss() {
+    @Override
+    String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
         final StringBuilder cssStringBuilder = new StringBuilder();
 
         try (final Printer css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM)) {
@@ -491,7 +496,9 @@ final class TextStyleNonEmpty extends TextStyle {
                 css.print(separator);
 
                 final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-                css.print(propertyName.value());
+                css.print(
+                    propertyNameMapper.apply(propertyName)
+                );
                 css.print(TextStyle.ASSIGNMENT);
                 css.print(" ");
 
