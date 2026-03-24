@@ -21,8 +21,6 @@ import walkingkooka.color.ColorStartup;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 
-import java.util.Optional;
-
 /**
  * Used to force all values types to {@link JsonNodeContext#register}
  */
@@ -40,13 +38,6 @@ public final class TreeTextStartup implements PublicStaticHelper {
         Length.none();
         Opacity.OPAQUE.value();
         TextOverflow.CLIP.value();
-
-        TextStyleProperty.with(
-            TextStylePropertyName.TEXT_ALIGN,
-            Optional.of(
-                TextAlign.LEFT
-            )
-        );
     }
 
     public static void init() {
