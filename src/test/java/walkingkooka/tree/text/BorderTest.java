@@ -184,7 +184,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     // toString.........................................................................................................
 
     @Test
-    public void testToString() {
+    public void testToStringWithBottom() {
         this.toStringAndCheck(
             Border.with(BoxEdge.BOTTOM,
                 TextStyle.EMPTY.setValues(
@@ -194,6 +194,32 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                 )
             ),
             "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}"
+        );
+    }
+
+    @Test
+    public void testToStringWithTop() {
+        this.toStringAndCheck(
+            Border.with(BoxEdge.TOP,
+                TextStyle.EMPTY.setValues(
+                    Maps.of(
+                        TextStylePropertyName.BORDER_RIGHT_COLOR, Color.fromRgb(0x123456),
+                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
+                )
+            ),
+            "TOP {border-right-color=#123456, border-right-style=DOTTED}"
+        );
+    }
+
+    @Test
+    public void testToStringWithAll() {
+        this.toStringAndCheck(
+            TextStyle.EMPTY.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                Length.pixel(2.0)
+            ).border(BoxEdge.ALL),
+            "ALL {border-bottom-color=black, border-bottom-style=DASHED, border-bottom-width=2px, border-left-color=black, border-left-style=DASHED, border-left-width=2px, border-right-color=black, border-right-style=DASHED, border-right-width=2px, border-top-color=black, border-top-style=DASHED, border-top-width=2px}"
         );
     }
 
