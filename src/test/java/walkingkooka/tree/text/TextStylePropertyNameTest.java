@@ -310,6 +310,73 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         }
     }
 
+    // isMargin.........................................................................................................
+
+    @Test
+    public void testIsMarginWithMarginLeft() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.MARGIN_LEFT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsMarginWithMarginRight() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.MARGIN_RIGHT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsMarginWithMarginTop() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.MARGIN_TOP,
+            true
+        );
+    }
+
+    @Test
+    public void testIsMarginWithMarginBottom() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.MARGIN_BOTTOM,
+            true
+        );
+    }
+
+    @Test
+    public void testIsMarginWithMargin() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.MARGIN,
+            true
+        );
+    }
+
+    @Test
+    public void testIsMarginWithBorderLeftColor() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.BORDER_LEFT_COLOR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsMarginWithPaddingLeft() {
+        this.isMarginAndCheck(
+            TextStylePropertyName.PADDING_LEFT,
+            false
+        );
+    }
+
+    private void isMarginAndCheck(final TextStylePropertyName<?> propertyName,
+                                  final boolean expected) {
+        this.checkEquals(
+            expected,
+            propertyName.isMargin(),
+            propertyName::toString
+        );
+    }
+
     // parseValue.......................................................................................................
     @Test
     public void testParseValueString() {
