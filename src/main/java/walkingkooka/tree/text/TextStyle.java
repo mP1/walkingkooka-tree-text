@@ -40,6 +40,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
@@ -687,4 +688,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
         return properties;
     }
+
+    // toText(Function).................................................................................................
+
+    abstract String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper);
 }
