@@ -1417,6 +1417,51 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
+    // setMargin........................................................................................................
+
+    @Test
+    public void testSetMarginWithEmpty() {
+        final TextStyle style = TextStyle.EMPTY;
+        final Length<?> length = Length.pixel(2.0);
+
+        this.setMarginAndCheck(
+            style,
+            length,
+            style.set(
+                TextStylePropertyName.MARGIN,
+                length
+            )
+        );
+    }
+
+    @Test
+    public void testSetMarginWithNotEmpty() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+        final Length<?> length = Length.pixel(2.0);
+
+        this.setMarginAndCheck(
+            style,
+            length,
+            style.set(
+                TextStylePropertyName.MARGIN,
+                length
+            )
+        );
+    }
+
+    private void setMarginAndCheck(final TextStyle style,
+                                   final Length<?> length,
+                                   final TextStyle expected) {
+        this.checkEquals(
+            expected,
+            style.setMargin(length),
+            () -> style + " setMargin " + length
+        );
+    }
+
     // ClassTesting.....................................................................................................
 
     @Override
