@@ -41,6 +41,11 @@ public final class Margin extends BorderMarginPadding {
     }
 
     @Override
+    boolean isProperty(final TextStylePropertyName<?> propertyName) {
+        return propertyName.isMargin();
+    }
+
+    @Override
     public Margin setEdge(final BoxEdge edge) {
         return this.setEdge0(edge)
             .cast();
