@@ -26,33 +26,49 @@ import java.util.Optional;
  */
 public final class Border extends BorderMarginPadding {
 
-    static Border with(final BoxEdge edge, final TextStyle textStyle) {
-        return new Border(edge, textStyle);
+    static Border with(final BoxEdge edge,
+                       final TextStyle textStyle) {
+        return new Border(
+            edge,
+            textStyle
+        );
     }
 
-    private Border(final BoxEdge edge, final TextStyle textStyle) {
+    private Border(final BoxEdge edge,
+                   final TextStyle textStyle) {
         super(edge, textStyle);
     }
 
     public Optional<Color> color() {
-        return this.textStyle.get(this.edge.borderColorPropertyName());
+        return this.textStyle.get(
+            this.edge.borderColorPropertyName()
+        );
     }
 
     public Border setColor(final Optional<Color> color) {
-        return this.setProperty(this.edge.borderColorPropertyName(), color).cast();
+        return this.setProperty(
+            this.edge.borderColorPropertyName(),
+            color
+        ).cast();
     }
 
     @Override
     public Border setEdge(final BoxEdge edge) {
-        return this.setEdge0(edge).cast();
+        return this.setEdge0(edge)
+            .cast();
     }
 
     public Optional<BorderStyle> style() {
-        return this.textStyle.get(this.edge.borderStylePropertyName());
+        return this.textStyle.get(
+            this.edge.borderStylePropertyName()
+        );
     }
 
     public Border setStyle(final Optional<BorderStyle> style) {
-        return this.setProperty(this.edge.borderStylePropertyName(), style).cast();
+        return this.setProperty(
+            this.edge.borderStylePropertyName(),
+            style
+        ).cast();
     }
 
     /**
@@ -69,7 +85,11 @@ public final class Border extends BorderMarginPadding {
     }
 
     @Override
-    BorderMarginPadding replace(final BoxEdge edge, final TextStyle textStyle) {
-        return new Border(edge, textStyle);
+    BorderMarginPadding replace(final BoxEdge edge,
+                                final TextStyle textStyle) {
+        return new Border(
+            edge,
+            textStyle
+        );
     }
 }
