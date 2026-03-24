@@ -97,7 +97,7 @@ abstract class BorderMarginPadding {
 
     final BoxEdge edge;
 
-    abstract <V> BorderMarginPadding replace(final BoxEdge edge, final TextStyle style);
+    abstract BorderMarginPadding replace(final BoxEdge edge, final TextStyle style);
 
     // textStyle........................................................................................................
 
