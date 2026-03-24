@@ -400,6 +400,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         );
     }
 
+    public final TextStyle setPadding(final Length<?> length) {
+        return this.set(
+            TextStylePropertyName.PADDING,
+            length
+        );
+    }
+
     /**
      * Returns a mutable copy of the current properties for modification.
      */
