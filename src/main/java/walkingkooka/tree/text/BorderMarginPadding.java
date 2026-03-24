@@ -72,14 +72,24 @@ abstract class BorderMarginPadding implements HasTextStyle,
      */
     final <V> BorderMarginPadding setProperty(final TextStylePropertyName<V> propertyName,
                                               final Optional<V> value) {
+        if (false == this.isProperty(propertyName)) {
+            throw new IllegalArgumentException("Invalid property " + propertyName);
+        }
+
         final TextStyle before = this.textStyle;
         final TextStyle after = value.isPresent() ?
             before.set(propertyName, value.get()) :
             before.remove(propertyName);
+
         return before == after ?
             this :
-            this.replace(this.edge, after);
+            this.replace(
+                this.edge,
+                after
+            );
     }
+
+    abstract boolean isProperty(final TextStylePropertyName<?> propertyName);
 
     // edge........................................................................................................
 

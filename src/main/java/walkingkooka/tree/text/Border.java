@@ -39,6 +39,11 @@ public final class Border extends BorderMarginPadding {
         super(edge, textStyle);
     }
 
+    @Override
+    boolean isProperty(final TextStylePropertyName<?> propertyName) {
+        return propertyName.isBorder();
+    }
+
     public Optional<Color> color() {
         return this.textStyle.get(
             this.edge.borderColorPropertyName()
