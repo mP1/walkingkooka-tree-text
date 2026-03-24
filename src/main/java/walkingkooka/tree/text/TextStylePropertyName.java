@@ -930,6 +930,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         // BorderMarginPadding
         this.border = name.startsWith("border");
         this.margin = name.startsWith("margin");
+        this.padding = name.startsWith("padding");
     }
 
     /**
@@ -1108,4 +1109,10 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     private final boolean margin;
+
+    boolean isPadding() {
+        return this.padding;
+    }
+
+    private final boolean padding;
 }

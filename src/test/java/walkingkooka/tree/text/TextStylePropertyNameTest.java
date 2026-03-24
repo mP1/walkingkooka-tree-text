@@ -484,6 +484,121 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         );
     }
 
+    // isPadding.........................................................................................................
+
+    @Test
+    public void testIsPaddingWithPaddingLeft() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.PADDING_LEFT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithPaddingRight() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.PADDING_RIGHT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithPaddingTop() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.PADDING_TOP,
+            true
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithPaddingBottom() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.PADDING_BOTTOM,
+            true
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithPadding() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.PADDING,
+            true
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderColor() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_COLOR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderLeftColor() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_LEFT_COLOR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderStyle() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_STYLE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderLeftStyle() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_LEFT_STYLE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderWidth() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_WIDTH,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithBorderLeftWidth() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.BORDER_LEFT_WIDTH,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithMargin() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.MARGIN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsPaddingWithMarginLeft() {
+        this.isPaddingAndCheck(
+            TextStylePropertyName.MARGIN_LEFT,
+            false
+        );
+    }
+
+    private void isPaddingAndCheck(final TextStylePropertyName<?> propertyName,
+                                   final boolean expected) {
+        this.checkEquals(
+            expected,
+            propertyName.isPadding(),
+            propertyName::toString
+        );
+    }
+
     // parseValue.......................................................................................................
     @Test
     public void testParseValueString() {
