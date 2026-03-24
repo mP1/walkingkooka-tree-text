@@ -51,7 +51,4 @@ public final class Margin extends BorderMarginPadding {
     BorderMarginPadding replace(final BoxEdge edge, final TextStyle textStyle) {
         return new Margin(edge, textStyle);
     }
-
-    // Object...........................................................................................................
-
 }
