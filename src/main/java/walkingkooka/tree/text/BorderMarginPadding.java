@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.text.HasText;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -25,12 +26,14 @@ import java.util.Optional;
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
  */
-abstract class BorderMarginPadding implements HasTextStyle {
+abstract class BorderMarginPadding implements HasTextStyle,
+    HasText {
 
     /**
      * Package private to limit sub classing.
      */
-    BorderMarginPadding(final BoxEdge edge, final TextStyle textStyle) {
+    BorderMarginPadding(final BoxEdge edge,
+                        final TextStyle textStyle) {
         super();
         this.edge = edge;
         this.textStyle = textStyle;
@@ -42,7 +45,9 @@ abstract class BorderMarginPadding implements HasTextStyle {
      * Getter that returns the width component.
      */
     public final Optional<Length<?>> width() {
-        return this.textStyle.get(this.widthPropertyName());
+        return this.textStyle.get(
+            this.widthPropertyName()
+        );
     }
 
     /**
@@ -51,7 +56,10 @@ abstract class BorderMarginPadding implements HasTextStyle {
     abstract BorderMarginPadding setWidth(final Optional<Length<?>> width);
 
     final BorderMarginPadding setWidth0(final Optional<Length<?>> width) {
-        return this.setProperty(this.widthPropertyName(), width);
+        return this.setProperty(
+            this.widthPropertyName(),
+            width
+        );
     }
 
     /**
@@ -88,16 +96,19 @@ abstract class BorderMarginPadding implements HasTextStyle {
     abstract BorderMarginPadding setEdge(final BoxEdge edge);
 
     final BorderMarginPadding setEdge0(final BoxEdge edge) {
-        Objects.requireNonNull(edge, "edge");
         return this.edge.equals(edge) ?
             this :
-            this.replace(edge, this.textStyle);
+            this.replace(
+                Objects.requireNonNull(edge, "edge"),
+                this.textStyle
+            );
 
     }
 
     final BoxEdge edge;
 
-    abstract BorderMarginPadding replace(final BoxEdge edge, final TextStyle style);
+    abstract BorderMarginPadding replace(final BoxEdge edge,
+                                         final TextStyle style);
 
     // textStyle........................................................................................................
 
@@ -139,5 +150,12 @@ abstract class BorderMarginPadding implements HasTextStyle {
     @Override
     public final String toString() {
         return this.edge + " " + this.textStyle;
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.textStyle.text();
     }
 }
