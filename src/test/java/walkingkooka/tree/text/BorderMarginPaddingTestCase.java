@@ -34,7 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements ClassTesting2<T>,
     HashCodeEqualsDefinedTesting2<T>,
-    ToStringTesting<T> {
+    ToStringTesting<T>,
+    HasTextStyleTesting {
 
     BorderMarginPaddingTestCase() {
         super();
@@ -125,7 +126,10 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.of(differentWidth));
 
         assertNotSame(borderMarginPadding, different);
-        this.checkEquals(this.textStyle(propertyName, differentWidth), different.textStyle());
+        this.textStyleAndCheck(
+            different,
+            this.textStyle(propertyName, differentWidth)
+        );
     }
 
     @Test
@@ -145,9 +149,9 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         assertNotSame(borderMarginPadding, different);
 
         properties.put(this.widthPropertyName(edge), differentWidth);
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY.setValues(properties)
         );
     }
 
@@ -169,9 +173,10 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         assertNotSame(borderMarginPadding, different);
 
         properties.remove(this.widthPropertyName(edge));
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY.setValues(properties)
         );
     }
 
@@ -215,7 +220,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
                      final BoxEdge edge,
                      final TextStyle textStyle) {
         this.checkEquals(edge, borderMarginPadding.edge(), "edge");
-        this.checkEquals(textStyle, borderMarginPadding.textStyle(), "textStyle");
+
+        this.textStyleAndCheck(
+            borderMarginPadding,
+            textStyle
+        );
     }
 
     // ClassTesting.....................................................................................................

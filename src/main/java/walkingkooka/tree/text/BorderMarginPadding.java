@@ -25,7 +25,7 @@ import java.util.Optional;
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
  */
-abstract class BorderMarginPadding {
+abstract class BorderMarginPadding implements HasTextStyle {
 
     /**
      * Package private to limit sub classing.
@@ -104,6 +104,7 @@ abstract class BorderMarginPadding {
     /**
      * Returns the {@link TextStyle}.
      */
+    @Override
     public final TextStyle textStyle() {
         return this.textStyle;
     }
