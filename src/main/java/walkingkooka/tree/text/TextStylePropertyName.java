@@ -926,6 +926,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.index = index;
 
         this.propertiesPath = PropertiesPath.parse(name);
+
+        // BorderMarginPadding
+        this.margin = name.startsWith("margin");
     }
 
     /**
@@ -1090,4 +1093,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     public CaseSensitivity caseSensitivity() {
         return CASE_SENSITIVITY;
     }
+
+    // BorderMarginPadding..............................................................................................
+
+    boolean isMargin() {
+        return this.margin;
+    }
+
+    private final boolean margin;
 }
