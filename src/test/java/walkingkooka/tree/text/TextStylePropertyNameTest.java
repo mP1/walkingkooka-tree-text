@@ -310,6 +310,113 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         }
     }
 
+    // isBorder.........................................................................................................
+
+    @Test
+    public void testIsBorderWithBorderLeftColor() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_LEFT_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderLeftStyle() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_LEFT_STYLE,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderLeftWidth() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_LEFT_WIDTH,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderRightColor() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_RIGHT_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderTopColor() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderBottomColor() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderColor() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithBorderWidth() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.BORDER_WIDTH,
+            true
+        );
+    }
+
+    @Test
+    public void testIsBorderWithMargin() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.MARGIN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsBorderWithMarginLeft() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.MARGIN_LEFT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsBorderWithPadding() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.PADDING,
+            false
+        );
+    }
+
+    @Test
+    public void testIsBorderWithPaddingLeft() {
+        this.isBorderAndCheck(
+            TextStylePropertyName.PADDING_LEFT,
+            false
+        );
+    }
+
+    private void isBorderAndCheck(final TextStylePropertyName<?> propertyName,
+                                  final boolean expected) {
+        this.checkEquals(
+            expected,
+            propertyName.isBorder(),
+            propertyName::toString
+        );
+    }
+    
     // isMargin.........................................................................................................
 
     @Test
