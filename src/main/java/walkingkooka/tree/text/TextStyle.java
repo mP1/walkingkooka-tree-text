@@ -348,7 +348,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                     final T value);
 
     /**
-     * Sets all border properties to the same given value.
+     * Sets all border properties to the same given value. Note to set all margin or padding property values, use
+     * {@link TextStylePropertyName#MARGIN} or {@link TextStylePropertyName#PADDING}.
      */
     public final TextStyle setBorder(final Color color,
                                      final BorderStyle style,
