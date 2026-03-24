@@ -24,22 +24,32 @@ import java.util.Optional;
  */
 public final class Margin extends BorderMarginPadding {
 
-    static Margin with(final BoxEdge edge, final TextStyle textStyle) {
-        return new Margin(edge, textStyle);
+    static Margin with(final BoxEdge edge,
+                       final TextStyle textStyle) {
+        return new Margin(
+            edge,
+            textStyle
+        );
     }
 
-    private Margin(final BoxEdge edge, final TextStyle textStyle) {
-        super(edge, textStyle);
+    private Margin(final BoxEdge edge,
+                   final TextStyle textStyle) {
+        super(
+            edge,
+            textStyle
+        );
     }
 
     @Override
     public Margin setEdge(final BoxEdge edge) {
-        return this.setEdge0(edge).cast();
+        return this.setEdge0(edge)
+            .cast();
     }
 
     @Override
     public Margin setWidth(final Optional<Length<?>> width) {
-        return this.setWidth0(width).cast();
+        return this.setWidth0(width)
+            .cast();
     }
 
     @Override
@@ -48,7 +58,11 @@ public final class Margin extends BorderMarginPadding {
     }
 
     @Override
-    BorderMarginPadding replace(final BoxEdge edge, final TextStyle textStyle) {
-        return new Margin(edge, textStyle);
+    BorderMarginPadding replace(final BoxEdge edge,
+                                final TextStyle textStyle) {
+        return new Margin(
+            edge,
+            textStyle
+        );
     }
 }
