@@ -27,7 +27,7 @@ public final class InvalidTextStylePropertyNameExceptionTest implements Throwabl
     public void testGetMessageBorder() {
         this.checkMessage(
             InvalidTextStylePropertyNameException.border(TextStylePropertyName.COLOR),
-            "Invalid border property \"color\""
+            "Border: Invalid property \"color\""
         );
     }
 
@@ -35,7 +35,7 @@ public final class InvalidTextStylePropertyNameExceptionTest implements Throwabl
     public void testGetMessageMargin() {
         this.checkMessage(
             InvalidTextStylePropertyNameException.margin(TextStylePropertyName.COLOR),
-            "Invalid margin property \"color\""
+            "Margin: Invalid property \"color\""
         );
     }
 
@@ -43,7 +43,7 @@ public final class InvalidTextStylePropertyNameExceptionTest implements Throwabl
     public void testGetMessagePadding() {
         this.checkMessage(
             InvalidTextStylePropertyNameException.padding(TextStylePropertyName.COLOR),
-            "Invalid padding property \"color\""
+            "Padding: Invalid property \"color\""
         );
     }
 

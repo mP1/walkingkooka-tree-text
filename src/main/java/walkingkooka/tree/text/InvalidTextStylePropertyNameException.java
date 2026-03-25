@@ -28,21 +28,21 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
 
     public static InvalidTextStylePropertyNameException border(final TextStylePropertyName<?> property) {
         return new InvalidTextStylePropertyNameException(
-            "border",
+            "Border",
             property
         );
     }
 
     public static InvalidTextStylePropertyNameException margin(final TextStylePropertyName<?> property) {
         return new InvalidTextStylePropertyNameException(
-            TextStylePropertyName.MARGIN.name,
+            Margin.class.getSimpleName(),
             property
         );
     }
 
     public static InvalidTextStylePropertyNameException padding(final TextStylePropertyName<?> property) {
         return new InvalidTextStylePropertyNameException(
-            TextStylePropertyName.PADDING.name,
+            Padding.class.getSimpleName(),
             property
         );
     }
@@ -56,7 +56,7 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
 
     @Override
     public String getMessage() {
-        return "Invalid " + this.filter + " property " + propertyName.inQuotes();
+        return this.filter + ": Invalid property " + propertyName.inQuotes();
     }
 
     public String filter() {
