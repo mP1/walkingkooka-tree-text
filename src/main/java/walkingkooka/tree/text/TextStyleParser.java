@@ -43,14 +43,18 @@ import java.util.function.Function;
  */
 final class TextStyleParser implements CanBeEmpty {
 
-    static <N extends Name & Comparable<N>> TextStyleParser with(final String text) {
+    static <N extends Name & Comparable<N>> TextStyleParser with(final String text,
+                                                                 final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
         return new TextStyleParser(
-            Objects.requireNonNull(text, "text")
+            Objects.requireNonNull(text, "text"),
+            Objects.requireNonNull(propertyNameFactory, "propertyNameFactory")
         );
     }
 
-    private TextStyleParser(final String text) {
+    private TextStyleParser(final String text,
+                            final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
         this.cursor = TextCursors.charSequence(text);
+        this.propertyNameFactory = propertyNameFactory;
     }
 
     /**
@@ -60,7 +64,7 @@ final class TextStyleParser implements CanBeEmpty {
         return NAME_PARSER.parse(
             this.cursor,
             PARSER_CONTEXT
-        ).map(t -> TextStylePropertyName.with(t.text()));
+        ).map(t -> this.propertyNameFactory.apply(t.text()));
     }
 
     private final Parser<ParserContext> NAME_PARSER = Parsers.initialAndPartCharPredicateString(
@@ -69,6 +73,8 @@ final class TextStyleParser implements CanBeEmpty {
         TextStylePropertyName.MIN_LENGTH,
         TextStylePropertyName.MAX_LENGTH
     );
+
+    private final Function<String, TextStylePropertyName<?>> propertyNameFactory;
 
     /**
      * Consumes any whitespace, don't really care how many or if any were skipped.

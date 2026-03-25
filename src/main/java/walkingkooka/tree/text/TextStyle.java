@@ -106,13 +106,22 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Passing the text from {@link #text()} to parse will give an equal {@link TextStyle}.
      */
     public static TextStyle parse(final String text) {
-        Objects.requireNonNull(text, "text");
+        return parse0(
+            text,
+            TextStylePropertyName::with
+        );
+    }
 
+    static TextStyle parse0(final String text,
+                            final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
         // WHITESPACE, TextStylePropertyName, WHITESPACE, COLON,
         // WHITESPACE VALUE WHITESPACE
         // COMMA | SEMI-COLON
 
-        final TextStyleParser parser = TextStyleParser.with(text);
+        final TextStyleParser parser = TextStyleParser.with(
+            text,
+            propertyNameFactory
+        );
         TextStyle style = EMPTY;
 
         while(parser.isNotEmpty()) {
