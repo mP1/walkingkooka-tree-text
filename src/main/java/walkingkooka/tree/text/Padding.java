@@ -30,7 +30,8 @@ public final class Padding extends BorderMarginPadding {
             TextStyle.parse0(
                 text,
                 PREFIX,
-                TextStylePropertyName::isPadding
+                TextStylePropertyName::isPadding,
+                InvalidTextStylePropertyNameException::padding
             )
         );
     }
