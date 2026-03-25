@@ -19,22 +19,44 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.color.Color;
 
 public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
+    // toString.........................................................................................................
+
     @Test
-    public void testToString() {
+    public void testToStringWithAll() {
         this.toStringAndCheck(
-            Margin.with(BoxEdge.BOTTOM,
+            TextStyle.parse("margin-left: 11px; margin-top: 22px; margin-right: 33px; margin-bottom: 44px;")
+                .margin(BoxEdge.ALL),
+            "margin ALL bottom: 44px; left: 11px; right: 33px; top: 22px;"
+        );
+    }
+    
+    @Test
+    public void testToStringBottom() {
+        this.toStringAndCheck(
+            Margin.with(
+                BoxEdge.BOTTOM,
                 TextStyle.EMPTY.setValues(
                     Maps.of(
-                        TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5),
-                        TextStylePropertyName.COLOR, Color.fromRgb(0x123456)
+                        TextStylePropertyName.MARGIN_BOTTOM, Length.pixel(12.5)
                     )
                 )
             ),
-            "BOTTOM {color=#123456, margin-bottom=12.5px}"
+            "margin BOTTOM bottom: 12.5px;"
+        );
+    }
+
+    // text.............................................................................................................
+
+    @Test
+    public void testText() {
+        this.textAndCheck(
+            TextStyle.EMPTY.setMargin(
+                Length.pixel(2.0)
+            ).margin(BoxEdge.ALL),
+            "bottom: 2px; left: 2px; right: 2px; top: 2px;"
         );
     }
 

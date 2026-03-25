@@ -25,16 +25,35 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     // toString.........................................................................................................
 
     @Test
-    public void testToString() {
+    public void testToStringWithAll() {
         this.toStringAndCheck(
-            Padding.with(BoxEdge.BOTTOM,
-                TextStyle.EMPTY.setValues(
-                    Maps.of(
-                        TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
-                        TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
-                )
-            ),
-            "BOTTOM {border-right-style=DOTTED, padding-bottom=12.5px}"
+            TextStyle.parse("padding-left: 11px; padding-top: 22px; padding-right: 33px; padding-bottom: 44px;")
+                .padding(BoxEdge.ALL),
+            "padding ALL bottom: 44px; left: 11px; right: 33px; top: 22px;"
+        );
+    }
+
+    @Test
+    public void testToStringWithBottom() {
+        this.toStringAndCheck(
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
+                    TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
+            ).padding(BoxEdge.BOTTOM),
+            "padding BOTTOM bottom: 12.5px;"
+        );
+    }
+
+    // text.............................................................................................................
+
+    @Test
+    public void testText() {
+        this.textAndCheck(
+            TextStyle.EMPTY.setPadding(
+                Length.pixel(2.0)
+            ).padding(BoxEdge.ALL),
+            "bottom: 2px; left: 2px; right: 2px; top: 2px;"
         );
     }
 

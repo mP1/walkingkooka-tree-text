@@ -157,15 +157,52 @@ abstract class BorderMarginPadding implements HasTextStyle,
             this.textStyle.equals(other.textStyle);
     }
 
+    /**
+     * <pre>
+     * border TOP top-color: #123; top-style: solid; top-width: 456px;
+     * </pre>
+     */
     @Override
     public final String toString() {
-        return this.edge + " " + this.textStyle;
+        return this.getClass()
+            .getSimpleName()
+            .toLowerCase() +
+            " " +
+            this.edge +
+            " " +
+            this.text();
     }
 
     // HasText..........................................................................................................
 
+    /**
+     * Returns a text representation without the redundant prefix of border, margin or padding.
+     * <pre>
+     * border-top-color: #111; border-top-style: SOLID; border-top-width: 22px;
+     * top-color: #111; top-style: SOLID; top-width: 22px;
+     *
+     * margin-top: 1px;
+     * top: 1px;
+     * </pre>
+     */
     @Override
-    public String text() {
-        return this.textStyle.text();
+    public final String text() {
+        if (null == this.text) {
+            this.text = this.textStyle.toText(
+                (n) -> n.value()
+                    .substring(
+                        this.textPrefixLength()
+                    )
+            );
+        }
+        return this.text;
     }
+
+    private String text;
+
+    /**
+     * The length of the prefix of each {@link TextStylePropertyName}. This will be used to remove the prefix when
+     * creating the {@link #text()} and {@link #toString()}.
+     */
+    abstract int textPrefixLength();
 }
