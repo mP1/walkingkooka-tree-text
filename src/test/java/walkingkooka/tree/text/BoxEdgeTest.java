@@ -162,6 +162,146 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         assertSame(expected, edge.flip(), () -> edge + " flip");
     }
 
+    // isTextStyleProperty..............................................................................................
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeTopAndBorderTopColor() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.TOP,
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeTopAndBorderTopStyle() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.TOP,
+            TextStylePropertyName.BORDER_TOP_STYLE,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeTopAndBorderTopWidth() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.TOP,
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeRightAndBorderTopWidth() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.RIGHT,
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeLeftAndBorderRightWidth() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.LEFT,
+            TextStylePropertyName.BORDER_RIGHT_WIDTH,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeLeftAndMargin() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.LEFT,
+            TextStylePropertyName.MARGIN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeLeftAndPadding() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.LEFT,
+            TextStylePropertyName.PADDING,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndBorderTopWidth() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndBorderRightWidth() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.BORDER_RIGHT_WIDTH,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndBorderBottomColor() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndColor() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.COLOR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndMargin() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.MARGIN,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndMarginLeft() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.MARGIN_LEFT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextStylePropertyBoxEdgeAllAndPaddingLeft() {
+        this.isTextStylePropertyAndCheck(
+            BoxEdge.ALL,
+            TextStylePropertyName.PADDING_LEFT,
+            true
+        );
+    }
+
+    private void isTextStylePropertyAndCheck(final BoxEdge edge,
+                                             final TextStylePropertyName<?> propertyName,
+                                             final boolean expected) {
+        this.checkEquals(
+            expected,
+            edge.isTextStyleProperty(propertyName),
+            () -> edge + " isTextStyleProperty " + propertyName
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<BoxEdge> type() {
         return BoxEdge.class;

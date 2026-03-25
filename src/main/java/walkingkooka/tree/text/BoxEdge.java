@@ -54,6 +54,13 @@ public enum BoxEdge {
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_BOTTOM;
         }
+
+        @Override
+        boolean isTextStyleProperty(final String propertyName) {
+            return propertyName.startsWith("border-top") ||
+                propertyName.startsWith("margin-top") ||
+                propertyName.startsWith("padding-top");
+        }
     },
     LEFT {
         @Override
@@ -84,6 +91,13 @@ public enum BoxEdge {
         @Override
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_LEFT;
+        }
+
+        @Override
+        boolean isTextStyleProperty(final String propertyName) {
+            return propertyName.startsWith("border-left") ||
+                propertyName.startsWith("margin-left") ||
+                propertyName.startsWith("padding-left");
         }
     },
     RIGHT {
@@ -116,6 +130,13 @@ public enum BoxEdge {
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_RIGHT;
         }
+
+        @Override
+        boolean isTextStyleProperty(final String propertyName) {
+            return propertyName.startsWith("border-right") ||
+                propertyName.startsWith("margin-right") ||
+                propertyName.startsWith("padding-right");
+        }
     },
     TOP {
         @Override
@@ -146,6 +167,13 @@ public enum BoxEdge {
         @Override
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING_TOP;
+        }
+
+        @Override
+        boolean isTextStyleProperty(final String propertyName) {
+            return propertyName.startsWith("border-top") ||
+                propertyName.startsWith("margin-top") ||
+                propertyName.startsWith("padding-top");
         }
     },
 
@@ -178,6 +206,13 @@ public enum BoxEdge {
         @Override
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
             return TextStylePropertyName.PADDING;
+        }
+
+        @Override
+        boolean isTextStyleProperty(final String propertyName) {
+            return propertyName.startsWith("border") ||
+                propertyName.startsWith("margin") ||
+                propertyName.startsWith("padding");
         }
     };
 
@@ -236,4 +271,16 @@ public enum BoxEdge {
     public abstract TextStylePropertyName<Length<?>> marginPropertyName();
 
     public abstract TextStylePropertyName<Length<?>> paddingPropertyName();
+
+    /**
+     * Tests if the given {@link TextStylePropertyName} matches this {@link BoxEdge}.
+     * {@link #ALL} will match all properties, {@link #TOP} will only match properties like {@link TextStylePropertyName#BORDER_TOP_WIDTH} etc.
+     */
+    final boolean isTextStyleProperty(final TextStylePropertyName<?> propertyName) {
+        return this.isTextStyleProperty(
+            propertyName.value()
+        );
+    }
+
+    abstract boolean isTextStyleProperty(final String propertyName);
 }
