@@ -73,7 +73,7 @@ abstract class BorderMarginPadding implements HasTextStyle,
     final <V> BorderMarginPadding setProperty(final TextStylePropertyName<V> propertyName,
                                               final Optional<V> value) {
         if (false == this.isProperty(propertyName)) {
-            throw new IllegalArgumentException("Invalid property " + propertyName);
+            throw this.invalidTextStylePropertyNameException(propertyName);
         }
 
         final TextStyle before = this.textStyle;
@@ -90,6 +90,8 @@ abstract class BorderMarginPadding implements HasTextStyle,
     }
 
     abstract boolean isProperty(final TextStylePropertyName<?> propertyName);
+
+    abstract InvalidTextStylePropertyNameException invalidTextStylePropertyNameException(final TextStylePropertyName<?> propertyName);
 
     // edge........................................................................................................
 

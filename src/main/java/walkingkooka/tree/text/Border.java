@@ -56,6 +56,11 @@ public final class Border extends BorderMarginPadding {
         return propertyName.isBorder();
     }
 
+    @Override
+    InvalidTextStylePropertyNameException invalidTextStylePropertyNameException(final TextStylePropertyName<?> propertyName) {
+        return InvalidTextStylePropertyNameException.border(propertyName);
+    }
+
     public Optional<Color> color() {
         return this.textStyle.get(
             this.edge.borderColorPropertyName()

@@ -58,6 +58,11 @@ public final class Padding extends BorderMarginPadding {
     }
 
     @Override
+    InvalidTextStylePropertyNameException invalidTextStylePropertyNameException(final TextStylePropertyName<?> propertyName) {
+        return InvalidTextStylePropertyNameException.padding(propertyName);
+    }
+
+    @Override
     public Padding setEdge(final BoxEdge edge) {
         return this.setEdge0(edge)
             .cast();
