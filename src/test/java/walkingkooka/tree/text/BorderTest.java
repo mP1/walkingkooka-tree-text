@@ -212,7 +212,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                         TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
                 )
             ),
-            "BOTTOM {border-right-color=#123456, border-right-style=DOTTED}"
+            "border BOTTOM right-color: #123456; right-style: dotted;"
         );
     }
 
@@ -226,7 +226,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                         TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
                 )
             ),
-            "TOP {border-right-color=#123456, border-right-style=DOTTED}"
+            "border TOP right-color: #123456; right-style: dotted;"
         );
     }
 
@@ -238,7 +238,33 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                 BorderStyle.DASHED,
                 Length.pixel(2.0)
             ).border(BoxEdge.ALL),
-            "ALL {border-bottom-color=black, border-bottom-style=DASHED, border-bottom-width=2px, border-left-color=black, border-left-style=DASHED, border-left-width=2px, border-right-color=black, border-right-style=DASHED, border-right-width=2px, border-top-color=black, border-top-style=DASHED, border-top-width=2px}"
+            "border ALL bottom-color: black; bottom-style: dashed; bottom-width: 2px; left-color: black; left-style: dashed; left-width: 2px; right-color: black; right-style: dashed; right-width: 2px; top-color: black; top-style: dashed; top-width: 2px;"
+        );
+    }
+
+    // text.............................................................................................................
+
+    @Test
+    public void testTextWithAll() {
+        this.textAndCheck(
+            TextStyle.EMPTY.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                Length.pixel(2.0)
+            ).border(BoxEdge.ALL),
+            "bottom-color: black; bottom-style: dashed; bottom-width: 2px; left-color: black; left-style: dashed; left-width: 2px; right-color: black; right-style: dashed; right-width: 2px; top-color: black; top-style: dashed; top-width: 2px;"
+        );
+    }
+
+    @Test
+    public void testTextWithTop() {
+        this.textAndCheck(
+            TextStyle.EMPTY.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                Length.pixel(2.0)
+            ).border(BoxEdge.TOP),
+            "top-color: black; top-style: dashed; top-width: 2px;"
         );
     }
 

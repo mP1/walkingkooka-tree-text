@@ -70,4 +70,11 @@ public final class Margin extends BorderMarginPadding {
             textStyle
         );
     }
+
+    // HasText..........................................................................................................
+
+    @Override
+    int textPrefixLength() {
+        return 7; // "margin-".length
+    }
 }
