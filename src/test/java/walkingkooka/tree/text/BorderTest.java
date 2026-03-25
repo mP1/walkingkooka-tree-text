@@ -299,7 +299,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     public void testParseInvalidBorderTextStylePropertyFails() {
         this.parseStringFails(
             "top-invalid: 1px;",
-            new IllegalArgumentException("Unknown text style property name: top-invalid")
+            new UnknownTextStylePropertyNameException("top-invalid")
         );
     }
 
