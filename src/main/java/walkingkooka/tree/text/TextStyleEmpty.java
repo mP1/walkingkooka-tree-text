@@ -25,6 +25,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * A {@link TextStyle} with style and values.
@@ -196,6 +197,11 @@ final class TextStyleEmpty extends TextStyle {
     @Override
     Padding padding(final BoxEdge edge) {
         return edge.emptyPadding;
+    }
+
+    @Override
+    TextStyle filter(final Predicate<TextStylePropertyName<?>> filter) {
+        return this;
     }
 
     // TreePrintable....................................................................................................

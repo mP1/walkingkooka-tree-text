@@ -57,7 +57,10 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final Border different = border.setColor(Optional.of(differentColor));
 
         assertNotSame(border, different);
-        this.checkEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, differentColor), different.textStyle());
+        this.textStyleAndCheck(
+            different,
+            this.textStyle(TextStylePropertyName.BORDER_LEFT_COLOR, differentColor)
+        );
     }
 
     @Test
@@ -77,9 +80,14 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.put(TextStylePropertyName.BORDER_RIGHT_COLOR, differentColor);
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_RIGHT_COLOR,
+                    differentColor
+                )
+            )
         );
     }
 
@@ -99,9 +107,10 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         assertNotSame(border, different);
 
         properties.remove(TextStylePropertyName.BORDER_RIGHT_COLOR);
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY
         );
     }
 
@@ -112,6 +121,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final BorderStyle style = BorderStyle.DOTTED;
         final BoxEdge edge = BoxEdge.BOTTOM;
         final Border border = edge.border(this.textStyle(TextStylePropertyName.BORDER_BOTTOM_STYLE, style));
+
         this.checkEquals(Optional.of(style), border.style(), "style");
     }
 
@@ -133,7 +143,13 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         final Border different = border.setStyle(Optional.of(differentStyle));
 
         assertNotSame(border, different);
-        this.checkEquals(this.textStyle(TextStylePropertyName.BORDER_LEFT_STYLE, differentStyle), different.textStyle());
+        this.textStyleAndCheck(
+            different,
+            this.textStyle(
+                TextStylePropertyName.BORDER_LEFT_STYLE,
+                differentStyle
+            )
+        );
     }
 
     @Test
@@ -152,10 +168,14 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         assertNotSame(border, different);
 
-        properties.put(TextStylePropertyName.BORDER_RIGHT_STYLE, differentStyle);
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY.setValues(
+                Maps.of(
+                    TextStylePropertyName.BORDER_RIGHT_STYLE,
+                    differentStyle
+                )
+            )
         );
     }
 
@@ -174,10 +194,9 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
         assertNotSame(border, different);
 
-        properties.remove(TextStylePropertyName.BORDER_RIGHT_STYLE);
-        this.checkEquals(
-            TextStyle.EMPTY.setValues(properties),
-            different.textStyle()
+        this.textStyleAndCheck(
+            different,
+            TextStyle.EMPTY
         );
     }
 

@@ -110,7 +110,7 @@ abstract class BorderMarginPadding implements HasTextStyle,
             this :
             this.replace(
                 Objects.requireNonNull(edge, "edge"),
-                this.textStyle
+                this.textStyle.filter(edge::isTextStyleProperty)
             );
 
     }

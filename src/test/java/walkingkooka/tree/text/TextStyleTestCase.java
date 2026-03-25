@@ -340,6 +340,58 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
     }
 
+    // border. .........................................................................................................
+
+    final void borderAndCheck(final String textStyle,
+                              final BoxEdge boxEdge) {
+        this.borderAndCheck(
+            TextStyle.parse(textStyle),
+            boxEdge
+        );
+    }
+
+    final void borderAndCheck(final TextStyle textStyle,
+                              final BoxEdge boxEdge) {
+        this.borderAndCheck(
+            textStyle,
+            boxEdge,
+            Border.with(
+                boxEdge,
+                textStyle
+            )
+        );
+    }
+
+    final void borderAndCheck(final String textStyle,
+                              final BoxEdge boxEdge,
+                              final String expected) {
+        this.borderAndCheck(
+            TextStyle.parse(textStyle),
+            boxEdge,
+            Border.with(
+                boxEdge,
+                TextStyle.parse(expected)
+            )
+        );
+    }
+
+    final void borderAndCheck(final TextStyle textStyle,
+                              final BoxEdge boxEdge,
+                              final Border expected) {
+        if (textStyle.equals(expected)) {
+            assertSame(
+                expected,
+                textStyle.border(boxEdge)
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                textStyle.border(boxEdge),
+                () -> textStyle + " border " + boxEdge
+            );
+        }
+    }
+
     // helpers .........................................................................................................
 
     final <TT extends TextNode> TT makeStyleNameParent(final TT child) {
