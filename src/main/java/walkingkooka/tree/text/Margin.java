@@ -24,6 +24,16 @@ import java.util.Optional;
  */
 public final class Margin extends BorderMarginPadding {
 
+    public static Margin parse(final String text) {
+        return with(
+            BoxEdge.ALL,
+            TextStyle.parse0(
+                text,
+                PREFIX
+            )
+        );
+    }
+
     static Margin with(final BoxEdge edge,
                        final TextStyle textStyle) {
         return new Margin(
@@ -75,6 +85,10 @@ public final class Margin extends BorderMarginPadding {
 
     @Override
     int textPrefixLength() {
-        return 7; // "margin-".length
+        return PREFIX_LENGTH;
     }
+
+    private final static String PREFIX = "margin-";
+
+    private final static int PREFIX_LENGTH = PREFIX.length();
 }

@@ -19,8 +19,10 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.test.ParseStringTesting;
 
-public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
+public final class MarginTest extends BorderMarginPaddingTestCase<Margin> 
+    implements ParseStringTesting<Margin> {
 
     // toString.........................................................................................................
 
@@ -71,6 +73,69 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge) {
         return edge.marginPropertyName();
     }
+
+    // parse............................................................................................................
+
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseEmptyString() {
+        this.parseStringAndCheck(
+            "",
+            TextStyle.EMPTY.margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithPrefix() {
+        final String text = "margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;";
+
+        this.parseStringAndCheck(
+            text,
+            TextStyle.parse(text)
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPrefix() {
+        final String text = "margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;";
+
+        this.parseStringAndCheck(
+            text.replace("margin-", ""),
+            TextStyle.parse(text)
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithAndWithoutPrefix() {
+        this.parseStringAndCheck(
+            "margin-top: 1px; margin-right: 2px; bottom: 3px; right: 4px;",
+            TextStyle.parse("margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;")
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Override
+    public Margin parseString(final String text) {
+        return Margin.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
+    }
+    
+    // class............................................................................................................
 
     @Override
     public Class<Margin> type() {
