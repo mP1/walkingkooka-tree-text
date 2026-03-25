@@ -24,6 +24,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 
 import java.util.Map;
@@ -37,7 +38,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     HashCodeEqualsDefinedTesting2<T>,
     ToStringTesting<T>,
     HasTextStyleTesting,
-    HasTextTesting {
+    HasTextTesting,
+    ParseStringTesting<T> {
 
     BorderMarginPaddingTestCase() {
         super();
@@ -238,6 +240,18 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
             borderMarginPadding,
             textStyle
         );
+    }
+
+    // parse............................................................................................................
+
+    @Override
+    public final Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public final RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
     }
 
     // ClassTesting.....................................................................................................
