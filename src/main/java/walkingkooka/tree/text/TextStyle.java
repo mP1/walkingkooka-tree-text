@@ -113,7 +113,19 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     static TextStyle parse0(final String text,
-                            final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
+                            final String prefix) {
+        return parse0(
+            text,
+            (String propertyName) -> TextStylePropertyName.with(
+                propertyName.startsWith(prefix) ?
+                    propertyName :
+                    prefix + propertyName
+            )
+        );
+    }
+
+    private static TextStyle parse0(final String text,
+                                    final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
         // WHITESPACE, TextStylePropertyName, WHITESPACE, COLON,
         // WHITESPACE VALUE WHITESPACE
         // COMMA | SEMI-COLON

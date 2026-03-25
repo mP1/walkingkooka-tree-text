@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.test.ParseStringTesting;
 
 import java.util.Map;
 import java.util.Optional;
@@ -27,7 +28,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
+public final class BorderTest extends BorderMarginPaddingTestCase<Border>
+    implements ParseStringTesting<Border> {
 
     // rgb............................................................................................................
 
@@ -279,6 +281,67 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge) {
         return edge.borderWidthPropertyName();
     }
+
+    // parse............................................................................................................
+
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseEmptyString() {
+        this.parseStringAndCheck(
+            "",
+            TextStyle.EMPTY.border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithPrefix() {
+        final String text = "border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;";
+
+        this.parseStringAndCheck(
+            text,
+            TextStyle.parse(text)
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPrefix() {
+        this.parseStringAndCheck(
+            "top-color: BLACK; right-style: solid; bottom-width: 1px; left-color: WHITE;",
+            TextStyle.parse("border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;")
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithAndWithoutPrefix() {
+        this.parseStringAndCheck(
+            "border-top-color: BLACK; right-style: solid; bottom-width: 1px; left-color: WHITE;",
+            TextStyle.parse("border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;")
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Override
+    public Border parseString(final String text) {
+        return Border.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<Border> type() {
