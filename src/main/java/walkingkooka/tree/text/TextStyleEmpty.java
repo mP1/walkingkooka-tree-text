@@ -23,6 +23,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -185,18 +186,21 @@ final class TextStyleEmpty extends TextStyle {
     // BoxEdge........................................................................................................
 
     @Override
-    Border border(final BoxEdge edge) {
-        return edge.emptyBorder;
+    public Border border(final BoxEdge boxEdge) {
+        Objects.requireNonNull(boxEdge, "boxEdge");
+        return boxEdge.emptyBorder;
     }
 
     @Override
-    Margin margin(final BoxEdge edge) {
-        return edge.emptyMargin;
+    public Margin margin(final BoxEdge boxEdge) {
+        Objects.requireNonNull(boxEdge, "boxEdge");
+        return boxEdge.emptyMargin;
     }
 
     @Override
-    Padding padding(final BoxEdge edge) {
-        return edge.emptyPadding;
+    public Padding padding(final BoxEdge boxEdge) {
+        Objects.requireNonNull(boxEdge, "boxEdge");
+        return boxEdge.emptyPadding;
     }
 
     @Override

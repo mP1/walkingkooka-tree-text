@@ -609,11 +609,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     // BoxEdge........................................................................................................
 
-    abstract Border border(final BoxEdge edge);
+    abstract public Border border(final BoxEdge edge);
 
-    abstract Margin margin(final BoxEdge edge);
+    abstract public Margin margin(final BoxEdge edge);
 
-    abstract Padding padding(final BoxEdge edge);
+    abstract public Padding padding(final BoxEdge edge);
 
     abstract TextStyle filter(final Predicate<TextStylePropertyName<?>> filter);
 
