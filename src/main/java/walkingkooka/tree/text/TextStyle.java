@@ -533,9 +533,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             }
         }
 
-        return copy.isEmpty() ?
-            TextStyle.EMPTY :
-            this.setValuesWithCopy(copy);
+        return this.setValuesWithCopy(copy);
 
     }
 

@@ -88,13 +88,21 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
-        final Map<TextStylePropertyName<?>, Object> oldValuesMap = this.value();
+        final TextStyle after;
 
-        return oldValuesMap.equals(values) ?
-            this :
-            TextStyleNonEmpty.with(
-                TextStylePropertiesMap.with(values)
-            );
+        if (values.isEmpty()) {
+            after = EMPTY;
+        } else {
+            final Map<TextStylePropertyName<?>, Object> oldValuesMap = this.value();
+
+            after = oldValuesMap.equals(values) ?
+                this :
+                TextStyleNonEmpty.with(
+                    TextStylePropertiesMap.with(values)
+                );
+        }
+
+        return after;
     }
 
     final TextStylePropertiesMap value;
