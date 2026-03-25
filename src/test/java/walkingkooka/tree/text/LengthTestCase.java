@@ -26,6 +26,7 @@ import walkingkooka.reflect.IsMethodTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
 import java.util.Optional;
@@ -39,7 +40,8 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
     JsonNodeMarshallingTesting<L>,
     ParseStringTesting<L>,
     ToStringTesting<L>,
-    TypeNameTesting<L> {
+    TypeNameTesting<L>,
+    HasTextTesting {
 
     LengthTestCase() {
         super();
@@ -61,6 +63,16 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
     public final void testUnit() {
         final L length = this.createLength();
         this.checkEquals(this.unit(), length.unit(), "unit");
+    }
+
+    @Test
+    public final void testText() {
+        final L length = this.createLength();
+
+        this.textAndCheck(
+            length,
+            length.toString()
+        );
     }
 
     abstract L createLength();

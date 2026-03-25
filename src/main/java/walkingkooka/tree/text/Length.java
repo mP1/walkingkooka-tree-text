@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -31,7 +32,7 @@ import java.util.function.Function;
 /**
  * Base class for any measure.
  */
-public abstract class Length<V> {
+public abstract class Length<V> implements HasText {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.
@@ -236,5 +237,12 @@ public abstract class Length<V> {
             Length::unmarshall,
             Length::marshall,
             Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
+    public final String text() {
+        return this.toString();
     }
 }
