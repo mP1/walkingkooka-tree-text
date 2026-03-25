@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,7 +40,7 @@ public final class Padding extends BorderMarginPadding {
     static Padding with(final BoxEdge edge,
                         final TextStyle textStyle) {
         return new Padding(
-            edge,
+            Objects.requireNonNull(edge, "edge"),
             textStyle
         );
     }

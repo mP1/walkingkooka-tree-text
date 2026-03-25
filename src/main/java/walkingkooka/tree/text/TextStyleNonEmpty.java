@@ -556,7 +556,7 @@ final class TextStyleNonEmpty extends TextStyle {
     // BoxEdge........................................................................................................
 
     @Override
-    Border border(final BoxEdge edge) {
+    public Border border(final BoxEdge edge) {
         return Border.with(
             edge,
             this.filter(
@@ -566,7 +566,7 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    Margin margin(final BoxEdge edge) {
+    public Margin margin(final BoxEdge edge) {
         return Margin.with(
             edge,
             this.filter(
@@ -576,7 +576,7 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    Padding padding(final BoxEdge edge) {
+    public Padding padding(final BoxEdge edge) {
         return Padding.with(
             edge,
             this.filter(

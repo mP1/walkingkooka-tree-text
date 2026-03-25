@@ -340,7 +340,16 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
     }
 
-    // border. .........................................................................................................
+    // border...........................................................................................................
+
+    @Test
+    public void testBorderWithNullBoxEdgeFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .border(null)
+        );
+    }
 
     final void borderAndCheck(final String textStyle,
                               final BoxEdge boxEdge) {
@@ -390,6 +399,28 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                 () -> textStyle + " border " + boxEdge
             );
         }
+    }
+
+    // margin...........................................................................................................
+
+    @Test
+    public void testMarginWithNullBoxEdgeFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .margin(null)
+        );
+    }
+
+    // padding..........................................................................................................
+
+    @Test
+    public void testPaddingWithNullBoxEdgeFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .margin(null)
+        );
     }
 
     // helpers .........................................................................................................
