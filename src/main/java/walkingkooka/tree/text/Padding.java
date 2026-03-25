@@ -29,7 +29,8 @@ public final class Padding extends BorderMarginPadding {
             BoxEdge.ALL,
             TextStyle.parse0(
                 text,
-                PREFIX
+                PREFIX,
+                TextStylePropertyName::isPadding
             )
         );
     }

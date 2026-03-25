@@ -903,6 +903,20 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         return textStylePropertyName;
     }
 
+    static TextStylePropertyName<?> withOptionalPrefix(final String name,
+                                                       final String prefix) {
+        Objects.requireNonNull(name, "name");
+
+        TextStylePropertyName<?> textStylePropertyName = CONSTANTS.get(
+            prefix.concat(name)
+        );
+        if(null == textStylePropertyName) {
+            textStylePropertyName = with(name);
+        }
+
+        return textStylePropertyName;
+    }
+
     private TextStylePropertyName(final String name,
                                   final TextStylePropertyValueHandler<T> handler,
                                   final BiConsumer<T, TextStyleVisitor> visitor,

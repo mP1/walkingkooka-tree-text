@@ -26,6 +26,7 @@ import walkingkooka.color.Color;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
@@ -113,14 +114,32 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     static TextStyle parse0(final String text,
-                            final String prefix) {
+                            final String prefix,
+                            final Function<TextStylePropertyName<?>, Boolean> checker) {
         return parse0(
             text,
-            (String propertyName) -> TextStylePropertyName.with(
-                propertyName.startsWith(prefix) ?
-                    propertyName :
-                    prefix + propertyName
-            )
+            (String propertyName) -> {
+                final TextStylePropertyName<?> textStylePropertyName = TextStylePropertyName.withOptionalPrefix(
+                    propertyName,
+                    prefix
+                );
+
+                if (false == checker.apply(textStylePropertyName)) {
+                    // Invalid border property "margin-top"
+                    throw new IllegalArgumentException(
+                        "Invalid " +
+                            CharSequences.subSequence(
+                                prefix,
+                                0,
+                                -1
+                            ) +
+                            " property " +
+                            CharSequences.quoteAndEscape(propertyName)
+                    );
+                }
+
+                return textStylePropertyName;
+            }
         );
     }
 

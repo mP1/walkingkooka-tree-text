@@ -65,10 +65,18 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
+    public void testParseInvalidPaddingTextStylePropertyFails() {
+        this.parseStringFails(
+            "top-invalid: 1px;",
+            new IllegalArgumentException("Unknown text style property name: top-invalid")
+        );
+    }
+
+    @Test
     public void testParseMarginFails() {
         this.parseStringFails(
             "top: 1px; margin-top: 2px",
-            new IllegalArgumentException("Unknown text style property name: padding-margin-top")
+            new IllegalArgumentException("Invalid padding property \"margin-top\"")
         );
     }
 
