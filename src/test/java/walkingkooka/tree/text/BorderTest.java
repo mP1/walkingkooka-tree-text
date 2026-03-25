@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.test.ParseStringTesting;
 
 import java.util.Map;
 import java.util.Optional;
@@ -28,8 +27,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class BorderTest extends BorderMarginPaddingTestCase<Border>
-    implements ParseStringTesting<Border> {
+public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
     // rgb............................................................................................................
 
@@ -329,16 +327,6 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border>
     @Override
     public Border parseString(final String text) {
         return Border.parse(text);
-    }
-
-    @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
-        return thrown;
-    }
-
-    @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
     }
 
     // class............................................................................................................

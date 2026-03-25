@@ -57,6 +57,65 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         );
     }
 
+    // parse............................................................................................................
+
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseMarginFails() {
+        this.parseStringFails(
+            "top: 1px; margin-top: 2px",
+            new IllegalArgumentException("Unknown text style property name: padding-margin-top")
+        );
+    }
+
+    @Test
+    public void testParseEmptyString() {
+        this.parseStringAndCheck(
+            "",
+            TextStyle.EMPTY.padding(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithPrefix() {
+        final String text = "padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-right: 4px;";
+
+        this.parseStringAndCheck(
+            text,
+            TextStyle.parse(text)
+                .padding(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPrefix() {
+        final String text = "padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-right: 4px;";
+
+        this.parseStringAndCheck(
+            text.replace("padding-", ""),
+            TextStyle.parse(text)
+                .padding(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithAndWithoutPrefix() {
+        this.parseStringAndCheck(
+            "padding-top: 1px; padding-right: 2px; bottom: 3px; right: 4px;",
+            TextStyle.parse("padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-right: 4px;")
+                .padding(BoxEdge.ALL)
+        );
+    }
+
+    @Override
+    public Padding parseString(final String text) {
+        return Padding.parse(text);
+    }
+
     // helpers..........................................................................................................
 
     @Override
