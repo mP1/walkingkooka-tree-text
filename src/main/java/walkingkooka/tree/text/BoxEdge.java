@@ -57,9 +57,9 @@ public enum BoxEdge {
 
         @Override
         boolean isTextStyleProperty(final String propertyName) {
-            return propertyName.startsWith("border-top") ||
-                propertyName.startsWith("margin-top") ||
-                propertyName.startsWith("padding-top");
+            return propertyName.startsWith("border-bottom") ||
+                propertyName.startsWith("margin-bottom") ||
+                propertyName.startsWith("padding-bottom");
         }
     },
     LEFT {
