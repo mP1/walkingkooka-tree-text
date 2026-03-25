@@ -296,6 +296,22 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
+    public void testParseInvalidBorderTextStylePropertyFails() {
+        this.parseStringFails(
+            "top-invalid: 1px;",
+            new IllegalArgumentException("Unknown text style property name: top-invalid")
+        );
+    }
+
+    @Test
+    public void testParsePaddingPropertyFails() {
+        this.parseStringFails(
+            "top-width: 1px; padding-top: 2px",
+            new IllegalArgumentException("Invalid border property \"padding-top\"")
+        );
+    }
+
+    @Test
     public void testParseWithPrefix() {
         final String text = "border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;";
 
