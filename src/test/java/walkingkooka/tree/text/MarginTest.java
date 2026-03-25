@@ -83,7 +83,7 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     public void testParseInvalidMarginTextStylePropertyFails() {
         this.parseStringFails(
             "top-invalid: 1px;",
-            new IllegalArgumentException("Unknown text style property name: top-invalid")
+            new UnknownTextStylePropertyNameException("top-invalid")
         );
     }
 

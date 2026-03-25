@@ -897,7 +897,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
         final TextStylePropertyName<?> textStylePropertyName = CONSTANTS.get(name);
         if(null == textStylePropertyName) {
-            throw new IllegalArgumentException("Unknown text style property name: " + name);
+            throw new UnknownTextStylePropertyNameException(name);
         }
 
         return textStylePropertyName;
