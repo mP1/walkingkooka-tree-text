@@ -57,15 +57,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         }
     }
 
-    @Test
-    public final void testWithNonEmptyTextStyle() {
-        final TextStyle textStyle = this.textStyle();
-
-        for (BoxEdge edge : BoxEdge.values()) {
-            this.check(this.createBorderMarginPadding(edge, textStyle), edge, textStyle);
-        }
-    }
-
     // edge........................................................................................................
 
     @Test
@@ -94,7 +85,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final T borderMarginPadding = this.createBorderMarginPadding(BoxEdge.LEFT, textStyle);
         final BorderMarginPadding different = borderMarginPadding.setEdge(BoxEdge.RIGHT);
         assertNotSame(borderMarginPadding, different);
-        this.check(different, BoxEdge.RIGHT, textStyle);
+        this.check(
+            different,
+            BoxEdge.RIGHT,
+            TextStyle.EMPTY
+        );
     }
 
     // width............................................................................................................
@@ -134,21 +129,46 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testSetWidthDifferent2() {
+        final TextStylePropertyName<Color> color = TextStylePropertyName.COLOR;
+
         final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-        properties.put(TextStylePropertyName.COLOR, Color.parseRgb("#333"));
+        properties.put(
+            color,
+            Color.BLACK // removed
+        );
 
         final BoxEdge edge = BoxEdge.RIGHT;
+
+        final TextStylePropertyName<Length<?>> widthPropertyName = this.widthPropertyName(edge);
+
+        properties.put(
+            widthPropertyName,
+            Length.pixel(1.0)
+        );
+
+
         final T borderMarginPadding = this.createBorderMarginPadding(
             edge,
             TextStyle.EMPTY.setValues(properties)
         );
 
         final Length<?> differentWidth = Length.pixel(99.0);
-        final BorderMarginPadding different = borderMarginPadding.setWidth(Optional.of(differentWidth));
+        final BorderMarginPadding different = borderMarginPadding.setWidth(
+            Optional.of(differentWidth)
+        );
 
-        assertNotSame(borderMarginPadding, different);
+        assertNotSame(
+            borderMarginPadding,
+            different
+        );
 
-        properties.put(this.widthPropertyName(edge), differentWidth);
+        properties.put(
+            widthPropertyName,
+            differentWidth
+        );
+
+        properties.remove(color);
+
         this.textStyleAndCheck(
             different,
             TextStyle.EMPTY.setValues(properties)
@@ -172,11 +192,9 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
         assertNotSame(borderMarginPadding, different);
 
-        properties.remove(this.widthPropertyName(edge));
-
         this.textStyleAndCheck(
             different,
-            TextStyle.EMPTY.setValues(properties)
+            TextStyle.EMPTY
         );
     }
 
@@ -187,13 +205,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final TextStyle textStyle = this.textStyle();
         this.checkNotEquals(this.createBorderMarginPadding(BoxEdge.LEFT, textStyle),
             this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
-    }
-
-    @Test
-    public final void testEqualsDifferentTextStyle() {
-        final BoxEdge edge = BoxEdge.RIGHT;
-        this.checkNotEquals(this.createBorderMarginPadding(edge, TextStyle.EMPTY),
-            this.createBorderMarginPadding(edge, this.textStyle()));
     }
 
     // helpers..........................................................................................................

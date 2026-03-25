@@ -41,6 +41,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
@@ -582,6 +583,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract Margin margin(final BoxEdge edge);
 
     abstract Padding padding(final BoxEdge edge);
+
+    abstract TextStyle filter(final Predicate<TextStylePropertyName<?>> filter);
 
     // Object...........................................................................................................
 

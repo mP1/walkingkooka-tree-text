@@ -335,6 +335,48 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // border...........................................................................................................
+
+    @Test
+    public void testBorderWithAll() {
+        this.borderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.ALL
+        );
+    }
+
+    @Test
+    public void testBorderWithTop() {
+        this.borderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBorderWithRight() {
+        this.borderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.RIGHT
+        );
+    }
+
+    @Test
+    public void testBorderWithBottom() {
+        this.borderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.BOTTOM
+        );
+    }
+
+    @Test
+    public void testBorderWithLeft() {
+        this.borderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.LEFT
+        );
+    }
+
     // getMargin........................................................................................................
 
     @Test

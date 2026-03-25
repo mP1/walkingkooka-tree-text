@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
@@ -555,17 +557,48 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     Border border(final BoxEdge edge) {
-        return Border.with(edge, this);
+        return Border.with(
+            edge,
+            this.filter(
+                n -> n.isBorder() && edge.isTextStyleProperty(n)
+            )
+        );
     }
 
     @Override
     Margin margin(final BoxEdge edge) {
-        return Margin.with(edge, this);
+        return Margin.with(
+            edge,
+            this.filter(
+                n -> n.isMargin() && edge.isTextStyleProperty(n)
+            )
+        );
     }
 
     @Override
     Padding padding(final BoxEdge edge) {
-        return Padding.with(edge, this);
+        return Padding.with(
+            edge,
+            this.filter(
+                n -> n.isPadding() && edge.isTextStyleProperty(n)
+            )
+        );
+    }
+
+    @Override
+    TextStyle filter(final Predicate<TextStylePropertyName<?>> filter) {
+        return setValuesWithCopy(
+            this.valuesMutableCopy()
+                .entrySet()
+                .stream()
+                .filter(nameAndValue -> filter.test(nameAndValue.getKey()))
+                .collect(
+                    Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                    )
+                )
+        );
     }
 
     // TreePrintable....................................................................................................

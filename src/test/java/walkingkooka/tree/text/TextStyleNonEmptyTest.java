@@ -1218,6 +1218,65 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // border...........................................................................................................
+
+    @Test
+    public void testBorderWithAllNoneFiltered() {
+        this.borderAndCheck(
+            "border-top-color: black; border-top-style: solid; border-left-width: 1px;",
+            BoxEdge.ALL
+        );
+    }
+
+    @Test
+    public void testBorderWithAllSomeFiltered() {
+        final String style = "border-top-color: black; border-top-style: solid; border-left-width: 1px;";
+
+        this.borderAndCheck(
+            style + "color: white; margin-left: 1px; padding-left: 2px;",
+            BoxEdge.ALL,
+            style
+        );
+    }
+
+    @Test
+    public void testBorderWithTop() {
+        this.borderAndCheck(
+            "border-top-color: white; border-right-color: black;",
+            BoxEdge.TOP,
+            "border-top-color: white;"
+        );
+    }
+
+    @Test
+    public void testBorderWithRight() {
+        final String style = "border-right-color: white; border-right-width: 1px; border-right-style: solid;";
+
+        this.borderAndCheck(
+            "border-top-color: black; color: black;" + style,
+            BoxEdge.RIGHT,
+            style
+        );
+    }
+
+    @Test
+    public void testBorderWithBottom() {
+        this.borderAndCheck(
+            "border-top-color: black; border-bottom-color: white; color: black;",
+            BoxEdge.BOTTOM,
+            "border-bottom-color: white;"
+        );
+    }
+
+    @Test
+    public void testBorderWithLeft() {
+        this.borderAndCheck(
+            "border-left-color: white; border-bottom-color: white; color: black; text-align: left",
+            BoxEdge.LEFT,
+            "border-left-color: white;"
+        );
+    }
+
     // getMargin...................................................................................................
 
     @Test
