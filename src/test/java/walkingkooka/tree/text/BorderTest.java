@@ -307,7 +307,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     public void testParsePaddingPropertyFails() {
         this.parseStringFails(
             "top-width: 1px; padding-top: 2px",
-            new IllegalArgumentException("Invalid border property \"padding-top\"")
+            InvalidTextStylePropertyNameException.border(TextStylePropertyName.PADDING_TOP)
         );
     }
 

@@ -91,7 +91,7 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     public void testParsePaddingPropertyFails() {
         this.parseStringFails(
             "top: 1px; padding-top: 2px",
-            new IllegalArgumentException("Invalid margin property \"padding-top\"")
+            InvalidTextStylePropertyNameException.margin(TextStylePropertyName.PADDING_TOP)
         );
     }
     
