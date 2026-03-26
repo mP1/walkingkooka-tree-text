@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 
@@ -27,6 +28,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
 
@@ -160,6 +162,145 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
 
     private void flipAndCheck(final BoxEdge edge, final BoxEdge expected) {
         assertSame(expected, edge.flip(), () -> edge + " flip");
+    }
+
+    // setBorder........................................................................................................
+
+    @Test
+    public void testSetBorderWithNullColorAllFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.setBorder(
+                null,
+                BorderStyle.DASHED,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithNullColorLeftFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.LEFT.setBorder(
+                null,
+                BorderStyle.DASHED,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithNullStyleAllFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.setBorder(
+                Color.BLACK,
+                null,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithNullStyleRightFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.RIGHT.setBorder(
+                Color.BLACK,
+                null,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithNullWidthAllFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithNullWidthTopFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderWithAll() {
+        this.setBorderAndCheck(
+            BoxEdge.ALL,
+            Color.BLACK,
+            BorderStyle.DASHED,
+            Length.pixel(2.0),
+            "top-color: black; top-style: dashed; top-width: 2.0px; right-color: black; right-style: dashed; right-width: 2.0px;" +
+                "bottom-color: black; bottom-style: dashed; bottom-width: 2.0px; left-color: black; left-style: dashed; left-width: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetBorderWithTop() {
+        this.setBorderAndCheck(
+            BoxEdge.TOP,
+            Color.BLACK,
+            BorderStyle.DASHED,
+            Length.pixel(2.0),
+            "top-color: black; top-style: dashed; top-width: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetBorderWithLeft() {
+        this.setBorderAndCheck(
+            BoxEdge.LEFT,
+            Color.BLACK,
+            BorderStyle.DASHED,
+            Length.pixel(2.0),
+            "left-color: black; left-style: dashed; left-width: 2.0px;"
+        );
+    }
+
+    private void setBorderAndCheck(final BoxEdge edge,
+                                   final Color color,
+                                   final BorderStyle style,
+                                   final Length<?> width,
+                                   final String expected) {
+        this.setBorderAndCheck(
+            edge,
+            color,
+            style,
+            width,
+            Border.parse(expected)
+                .setEdge(edge)
+        );
+    }
+
+    private void setBorderAndCheck(final BoxEdge edge,
+                                   final Color color,
+                                   final BorderStyle style,
+                                   final Length<?> width,
+                                   final Border expected) {
+        this.checkEquals(
+            expected,
+            edge.setBorder(
+                color,
+                style,
+                width
+            ),
+            () -> edge + " setBorder " + color + " " + style + " " + width
+        );
     }
 
     // isTextStyleProperty..............................................................................................

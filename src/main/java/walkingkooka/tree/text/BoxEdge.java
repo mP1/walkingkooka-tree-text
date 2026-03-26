@@ -232,6 +232,30 @@ public enum BoxEdge {
      */
     final Border emptyBorder = Border.with(this, TextStyle.EMPTY);
 
+    /**
+     * Creates a {@link Border} with this {@link BoxEdge} and the given {@link Color}, {@link BorderStyle}, {@link Length}.
+     */
+    public final Border setBorder(final Color color,
+                                  final BorderStyle style,
+                                  final Length<?> width) {
+        return ALL == this ?
+            TextStyle.EMPTY.setBorder(
+                color,
+                style,
+                width
+            ).border(this) :
+            TextStyle.EMPTY.set(
+                this.borderColorPropertyName(),
+                color
+            ).set(
+                this.borderStylePropertyName(),
+                style
+            ).set(
+                this.borderWidthPropertyName(),
+                width
+            ).border(this);
+    }
+
     // margin...........................................................................................................
 
     /**
