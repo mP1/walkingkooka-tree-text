@@ -265,6 +265,15 @@ public enum BoxEdge {
         ).margin(this);
     }
 
+    /**
+     * Creates a {@link Padding} with this {@link BoxEdge} and the given {@link Length}.
+     */
+    public final Padding setPadding(final Length<?> width) {
+        return TextStyle.EMPTY.setPadding(
+            width
+        ).padding(this);
+    }
+
     // margin...........................................................................................................
 
     /**
