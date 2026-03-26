@@ -53,6 +53,15 @@ public final class Border extends BorderMarginPadding {
     }
 
     @Override
+    public <V> Border setProperty(final TextStylePropertyName<V> propertyName,
+                                  final Optional<V> value) {
+        return this.setProperty0(
+            propertyName,
+            value
+        ).cast();
+    }
+
+    @Override
     boolean isProperty(final TextStylePropertyName<?> propertyName) {
         return propertyName.isBorder();
     }
@@ -69,7 +78,7 @@ public final class Border extends BorderMarginPadding {
     }
 
     public Border setColor(final Optional<Color> color) {
-        return this.setProperty(
+        return this.setProperty0(
             this.edge.borderColorPropertyName(),
             color
         ).cast();
@@ -88,7 +97,7 @@ public final class Border extends BorderMarginPadding {
     }
 
     public Border setStyle(final Optional<BorderStyle> style) {
-        return this.setProperty(
+        return this.setProperty0(
             this.edge.borderStylePropertyName(),
             style
         ).cast();

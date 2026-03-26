@@ -20,6 +20,10 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
     // toString.........................................................................................................
@@ -124,6 +128,51 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         return Padding.parse(text);
     }
 
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithInvalidFails() {
+        assertThrows(
+            InvalidTextStylePropertyNameException.class,
+            () -> Padding.parse("top: 1px;")
+                .setProperty(
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    Optional.of(
+                        Length.pixel(222.0)
+                    )
+                )
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Padding.parse("top: 1px;"),
+            TextStylePropertyName.PADDING_TOP,
+            Length.pixel(1.0)
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithReplaced() {
+        this.setPropertyAndCheck(
+            Padding.parse("top: 1px;"),
+            TextStylePropertyName.PADDING_TOP,
+            Length.pixel(2.0),
+            Padding.parse("top: 2px;")
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithAll() {
+        this.setPropertyAndCheck(
+            Padding.parse("top: 1px;"),
+            TextStylePropertyName.PADDING_BOTTOM,
+            Length.pixel(2.0),
+            Padding.parse("top: 1px; bottom: 2px;")
+        );
+    }
+    
     // helpers..........................................................................................................
 
     @Override
