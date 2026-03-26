@@ -54,6 +54,15 @@ public final class Margin extends BorderMarginPadding {
     }
 
     @Override
+    public <V> Margin setProperty(final TextStylePropertyName<V> propertyName,
+                                  final Optional<V> value) {
+        return this.setProperty0(
+            propertyName,
+            value
+        ).cast();
+    }
+
+    @Override
     boolean isProperty(final TextStylePropertyName<?> propertyName) {
         return propertyName.isMargin();
     }

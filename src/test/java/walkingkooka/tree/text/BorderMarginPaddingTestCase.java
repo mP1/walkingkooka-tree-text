@@ -202,6 +202,113 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
+    // setProperty......................................................................................................
+
+    @Test
+    public final void testSetPropertyWithNullNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .setProperty(
+                    null,
+                    Optional.empty()
+                )
+        );
+    }
+
+    @Test
+    public final void testSetPropertyWithNullInvalidNameFails() {
+        assertThrows(
+            InvalidTextStylePropertyNameException.class,
+            () -> this.createBorderMarginPadding()
+                .setProperty(
+                    TextStylePropertyName.TEXT_ALIGN,
+                    Optional.empty()
+                )
+        );
+    }
+
+    @Test
+    public final void testSetPropertyWithNullValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .setProperty(
+                    this.widthPropertyName(BoxEdge.TOP),
+                    null
+                )
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final T expected) {
+        this.setPropertyAndCheck(
+            borderMappingPadding,
+            name,
+            Optional.empty(),
+            expected
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final V value) {
+        this.setPropertyAndCheck(
+            borderMappingPadding,
+            name,
+            Optional.of(value)
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final Optional<V> value) {
+        this.setPropertyAndCheck(
+            borderMappingPadding,
+            name,
+            value,
+            borderMappingPadding
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final V value,
+                                       final T expected) {
+        this.setPropertyAndCheck(
+            borderMappingPadding,
+            name,
+            Optional.of(value),
+            expected
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final Optional<V> value,
+                                       final T expected) {
+        if (expected.equals(borderMappingPadding)) {
+            assertSame(
+                expected,
+                borderMappingPadding.setProperty(
+                    name,
+                    value
+                ),
+                () -> borderMappingPadding + " setProperty " + name + " " + value.orElse(null)
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                borderMappingPadding.setProperty(
+                    name,
+                    value
+                ),
+                () -> borderMappingPadding + " setProperty " + name + " " + value.orElse(null)
+            );
+        }
+    }
+
     // equals...........................................................................................................
 
     @Test
@@ -212,6 +319,13 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     }
 
     // helpers..........................................................................................................
+
+    final T createBorderMarginPadding() {
+        return this.createBorderMarginPadding(
+            BoxEdge.ALL,
+            TextStyle.EMPTY
+        );
+    }
 
     abstract T createBorderMarginPadding(final BoxEdge edge,
                                          final TextStyle textStyle);

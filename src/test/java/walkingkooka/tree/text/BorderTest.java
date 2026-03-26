@@ -26,6 +26,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
@@ -197,6 +198,59 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         this.textStyleAndCheck(
             different,
             TextStyle.EMPTY
+        );
+    }
+
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithInvalidFails() {
+        assertThrows(
+            InvalidTextStylePropertyNameException.class,
+            () -> Border.parse("top-color: black; top-style: solid; top-width: 1px;")
+                .setEdge(BoxEdge.TOP)
+                .setProperty(
+                    TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    Optional.of(Color.WHITE)
+                )
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            Color.BLACK
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithReplaced() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            Color.WHITE,
+            Border.parse("top-color: white; top-style: solid; top-width: 1px;")
+        );
+    }
+
+    @Test
+    public void testSetPropertyRemoved() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            Border.parse("top-style: solid; top-width: 1px;")
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithEdgeAll() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
+            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+            Color.WHITE,
+            Border.parse("top-color: black; top-style: solid; top-width: 1px; bottom-color: white")
         );
     }
 

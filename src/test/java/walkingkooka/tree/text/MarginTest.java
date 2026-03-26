@@ -20,6 +20,10 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
     // toString.........................................................................................................
@@ -72,6 +76,61 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         return edge.marginPropertyName();
     }
 
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithInvalidFails() {
+        assertThrows(
+            InvalidTextStylePropertyNameException.class,
+            () -> Margin.parse("top: 1px;")
+                .setEdge(BoxEdge.TOP)
+                .setProperty(
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    Optional.of(
+                        Length.pixel(222.0)
+                    )
+                )
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_TOP,
+            Length.pixel(1.0)
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithReplaced() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_TOP,
+            Length.pixel(2.0),
+            Margin.parse("top: 2px;")
+        );
+    }
+
+    @Test
+    public void testSetPropertyRemoved() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_TOP,
+            Margin.parse("")
+        );
+    }
+
+    @Test
+    public void testSetPropertyWhenAll() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_BOTTOM,
+            Length.pixel(2.0),
+            Margin.parse("top: 1px; bottom: 2px;")
+        );
+    }
+    
     // parse............................................................................................................
 
     @Override
