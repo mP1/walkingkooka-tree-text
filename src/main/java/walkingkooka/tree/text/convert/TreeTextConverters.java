@@ -45,6 +45,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
+     * {@see TreeTextConverterTextToBorder}
+     */
+    public static <C extends ConverterContext> Converter<C> textToBorder() {
+        return TreeTextConverterTextToBorder.instance();
+    }
+    
+    /**
      * {@see TreeTextConverterTextToFlag}
      */
     public static <C extends ConverterContext> Converter<C> textToFlag() {
