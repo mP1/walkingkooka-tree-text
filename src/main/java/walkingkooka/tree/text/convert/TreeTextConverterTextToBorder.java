@@ -22,7 +22,7 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.Border;
 
 /**
- * A {@link Converter} that creates a {@link Border} with the given two letter country code such as AU or NZ
+ * A {@link Converter} that creates a {@link Border}
  */
 final class TreeTextConverterTextToBorder<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
 
