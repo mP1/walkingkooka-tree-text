@@ -17,12 +17,15 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.naming.HasName;
+
 import java.util.Objects;
 
 /**
  * Reports an invalid {@link TextStylePropertyName} such as passing a padding to a {@link Border}.
  */
-public final class InvalidTextStylePropertyNameException extends IllegalArgumentException {
+public final class InvalidTextStylePropertyNameException extends IllegalArgumentException
+    implements HasName<TextStylePropertyName<?>> {
 
     private static final long serialVersionUID = 1L;
 
@@ -51,12 +54,12 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
                                                  final TextStylePropertyName<?> property) {
         super();
         this.filter = Objects.requireNonNull(filter, "filter");
-        this.propertyName = Objects.requireNonNull(property, "propertyName");
+        this.name = Objects.requireNonNull(property, "propertyName");
     }
 
     @Override
     public String getMessage() {
-        return this.filter + ": Invalid property " + propertyName.inQuotes();
+        return this.filter + ": Invalid property " + this.name.inQuotes();
     }
 
     public String filter() {
@@ -65,9 +68,10 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
 
     private final String filter;
 
-    public TextStylePropertyName<?> propertyName() {
-        return this.propertyName;
+    @Override
+    public TextStylePropertyName<?> name() {
+        return this.name;
     }
 
-    private final TextStylePropertyName<?> propertyName;
+    private final TextStylePropertyName<?> name;
 }
