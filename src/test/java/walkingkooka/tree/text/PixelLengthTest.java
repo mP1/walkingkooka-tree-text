@@ -41,7 +41,10 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseStringFails("12EM", IllegalArgumentException.class);
+        this.parseStringFails(
+            "12EM",
+            new IllegalArgumentException("Missing unit: \"px\"")
+        );
     }
 
     @Test

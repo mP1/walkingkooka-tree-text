@@ -73,8 +73,8 @@ public final class LengthUnit<V, L extends Length<V>> {
     }
 
     void parseUnitTextCheck(final String text) {
-        if (!this.unitPresent(text)) {
-            throw new IllegalArgumentException("Text " + CharSequences.quoteAndEscape(text) + " missing unit suffix " + CharSequences.quoteAndEscape(this.suffix));
+        if (false == this.unitPresent(text)) {
+            throw new IllegalArgumentException("Missing unit: " + CharSequences.quoteAndEscape(this.suffix));
         }
     }
 
