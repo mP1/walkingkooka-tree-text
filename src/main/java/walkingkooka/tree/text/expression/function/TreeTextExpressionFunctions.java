@@ -26,6 +26,7 @@ import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Margin;
+import walkingkooka.tree.text.Padding;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
@@ -98,6 +99,13 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
         return TreeTextExpressionFunctionMergeStyle.instance();
     }
 
+    /**
+     * {@see TreeTextExpressionFunctionPadding}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Padding, C> padding() {
+        return TreeTextExpressionFunctionPadding.instance();
+    }
+    
     /**
      * {@see TreeTextExpressionFunctionSetText}
      */

@@ -31,6 +31,7 @@ import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.Margin;
+import walkingkooka.tree.text.Padding;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
@@ -61,6 +62,10 @@ abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationConte
 
     final static ExpressionFunctionParameter<Margin> MARGIN = ExpressionFunctionParameterName.with("margin")
         .required(Margin.class)
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
+
+    final static ExpressionFunctionParameter<Padding> PADDING = ExpressionFunctionParameterName.with("padding")
+        .required(Padding.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
     final static ExpressionFunctionParameter<Styleable> STYLEABLE = ExpressionFunctionParameterName.with("Styleable")
