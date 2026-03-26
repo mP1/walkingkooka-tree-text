@@ -64,6 +64,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
     public static <C extends ConverterContext> Converter<C> textToMargin() {
         return TreeTextConverterTextToMargin.instance();
     }
+
+    /**
+     * {@see TreeTextConverterTextToPadding}
+     */
+    public static <C extends ConverterContext> Converter<C> textToPadding() {
+        return TreeTextConverterTextToPadding.instance();
+    }
     
     /**
      * {@see TreeTextConverterTextToTextNode}
