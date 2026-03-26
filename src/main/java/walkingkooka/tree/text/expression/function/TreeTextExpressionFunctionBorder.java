@@ -18,7 +18,6 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.net.Url;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Border;
@@ -26,7 +25,7 @@ import walkingkooka.tree.text.Border;
 import java.util.List;
 
 /**
- * A function that accepts a {@link Url} and creates a {@link Border}.
+ * A function that accepts a {@link String} and creates a {@link Border}.
  */
 final class TreeTextExpressionFunctionBorder<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Border, C> {
 
