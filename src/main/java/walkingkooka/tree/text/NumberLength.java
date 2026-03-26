@@ -31,9 +31,11 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
 
     static NumberLength parseNumber0(final String text) {
         try {
-            return with(Long.parseLong(text));
+            return with(
+                Long.parseLong(text)
+            );
         } catch (final NumberFormatException cause) {
-            throw new IllegalArgumentException("Invalid text " + CharSequences.quoteAndEscape(text), cause);
+            throw new IllegalArgumentException("Invalid number length " + CharSequences.quoteAndEscape(text), cause);
         }
     }
 
