@@ -167,6 +167,7 @@ These `Converters` that convert function parameter that may be `String` to other
 - [has-text-node](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterHasTextNode.java)
 - [has-text-style](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterHasTextStyle.java)
 - [properties-to-text-style](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterPropertiesToTextStyle.java)
+- [text-to-border](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterTextToBorder.java)
 - [text-to-flag](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterTextToFlag.java)
 - [text-to-text-node](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterTextToTextNode.java)
 - [text-to-text-style](https://github.com/mP1/walkingkooka-tree-text/blob/master/src/main/java/walkingkooka/tree/text/convert/TreeTextConverterTextToTextStyle.java)
