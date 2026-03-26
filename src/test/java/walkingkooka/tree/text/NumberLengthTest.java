@@ -31,7 +31,10 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Test
     public void testParseInvalidNumberFails() {
-        this.parseStringFails("A", IllegalArgumentException.class);
+        this.parseStringFails(
+            "A",
+            new IllegalArgumentException("Invalid number length \"A\"")
+        );
     }
 
     @Test
