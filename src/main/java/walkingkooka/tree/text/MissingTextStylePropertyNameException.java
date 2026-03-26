@@ -17,28 +17,34 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.naming.HasName;
+
 import java.util.Objects;
 
 /**
  * Reports an missing {@link TextStylePropertyName}.
  */
-public final class MissingTextStylePropertyNameException extends IllegalArgumentException {
+public final class MissingTextStylePropertyNameException extends IllegalArgumentException
+    implements HasName<TextStylePropertyName<?>> {
 
     private static final long serialVersionUID = 1L;
 
-    public MissingTextStylePropertyNameException(final TextStylePropertyName<?> propertyName) {
+    public MissingTextStylePropertyNameException(final TextStylePropertyName<?> name) {
         super();
-        this.propertyName = Objects.requireNonNull(propertyName, "propertyName");
+        this.name = Objects.requireNonNull(name, "name");
     }
 
     @Override
     public String getMessage() {
-        return "TextStyle: Missing property " + this.propertyName.inQuotes();
+        return "TextStyle: Missing property " + this.name.inQuotes();
     }
 
-    public TextStylePropertyName<?> propertyName() {
-        return this.propertyName;
+    // HasName..........................................................................................................
+
+    @Override
+    public TextStylePropertyName<?> name() {
+        return this.name;
     }
 
-    private final TextStylePropertyName<?> propertyName;
+    private final TextStylePropertyName<?> name;
 }
