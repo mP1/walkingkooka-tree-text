@@ -1132,7 +1132,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     // MissingTextStylePropertyNameException............................................................................
 
-    public MissingTextStylePropertyNameException missingTextStylePropertyName() {
+    public MissingTextStylePropertyNameException missingTextStylePropertyNameException() {
         return new MissingTextStylePropertyNameException(this);
     }
 }
