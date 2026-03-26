@@ -375,6 +375,78 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         );
     }
 
+    // setPadding.......................................................................................................
+
+    @Test
+    public void testSetPaddingWithNullWidthAllFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.setPadding(
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetPaddingWithNullWidthTopFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.TOP.setPadding(
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetPaddingWithAll() {
+        this.setPaddingAndCheck(
+            BoxEdge.ALL,
+            Length.pixel(2.0),
+            "top: 2.0px; right: 2.0px; bottom: 2.0px; left: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetPaddingWithTop() {
+        this.setPaddingAndCheck(
+            BoxEdge.TOP,
+            Length.pixel(2.0),
+            "top: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetPaddingWithLeft() {
+        this.setPaddingAndCheck(
+            BoxEdge.LEFT,
+            Length.pixel(2.0),
+            "left: 2.0px;"
+        );
+    }
+
+    private void setPaddingAndCheck(final BoxEdge edge,
+                                   final Length<?> width,
+                                   final String expected) {
+        this.setPaddingAndCheck(
+            edge,
+            width,
+            Padding.parse(expected)
+                .setEdge(edge)
+        );
+    }
+
+    private void setPaddingAndCheck(final BoxEdge edge,
+                                   final Length<?> width,
+                                   final Padding expected) {
+        this.checkEquals(
+            expected,
+            edge.setPadding(
+                width
+            ),
+            () -> edge + " setPadding " + width
+        );
+    }
+
     // isTextStyleProperty..............................................................................................
 
     @Test
