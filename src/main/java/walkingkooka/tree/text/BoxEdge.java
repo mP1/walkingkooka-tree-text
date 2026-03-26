@@ -17,7 +17,19 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.color.Color;
+import walkingkooka.predicate.character.CharPredicates;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.cursor.TextCursor;
+import walkingkooka.text.cursor.TextCursorSavePoint;
+import walkingkooka.text.cursor.TextCursors;
+import walkingkooka.text.cursor.parser.Parser;
+import walkingkooka.text.cursor.parser.ParserContext;
+import walkingkooka.text.cursor.parser.ParserContexts;
+import walkingkooka.text.cursor.parser.Parsers;
+
+import java.util.Arrays;
 
 /**
  * One of the four edge around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
@@ -273,6 +285,102 @@ public enum BoxEdge {
             width
         ).padding(this);
     }
+
+    // parseBorder......................................................................................................
+
+    /**
+     * Parses a border. Spaces before and after are optional, but at least 1 space is required between tokens.
+     * <pre>
+     * black SOLID 1px
+     * #123 solid 2px
+     * </pre>
+     */
+    public final Border parseBorder(final String text) {
+        final TextCursor textCursor = TextCursors.charSequence(text);
+
+        OPTIONAL_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+        // color
+        final Color color;
+        final TextCursorSavePoint colorStart = textCursor.save();
+
+        try {
+            NOT_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+            color = Color.parse(
+                colorStart.textBetween()
+                    .toString()
+            );
+        } catch (final InvalidCharacterException invalidCharacterException) {
+            throw invalidCharacterException.setTextAndPosition(
+                text,
+                colorStart.lineInfo()
+                    .textOffset()
+            );
+        }
+
+        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+        final String styleText = parseToken(textCursor);
+
+        final BorderStyle style = Arrays.stream(BorderStyle.values())
+            .filter(s -> s.name().equalsIgnoreCase(styleText))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Unknown style " + CharSequences.quoteAndEscape(styleText)));
+
+        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+        final String widthText = parseToken(textCursor);
+
+        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+        final Length<?> width = Length.parse(widthText);
+
+        OPTIONAL_SPACE.parse(textCursor, PARSER_CONTEXT);
+
+        if (textCursor.isNotEmpty()) {
+            throw textCursor.lineInfo()
+                .invalidCharacterException()
+                .get();
+        }
+
+        return this.setBorder(
+            color,
+            style,
+            width
+        );
+    }
+
+    private final static Parser<ParserContext> REQUIRED_SPACE = Parsers.charPredicateString(
+        CharPredicates.whitespace(),
+        1,
+        65536
+    );
+
+    private final static Parser<ParserContext> OPTIONAL_SPACE = REQUIRED_SPACE.optional();
+
+    private static String parseToken(final TextCursor cursor) {
+        final TextCursorSavePoint start = cursor.save();
+
+        NOT_SPACE.parse(
+            cursor,
+            PARSER_CONTEXT
+        );
+
+        return start.textBetween()
+            .toString();
+    }
+
+    private final static Parser<ParserContext> NOT_SPACE = Parsers.charPredicateString(
+        CharPredicates.whitespace()
+            .negate(),
+        1,
+        255
+    );
+
+    private final static ParserContext PARSER_CONTEXT = ParserContexts.fake();
+
+    // parseMargin......................................................................................................
 
     public final Margin parseMargin(final String width) {
         return this.setMargin(
