@@ -274,6 +274,12 @@ public enum BoxEdge {
         ).padding(this);
     }
 
+    public final Padding parsePadding(final String width) {
+        return this.setPadding(
+            Length.parse(width)
+        );
+    }
+
     // margin...........................................................................................................
 
     /**

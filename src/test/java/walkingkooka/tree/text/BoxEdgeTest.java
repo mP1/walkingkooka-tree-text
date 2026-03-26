@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.CharSequences;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -444,6 +445,49 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
                 width
             ),
             () -> edge + " setPadding " + width
+        );
+    }
+
+    // parsePadding.....................................................................................................
+
+    @Test
+    public void testParsePaddingAll() {
+        this.parsePaddingAndCheck(
+            BoxEdge.ALL,
+            "1px",
+            BoxEdge.ALL.setPadding(
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParsePaddingTop() {
+        this.parsePaddingAndCheck(
+            BoxEdge.TOP,
+            "1px",
+            TextStyle.parse("padding-top: 1px")
+                .padding(BoxEdge.TOP)
+        );
+    }
+
+    @Test
+    public void testParsePaddingLeft() {
+        this.parsePaddingAndCheck(
+            BoxEdge.LEFT,
+            "1px",
+            TextStyle.parse("padding-left: 1px")
+                .padding(BoxEdge.LEFT)
+        );
+    }
+
+    private void parsePaddingAndCheck(final BoxEdge edge,
+                                      final String text,
+                                      final Padding expected) {
+        this.checkEquals(
+            expected,
+            edge.parsePadding(text),
+            () -> edge + " parsePadding " + CharSequences.quoteAndEscape(text)
         );
     }
 
