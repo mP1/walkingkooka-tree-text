@@ -256,6 +256,15 @@ public enum BoxEdge {
             ).border(this);
     }
 
+    /**
+     * Creates a {@link Margin} with this {@link BoxEdge} and the given {@link Length}.
+     */
+    public final Margin setMargin(final Length<?> width) {
+        return TextStyle.EMPTY.setMargin(
+            width
+        ).margin(this);
+    }
+
     // margin...........................................................................................................
 
     /**

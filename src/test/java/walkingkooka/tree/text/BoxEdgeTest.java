@@ -303,6 +303,78 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         );
     }
 
+    // setMargin........................................................................................................
+
+    @Test
+    public void testSetMarginWithNullWidthAllFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.setMargin(
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetMarginWithNullWidthTopFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.TOP.setMargin(
+                null
+            )
+        );
+    }
+
+    @Test
+    public void testSetMarginWithAll() {
+        this.setMarginAndCheck(
+            BoxEdge.ALL,
+            Length.pixel(2.0),
+            "top: 2.0px; right: 2.0px; bottom: 2.0px; left: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetMarginWithTop() {
+        this.setMarginAndCheck(
+            BoxEdge.TOP,
+            Length.pixel(2.0),
+            "top: 2.0px;"
+        );
+    }
+
+    @Test
+    public void testSetMarginWithLeft() {
+        this.setMarginAndCheck(
+            BoxEdge.LEFT,
+            Length.pixel(2.0),
+            "left: 2.0px;"
+        );
+    }
+
+    private void setMarginAndCheck(final BoxEdge edge,
+                                   final Length<?> width,
+                                   final String expected) {
+        this.setMarginAndCheck(
+            edge,
+            width,
+            Margin.parse(expected)
+                .setEdge(edge)
+        );
+    }
+
+    private void setMarginAndCheck(final BoxEdge edge,
+                                   final Length<?> width,
+                                   final Margin expected) {
+        this.checkEquals(
+            expected,
+            edge.setMargin(
+                width
+            ),
+            () -> edge + " setMargin " + width
+        );
+    }
+
     // isTextStyleProperty..............................................................................................
 
     @Test
