@@ -495,7 +495,7 @@ public enum BoxEdge {
                 throw firstRuntime;
             }
 
-            // not color, style or width InvalidCharacterException
+            // not width InvalidCharacterException
             throw start.lineInfo()
                 .emptyTextOrInvalidCharacterExceptionOrLast("text");
         }
