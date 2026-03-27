@@ -301,8 +301,10 @@ public enum BoxEdge {
      * Creates a {@link Margin} with this {@link BoxEdge} and the given {@link Length}.
      */
     public final Margin setMargin(final Length<?> width) {
+        Objects.requireNonNull(width, "width");
+
         return TextStyle.EMPTY.setMargin(
-            width
+            Optional.of(width)
         ).margin(this);
     }
 

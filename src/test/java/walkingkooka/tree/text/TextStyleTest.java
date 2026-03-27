@@ -41,6 +41,7 @@ import walkingkooka.tree.json.patch.PatchableTesting;
 import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -1422,15 +1423,28 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testSetMarginWithEmpty() {
         final TextStyle style = TextStyle.EMPTY;
-        final Length<?> length = Length.pixel(2.0);
 
         this.setMarginAndCheck(
             style,
-            length,
-            style.set(
-                TextStylePropertyName.MARGIN,
-                length
-            )
+            Optional.empty(),
+            style
+        );
+    }
+
+    @Test
+    public void testSetMarginWithEmpty2() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.MARGIN,
+            Length.pixel(1.0)
+        ).set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.setMarginAndCheck(
+            style,
+            Optional.empty(),
+            style.remove(TextStylePropertyName.MARGIN)
         );
     }
 
@@ -1454,6 +1468,16 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     private void setMarginAndCheck(final TextStyle style,
                                    final Length<?> length,
+                                   final TextStyle expected) {
+        this.setMarginAndCheck(
+            style,
+            Optional.of(length),
+            expected
+        );
+    }
+
+    private void setMarginAndCheck(final TextStyle style,
+                                   final Optional<Length<?>> length,
                                    final TextStyle expected) {
         this.checkEquals(
             expected,

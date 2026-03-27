@@ -28,6 +28,8 @@ import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Margin;
 import walkingkooka.tree.text.TextStyle;
 
+import java.util.Optional;
+
 public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTestCase<TreeTextConverterTextToMargin<FakeConverterContext>, FakeConverterContext> {
 
     @Test
@@ -41,7 +43,9 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
     @Test
     public void testConvertStringToMargin() {
         final Margin margin = TextStyle.EMPTY.setMargin(
-            Length.pixel(1.0)
+            Optional.of(
+                Length.pixel(1.0)
+            )
         ).margin(BoxEdge.ALL);
 
         this.convertAndCheck(
