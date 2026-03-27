@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.predicate.character.CharPredicates;
@@ -319,7 +318,8 @@ public enum BoxEdge {
     // parseBorder......................................................................................................
 
     /**
-     * Parses a border. Spaces before and after are optional, but at least 1 space is required between tokens.
+     * Parses a border. Spaces before and after are optional, but at least 1 space is required between tokens. Note
+     * tokens are all optional.
      * <pre>
      * black SOLID 1px
      * #123 solid 2px
@@ -328,56 +328,82 @@ public enum BoxEdge {
     public final Border parseBorder(final String text) {
         final TextCursor textCursor = TextCursors.charSequence(text);
 
-        skipOptionalSpaces(textCursor);
+        Color color = null;
+        BorderStyle style = null;
+        Length<?> width = null;
 
-        // color
-        final Color color;
-        final TextCursorSavePoint colorStart = textCursor.save();
+        boolean optionalSpaces = true;
 
-        try {
-            NOT_SPACE.parse(textCursor, PARSER_CONTEXT);
+        while(textCursor.isNotEmpty()) {
+            if(optionalSpaces) {
+                skipOptionalSpaces(textCursor);
+                optionalSpaces = false; // required
+            } else {
+                skipRequiredSpaces(textCursor);
+            }
 
-            color = Color.parse(
-                colorStart.textBetween()
-                    .toString()
+            if(textCursor.isEmpty()) {
+                break;
+            }
+
+            final TextCursorSavePoint start = textCursor.save();
+
+            NOT_SPACE.parse(
+                textCursor,
+                PARSER_CONTEXT
             );
-        } catch (final InvalidCharacterException invalidCharacterException) {
-            throw invalidCharacterException.setTextAndPosition(
-                text,
-                colorStart.lineInfo()
-                    .textOffset()
-            );
-        }
 
-        skipRequiredSpaces(textCursor);
+            final String token = start.textBetween()
+                .toString();
+            RuntimeException firstRuntime = null;
 
-        final String styleText = parseToken(textCursor);
+            if(null == color) {
+                try {
+                    color = Color.parse(token);
+                    continue; // try next
+                } catch (final RuntimeException cause) {
+                    firstRuntime = cause;
+                }
+            }
 
-        final BorderStyle style = Arrays.stream(BorderStyle.values())
-            .filter(s -> s.name().equalsIgnoreCase(styleText))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Unknown style " + CharSequences.quoteAndEscape(styleText)));
+            if(null == style) {
+                try {
+                    style = Arrays.stream(BorderStyle.values())
+                        .filter(s -> s.name().equalsIgnoreCase(token))
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException("Unknown style " + CharSequences.quoteAndEscape(token)));
+                    continue; // try next
+                } catch (final RuntimeException cause) {
+                    if(null == firstRuntime) {
+                        firstRuntime = cause;
+                    }
+                }
+            }
 
-        skipRequiredSpaces(textCursor);
+            if(null == width) {
+                try {
+                    width = Length.parse(token);
+                    continue;
+                } catch (final RuntimeException cause) {
+                    if(null == firstRuntime) {
+                        firstRuntime = cause;
+                    }
+                }
+            }
 
-        final String widthText = parseToken(textCursor);
+            if(null != firstRuntime) {
+                throw firstRuntime;
+            }
 
-        skipRequiredSpaces(textCursor);
-
-        final Length<?> width = Length.parse(widthText);
-
-        skipOptionalSpaces(textCursor);
-
-        if (textCursor.isNotEmpty()) {
-            throw textCursor.lineInfo()
-                .invalidCharacterException()
-                .get();
+            // not color, style or width InvalidCharacterException
+            throw start.lineInfo()
+                .emptyTextOrInvalidCharacterExceptionOrLast("text");
         }
 
         return this.setBorder(
-            Optional.of(color),
-            Optional.of(style),
-            Optional.of(width)
+            Optional.ofNullable(color),
+            Optional.ofNullable(style),
+            Optional.ofNullable(width)
         );
     }
 
@@ -396,18 +422,6 @@ public enum BoxEdge {
     }
 
     private final static Parser<ParserContext> OPTIONAL_SPACE = REQUIRED_SPACE.optional();
-
-    private static String parseToken(final TextCursor cursor) {
-        final TextCursorSavePoint start = cursor.save();
-
-        NOT_SPACE.parse(
-            cursor,
-            PARSER_CONTEXT
-        );
-
-        return start.textBetween()
-            .toString();
-    }
 
     private final static Parser<ParserContext> NOT_SPACE = Parsers.charPredicateString(
         CharPredicates.whitespace()
