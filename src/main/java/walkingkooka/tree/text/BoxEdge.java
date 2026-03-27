@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * One of the four edge around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
@@ -436,19 +437,71 @@ public enum BoxEdge {
 
     // parseMargin......................................................................................................
 
-    public final Margin parseMargin(final String width) {
-        return this.setMargin(
-            Optional.of(
-                Length.parse(width)
-            )
+    public final Margin parseMargin(final String text) {
+        return this.parseMarginOrPadding(
+            text,
+            this::setMargin
         );
     }
-    
-    public final Padding parsePadding(final String width) {
-        return this.setPadding(
-            Optional.of(
-                Length.parse(width)
-            )
+
+    public final Padding parsePadding(final String text) {
+        return this.parseMarginOrPadding(
+            text,
+            this::setPadding
+        );
+    }
+
+    private <T extends BorderMarginPadding> T parseMarginOrPadding(final String text,
+                                                                   final Function<Optional<Length<?>>, T> setMarginOrPadding) {
+        final TextCursor textCursor = TextCursors.charSequence(text);
+
+        Length<?> width = null;
+
+        boolean optionalSpaces = true;
+
+        while (textCursor.isNotEmpty()) {
+            if (optionalSpaces) {
+                skipOptionalSpaces(textCursor);
+                optionalSpaces = false; // required
+            } else {
+                skipRequiredSpaces(textCursor);
+            }
+
+            if (textCursor.isEmpty()) {
+                break;
+            }
+
+            final TextCursorSavePoint start = textCursor.save();
+
+            NOT_SPACE.parse(
+                textCursor,
+                PARSER_CONTEXT
+            );
+
+            final String token = start.textBetween()
+                .toString();
+            RuntimeException firstRuntime = null;
+
+            try {
+                width = Length.parse(token);
+                continue;
+            } catch (final RuntimeException cause) {
+                if (null == firstRuntime) {
+                    firstRuntime = cause;
+                }
+            }
+
+            if (null != firstRuntime) {
+                throw firstRuntime;
+            }
+
+            // not color, style or width InvalidCharacterException
+            throw start.lineInfo()
+                .emptyTextOrInvalidCharacterExceptionOrLast("text");
+        }
+
+        return setMarginOrPadding.apply(
+            Optional.ofNullable(width)
         );
     }
 
