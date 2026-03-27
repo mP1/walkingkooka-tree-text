@@ -55,7 +55,9 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     public void testText() {
         this.textAndCheck(
             TextStyle.EMPTY.setPadding(
-                Length.pixel(2.0)
+                Optional.of(
+                    Length.pixel(2.0)
+                )
             ).padding(BoxEdge.ALL),
             "bottom: 2px; left: 2px; right: 2px; top: 2px;"
         );
