@@ -298,7 +298,7 @@ public enum BoxEdge {
     public final Border parseBorder(final String text) {
         final TextCursor textCursor = TextCursors.charSequence(text);
 
-        OPTIONAL_SPACE.parse(textCursor, PARSER_CONTEXT);
+        skipOptionalSpaces(textCursor);
 
         // color
         final Color color;
@@ -319,7 +319,7 @@ public enum BoxEdge {
             );
         }
 
-        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+        skipRequiredSpaces(textCursor);
 
         final String styleText = parseToken(textCursor);
 
@@ -328,15 +328,15 @@ public enum BoxEdge {
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("Unknown style " + CharSequences.quoteAndEscape(styleText)));
 
-        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+        skipRequiredSpaces(textCursor);
 
         final String widthText = parseToken(textCursor);
 
-        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+        skipRequiredSpaces(textCursor);
 
         final Length<?> width = Length.parse(widthText);
 
-        OPTIONAL_SPACE.parse(textCursor, PARSER_CONTEXT);
+        skipOptionalSpaces(textCursor);
 
         if (textCursor.isNotEmpty()) {
             throw textCursor.lineInfo()
@@ -351,11 +351,19 @@ public enum BoxEdge {
         );
     }
 
+    private void skipRequiredSpaces(final TextCursor textCursor) {
+        REQUIRED_SPACE.parse(textCursor, PARSER_CONTEXT);
+    }
+
     private final static Parser<ParserContext> REQUIRED_SPACE = Parsers.charPredicateString(
         CharPredicates.whitespace(),
         1,
         65536
     );
+
+    private void skipOptionalSpaces(final TextCursor textCursor) {
+        OPTIONAL_SPACE.parse(textCursor, PARSER_CONTEXT);
+    }
 
     private final static Parser<ParserContext> OPTIONAL_SPACE = REQUIRED_SPACE.optional();
 
