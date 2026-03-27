@@ -373,6 +373,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
+    public void testSetMarginWithTopAndEmptyWidth() {
+        this.setMarginAndCheck(
+            BoxEdge.TOP,
+            Optional.empty(),
+            ""
+        );
+    }
+
+    @Test
     public void testSetMarginWithLeft() {
         this.setMarginAndCheck(
             BoxEdge.LEFT,
@@ -386,6 +395,16 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
                                    final String expected) {
         this.setMarginAndCheck(
             edge,
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setMarginAndCheck(final BoxEdge edge,
+                                   final Optional<Length<?>> width,
+                                   final String expected) {
+        this.setMarginAndCheck(
+            edge,
             width,
             Margin.parse(expected)
                 .setEdge(edge)
@@ -395,11 +414,19 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     private void setMarginAndCheck(final BoxEdge edge,
                                    final Length<?> width,
                                    final Margin expected) {
+        this.setMarginAndCheck(
+            edge,
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setMarginAndCheck(final BoxEdge edge,
+                                   final Optional<Length<?>> width,
+                                   final Margin expected) {
         this.checkEquals(
             expected,
-            edge.setMargin(
-                width
-            ),
+            edge.setMargin(width),
             () -> edge + " setMargin " + width
         );
     }
@@ -734,7 +761,9 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.ALL,
             "1px",
             BoxEdge.ALL.setMargin(
-                Length.pixel(1.0)
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
