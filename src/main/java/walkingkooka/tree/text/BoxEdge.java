@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.InvalidCharacterException;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.text.CharSequences;
@@ -30,6 +31,9 @@ import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.text.cursor.parser.Parsers;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * One of the four edge around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
@@ -247,25 +251,51 @@ public enum BoxEdge {
     /**
      * Creates a {@link Border} with this {@link BoxEdge} and the given {@link Color}, {@link BorderStyle}, {@link Length}.
      */
-    public final Border setBorder(final Color color,
-                                  final BorderStyle style,
-                                  final Length<?> width) {
-        return ALL == this ?
-            TextStyle.EMPTY.setBorder(
-                color,
-                style,
-                width
-            ).border(this) :
-            TextStyle.EMPTY.set(
-                this.borderColorPropertyName(),
-                color
-            ).set(
-                this.borderStylePropertyName(),
-                style
-            ).set(
-                this.borderWidthPropertyName(),
-                width
-            ).border(this);
+    public final Border setBorder(final Optional<Color> color,
+                                  final Optional<BorderStyle> style,
+                                  final Optional<Length<?>> width) {
+        Objects.requireNonNull(color, "color");
+        Objects.requireNonNull(style, "style");
+        Objects.requireNonNull(width, "width");
+
+        final Map<TextStylePropertyName<?>, Object> nameToValues = Maps.sorted();
+
+        for (final BoxEdge boxEdge : BoxEdge.values()) {
+            if (this == boxEdge || this == ALL) {
+                {
+                    final Color colorOrNull = color.orElse(null);
+                    if (null != colorOrNull) {
+                        nameToValues.put(
+                            boxEdge.borderColorPropertyName(),
+                            colorOrNull
+                        );
+                    }
+                }
+                {
+                    final BorderStyle styleOrNull = style.orElse(null);
+                    if (null != styleOrNull) {
+                        nameToValues.put(
+                            boxEdge.borderStylePropertyName(),
+                            styleOrNull
+                        );
+                    }
+                }
+                {
+                    final Length<?> widthOrNull = width.orElse(null);
+                    if (null != widthOrNull) {
+                        nameToValues.put(
+                            boxEdge.borderWidthPropertyName(),
+                            widthOrNull
+                        );
+                    }
+                }
+            }
+        }
+
+        return Border.with(
+            this,
+            TextStyle.EMPTY.setValues(nameToValues)
+        );
     }
 
     /**
@@ -345,9 +375,9 @@ public enum BoxEdge {
         }
 
         return this.setBorder(
-            color,
-            style,
-            width
+            Optional.of(color),
+            Optional.of(style),
+            Optional.of(width)
         );
     }
 
