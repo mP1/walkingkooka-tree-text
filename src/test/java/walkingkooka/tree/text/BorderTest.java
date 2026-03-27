@@ -399,6 +399,86 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         return Border.parse(text);
     }
 
+    // valueAsText......................................................................................................
+
+    @Test
+    public void testValuesAsTextWithEmptyAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.border(BoxEdge.ALL),
+            ""
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithEmptyAndTop() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.border(BoxEdge.TOP),
+            ""
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithSameAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                Length.pixel(1.0)
+            ).border(BoxEdge.ALL),
+            "black DASHED 1px"
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithSomeDifferentAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px; border-bottom-color: BLACK; border-bottom-style: DASHED; border-bottom-width: 2px;" +
+                    "border-left-color: BLACK; border-left-style: SOLID; border-left-width: 3px; border-right-color: BLACK; border-right-style: DOTTED; border-right-width: 4px;"
+            ).border(BoxEdge.ALL),
+            "black"
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithAllDifferentAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px; border-bottom-color: WHITE; border-bottom-style: DASHED; border-bottom-width: 2px;" +
+                    "border-left-color: RED; border-left-style: SOLID; border-left-width: 3px; border-right-color: GREEN; border-right-style: DOTTED; border-right-width: 4px;"
+            ).border(BoxEdge.ALL),
+            ""
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithSameAndLeft() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.setBorder(
+                Color.BLACK,
+                BorderStyle.DASHED,
+                Length.pixel(1.0)
+            ).border(BoxEdge.LEFT),
+            "black DASHED 1px"
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithIncompleteAndLeft() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.setBorder(
+                    Color.BLACK,
+                    BorderStyle.DASHED,
+                    Length.pixel(1.0)
+                ).border(BoxEdge.LEFT)
+                .setProperty(
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
+                    Optional.empty()
+                ),
+            "DASHED 1px"
+        );
+    }
+
     // class............................................................................................................
 
     @Override

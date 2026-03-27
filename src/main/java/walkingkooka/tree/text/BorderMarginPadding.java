@@ -211,4 +211,23 @@ abstract class BorderMarginPadding implements HasTextStyle,
      * creating the {@link #text()} and {@link #toString()}.
      */
     abstract int textPrefixLength();
+
+    // valuesAsText()...................................................................................................
+
+    /**
+     * Returns the values for this {@link BorderMarginPadding} without any property names. This text should be
+     * usable by the matching {@link BoxEdge#parseBorder(String)}, {@link BoxEdge#parseMargin(String)} and {@link BoxEdge#parsePadding(String)}.
+     * <pre>
+     * 12px
+     * black solid 1px
+     * </pre>
+     */
+    abstract String valuesAsText();
+
+    final String widthAsText() {
+        return this.textStyle.get(
+                this.widthPropertyName()
+            ).map(Length::toString)
+            .orElse("");
+    }
 }
