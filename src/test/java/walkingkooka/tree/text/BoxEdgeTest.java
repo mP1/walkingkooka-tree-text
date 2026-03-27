@@ -789,6 +789,17 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
+    public void testParseMarginAllEmpty() {
+        this.parseMarginAndCheck(
+            BoxEdge.ALL,
+            "",
+            BoxEdge.ALL.setMargin(
+                Optional.empty()
+            )
+        );
+    }
+
+    @Test
     public void testParseMarginTop() {
         this.parseMarginAndCheck(
             BoxEdge.TOP,
@@ -805,6 +816,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             "1px",
             TextStyle.parse("margin-left: 1px")
                 .margin(BoxEdge.LEFT)
+        );
+    }
+
+    @Test
+    public void testParseMarginRightWithEmpty() {
+        this.parseMarginAndCheck(
+            BoxEdge.LEFT,
+            "",
+            TextStyle.EMPTY.margin(BoxEdge.LEFT)
         );
     }
 
@@ -850,6 +870,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             "1px",
             TextStyle.parse("padding-left: 1px")
                 .padding(BoxEdge.LEFT)
+        );
+    }
+
+    @Test
+    public void testParsePaddingRightWithEmpty() {
+        this.parsePaddingAndCheck(
+            BoxEdge.LEFT,
+            "",
+            TextStyle.EMPTY.padding(BoxEdge.LEFT)
         );
     }
 
