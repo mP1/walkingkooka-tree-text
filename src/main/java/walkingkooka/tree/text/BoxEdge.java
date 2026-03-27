@@ -310,12 +310,11 @@ public enum BoxEdge {
     /**
      * Creates a {@link Padding} with this {@link BoxEdge} and the given {@link Length}.
      */
-    public final Padding setPadding(final Length<?> width) {
+    public final Padding setPadding(final Optional<Length<?>> width) {
         Objects.requireNonNull(width, "width");
 
-        return TextStyle.EMPTY.setPadding(
-            Optional.of(width)
-        ).padding(this);
+        return TextStyle.EMPTY.setPadding(width)
+            .padding(this);
     }
 
     // parseBorder......................................................................................................
@@ -447,7 +446,9 @@ public enum BoxEdge {
     
     public final Padding parsePadding(final String width) {
         return this.setPadding(
-            Length.parse(width)
+            Optional.of(
+                Length.parse(width)
+            )
         );
     }
 

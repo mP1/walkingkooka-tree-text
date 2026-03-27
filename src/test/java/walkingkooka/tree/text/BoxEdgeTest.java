@@ -481,8 +481,18 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     private void setPaddingAndCheck(final BoxEdge edge,
-                                   final Length<?> width,
-                                   final String expected) {
+                                    final Length<?> width,
+                                    final String expected) {
+        this.setPaddingAndCheck(
+            edge,
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setPaddingAndCheck(final BoxEdge edge,
+                                    final Optional<Length<?>> width,
+                                    final String expected) {
         this.setPaddingAndCheck(
             edge,
             width,
@@ -492,8 +502,18 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     private void setPaddingAndCheck(final BoxEdge edge,
-                                   final Length<?> width,
-                                   final Padding expected) {
+                                    final Length<?> width,
+                                    final Padding expected) {
+        this.setPaddingAndCheck(
+            edge,
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setPaddingAndCheck(final BoxEdge edge,
+                                    final Optional<Length<?>> width,
+                                    final Padding expected) {
         this.checkEquals(
             expected,
             edge.setPadding(
@@ -806,7 +826,9 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.ALL,
             "1px",
             BoxEdge.ALL.setPadding(
-                Length.pixel(1.0)
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
