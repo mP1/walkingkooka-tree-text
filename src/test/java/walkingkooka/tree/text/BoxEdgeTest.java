@@ -828,9 +828,18 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         );
     }
 
+    @Test
+    public void testParseMarginAllWithTopRightBottomLeft() {
+        this.parseMarginAndCheck(
+            BoxEdge.ALL,
+            "1.0px 2.0px 3.0px 4.0px",
+            Margin.parse("top: 1px; right: 2px; bottom: 3px; left: 4px;")
+        );
+    }
+
     private void parseMarginAndCheck(final BoxEdge edge,
-                                      final String text,
-                                      final Margin expected) {
+                                     final String text,
+                                     final Margin expected) {
         this.checkEquals(
             expected,
             edge.parseMargin(text),
@@ -879,6 +888,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.LEFT,
             "",
             TextStyle.EMPTY.padding(BoxEdge.LEFT)
+        );
+    }
+
+    @Test
+    public void testParsePaddingAllWithTopRightBottomLeft() {
+        this.parsePaddingAndCheck(
+            BoxEdge.ALL,
+            "1.0px 2.0px 3.0px 4.0px",
+            Padding.parse("padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-left: 4px;")
         );
     }
 

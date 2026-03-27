@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.predicate.character.CharPredicates;
@@ -30,6 +31,7 @@ import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.text.cursor.parser.Parsers;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -440,19 +442,170 @@ public enum BoxEdge {
     public final Margin parseMargin(final String text) {
         return this.parseMarginOrPadding(
             text,
+            this::setAllMargins,
             this::setMargin
         );
+    }
+
+    private Margin setAllMargins(final List<Length<?>> widths) {
+        final Margin margin;
+
+        final int tokenCount = widths.size();
+
+        switch (tokenCount) {
+            case 0:
+                margin = this.setMargin(
+                    Optional.empty()
+                );
+                break;
+            case 1:
+                margin = this.setMargin(
+                    Optional.of(
+                        widths.get(0)
+                    )
+                );
+                break;
+
+            case 4:
+                // top right bottom left
+                margin = Margin.with(
+                    this,
+                    TextStyle.EMPTY.setValues(
+                        Maps.of(
+                            TextStylePropertyName.MARGIN_TOP,
+                            widths.get(0),
+                            TextStylePropertyName.MARGIN_RIGHT,
+                            widths.get(1),
+                            TextStylePropertyName.MARGIN_BOTTOM,
+                            widths.get(2),
+                            TextStylePropertyName.MARGIN_LEFT,
+                            widths.get(3)
+                        )
+                    )
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Expected 4 tokens got " + tokenCount);
+        }
+
+        return margin;
     }
 
     public final Padding parsePadding(final String text) {
         return this.parseMarginOrPadding(
             text,
+            this::setAllPaddings,
             this::setPadding
         );
     }
 
+    private Padding setAllPaddings(final List<Length<?>> widths) {
+        final Padding padding;
+
+        final int tokenCount = widths.size();
+
+        switch (tokenCount) {
+            case 0:
+                padding = this.setPadding(
+                    Optional.empty()
+                );
+                break;
+            case 1:
+                padding = this.setPadding(
+                    Optional.of(
+                        widths.get(0)
+                    )
+                );
+                break;
+
+            case 4:
+                // top right bottom left
+                padding = Padding.with(
+                    this,
+                    TextStyle.EMPTY.setValues(
+                        Maps.of(
+                            TextStylePropertyName.PADDING_TOP,
+                            widths.get(0),
+                            TextStylePropertyName.PADDING_RIGHT,
+                            widths.get(1),
+                            TextStylePropertyName.PADDING_BOTTOM,
+                            widths.get(2),
+                            TextStylePropertyName.PADDING_LEFT,
+                            widths.get(3)
+                        )
+                    )
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Expected 4 tokens got " + tokenCount);
+        }
+
+        return padding;
+    }
+
     private <T extends BorderMarginPadding> T parseMarginOrPadding(final String text,
+                                                                   final Function<List<Length<?>>, T> marginOrPaddingFactory,
                                                                    final Function<Optional<Length<?>>, T> setMarginOrPadding) {
+        return this == ALL ?
+            this.parseMarginOrPaddingAll(
+                text,
+                marginOrPaddingFactory
+            ) :
+            this.parseMarginOrPaddingNotAll(
+                text,
+                setMarginOrPadding
+            );
+    }
+
+    private <T extends BorderMarginPadding> T parseMarginOrPaddingAll(final String text,
+                                                                      final Function<List<Length<?>>, T> marginOrPaddingFactory) {
+        final TextCursor textCursor = TextCursors.charSequence(text);
+
+        final List<Length<?>> widths = Lists.array();
+
+        while (textCursor.isNotEmpty()) {
+            if(widths.isEmpty()) {
+                skipOptionalSpaces(textCursor);
+            } else {
+                skipRequiredSpaces(textCursor);
+            }
+
+            if (textCursor.isEmpty()) {
+                break;
+            }
+
+            final TextCursorSavePoint start = textCursor.save();
+
+            NOT_SPACE.parse(
+                textCursor,
+                PARSER_CONTEXT
+            );
+
+            final String token = start.textBetween()
+                .toString();
+            RuntimeException firstRuntime = null;
+
+            try {
+                widths.add(
+                    Length.parse(token)
+                );
+                continue;
+            } catch (final RuntimeException cause) {
+                if (null == firstRuntime) {
+                    firstRuntime = cause;
+                }
+            }
+
+            if (null != firstRuntime) {
+                throw firstRuntime;
+            }
+        }
+
+        return marginOrPaddingFactory.apply(widths);
+    }
+
+    private <T extends BorderMarginPadding> T parseMarginOrPaddingNotAll(final String text,
+                                                                         final Function<Optional<Length<?>>, T> setMarginOrPadding) {
         final TextCursor textCursor = TextCursors.charSequence(text);
 
         Length<?> width = null;
@@ -495,9 +648,9 @@ public enum BoxEdge {
                 throw firstRuntime;
             }
 
-            // not width InvalidCharacterException
-            throw start.lineInfo()
-                .emptyTextOrInvalidCharacterExceptionOrLast("text");
+            if (textCursor.isEmpty()) {
+                break;
+            }
         }
 
         return setMarginOrPadding.apply(
