@@ -312,8 +312,10 @@ public enum BoxEdge {
      * Creates a {@link Padding} with this {@link BoxEdge} and the given {@link Length}.
      */
     public final Padding setPadding(final Length<?> width) {
+        Objects.requireNonNull(width, "width");
+
         return TextStyle.EMPTY.setPadding(
-            width
+            Optional.of(width)
         ).padding(this);
     }
 

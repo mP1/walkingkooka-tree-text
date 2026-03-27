@@ -1491,15 +1491,28 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testSetPaddingWithEmpty() {
         final TextStyle style = TextStyle.EMPTY;
-        final Length<?> length = Length.pixel(2.0);
 
         this.setPaddingAndCheck(
             style,
-            length,
-            style.set(
-                TextStylePropertyName.PADDING,
-                length
-            )
+            Optional.empty(),
+            style
+        );
+    }
+
+    @Test
+    public void testSetPaddingWithEmpty2() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.PADDING,
+            Length.pixel(1.0)
+        ).set(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+
+        this.setPaddingAndCheck(
+            style,
+            Optional.empty(),
+            style.remove(TextStylePropertyName.PADDING)
         );
     }
 
@@ -1523,6 +1536,16 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     private void setPaddingAndCheck(final TextStyle style,
                                    final Length<?> length,
+                                   final TextStyle expected) {
+        this.setPaddingAndCheck(
+            style,
+            Optional.of(length),
+            expected
+        );
+    }
+
+    private void setPaddingAndCheck(final TextStyle style,
+                                   final Optional<Length<?>> length,
                                    final TextStyle expected) {
         this.checkEquals(
             expected,

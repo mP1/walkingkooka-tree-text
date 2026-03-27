@@ -28,6 +28,8 @@ import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Padding;
 import walkingkooka.tree.text.TextStyle;
 
+import java.util.Optional;
+
 public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterTestCase<TreeTextConverterTextToPadding<FakeConverterContext>, FakeConverterContext> {
 
     @Test
@@ -41,7 +43,9 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
     @Test
     public void testConvertStringToPadding() {
         final Padding padding = TextStyle.EMPTY.setPadding(
-            Length.pixel(1.0)
+            Optional.of(
+                Length.pixel(1.0)
+            )
         ).padding(BoxEdge.ALL);
 
         this.convertAndCheck(
