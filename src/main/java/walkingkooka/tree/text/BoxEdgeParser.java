@@ -29,6 +29,7 @@ import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.text.cursor.parser.Parsers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 abstract class BoxEdgeParser<T extends BorderMarginPadding> {
@@ -108,19 +109,19 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
 
             case 4:
                 // top right bottom left
+                final Map<TextStylePropertyName<?>, Object> nameToValues = Maps.ordered();
+
+                int i = 0;
+                for (final BoxEdge boxEdge : ALL_BOX_EDGES) {
+                    nameToValues.put(
+                        this.width(boxEdge),
+                        widths.get(i)
+                    );
+                    i++;
+                }
+
                 marginOrPadding = this.setBoxEdgeAndTextStyle(
-                    TextStyle.EMPTY.setValues(
-                        Maps.of(
-                            this.width(BoxEdge.TOP),
-                            widths.get(0),
-                            this.width(BoxEdge.RIGHT),
-                            widths.get(1),
-                            this.width(BoxEdge.BOTTOM),
-                            widths.get(2),
-                            this.width(BoxEdge.LEFT),
-                            widths.get(3)
-                        )
-                    )
+                    TextStyle.EMPTY.setValues(nameToValues)
                 );
                 break;
             default:
@@ -129,6 +130,13 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
 
         return marginOrPadding;
     }
+
+    final static List<BoxEdge> ALL_BOX_EDGES = Lists.of(
+        BoxEdge.TOP,
+        BoxEdge.RIGHT,
+        BoxEdge.BOTTOM,
+        BoxEdge.LEFT
+    );
 
     abstract TextStylePropertyName<Length<?>> width(final BoxEdge boxEdge);
 
