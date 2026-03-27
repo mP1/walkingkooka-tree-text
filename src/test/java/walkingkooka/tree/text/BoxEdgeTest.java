@@ -174,8 +174,8 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             NullPointerException.class,
             () -> BoxEdge.ALL.setBorder(
                 null,
-                BorderStyle.DASHED,
-                Length.none()
+                Optional.empty(), // style
+                Optional.empty() // width
             )
         );
     }
@@ -186,8 +186,8 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             NullPointerException.class,
             () -> BoxEdge.LEFT.setBorder(
                 null,
-                BorderStyle.DASHED,
-                Length.none()
+                Optional.empty(), // style
+                Optional.empty() // width
             )
         );
     }
@@ -197,9 +197,9 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         assertThrows(
             NullPointerException.class,
             () -> BoxEdge.ALL.setBorder(
-                Color.BLACK,
+                Optional.empty(), // color
                 null,
-                Length.none()
+                Optional.empty() // width
             )
         );
     }
@@ -209,9 +209,9 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         assertThrows(
             NullPointerException.class,
             () -> BoxEdge.RIGHT.setBorder(
-                Color.BLACK,
+                Optional.empty(), // color
                 null,
-                Length.none()
+                Optional.empty() // width
             )
         );
     }
@@ -221,8 +221,8 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         assertThrows(
             NullPointerException.class,
             () -> BoxEdge.ALL.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
+                Optional.empty(), // color
+                Optional.empty(), // style
                 null
             )
         );
@@ -233,8 +233,8 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
         assertThrows(
             NullPointerException.class,
             () -> BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
+                Optional.empty(), // color
+                Optional.empty(), // style
                 null
             )
         );
@@ -281,6 +281,20 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
                                    final String expected) {
         this.setBorderAndCheck(
             edge,
+            Optional.of(color),
+            Optional.of(style),
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setBorderAndCheck(final BoxEdge edge,
+                                   final Optional<Color> color,
+                                   final Optional<BorderStyle> style,
+                                   final Optional<Length<?>> width,
+                                   final String expected) {
+        this.setBorderAndCheck(
+            edge,
             color,
             style,
             width,
@@ -293,6 +307,20 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
                                    final Color color,
                                    final BorderStyle style,
                                    final Length<?> width,
+                                   final Border expected) {
+        this.setBorderAndCheck(
+            edge,
+            Optional.of(color),
+            Optional.of(style),
+            Optional.of(width),
+            expected
+        );
+    }
+
+    private void setBorderAndCheck(final BoxEdge edge,
+                                   final Optional<Color> color,
+                                   final Optional<BorderStyle> style,
+                                   final Optional<Length<?>> width,
                                    final Border expected) {
         this.checkEquals(
             expected,
@@ -538,9 +566,11 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "black SOLID 1px",
             BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.SOLID,
-                Length.pixel(1.0)
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
@@ -551,9 +581,13 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "#123 SOLID 1px",
             BoxEdge.TOP.setBorder(
-                Color.parse("#123"),
-                BorderStyle.SOLID,
-                Length.pixel(1.0)
+                Optional.of(
+                    Color.parse("#123")
+                ),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
@@ -564,9 +598,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "#123 SOlid 1px",
             BoxEdge.TOP.setBorder(
-                Color.parse("#123"),
-                BorderStyle.SOLID,
-                Length.pixel(1.0)
+                Optional.of(
+                    Color.parse("#123")
+                ),
+                Optional.of(
+                    BorderStyle.SOLID
+                ),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
@@ -577,9 +617,11 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "black SOLID 1px",
             BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.SOLID,
-                Length.pixel(1.0)
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
@@ -590,9 +632,11 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "  black  SOLID  1px  ",
             BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.SOLID,
-                Length.pixel(1.0)
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
             )
         );
     }
@@ -603,9 +647,11 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "black SOLID none",
             BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.SOLID,
-                Length.none()
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.none()
+                )
             )
         );
     }
@@ -616,9 +662,11 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
             BoxEdge.TOP,
             "black SOLID none  ",
             BoxEdge.TOP.setBorder(
-                Color.BLACK,
-                BorderStyle.SOLID,
-                Length.none()
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.none()
+                )
             )
         );
     }
