@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.predicate.character.CharPredicates;
+import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.TextCursorSavePoint;
 import walkingkooka.text.cursor.TextCursors;
@@ -64,7 +65,7 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
 
             final TextCursorSavePoint start = textCursor.save();
 
-            NOT_SPACE.parse(
+            TOKEN.parse(
                 textCursor,
                 PARSER_CONTEXT
             );
@@ -163,7 +164,7 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
 
             final TextCursorSavePoint start = textCursor.save();
 
-            NOT_SPACE.parse(
+            TOKEN.parse(
                 textCursor,
                 PARSER_CONTEXT
             );
@@ -217,9 +218,30 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
 
     private final static Parser<ParserContext> OPTIONAL_SPACE = REQUIRED_SPACE.optional();
 
-    final static Parser<ParserContext> NOT_SPACE = Parsers.charPredicateString(
+    static TextCursorSavePoint isSeparator(final TextCursor textCursor) {
+        final TextCursorSavePoint savePoint = textCursor.save();
+
+        return SEPARATOR_PARSER.parse(
+            textCursor,
+            PARSER_CONTEXT
+        ).isPresent() ?
+            savePoint :
+            null;
+    }
+
+    final static CharacterConstant SEPARATOR = CharacterConstant.COMMA;
+
+    final static Parser<ParserContext> SEPARATOR_PARSER = Parsers.character(
+        CharPredicates.is(SEPARATOR.character())
+    );
+
+    final static Parser<ParserContext> TOKEN = Parsers.charPredicateString(
         CharPredicates.whitespace()
-            .negate(),
+            .or(
+                CharPredicates.is(
+                    SEPARATOR.character()
+                )
+            ).negate(),
         1,
         255
     );

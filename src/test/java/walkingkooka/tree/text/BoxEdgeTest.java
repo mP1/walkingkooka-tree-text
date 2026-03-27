@@ -615,6 +615,97 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
+    public void testParseBorderCommaFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder(",")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderCommaFails2() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder(", ")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderColorCommaFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("BLACK,")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderSolidCommaFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("BLACK,")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderWidthCommaFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("1px,")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderWidthCommaSpaceFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("1px ,")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
+    public void testParseBorderWidthCommaFails2() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("1px, ")
+        );
+
+        this.characterAndCheck(
+            thrown,
+            ','
+        );
+    }
+
+    @Test
     public void testParseBorderSolidColorFails() {
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
@@ -634,9 +725,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("1px BLACK")
         );
 
-        this.checkEquals(
-            "Invalid character 'B' at 4",
-            thrown.getMessage()
+        this.characterAndCheck(
+            thrown,
+            'B'
         );
     }
 
@@ -647,9 +738,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("1px SOLID")
         );
 
-        this.checkEquals(
-            "Invalid character 'S' at 4",
-            thrown.getMessage()
+        this.characterAndCheck(
+            thrown,
+            'S'
         );
     }
 
@@ -805,13 +896,108 @@ public final class BoxEdgeTest implements TreePrintableTesting,
         );
     }
 
+    @Test
+    public void testParserBorderTopColorRightColorBottomColorLeftColor() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "BLACK, WHITE, RED, GREEN",
+            Border.parse(
+                "top-color: BLACK;" +
+                    "right-color: WHITE;" +
+                    "bottom-color: RED;" +
+                    "left-color: GREEN;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopColorStyleRightColorStyleBottomColorStyleLeftColorStyle() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "BLACK SOLID, WHITE DASHED, RED SOLID, GREEN DASHED",
+            Border.parse(
+                "top-color: BLACK; top-style: SOLID;" +
+                    "right-color: WHITE; right-style: DASHED;" +
+                    "bottom-color: RED; bottom-style: SOLID;" +
+                    "left-color: GREEN; left-style: DASHED;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopColorWidthRightColorWidthBottomColorWidthLeftColorWidth() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "BLACK 1px, WHITE 2px, RED 3px, GREEN 4px",
+            Border.parse(
+                "top-color: BLACK; top-width: 1px;" +
+                    "right-color: WHITE; right-width: 2px;" +
+                    "bottom-color: RED; bottom-width: 3px;" +
+                    "left-color: GREEN; left-width: 4px;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopStyleWidthRightStyleWidthBottomStyleWidthLeftStyleWidth() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "SOLID 1px, DASHED 2px, SOLID 3px, DASHED 4px",
+            Border.parse(
+                "top-style: SOLID; top-width: 1px;" +
+                    "right-style: DASHED; right-width: 2px;" +
+                    "bottom-style: SOLID; bottom-width: 3px;" +
+                    "left-style: DASHED; left-width: 4px;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopColorStyleWidthRightColorStyleWidthBottomColorStyleWidthLeftColorStyleWidth() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "BLACK SOLID 1px, WHITE DASHED 2px, RED SOLID 3px, GREEN DASHED 4px",
+            Border.parse(
+                "top-color: BLACK; top-style: SOLID; top-width: 1px;" +
+                    "right-color: WHITE; right-style: DASHED; right-width: 2px;" +
+                    "bottom-color: RED; bottom-style: SOLID; bottom-width: 3px;" +
+                    "left-color: GREEN; left-style: DASHED; left-width: 4px;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopColorStyleWidthRightColorStyleWidthBottomColorStyleWidthLeftColorStyleWidthExtraSpaces() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "  BLACK  SOLID  1px  ,  WHITE  DASHED  2px  ,  RED  SOLID  3px  ,  GREEN  DASHED  4px  ",
+            Border.parse(
+                "top-color: BLACK; top-style: SOLID; top-width: 1px;" +
+                    "right-color: WHITE; right-style: DASHED; right-width: 2px;" +
+                    "bottom-color: RED; bottom-style: SOLID; bottom-width: 3px;" +
+                    "left-color: GREEN; left-style: DASHED; left-width: 4px;"
+            )
+        );
+    }
+
     private void parseBorderAndCheck(final BoxEdge edge,
                                      final String text,
                                      final Border expected) {
+        expected.toString();
+
         this.checkEquals(
             expected,
             edge.parseBorder(text),
             () -> edge + " parseBorder " + CharSequences.quoteAndEscape(text)
+        );
+    }
+
+    private void characterAndCheck(final InvalidCharacterException thrown,
+                                   final char expected) {
+        this.checkEquals(
+            expected,
+            thrown.character(),
+            thrown::getMessage
         );
     }
 

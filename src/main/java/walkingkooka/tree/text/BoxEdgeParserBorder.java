@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.collect.iterator.Iterators;
 import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursor;
@@ -24,6 +25,7 @@ import walkingkooka.text.cursor.TextCursorSavePoint;
 import walkingkooka.text.cursor.TextCursors;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Optional;
 
 final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
@@ -48,33 +50,66 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
     Border parseBorder(final String text) {
         final TextCursor textCursor = TextCursors.charSequence(text);
 
+        skipOptionalSpaces(textCursor);
+
+        final BoxEdge boxEdge = this.boxEdge;
+
+        final TextStyle textStyle = this.parseBorder0(
+            textCursor,
+            TextStyle.EMPTY,
+            BoxEdge.ALL == boxEdge ?
+                ALL_BOX_EDGES.iterator() :
+                Iterators.one(boxEdge)
+        );
+
+        skipOptionalSpaces(textCursor);
+        if (textCursor.isNotEmpty()) {
+            throw textCursor.lineInfo()
+                .invalidCharacterException()
+                .get();
+        }
+
+        return this.boxEdge.border(textStyle);
+    }
+
+    private TextStyle parseBorder0(final TextCursor textCursor,
+                                   final TextStyle textStyle,
+                                   final Iterator<BoxEdge> nextBoxEdge) {
+        final BoxEdge boxEdge = nextBoxEdge.next();
+
+        TextStyle after = textStyle;
+
         Color color = null;
         BorderStyle style = null;
         Length<?> width = null;
 
-        boolean optionalSpaces = true;
+        TextCursorSavePoint separator = null;
 
         while (textCursor.isNotEmpty()) {
-            if (optionalSpaces) {
-                skipOptionalSpaces(textCursor);
-                optionalSpaces = false; // required
-            } else {
-                skipRequiredSpaces(textCursor);
+            separator = isSeparator(textCursor);
+
+            if (null != separator) {
+                break;
             }
 
-            if (textCursor.isEmpty()) {
-                break;
+            // if cursor not empty expect separator after WIDTH
+            if (null != width) {
+                throw textCursor.lineInfo()
+                    .invalidCharacterException()
+                    .get();
             }
 
             final TextCursorSavePoint start = textCursor.save();
 
-            NOT_SPACE.parse(
+            TOKEN.parse(
                 textCursor,
                 PARSER_CONTEXT
             );
 
             final String token = start.textBetween()
                 .toString();
+            skipOptionalSpaces(textCursor);
+
             RuntimeException firstRuntime = null;
 
             if (null == color && null == width && null == style) {
@@ -115,16 +150,55 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                 throw firstRuntime;
             }
 
+            if (nextBoxEdge.hasNext()) {
+                break;
+            }
+
             // not color, style or width InvalidCharacterException
             throw start.lineInfo()
                 .emptyTextOrInvalidCharacterExceptionOrLast("text");
         }
 
-        return this.boxEdge.setBorder(
-            Optional.ofNullable(color),
-            Optional.ofNullable(style),
-            Optional.ofNullable(width)
-        );
+        if (null != color) {
+            after = after.set(
+                boxEdge.borderColorPropertyName(),
+                color
+            );
+        }
+
+        if (null != style) {
+            after = after.set(
+                boxEdge.borderStylePropertyName(),
+                style
+            );
+        }
+
+        if (null != width) {
+            after = after.set(
+                boxEdge.borderWidthPropertyName(),
+                width
+            );
+        }
+
+        if (null != separator) {
+            skipOptionalSpaces(textCursor);
+
+            if (textCursor.isEmpty() || false == nextBoxEdge.hasNext()) {
+                throw separator.lineInfo()
+                    .invalidCharacterException()
+                    .get();
+            }
+
+            skipOptionalSpaces(textCursor);
+
+            after = parseBorder0(
+                textCursor,
+                after,
+                nextBoxEdge
+            );
+        }
+
+        return after;
     }
 
     @Override
@@ -134,7 +208,10 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
 
     @Override
     Border setBoxEdgeAndTextStyle(final TextStyle textStyle) {
-        throw new UnsupportedOperationException();
+        return Border.with(
+            this.boxEdge,
+            textStyle
+        );
     }
 
     @Override
