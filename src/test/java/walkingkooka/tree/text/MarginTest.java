@@ -198,6 +198,49 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         return Margin.parse(text);
     }
 
+    // valueAsText......................................................................................................
+
+    @Test
+    public void testValuesAsTextWithEmptyAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.margin(BoxEdge.ALL),
+            ""
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithEmptyAndTop() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.margin(BoxEdge.TOP),
+            ""
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithNotEmptyAndTop() {
+        this.valuesAsTextAndCheck(
+            BoxEdge.TOP.parseMargin("1px"),
+            "1px"
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithNotEmptyAndAll() {
+        this.valuesAsTextAndCheck(
+            BoxEdge.ALL.parseMargin("1px"),
+            "1px"
+        );
+    }
+
+    @Test
+    public void testValuesAsTextWithNotEmptyAllDifferentAndAll() {
+        this.valuesAsTextAndCheck(
+            TextStyle.EMPTY.parse("margin-top: 1px; margin-bottom: 2px; margin-left: 3px; margin-bottom: 4px;")
+                .margin(BoxEdge.ALL),
+            ""
+        );
+    }
+
     // class............................................................................................................
 
     @Override
