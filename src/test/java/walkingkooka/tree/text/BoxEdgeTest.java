@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.EmptyTextException;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
@@ -488,10 +487,15 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
-    public void testParseBorderWithEmptyFails() {
-        assertThrows(
-            EmptyTextException.class,
-            () -> BoxEdge.ALL.parseBorder("")
+    public void testParseBorderWithEmpty() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "",
+            BoxEdge.ALL.setBorder(
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()
+            )
         );
     }
 
@@ -561,7 +565,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
-    public void testParseBorderColorName() {
+    public void testParseBorderColorNameStyleWidth() {
         this.parseBorderAndCheck(
             BoxEdge.TOP,
             "black SOLID 1px",
@@ -576,7 +580,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
-    public void testParseBorderRgbColor() {
+    public void testParseBorderRgbColorStyleWidth() {
         this.parseBorderAndCheck(
             BoxEdge.TOP,
             "#123 SOLID 1px",
@@ -593,7 +597,7 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
-    public void testParseBorderMixedCaseStyle() {
+    public void testParseBorderColorMixedCaseStyleWidth() {
         this.parseBorderAndCheck(
             BoxEdge.TOP,
             "#123 SOlid 1px",
@@ -612,13 +616,54 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
     }
 
     @Test
-    public void testParseBorder() {
+    public void testParseBorderColor() {
         this.parseBorderAndCheck(
             BoxEdge.TOP,
-            "black SOLID 1px",
+            "black",
             BoxEdge.TOP.setBorder(
                 Optional.of(Color.BLACK),
+                Optional.empty(),
+                Optional.empty()
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderStyle() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "SOLID",
+            BoxEdge.TOP.setBorder(
+                Optional.empty(),
                 Optional.of(BorderStyle.SOLID),
+                Optional.empty()
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderStyleWidth() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "SOLID 1px",
+            BoxEdge.TOP.setBorder(
+                Optional.empty(),
+                Optional.of(BorderStyle.SOLID),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderWidth() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "1px",
+            BoxEdge.TOP.setBorder(
+                Optional.empty(),
+                Optional.empty(),
                 Optional.of(
                     Length.pixel(1.0)
                 )
