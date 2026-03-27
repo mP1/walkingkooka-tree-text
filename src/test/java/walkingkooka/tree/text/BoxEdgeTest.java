@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.EmptyTextException;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
@@ -445,6 +446,190 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
                 width
             ),
             () -> edge + " setPadding " + width
+        );
+    }
+
+    // parseBorder......................................................................................................
+
+    @Test
+    public void testParseBorderWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.parseBorder(null)
+        );
+    }
+
+    @Test
+    public void testParseBorderWithEmptyFails() {
+        assertThrows(
+            EmptyTextException.class,
+            () -> BoxEdge.ALL.parseBorder("")
+        );
+    }
+
+    @Test
+    public void testParseBorderInvalidColorFails() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("!invalid-color SOLID 1px")
+        );
+
+        this.checkEquals(
+            "Invalid rgb \"!invalid-color\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderInvalidColorFails2() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("  !invalid-color SOLID 1px")
+        );
+
+        this.checkEquals(
+            "Invalid rgb \"!invalid-color\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderInvalidBorderStyleFails() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("black !INVALID 1px")
+        );
+
+        this.checkEquals(
+            "Unknown style \"!INVALID\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderInvalidBorderWidthFails() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("black SOLID !invalid")
+        );
+
+        this.checkEquals(
+            "Invalid number length \"!invalid\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderInvalidBorderWidthFails2() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("black SOLID !invalid ")
+        );
+
+        this.checkEquals(
+            "Invalid number length \"!invalid\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderColorName() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "black SOLID 1px",
+            BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.SOLID,
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderRgbColor() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "#123 SOLID 1px",
+            BoxEdge.TOP.setBorder(
+                Color.parse("#123"),
+                BorderStyle.SOLID,
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderMixedCaseStyle() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "#123 SOlid 1px",
+            BoxEdge.TOP.setBorder(
+                Color.parse("#123"),
+                BorderStyle.SOLID,
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorder() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "black SOLID 1px",
+            BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.SOLID,
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderExtraSpaces() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "  black  SOLID  1px  ",
+            BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.SOLID,
+                Length.pixel(1.0)
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderNoneLength() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "black SOLID none",
+            BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.SOLID,
+                Length.none()
+            )
+        );
+    }
+
+    @Test
+    public void testParseBorderTrailingSpace() {
+        this.parseBorderAndCheck(
+            BoxEdge.TOP,
+            "black SOLID none  ",
+            BoxEdge.TOP.setBorder(
+                Color.BLACK,
+                BorderStyle.SOLID,
+                Length.none()
+            )
+        );
+    }
+
+    private void parseBorderAndCheck(final BoxEdge edge,
+                                     final String text,
+                                     final Border expected) {
+        this.checkEquals(
+            expected,
+            edge.parseBorder(text),
+            () -> edge + " parseBorder " + CharSequences.quoteAndEscape(text)
         );
     }
 
