@@ -54,9 +54,9 @@ public final class Padding extends BorderMarginPadding {
     }
 
     @Override
-    public <V> Padding setProperty(final TextStylePropertyName<V> propertyName,
-                                   final Optional<V> value) {
-        return this.setProperty0(
+    public <V> Padding setOrRemoveProperty(final TextStylePropertyName<V> propertyName,
+                                           final Optional<V> value) {
+        return this.setOrRemoveProperty0(
             propertyName,
             value
         ).cast();

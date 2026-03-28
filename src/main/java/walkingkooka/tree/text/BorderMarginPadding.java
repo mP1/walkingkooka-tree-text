@@ -59,7 +59,7 @@ abstract class BorderMarginPadding implements HasTextStyle,
     abstract BorderMarginPadding setWidth(final Optional<Length<?>> width);
 
     final BorderMarginPadding setWidth0(final Optional<Length<?>> width) {
-        return this.setProperty0(
+        return this.setOrRemoveProperty0(
             this.widthPropertyName(),
             width
         );
@@ -70,14 +70,14 @@ abstract class BorderMarginPadding implements HasTextStyle,
      */
     abstract TextStylePropertyName<Length<?>> widthPropertyName();
 
-    public abstract <V> BorderMarginPadding setProperty(final TextStylePropertyName<V> propertyName,
-                                                        final Optional<V> value);
+    public abstract <V> BorderMarginPadding setOrRemoveProperty(final TextStylePropertyName<V> propertyName,
+                                                                final Optional<V> value);
 
     /**
      * Replaces a property if the value is different returning a new {@link BorderMarginPadding}.
      */
-    final <V> BorderMarginPadding setProperty0(final TextStylePropertyName<V> propertyName,
-                                               final Optional<V> value) {
+    final <V> BorderMarginPadding setOrRemoveProperty0(final TextStylePropertyName<V> propertyName,
+                                                       final Optional<V> value) {
         // edge test ensures cannot set border-bottom-XXX will be rejected when edge=TOP, but edge=ALL would allow
         if (false == (this.isProperty(propertyName) && this.edge.isTextStyleProperty(propertyName))) {
             throw this.invalidTextStylePropertyNameException(propertyName);

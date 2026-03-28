@@ -204,14 +204,14 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
-    // setProperty......................................................................................................
+    // setOrRemoveProperty..............................................................................................
 
     @Test
-    public final void testSetPropertyWithNullNameFails() {
+    public final void testSetOrRemovePropertyWithNullNameFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createBorderMarginPadding()
-                .setProperty(
+                .setOrRemoveProperty(
                     null,
                     Optional.empty()
                 )
@@ -219,11 +219,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     }
 
     @Test
-    public final void testSetPropertyWithNullInvalidNameFails() {
+    public final void testSetOrRemovePropertyWithNullInvalidNameFails() {
         assertThrows(
             InvalidTextStylePropertyNameException.class,
             () -> this.createBorderMarginPadding()
-                .setProperty(
+                .setOrRemoveProperty(
                     TextStylePropertyName.TEXT_ALIGN,
                     Optional.empty()
                 )
@@ -231,21 +231,21 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     }
 
     @Test
-    public final void testSetPropertyWithNullValueFails() {
+    public final void testSetOrRemovePropertyWithNullValueFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createBorderMarginPadding()
-                .setProperty(
+                .setOrRemoveProperty(
                     this.widthPropertyName(BoxEdge.TOP),
                     null
                 )
         );
     }
 
-    final <V> void setPropertyAndCheck(final T borderMappingPadding,
-                                       final TextStylePropertyName<V> name,
-                                       final T expected) {
-        this.setPropertyAndCheck(
+    final <V> void setOrRemovePropertyAndCheck(final T borderMappingPadding,
+                                               final TextStylePropertyName<V> name,
+                                               final T expected) {
+        this.setOrRemovePropertyAndCheck(
             borderMappingPadding,
             name,
             Optional.empty(),
@@ -253,20 +253,20 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
-    final <V> void setPropertyAndCheck(final T borderMappingPadding,
-                                       final TextStylePropertyName<V> name,
-                                       final V value) {
-        this.setPropertyAndCheck(
+    final <V> void setOrRemovePropertyAndCheck(final T borderMappingPadding,
+                                               final TextStylePropertyName<V> name,
+                                               final V value) {
+        this.setOrRemovePropertyAndCheck(
             borderMappingPadding,
             name,
             Optional.of(value)
         );
     }
 
-    final <V> void setPropertyAndCheck(final T borderMappingPadding,
-                                       final TextStylePropertyName<V> name,
-                                       final Optional<V> value) {
-        this.setPropertyAndCheck(
+    final <V> void setOrRemovePropertyAndCheck(final T borderMappingPadding,
+                                               final TextStylePropertyName<V> name,
+                                               final Optional<V> value) {
+        this.setOrRemovePropertyAndCheck(
             borderMappingPadding,
             name,
             value,
@@ -274,11 +274,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
-    final <V> void setPropertyAndCheck(final T borderMappingPadding,
-                                       final TextStylePropertyName<V> name,
-                                       final V value,
-                                       final T expected) {
-        this.setPropertyAndCheck(
+    final <V> void setOrRemovePropertyAndCheck(final T borderMappingPadding,
+                                               final TextStylePropertyName<V> name,
+                                               final V value,
+                                               final T expected) {
+        this.setOrRemovePropertyAndCheck(
             borderMappingPadding,
             name,
             Optional.of(value),
@@ -286,27 +286,27 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
-    final <V> void setPropertyAndCheck(final T borderMappingPadding,
-                                       final TextStylePropertyName<V> name,
-                                       final Optional<V> value,
-                                       final T expected) {
+    final <V> void setOrRemovePropertyAndCheck(final T borderMappingPadding,
+                                               final TextStylePropertyName<V> name,
+                                               final Optional<V> value,
+                                               final T expected) {
         if (expected.equals(borderMappingPadding)) {
             assertSame(
                 expected,
-                borderMappingPadding.setProperty(
+                borderMappingPadding.setOrRemoveProperty(
                     name,
                     value
                 ),
-                () -> borderMappingPadding + " setProperty " + name + " " + value.orElse(null)
+                () -> borderMappingPadding + " setOrRemoveProperty " + name + " " + value.orElse(null)
             );
         } else {
             this.checkEquals(
                 expected,
-                borderMappingPadding.setProperty(
+                borderMappingPadding.setOrRemoveProperty(
                     name,
                     value
                 ),
-                () -> borderMappingPadding + " setProperty " + name + " " + value.orElse(null)
+                () -> borderMappingPadding + " setOrRemoveProperty " + name + " " + value.orElse(null)
             );
         }
     }
