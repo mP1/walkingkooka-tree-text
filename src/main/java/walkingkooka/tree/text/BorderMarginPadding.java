@@ -70,8 +70,11 @@ abstract class BorderMarginPadding implements HasTextStyle,
      */
     abstract TextStylePropertyName<Length<?>> widthPropertyName();
 
-    public final <V> BorderMarginPadding setProperty(final TextStylePropertyName<V> propertyName,
-                                                     final V value) {
+    public abstract <V> BorderMarginPadding setProperty(final TextStylePropertyName<V> propertyName,
+                                                        final V value);
+
+    final <V> BorderMarginPadding setProperty0(final TextStylePropertyName<V> propertyName,
+                                               final V value) {
         Objects.requireNonNull(propertyName, "propertyName");
         Objects.requireNonNull(value, "value");
 
