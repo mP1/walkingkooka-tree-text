@@ -1110,7 +1110,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
-    public void testParsePaddingTop() {
+    public void testParsePaddingTopLength() {
         this.parsePaddingAndCheck(
             BoxEdge.TOP,
             "1px",
@@ -1120,10 +1120,30 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
-    public void testParsePaddingLeft() {
+    public void testParsePaddingTopPropertyNameLength() {
+        this.parsePaddingAndCheck(
+            BoxEdge.TOP,
+            "top: 1px",
+            TextStyle.parse("padding-top: 1px")
+                .padding(BoxEdge.TOP)
+        );
+    }
+
+    @Test
+    public void testParsePaddingLeftLength() {
         this.parsePaddingAndCheck(
             BoxEdge.LEFT,
             "1px",
+            TextStyle.parse("padding-left: 1px")
+                .padding(BoxEdge.LEFT)
+        );
+    }
+
+    @Test
+    public void testParsePaddingLeftPropertyNameAndLength() {
+        this.parsePaddingAndCheck(
+            BoxEdge.LEFT,
+            "left: 1px;",
             TextStyle.parse("padding-left: 1px")
                 .padding(BoxEdge.LEFT)
         );
@@ -1139,7 +1159,16 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
-    public void testParsePaddingAllWithTopRightBottomLeft() {
+    public void testParsePaddingAllWithTopRightBottomPropertyNameAndLengths() {
+        this.parsePaddingAndCheck(
+            BoxEdge.ALL,
+            "top: 1.0px; right: 2.0px; bottom: 3.0px;",
+            Padding.parse("padding-top: 1px; padding-right: 2px; padding-bottom: 3px;")
+        );
+    }
+
+    @Test
+    public void testParsePaddingAllWithTopRightBottomLeftLengths() {
         this.parsePaddingAndCheck(
             BoxEdge.ALL,
             "1.0px 2.0px 3.0px 4.0px",

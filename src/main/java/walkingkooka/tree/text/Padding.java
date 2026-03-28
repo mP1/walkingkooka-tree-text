@@ -120,7 +120,7 @@ public final class Padding extends BorderMarginPadding {
         return PREFIX_LENGTH;
     }
 
-    private final static String PREFIX = "padding-";
+    final static String PREFIX = "padding-";
 
     private final static int PREFIX_LENGTH = PREFIX.length();
 
