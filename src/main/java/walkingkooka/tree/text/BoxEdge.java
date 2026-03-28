@@ -23,6 +23,8 @@ import walkingkooka.color.Color;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * One of the four edge around a box with methods to retrieve {@link Border}, {@link Margin} and {@link Padding}
@@ -325,34 +327,47 @@ public enum BoxEdge {
     // parseMargin......................................................................................................
 
     public final Margin parseMargin(final String text) {
-        Objects.requireNonNull(text, "text");
-
-        // if assignment is present use TextStyle to parse a limit subset of properties.
-        return -1 != text.indexOf(TextStyle.ASSIGNMENT.character()) ?
-            TextStyle.parse0(
-                text,
-                Margin.PREFIX,
-                (n) -> n.isMargin() && this.isTextStyleProperty(n),
-                InvalidTextStylePropertyNameException::margin
-            ).margin(this) :
-            BoxEdgeParserMargin.with(this)
-                .parseMarginOrPadding(text);
+        return this.parseMarginPadding(
+            text,
+            Margin.PREFIX,
+            TextStylePropertyName::isMargin,
+            InvalidTextStylePropertyNameException::margin,
+            (TextStyle textStyle) -> textStyle.margin(this),
+            BoxEdgeParserMargin::with
+        );
     }
 
     // parsePadding.....................................................................................................
 
     public final Padding parsePadding(final String text) {
+        return this.parseMarginPadding(
+            text,
+            Padding.PREFIX,
+            TextStylePropertyName::isPadding,
+            InvalidTextStylePropertyNameException::padding,
+            (TextStyle textStyle) -> textStyle.padding(this),
+            BoxEdgeParserPadding::with
+        );
+    }
+
+    private <BMP extends BorderMarginPadding> BMP parseMarginPadding(final String text,
+                                                                     final String prefix,
+                                                                     final Predicate<TextStylePropertyName<?>> isMarginOrPadding,
+                                                                     final Function<TextStylePropertyName<?>, InvalidTextStylePropertyNameException> invalidTextStylePropertyNameException,
+                                                                     final Function<TextStyle, BMP> marginPaddingFactory,
+                                                                     final Function<BoxEdge, BoxEdgeParser<BMP>> boxEdgeParserFactory) {
         Objects.requireNonNull(text, "text");
 
-        // if assignment is present use TextStyle to parse a limit subset of properties.
         return -1 != text.indexOf(TextStyle.ASSIGNMENT.character()) ?
-            TextStyle.parse0(
-                text,
-                Padding.PREFIX,
-                (n) -> n.isPadding() && this.isTextStyleProperty(n),
-                InvalidTextStylePropertyNameException::padding
-            ).padding(this) :
-            BoxEdgeParserPadding.with(this)
+            marginPaddingFactory.apply(
+                TextStyle.parse0(
+                    text,
+                    prefix,
+                    (n) -> isMarginOrPadding.test(n) && this.isTextStyleProperty(n),
+                    invalidTextStylePropertyNameException
+                )
+            ) :
+            boxEdgeParserFactory.apply(this)
                 .parseMarginOrPadding(text);
     }
 
