@@ -46,6 +46,25 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
             Margin.parse("top: 1px; bottom: 2.0px;")
         );
     }
+
+    // removeProperty...................................................................................................
+
+    @Test
+    public void testRemovePropertyMissingProperty() {
+        this.removePropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_BOTTOM
+        );
+    }
+
+    @Test
+    public void testRemovePropertyExisting() {
+        this.removePropertyAndCheck(
+            Margin.parse("top: 1px; bottom: 2px;"),
+            TextStylePropertyName.MARGIN_BOTTOM,
+            Margin.parse("top: 1px; ")
+        );
+    }
     
     // toString.........................................................................................................
 

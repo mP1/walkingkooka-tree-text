@@ -222,6 +222,25 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    // removeProperty...................................................................................................
+
+    @Test
+    public void testRemovePropertyWithMissing() {
+        this.removePropertyAndCheck(
+            Border.parse("top-color: black;"),
+            TextStylePropertyName.BORDER_TOP_STYLE
+        );
+    }
+
+    @Test
+    public void testRemovePropertyExisting() {
+        this.removePropertyAndCheck(
+            Border.parse("top-color: black; top-style: dashed;"),
+            TextStylePropertyName.BORDER_TOP_STYLE,
+            Border.parse("top-color: black;")
+        );
+    }
+
     // setOrRemoveProperty..............................................................................................
 
     @Test
