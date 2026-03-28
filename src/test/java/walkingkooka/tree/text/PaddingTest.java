@@ -26,6 +26,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Padding.parse("top: 1px;"),
+            TextStylePropertyName.PADDING_TOP,
+            Length.pixel(1.0)
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithDifferent() {
+        this.setPropertyAndCheck(
+            Padding.parse("top: 1px;"),
+            TextStylePropertyName.PADDING_BOTTOM,
+            Length.pixel(2.0),
+            Padding.parse("top: 1px; bottom: 2.0px;")
+        );
+    }
+    
     // toString.........................................................................................................
 
     @Test

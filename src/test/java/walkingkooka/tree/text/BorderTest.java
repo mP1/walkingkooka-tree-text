@@ -201,6 +201,27 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black;"),
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            Color.BLACK
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithDifferent() {
+        this.setPropertyAndCheck(
+            Border.parse("top-color: black;"),
+            TextStylePropertyName.BORDER_TOP_STYLE,
+            BorderStyle.DASHED,
+            Border.parse("top-color: black; top-style: dashed;")
+        );
+    }
+
     // setOrRemoveProperty..............................................................................................
 
     @Test
