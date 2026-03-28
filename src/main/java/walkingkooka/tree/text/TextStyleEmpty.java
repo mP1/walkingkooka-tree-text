@@ -233,6 +233,6 @@ final class TextStyleEmpty extends TextStyle {
 
     @Override
     String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
-        throw new UnsupportedOperationException(); // is empty will never be called
+        return "";
     }
 }
