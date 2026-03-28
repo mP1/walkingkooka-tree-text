@@ -24,6 +24,7 @@ import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -32,7 +33,8 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
+public final class BoxEdgeTest implements TreePrintableTesting,
+    ClassTesting2<BoxEdge> {
 
     @Test
     public void testBorderColorPropertyName() {
