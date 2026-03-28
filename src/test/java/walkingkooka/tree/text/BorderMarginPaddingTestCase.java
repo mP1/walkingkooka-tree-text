@@ -204,6 +204,68 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
+    // setProperty......................................................................................................
+
+    @Test
+    public final void testSetPropertyWithNullNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .setProperty(
+                    null,
+                    "Hello"
+                )
+        );
+    }
+
+    @Test
+    public final void testSetPropertyWithNullValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .setOrRemoveProperty(
+                    this.widthPropertyName(BoxEdge.TOP),
+                    null
+                )
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final V value) {
+        this.setPropertyAndCheck(
+            borderMappingPadding,
+            name,
+            value,
+            borderMappingPadding
+        );
+    }
+
+    final <V> void setPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> name,
+                                       final V value,
+                                       final T expected) {
+        if (expected.equals(borderMappingPadding)) {
+            assertSame(
+                expected,
+                borderMappingPadding.setProperty(
+                    name,
+                    value
+                ),
+                () -> borderMappingPadding + " setProperty " + name + " " + value
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                borderMappingPadding.setProperty(
+                    name,
+                    value
+                ),
+                () -> borderMappingPadding + " setProperty " + name + " " + value
+            );
+        }
+    }
+
     // setOrRemoveProperty..............................................................................................
 
     @Test

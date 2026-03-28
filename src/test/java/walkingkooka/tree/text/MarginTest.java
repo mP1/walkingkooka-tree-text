@@ -26,6 +26,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
+    // setProperty......................................................................................................
+
+    @Test
+    public void testSetPropertyWithSame() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_TOP,
+            Length.pixel(1.0)
+        );
+    }
+
+    @Test
+    public void testSetPropertyWithDifferent() {
+        this.setPropertyAndCheck(
+            Margin.parse("top: 1px;"),
+            TextStylePropertyName.MARGIN_BOTTOM,
+            Length.pixel(2.0),
+            Margin.parse("top: 1px; bottom: 2.0px;")
+        );
+    }
+    
     // toString.........................................................................................................
 
     @Test
