@@ -142,7 +142,9 @@ public final class Border extends BorderMarginPadding {
         if (textStyle.isEmpty()) {
             text = "";
         } else {
-            if (BoxEdge.ALL == this.edge) {
+            final BoxEdge boxEdge = this.edge;
+
+            if (BoxEdge.ALL == boxEdge) {
                 final Color topColor = textStyle.get(TextStylePropertyName.BORDER_TOP_COLOR)
                     .orElse(null);
                 final BorderStyle topStyle = textStyle.get(TextStylePropertyName.BORDER_TOP_STYLE)
@@ -245,6 +247,23 @@ public final class Border extends BorderMarginPadding {
                         text = b.toString();
                     }
                 }
+            } else {
+                final StringBuilder b = new StringBuilder();
+
+                appendIfNotNull(
+                    textStyle.get(
+                        boxEdge.borderColorPropertyName()
+                    ).orElse(null),
+                    textStyle.get(
+                        boxEdge.borderStylePropertyName()
+                    ).orElse(null),
+                    textStyle.get(
+                        boxEdge.borderWidthPropertyName()
+                    ).orElse(null),
+                    b
+                );
+
+                text = b.toString();
             }
         }
 
