@@ -1038,10 +1038,20 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
-    public void testParseMarginLeft() {
+    public void testParseMarginLeftAndLength() {
         this.parseMarginAndCheck(
             BoxEdge.LEFT,
             "1px",
+            TextStyle.parse("margin-left: 1px")
+                .margin(BoxEdge.LEFT)
+        );
+    }
+
+    @Test
+    public void testParseMarginLeftPropertyNameAndLength() {
+        this.parseMarginAndCheck(
+            BoxEdge.LEFT,
+            "left: 1px",
             TextStyle.parse("margin-left: 1px")
                 .margin(BoxEdge.LEFT)
         );
@@ -1057,11 +1067,20 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
-    public void testParseMarginAllWithTopRightBottomLeft() {
+    public void testParseMarginAllWithTopRightBottomLeftLengths() {
         this.parseMarginAndCheck(
             BoxEdge.ALL,
             "1.0px 2.0px 3.0px 4.0px",
             Margin.parse("top: 1px; right: 2px; bottom: 3px; left: 4px;")
+        );
+    }
+
+    @Test
+    public void testParseMarginAllWithTopLeftPropertyNameAndLengths() {
+        this.parseMarginAndCheck(
+            BoxEdge.ALL,
+            "top: 1.0px; left: 2.0px;",
+            Margin.parse("top: 1px; left: 2px;")
         );
     }
 
