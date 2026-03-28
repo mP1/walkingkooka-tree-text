@@ -205,7 +205,7 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testParseWithPrefix() {
+    public void testParsePropertyNamesWithPrefix() {
         final String text = "margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;";
 
         this.parseStringAndCheck(
@@ -216,7 +216,7 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testParseWithoutPrefix() {
+    public void testParsePropertyNamesWithoutPrefix() {
         final String text = "margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;";
 
         this.parseStringAndCheck(
@@ -227,10 +227,19 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testParseWithAndWithoutPrefix() {
+    public void testParsePropertyNamesWithAndWithoutPrefix() {
         this.parseStringAndCheck(
             "margin-top: 1px; margin-right: 2px; bottom: 3px; right: 4px;",
             TextStyle.parse("margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;")
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseLengths() {
+        this.parseStringAndCheck(
+            "1px 2px 3px 4px",
+            TextStyle.parse("margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-left: 4px;")
                 .margin(BoxEdge.ALL)
         );
     }
