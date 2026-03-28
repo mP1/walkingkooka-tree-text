@@ -201,15 +201,15 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
-    // setProperty......................................................................................................
+    // setOrRemoveProperty..............................................................................................
 
     @Test
-    public void testSetPropertyWithInvalidFails() {
+    public void testSetOrRemovePropertyWithInvalidFails() {
         assertThrows(
             InvalidTextStylePropertyNameException.class,
             () -> Border.parse("top-color: black; top-style: solid; top-width: 1px;")
                 .setEdge(BoxEdge.TOP)
-                .setProperty(
+                .setOrRemoveProperty(
                     TextStylePropertyName.BORDER_BOTTOM_COLOR,
                     Optional.of(Color.WHITE)
                 )
@@ -217,8 +217,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testSetPropertyWithSame() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithSame() {
+        this.setOrRemovePropertyAndCheck(
             Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
             TextStylePropertyName.BORDER_TOP_COLOR,
             Color.BLACK
@@ -226,8 +226,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testSetPropertyWithReplaced() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithReplaced() {
+        this.setOrRemovePropertyAndCheck(
             Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
             TextStylePropertyName.BORDER_TOP_COLOR,
             Color.WHITE,
@@ -236,8 +236,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testSetPropertyRemoved() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyRemoved() {
+        this.setOrRemovePropertyAndCheck(
             Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
             TextStylePropertyName.BORDER_TOP_COLOR,
             Border.parse("top-style: solid; top-width: 1px;")
@@ -245,8 +245,8 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testSetPropertyWithEdgeAll() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithEdgeAll() {
+        this.setOrRemovePropertyAndCheck(
             Border.parse("top-color: black; top-style: solid; top-width: 1px;"),
             TextStylePropertyName.BORDER_BOTTOM_COLOR,
             Color.WHITE,
@@ -471,7 +471,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                     BorderStyle.DASHED,
                     Length.pixel(1.0)
                 ).border(BoxEdge.LEFT)
-                .setProperty(
+                .setOrRemoveProperty(
                     TextStylePropertyName.BORDER_LEFT_COLOR,
                     Optional.empty()
                 ),

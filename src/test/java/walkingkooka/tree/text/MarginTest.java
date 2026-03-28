@@ -78,15 +78,15 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         return edge.marginPropertyName();
     }
 
-    // setProperty......................................................................................................
+    // setOrRemoveProperty......................................................................................................
 
     @Test
-    public void testSetPropertyWithInvalidFails() {
+    public void testSetOrRemovePropertyWithInvalidFails() {
         assertThrows(
             InvalidTextStylePropertyNameException.class,
             () -> Margin.parse("top: 1px;")
                 .setEdge(BoxEdge.TOP)
-                .setProperty(
+                .setOrRemoveProperty(
                     TextStylePropertyName.MARGIN_BOTTOM,
                     Optional.of(
                         Length.pixel(222.0)
@@ -96,8 +96,8 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testSetPropertyWithSame() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithSame() {
+        this.setOrRemovePropertyAndCheck(
             Margin.parse("top: 1px;"),
             TextStylePropertyName.MARGIN_TOP,
             Length.pixel(1.0)
@@ -105,8 +105,8 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testSetPropertyWithReplaced() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithReplaced() {
+        this.setOrRemovePropertyAndCheck(
             Margin.parse("top: 1px;"),
             TextStylePropertyName.MARGIN_TOP,
             Length.pixel(2.0),
@@ -115,8 +115,8 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testSetPropertyRemoved() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyRemoved() {
+        this.setOrRemovePropertyAndCheck(
             Margin.parse("top: 1px;"),
             TextStylePropertyName.MARGIN_TOP,
             Margin.parse("")
@@ -124,8 +124,8 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
-    public void testSetPropertyWhenAll() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWhenAll() {
+        this.setOrRemovePropertyAndCheck(
             Margin.parse("top: 1px;"),
             TextStylePropertyName.MARGIN_BOTTOM,
             Length.pixel(2.0),

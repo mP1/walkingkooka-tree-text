@@ -130,14 +130,14 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         return Padding.parse(text);
     }
 
-    // setProperty......................................................................................................
+    // setOrRemoveProperty..............................................................................................
 
     @Test
-    public void testSetPropertyWithInvalidFails() {
+    public void testSetOrRemovePropertyWithInvalidFails() {
         assertThrows(
             InvalidTextStylePropertyNameException.class,
             () -> Padding.parse("top: 1px;")
-                .setProperty(
+                .setOrRemoveProperty(
                     TextStylePropertyName.MARGIN_BOTTOM,
                     Optional.of(
                         Length.pixel(222.0)
@@ -147,8 +147,8 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
-    public void testSetPropertyWithSame() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithSame() {
+        this.setOrRemovePropertyAndCheck(
             Padding.parse("top: 1px;"),
             TextStylePropertyName.PADDING_TOP,
             Length.pixel(1.0)
@@ -156,8 +156,8 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
-    public void testSetPropertyWithReplaced() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithReplaced() {
+        this.setOrRemovePropertyAndCheck(
             Padding.parse("top: 1px;"),
             TextStylePropertyName.PADDING_TOP,
             Length.pixel(2.0),
@@ -166,8 +166,8 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
-    public void testSetPropertyWithAll() {
-        this.setPropertyAndCheck(
+    public void testSetOrRemovePropertyWithAll() {
+        this.setOrRemovePropertyAndCheck(
             Padding.parse("top: 1px;"),
             TextStylePropertyName.PADDING_BOTTOM,
             Length.pixel(2.0),
