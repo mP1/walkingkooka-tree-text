@@ -308,40 +308,4 @@ public final class Border extends BorderMarginPadding {
     final static String PREFIX = "border-";
 
     private final static int PREFIX_LENGTH = PREFIX.length();
-
-    // valuesAsText()...................................................................................................
-
-    @Override
-    public String valuesAsText() {
-        final StringBuilder b = new StringBuilder();
-
-        valueAsTextAppend(
-            this.color(),
-            b
-        );
-
-        valueAsTextAppend(
-            this.style(),
-            b
-        );
-
-        valueAsTextAppend(
-            this.width(),
-            b
-        );
-
-        return b.toString();
-    }
-
-    private static void valueAsTextAppend(final Optional<?> value,
-                                          final StringBuilder b) {
-        if (value.isPresent()) {
-            if (b.length() > 0) {
-                b.append(' ');
-            }
-            b.append(
-                value.get()
-            );
-        }
-    }
 }

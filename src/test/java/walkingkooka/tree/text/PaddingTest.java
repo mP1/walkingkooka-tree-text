@@ -244,49 +244,6 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         );
     }
 
-    // valueAsText......................................................................................................
-
-    @Test
-    public void testValuesAsTextWithEmptyAndAll() {
-        this.valuesAsTextAndCheck(
-            TextStyle.EMPTY.padding(BoxEdge.ALL),
-            ""
-        );
-    }
-
-    @Test
-    public void testValuesAsTextWithEmptyAndTop() {
-        this.valuesAsTextAndCheck(
-            TextStyle.EMPTY.padding(BoxEdge.TOP),
-            ""
-        );
-    }
-
-    @Test
-    public void testValuesAsTextWithNotEmptyAndTop() {
-        this.valuesAsTextAndCheck(
-            BoxEdge.TOP.parsePadding("1px"),
-            "1px"
-        );
-    }
-
-    @Test
-    public void testValuesAsTextWithNotEmptyAndAll() {
-        this.valuesAsTextAndCheck(
-            BoxEdge.ALL.parsePadding("1px"),
-            "1px"
-        );
-    }
-
-    @Test
-    public void testValuesAsTextWithNotEmptyAllDifferentAndAll() {
-        this.valuesAsTextAndCheck(
-            TextStyle.EMPTY.parse("padding-top: 1px; padding-bottom: 2px; padding-left: 3px; padding-bottom: 4px;")
-                .padding(BoxEdge.ALL),
-            ""
-        );
-    }
-    
     // helpers..........................................................................................................
 
     @Override
