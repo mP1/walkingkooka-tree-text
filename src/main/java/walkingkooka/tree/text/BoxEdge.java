@@ -325,8 +325,18 @@ public enum BoxEdge {
     // parseMargin......................................................................................................
 
     public final Margin parseMargin(final String text) {
-        return BoxEdgeParserMargin.with(this)
-            .parseMarginOrPadding(text);
+        Objects.requireNonNull(text, "text");
+
+        // if assignment is present use TextStyle to parse a limit subset of properties.
+        return -1 != text.indexOf(TextStyle.ASSIGNMENT.character()) ?
+            TextStyle.parse0(
+                text,
+                Margin.PREFIX,
+                (n) -> n.isMargin() && this.isTextStyleProperty(n),
+                InvalidTextStylePropertyNameException::margin
+            ).margin(this) :
+            BoxEdgeParserMargin.with(this)
+                .parseMarginOrPadding(text);
     }
 
     // parsePadding.....................................................................................................

@@ -120,7 +120,7 @@ public final class Margin extends BorderMarginPadding {
         return PREFIX_LENGTH;
     }
 
-    private final static String PREFIX = "margin-";
+    final static String PREFIX = "margin-";
 
     private final static int PREFIX_LENGTH = PREFIX.length();
 
