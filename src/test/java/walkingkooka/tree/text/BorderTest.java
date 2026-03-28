@@ -406,7 +406,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testParseWithPrefix() {
+    public void testParsePropertyNamesWithPrefix() {
         final String text = "border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;";
 
         this.parseStringAndCheck(
@@ -417,7 +417,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testParseWithoutPrefix() {
+    public void testParsePropertyNamesWithoutPrefix() {
         this.parseStringAndCheck(
             "top-color: BLACK; right-style: solid; bottom-width: 1px; left-color: WHITE;",
             TextStyle.parse("border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;")
@@ -426,10 +426,28 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testParseWithAndWithoutPrefix() {
+    public void testParseWithAndPropertyNamesWithoutPrefix() {
         this.parseStringAndCheck(
             "border-top-color: BLACK; right-style: solid; bottom-width: 1px; left-color: WHITE;",
             TextStyle.parse("border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;")
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPropertyNames() {
+        this.parseStringAndCheck(
+            "BLACK, WHITE, RED, GREEN",
+            TextStyle.parse("border-top-color: BLACK; border-right-color: WHITE; border-bottom-color: RED; border-left-color: GREEN;")
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPropertyNames2() {
+        this.parseStringAndCheck(
+            "BLACK solid 1px, WHITE, RED, GREEN",
+            TextStyle.parse("border-top-color: BLACK; border-top-style: solid; border-top-width: 1px; border-right-color: WHITE; border-bottom-color: RED; border-left-color: GREEN;")
                 .border(BoxEdge.ALL)
         );
     }
