@@ -356,9 +356,7 @@ public enum BoxEdge {
                                                                      final Function<TextStylePropertyName<?>, InvalidTextStylePropertyNameException> invalidTextStylePropertyNameException,
                                                                      final Function<TextStyle, BMP> marginPaddingFactory,
                                                                      final Function<BoxEdge, BoxEdgeParser<BMP>> boxEdgeParserFactory) {
-        Objects.requireNonNull(text, "text");
-
-        return -1 != text.indexOf(TextStyle.ASSIGNMENT.character()) ?
+        return hasPropertyNames(text) ?
             marginPaddingFactory.apply(
                 TextStyle.parse0(
                     text,
@@ -369,6 +367,12 @@ public enum BoxEdge {
             ) :
             boxEdgeParserFactory.apply(this)
                 .parseMarginOrPadding(text);
+    }
+
+    private static boolean hasPropertyNames(final String text) {
+        Objects.requireNonNull(text, "text");
+
+        return -1 != text.indexOf(TextStyle.ASSIGNMENT.character());
     }
 
     // margin...........................................................................................................
