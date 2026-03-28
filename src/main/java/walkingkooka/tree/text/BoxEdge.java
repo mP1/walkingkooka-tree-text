@@ -317,11 +317,19 @@ public enum BoxEdge {
      * <pre>
      * black SOLID 1px
      * #123 solid 2px
+     * top-color: BLACK; top-solid: SOLID; top-width: 1px;
      * </pre>
      */
     public final Border parseBorder(final String text) {
-        return BoxEdgeParserBorder.with(this)
-            .parseBorder(text);
+        return hasPropertyNames(text) ?
+            TextStyle.parse0(
+                text,
+                Border.PREFIX,
+                (n) -> n.isBorder() && this.isTextStyleProperty(n),
+                InvalidTextStylePropertyNameException::border
+            ).border(this) :
+            BoxEdgeParserBorder.with(this)
+                .parseBorder(text);
     }
 
     // parseMargin......................................................................................................
