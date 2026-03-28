@@ -135,6 +135,153 @@ public final class Border extends BorderMarginPadding {
     // HasText..........................................................................................................
 
     @Override
+    String prepareText() {
+        String text = null;
+
+        final TextStyle textStyle = this.textStyle;
+        if (textStyle.isEmpty()) {
+            text = "";
+        } else {
+            if (BoxEdge.ALL == this.edge) {
+                final Color topColor = textStyle.get(TextStylePropertyName.BORDER_TOP_COLOR)
+                    .orElse(null);
+                final BorderStyle topStyle = textStyle.get(TextStylePropertyName.BORDER_TOP_STYLE)
+                    .orElse(null);
+                final Length<?> topWidth = textStyle.get(TextStylePropertyName.BORDER_TOP_WIDTH)
+                    .orElse(null);
+
+                final Color rightColor = textStyle.get(TextStylePropertyName.BORDER_RIGHT_COLOR)
+                    .orElse(null);
+                final BorderStyle rightStyle = textStyle.get(TextStylePropertyName.BORDER_RIGHT_STYLE)
+                    .orElse(null);
+                final Length<?> rightWidth = textStyle.get(TextStylePropertyName.BORDER_RIGHT_WIDTH)
+                    .orElse(null);
+
+                final Color bottomColor = textStyle.get(TextStylePropertyName.BORDER_BOTTOM_COLOR)
+                    .orElse(null);
+                final BorderStyle bottomStyle = textStyle.get(TextStylePropertyName.BORDER_BOTTOM_STYLE)
+                    .orElse(null);
+                final Length<?> bottomWidth = textStyle.get(TextStylePropertyName.BORDER_BOTTOM_WIDTH)
+                    .orElse(null);
+
+                final Color leftColor = textStyle.get(TextStylePropertyName.BORDER_LEFT_COLOR)
+                    .orElse(null);
+                final BorderStyle leftStyle = textStyle.get(TextStylePropertyName.BORDER_LEFT_STYLE)
+                    .orElse(null);
+                final Length<?> leftWidth = textStyle.get(TextStylePropertyName.BORDER_LEFT_WIDTH)
+                    .orElse(null);
+
+                // COLOR STYLE WIDTH
+                if (areAllEqual(topColor, rightColor, bottomColor, leftColor) && areAllEqual(topStyle, rightStyle, bottomStyle, leftStyle) && areAllEqual(topWidth, rightWidth, bottomWidth, leftWidth)) {
+                    final StringBuilder b = new StringBuilder();
+
+                    appendIfNotNull(
+                        topColor,
+                        b
+                    );
+
+                    appendIfNotNull(
+                        topStyle,
+                        b
+                    );
+
+                    appendIfNotNull(
+                        topWidth,
+                        b
+                    );
+
+                    text = b.toString();
+                } else {
+                    final int topCount = count(
+                        topColor,
+                        topStyle,
+                        topWidth
+                    );
+
+                    final int rightCount = count(
+                        rightColor,
+                        rightStyle,
+                        rightWidth
+                    );
+
+                    final int bottomCount = count(
+                        bottomColor,
+                        bottomStyle,
+                        bottomWidth
+                    );
+
+                    final int leftCount = count(
+                        leftColor,
+                        leftStyle,
+                        leftWidth
+                    );
+
+                    if(topCount > 0 && rightCount > 0 && bottomCount > 0 && leftCount > 0) {
+                        final StringBuilder b = new StringBuilder();
+                        appendIfNotNull(
+                            topColor,
+                            topStyle,
+                            topWidth,
+                            b
+                        );
+                        appendIfNotNull(
+                            rightColor,
+                            rightStyle,
+                            rightWidth,
+                            b
+                        );
+                        appendIfNotNull(
+                            bottomColor,
+                            bottomStyle,
+                            bottomWidth,
+                            b
+                        );
+                        appendIfNotNull(
+                            leftColor,
+                            leftStyle,
+                            leftWidth,
+                            b
+                        );
+                        text = b.toString();
+                    }
+                }
+            }
+        }
+
+        if(null == text) {
+            text = textStyle.toText(
+                (n) -> n.value()
+                    .substring(
+                        this.textPrefixLength()
+                    )
+            );
+        }
+
+        return text;
+    }
+    
+    private static int count(final Color color,
+                             final BorderStyle borderStyle,
+                             final Length<?> width) {
+        return (null != color ? 1 : 0) +
+            (null != borderStyle ? 1 : 0) +
+            (null != width ? 1 : 0);
+    }
+
+    private static void appendIfNotNull(final Color color,
+                                        final BorderStyle style,
+                                        final Length<?> width,
+                                        final StringBuilder b) {
+        if(b.length() > 0) {
+            b.append(BoxEdgeParser.SEPARATOR);
+        }
+
+        appendIfNotNull(color, b);
+        appendIfNotNull(style, b);
+        appendIfNotNull(width, b);
+    }
+
+    @Override
     int textPrefixLength() {
         return PREFIX_LENGTH;
     }

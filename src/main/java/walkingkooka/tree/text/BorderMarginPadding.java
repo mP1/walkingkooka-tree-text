@@ -24,6 +24,7 @@ import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
@@ -222,17 +223,85 @@ abstract class BorderMarginPadding implements HasTextStyle,
     @Override
     public final String text() {
         if (null == this.text) {
-            this.text = this.textStyle.toText(
-                (n) -> n.value()
-                    .substring(
-                        this.textPrefixLength()
-                    )
-            );
+            this.text = this.prepareText();
         }
         return this.text;
     }
 
     private String text;
+
+    abstract String prepareText();
+
+    final String marginPaddingLengthsOrTextStyleToText(final Function<BoxEdge, TextStylePropertyName<Length<?>>> lengthPropertyNameGetter) {
+        final String text;
+
+        final TextStyle textStyle = this.textStyle;
+        final BoxEdge boxEdge = this.edge;
+
+        if(BoxEdge.ALL == boxEdge) {
+            final Length<?> top = textStyle.get(
+                lengthPropertyNameGetter.apply(BoxEdge.TOP)
+            ).orElse(null);
+
+            final Length<?> right = textStyle.get(
+                lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
+            ).orElse(null);
+
+            final Length<?> bottom = textStyle.get(
+                lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
+            ).orElse(null);
+
+            final Length<?> left = textStyle.get(
+                lengthPropertyNameGetter.apply(BoxEdge.LEFT)
+            ).orElse(null);
+
+            if (areAllEqual(top, right, bottom, left)) {
+                text = top.text();
+            } else {
+                final StringBuilder b = new StringBuilder();
+                appendIfNotNull(
+                    top,
+                    b
+                );
+                appendIfNotNull(
+                    right,
+                    b
+                );
+                appendIfNotNull(
+                    bottom,
+                    b
+                );
+                appendIfNotNull(
+                    left,
+                    b
+                );
+
+                text = b.toString();
+            }
+
+        } else {
+            text = textStyle.get(
+                lengthPropertyNameGetter.apply(boxEdge)
+            ).map(Length::toString)
+                .orElse("");
+        }
+
+        return text;
+    }
+
+    static <T> boolean areAllEqual(final T top, final T right, final T bottom, final T left) {
+        return Objects.equals(top, right) && Objects.equals(bottom, left) && Objects.equals(top, bottom);
+    }
+
+    static void appendIfNotNull(final Object valueOrNull,
+                                final StringBuilder b) {
+        if (null != valueOrNull) {
+            if(b.length() > 0) {
+                b.append(" ");
+            }
+            b.append(valueOrNull);
+        }
+    }
 
     /**
      * The length of the prefix of each {@link TextStylePropertyName}. This will be used to remove the prefix when

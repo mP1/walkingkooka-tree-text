@@ -108,6 +108,11 @@ public final class Padding extends BorderMarginPadding {
     // HasText..........................................................................................................
 
     @Override
+    String prepareText() {
+        return this.marginPaddingLengthsOrTextStyleToText(BoxEdge::paddingPropertyName);
+    }
+
+    @Override
     int textPrefixLength() {
         return PREFIX_LENGTH;
     }
