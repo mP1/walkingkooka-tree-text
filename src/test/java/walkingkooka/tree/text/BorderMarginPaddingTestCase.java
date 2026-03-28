@@ -266,6 +266,48 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         }
     }
 
+    // removeProperty...................................................................................................
+
+    @Test
+    public final void testRemovePropertyWithNullNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .removeProperty(
+                    null
+                )
+        );
+    }
+
+    final <V> void removePropertyAndCheck(final T borderMappingPadding,
+                                          final TextStylePropertyName<V> name) {
+        this.removePropertyAndCheck(
+            borderMappingPadding,
+            name,
+            borderMappingPadding
+        );
+    }
+
+    final <V> void removePropertyAndCheck(final T borderMappingPadding,
+                                          final TextStylePropertyName<V> name,
+                                          final T expected) {
+        if (expected.equals(borderMappingPadding)) {
+            assertSame(
+                expected,
+                borderMappingPadding.removeProperty(name),
+                () -> borderMappingPadding + " removeProperty " + name
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                borderMappingPadding.removeProperty(
+                    name
+                ),
+                () -> borderMappingPadding + " removeProperty " + name
+            );
+        }
+    }
+    
     // setOrRemoveProperty..............................................................................................
 
     @Test
