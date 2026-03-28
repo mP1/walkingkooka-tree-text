@@ -415,17 +415,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         }
     }
 
-    // valuesAsText.....................................................................................................
-
-    final void valuesAsTextAndCheck(final T borderMappingPadding,
-                                    final String expected) {
-        this.checkEquals(
-            expected,
-            borderMappingPadding.valuesAsText(),
-            borderMappingPadding::toString
-        );
-    }
-
     // equals...........................................................................................................
 
     @Test
