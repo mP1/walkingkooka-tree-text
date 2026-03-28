@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.collect.iterator.Iterators;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursor;
@@ -26,6 +27,7 @@ import walkingkooka.text.cursor.TextCursors;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
@@ -46,6 +48,7 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
      * SOLID 1px
      * 1px
      * </pre>
+     * Note this method can only be called once with each instance as fields are read/written.
      */
     Border parseBorder(final String text) {
         final TextCursor textCursor = TextCursors.charSequence(text);
@@ -54,9 +57,10 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
 
         final BoxEdge boxEdge = this.boxEdge;
 
-        final TextStyle textStyle = this.parseBorder0(
+        this.boxEdgeCounter = 0;
+
+        this.parseBorder0(
             textCursor,
-            TextStyle.EMPTY,
             BoxEdge.ALL == boxEdge ?
                 ALL_BOX_EDGES.iterator() :
                 Iterators.one(boxEdge)
@@ -69,15 +73,14 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                 .get();
         }
 
-        return this.boxEdge.border(textStyle);
+        return this.boxEdge.border(
+            TextStyle.EMPTY.setValues(this.nameToValues)
+        );
     }
 
-    private TextStyle parseBorder0(final TextCursor textCursor,
-                                   final TextStyle textStyle,
-                                   final Iterator<BoxEdge> nextBoxEdge) {
+    private void parseBorder0(final TextCursor textCursor,
+                              final Iterator<BoxEdge> nextBoxEdge) {
         final BoxEdge boxEdge = nextBoxEdge.next();
-
-        TextStyle after = textStyle;
 
         Color color = null;
         BorderStyle style = null;
@@ -159,27 +162,6 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                 .emptyTextOrInvalidCharacterExceptionOrLast("text");
         }
 
-        if (null != color) {
-            after = after.set(
-                boxEdge.borderColorPropertyName(),
-                color
-            );
-        }
-
-        if (null != style) {
-            after = after.set(
-                boxEdge.borderStylePropertyName(),
-                style
-            );
-        }
-
-        if (null != width) {
-            after = after.set(
-                boxEdge.borderWidthPropertyName(),
-                width
-            );
-        }
-
         if (null != separator) {
             skipOptionalSpaces(textCursor);
 
@@ -191,15 +173,119 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
 
             skipOptionalSpaces(textCursor);
 
-            after = parseBorder0(
+            this.boxEdgeCounter++;
+
+            parseBorder0(
                 textCursor,
-                after,
                 nextBoxEdge
             );
         }
 
-        return after;
+        final int boxEdgeCounter = this.boxEdgeCounter;
+        final Map<TextStylePropertyName<?>, Object> nameToValues = this.nameToValues;
+
+        // special case if text is empty.
+        if (textCursor.isEmpty() && nextBoxEdge.hasNext()) {
+            switch (boxEdgeCounter) {
+                case 0:
+                    // if first group repeat 4x times.
+                    if (null != color) {
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_TOP_COLOR,
+                            color
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_RIGHT_COLOR,
+                            color
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                            color
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_LEFT_COLOR,
+                            color
+                        );
+                    }
+
+                    if (null != style) {
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_TOP_STYLE,
+                            style
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_RIGHT_STYLE,
+                            style
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                            style
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_LEFT_STYLE,
+                            style
+                        );
+                    }
+
+                    if (null != width) {
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_TOP_WIDTH,
+                            width
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                            width
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                            width
+                        );
+                        nameToValues.put(
+                            TextStylePropertyName.BORDER_LEFT_WIDTH,
+                            width
+                        );
+                    }
+                    break;
+                case 1:
+                    throw new IllegalArgumentException("Missing bottom and left");
+                case 2:
+                    throw new IllegalArgumentException("Missing left");
+                case 3:
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected boxEdgeCounter " + boxEdgeCounter); // shouldnt happen
+            }
+        } else {
+
+            if (null != color) {
+                nameToValues.put(
+                    boxEdge.borderColorPropertyName(),
+                    color
+                );
+            }
+
+            if (null != style) {
+                nameToValues.put(
+                    boxEdge.borderStylePropertyName(),
+                    style
+                );
+            }
+
+            if (null != width) {
+                nameToValues.put(
+                    boxEdge.borderWidthPropertyName(),
+                    width
+                );
+            }
+        }
     }
+
+    private int boxEdgeCounter;
+
+    /**
+     * Aggregates properties as parseBorder consumes text
+     */
+    private final Map<TextStylePropertyName<?>, Object> nameToValues = Maps.sorted();
 
     @Override
     TextStylePropertyName<Length<?>> width(final BoxEdge boxEdge) {

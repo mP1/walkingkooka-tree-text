@@ -435,7 +435,32 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testParseWithoutPropertyNames() {
+    public void testParseWithoutPropertyNames1Group() {
+        this.parseStringAndCheck(
+            "BLACK",
+            TextStyle.parse("border-top-color: BLACK; border-right-color: BLACK; border-bottom-color: BLACK; border-left-color: BLACK;")
+                .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutPropertyNames2GroupsFails() {
+        this.parseStringFails(
+            "BLACK, WHITE",
+            new IllegalArgumentException("Missing bottom and left")
+        );
+    }
+
+    @Test
+    public void testParseWithoutPropertyNamesThreeGroupsFails() {
+        this.parseStringFails(
+            "BLACK, WHITE, RED",
+            new IllegalArgumentException("Missing left")
+        );
+    }
+
+    @Test
+    public void testParseWithoutPropertyNamesFourGroups() {
         this.parseStringAndCheck(
             "BLACK, WHITE, RED, GREEN",
             TextStyle.parse("border-top-color: BLACK; border-right-color: WHITE; border-bottom-color: RED; border-left-color: GREEN;")
@@ -444,7 +469,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     }
 
     @Test
-    public void testParseWithoutPropertyNames2() {
+    public void testParseWithoutPropertyNamesFourGroups2() {
         this.parseStringAndCheck(
             "BLACK solid 1px, WHITE, RED, GREEN",
             TextStyle.parse("border-top-color: BLACK; border-top-style: solid; border-top-width: 1px; border-right-color: WHITE; border-bottom-color: RED; border-left-color: GREEN;")
