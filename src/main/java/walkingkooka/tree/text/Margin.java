@@ -63,7 +63,7 @@ public final class Margin extends BorderMarginPadding {
     }
 
     @Override
-    public <V> Margin removeProperty(final TextStylePropertyName<V> propertyName) {
+    public Margin removeProperty(final TextStylePropertyName<?> propertyName) {
         return this.removeProperty0(propertyName)
             .cast();
     }
