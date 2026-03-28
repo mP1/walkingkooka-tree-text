@@ -230,6 +230,36 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         return edge.paddingPropertyName();
     }
 
+    // treePrint........................................................................................................
+
+    @Test
+    public void testTreePrintAll() {
+        this.treePrintAndCheck(
+            Padding.parse("top: 1px; right: 2px; bottom: 3px; left: 4px;"),
+            "Padding\n" +
+                "  ALL\n" +
+                "    TextStyle\n" +
+                "      padding-bottom=3px (walkingkooka.tree.text.PixelLength)\n" +
+                "      padding-left=4px (walkingkooka.tree.text.PixelLength)\n" +
+                "      padding-right=2px (walkingkooka.tree.text.PixelLength)\n" +
+                "      padding-top=1px (walkingkooka.tree.text.PixelLength)\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintTop() {
+        this.treePrintAndCheck(
+            Padding.parse("top: 99px;")
+                .setEdge(BoxEdge.TOP),
+            "Padding\n" +
+                "  TOP\n" +
+                "    TextStyle\n" +
+                "      padding-top=99px (walkingkooka.tree.text.PixelLength)\n"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<Padding> type() {
         return Padding.class;

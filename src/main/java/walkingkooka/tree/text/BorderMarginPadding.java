@@ -19,6 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.text.HasText;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -27,7 +29,8 @@ import java.util.Optional;
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
  */
 abstract class BorderMarginPadding implements HasTextStyle,
-    HasText {
+    HasText,
+    TreePrintable {
 
     /**
      * Package private to limit sub classing.
@@ -229,5 +232,24 @@ abstract class BorderMarginPadding implements HasTextStyle,
                 this.widthPropertyName()
             ).map(Length::toString)
             .orElse("");
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+
+        printer.indent();
+        {
+            printer.println(this.edge.name());
+
+            printer.indent();
+            {
+                this.textStyle.printTree(printer);
+            }
+            printer.outdent();
+        }
+        printer.outdent();
     }
 }

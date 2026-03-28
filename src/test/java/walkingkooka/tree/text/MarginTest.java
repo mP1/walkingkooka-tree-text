@@ -243,6 +243,34 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         );
     }
 
+    // treePrint........................................................................................................
+
+    @Test
+    public void testTreePrintAll() {
+        this.treePrintAndCheck(
+            Margin.parse("top: 1px; right: 2px; bottom: 3px; left: 4px"),
+            "Margin\n" +
+                "  ALL\n" +
+                "    TextStyle\n" +
+                "      margin-bottom=3px (walkingkooka.tree.text.PixelLength)\n" +
+                "      margin-left=4px (walkingkooka.tree.text.PixelLength)\n" +
+                "      margin-right=2px (walkingkooka.tree.text.PixelLength)\n" +
+                "      margin-top=1px (walkingkooka.tree.text.PixelLength)\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintTop() {
+        this.treePrintAndCheck(
+            Margin.parse("top: 99px")
+                .setEdge(BoxEdge.TOP),
+            "Margin\n" +
+                "  TOP\n" +
+                "    TextStyle\n" +
+                "      margin-top=99px (walkingkooka.tree.text.PixelLength)\n"
+        );
+    }
+
     // class............................................................................................................
 
     @Override
