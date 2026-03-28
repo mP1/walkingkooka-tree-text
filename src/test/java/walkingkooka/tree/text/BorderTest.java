@@ -332,21 +332,41 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                 BorderStyle.DASHED,
                 Length.pixel(2.0)
             ).border(BoxEdge.ALL),
-            "border ALL bottom-color: black; bottom-style: dashed; bottom-width: 2px; left-color: black; left-style: dashed; left-width: 2px; right-color: black; right-style: dashed; right-width: 2px; top-color: black; top-style: dashed; top-width: 2px;"
+            "border ALL black DASHED 2px"
         );
     }
 
     // text.............................................................................................................
 
     @Test
-    public void testTextWithAll() {
+    public void testTextWithAllAndEmpty() {
         this.textAndCheck(
-            TextStyle.EMPTY.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
-                Length.pixel(2.0)
-            ).border(BoxEdge.ALL),
-            "bottom-color: black; bottom-style: dashed; bottom-width: 2px; left-color: black; left-style: dashed; left-width: 2px; right-color: black; right-style: dashed; right-width: 2px; top-color: black; top-style: dashed; top-width: 2px;"
+            TextStyle.EMPTY.border(BoxEdge.ALL),
+            ""
+        );
+    }
+
+    @Test
+    public void testTextWithTopAndEmpty() {
+        this.textAndCheck(
+            TextStyle.EMPTY.border(BoxEdge.TOP),
+            ""
+        );
+    }
+
+    @Test
+    public void testTextWithAllDifferent() {
+        this.textAndCheck(
+            Border.parse("BLACK SOLID 1px, WHITE DOTTED 2px, RED DASHED 3px, GREEN DOTTED 4px"),
+            "black SOLID 1px, white DOTTED 2px, red DASHED 3px, green DOTTED 4px"
+        );
+    }
+
+    @Test
+    public void testTextWithAllSame() {
+        this.textAndCheck(
+            Border.parse("BLACK SOLID 1px"),
+            "black SOLID 1px"
         );
     }
 

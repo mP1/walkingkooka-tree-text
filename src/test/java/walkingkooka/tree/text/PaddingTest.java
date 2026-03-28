@@ -71,9 +71,9 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     @Test
     public void testToStringWithAll() {
         this.toStringAndCheck(
-            TextStyle.parse("padding-left: 11px; padding-top: 22px; padding-right: 33px; padding-bottom: 44px;")
+            TextStyle.parse("padding-top: 11px; padding-right: 22px; padding-bottom: 33px; padding-left: 44px;")
                 .padding(BoxEdge.ALL),
-            "padding ALL bottom: 44px; left: 11px; right: 33px; top: 22px;"
+            "padding ALL 11px 22px 33px 44px"
         );
     }
 
@@ -85,21 +85,41 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
                     TextStylePropertyName.PADDING_BOTTOM, Length.pixel(12.5),
                     TextStylePropertyName.BORDER_RIGHT_STYLE, BorderStyle.DOTTED)
             ).padding(BoxEdge.BOTTOM),
-            "padding BOTTOM bottom: 12.5px;"
+            "padding BOTTOM 12.5px"
         );
     }
 
     // text.............................................................................................................
 
     @Test
-    public void testText() {
+    public void testTextAllAndSameValues() {
         this.textAndCheck(
             TextStyle.EMPTY.setPadding(
                 Optional.of(
                     Length.pixel(2.0)
                 )
             ).padding(BoxEdge.ALL),
-            "bottom: 2px; left: 2px; right: 2px; top: 2px;"
+            "2px"
+        );
+    }
+
+    @Test
+    public void testTextAllAndDifferentValues() {
+        final String text = "1px 2px 3px 4px";
+
+        this.textAndCheck(
+            Padding.parse(text),
+            text
+        );
+    }
+
+    @Test
+    public void testTextLeft() {
+        final String text = "1px";
+
+        this.textAndCheck(
+            Padding.parse(text),
+            text
         );
     }
 

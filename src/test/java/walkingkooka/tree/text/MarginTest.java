@@ -71,9 +71,9 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     @Test
     public void testToStringWithAll() {
         this.toStringAndCheck(
-            TextStyle.parse("margin-left: 11px; margin-top: 22px; margin-right: 33px; margin-bottom: 44px;")
+            TextStyle.parse("margin-top: 11px; margin-right: 22px; margin-bottom: 33px; margin-left: 44px;")
                 .margin(BoxEdge.ALL),
-            "margin ALL bottom: 44px; left: 11px; right: 33px; top: 22px;"
+            "margin ALL 11px 22px 33px 44px"
         );
     }
     
@@ -88,21 +88,38 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
                     )
                 )
             ),
-            "margin BOTTOM bottom: 12.5px;"
+            "margin BOTTOM 12.5px"
         );
     }
 
     // text.............................................................................................................
 
     @Test
-    public void testText() {
+    public void testTextAllAndSameValues() {
         this.textAndCheck(
             TextStyle.EMPTY.setMargin(
                 Optional.of(
                     Length.pixel(2.0)
                 )
             ).margin(BoxEdge.ALL),
-            "bottom: 2px; left: 2px; right: 2px; top: 2px;"
+            "2px"
+        );
+    }
+
+    @Test
+    public void testTextAllAndDifferentValues() {
+        this.textAndCheck(
+            Margin.parse("top: 1px; right: 2px; bottom: 3px; left: 4px;"),
+            "1px 2px 3px 4px"
+        );
+    }
+
+    @Test
+    public void testTextLeft() {
+        this.textAndCheck(
+            Margin.parse("left: 1px")
+                .setEdge(BoxEdge.LEFT),
+            "1px"
         );
     }
 
