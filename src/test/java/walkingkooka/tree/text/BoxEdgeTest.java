@@ -911,6 +911,34 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     }
 
     @Test
+    public void testParserBorderTopColorRightColorBottomColorLeftColorWithShortPropertyNames() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "top-color: BLACK; right-color: WHITE; bottom-color: RED; left-color: GREEN;",
+            Border.parse(
+                "top-color: BLACK;" +
+                    "right-color: WHITE;" +
+                    "bottom-color: RED;" +
+                    "left-color: GREEN;"
+            )
+        );
+    }
+
+    @Test
+    public void testParserBorderTopColorRightColorBottomColorLeftColorWithFullPropertyNames() {
+        this.parseBorderAndCheck(
+            BoxEdge.ALL,
+            "border-top-color: BLACK; border-right-color: WHITE; border-bottom-color: RED; border-left-color: GREEN;",
+            Border.parse(
+                "top-color: BLACK;" +
+                    "right-color: WHITE;" +
+                    "bottom-color: RED;" +
+                    "left-color: GREEN;"
+            )
+        );
+    }
+
+    @Test
     public void testParserBorderTopColorStyleRightColorStyleBottomColorStyleLeftColorStyle() {
         this.parseBorderAndCheck(
             BoxEdge.ALL,
