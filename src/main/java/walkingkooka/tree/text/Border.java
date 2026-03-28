@@ -28,15 +28,7 @@ import java.util.Optional;
 public final class Border extends BorderMarginPadding {
 
     public static Border parse(final String text) {
-        return with(
-            BoxEdge.ALL,
-            TextStyle.parse0(
-                text,
-                PREFIX,
-                TextStylePropertyName::isBorder,
-                InvalidTextStylePropertyNameException::border
-            )
-        );
+        return BoxEdge.ALL.parseBorder(text);
     }
 
     static Border with(final BoxEdge edge,
