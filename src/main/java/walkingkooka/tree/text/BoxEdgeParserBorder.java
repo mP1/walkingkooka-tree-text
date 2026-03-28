@@ -36,6 +36,15 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
         super(boxEdge);
     }
 
+    /**
+     * Parses the border tokens in order COLOR, STYLE, WIDTH with each optional.
+     * <pre>
+     * BLACK
+     * BLACK SOLID 1px
+     * SOLID 1px
+     * 1px
+     * </pre>
+     */
     Border parseBorder(final String text) {
         final TextCursor textCursor = TextCursors.charSequence(text);
 
@@ -68,7 +77,7 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                 .toString();
             RuntimeException firstRuntime = null;
 
-            if (null == color) {
+            if (null == color && null == width && null == style) {
                 try {
                     color = Color.parse(token);
                     continue; // try next
@@ -77,7 +86,7 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                 }
             }
 
-            if (null == style) {
+            if (null == style && null == width) {
                 try {
                     style = Arrays.stream(BorderStyle.values())
                         .filter(s -> s.name().equalsIgnoreCase(token))

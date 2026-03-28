@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
@@ -607,6 +608,45 @@ public final class BoxEdgeTest implements ClassTesting2<BoxEdge> {
 
         this.checkEquals(
             "Invalid number length \"!invalid\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderSolidColorFails() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> BoxEdge.ALL.parseBorder("SOLID BLACK")
+        );
+
+        this.checkEquals(
+            "Invalid number length \"BLACK\"",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderWidthColorFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("1px BLACK")
+        );
+
+        this.checkEquals(
+            "Invalid character 'B' at 4",
+            thrown.getMessage()
+        );
+    }
+
+    @Test
+    public void testParseBorderWidthStyleFails() {
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder("1px SOLID")
+        );
+
+        this.checkEquals(
+            "Invalid character 'S' at 4",
             thrown.getMessage()
         );
     }
