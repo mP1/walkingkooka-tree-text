@@ -479,6 +479,35 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    // treePrint........................................................................................................
+
+    @Test
+    public void testTreePrintAll() {
+        this.treePrintAndCheck(
+            Border.parse("top-color: black; right-color: red; right-style: SOLID; right-width: 1px; bottom-color: green"),
+            "Border\n" +
+                "  ALL\n" +
+                "    TextStyle\n" +
+                "      border-bottom-color=green (walkingkooka.color.OpaqueRgbColor)\n" +
+                "      border-right-color=red (walkingkooka.color.OpaqueRgbColor)\n" +
+                "      border-right-style=SOLID (walkingkooka.tree.text.BorderStyle)\n" +
+                "      border-right-width=1px (walkingkooka.tree.text.PixelLength)\n" +
+                "      border-top-color=black (walkingkooka.color.OpaqueRgbColor)\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintTop() {
+        this.treePrintAndCheck(
+            Border.parse("top-color: black;")
+                .setEdge(BoxEdge.TOP),
+            "Border\n" +
+                "  TOP\n" +
+                "    TextStyle\n" +
+                "      border-top-color=black (walkingkooka.color.OpaqueRgbColor)\n"
+        );
+    }
+
     // class............................................................................................................
 
     @Override

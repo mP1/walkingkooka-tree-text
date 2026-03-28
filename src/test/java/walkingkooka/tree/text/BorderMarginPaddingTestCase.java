@@ -26,6 +26,7 @@ import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Map;
 import java.util.Optional;
@@ -39,7 +40,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     ToStringTesting<T>,
     HasTextStyleTesting,
     HasTextTesting,
-    ParseStringTesting<T> {
+    ParseStringTesting<T>,
+    TreePrintableTesting {
 
     BorderMarginPaddingTestCase() {
         super();
