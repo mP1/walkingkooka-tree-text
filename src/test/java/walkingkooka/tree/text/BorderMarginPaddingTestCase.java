@@ -208,6 +208,37 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
+    // getProperty......................................................................................................
+
+    final <V> void getPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> propertyName) {
+        this.getPropertyAndCheck(
+            borderMappingPadding,
+            propertyName,
+            Optional.empty()
+        );
+    }
+
+    final <V> void getPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> propertyName,
+                                       final V expected) {
+        this.getPropertyAndCheck(
+            borderMappingPadding,
+            propertyName,
+            Optional.of(expected)
+        );
+    }
+
+    final <V> void getPropertyAndCheck(final T borderMappingPadding,
+                                       final TextStylePropertyName<V> propertyName,
+                                       final Optional<V> expected) {
+        this.checkEquals(
+            expected,
+            borderMappingPadding.getProperty(propertyName),
+            () -> borderMappingPadding + " getProperty " + propertyName
+        );
+    }
+
     // setProperty......................................................................................................
 
     @Test
