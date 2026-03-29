@@ -73,11 +73,7 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
 
     @Override
     FontWeight parseValueText(final String value) {
-        return FontWeight.BOLD_TEXT.equals(value) ?
-            FontWeight.BOLD :
-            FontWeight.NORMAL_TEXT.equals(value) ?
-                FontWeight.NORMAL :
-                FontWeight.with(Integer.parseInt(value));
+        return FontWeight.parse(value);
     }
 
     @Override

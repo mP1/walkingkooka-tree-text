@@ -50,6 +50,18 @@ public final class FontWeight implements Comparable<FontWeight>,
      */
     public final static FontWeight BOLD = new FontWeight(BOLD_VALUE);
 
+    public static FontWeight parse(final String text) {
+        return FontWeight.BOLD_TEXT.equals(text) ?
+            FontWeight.BOLD :
+            FontWeight.NORMAL_TEXT.equals(text) ?
+                FontWeight.NORMAL :
+                FontWeight.with(
+                    Integer.parseInt(
+                        CharSequences.failIfNullOrEmpty(text, "text")
+                    )
+                );
+    }
+
     /**
      * Factory that creates a {@link FontWeight}.
      */

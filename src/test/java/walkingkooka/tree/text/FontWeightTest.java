@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ConstantsTesting;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -30,7 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
-    implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight> {
+    implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight>,
+    ParseStringTesting<FontWeight> {
 
     private final static int VALUE = 456;
 
@@ -59,19 +61,42 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     // parseValue......................................................................................................
 
     @Test
-    public void testParseValueBold() {
-        this.checkEquals(
-            FontWeight.BOLD,
-            this.textStylePropertyName().parseValue("bold")
+    public void testParseWithBold() {
+        this.parseStringAndCheck(
+            "bold",
+            FontWeight.BOLD
         );
     }
 
     @Test
-    public void testParseValueNumber() {
-        this.checkEquals(
-            FontWeight.with(23),
-            this.textStylePropertyName().parseValue("23")
+    public void testParseWithNormal() {
+        this.parseStringAndCheck(
+            "normal",
+            FontWeight.NORMAL
         );
+    }
+
+    @Test
+    public void testParseWithNumber() {
+        this.parseStringAndCheck(
+            "23",
+            FontWeight.with(23)
+        );
+    }
+
+    @Override
+    public FontWeight parseString(final String text) {
+        return FontWeight.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
     }
 
     // HasJsonNode......................................................................................................
