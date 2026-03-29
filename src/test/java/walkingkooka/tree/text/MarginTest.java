@@ -28,6 +28,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
+    // isEmpty..........................................................................................................
+
+    @Test
+    public void testIsEmptyWhenNotEmpty() {
+        this.isEmptyAndCheck(
+            Margin.parse("1px"),
+            false
+        );
+    }
+
+    @Test
+    public void testIsEmptyWhenEmpty() {
+        this.isEmptyAndCheck(
+            Margin.parse(""),
+            true
+        );
+    }
+
     // setProperty......................................................................................................
 
     @Test
