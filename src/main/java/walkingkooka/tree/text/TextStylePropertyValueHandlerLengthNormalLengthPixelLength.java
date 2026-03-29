@@ -41,7 +41,7 @@ final class TextStylePropertyValueHandlerLengthNormalLengthPixelLength extends T
 
     @Override
     String invalidValueMessage(final Object value) {
-        return "Expected NoneLength | PixelLength got " + value.getClass().getSimpleName();
+        return "Expected NormalLength | PixelLength got " + value.getClass().getSimpleName();
     }
 
     // Object ..........................................................................................................
