@@ -1014,7 +1014,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     int index() {
         final int index = this.index;
         if(-1 == index) {
-            throw new IllegalArgumentException("Invalid property name: " + this.inQuotes());
+            throw this.invalidTextStylePropertyNameException();
         }
         return index;
     }
