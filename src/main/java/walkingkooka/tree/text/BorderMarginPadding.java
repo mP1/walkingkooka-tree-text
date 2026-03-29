@@ -21,9 +21,14 @@ import walkingkooka.Cast;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
@@ -326,5 +331,80 @@ abstract class BorderMarginPadding implements HasTextStyle,
             printer.outdent();
         }
         printer.outdent();
+    }
+
+    // json.............................................................................................................
+
+    static Border unmarshallBorder(final JsonNode json,
+                                   final JsonNodeUnmarshallContext context) {
+        return unmarshall(
+            json,
+            BoxEdge::parseBorder
+        );
+    }
+
+    static Margin unmarshallMargin(final JsonNode json,
+                                   final JsonNodeUnmarshallContext context) {
+        return unmarshall(
+            json,
+            BoxEdge::parseMargin
+        );
+    }
+
+    static Padding unmarshallPadding(final JsonNode json,
+                                     final JsonNodeUnmarshallContext context) {
+        return unmarshall(
+            json,
+            BoxEdge::parsePadding
+        );
+    }
+
+    private static <BMP extends BorderMarginPadding> BMP unmarshall(final JsonNode json,
+                                                                    final BiFunction<BoxEdge, String, BMP> parse) {
+        final String string = json.stringOrFail();
+        final int space = string.indexOf(' ');
+        if(-1 == space || 0 == space) {
+            throw new IllegalArgumentException("Missing BoxEdge");
+        }
+        final BoxEdge boxEdge = BoxEdge.valueOf(
+            string.substring(
+                0,
+                space
+            )
+        );
+
+        return parse.apply(
+            boxEdge,
+            string.substring(space + 1)
+        );
+    }
+
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        return JsonNode.string(
+            this.edge + " " + this.text()
+        );
+    }
+
+    static {
+        JsonNodeContext.register(
+            "border",
+            BorderMarginPadding::unmarshallBorder,
+            BorderMarginPadding::marshall,
+            Border.class
+        );
+
+        JsonNodeContext.register(
+            "margin",
+            BorderMarginPadding::unmarshallMargin,
+            BorderMarginPadding::marshall,
+            Margin.class
+        );
+
+        JsonNodeContext.register(
+            "padding",
+            BorderMarginPadding::unmarshallPadding,
+            BorderMarginPadding::marshall,
+            Padding.class
+        );
     }
 }
