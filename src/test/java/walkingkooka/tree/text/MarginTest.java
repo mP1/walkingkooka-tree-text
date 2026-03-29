@@ -138,12 +138,25 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
     @Test
     public void testTextAllAndSameValues() {
+        final Length<?> length = Length.pixel(2.0);
+
         this.textAndCheck(
-            TextStyle.EMPTY.setMargin(
-                Optional.of(
-                    Length.pixel(2.0)
+            Margin.with(
+                BoxEdge.ALL,
+                TextStyle.EMPTY.set(
+                    TextStylePropertyName.MARGIN_TOP,
+                    length
+                ).set(
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    length
+                ).set(
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    length
+                ).set(
+                    TextStylePropertyName.MARGIN_LEFT,
+                    length
                 )
-            ).margin(BoxEdge.ALL),
+            ),
             "2px"
         );
     }

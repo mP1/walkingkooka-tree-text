@@ -489,9 +489,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN = registerConstant(
+    public final static TextStylePropertyName<Margin> MARGIN = registerConstant(
         "margin", // property name
-        TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+        TextStylePropertyValueHandler.margin(), // handler
         null // visitor should NEVER happen
     );
 

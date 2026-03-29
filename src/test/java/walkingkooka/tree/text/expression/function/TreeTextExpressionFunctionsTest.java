@@ -42,6 +42,7 @@ import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.text.BoxEdge;
 import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.FontFamily;
 import walkingkooka.tree.text.FontSize;
@@ -49,6 +50,7 @@ import walkingkooka.tree.text.FontWeight;
 import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Length;
+import walkingkooka.tree.text.Margin;
 import walkingkooka.tree.text.Opacity;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
@@ -60,6 +62,7 @@ import walkingkooka.tree.text.convert.TreeTextConverters;
 import java.lang.reflect.Method;
 import java.math.MathContext;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
@@ -601,6 +604,13 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                 case "Length":
                     propertyValue = Length.pixel(1.0);
                     break;
+                case "Margin":
+                    propertyValue = BoxEdge.ALL.setMargin(
+                        Optional.of(
+                            Length.pixel(1.0)
+                        )
+                    );
+                    break;
                 case "Opacity":
                     propertyValue = Opacity.with(0.5);
                     break;
@@ -624,6 +634,10 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             }
 
             String propertyValueText = propertyValue.toString();
+            if (propertyValue instanceof Margin) {
+                propertyValueText = ((Margin) propertyValue)
+                    .text();
+            }
             if (type == Opacity.class) {
                 propertyValueText = Opacity.with(0.5).text();
             }

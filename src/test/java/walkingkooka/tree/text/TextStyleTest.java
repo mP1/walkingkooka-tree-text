@@ -1435,7 +1435,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetMarginWithEmpty2() {
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.MARGIN,
-            Length.pixel(1.0)
+            BoxEdge.ALL.setMargin(
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
         ).set(
             TextStylePropertyName.COLOR,
             Color.BLACK
@@ -1444,7 +1448,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         this.setMarginAndCheck(
             style,
             Optional.empty(),
-            style.remove(TextStylePropertyName.MARGIN)
+            style
         );
     }
 
@@ -1458,31 +1462,42 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setMarginAndCheck(
             style,
-            length,
+            BoxEdge.ALL.setMargin(
+                Optional.of(length)
+            ),
             style.set(
-                TextStylePropertyName.MARGIN,
+                TextStylePropertyName.MARGIN_TOP,
+                length
+            ).set(
+                TextStylePropertyName.MARGIN_RIGHT,
+                length
+            ).set(
+                TextStylePropertyName.MARGIN_BOTTOM,
+                length
+            ).set(
+                TextStylePropertyName.MARGIN_LEFT,
                 length
             )
         );
     }
 
     private void setMarginAndCheck(final TextStyle style,
-                                   final Length<?> length,
+                                   final Margin margin,
                                    final TextStyle expected) {
         this.setMarginAndCheck(
             style,
-            Optional.of(length),
+            Optional.of(margin),
             expected
         );
     }
 
     private void setMarginAndCheck(final TextStyle style,
-                                   final Optional<Length<?>> length,
+                                   final Optional<Margin> margin,
                                    final TextStyle expected) {
         this.checkEquals(
             expected,
-            style.setMargin(length),
-            () -> style + " setMargin " + length
+            style.setMargin(margin),
+            () -> style + " setMargin " + margin
         );
     }
 

@@ -29,6 +29,7 @@ import walkingkooka.tree.json.JsonPropertyName;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -1285,51 +1286,31 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testMarginGetDifferent() {
-        this.getAndCheck(
-            TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
-            ).set(
-                TextStylePropertyName.MARGIN_TOP,
-                Length.pixel(111.0)
-            ).set(
-                TextStylePropertyName.MARGIN_LEFT,
-                Length.pixel(222.0)
-            ).set(
-                TextStylePropertyName.MARGIN_RIGHT,
-                Length.pixel(333.0)
-            ).set(
-                TextStylePropertyName.MARGIN_BOTTOM,
-                Length.pixel(444.0)
-            ),
-            TextStylePropertyName.MARGIN
+    public void testMarginGet() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        ).set(
+            TextStylePropertyName.MARGIN_TOP,
+            Length.pixel(111.0)
+        ).set(
+            TextStylePropertyName.MARGIN_LEFT,
+            Length.pixel(222.0)
+        ).set(
+            TextStylePropertyName.MARGIN_RIGHT,
+            Length.pixel(333.0)
+        ).set(
+            TextStylePropertyName.MARGIN_BOTTOM,
+            Length.pixel(444.0)
         );
-    }
-
-    @Test
-    public void testMarginGetSame() {
-        final Length<?> width = Length.pixel(888.0);
 
         this.getAndCheck(
-            TextStyle.EMPTY.set(
-                TextStylePropertyName.TEXT_ALIGN,
-                TextAlign.LEFT
-            ).set(
-                TextStylePropertyName.MARGIN_TOP,
-                width
-            ).set(
-                TextStylePropertyName.MARGIN_LEFT,
-                width
-            ).set(
-                TextStylePropertyName.MARGIN_RIGHT,
-                width
-            ).set(
-                TextStylePropertyName.MARGIN_BOTTOM,
-                width
+            textStyle.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
             ),
             TextStylePropertyName.MARGIN,
-            width
+            BoxEdge.ALL.margin(textStyle)
         );
     }
 
@@ -1347,7 +1328,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         this.setAndCheck(
             notEmpty,
             TextStylePropertyName.MARGIN,
-            width,
+            BoxEdge.ALL.setMargin(
+                Optional.of(width)
+            ),
             notEmpty.setValues(
                 Maps.of(
                     TextStylePropertyName.MARGIN_TOP,
@@ -1705,7 +1688,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             notEmpty.setValues(
                 Maps.of(
                     TextStylePropertyName.MARGIN,
-                    width
+                    BoxEdge.ALL.setMargin(
+                        Optional.of(width)
+                    )
                 )
             )
         );
