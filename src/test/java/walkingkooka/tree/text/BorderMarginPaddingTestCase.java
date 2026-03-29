@@ -27,6 +27,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
 import java.util.Map;
 import java.util.Optional;
@@ -41,7 +42,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     HasTextStyleTesting,
     HasTextTesting,
     ParseStringTesting<T>,
-    TreePrintableTesting {
+    TreePrintableTesting,
+    JsonNodeMarshallingTesting<T> {
 
     BorderMarginPaddingTestCase() {
         super();
@@ -472,6 +474,13 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     @Override
     public final RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
         return thrown;
+    }
+
+    // json.............................................................................................................
+
+    @Override
+    public final T createJsonNodeMarshallingValue() {
+        return this.createObject();
     }
 
     // ClassTesting.....................................................................................................

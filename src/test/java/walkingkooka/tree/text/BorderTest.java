@@ -20,6 +20,8 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Map;
 import java.util.Optional;
@@ -542,6 +544,41 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
                 "  TOP\n" +
                 "    TextStyle\n" +
                 "      border-top-color=black (walkingkooka.color.OpaqueRgbColor)\n"
+        );
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testMarshallAll() {
+        final Border border = Border.parse("top-color: black; right-style: SOLID; bottom-width: 1px;");
+
+        this.marshallAndCheck(
+            border,
+            JsonNode.string(
+                "ALL " + border.text()
+            )
+        );
+    }
+
+    @Test
+    public void testMarshallLeft() {
+        final Border border = BoxEdge.LEFT.parseBorder("BLACK SOLID");
+
+        this.marshallAndCheck(
+            border,
+            JsonNode.string(
+                "LEFT " + border.text()
+            )
+        );
+    }
+
+    @Override
+    public Border unmarshall(final JsonNode json,
+                             final JsonNodeUnmarshallContext context) {
+        return BorderMarginPadding.unmarshallBorder(
+            json,
+            context
         );
     }
 

@@ -19,6 +19,8 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
 
@@ -291,6 +293,42 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
                 "  TOP\n" +
                 "    TextStyle\n" +
                 "      margin-top=99px (walkingkooka.tree.text.PixelLength)\n"
+        );
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testMarshallAll() {
+        final Margin margin = Margin.parse("top: 1px; left: 4px;");
+
+        this.marshallAndCheck(
+            margin,
+            JsonNode.string(
+                "ALL " + margin.text()
+            )
+        );
+    }
+
+    @Test
+    public void testMarshallRight() {
+        final Margin margin = Margin.parse("right: 4px;")
+            .setEdge(BoxEdge.RIGHT);
+
+        this.marshallAndCheck(
+            margin,
+            JsonNode.string(
+                "RIGHT " + margin.text()
+            )
+        );
+    }
+
+    @Override
+    public Margin unmarshall(final JsonNode json,
+                             final JsonNodeUnmarshallContext context) {
+        return BorderMarginPadding.unmarshallMargin(
+            json,
+            context
         );
     }
 
