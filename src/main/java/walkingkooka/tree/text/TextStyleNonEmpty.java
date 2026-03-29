@@ -459,19 +459,16 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     public String text() {
-        if (null == this.css) {
-            this.css = this.toText(
+        if (null == this.text) {
+            this.text = this.toText(
                 TextStylePropertyName::value
             );
         }
 
-        return this.css;
+        return this.text;
     }
 
-    /**
-     * A lazily populated cache of the css
-     */
-    private String css;
+    private String text;
 
     /**
      * Prints each property and value with spaces after each separator. The provider {@link Function} may be used to
