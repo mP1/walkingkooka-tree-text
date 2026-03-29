@@ -76,7 +76,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
                 TextStylePropertyName.MARGIN,
                 "Invalid123"
             ).setExpected("top or left"),
-            "Invalid \"margin\" expected top or left got \"Invalid123\""
+            "Invalid \"margin\" expected top or left but got \"Invalid123\""
         );
     }
 

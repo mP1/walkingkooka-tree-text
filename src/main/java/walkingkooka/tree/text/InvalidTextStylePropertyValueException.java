@@ -51,7 +51,7 @@ public final class InvalidTextStylePropertyValueException extends IllegalArgumen
         return "Invalid " + this.name.inQuotes() +
             (
                 null != expected ?
-                    " expected " + expected + " got " + quotedValue :
+                    " expected " + expected + " but got " + quotedValue :
                     " value " + quotedValue
             );
     }
