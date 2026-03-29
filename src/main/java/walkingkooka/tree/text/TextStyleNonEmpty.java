@@ -480,60 +480,60 @@ final class TextStyleNonEmpty extends TextStyle {
      */
     @Override
     String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
-        final StringBuilder cssStringBuilder = new StringBuilder();
+        final StringBuilder b = new StringBuilder();
 
-        try (final Printer css = Printers.stringBuilder(cssStringBuilder, LineEnding.SYSTEM)) {
+        try (final Printer text = Printers.stringBuilder(b, LineEnding.SYSTEM)) {
             String separator = "";
 
             for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
-                css.print(separator);
+                text.print(separator);
 
                 final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-                css.print(
+                text.print(
                     propertyNameMapper.apply(propertyName)
                 );
-                css.print(TextStyle.ASSIGNMENT);
-                css.print(" ");
+                text.print(TextStyle.ASSIGNMENT);
+                text.print(" ");
 
                 final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss = valueToCss(value);
+                final CharSequence valueCss = valueToText(value);
 
-                css.print(valueCss);
-                css.print(TextStyle.SEPARATOR.string());
+                text.print(valueCss);
+                text.print(TextStyle.SEPARATOR.string());
 
                 separator = " ";
             }
         }
 
-        return cssStringBuilder.toString();
+        return b.toString();
     }
 
-    private static CharSequence valueToCss(final Object value) {
-        final CharSequence css;
+    private static CharSequence valueToText(final Object value) {
+        final CharSequence text;
 
         // dont want to handle values such as FontFamily (which implements Name) here.
         // Name extends HasText
         if (value instanceof HasText && false == value instanceof Name) {
             final HasText hasText = (HasText) value;
-            css = hasText.text();
+            text = hasText.text();
         } else {
             if (value instanceof Enum) {
                 final Enum<?> enumEnum = (Enum<?>) value;
-                css = CaseKind.SNAKE.change(
+                text = CaseKind.SNAKE.change(
                     enumEnum.name().toLowerCase(),
                     CaseKind.KEBAB
                 );
             } else {
                 final String stringValue = value.toString();
                 if (stringValue.indexOf(' ') >= 0) {
-                    css = CharSequences.quoteAndEscape(stringValue);
+                    text = CharSequences.quoteAndEscape(stringValue);
                 } else {
-                    css = stringValue;
+                    text = stringValue;
                 }
             }
         }
 
-        return css;
+        return text;
     }
 
     // BoxEdge........................................................................................................
