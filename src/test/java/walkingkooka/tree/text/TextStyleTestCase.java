@@ -244,17 +244,39 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
 
     @Test
     public final void testGetUnknown() {
-        this.getAndCheck(this.createObject(),
-            TextStylePropertyName.HYPHENS,
-            null);
+        this.getAndCheck(
+            this.createObject(),
+            TextStylePropertyName.HYPHENS
+        );
+    }
+
+    final <TT> void getAndCheck(final TextStyle textStyle,
+                                final TextStylePropertyName<TT> propertyName) {
+        this.getAndCheck(
+            textStyle,
+            propertyName,
+            Optional.empty()
+        );
     }
 
     final <TT> void getAndCheck(final TextStyle textStyle,
                                 final TextStylePropertyName<TT> propertyName,
                                 final TT value) {
-        this.checkEquals(Optional.ofNullable(value),
+        this.getAndCheck(
+            textStyle,
+            propertyName,
+            Optional.of(value)
+        );
+    }
+
+    final <TT> void getAndCheck(final TextStyle textStyle,
+                                final TextStylePropertyName<TT> propertyName,
+                                final Optional<TT> value) {
+        this.checkEquals(
+            value,
             textStyle.get(propertyName),
-            () -> textStyle + " get " + propertyName);
+            () -> textStyle + " get " + propertyName
+        );
     }
 
     // set..............................................................................................................
