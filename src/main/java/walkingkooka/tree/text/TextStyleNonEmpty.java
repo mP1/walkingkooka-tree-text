@@ -524,12 +524,9 @@ final class TextStyleNonEmpty extends TextStyle {
                     CaseKind.KEBAB
                 );
             } else {
-                final String stringValue = value.toString();
-                if (stringValue.indexOf(' ') >= 0) {
-                    text = CharSequences.quoteAndEscape(stringValue);
-                } else {
-                    text = stringValue;
-                }
+                text = CharSequences.quoteIfNecessary(
+                    value.toString()
+                );
             }
         }
 
