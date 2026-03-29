@@ -120,6 +120,28 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         this.entries = entries;
     }
 
+    /**
+     * Returns a new mutable copy.
+     */
+    TextStylePropertiesMapMutable mutable() {
+        final TextStylePropertiesMapMutable mutable = TextStylePropertiesMapMutable.empty();
+
+        final TextStylePropertiesMapEntrySet entries = this.entries;
+        System.arraycopy(
+            entries.values,
+            0,
+            mutable.values,
+            0,
+            entries.values.length
+        );
+
+        mutable.size = entries.size();
+
+        return mutable;
+    }
+
+    // Map..............................................................................................................
+
     @Override
     public Object get(final Object key) {
         return key instanceof TextStylePropertyName ?
