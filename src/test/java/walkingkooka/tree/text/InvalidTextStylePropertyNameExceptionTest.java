@@ -47,6 +47,14 @@ public final class InvalidTextStylePropertyNameExceptionTest implements Throwabl
         );
     }
 
+    @Test
+    public void testGetMessageTextStyle() {
+        this.checkMessage(
+            InvalidTextStylePropertyNameException.textStyle(TextStylePropertyName.COLOR),
+            "Invalid property \"color\""
+        );
+    }
+
     // class............................................................................................................
 
     @Override

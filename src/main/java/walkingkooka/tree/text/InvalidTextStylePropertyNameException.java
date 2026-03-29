@@ -50,6 +50,13 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
         );
     }
 
+    public static InvalidTextStylePropertyNameException textStyle(final TextStylePropertyName<?> property) {
+        return new InvalidTextStylePropertyNameException(
+            "",
+            property
+        );
+    }
+
     public InvalidTextStylePropertyNameException(final String filter,
                                                  final TextStylePropertyName<?> property) {
         super();
@@ -59,7 +66,16 @@ public final class InvalidTextStylePropertyNameException extends IllegalArgument
 
     @Override
     public String getMessage() {
-        return this.filter + ": Invalid property " + this.name.inQuotes();
+        // Border: Invalid property "color"
+        // Invalid property "color"
+
+        final String filter = this.filter;
+        return (
+            filter.isEmpty() ?
+                "" :
+                filter.concat(": ")
+        ) + "Invalid property " +
+            this.name.inQuotes();
     }
 
     public String filter() {
