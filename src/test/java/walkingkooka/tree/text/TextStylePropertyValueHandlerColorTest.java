@@ -29,7 +29,7 @@ public final class TextStylePropertyValueHandlerColorTest extends TextStylePrope
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"color\": Expected color but got TextStylePropertyValueHandlerColorTest"
+            "Invalid \"color\" expected Color but got " + this.getClass().getSimpleName()
         );
     }
 

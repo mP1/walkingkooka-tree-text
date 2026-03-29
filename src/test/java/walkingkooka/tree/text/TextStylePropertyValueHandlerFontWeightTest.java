@@ -27,7 +27,7 @@ public final class TextStylePropertyValueHandlerFontWeightTest extends TextStyle
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"font-weight\": Expected FontWeight but got TextStylePropertyValueHandlerFontWeightTest"
+            "Invalid \"font-weight\" expected FontWeight but got " + this.getClass().getSimpleName()
         );
     }
 

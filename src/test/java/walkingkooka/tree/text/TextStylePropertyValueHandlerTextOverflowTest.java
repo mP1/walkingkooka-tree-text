@@ -29,7 +29,7 @@ public final class TextStylePropertyValueHandlerTextOverflowTest extends TextSty
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"text-overflow\": Expected TextOverflow got TextStylePropertyValueHandlerTextOverflowTest"
+            "Invalid \"text-overflow\" expected TextOverflow but got " + this.getClass().getSimpleName()
         );
     }
 

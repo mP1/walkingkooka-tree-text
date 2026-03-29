@@ -56,8 +56,12 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected TextOverflow got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     @Override

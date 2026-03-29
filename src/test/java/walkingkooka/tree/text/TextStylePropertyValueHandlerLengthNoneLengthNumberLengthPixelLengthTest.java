@@ -32,9 +32,11 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
 
     @Test
     public void testCheckValueWithNormalFails() {
+        final Length<?> value = Length.normal();
+
         this.checkValueFails(
-            Length.normal(),
-            "Property \"tab-size\": Expected NoneLength | NumberLength | PixelLength got NormalLength"
+            value,
+            "Invalid \"tab-size\" expected NoneLength | NumberLength | PixelLength but got " + value.getClass().getSimpleName()
         );
     }
 
@@ -55,7 +57,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"tab-size\": Expected NoneLength | NumberLength | PixelLength got TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLengthTest"
+            "Invalid \"tab-size\" expected NoneLength | NumberLength | PixelLength but got " + this.getClass().getSimpleName()
         );
     }
 

@@ -56,8 +56,12 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected FontSize but got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     @Override

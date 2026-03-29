@@ -73,8 +73,12 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected " + this.type.getSimpleName() + " but got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     private final Class<E> type;

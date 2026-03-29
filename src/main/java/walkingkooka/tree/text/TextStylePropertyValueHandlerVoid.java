@@ -57,8 +57,10 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Values not supported";
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return name.invalidTextStylePropertyValueException(value)
+            .setExpected("values not supported");
     }
 
     @Override

@@ -30,9 +30,11 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
 
     @Test
     public void testCheckValueNumberFails() {
+        final Length<?> value = Length.number(1L);
+
         this.checkValueFails(
-            Length.number(1L),
-            "Property \"line-height\": Expected NormalLength | PixelLength got NumberLength"
+            value,
+            "Invalid \"line-height\" expected NormalLength | PixelLength but got " + value.getClass().getSimpleName()
         );
     }
 
@@ -46,7 +48,7 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"line-height\": Expected NormalLength | PixelLength got TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTest"
+            "Invalid \"line-height\" expected NormalLength | PixelLength but got " + this.getClass().getSimpleName()
         );
     }
 

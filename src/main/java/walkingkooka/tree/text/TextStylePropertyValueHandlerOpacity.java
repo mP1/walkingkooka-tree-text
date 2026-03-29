@@ -56,8 +56,12 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected Opacity got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     @Override

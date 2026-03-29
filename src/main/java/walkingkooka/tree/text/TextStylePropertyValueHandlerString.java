@@ -56,8 +56,14 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected non empty String got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        final InvalidTextStylePropertyValueException exception = name.invalidTextStylePropertyValueException(value)
+            .setExpected("non empty String");
+        if(false == value instanceof String) {
+            exception.appendValueType();
+        }
+        return exception;
     }
 
     @Override
