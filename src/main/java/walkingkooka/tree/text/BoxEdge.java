@@ -207,7 +207,7 @@ public enum BoxEdge {
 
         @Override
         public TextStylePropertyName<Length<?>> marginPropertyName() {
-            return TextStylePropertyName.MARGIN;
+            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -295,8 +295,38 @@ public enum BoxEdge {
     public final Margin setMargin(final Optional<Length<?>> width) {
         Objects.requireNonNull(width, "width");
 
-        return TextStyle.EMPTY.setMargin(width)
-            .margin(this);
+        final TextStyle textStyle;
+
+        if (width.isPresent()) {
+            final Length<?> length = width.get();
+
+            if (ALL == this) {
+                textStyle = TextStyle.EMPTY.setValues(
+                    Maps.of(
+                        TextStylePropertyName.MARGIN_TOP,
+                        length,
+                        TextStylePropertyName.MARGIN_RIGHT,
+                        length,
+                        TextStylePropertyName.MARGIN_BOTTOM,
+                        length,
+                        TextStylePropertyName.MARGIN_LEFT,
+                        length
+                    )
+                );
+            } else {
+                textStyle = TextStyle.EMPTY.set(
+                    this.marginPropertyName(),
+                    length
+                );
+            }
+        } else {
+            textStyle = TextStyle.EMPTY;
+        }
+
+        return Margin.with(
+            this,
+            textStyle
+        );
     }
 
     /**

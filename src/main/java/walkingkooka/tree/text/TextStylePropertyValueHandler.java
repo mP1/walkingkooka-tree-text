@@ -74,6 +74,13 @@ abstract class TextStylePropertyValueHandler<T> {
     }
 
     /**
+     * {@see TextStylePropertyValueHandlerMargin}
+     */
+    static TextStylePropertyValueHandler<Margin> margin() {
+        return TextStylePropertyValueHandlerMargin.INSTANCE;
+    }
+
+    /**
      * {@see TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength}
      */
     static TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixelLength noneLengthNumberLengthPixelLength() {

@@ -236,16 +236,9 @@ final class TextStyleNonEmpty extends TextStyle {
                 }
                 break;
             case MARGIN:
-                // only return a non null width if all margins are the same.
-                final Object marginWidth = value.get(TextStylePropertyName.MARGIN_TOP);
-                if (null != marginWidth) {
-                    if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_LEFT))) {
-                        if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_RIGHT))) {
-                            if (marginWidth.equals(value.get(TextStylePropertyName.MARGIN_BOTTOM))) {
-                                get = marginWidth;
-                            }
-                        }
-                    }
+                final Margin margin = BoxEdge.ALL.margin(this);
+                if(margin.isNotEmpty()) {
+                    get = margin;
                 }
                 break;
             case PADDING:

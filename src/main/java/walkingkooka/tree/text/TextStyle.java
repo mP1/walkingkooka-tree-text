@@ -342,12 +342,9 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 );
                 break;
             case MARGIN:
-                set = this.setTopLeftRightBottom(
-                    TextStylePropertyName.MARGIN_TOP,
-                    TextStylePropertyName.MARGIN_LEFT,
-                    TextStylePropertyName.MARGIN_RIGHT,
-                    TextStylePropertyName.MARGIN_BOTTOM,
-                    (Length<?>) value
+                set = this.merge(
+                    ((Margin) value)
+                        .textStyle()
                 );
                 break;
             case PADDING:
@@ -425,13 +422,15 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return this.setValuesWithCopy(colorStyleWidth);
     }
 
-    public final TextStyle setMargin(final Optional<Length<?>> length) {
-        Objects.requireNonNull(length, "length");
-        
-        return this.setOrRemove(
-            TextStylePropertyName.MARGIN,
-            length.orElse(null)
-        );
+    public final TextStyle setMargin(final Optional<Margin> margin) {
+        Objects.requireNonNull(margin, "margin");
+
+        return margin.isEmpty() ?
+            this :
+            this.merge(
+                margin.get()
+                    .textStyle()
+            );
     }
 
     public final TextStyle setPadding(final Optional<Length<?>> length) {
@@ -522,21 +521,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                         );
                         break;
                     case MARGIN:
-                        copy.put(
-                            TextStylePropertyName.MARGIN_TOP,
-                            value
-                        );
-                        copy.put(
-                            TextStylePropertyName.MARGIN_LEFT,
-                            value
-                        );
-                        copy.put(
-                            TextStylePropertyName.MARGIN_RIGHT,
-                            value
-                        );
-                        copy.put(
-                            TextStylePropertyName.MARGIN_BOTTOM,
-                            value
+                        final Margin margin = (Margin) value;
+
+                        copy.putAll(
+                            margin.textStyle()
+                                .textStyleMap()
                         );
                         break;
                     case PADDING:

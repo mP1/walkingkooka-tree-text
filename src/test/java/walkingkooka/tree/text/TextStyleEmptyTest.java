@@ -31,6 +31,7 @@ import walkingkooka.visit.Visiting;
 
 import java.math.MathContext;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -393,7 +394,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         this.setAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.MARGIN,
-            length,
+            BoxEdge.ALL.setMargin(
+                Optional.of(length)
+            ),
             TextStyle.EMPTY.setValues(
                 Maps.of(
                     TextStylePropertyName.MARGIN_TOP,
