@@ -434,7 +434,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     }
 
     // setPadding.......................................................................................................
-
+    
     @Test
     public void testPaddingSet() {
         final Length<?> length = Length.pixel(100.0);
@@ -442,7 +442,9 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         this.setAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.PADDING,
-            length,
+            BoxEdge.ALL.setPadding(
+                Optional.of(length)
+            ),
             TextStyle.EMPTY.setValues(
                 Maps.of(
                     TextStylePropertyName.PADDING_TOP,
@@ -457,7 +459,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             )
         );
     }
-
+    
     // removePadding....................................................................................................
 
     @Test

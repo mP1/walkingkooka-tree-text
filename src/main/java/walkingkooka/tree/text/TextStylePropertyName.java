@@ -636,9 +636,9 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding
      */
-    public final static TextStylePropertyName<Length<?>> PADDING = registerConstant(
+    public final static TextStylePropertyName<Padding> PADDING = registerConstant(
         "padding", // property name
-        TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+        TextStylePropertyValueHandler.padding(), // handler
         null // visitor should NEVER happen
     );
 
