@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.CanBeEmptyTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
@@ -43,7 +44,8 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     HasTextTesting,
     ParseStringTesting<T>,
     TreePrintableTesting,
-    JsonNodeMarshallingTesting<T> {
+    JsonNodeMarshallingTesting<T>,
+    CanBeEmptyTesting {
 
     BorderMarginPaddingTestCase() {
         super();

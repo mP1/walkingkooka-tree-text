@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -36,7 +37,8 @@ import java.util.function.Function;
  */
 abstract class BorderMarginPadding implements HasTextStyle,
     HasText,
-    TreePrintable {
+    TreePrintable,
+    CanBeEmpty {
 
     /**
      * Package private to limit sub classing.
@@ -171,6 +173,13 @@ abstract class BorderMarginPadding implements HasTextStyle,
     }
 
     final TextStyle textStyle;
+
+    // CanBeEmpty.......................................................................................................
+
+    @Override
+    public final boolean isEmpty() {
+        return this.textStyle.isEmpty();
+    }
 
     // helper...........................................................................................................
 
