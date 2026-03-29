@@ -27,7 +27,7 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"font-size\": Expected FontSize but got TextStylePropertyValueHandlerFontSizeTest"
+            "Invalid \"font-size\" expected FontSize but got " + this.getClass().getSimpleName()
         );
     }
 

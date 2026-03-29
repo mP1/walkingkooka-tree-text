@@ -31,17 +31,21 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
 
     @Test
     public void testCheckValueWithNormalFails() {
+        final Length<?> value = Length.normal();
+
         this.checkValueFails(
-            Length.normal(),
-            "Property \"max-height\": Expected NoneLength | PixelLength got NormalLength"
+            value,
+            "Invalid \"max-height\" expected NoneLength | PixelLength but got " + value.getClass().getSimpleName()
         );
     }
 
     @Test
     public void testCheckValueWithNumberFails() {
+        final Length<?> value = Length.number(1L);
+
         this.checkValueFails(
-            Length.number(1L),
-            "Property \"max-height\": Expected NoneLength | PixelLength got NumberLength");
+            value,
+            "Invalid \"max-height\" expected NoneLength | PixelLength but got " + value.getClass().getSimpleName());
     }
 
     @Test
@@ -54,16 +58,17 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"max-height\": Expected NoneLength | PixelLength got TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest"
+            "Invalid \"max-height\" expected NoneLength | PixelLength but got " + this.getClass().getSimpleName()
         );
     }
 
     @Test
     public void testCheckValueWithIncompatibleTypeFails2() {
         final FakeNode<?, ?, ?, ?> fakeNode = new FakeNode<>();
+
         this.checkValueFails(
             fakeNode,
-            "Property \"max-height\": Expected NoneLength | PixelLength got FakeNode"
+            "Invalid \"max-height\" expected NoneLength | PixelLength but got " + fakeNode.getClass().getSimpleName()
         );
     }
 

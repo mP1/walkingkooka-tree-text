@@ -910,7 +910,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testParseNoneLengthNormalLengthPixelLengthWithNoneFails() {
         this.parseStringFails(
             "word-spacing: none",
-            new IllegalArgumentException("Property \"word-spacing\": Expected NormalLength | PixelLength got NoneLength")
+            new IllegalArgumentException("Invalid \"word-spacing\" expected NormalLength | PixelLength but got NoneLength")
         );
     }
 
@@ -918,7 +918,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testParseNoneLengthNormalLengthPixelLengthWithNumberFails() {
         this.parseStringFails(
             "word-spacing: 12",
-            new IllegalArgumentException("Property \"word-spacing\": Expected NormalLength | PixelLength got NumberLength")
+            new IllegalArgumentException("Invalid \"word-spacing\" expected NormalLength | PixelLength but got NumberLength")
         );
     }
 

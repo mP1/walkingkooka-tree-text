@@ -27,7 +27,7 @@ public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePro
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"opacity\": Expected Opacity got TextStylePropertyValueHandlerOpacityTest"
+            "Invalid \"opacity\" expected Opacity but got " + this.getClass().getSimpleName()
         );
     }
 

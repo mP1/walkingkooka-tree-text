@@ -24,7 +24,9 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Base class that contains abstract methods with sub-classes for each fo the different type of {@link TextStylePropertyName}
@@ -141,14 +143,9 @@ abstract class TextStylePropertyValueHandler<T> {
         }
 
         if (false == this.testValue(value)) {
-            // Property "tab-size" value normal(NormalLength) is not a NoneLength|NumberLength|PixelLength
-            throw new IllegalArgumentException(
-                "Property " +
-                name.inQuotes() +
-                    ": " +
-                    this.invalidValueMessage(
-                        value
-                    )
+            throw this.invalidValueMessage(
+                name,
+                value
             );
         }
 
@@ -158,7 +155,28 @@ abstract class TextStylePropertyValueHandler<T> {
     /**
      * The message that will appear when {@link #checkValue(Object, TextStylePropertyName)} fails.
      */
-    abstract String invalidValueMessage(final Object value);
+    abstract InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                                        final Object value);
+
+    final InvalidTextStylePropertyValueException expectedValueType(final TextStylePropertyName<?> name,
+                                                                   final Object value) {
+        return name.invalidTextStylePropertyValueException(value)
+            .setExpected(
+                this.valueType()
+                    .getSimpleName()
+            ).appendValueType();
+    }
+
+    final InvalidTextStylePropertyValueException expectedAny(final TextStylePropertyName<?> name,
+                                                             final Object value,
+                                                             final Class<?>...types) {
+        return name.invalidTextStylePropertyValueException(value)
+            .setExpected(
+                Arrays.stream(types)
+                    .map(Class::getSimpleName)
+                    .collect(Collectors.joining(" | "))
+            ).appendValueType();
+    }
 
     // parseValue.......................................................................................................
 

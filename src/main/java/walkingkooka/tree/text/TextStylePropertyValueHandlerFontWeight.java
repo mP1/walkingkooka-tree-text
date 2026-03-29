@@ -56,8 +56,12 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected FontWeight but got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     @Override

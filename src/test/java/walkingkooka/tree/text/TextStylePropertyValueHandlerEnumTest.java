@@ -30,7 +30,7 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"text-wrapping\": Expected TextWrapping but got TextStylePropertyValueHandlerEnumTest"
+            "Invalid \"text-wrapping\" expected TextWrapping but got " + this.getClass().getSimpleName()
         );
     }
 

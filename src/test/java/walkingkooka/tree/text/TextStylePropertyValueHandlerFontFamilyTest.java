@@ -29,7 +29,7 @@ public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStyle
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"font-family\": Expected FontFamily but got TextStylePropertyValueHandlerFontFamilyTest"
+            "Invalid \"font-family\" expected FontFamily but got " + this.getClass().getSimpleName()
         );
     }
 

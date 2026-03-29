@@ -27,7 +27,7 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
     public void testCheckValueWithIncompatibleTypeFails() {
         this.checkValueFails(
             this,
-            "Property \"text\": Expected non empty String got TextStylePropertyValueHandlerStringTest"
+            "Invalid \"text\" expected non empty String but got " + this.getClass().getSimpleName()
         );
     }
 
@@ -35,7 +35,7 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
     public void testCheckValueWithEmptyStringFails() {
         this.checkValueFails(
             "",
-            "Property \"text\": Expected non empty String got String"
+            "Invalid \"text\" expected non empty String"
         );
     }
 

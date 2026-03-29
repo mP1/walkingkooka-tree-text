@@ -58,8 +58,12 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
-    String invalidValueMessage(final Object value) {
-        return "Expected color but got " + value.getClass().getSimpleName();
+    InvalidTextStylePropertyValueException invalidValueMessage(final TextStylePropertyName<?> name,
+                                                               final Object value) {
+        return this.expectedValueType(
+            name,
+            value
+        );
     }
 
     @Override
