@@ -73,19 +73,7 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
-        final TextStylePropertiesMapEntrySet entries = this.value.entries;
-
-        // "clone" the values faster than putAll
-        final TextStylePropertiesMapMutable copy = TextStylePropertiesMapMutable.empty();
-        copy.size = entries.count;
-        System.arraycopy(
-            entries.values,
-            0,
-            copy.values,
-            0,
-            entries.values.length
-        );
-        return copy;
+        return this.value.mutable();
     }
 
     @Override
