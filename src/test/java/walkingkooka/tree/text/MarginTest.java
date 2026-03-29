@@ -97,6 +97,28 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     // text.............................................................................................................
 
     @Test
+    public void testTextAllEmpty() {
+        this.textAndCheck(
+            Margin.with(
+                BoxEdge.ALL,
+                TextStyle.EMPTY
+            ),
+            ""
+        );
+    }
+
+    @Test
+    public void testTextLeftEmpty() {
+        this.textAndCheck(
+            Margin.with(
+                BoxEdge.LEFT,
+                TextStyle.EMPTY
+            ),
+            ""
+        );
+    }
+
+    @Test
     public void testTextAllAndSameValues() {
         this.textAndCheck(
             TextStyle.EMPTY.setMargin(
