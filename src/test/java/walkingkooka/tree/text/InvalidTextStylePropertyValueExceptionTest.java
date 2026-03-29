@@ -75,8 +75,49 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 "Invalid123"
-            ).setExpected("top or left"),
+            ).setExpected(
+                "top or left"
+            ),
+            "Invalid \"margin\" expected top or left"
+        );
+    }
+
+    @Test
+    public void testGetMessageWithExpectedAndValue() {
+        this.checkMessage(
+            new InvalidTextStylePropertyValueException(
+                TextStylePropertyName.MARGIN,
+                "Invalid123"
+            ).setExpected(
+                "top or left"
+            ).appendValue(),
             "Invalid \"margin\" expected top or left but got \"Invalid123\""
+        );
+    }
+
+    @Test
+    public void testGetMessageWithExpectedAndValue2() {
+        this.checkMessage(
+            new InvalidTextStylePropertyValueException(
+                TextStylePropertyName.MARGIN,
+                123
+            ).setExpected(
+                "top or left"
+            ).appendValue(),
+            "Invalid \"margin\" expected top or left but got 123"
+        );
+    }
+
+    @Test
+    public void testGetMessageWithExpectedAndValueType() {
+        this.checkMessage(
+            new InvalidTextStylePropertyValueException(
+                TextStylePropertyName.MARGIN,
+                "Invalid123"
+            ).setExpected(
+                "top or left"
+            ).appendValueType(),
+            "Invalid \"margin\" expected top or left but got String"
         );
     }
 

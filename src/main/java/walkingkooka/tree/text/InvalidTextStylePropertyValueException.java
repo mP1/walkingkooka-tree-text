@@ -37,35 +37,78 @@ public final class InvalidTextStylePropertyValueException extends IllegalArgumen
         super();
         this.name = Objects.requireNonNull(name, "name");
         this.value = value;
+
+        this.appendValue = true;
     }
 
     @Override
     public String getMessage() {
-        final String expected = this.expected;
-
         // Invalid "color" value "InvalidValue123"
+        // Invalid "color" expected $expected
         // Invalid "color" expected $expected got "InvalidValue123"
 
-        final CharSequence quotedValue = CharSequences.quoteIfChars(this.value);
+        final StringBuilder b = new StringBuilder()
+            .append("Invalid ")
+            .append(this.name.inQuotes());
 
-        return "Invalid " + this.name.inQuotes() +
-            (
-                null != expected ?
-                    " expected " + expected + " but got " + quotedValue :
-                    " value " + quotedValue
+        final String expected = this.expected;
+        if (null != expected) {
+            b.append(" expected ")
+                .append(expected);
+        }
+
+        final Object value = this.value;
+        final boolean appendValue = this.appendValue;
+        final boolean appendValueType = this.appendValueType;
+
+        if (appendValue || (appendValueType && null == value)) {
+            b.append(
+                null == expected ?
+                    " value " :
+                    " but got "
             );
+
+            b.append(
+                CharSequences.quoteIfChars(value)
+            );
+        } else {
+            if (appendValueType) {
+                b.append(" but got ")
+                    .append(value.getClass().getSimpleName());
+            }
+        }
+
+        return b.toString();
     }
 
     /**
-     * Adds an expected part of the message, note it is not necessary to start the message with expected.
+     * Adds an expected part of the message, note it is not necessary to start the message with expected. Note {@link #appendValue}
+     * must be invoked to append the value.
      */
     public InvalidTextStylePropertyValueException setExpected(final String expected) {
         this.expected = CharSequences.failIfNullOrEmpty(expected, "expected");
-
+        this.appendValue = false;
+        this.appendValueType = false;
         return this;
     }
 
     private String expected;
+
+    public InvalidTextStylePropertyValueException appendValue() {
+        this.appendValue = true;
+        this.appendValueType = false;
+        return this;
+    }
+
+    private boolean appendValue;
+
+    public InvalidTextStylePropertyValueException appendValueType() {
+        this.appendValueType = true;
+        this.appendValue = false;
+        return this;
+    }
+
+    private boolean appendValueType;
 
     // HasName..........................................................................................................
 
