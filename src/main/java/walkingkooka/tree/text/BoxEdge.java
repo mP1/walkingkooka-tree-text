@@ -212,7 +212,7 @@ public enum BoxEdge {
 
         @Override
         public TextStylePropertyName<Length<?>> paddingPropertyName() {
-            return TextStylePropertyName.PADDING;
+            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -335,8 +335,38 @@ public enum BoxEdge {
     public final Padding setPadding(final Optional<Length<?>> width) {
         Objects.requireNonNull(width, "width");
 
-        return TextStyle.EMPTY.setPadding(width)
-            .padding(this);
+        final TextStyle textStyle;
+
+        if (width.isPresent()) {
+            final Length<?> length = width.get();
+
+            if (ALL == this) {
+                textStyle = TextStyle.EMPTY.setValues(
+                    Maps.of(
+                        TextStylePropertyName.PADDING_TOP,
+                        length,
+                        TextStylePropertyName.PADDING_RIGHT,
+                        length,
+                        TextStylePropertyName.PADDING_BOTTOM,
+                        length,
+                        TextStylePropertyName.PADDING_LEFT,
+                        length
+                    )
+                );
+            } else {
+                textStyle = TextStyle.EMPTY.set(
+                    this.paddingPropertyName(),
+                    length
+                );
+            }
+        } else {
+            textStyle = TextStyle.EMPTY;
+        }
+
+        return Padding.with(
+            this,
+            textStyle
+        );
     }
 
     // parseBorder......................................................................................................

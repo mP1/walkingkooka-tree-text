@@ -52,6 +52,7 @@ import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Margin;
 import walkingkooka.tree.text.Opacity;
+import walkingkooka.tree.text.Padding;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextOverflow;
@@ -614,6 +615,13 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                 case "Opacity":
                     propertyValue = Opacity.with(0.5);
                     break;
+                case "Padding":
+                    propertyValue = BoxEdge.ALL.setPadding(
+                        Optional.of(
+                            Length.pixel(1.0)
+                        )
+                    );
+                    break;
                 case "String":
                     propertyValue = "Hello";
                     break;
@@ -636,6 +644,10 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             String propertyValueText = propertyValue.toString();
             if (propertyValue instanceof Margin) {
                 propertyValueText = ((Margin) propertyValue)
+                    .text();
+            }
+            if (propertyValue instanceof Padding) {
+                propertyValueText = ((Padding) propertyValue)
                     .text();
             }
             if (type == Opacity.class) {

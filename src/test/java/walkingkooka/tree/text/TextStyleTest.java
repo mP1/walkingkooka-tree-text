@@ -1518,7 +1518,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetPaddingWithEmpty2() {
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.PADDING,
-            Length.pixel(1.0)
+            BoxEdge.ALL.setPadding(
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
         ).set(
             TextStylePropertyName.COLOR,
             Color.BLACK
@@ -1527,7 +1531,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         this.setPaddingAndCheck(
             style,
             Optional.empty(),
-            style.remove(TextStylePropertyName.PADDING)
+            style
         );
     }
 
@@ -1541,31 +1545,42 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setPaddingAndCheck(
             style,
-            length,
+            BoxEdge.ALL.setPadding(
+                Optional.of(length)
+            ),
             style.set(
-                TextStylePropertyName.PADDING,
+                TextStylePropertyName.PADDING_TOP,
+                length
+            ).set(
+                TextStylePropertyName.PADDING_RIGHT,
+                length
+            ).set(
+                TextStylePropertyName.PADDING_BOTTOM,
+                length
+            ).set(
+                TextStylePropertyName.PADDING_LEFT,
                 length
             )
         );
     }
 
     private void setPaddingAndCheck(final TextStyle style,
-                                   final Length<?> length,
+                                   final Padding padding,
                                    final TextStyle expected) {
         this.setPaddingAndCheck(
             style,
-            Optional.of(length),
+            Optional.of(padding),
             expected
         );
     }
 
     private void setPaddingAndCheck(final TextStyle style,
-                                   final Optional<Length<?>> length,
+                                   final Optional<Padding> padding,
                                    final TextStyle expected) {
         this.checkEquals(
             expected,
-            style.setPadding(length),
-            () -> style + " setPadding " + length
+            style.setPadding(padding),
+            () -> style + " setPadding " + padding
         );
     }
 

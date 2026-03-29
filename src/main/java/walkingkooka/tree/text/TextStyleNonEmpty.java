@@ -242,16 +242,9 @@ final class TextStyleNonEmpty extends TextStyle {
                 }
                 break;
             case PADDING:
-                // only return a non null width if all paddings are the same.
-                final Object paddingWidth = value.get(TextStylePropertyName.PADDING_TOP);
-                if (null != paddingWidth) {
-                    if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_LEFT))) {
-                        if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_RIGHT))) {
-                            if (paddingWidth.equals(value.get(TextStylePropertyName.PADDING_BOTTOM))) {
-                                get = paddingWidth;
-                            }
-                        }
-                    }
+                final Padding padding = BoxEdge.ALL.padding(this);
+                if (padding.isNotEmpty()) {
+                    get = padding;
                 }
                 break;
             default:
