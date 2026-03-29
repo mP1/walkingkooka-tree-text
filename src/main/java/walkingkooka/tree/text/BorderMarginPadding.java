@@ -241,54 +241,59 @@ abstract class BorderMarginPadding implements HasTextStyle,
         final String text;
 
         final TextStyle textStyle = this.textStyle;
-        final BoxEdge boxEdge = this.edge;
 
-        if(BoxEdge.ALL == boxEdge) {
-            final Length<?> top = textStyle.get(
-                lengthPropertyNameGetter.apply(BoxEdge.TOP)
-            ).orElse(null);
-
-            final Length<?> right = textStyle.get(
-                lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
-            ).orElse(null);
-
-            final Length<?> bottom = textStyle.get(
-                lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
-            ).orElse(null);
-
-            final Length<?> left = textStyle.get(
-                lengthPropertyNameGetter.apply(BoxEdge.LEFT)
-            ).orElse(null);
-
-            if (areAllEqual(top, right, bottom, left)) {
-                text = top.text();
-            } else {
-                final StringBuilder b = new StringBuilder();
-                appendIfNotNull(
-                    top,
-                    b
-                );
-                appendIfNotNull(
-                    right,
-                    b
-                );
-                appendIfNotNull(
-                    bottom,
-                    b
-                );
-                appendIfNotNull(
-                    left,
-                    b
-                );
-
-                text = b.toString();
-            }
-
+        if (textStyle.isEmpty()) {
+            text = "";
         } else {
-            text = textStyle.get(
-                lengthPropertyNameGetter.apply(boxEdge)
-            ).map(Length::toString)
-                .orElse("");
+            final BoxEdge boxEdge = this.edge;
+
+            if (BoxEdge.ALL == boxEdge) {
+                final Length<?> top = textStyle.get(
+                    lengthPropertyNameGetter.apply(BoxEdge.TOP)
+                ).orElse(null);
+
+                final Length<?> right = textStyle.get(
+                    lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
+                ).orElse(null);
+
+                final Length<?> bottom = textStyle.get(
+                    lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
+                ).orElse(null);
+
+                final Length<?> left = textStyle.get(
+                    lengthPropertyNameGetter.apply(BoxEdge.LEFT)
+                ).orElse(null);
+
+                if (areAllEqual(top, right, bottom, left)) {
+                    text = top.text();
+                } else {
+                    final StringBuilder b = new StringBuilder();
+                    appendIfNotNull(
+                        top,
+                        b
+                    );
+                    appendIfNotNull(
+                        right,
+                        b
+                    );
+                    appendIfNotNull(
+                        bottom,
+                        b
+                    );
+                    appendIfNotNull(
+                        left,
+                        b
+                    );
+
+                    text = b.toString();
+                }
+
+            } else {
+                text = textStyle.get(
+                        lengthPropertyNameGetter.apply(boxEdge)
+                    ).map(Length::toString)
+                    .orElse("");
+            }
         }
 
         return text;
