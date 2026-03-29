@@ -759,8 +759,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
             ),
-            TextStylePropertyName.BORDER_COLOR,
-            null
+            TextStylePropertyName.BORDER_COLOR
         );
     }
 
@@ -783,8 +782,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.BORDER_BOTTOM_COLOR,
                 Color.parse("#444")
             ),
-            TextStylePropertyName.BORDER_COLOR,
-            null
+            TextStylePropertyName.BORDER_COLOR
         );
     }
 
@@ -915,8 +913,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
             ),
-            TextStylePropertyName.BORDER_STYLE,
-            null
+            TextStylePropertyName.BORDER_STYLE
         );
     }
 
@@ -939,8 +936,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.BORDER_BOTTOM_STYLE,
                 BorderStyle.DOTTED
             ),
-            TextStylePropertyName.BORDER_STYLE,
-            null
+            TextStylePropertyName.BORDER_STYLE
         );
     }
 
@@ -1071,8 +1067,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
             ),
-            TextStylePropertyName.BORDER_WIDTH,
-            null
+            TextStylePropertyName.BORDER_WIDTH
         );
     }
 
@@ -1095,8 +1090,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.BORDER_BOTTOM_WIDTH,
                 Length.pixel(444.0)
             ),
-            TextStylePropertyName.BORDER_WIDTH,
-            null
+            TextStylePropertyName.BORDER_WIDTH
         );
     }
 
@@ -1286,8 +1280,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
             ),
-            TextStylePropertyName.MARGIN,
-            null
+            TextStylePropertyName.MARGIN
         );
     }
 
@@ -1310,8 +1303,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.MARGIN_BOTTOM,
                 Length.pixel(444.0)
             ),
-            TextStylePropertyName.MARGIN,
-            null
+            TextStylePropertyName.MARGIN
         );
     }
 
@@ -1442,8 +1434,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
             ),
-            TextStylePropertyName.PADDING,
-            null
+            TextStylePropertyName.PADDING
         );
     }
 
@@ -1466,8 +1457,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 TextStylePropertyName.PADDING_BOTTOM,
                 Length.pixel(444.0)
             ),
-            TextStylePropertyName.PADDING,
-            null
+            TextStylePropertyName.PADDING
         );
     }
 

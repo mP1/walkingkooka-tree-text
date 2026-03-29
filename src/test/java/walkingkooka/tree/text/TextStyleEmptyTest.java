@@ -200,8 +200,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testBorderColorGet() {
         this.getAndCheck(
             TextStyle.EMPTY,
-            TextStylePropertyName.BORDER_COLOR,
-            null
+            TextStylePropertyName.BORDER_COLOR
         );
     }
 
@@ -247,8 +246,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testBorderStyleGet() {
         this.getAndCheck(
             TextStyle.EMPTY,
-            TextStylePropertyName.BORDER_STYLE,
-            null
+            TextStylePropertyName.BORDER_STYLE
         );
     }
 
@@ -294,8 +292,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testBorderWidthGet() {
         this.getAndCheck(
             TextStyle.EMPTY,
-            TextStylePropertyName.BORDER_WIDTH,
-            null
+            TextStylePropertyName.BORDER_WIDTH
         );
     }
 
@@ -383,8 +380,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testMarginGet() {
         this.getAndCheck(
             TextStyle.EMPTY,
-            TextStylePropertyName.MARGIN,
-            null
+            TextStylePropertyName.MARGIN
         );
     }
 
@@ -430,8 +426,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     public void testPaddingGet() {
         this.getAndCheck(
             TextStyle.EMPTY,
-            TextStylePropertyName.PADDING,
-            null
+            TextStylePropertyName.PADDING
         );
     }
 
