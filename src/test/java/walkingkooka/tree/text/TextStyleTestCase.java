@@ -151,9 +151,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
     }
 
-    private void setValuesAndCheck(final TextStyle textStyle,
-                                   final Map<TextStylePropertyName<?>, Object> values,
-                                   final TextStyle expected) {
+    final void setValuesAndCheck(final TextStyle textStyle,
+                                 final Map<TextStylePropertyName<?>, Object> values,
+                                 final TextStyle expected) {
         this.checkEquals(
             expected,
             textStyle.setValues(values),

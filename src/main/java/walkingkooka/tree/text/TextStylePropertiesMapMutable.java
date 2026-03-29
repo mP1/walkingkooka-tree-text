@@ -75,6 +75,28 @@ final class TextStylePropertiesMapMutable extends AbstractMap<TextStylePropertyN
         return old;
     }
 
+    @Override
+    public Object remove(final Object name) {
+        Objects.requireNonNull(name, "name");
+
+        return name instanceof TextStylePropertyName ?
+            this.removeTextStylePropertyName(
+                (TextStylePropertyName) name
+            ) :
+            null;
+    }
+
+    private Object removeTextStylePropertyName(final TextStylePropertyName<?> name) {
+        final int index = name.index;
+
+        final Object old = this.values[index];
+        if(null != old) {
+            this.size--;
+        }
+        this.values[index] = null;
+        return old;
+    }
+
     final Object[] values;
 
     @Override

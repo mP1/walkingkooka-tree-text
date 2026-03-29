@@ -692,6 +692,54 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // setValues........................................................................................................
+
+    @Test
+    public void testSetValuesRemoves() {
+        final Map<TextStylePropertyName<?>, Object> values = Maps.hash();
+        values.put(
+            TextStylePropertyName.COLOR,
+            null
+        );
+
+        this.setValuesAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            ),
+            values,
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testSetValuesRemovesAndReplaces() {
+        final Map<TextStylePropertyName<?>, Object> values = Maps.hash();
+        values.put(
+            TextStylePropertyName.COLOR,
+            null
+        );
+        values.put(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        );
+
+        this.setValuesAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            values,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.CENTER
+            )
+        );
+    }
+
     // setBorder.......................................................................................................
 
     @Test
