@@ -1130,6 +1130,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
 
     private final boolean padding;
 
+    // InvalidTextStylePropertyNameException............................................................................
+
+    public InvalidTextStylePropertyNameException invalidTextStylePropertyNameException() {
+        return InvalidTextStylePropertyNameException.textStyle(this);
+    }
+    
     // InvalidTextStylePropertyValueException............................................................................
 
     public InvalidTextStylePropertyValueException invalidTextStylePropertyValueException(final Object value) {
