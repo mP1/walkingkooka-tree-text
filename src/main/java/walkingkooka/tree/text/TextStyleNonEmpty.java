@@ -203,19 +203,26 @@ final class TextStyleNonEmpty extends TextStyle {
                                         final TextStylePropertyName<T> rightName,
                                         final TextStylePropertyName<T> bottomName,
                                         final T value) {
-        return this.setValue(
+        final TextStylePropertiesMap values = this.copy();
+
+        values.setTextStyleProperty(
             topName,
             value
-        ).setValue(
-            leftName,
-            value
-        ).setValue(
+        );
+        values.setTextStyleProperty(
             rightName,
             value
-        ).setValue(
+        );
+        values.setTextStyleProperty(
             bottomName,
             value
         );
+        values.setTextStyleProperty(
+            leftName,
+            value
+        );
+
+        return this.setTextStylePropertiesMap(values);
     }
 
     @Override
