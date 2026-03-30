@@ -133,7 +133,7 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         return this.size;
     }
 
-    int size;
+    private int size;
 
     @Override
     public Object get(final Object name) {
