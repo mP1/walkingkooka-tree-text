@@ -271,7 +271,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 final int index = propertyName.index();
                 final TextStylePropertiesMap values = this.value;
                 if (null != values.values[index]) {
-                    if (1 == values.size) {
+                    if (1 == values.size()) {
                         removed = EMPTY;
                     } else {
                         final TextStylePropertiesMap mapRemoved = values.copy();
