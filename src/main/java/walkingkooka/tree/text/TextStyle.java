@@ -417,16 +417,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     }
 
     public final TextStyle setPadding(final Optional<Padding> padding) {
-        return this.setMarginPadding(padding);
-    }
+        Objects.requireNonNull(padding, "padding");
 
-    private TextStyle setMarginPadding(final Optional<? extends BorderMarginPadding> marginOrPadding) {
-        return marginOrPadding.isEmpty() ?
-            this :
-            this.merge(
-                marginOrPadding.get()
-                    .textStyle()
-            );
+        return this.setOrRemove(
+            TextStylePropertyName.PADDING,
+            padding.orElse(null)
+        );
     }
 
     /**

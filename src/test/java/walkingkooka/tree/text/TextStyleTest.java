@@ -1523,19 +1523,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testSetPaddingWithEmpty2() {
         final TextStyle style = TextStyle.EMPTY.set(
-            TextStylePropertyName.PADDING,
-            BoxEdge.ALL.setPadding(
-                Optional.of(
-                    Length.pixel(1.0)
-                )
-            )
-        ).set(
             TextStylePropertyName.COLOR,
             Color.BLACK
         );
 
         this.setPaddingAndCheck(
-            style,
+            style.set(
+                TextStylePropertyName.PADDING,
+                BoxEdge.ALL.setPadding(
+                    Optional.of(
+                        Length.pixel(1.0)
+                    )
+                )
+            ),
             Optional.empty(),
             style
         );
