@@ -91,6 +91,13 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         this.removeTextStyleProperty(TextStylePropertyName.MARGIN_LEFT);
     }
 
+    void removePadding() {
+        this.removeTextStyleProperty(TextStylePropertyName.PADDING_TOP);
+        this.removeTextStyleProperty(TextStylePropertyName.PADDING_RIGHT);
+        this.removeTextStyleProperty(TextStylePropertyName.PADDING_BOTTOM);
+        this.removeTextStyleProperty(TextStylePropertyName.PADDING_LEFT);
+    }
+
     <T> T removeTextStyleProperty(final TextStylePropertyName<T> name) {
         return this.setTextStyleProperty(
             name,
