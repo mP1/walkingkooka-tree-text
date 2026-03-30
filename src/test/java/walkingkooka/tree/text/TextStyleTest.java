@@ -1394,9 +1394,15 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 "border-top-style=DASHED\n" +
                 "border-top-width=34px",
             TextStyleNonEmpty.EMPTY.setBorder(
-                Color.WHITE,
-                BorderStyle.DASHED,
-                Length.pixel(34.0)
+                Optional.of(
+                    BoxEdge.ALL.setBorder(
+                        Optional.of(Color.WHITE),
+                        Optional.of(BorderStyle.DASHED),
+                        Optional.of(
+                            Length.pixel(34.0)
+                        )
+                    )
+                )
             ).text()
         );
     }

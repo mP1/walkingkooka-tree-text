@@ -84,6 +84,24 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         return copy;
     }
 
+    void removeBorder() {
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_COLOR);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_STYLE);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_WIDTH);
+
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_COLOR);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_STYLE);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_WIDTH);
+
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_COLOR);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_STYLE);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_WIDTH);
+
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_COLOR);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_STYLE);
+        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_WIDTH);
+    }
+
     void removeMargin() {
         this.removeTextStyleProperty(TextStylePropertyName.MARGIN_TOP);
         this.removeTextStyleProperty(TextStylePropertyName.MARGIN_RIGHT);
@@ -103,6 +121,31 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
             name,
             null
         );
+    }
+
+    void setBorder(final Border border) {
+        final BoxEdge borderBoxEdge = border.edge();
+
+        for (final BoxEdge boxEdge : BoxEdge.values()) {
+            if (BoxEdge.ALL == boxEdge) {
+                continue;
+            }
+
+            if (boxEdge == borderBoxEdge || BoxEdge.ALL == borderBoxEdge) {
+                this.setBorderMarginPadding(
+                    border,
+                    boxEdge.borderColorPropertyName()
+                );
+                this.setBorderMarginPadding(
+                    border,
+                    boxEdge.borderStylePropertyName()
+                );
+                this.setBorderMarginPadding(
+                    border,
+                    boxEdge.borderWidthPropertyName()
+                );
+            }
+        }
     }
 
     <T> T setBorderMarginPadding(final BorderMarginPadding borderMarginPadding,

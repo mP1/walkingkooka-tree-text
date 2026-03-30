@@ -280,6 +280,15 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    @Test
+    public void testRemovePropertyExistingBorder() {
+        this.removePropertyAndCheck(
+            Border.parse("top-color: black; top-style: dashed;"),
+            TextStylePropertyName.BORDER,
+            Border.parse("")
+        );
+    }
+
     // setOrRemoveProperty..............................................................................................
 
     @Test
@@ -367,13 +376,11 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
 
     @Test
     public void testToStringWithAll() {
+        final String text = "black DASHED 2px";
+
         this.toStringAndCheck(
-            TextStyle.EMPTY.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
-                Length.pixel(2.0)
-            ).border(BoxEdge.ALL),
-            "border ALL black DASHED 2px"
+            Border.parse(text),
+            "border ALL " + text
         );
     }
 
@@ -414,11 +421,13 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testTextWithTop() {
         this.textAndCheck(
-            TextStyle.EMPTY.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
-                Length.pixel(2.0)
-            ).border(BoxEdge.TOP),
+            BoxEdge.TOP.setBorder(
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.DASHED),
+                Optional.of(
+                    Length.pixel(2.0)
+                )
+            ),
             "black DASHED 2px"
         );
     }
@@ -426,11 +435,13 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testTextWithRight() {
         this.textAndCheck(
-            TextStyle.EMPTY.setBorder(
-                Color.BLACK,
-                BorderStyle.DASHED,
-                Length.pixel(2.0)
-            ).border(BoxEdge.RIGHT),
+            BoxEdge.RIGHT.setBorder(
+                Optional.of(Color.BLACK),
+                Optional.of(BorderStyle.DASHED),
+                Optional.of(
+                    Length.pixel(2.0)
+                )
+            ),
             "black DASHED 2px"
         );
     }

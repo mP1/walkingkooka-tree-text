@@ -42,6 +42,7 @@ import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.text.Border;
 import walkingkooka.tree.text.BoxEdge;
 import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.FontFamily;
@@ -590,6 +591,9 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
 
             final Class<?> type = propertyName.type();
             switch (type.getSimpleName()) {
+                case "Border":
+                    propertyValue = Border.parse("BLACK SOLID 1px");
+                    break;
                 case "Color":
                     propertyValue = Color.BLACK;
                     break;
@@ -642,6 +646,10 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
             }
 
             String propertyValueText = propertyValue.toString();
+            if (propertyValue instanceof Border) {
+                propertyValueText = ((Border) propertyValue)
+                    .text();
+            }
             if (propertyValue instanceof Margin) {
                 propertyValueText = ((Margin) propertyValue)
                     .text();

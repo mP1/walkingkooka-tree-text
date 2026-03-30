@@ -589,6 +589,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testRemoveBorder() {
+        final TextStyle textStyle = TextStyle.parse(
+            "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+                "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+                "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;"
+        );
+
+        this.removeAndCheck(
+            textStyle.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.BORDER,
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
     // set & remove ...................................................................................................
 
     @Test
@@ -743,17 +765,136 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setBorder.......................................................................................................
 
     @Test
-    public void testSetBorder() {
-        final String text = "abc123";
+    public void testSetBorderAllSame() {
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        ).set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+            .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+            .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+            .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+            .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+            .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+            .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+            .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+            .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width);
+
+        this.setBorderAndCheck(
+            textStyle,
+            BoxEdge.ALL.setBorder(
+                Optional.of(color),
+                Optional.of(style),
+                Optional.of(width)
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderAll() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
 
         final Color color = Color.parse("#123");
         final BorderStyle style = BorderStyle.DASHED;
         final Length<?> width = Length.pixel(123.5);
 
-        this.checkEquals(
-            TextStyle.EMPTY
-                .set(TextStylePropertyName.TEXT, text)
-                .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.of(
+                BoxEdge.ALL.setBorder(
+                    Optional.of(color),
+                    Optional.of(style),
+                    Optional.of(width)
+                )
+            ),
+            textStyle.set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+                .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+                .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+                .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width)
+        );
+    }
+
+    @Test
+    public void testSetBorderTopSame() {
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+            .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+            .set(TextStylePropertyName.BORDER_TOP_WIDTH, width);
+
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.of(
+                BoxEdge.TOP.setBorder(
+                    Optional.of(color),
+                    Optional.of(style),
+                    Optional.of(width)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetBorderTop() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        final Color color = Color.parse("#123");
+        final BorderStyle style = BorderStyle.DASHED;
+        final Length<?> width = Length.pixel(123.5);
+
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.of(
+                BoxEdge.TOP.setBorder(
+                    Optional.of(color),
+                    Optional.of(style),
+                    Optional.of(width)
+                )
+            ),
+            textStyle.set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+                .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+                .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+        );
+    }
+
+    @Test
+    public void testSetBorderAllSomeMissing() {
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        final Color color = Color.BLACK;
+        final BorderStyle style = BorderStyle.SOLID;
+        final Length<?> width = Length.pixel(1.0);
+
+        this.setBorderAndCheck(
+            textStyle.set(TextStylePropertyName.BORDER_TOP_COLOR, color)
                 .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
                 .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
                 .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
@@ -765,37 +906,111 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
                 .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
                 .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
-            TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
-                .setBorder(
-                    color,
-                    style,
-                    width
-                )
+            Border.parse("border-top-color: WHITE; border-right-color: WHITE"),
+            textStyle.set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.WHITE
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                Color.WHITE
+            )
         );
     }
 
     @Test
-    public void testSetBorderSame() {
-        final String text = "abc123";
+    public void testSetBorderTopSomeMissing() {
+        final Color color = Color.BLACK;
+        final BorderStyle style = BorderStyle.SOLID;
+        final Length<?> width = Length.pixel(1.0);
 
-        final Color color = Color.parse("#123");
-        final BorderStyle style = BorderStyle.DASHED;
-        final Length<?> width = Length.pixel(123.5);
+        final TextStyle textStyle = TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ).set(TextStylePropertyName.BORDER_TOP_COLOR, color)
+            .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
+            .set(TextStylePropertyName.BORDER_TOP_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_RIGHT_COLOR, color)
+            .set(TextStylePropertyName.BORDER_RIGHT_STYLE, style)
+            .set(TextStylePropertyName.BORDER_RIGHT_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, color)
+            .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, style)
+            .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
+            .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
+            .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
+            .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width);
 
-        final TextStyle textStyle = TextStyle.EMPTY.set(TextStylePropertyName.TEXT, text)
-            .setBorder(
-                color,
-                style,
-                width
-            );
-
-        assertSame(
+        this.setBorderAndCheck(
             textStyle,
-            textStyle.setBorder(
-                color,
-                style,
-                width
-            )
+            Border.parse("border-top-color: WHITE;")
+                .setEdge(BoxEdge.TOP),
+            textStyle.set(
+                    TextStylePropertyName.BORDER_TOP_COLOR,
+                    Color.WHITE
+                ).remove(TextStylePropertyName.BORDER_TOP_STYLE)
+                .remove(TextStylePropertyName.BORDER_TOP_WIDTH)
+        );
+    }
+
+    // getBorder........................................................................................................
+
+    @Test
+    public void testBorderMissing() {
+        this.getAndCheck(
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            ),
+            TextStylePropertyName.BORDER
+        );
+    }
+
+    @Test
+    public void testBorderAll() {
+        final String text = "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+            "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+            "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+            "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;";
+
+        this.getAndCheck(
+            TextStyle.parse(text),
+            TextStylePropertyName.BORDER,
+            Border.parse(text)
+        );
+    }
+
+    @Test
+    public void testBorderAll2() {
+        final String text = "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+            "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+            "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+            "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;";
+
+        this.getAndCheck(
+            TextStyle.parse(text + " color: BLUE;"),
+            TextStylePropertyName.BORDER,
+            Border.parse(text)
+        );
+    }
+
+    @Test
+    public void testBorderIncomplete() {
+        final String text = "border-top-color: BLACK; border-right-style: SOLID; border-bottom-width: 1px;";
+
+        this.getAndCheck(
+            TextStyle.parse(text),
+            TextStylePropertyName.BORDER,
+            Border.parse(text)
+        );
+    }
+
+    @Test
+    public void testBorderIncomplete2() {
+        final String text = "border-top-color: BLACK; border-right-style: SOLID; border-bottom-width: 1px;";
+
+        this.getAndCheck(
+            TextStyle.parse(text + " color: BLUE;"),
+            TextStylePropertyName.BORDER,
+            Border.parse(text)
         );
     }
 
@@ -2007,9 +2222,9 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     public void testPropertiesWithBorder() {
         this.propertiesAndCheck(
             TextStyleNonEmpty.EMPTY.setBorder(
-                Color.WHITE,
-                BorderStyle.DASHED,
-                Length.pixel(34.0)
+                Optional.of(
+                    Border.parse("WHITE DASHED 34.0px")
+                )
             ),
             "border-bottom-color=white\n" +
                 "border-bottom-style=DASHED\n" +
