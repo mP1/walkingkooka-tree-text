@@ -95,7 +95,7 @@ final class TextStyleEmpty extends TextStyle {
     // setChildren......................................................................................................
 
     @Override
-    TextStylePropertiesMap textStyleMap() {
+    TextStylePropertiesMap textStylePropertiesMap() {
         return TextStylePropertiesMap.EMPTY;
     }
 

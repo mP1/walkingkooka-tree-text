@@ -543,7 +543,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             Lists.of(
                 TextNode.text("Hello")
             ),
-            textStyle.textStyleMap()
+            textStyle.textStylePropertiesMap()
         );
 
         assertSame(

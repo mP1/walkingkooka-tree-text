@@ -287,7 +287,7 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final TextNode setTextStyle(final TextStyle textStyle) {
         return this.setAttributes(
             Objects.requireNonNull(textStyle, "textStyle")
-                .textStyleMap()
+                .textStylePropertiesMap()
         );
     }
 
