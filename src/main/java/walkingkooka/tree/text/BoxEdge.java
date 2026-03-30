@@ -300,18 +300,26 @@ public enum BoxEdge {
             final Length<?> length = width.get();
 
             if (ALL == this) {
-                textStyle = TextStyle.EMPTY.setValues(
-                    Maps.of(
-                        TextStylePropertyName.MARGIN_TOP,
-                        length,
-                        TextStylePropertyName.MARGIN_RIGHT,
-                        length,
-                        TextStylePropertyName.MARGIN_BOTTOM,
-                        length,
-                        TextStylePropertyName.MARGIN_LEFT,
-                        length
-                    )
+                final TextStylePropertiesMap textStylePropertiesMap = TextStylePropertiesMap.empty();
+
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.MARGIN_TOP,
+                    length
                 );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.MARGIN_RIGHT,
+                    length
+                );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.MARGIN_BOTTOM,
+                    length
+                );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.MARGIN_LEFT,
+                    length
+                );
+
+                textStyle = TextStyle.EMPTY.setValues(textStylePropertiesMap);
             } else {
                 textStyle = TextStyle.EMPTY.set(
                     this.marginPropertyName(),
