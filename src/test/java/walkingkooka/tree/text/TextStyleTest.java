@@ -1440,19 +1440,19 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     @Test
     public void testSetMarginWithEmpty2() {
         final TextStyle style = TextStyle.EMPTY.set(
-            TextStylePropertyName.MARGIN,
-            BoxEdge.ALL.setMargin(
-                Optional.of(
-                    Length.pixel(1.0)
-                )
-            )
-        ).set(
             TextStylePropertyName.COLOR,
             Color.BLACK
         );
 
         this.setMarginAndCheck(
-            style,
+            style.set(
+                TextStylePropertyName.MARGIN,
+                BoxEdge.ALL.setMargin(
+                    Optional.of(
+                        Length.pixel(1.0)
+                    )
+                )
+            ),
             Optional.empty(),
             style
         );

@@ -410,7 +410,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final TextStyle setMargin(final Optional<Margin> margin) {
         Objects.requireNonNull(margin, "margin");
 
-        return this.setMarginPadding(margin);
+        return this.setOrRemove(
+            TextStylePropertyName.MARGIN,
+            margin.orElse(null)
+        );
     }
 
     public final TextStyle setPadding(final Optional<Padding> padding) {
