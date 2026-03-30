@@ -198,34 +198,6 @@ final class TextStyleNonEmpty extends TextStyle {
     // set..............................................................................................................
 
     @Override
-    <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
-                                        final TextStylePropertyName<T> leftName,
-                                        final TextStylePropertyName<T> rightName,
-                                        final TextStylePropertyName<T> bottomName,
-                                        final T value) {
-        final TextStylePropertiesMap values = this.copy();
-
-        values.setTextStyleProperty(
-            topName,
-            value
-        );
-        values.setTextStyleProperty(
-            rightName,
-            value
-        );
-        values.setTextStyleProperty(
-            bottomName,
-            value
-        );
-        values.setTextStyleProperty(
-            leftName,
-            value
-        );
-
-        return this.setTextStylePropertiesMap(values);
-    }
-
-    @Override
     <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
                                    final V value) {
         final TextStyleNonEmpty textStyle;
