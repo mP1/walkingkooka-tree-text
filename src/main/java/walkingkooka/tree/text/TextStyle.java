@@ -236,13 +236,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * and these styles.
      */
     public final TextNode setChildren(final List<TextNode> textNodes) {
-        return TextStyleNode.with(textNodes, this.textStyleMap());
+        return TextStyleNode.with(textNodes, this.textStylePropertiesMap());
     }
 
     /**
      * A {@link TextStylePropertiesMap} holding the {@link TextStylePropertyName} and values.
      */
-    abstract TextStylePropertiesMap textStyleMap();
+    abstract TextStylePropertiesMap textStylePropertiesMap();
 
     // merge............................................................................................................
 
@@ -788,7 +788,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     public final Properties properties() {
         Properties properties = Properties.EMPTY;
 
-        for(final Entry<TextStylePropertyName<?>, ?> nameAndValue : this.textStyleMap().entrySet() ) {
+        for(final Entry<TextStylePropertyName<?>, ?> nameAndValue : this.textStylePropertiesMap().entrySet() ) {
             final TextStylePropertyName<?> name = nameAndValue.getKey();
             properties = properties.set(
                 name.propertiesPath,

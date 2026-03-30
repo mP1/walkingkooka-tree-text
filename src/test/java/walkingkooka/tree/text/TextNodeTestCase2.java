@@ -130,7 +130,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         this.checkEquals(
             textNode.attributes(),
             textNode.textStyle()
-                .textStyleMap()
+                .textStylePropertiesMap()
         );
 
         this.textStyleAndCheck(

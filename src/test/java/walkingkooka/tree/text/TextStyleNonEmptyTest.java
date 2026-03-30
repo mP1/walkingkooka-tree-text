@@ -195,7 +195,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         final TextNode textStyle = TextStyleNode.with(
             children,
             this.createTextStyle()
-                .textStyleMap()
+                .textStylePropertiesMap()
         );
 
         this.replaceAndCheck(
@@ -300,7 +300,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             this.makeStyleNameParent(
                 TextStyleNode.with(
                     Lists.of(textNode),
-                    textStyle.textStyleMap())
+                    textStyle.textStylePropertiesMap())
             )
         );
     }
