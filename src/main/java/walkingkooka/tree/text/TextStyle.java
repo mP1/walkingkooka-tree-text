@@ -106,7 +106,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Passing the text from {@link #text()} to parse will give an equal {@link TextStyle}.
      */
     public static TextStyle parse(final String text) {
-        return parse0(
+        return parse1(
             text,
             TextStylePropertyName::with
         );
@@ -116,7 +116,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                             final String prefix,
                             final Function<TextStylePropertyName<?>, Boolean> checker,
                             final Function<TextStylePropertyName<?>, InvalidTextStylePropertyNameException> invalid) {
-        return parse0(
+        return parse1(
             text,
             (String propertyName) -> {
                 final TextStylePropertyName<?> textStylePropertyName = TextStylePropertyName.withOptionalPrefix(
@@ -134,7 +134,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         );
     }
 
-    private static TextStyle parse0(final String text,
+    private static TextStyle parse1(final String text,
                                     final Function<String, TextStylePropertyName<?>> propertyNameFactory) {
         // WHITESPACE, TextStylePropertyName, WHITESPACE, COLON,
         // WHITESPACE VALUE WHITESPACE
