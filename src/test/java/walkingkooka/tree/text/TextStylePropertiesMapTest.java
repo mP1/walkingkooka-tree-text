@@ -33,14 +33,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStylePropertiesMapTest implements MapTesting2<TextStylePropertiesMap, TextStylePropertyName<?>, Object> {
 
     @Test
-    public void testWithInvalidPropertyFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextStylePropertiesMap.with(Maps.of(TextStylePropertyName.WORD_BREAK, null))
-        );
-    }
-
-    @Test
     public void testWithMapCopied() {
         final Map<TextStylePropertyName<?>, Object> from = Maps.sorted();
         from.put(this.property1(), this.value1());
@@ -127,8 +119,20 @@ public final class TextStylePropertiesMapTest implements MapTesting2<TextStylePr
         return FontFamily.with("Times News Roman");
     }
 
+    // class............................................................................................................
+
     @Override
     public Class<TextStylePropertiesMap> type() {
         return TextStylePropertiesMap.class;
+    }
+
+    @Override
+    public String typeNamePrefix() {
+        return TextStylePropertiesMap.class.getSimpleName();
+    }
+
+    @Override
+    public String typeNameSuffix() {
+        return "";
     }
 }

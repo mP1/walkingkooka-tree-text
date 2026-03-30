@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonObject;
@@ -40,7 +39,10 @@ public final class TextStyleNode extends TextParentNode {
 
     public final static TextNodeName NAME = TextNodeName.fromClass(TextStyleNode.class);
 
-    final static TextStylePropertiesMap NO_ATTRIBUTES_MAP = TextStylePropertiesMap.with(Maps.empty());
+    /**
+     * An empty immutable {@link TextStylePropertiesMap}.
+     */
+    final static TextStylePropertiesMap NO_ATTRIBUTES_MAP = TextStylePropertiesMap.EMPTY;
 
     /**
      * Factory that creates a {@link TextStyleNode} with the given children and style.
@@ -52,7 +54,11 @@ public final class TextStyleNode extends TextParentNode {
         final List<TextNode> copy = Lists.immutable(children);
         return properties.isEmpty() && copy.size() == 1 ?
             copy.get(0) :
-            new TextStyleNode(NO_INDEX, copy, properties);
+            new TextStyleNode(
+                NO_INDEX,
+                copy,
+                properties
+            );
     }
 
     /**
@@ -236,7 +242,7 @@ public final class TextStyleNode extends TextParentNode {
     JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object();
         if (this.attributes.isNotEmpty()) {
-            json = json.set(STYLES_PROPERTY, this.attributes.toJson(context));
+            json = json.set(STYLES_PROPERTY, this.attributes.marshall(context));
         }
 
         return this.addChildrenValuesJson(json, context);

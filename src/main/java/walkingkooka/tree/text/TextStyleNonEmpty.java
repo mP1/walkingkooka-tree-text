@@ -33,10 +33,10 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
@@ -72,27 +72,8 @@ final class TextStyleNonEmpty extends TextStyle {
     }
 
     @Override
-    Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
-        return this.value.mutable();
-    }
-
-    @Override
-    TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
-        final TextStyle after;
-
-        if (values.isEmpty()) {
-            after = EMPTY;
-        } else {
-            final Map<TextStylePropertyName<?>, Object> oldValuesMap = this.value();
-
-            after = oldValuesMap.equals(values) ?
-                this :
-                TextStyleNonEmpty.with(
-                    TextStylePropertiesMap.with(values)
-                );
-        }
-
-        return after;
+    TextStylePropertiesMap copy() {
+        return this.value.copy();
     }
 
     final TextStylePropertiesMap value;
@@ -106,59 +87,28 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     TextStyle mergeNonEmpty(final TextStyleNonEmpty other) {
-        final TextStylePropertiesMapEntrySet before = other.value.entries;
-        final TextStylePropertiesMapEntrySet after = this.value.entries;
+        final TextStylePropertiesMap merged = other.value.copy();
 
-        final Object[] beforeValues = before.values;
-        final Object[] afterValues = after.values;
+        boolean equals = true;
 
-        final int beforeSize = beforeValues.length;
-        final int afterSize = afterValues.length;
-        final int newSize = Math.max(
-            beforeSize,
-            afterSize
-        );
+        for (int i = 0; i < merged.values.length; i++) {
+            final Object value = this.value.values[i];
 
-        boolean different = false;
-        int newCount = 0;
-
-        final Object[] newValues = new Object[newSize];
-
-        for(int i = 0; i < newSize; i++) {
-            final Object beforeValue = i < beforeSize ?
-                beforeValues[i] :
-                null;
-
-            final Object afterValue = i < afterSize ?
-                afterValues[i] :
-                null;
-
-            Object newValue = afterValue;
-            if(null != newValue) {
-                different = different | false == newValue.equals(beforeValue);
-                newCount++;
-            } else {
-                newValue = beforeValue;
-
-                if(null != newValue) {
-                    newCount++;
-                    different = true;
-                }
+            if (null != value) {
+                equals = equals &
+                    Objects.equals(
+                        value,
+                        merged.setTextStyleProperty(
+                            TextStylePropertyName.NAMES[i],
+                            value
+                        )
+                    );
             }
-
-            newValues[i] = newValue;
         }
 
-        return different ?
-            TextStyleNonEmpty.with(
-                TextStylePropertiesMap.withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.with(
-                        newValues,
-                        newCount
-                    )
-                )
-            ) :
-            this;
+        return equals ?
+            other :
+            TextStyleNonEmpty.with(merged);
     }
 
     // replace..........................................................................................................
@@ -225,7 +175,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 break;
             case MARGIN:
                 final Margin margin = BoxEdge.ALL.margin(this);
-                if(margin.isNotEmpty()) {
+                if (margin.isNotEmpty()) {
                     get = margin;
                 }
                 break;
@@ -271,51 +221,24 @@ final class TextStyleNonEmpty extends TextStyle {
     @Override
     <V> TextStyleNonEmpty setValue(final TextStylePropertyName<V> propertyName,
                                    final V value) {
-        final TextStyleNonEmpty set;
+        final TextStyleNonEmpty textStyle;
 
         final TextStylePropertiesMap map = this.value;
-        final Object previousValue = map.getValue(propertyName);
+        final Object previousValue = map.get(propertyName);
 
         if (value.equals(previousValue)) {
-            set = this;
+            textStyle = this;
         } else {
-            final TextStylePropertiesMapEntrySet entries = map.entries;
-
-            final int index = propertyName.index();
-            final int oldSize = entries.values.length;
-            final int newSize = Math.max(
-                index + 1,
-                oldSize
+            final TextStylePropertiesMap copy = map.copy();
+            copy.setTextStyleProperty(
+                propertyName,
+                value
             );
 
-            final Object[] oldValues = entries.values;
-
-            final Object[] newValues = new Object[newSize];
-            System.arraycopy(
-                oldValues,
-                0,
-                newValues,
-                0,
-                oldSize
-            );
-            newValues[index] = value;
-
-            set = TextStyleNonEmpty.with(
-                TextStylePropertiesMap.withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.with(
-                        newValues,
-                        entries.count +
-                            (
-                                null == previousValue ?
-                                1 :
-                                0
-                            )
-                    )
-                )
-            );
+            textStyle = with(copy);
         }
 
-        return set;
+        return textStyle;
     }
 
     // remove...........................................................................................................
@@ -367,58 +290,17 @@ final class TextStyleNonEmpty extends TextStyle {
                 break;
             default:
                 final int index = propertyName.index();
-
-                final TextStylePropertiesMapEntrySet entries = this.value.entries;
-                final Object[] oldValues = entries.values;
-                final int oldArraySize = oldValues.length;
-
-                // remove index outside values, never existed
-                if(index >= oldArraySize) {
-                    removed = this;
-                } else {
-                    final Object previousValue = oldValues[index];
-
-                    // value was already null, nothing to remove
-                    if(null == previousValue) {
-                        removed = this;
+                final TextStylePropertiesMap values = this.value;
+                if (null != values.values[index]) {
+                    if (1 == values.size) {
+                        removed = EMPTY;
                     } else {
-                        final int count = entries.count - 1;
-
-                        // removed only value return EMPTY
-                        if(0 == count) {
-                            removed = TextStyle.EMPTY;
-                        } else {
-                            int newArraySize = oldArraySize;
-
-                            // value being removed is the last value in array, need to compact
-                            if(index == oldArraySize) {
-                                // find previous non null value
-                                while(null == oldValues[newArraySize]) {
-                                    newArraySize--;
-                                }
-                            }
-
-                            // copy old array into new
-                            final Object[] newValues = new Object[newArraySize];
-                            for(int i = 0; i < oldArraySize; i++) {
-                                newValues[i] = oldValues[i];
-                            }
-
-                            // didnt remove last element of array, need to clear value in new array
-                            if(index < newArraySize) {
-                                newValues[index] = null;
-                            }
-
-                            removed = TextStyleNonEmpty.with(
-                                TextStylePropertiesMap.withTextStyleMapEntrySet(
-                                    TextStylePropertiesMapEntrySet.with(
-                                        newValues,
-                                        count
-                                    )
-                                )
-                            );
-                        }
+                        final TextStylePropertiesMap mapRemoved = values.copy();
+                        mapRemoved.removeTextStyleProperty(propertyName);
+                        removed = TextStyleNonEmpty.with(mapRemoved);
                     }
+                } else {
+                    removed = this;
                 }
                 break;
         }
@@ -555,18 +437,17 @@ final class TextStyleNonEmpty extends TextStyle {
 
     @Override
     TextStyle filter(final Predicate<TextStylePropertyName<?>> filter) {
-        return setValuesWithCopy(
-            this.valuesMutableCopy()
-                .entrySet()
-                .stream()
-                .filter(nameAndValue -> filter.test(nameAndValue.getKey()))
-                .collect(
-                    Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue
-                    )
-                )
-        );
+        final TextStylePropertiesMap copy = this.copy();
+
+        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : copy.entrySet()) {
+            if (false == filter.test(propertyAndValue.getKey())) {
+                copy.removeTextStyleProperty(
+                    propertyAndValue.getKey()
+                );
+            }
+        }
+
+        return this.setValues(copy);
     }
 
     // TreePrintable....................................................................................................
