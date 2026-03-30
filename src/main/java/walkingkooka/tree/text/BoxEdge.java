@@ -20,7 +20,6 @@ package walkingkooka.tree.text;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -249,14 +248,14 @@ public enum BoxEdge {
         Objects.requireNonNull(style, "style");
         Objects.requireNonNull(width, "width");
 
-        final Map<TextStylePropertyName<?>, Object> nameToValues = Maps.sorted();
+        final TextStylePropertiesMap values = TextStylePropertiesMap.empty();
 
         for (final BoxEdge boxEdge : BoxEdge.values()) {
-            if (this == boxEdge || this == ALL) {
+            if (ALL != boxEdge && (this == boxEdge || this == ALL)) {
                 {
                     final Color colorOrNull = color.orElse(null);
                     if (null != colorOrNull) {
-                        nameToValues.put(
+                        values.setTextStyleProperty(
                             boxEdge.borderColorPropertyName(),
                             colorOrNull
                         );
@@ -265,7 +264,7 @@ public enum BoxEdge {
                 {
                     final BorderStyle styleOrNull = style.orElse(null);
                     if (null != styleOrNull) {
-                        nameToValues.put(
+                        values.setTextStyleProperty(
                             boxEdge.borderStylePropertyName(),
                             styleOrNull
                         );
@@ -274,7 +273,7 @@ public enum BoxEdge {
                 {
                     final Length<?> widthOrNull = width.orElse(null);
                     if (null != widthOrNull) {
-                        nameToValues.put(
+                        values.setTextStyleProperty(
                             boxEdge.borderWidthPropertyName(),
                             widthOrNull
                         );
@@ -285,7 +284,7 @@ public enum BoxEdge {
 
         return Border.with(
             this,
-            TextStyle.EMPTY.setValues(nameToValues)
+            TextStyle.EMPTY.setValues(values)
         );
     }
 
