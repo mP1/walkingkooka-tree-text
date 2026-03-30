@@ -18,87 +18,46 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
+import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 /**
- * A read only sorted view of attributes or text style to values that appear within a {@link TextStyleNode}.
+ * Base class for both the immutable and mutable Maps used by {@link TextStyleNonEmpty}, backed by an array,
+ * using {@link TextStylePropertyName#index()} to locate the slot and set/get/remove the value.
  */
 final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>, Object> implements CanBeEmpty {
 
-    static {
-        Maps.registerImmutableType(TextStylePropertiesMap.class);
+    /**
+     * An empty immutable {@link TextStylePropertiesMap}.
+     */
+    final static TextStylePropertiesMap EMPTY = TextStylePropertiesMap.empty();
+
+    static TextStylePropertiesMap empty() {
+        return new TextStylePropertiesMap();
     }
 
-    /**
-     * An empty {@link TextStylePropertiesMap}.
-     */
-    static final TextStylePropertiesMap EMPTY = new TextStylePropertiesMap(TextStylePropertiesMapEntrySet.EMPTY);
-
-    /**
-     * Factory that returns a {@link TextStylePropertiesMap} taking a copy of the values inside the {@link Map}.
-     */
     static TextStylePropertiesMap with(final Map<TextStylePropertyName<?>, Object> map) {
-        Objects.requireNonNull(map, "map");
-
         final TextStylePropertiesMap textStylePropertiesMap;
 
         if (map instanceof TextStylePropertiesMap) {
             textStylePropertiesMap = (TextStylePropertiesMap) map;
         } else {
-            if(map instanceof TextStylePropertiesMapMutable) {
-                final TextStylePropertiesMapMutable textStylePropertiesMapMutable = (TextStylePropertiesMapMutable) map;
+            textStylePropertiesMap = empty();
 
-                // not required, but taking a copy just to be safe
-                final Object[] array = textStylePropertiesMapMutable.values;
-                final Object[] copy = new Object[array.length];
-                System.arraycopy(
-                    array,
-                    0,
-                    copy,
-                    0,
-                    array.length
-                );
-
-                textStylePropertiesMap = TextStylePropertiesMap.withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.with(
-                        copy,
-                        textStylePropertiesMapMutable.size()
-                    )
-                );
-            } else {
-                int count = 0;
-                final List<Object> values = Lists.autoExpandArray();
-
-                for (final Entry<TextStylePropertyName<?>, Object> entry : map.entrySet()) {
-                    final TextStylePropertyName<?> propertyName = entry.getKey();
-                    final int index = propertyName.index();
-
-                    final Object value = entry.getValue();
-                    propertyName.checkValue(value);
-
-                    values.set(
-                        index,
-                        entry.getValue()
-                    );
-
-                    count++;
-                }
-
-                textStylePropertiesMap = withTextStyleMapEntrySet(
-                    TextStylePropertiesMapEntrySet.with(
-                        values.toArray(),
-                        count
-                    )
+            for (final Entry<TextStylePropertyName<?>, Object> entry : map.entrySet()) {
+                textStylePropertiesMap.setTextStyleProperty(
+                    entry.getKey(),
+                    entry.getValue()
                 );
             }
         }
@@ -106,88 +65,195 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         return textStylePropertiesMap;
     }
 
-    /**
-     * Factory that returns a {@link TextStylePropertiesMap} with the given entries.
-     */
-    static TextStylePropertiesMap withTextStyleMapEntrySet(final TextStylePropertiesMapEntrySet entrySet) {
-        return entrySet.isEmpty() ?
-            EMPTY :
-            new TextStylePropertiesMap(entrySet);
-    }
-
-    private TextStylePropertiesMap(final TextStylePropertiesMapEntrySet entries) {
+    TextStylePropertiesMap() {
         super();
-        this.entries = entries;
+        this.values = new Object[TextStylePropertyName.NAMES.length];
+        this.size = 0;
     }
 
-    /**
-     * Returns a new mutable copy.
-     */
-    TextStylePropertiesMapMutable mutable() {
-        final TextStylePropertiesMapMutable mutable = TextStylePropertiesMapMutable.empty();
-
-        final TextStylePropertiesMapEntrySet entries = this.entries;
+    TextStylePropertiesMap copy() {
+        final TextStylePropertiesMap copy = empty();
         System.arraycopy(
-            entries.values,
+            this.values,
             0,
-            mutable.values,
+            copy.values,
             0,
-            entries.values.length
+            this.values.length
         );
+        copy.size = this.size;
+        return copy;
+    }
 
-        mutable.size = entries.size();
+    <T> T removeTextStyleProperty(final TextStylePropertyName<T> name) {
+        return this.setTextStyleProperty(
+            name,
+            null
+        );
+    }
 
-        return mutable;
+    <T> T setBorderMarginPadding(final BorderMarginPadding borderMarginPadding,
+                                 final TextStylePropertyName<T> name) {
+        return this.setTextStyleProperty(
+            name,
+            borderMarginPadding.getProperty(name)
+                .orElse(null)
+        );
+    }
+
+    private static <T> void mapSetOrRemove(final TextStylePropertyName<T> name,
+                                           final Object value,
+                                           final TextStylePropertiesMap values) {
+        values.setTextStyleProperty(
+            name,
+            value
+        );
+    }
+
+    <T> T setTextStyleProperty(final TextStylePropertyName<T> name,
+                               final Object value) {
+        final int index = name.index();
+
+        if (null != value) {
+            name.checkValue(value);
+        }
+
+        Object[] values = this.values;
+
+        final T previous = (T) values[index];
+        values[index] = value;
+
+        if (null == previous) {
+            if (null != value) {
+                this.size++;
+            }
+        } else {
+            if (null == value) {
+                this.size--;
+            }
+        }
+
+        return previous;
     }
 
     // Map..............................................................................................................
 
     @Override
-    public Object get(final Object key) {
-        return key instanceof TextStylePropertyName ?
-            this.getValue(
-                (TextStylePropertyName<?>) key
+    public int size() {
+        return this.size;
+    }
+
+    int size;
+
+    @Override
+    public Object get(final Object name) {
+        return name instanceof TextStylePropertyName ?
+            this.getTextStylePropertyName(
+                (TextStylePropertyName) name
             ) :
             null;
     }
 
-    Object getValue(final TextStylePropertyName<?> name) {
-        Objects.requireNonNull(name, "name");
-
-        final Object[] values = this.entries.values;
+    private Object getTextStylePropertyName(final TextStylePropertyName<?> name) {
         final int index = name.index();
-
-        return index >= values.length ?
+        return -1 == index ?
             null :
-            values[index];
+            this.values[index];
     }
+
+    final Object[] values;
 
     @Override
     public Set<Entry<TextStylePropertyName<?>, Object>> entrySet() {
+        if (null == this.entries) {
+            this.entries = TextStylePropertiesMapEntrySet.with(this);
+        }
         return this.entries;
     }
 
-    final TextStylePropertiesMapEntrySet entries;
+    private TextStylePropertiesMapEntrySet entries;
 
     // TextStyleVisitor.................................................................................................
 
     void accept(final TextStyleVisitor visitor) {
-        this.entries.accept(visitor);
+        int index = 0;
+
+        for (Object value : this.values) {
+            if (null != value) {
+                visitor.acceptPropertyAndValue(
+                    TextStylePropertyName.NAMES[index],
+                    Cast.to(value)
+                );
+            }
+
+            index++;
+        }
     }
 
     // json.............................................................................................................
 
-    static TextStylePropertiesMap unmarshall(final JsonNode json,
-                                             final JsonNodeUnmarshallContext context) {
-        return withTextStyleMapEntrySet(
-            TextStylePropertiesMapEntrySet.unmarshall(
-                json,
-                context
-            )
-        );
+    static {
+        Maps.registerImmutableType(TextStylePropertiesMap.class);
     }
 
-    JsonNode toJson(final JsonNodeMarshallContext context) {
-        return this.entries.toJson(context);
+    /**
+     * Recreates this {@link TextStylePropertiesMapEntrySet} from the json object.
+     */
+    static TextStylePropertiesMap unmarshall(final JsonNode json,
+                                             final JsonNodeUnmarshallContext context) {
+        final TextStylePropertiesMap map = TextStylePropertiesMap.empty();
+
+        for (final JsonNode child : json.children()) {
+            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
+
+            map.setTextStyleProperty(
+                name,
+                Cast.to(
+                    name.handler.unmarshall(
+                        child,
+                        name,
+                        context
+                    )
+                )
+            );
+        }
+
+        return map.isEmpty() ?
+            EMPTY :
+            map;
+    }
+
+    /**
+     * Creates a json object using the keys and values from the entries in this {@link Map}.
+     */
+    JsonNode marshall(final JsonNodeMarshallContext context) {
+        final List<JsonNode> json = Lists.array();
+
+        for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.entrySet()) {
+            final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
+            final JsonNode value = propertyName.handler.marshall(
+                Cast.to(
+                    propertyAndValue.getValue()
+                ),
+                context
+            );
+
+            json.add(
+                value.setName(
+                    propertyName.jsonPropertyName
+                )
+            );
+        }
+
+        return JsonNode.object()
+            .setChildren(json);
+    }
+
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(TextStylePropertiesMap.class),
+            TextStylePropertiesMap::unmarshall,
+            TextStylePropertiesMap::marshall,
+            TextStylePropertiesMap.class
+        );
     }
 }

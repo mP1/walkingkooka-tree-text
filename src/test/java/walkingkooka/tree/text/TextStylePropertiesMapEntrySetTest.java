@@ -27,22 +27,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStylePropertiesMapEntrySetTest implements ImmutableSetTesting<TextStylePropertiesMapEntrySet, Entry<TextStylePropertyName<?>, Object>>,
     IteratorTesting {
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            TextStylePropertiesMapEntrySet.EMPTY,
-            TextStylePropertiesMapEntrySet.with(
-                new Object[0],
-                0
-            )
-        );
-    }
 
     @Test
     public void testSize() {

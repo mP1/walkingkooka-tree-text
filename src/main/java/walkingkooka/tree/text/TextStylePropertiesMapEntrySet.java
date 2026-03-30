@@ -17,91 +17,46 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.Cast;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.ImmutableSetDefaults;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 
 /**
  * A read only {@link Set} sorted view of properties that have had their values checked.
- * <br>
- * For performance reasons an array of fixed size is kept, with the {@link TextStylePropertyName#index()} used to
- * get a value.
- * <br>
- * A simple performance test TextStylePerfTest shows this to be at least 10x faster than a sorted map.
  */
 final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePropertyName<?>, Object>> implements ImmutableSetDefaults<TextStylePropertiesMapEntrySet, Entry<TextStylePropertyName<?>, Object>> {
 
     /**
-     * An empty {@link TextStylePropertiesMap}.
-     */
-    static final TextStylePropertiesMapEntrySet EMPTY = new TextStylePropertiesMapEntrySet(
-        new Object[0],
-        0
-    );
-
-    /**
      * Factory that creates a {@link TextStylePropertiesMapEntrySet}.
      */
-    static TextStylePropertiesMapEntrySet with(final Object[] values,
-                                               final int count) {
-        return 0 == count ?
-            EMPTY :
-            new TextStylePropertiesMapEntrySet(
-                values,
-                count
-            );
+    static TextStylePropertiesMapEntrySet with(final TextStylePropertiesMap map) {
+        return new TextStylePropertiesMapEntrySet(map);
     }
 
-    private TextStylePropertiesMapEntrySet(final Object[] values,
-                                           final int count) {
-        this.values = values;
-        this.count = count;
+    private TextStylePropertiesMapEntrySet(final TextStylePropertiesMap map) {
+        this.map = map;
     }
 
     @Override
     public Iterator<Entry<TextStylePropertyName<?>, Object>> iterator() {
-        return TextStylePropertiesMapEntrySetIterator.with(this.values);
+        return TextStylePropertiesMapEntrySetIterator.with(this.map.values);
     }
 
     @Override
     public int size() {
-        return this.count;
+        return this.map.size();
     }
 
-    /**
-     * The actual number of NON NULL values in this set.
-     */
-    final int count;
-
-    final Object[] values;
-
-    // TextStyleVisitor.................................................................................................
-
-    void accept(final TextStyleVisitor visitor) {
-        int index = 0;
-
-        for (Object value : this.values) {
-            if (null != value) {
-                visitor.acceptPropertyAndValue(
-                    TextStylePropertyName.NAMES[index],
-                    Cast.to(value)
-                );
-            }
-
-            index++;
-        }
-    }
+    private final TextStylePropertiesMap map;
 
     // ImmutableSetDefaults.............................................................................................
 
@@ -121,63 +76,31 @@ final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePr
         throw new UnsupportedOperationException();
     }
 
-    // JsonNodeContext..................................................................................................
+    // json.............................................................................................................
 
-    /**
-     * Recreates this {@link TextStylePropertiesMapEntrySet} from the json object.
-     */
-    static TextStylePropertiesMapEntrySet unmarshall(final JsonNode json,
-                                                     final JsonNodeUnmarshallContext context) {
-        final List<Object> values = Lists.autoExpandArray();
-        int size = 0;
+    static {
 
-        for (final JsonNode child : json.children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
-            final int index = name.index();
-
-            final Object value = name.handler.unmarshall(
-                child,
-                name,
-                context
-            );
-
-            values.set(
-                index,
-                value
-            );
-
-            size++;
-        }
-
-        return with(
-            values.toArray(),
-            size
-        );
     }
 
-    /**
-     * Creates a json object using the keys and values from the entries in this {@link Set}.
-     */
-    JsonNode toJson(final JsonNodeMarshallContext context) {
-        final List<JsonNode> json = Lists.array();
-
-        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this) {
-            final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.marshall(
-                Cast.to(
-                    propertyAndValue.getValue()
-                ),
+    static TextStylePropertiesMapEntrySet unmarshall(final JsonNode json,
+                                                     final JsonNodeUnmarshallContext context) {
+        return (TextStylePropertiesMapEntrySet)
+            TextStylePropertiesMap.unmarshall(
+                json,
                 context
-            );
+            ).entrySet();
+    }
 
-            json.add(
-                value.setName(
-                    propertyName.jsonPropertyName
-                )
-            );
-        }
+    JsonNode marshall(final JsonNodeMarshallContext context) {
+        return this.map.marshall(context);
+    }
 
-        return JsonNode.object()
-            .setChildren(json);
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(TextStylePropertiesMapEntrySet.class),
+            TextStylePropertiesMapEntrySet::unmarshall,
+            TextStylePropertiesMapEntrySet::marshall,
+            TextStylePropertiesMapEntrySet.class
+        );
     }
 }

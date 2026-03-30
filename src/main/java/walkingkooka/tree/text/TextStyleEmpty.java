@@ -69,17 +69,8 @@ final class TextStyleEmpty extends TextStyle {
     }
 
     @Override
-    Map<TextStylePropertyName<?>, Object> valuesMutableCopy() {
-        return Maps.sorted();
-    }
-
-    @Override
-    TextStyle setValuesWithCopy(final Map<TextStylePropertyName<?>, Object> values) {
-        return values.isEmpty() ?
-            EMPTY :
-            TextStyleNonEmpty.with(
-                TextStylePropertiesMap.with(values)
-            );
+    TextStylePropertiesMap copy() {
+        return TextStylePropertiesMap.empty();
     }
 
     // merge............................................................................................................
@@ -121,44 +112,25 @@ final class TextStyleEmpty extends TextStyle {
                                                 final TextStylePropertyName<T> right,
                                                 final TextStylePropertyName<T> bottom,
                                                 final T value) {
-        final int topIndex = top.index();
-        ;
-        final int size = topIndex + 1;
-        final Object[] values = new Object[size];
+        final TextStylePropertiesMap values = this.copy();
 
-        values[topIndex] = value;
-        values[left.index()] = value;
-        values[right.index()] = value;
-        values[bottom.index()] = value;
+        values.setTextStyleProperty(top, value);
+        values.setTextStyleProperty(left, value);
+        values.setTextStyleProperty(right, value);
+        values.setTextStyleProperty(bottom, value);
 
-        return TextStyleNonEmpty.with(
-            TextStylePropertiesMap.withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.with(
-                    values,
-                    4
-                )
-            )
-        );
+        values.size = 4;
+
+        return TextStyleNonEmpty.with(values);
     }
 
     @Override
     <T> TextStyleNonEmpty setValue(final TextStylePropertyName<T> propertyName,
                                    final T value) {
-        final int index = propertyName.index();
-        ;
-        final int size = index + 1;
-        final Object[] values = new Object[size];
+        final TextStylePropertiesMap values = this.copy();
+        values.setTextStyleProperty(propertyName, value);
 
-        values[index] = value;
-
-        return TextStyleNonEmpty.with(
-            TextStylePropertiesMap.withTextStyleMapEntrySet(
-                TextStylePropertiesMapEntrySet.with(
-                    values,
-                    1
-                )
-            )
-        );
+        return TextStyleNonEmpty.with(values);
     }
 
     @Override
