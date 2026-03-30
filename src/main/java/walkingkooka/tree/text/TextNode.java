@@ -264,10 +264,11 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      */
     @Override
     public final TextNode setAttributes(final Map<TextStylePropertyName<?>, Object> attributes) {
-        final TextStylePropertiesMap textStyleMap = TextStylePropertiesMap.with(attributes);
-        return textStyleMap.isEmpty() ?
+        final TextStylePropertiesMap textStylePropertiesMap = TextStylePropertiesMap.with(attributes);
+
+        return textStylePropertiesMap.isEmpty() ?
             this.setAttributesEmpty() :
-            this.setAttributesNonEmpty(textStyleMap);
+            this.setAttributesNonEmpty(textStylePropertiesMap);
     }
 
     /**
