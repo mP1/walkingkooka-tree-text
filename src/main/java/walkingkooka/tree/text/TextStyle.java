@@ -315,29 +315,29 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
         switch (propertyName.name) {
             case BORDER_COLOR:
-                set = this.setTopLeftRightBottom(
+                set = this.setTopRightBottomLeft(
                     TextStylePropertyName.BORDER_TOP_COLOR,
-                    TextStylePropertyName.BORDER_LEFT_COLOR,
                     TextStylePropertyName.BORDER_RIGHT_COLOR,
                     TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                    TextStylePropertyName.BORDER_LEFT_COLOR,
                     (Color) value
                 );
                 break;
             case BORDER_STYLE:
-                set = this.setTopLeftRightBottom(
+                set = this.setTopRightBottomLeft(
                     TextStylePropertyName.BORDER_TOP_STYLE,
-                    TextStylePropertyName.BORDER_LEFT_STYLE,
                     TextStylePropertyName.BORDER_RIGHT_STYLE,
                     TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                    TextStylePropertyName.BORDER_LEFT_STYLE,
                     (BorderStyle) value
                 );
                 break;
             case BORDER_WIDTH:
-                set = this.setTopLeftRightBottom(
+                set = this.setTopRightBottomLeft(
                     TextStylePropertyName.BORDER_TOP_WIDTH,
-                    TextStylePropertyName.BORDER_LEFT_WIDTH,
                     TextStylePropertyName.BORDER_RIGHT_WIDTH,
                     TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                    TextStylePropertyName.BORDER_LEFT_WIDTH,
                     (Length<?>) value
                 );
                 break;
@@ -359,7 +359,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return set;
     }
 
-    final <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
+    final <T> TextStyle setTopRightBottomLeft(final TextStylePropertyName<T> topName,
                                               final TextStylePropertyName<T> leftName,
                                               final TextStylePropertyName<T> rightName,
                                               final TextStylePropertyName<T> bottomName,
