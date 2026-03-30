@@ -252,12 +252,9 @@ final class TextStyleNonEmpty extends TextStyle {
                 );
                 break;
             case MARGIN:
-                removed = this.removeValues(
-                    TextStylePropertyName.MARGIN_TOP,
-                    TextStylePropertyName.MARGIN_LEFT,
-                    TextStylePropertyName.MARGIN_RIGHT,
-                    TextStylePropertyName.MARGIN_BOTTOM
-                );
+                final TextStylePropertiesMap textStylePropertiesMap = this.copy();
+                textStylePropertiesMap.removeMargin();
+                removed = this.setValues(textStylePropertiesMap);
                 break;
             case PADDING:
                 removed = this.removeValues(
