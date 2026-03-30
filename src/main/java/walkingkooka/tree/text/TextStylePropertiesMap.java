@@ -100,15 +100,6 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         );
     }
 
-    private static <T> void mapSetOrRemove(final TextStylePropertyName<T> name,
-                                           final Object value,
-                                           final TextStylePropertiesMap values) {
-        values.setTextStyleProperty(
-            name,
-            value
-        );
-    }
-
     <T> T setTextStyleProperty(final TextStylePropertyName<T> name,
                                final Object value) {
         final int index = name.index();
