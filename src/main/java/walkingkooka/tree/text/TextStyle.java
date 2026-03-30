@@ -567,10 +567,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 );
                             }
                         } else {
-                            copy.removeTextStyleProperty(TextStylePropertyName.MARGIN_TOP);
-                            copy.removeTextStyleProperty(TextStylePropertyName.MARGIN_RIGHT);
-                            copy.removeTextStyleProperty(TextStylePropertyName.MARGIN_BOTTOM);
-                            copy.removeTextStyleProperty(TextStylePropertyName.MARGIN_LEFT);
+                            copy.removeMargin();
                         }
                         break;
                     case PADDING:

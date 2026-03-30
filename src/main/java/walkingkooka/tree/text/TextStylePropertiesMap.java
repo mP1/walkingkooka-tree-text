@@ -84,6 +84,13 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         return copy;
     }
 
+    void removeMargin() {
+        this.removeTextStyleProperty(TextStylePropertyName.MARGIN_TOP);
+        this.removeTextStyleProperty(TextStylePropertyName.MARGIN_RIGHT);
+        this.removeTextStyleProperty(TextStylePropertyName.MARGIN_BOTTOM);
+        this.removeTextStyleProperty(TextStylePropertyName.MARGIN_LEFT);
+    }
+
     <T> T removeTextStyleProperty(final TextStylePropertyName<T> name) {
         return this.setTextStyleProperty(
             name,
