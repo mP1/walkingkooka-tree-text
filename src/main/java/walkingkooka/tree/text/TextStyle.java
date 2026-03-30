@@ -75,6 +75,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     static final String BORDER_WIDTH = "border-width";
 
+    static final String BORDER = "border";
+
     static final String MARGIN = "margin";
 
     static final String PADDING = "padding";
@@ -341,6 +343,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     (Length<?>) value
                 );
                 break;
+            case BORDER:
+                final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
+                borderTextStylePropertiesMap.setBorder(
+                    (Border)value
+                );
+                set = this.setValues(borderTextStylePropertiesMap);
+                break;
             case MARGIN:
             case PADDING:
                 set = this.merge(
@@ -389,50 +398,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract <T> TextStyle setValue(final TextStylePropertyName<T> propertyName,
                                     final T value);
 
-    /**
-     * Sets all border properties to the same given value. Note to set all margin or padding property values, use
-     * {@link TextStylePropertyName#MARGIN} or {@link TextStylePropertyName#PADDING}.
-     */
-    public final TextStyle setBorder(final Color color,
-                                     final BorderStyle style,
-                                     final Length<?> width) {
-        Objects.requireNonNull(color, "color");
-        Objects.requireNonNull(style, "style");
-        Objects.requireNonNull(width, "width");
+    public final TextStyle setBorder(final Optional<Border> border) {
+        Objects.requireNonNull(border, "border");
 
-        final TextStylePropertiesMap colorStyleWidth = this.copy();
-
-        for (final BoxEdge boxEdge : BoxEdge.values()) {
-            if (BoxEdge.ALL == boxEdge) {
-                continue;
-            }
-
-            final TextStylePropertyName<Color> colorPropertyName = boxEdge.borderColorPropertyName();
-            colorPropertyName.checkValue(color);
-
-            colorStyleWidth.setTextStyleProperty(
-                colorPropertyName,
-                color
-            );
-
-            final TextStylePropertyName<BorderStyle> stylePropertyName = boxEdge.borderStylePropertyName();
-            stylePropertyName.checkValue(style);
-
-            colorStyleWidth.setTextStyleProperty(
-                stylePropertyName,
-                style
-            );
-
-            final TextStylePropertyName<Length<?>> widthPropertyName = boxEdge.borderWidthPropertyName();
-            widthPropertyName.checkValue(width);
-
-            colorStyleWidth.setTextStyleProperty(
-                widthPropertyName,
-                width
-            );
-        }
-
-        return this.setTextStylePropertiesMap(colorStyleWidth);
+        return this.setOrRemove(
+            TextStylePropertyName.BORDER,
+            border.orElse(null)
+        );
     }
 
     public final TextStyle setMargin(final Optional<Margin> margin) {
@@ -485,6 +457,14 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                 }
 
                 switch (propertyName.name) {
+                    case BORDER:
+                        final Border border = (Border) value;
+                        if (null != border) {
+                            copy.setBorder(border);
+                        } else {
+                            copy.removeBorder();
+                        }
+                        break;
                     case BORDER_COLOR:
                         copy.setTextStyleProperty(
                             TextStylePropertyName.BORDER_TOP_COLOR,

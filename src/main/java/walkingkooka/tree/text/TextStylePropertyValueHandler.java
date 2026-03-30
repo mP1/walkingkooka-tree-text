@@ -35,6 +35,13 @@ import java.util.stream.Collectors;
 abstract class TextStylePropertyValueHandler<T> {
 
     /**
+     * {@see TextStylePropertyValueHandlerBorder}
+     */
+    static TextStylePropertyValueHandler<Border> border() {
+        return TextStylePropertyValueHandlerBorder.INSTANCE;
+    }
+    
+    /**
      * {@see TextStylePropertyValueHandlerColor}
      */
     static TextStylePropertyValueHandler<Color> color() {

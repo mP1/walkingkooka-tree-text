@@ -20,15 +20,10 @@ package walkingkooka.tree.text.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
-import walkingkooka.color.Color;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Border;
-import walkingkooka.tree.text.BorderStyle;
-import walkingkooka.tree.text.BoxEdge;
-import walkingkooka.tree.text.Length;
-import walkingkooka.tree.text.TextStyle;
 
 public final class TreeTextConverterTextToBorderTest extends TreeTextConverterTestCase<TreeTextConverterTextToBorder<FakeConverterContext>, FakeConverterContext> {
 
@@ -42,11 +37,7 @@ public final class TreeTextConverterTextToBorderTest extends TreeTextConverterTe
 
     @Test
     public void testConvertStringToBorder() {
-        final Border border = TextStyle.EMPTY.setBorder(
-            Color.BLACK,
-            BorderStyle.DASHED,
-            Length.pixel(1.0)
-        ).border(BoxEdge.ALL);
+        final Border border = Border.parse("BLACK DASHED 1.0px");
 
         this.convertAndCheck(
             border.text(),

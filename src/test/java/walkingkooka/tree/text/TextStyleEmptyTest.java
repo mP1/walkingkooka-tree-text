@@ -173,7 +173,13 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         final BorderStyle style = BorderStyle.DASHED;
         final Length<?> width = Length.pixel(123.5);
 
-        this.checkEquals(
+        this.setBorderAndCheck(
+            TextStyle.EMPTY,
+            BoxEdge.ALL.setBorder(
+                Optional.of(color),
+                Optional.of(style),
+                Optional.of(width)
+            ),
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BORDER_TOP_COLOR, color)
                 .set(TextStylePropertyName.BORDER_TOP_STYLE, style)
@@ -186,12 +192,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
                 .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, width)
                 .set(TextStylePropertyName.BORDER_LEFT_COLOR, color)
                 .set(TextStylePropertyName.BORDER_LEFT_STYLE, style)
-                .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width),
-            TextStyle.EMPTY.setBorder(
-                color,
-                style,
-                width
-            )
+                .set(TextStylePropertyName.BORDER_LEFT_WIDTH, width)
         );
     }
 

@@ -323,43 +323,67 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     // setBorder........................................................................................................
 
     @Test
-    public final void testSetBorderWithNullColorFails() {
-        this.setBorderWithNullFails(
-            null,
-            BorderStyle.DASHED,
-            Length.none()
-        );
-    }
-
-    @Test
-    public final void testSetBorderWithNullStyleFails() {
-        this.setBorderWithNullFails(
-            Color.BLACK,
-            null,
-            Length.none()
-        );
-    }
-
-    @Test
-    public final void testSetBorderWithNullWidthFails() {
-        this.setBorderWithNullFails(
-            Color.BLACK,
-            BorderStyle.DASHED,
-            null
-        );
-    }
-
-    private void setBorderWithNullFails(final Color color,
-                                        final BorderStyle style,
-                                        final Length<?> length) {
+    public final void testSetBorderWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> this.createObject().setBorder(
-                color,
-                style,
-                length
-            )
+            () -> this.createObject().setBorder(null)
         );
+    }
+
+    final void setBorderAndCheck(final TextStyle textStyle,
+                                 final Border border) {
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.of(border),
+            textStyle
+        );
+    }
+
+    final void setBorderAndCheck(final TextStyle textStyle,
+                                 final Optional<Border> border) {
+        this.setBorderAndCheck(
+            textStyle,
+            border,
+            textStyle
+        );
+    }
+
+    final void setBorderAndCheck(final TextStyle textStyle,
+                                 final TextStyle expected) {
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.empty(),
+            expected
+        );
+    }
+
+    final void setBorderAndCheck(final TextStyle textStyle,
+                                 final Border border,
+                                 final TextStyle expected) {
+        this.setBorderAndCheck(
+            textStyle,
+            Optional.of(border),
+            expected
+        );
+    }
+
+    final void setBorderAndCheck(final TextStyle textStyle,
+                                 final Optional<Border> border,
+                                 final TextStyle expected) {
+        final TextStyle set = textStyle.setBorder(border);
+
+        this.checkEquals(
+            expected,
+            set,
+            () -> textStyle + " setBorder " + border
+        );
+
+        if (expected.equals(textStyle)) {
+            assertSame(
+                expected,
+                set
+            );
+        }
     }
 
     // border...........................................................................................................
