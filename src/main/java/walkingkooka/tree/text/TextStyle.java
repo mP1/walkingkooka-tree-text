@@ -598,10 +598,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                                 );
                             }
                         } else {
-                            copy.removeTextStyleProperty(TextStylePropertyName.PADDING_TOP);
-                            copy.removeTextStyleProperty(TextStylePropertyName.PADDING_RIGHT);
-                            copy.removeTextStyleProperty(TextStylePropertyName.PADDING_BOTTOM);
-                            copy.removeTextStyleProperty(TextStylePropertyName.PADDING_LEFT);
+                            copy.removePadding();
                         }
                         break;
                     default:

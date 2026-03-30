@@ -257,12 +257,9 @@ final class TextStyleNonEmpty extends TextStyle {
                 removed = this.setValues(textStylePropertiesMap);
                 break;
             case PADDING:
-                removed = this.removeValues(
-                    TextStylePropertyName.PADDING_TOP,
-                    TextStylePropertyName.PADDING_LEFT,
-                    TextStylePropertyName.PADDING_RIGHT,
-                    TextStylePropertyName.PADDING_BOTTOM
-                );
+                final TextStylePropertiesMap textStylePropertiesMap2 = this.copy();
+                textStylePropertiesMap2.removePadding();
+                removed = this.setValues(textStylePropertiesMap2);
                 break;
             default:
                 final int index = propertyName.index();
