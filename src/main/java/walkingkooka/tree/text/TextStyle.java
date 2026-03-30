@@ -359,11 +359,32 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         return set;
     }
 
-    abstract <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> top,
-                                                 final TextStylePropertyName<T> left,
-                                                 final TextStylePropertyName<T> right,
-                                                 final TextStylePropertyName<T> bottom,
-                                                 final T value);
+    final <T> TextStyle setTopLeftRightBottom(final TextStylePropertyName<T> topName,
+                                              final TextStylePropertyName<T> leftName,
+                                              final TextStylePropertyName<T> rightName,
+                                              final TextStylePropertyName<T> bottomName,
+                                              final T value) {
+        final TextStylePropertiesMap values = this.copy();
+
+        values.setTextStyleProperty(
+            topName,
+            value
+        );
+        values.setTextStyleProperty(
+            rightName,
+            value
+        );
+        values.setTextStyleProperty(
+            bottomName,
+            value
+        );
+        values.setTextStyleProperty(
+            leftName,
+            value
+        );
+
+        return this.setTextStylePropertiesMap(values);
+    }
 
     abstract <T> TextStyle setValue(final TextStylePropertyName<T> propertyName,
                                     final T value);
