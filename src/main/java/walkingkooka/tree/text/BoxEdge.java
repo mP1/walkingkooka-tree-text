@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 
 import java.util.Objects;
@@ -348,18 +347,26 @@ public enum BoxEdge {
             final Length<?> length = width.get();
 
             if (ALL == this) {
-                textStyle = TextStyle.EMPTY.setValues(
-                    Maps.of(
-                        TextStylePropertyName.PADDING_TOP,
-                        length,
-                        TextStylePropertyName.PADDING_RIGHT,
-                        length,
-                        TextStylePropertyName.PADDING_BOTTOM,
-                        length,
-                        TextStylePropertyName.PADDING_LEFT,
-                        length
-                    )
+                final TextStylePropertiesMap textStylePropertiesMap = TextStylePropertiesMap.empty();
+
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.PADDING_TOP,
+                    length
                 );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.PADDING_RIGHT,
+                    length
+                );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.PADDING_BOTTOM,
+                    length
+                );
+                textStylePropertiesMap.setTextStyleProperty(
+                    TextStylePropertyName.PADDING_LEFT,
+                    length
+                );
+
+                textStyle = TextStyle.EMPTY.setValues(textStylePropertiesMap);
             } else {
                 textStyle = TextStyle.EMPTY.set(
                     this.paddingPropertyName(),
