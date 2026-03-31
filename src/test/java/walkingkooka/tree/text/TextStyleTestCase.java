@@ -433,18 +433,11 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     final void borderAndCheck(final TextStyle textStyle,
                               final BoxEdge boxEdge,
                               final Border expected) {
-        if (textStyle.equals(expected)) {
-            assertSame(
-                expected,
-                textStyle.border(boxEdge)
-            );
-        } else {
-            this.checkEquals(
-                expected,
-                textStyle.border(boxEdge),
-                () -> textStyle + " border " + boxEdge
-            );
-        }
+        this.checkEquals(
+            expected,
+            textStyle.border(boxEdge),
+            () -> textStyle + " border " + boxEdge
+        );
     }
 
     // margin...........................................................................................................
