@@ -1011,8 +1011,6 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     private void parseBorderAndCheck(final BoxEdge edge,
                                      final String text,
                                      final Border expected) {
-        expected.toString();
-
         this.checkEquals(
             expected,
             edge.parseBorder(text),
