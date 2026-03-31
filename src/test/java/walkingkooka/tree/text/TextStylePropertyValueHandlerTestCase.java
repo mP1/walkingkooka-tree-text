@@ -72,10 +72,10 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
         );
     }
 
-    private <T extends RuntimeException> void checkValueFails(final Object value,
-                                                              final Class<T> throwType,
-                                                              final String message) {
-        final T thrown = assertThrows(
+    private <TT extends RuntimeException> void checkValueFails(final Object value,
+                                                               final Class<TT> throwType,
+                                                               final String message) {
+        final TT thrown = assertThrows(
             throwType,
             () -> this.checkValue(value)
         );
@@ -85,7 +85,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
             "message"
         );
 
-        final T thrown2 = assertThrows(
+        final TT thrown2 = assertThrows(
             throwType,
             () -> this.propertyName().checkValue(value)
         );
