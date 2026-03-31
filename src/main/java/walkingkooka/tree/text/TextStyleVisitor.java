@@ -57,16 +57,6 @@ public abstract class TextStyleVisitor extends Visitor<TextStyle> {
 
     // entries..........................................................................................................
 
-//    final void acceptPropertyAndValue(final Entry<TextStylePropertyName<?>, Object> entry) {
-//        final TextStylePropertyName<?> propertyName = entry.getKey();
-//        final Object value = entry.getValue();
-//
-//        if (Visiting.CONTINUE == this.startVisit(propertyName, value)) {
-//            propertyName.accept(value, this);
-//        }
-//        this.endVisit(propertyName, value);
-//    }
-
     final <T> void acceptPropertyAndValue(final TextStylePropertyName<T> name,
                                           final T value) {
         if (Visiting.CONTINUE == this.startVisit(name, value)) {
