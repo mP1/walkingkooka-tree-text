@@ -37,7 +37,7 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
 
     @Test
     public void testConvertStringToMargin() {
-        final Margin margin = Margin.parse("1.0px");;
+        final Margin margin = Margin.parse("1.0px");
 
         this.convertAndCheck(
             margin.text(),
