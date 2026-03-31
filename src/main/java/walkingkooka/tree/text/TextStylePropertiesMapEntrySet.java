@@ -78,10 +78,6 @@ final class TextStylePropertiesMapEntrySet extends AbstractSet<Entry<TextStylePr
 
     // json.............................................................................................................
 
-    static {
-
-    }
-
     static TextStylePropertiesMapEntrySet unmarshall(final JsonNode json,
                                                      final JsonNodeUnmarshallContext context) {
         return (TextStylePropertiesMapEntrySet)
