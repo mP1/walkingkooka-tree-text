@@ -196,7 +196,7 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
     public Object get(final Object name) {
         return name instanceof TextStylePropertyName ?
             this.getTextStylePropertyName(
-                (TextStylePropertyName) name
+                (TextStylePropertyName<?>) name
             ) :
             null;
     }

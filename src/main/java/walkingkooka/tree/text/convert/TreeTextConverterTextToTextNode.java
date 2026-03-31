@@ -31,7 +31,7 @@ final class TreeTextConverterTextToTextNode<C extends ConverterContext> extends 
         return INSTANCE;
     }
 
-    private final static TreeTextConverterTextToTextNode INSTANCE = new TreeTextConverterTextToTextNode();
+    private final static TreeTextConverterTextToTextNode INSTANCE = new TreeTextConverterTextToTextNode<>();
 
     private TreeTextConverterTextToTextNode() {
         super();
