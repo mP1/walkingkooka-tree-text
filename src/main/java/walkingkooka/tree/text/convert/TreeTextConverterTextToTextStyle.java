@@ -32,7 +32,7 @@ final class TreeTextConverterTextToTextStyle<C extends ConverterContext> extends
         return INSTANCE;
     }
 
-    private final static TreeTextConverterTextToTextStyle INSTANCE = new TreeTextConverterTextToTextStyle();
+    private final static TreeTextConverterTextToTextStyle INSTANCE = new TreeTextConverterTextToTextStyle<>();
 
     private TreeTextConverterTextToTextStyle() {
         super();

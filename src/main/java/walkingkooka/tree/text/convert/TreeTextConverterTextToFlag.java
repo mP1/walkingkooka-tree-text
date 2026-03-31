@@ -31,7 +31,7 @@ final class TreeTextConverterTextToFlag<C extends ConverterContext> extends Tree
         return INSTANCE;
     }
 
-    private final static TreeTextConverterTextToFlag INSTANCE = new TreeTextConverterTextToFlag();
+    private final static TreeTextConverterTextToFlag INSTANCE = new TreeTextConverterTextToFlag<>();
 
     private TreeTextConverterTextToFlag() {
         super();

@@ -31,7 +31,7 @@ final class TreeTextConverterUrlToHyperlink<C extends ConverterContext> extends 
         return INSTANCE;
     }
 
-    private final static TreeTextConverterUrlToHyperlink INSTANCE = new TreeTextConverterUrlToHyperlink();
+    private final static TreeTextConverterUrlToHyperlink INSTANCE = new TreeTextConverterUrlToHyperlink<>();
 
     private TreeTextConverterUrlToHyperlink() {
         super();

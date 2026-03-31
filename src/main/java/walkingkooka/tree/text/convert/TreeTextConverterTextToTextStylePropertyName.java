@@ -29,7 +29,7 @@ final class TreeTextConverterTextToTextStylePropertyName<C extends ConverterCont
         return INSTANCE;
     }
 
-    private final static TreeTextConverterTextToTextStylePropertyName INSTANCE = new TreeTextConverterTextToTextStylePropertyName();
+    private final static TreeTextConverterTextToTextStylePropertyName INSTANCE = new TreeTextConverterTextToTextStylePropertyName<>();
 
     private TreeTextConverterTextToTextStylePropertyName() {
         super();

@@ -28,7 +28,7 @@ final class TreeTextConverterUrlToImage<C extends ConverterContext> extends Tree
         return INSTANCE;
     }
 
-    private final static TreeTextConverterUrlToImage INSTANCE = new TreeTextConverterUrlToImage();
+    private final static TreeTextConverterUrlToImage INSTANCE = new TreeTextConverterUrlToImage<>();
 
     private TreeTextConverterUrlToImage() {
         super();

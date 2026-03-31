@@ -635,7 +635,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
 
                 default:
                     if (type.isEnum()) {
-                        final Enum[] enums = (Enum[])
+                        final Enum<?>[] enums = (Enum<?>[])
                             type.getMethod("values")
                                 .invoke(null);
                         propertyValue = enums[0];
