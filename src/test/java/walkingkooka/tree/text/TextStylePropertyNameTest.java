@@ -41,6 +41,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import java.lang.reflect.Field;
 import java.math.MathContext;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -308,6 +309,36 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 propertyName.urlFragment()
             );
         }
+    }
+
+    // setValue.........................................................................................................
+
+    @Test
+    public void testSetValueWithNotEmpty() {
+        this.setValueAndCheck(
+            TextStylePropertyName.COLOR,
+            Optional.of(Color.BLACK)
+        );
+    }
+
+    @Test
+    public void testSetValueWithEmpty() {
+        this.setValueAndCheck(
+            TextStylePropertyName.COLOR,
+            Optional.empty()
+        );
+    }
+
+    private <T> void setValueAndCheck(final TextStylePropertyName<T> name,
+                                      final Optional<T> value) {
+        this.checkEquals(
+            TextStyleProperty.with(
+                name,
+                value
+            ),
+            name.setValue(value),
+            () -> name + " setValue " + value
+        );
     }
 
     // isBorder.........................................................................................................
