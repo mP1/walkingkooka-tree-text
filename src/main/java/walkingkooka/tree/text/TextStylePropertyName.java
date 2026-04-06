@@ -956,6 +956,13 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.padding = name.startsWith("padding");
     }
 
+    public TextStyleProperty<T> setValue(final Optional<T> value) {
+        return TextStyleProperty.with(
+            this,
+            value
+        );
+    }
+
     /**
      * If the type parameter is for an {@link Enum} return the {@link Class enum class} or {@link Optional#empty()}.
      */
