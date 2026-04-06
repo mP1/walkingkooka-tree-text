@@ -25,6 +25,8 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.currency.CurrencyCode;
+import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.tree.text.TextStyle;
 
 import java.util.Currency;
@@ -91,16 +93,20 @@ public final class TreeTextConverterPropertiesToTextStyleTest extends TreeTextCo
             );
 
             @Override
-            public Optional<Currency> currencyForCurrencyCode(final String currencyCode) {
+            public Optional<Currency> currencyForCurrencyCode(final CurrencyCode currencyCode) {
                 return Optional.of(
-                    Currency.getInstance(currencyCode)
+                    Currency.getInstance(
+                        currencyCode.value()
+                    )
                 );
             }
 
             @Override
-            public Optional<Locale> localeForLanguageTag(final String languageTag) {
+            public Optional<Locale> localeForLanguageTag(final LocaleLanguageTag languageTag) {
                 return Optional.of(
-                    Locale.forLanguageTag(languageTag)
+                    Locale.forLanguageTag(
+                        languageTag.value()
+                    )
                 );
             }
         };
