@@ -311,6 +311,21 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         }
     }
 
+    // clearValue.......................................................................................................
+
+    @Test
+    public void testClearValue() {
+        final TextStylePropertyName<?> propertyName = TextStylePropertyName.COLOR;
+
+        this.checkEquals(
+            TextStyleProperty.with(
+                propertyName,
+                Optional.empty()
+            ),
+            propertyName.setValue(Optional.empty())
+        );
+    }
+
     // setValue.........................................................................................................
 
     @Test

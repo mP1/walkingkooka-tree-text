@@ -963,6 +963,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         );
     }
 
+    public TextStyleProperty<T> clearValue() {
+        return this.setValue(
+            Optional.empty()
+        );
+    }
+
     /**
      * If the type parameter is for an {@link Enum} return the {@link Class enum class} or {@link Optional#empty()}.
      */
