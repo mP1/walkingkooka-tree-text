@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
@@ -1151,6 +1152,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     private final boolean padding;
+
+    // cast.............................................................................................................
+
+    /**
+     * Type safe cast of a value that should be the required type.
+     */
+    public T cast(final Object value) {
+        return Cast.to(value);
+    }
 
     // InvalidTextStylePropertyNameException............................................................................
 
