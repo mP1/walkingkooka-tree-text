@@ -308,11 +308,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         Objects.requireNonNull(propertyName, "propertyName");
 
         propertyName.checkValue(value);
-        return this.setNonNull(propertyName, value);
-    }
 
-    private <V> TextStyle setNonNull(final TextStylePropertyName<V> propertyName,
-                                     final V value) {
         final TextStyle set;
 
         switch (propertyName.name) {
