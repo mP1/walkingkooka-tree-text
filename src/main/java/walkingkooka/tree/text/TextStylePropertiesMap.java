@@ -227,9 +227,13 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
 
         for (Object value : this.values) {
             if (null != value) {
+                final TextStylePropertyName<?> name = TextStylePropertyName.NAMES[index];
+
                 visitor.acceptPropertyAndValue(
-                    TextStylePropertyName.NAMES[index],
-                    Cast.to(value)
+                    name,
+                    Cast.to(
+                        name.cast(value)
+                    )
                 );
             }
 
@@ -255,7 +259,7 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
 
             map.setTextStyleProperty(
                 name,
-                Cast.to(
+                name.cast(
                     name.handler.unmarshall(
                         child,
                         name,
