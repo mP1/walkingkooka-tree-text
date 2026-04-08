@@ -81,6 +81,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     static final String PADDING = "padding";
 
+    static final String WILDCARD = "*";
+
     public final static CharacterConstant ASSIGNMENT = CharacterConstant.with(':');
 
     public final static CharacterConstant SEPARATOR = CharacterConstant.with(';');
@@ -278,12 +280,17 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // get..............................................................................................................
 
     /**
-     * Gets the value for the given {@link TextStylePropertyName}.
+     * Gets the value for the given {@link TextStylePropertyName}. If the property name is {@link TextStylePropertyName#WILDCARD},
+     * this {@link TextStyle} will be returned.
      */
     public final <V> Optional<V> get(final TextStylePropertyName<V> propertyName) {
         Objects.requireNonNull(propertyName, "propertyName");
 
-        return this.getNonNull(propertyName);
+        return TextStylePropertyName.WILDCARD == propertyName ?
+            Optional.of(
+                propertyName.cast(this)
+            ) :
+            this.getNonNull(propertyName);
     }
 
     abstract <V> Optional<V> getNonNull(final TextStylePropertyName<V> propertyName);
@@ -301,6 +308,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * Sets a possibly new property returning a {@link TextStyle} with the new definition which may or may not
      * require creating a new {@link TextStyle}.
+     * A with {@link TextStylePropertyName#WILDCARD} will simply return the {@link TextStyle value}.
      */
     @Override
     public final <V> TextStyle set(final TextStylePropertyName<V> propertyName,
@@ -352,6 +360,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     ((HasTextStyle) value)
                         .textStyle()
                 );
+                break;
+            case WILDCARD:
+                set = this.equals(value) ?
+                    this :
+                    TextStylePropertyName.WILDCARD.cast(value);
                 break;
             default:
                 set = this.setValue(

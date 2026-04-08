@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -25,30 +24,30 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Optional;
 
 /**
- * A {@link TextStylePropertyValueHandler} for {@link Void} parameter values.
+ * A {@link TextStylePropertyValueHandler} for {@link TextStyle} parameter values.
  */
-final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHandler<Void> {
+final class TextStylePropertyValueHandlerTextStyle extends TextStylePropertyValueHandler<TextStyle> {
 
     /**
      * Singleton
      */
-    final static TextStylePropertyValueHandlerVoid INSTANCE = new TextStylePropertyValueHandlerVoid();
+    final static TextStylePropertyValueHandlerTextStyle INSTANCE = new TextStylePropertyValueHandlerTextStyle();
 
     /**
      * Private ctor
      */
-    private TextStylePropertyValueHandlerVoid() {
+    private TextStylePropertyValueHandlerTextStyle() {
         super();
     }
 
     @Override
-    Class<Void> valueType() {
-        return Void.class;
+    Class<TextStyle> valueType() {
+        return TextStyle.class;
     }
 
     @Override
     boolean testValue(final Object value) {
-        return false;
+        return value instanceof TextStyle;
     }
 
     @Override
@@ -64,42 +63,42 @@ final class TextStylePropertyValueHandlerVoid extends TextStylePropertyValueHand
     }
 
     @Override
-    Void parseValue(final TextStyleParser parser) {
+    TextStyle parseValue(final TextStyleParser parser) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    Void parseValueText(final String value) {
-        if (value.length() > 0) {
-            throw new IllegalArgumentException("Only empty values allowed: " + CharSequences.quoteAndEscape(value));
-        }
-        return null;
+    TextStyle parseValueText(final String value) {
+        return TextStyle.parse(value);
     }
 
     @Override
-    String makeString(final Void value) {
-        throw new UnsupportedOperationException();
+    String makeString(final TextStyle value) {
+        return value.text();
     }
 
-    // JsonNodeContext..................................................................................................
+    // json.............................................................................................................
 
     @Override
-    Void unmarshall(final JsonNode node,
-                    final TextStylePropertyName<?> name,
-                    final JsonNodeUnmarshallContext context) {
-        throw new UnsupportedOperationException("Unmarshalling " + name.inQuotes() + " with " + node + " is not supported");
+    TextStyle unmarshall(final JsonNode node,
+                         final TextStylePropertyName<?> name,
+                         final JsonNodeUnmarshallContext context) {
+        return context.unmarshall(
+            node,
+            TextStyle.class
+        );
     }
 
     @Override
-    JsonNode marshall(final Void value,
+    JsonNode marshall(final TextStyle value,
                       final JsonNodeMarshallContext context) {
-        throw new UnsupportedOperationException("Marshalling value not supported");
+        return context.marshall(value);
     }
 
     // Object ..........................................................................................................
 
     @Override
     public String toString() {
-        return Void.class.getSimpleName();
+        return TextStyle.class.getSimpleName();
     }
 }

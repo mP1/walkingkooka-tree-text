@@ -185,15 +185,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
-    @Test
-    public void testGetOrFailWildcard() {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> this.createObject()
-                .getOrFail(TextStylePropertyName.WILDCARD)
-        );
-    }
-
     // setOrRemove......................................................................................................
 
     @Test
@@ -323,26 +314,6 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchSetWildcardWithNonNullFails() {
-        final UnsupportedOperationException thrown = assertThrows(
-            UnsupportedOperationException.class,
-            () -> TextStyle.EMPTY.patch(
-                JsonNode.object()
-                    .set(
-                        JsonPropertyName.with(TextStylePropertyName.WILDCARD.value()),
-                        "This must fail!"
-                    ),
-                this.createPatchContext()
-            )
-        );
-        this.checkEquals(
-            "Unmarshalling \"*\" with \"This must fail!\" is not supported",
-            thrown.getMessage(),
-            "message"
-        );
-    }
-
-    @Test
     public void testPatchBorderColor() {
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
@@ -362,6 +333,20 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_BOTTOM_COLOR, color
                 )
             )
+        );
+    }
+
+    @Test
+    public void testPatchWildcard() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.RIGHT
+        );
+
+        this.patchAndCheck(
+            TextStyle.parse("text-align: LEFT;"),
+            TextStylePropertyName.WILDCARD.stylePatch(style),
+            style
         );
     }
 

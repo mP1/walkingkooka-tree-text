@@ -165,6 +165,28 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    @Test
+    public void testSetWildcardWithEmpty() {
+        this.setAndCheck(
+            TextStyle.EMPTY,
+            TextStylePropertyName.WILDCARD,
+            TextStyle.EMPTY,
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testSetWildcardWithNotEmpty() {
+        final TextStyle textStyle = TextStyle.parse("text-align: left;");
+
+        this.setAndCheck(
+            TextStyle.EMPTY,
+            TextStylePropertyName.WILDCARD,
+            textStyle,
+            textStyle
+        );
+    }
+
     // setBorder.......................................................................................................
 
     @Test
@@ -468,6 +490,17 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.PADDING,
+            TextStyle.EMPTY
+        );
+    }
+
+    // get..............................................................................................................
+
+    @Test
+    public void testGetWildcard() {
+        this.getAndCheck(
+            TextStyle.EMPTY,
+            TextStylePropertyName.WILDCARD,
             TextStyle.EMPTY
         );
     }
