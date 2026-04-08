@@ -711,7 +711,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             JsonNode.object()
                 .set(
                     JsonPropertyName.with("textAlign"),
-                    JsonNode.string("RIGHT")
+                    "RIGHT"
                 )
         );
     }
@@ -762,7 +762,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             JsonNode.object()
                 .set(
                     JsonPropertyName.with("borderColor"),
-                    JsonNode.string(propertyValue.toString())
+                    propertyValue.toString()
                 )
         );
 
