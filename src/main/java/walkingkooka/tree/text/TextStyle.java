@@ -281,7 +281,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      * Gets the value for the given {@link TextStylePropertyName}.
      */
     public final <V> Optional<V> get(final TextStylePropertyName<V> propertyName) {
-        Objects.requireNonNull((TextStylePropertyName<?>) propertyName, "propertyName");
+        Objects.requireNonNull(propertyName, "propertyName");
 
         return this.getNonNull(propertyName);
     }
@@ -305,7 +305,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     @Override
     public final <V> TextStyle set(final TextStylePropertyName<V> propertyName,
                                    final V value) {
-        Objects.requireNonNull((TextStylePropertyName<?>) propertyName, "propertyName");
+        Objects.requireNonNull(propertyName, "propertyName");
 
         propertyName.checkValue(value);
         return this.setNonNull(propertyName, value);
