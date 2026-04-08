@@ -784,6 +784,71 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
+    public void testStylePatchWildcardEmptyTextStyle() {
+        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.WILDCARD;
+        final TextStyle propertyValue = TextStyle.EMPTY;
+
+        this.stylePatchAndCheck(
+            propertyName,
+            propertyValue,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("*"),
+                    JsonNode.object()
+                )
+        );
+
+        final TextStyle textStyle = TextStyle.EMPTY
+            .set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            );
+
+        this.patchAndCheck(
+            propertyName,
+            propertyValue,
+            textStyle,
+            propertyValue
+        );
+    }
+
+    @Test
+    public void testStylePatchWildcardReplaces() {
+        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.WILDCARD;
+        final TextStyle propertyValue = TextStyle.parse("text-align: LEFT; vertical-align: TOP;");
+
+        this.stylePatchAndCheck(
+            propertyName,
+            propertyValue,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("*"),
+                    JsonNode.object()
+                        .set(
+                            JsonPropertyName.with("textAlign"),
+                            "LEFT"
+                        ).set(
+                            JsonPropertyName.with("verticalAlign"),
+                            "TOP"
+                        )
+                )
+        );
+
+        final TextStyle textStyle = TextStyle.EMPTY
+            .set(
+                TextStylePropertyName.COLOR,
+                Color.BLACK
+            );
+
+        this.patchAndCheck(
+            propertyName,
+            propertyValue,
+            textStyle,
+            propertyValue
+        );
+    }
+
+    @Test
     public void testStylePatchNullValue() {
         this.stylePatchAndCheck(
             TextStylePropertyName.TEXT_ALIGN,
