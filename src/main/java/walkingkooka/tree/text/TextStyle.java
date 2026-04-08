@@ -622,11 +622,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
      */
     @Override
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
-        Objects.requireNonNull(propertyName, "propertyName");
-
         return propertyName == TextStylePropertyName.WILDCARD ?
             TextStyle.EMPTY :
-            this.removeNonNull(propertyName);
+            this.removeNonNull(
+                Objects.requireNonNull(propertyName, "propertyName")
+            );
     }
 
     abstract TextStyle removeNonNull(final TextStylePropertyName<?> propertyName);
