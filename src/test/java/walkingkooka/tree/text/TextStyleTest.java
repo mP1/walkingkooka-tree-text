@@ -337,7 +337,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchWildcard() {
+    public void testPatchAll() {
         final TextStyle style = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.RIGHT
@@ -345,7 +345,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.patchAndCheck(
             TextStyle.parse("text-align: LEFT;"),
-            TextStylePropertyName.WILDCARD.stylePatch(style),
+            TextStylePropertyName.ALL.stylePatch(style),
             style
         );
     }
@@ -381,14 +381,14 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchRemovePropertyWildcard() {
+    public void testPatchRemovePropertyAll() {
         this.patchAndCheck(
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
             JsonNode.object()
                 .set(
                     JsonPropertyName.with(
-                        TextStylePropertyName.WILDCARD.value()
+                        TextStylePropertyName.ALL.value()
                     ),
                     JsonNode.nullNode()
                 ),
@@ -397,7 +397,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testPatchRemovePropertyWildcardManyValues() {
+    public void testPatchRemovePropertyAllManyValues() {
         this.patchAndCheck(
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
@@ -405,7 +405,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             JsonNode.object()
                 .set(
                     JsonPropertyName.with(
-                        TextStylePropertyName.WILDCARD.value())
+                        TextStylePropertyName.ALL.value())
                     , JsonNode.nullNode()
                 ),
             TextStyle.EMPTY

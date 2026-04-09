@@ -33,7 +33,7 @@ public final class TextStylePropertyValueHandlerTextStyleTest extends TextStyleP
 
     @Override
     TextStylePropertyName<TextStyle> propertyName() {
-        return TextStylePropertyName.WILDCARD;
+        return TextStylePropertyName.ALL;
     }
 
     @Override

@@ -69,6 +69,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextStyle EMPTY = TextStyleEmpty.instance();
 
+    static final String ALL = "*";
+
     static final String BORDER_COLOR = "border-color";
 
     static final String BORDER_STYLE = "border-style";
@@ -80,8 +82,6 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     static final String MARGIN = "margin";
 
     static final String PADDING = "padding";
-
-    static final String WILDCARD = "*";
 
     public final static CharacterConstant ASSIGNMENT = CharacterConstant.with(':');
 
@@ -280,13 +280,13 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     // get..............................................................................................................
 
     /**
-     * Gets the value for the given {@link TextStylePropertyName}. If the property name is {@link TextStylePropertyName#WILDCARD},
+     * Gets the value for the given {@link TextStylePropertyName}. If the property name is {@link TextStylePropertyName#ALL},
      * this {@link TextStyle} will be returned.
      */
     public final <V> Optional<V> get(final TextStylePropertyName<V> propertyName) {
         Objects.requireNonNull(propertyName, "propertyName");
 
-        return TextStylePropertyName.WILDCARD == propertyName ?
+        return TextStylePropertyName.ALL == propertyName ?
             Optional.of(
                 propertyName.cast(this)
             ) :
@@ -308,7 +308,7 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     /**
      * Sets a possibly new property returning a {@link TextStyle} with the new definition which may or may not
      * require creating a new {@link TextStyle}.
-     * A with {@link TextStylePropertyName#WILDCARD} will simply return the {@link TextStyle value}.
+     * A with {@link TextStylePropertyName#ALL} will simply return the {@link TextStyle value}.
      */
     @Override
     public final <V> TextStyle set(final TextStylePropertyName<V> propertyName,
@@ -361,10 +361,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                         .textStyle()
                 );
                 break;
-            case WILDCARD:
+            case ALL:
                 set = this.equals(value) ?
                     this :
-                    TextStylePropertyName.WILDCARD.cast(value);
+                    TextStylePropertyName.ALL.cast(value);
                 break;
             default:
                 set = this.setValue(
@@ -627,11 +627,11 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     /**
      * Removes a possibly existing property returning a {@link TextStyle} without.
-     * {@link TextStylePropertyName#WILDCARD} is a special case and always returns a {@link #EMPTY}.
+     * {@link TextStylePropertyName#ALL} is a special case and always returns a {@link #EMPTY}.
      */
     @Override
     public final TextStyle remove(final TextStylePropertyName<?> propertyName) {
-        return propertyName == TextStylePropertyName.WILDCARD ?
+        return propertyName == TextStylePropertyName.ALL ?
             TextStyle.EMPTY :
             this.removeNonNull(
                 Objects.requireNonNull(propertyName, "propertyName")
