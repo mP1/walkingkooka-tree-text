@@ -97,13 +97,13 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Test
-    public final void testSetValuesWithWildcardFails() {
+    public final void testSetValuesWithAllFails() {
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
             () -> this.createObject()
                 .setValues(
                     Maps.of(
-                        TextStylePropertyName.WILDCARD,
+                        TextStylePropertyName.ALL,
                         "hello"
                     )
                 )
@@ -293,11 +293,11 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Test
-    public final void testSetWildcardFails() {
+    public final void testSetAllFails() {
         assertThrows(
             IllegalArgumentException.class,
             () -> {
-                final TextStylePropertyName<?> propertyName = TextStylePropertyName.WILDCARD;
+                final TextStylePropertyName<?> propertyName = TextStylePropertyName.ALL;
                 this.createObject()
                     .set(
                         propertyName,

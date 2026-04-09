@@ -336,12 +336,12 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testGetWildcard() {
+    public void testGetAll() {
         final TextStyleNonEmpty textStyle = this.createTextStyle();
 
         this.getAndCheck(
             textStyle,
-            TextStylePropertyName.WILDCARD,
+            TextStylePropertyName.ALL,
             textStyle
         );
     }
@@ -367,22 +367,22 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testSetWildcardWithEmpty() {
+    public void testSetAllWithEmpty() {
         this.setAndCheck(
             this.createTextStyle(),
-            TextStylePropertyName.WILDCARD,
+            TextStylePropertyName.ALL,
             TextStyle.EMPTY,
             TextStyle.EMPTY
         );
     }
 
     @Test
-    public void testSetWildcardWithNotEmpty() {
+    public void testSetAllWithNotEmpty() {
         final TextStyle textStyle = TextStyle.parse("text-align: left;");
 
         this.setAndCheck(
             this.createTextStyle(),
-            TextStylePropertyName.WILDCARD,
+            TextStylePropertyName.ALL,
             textStyle,
             textStyle
         );

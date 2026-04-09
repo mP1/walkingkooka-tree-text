@@ -96,9 +96,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     // index............................................................................................................
 
     @Test
-    public void testIndexWithWildcard() {
+    public void testIndexWithAll() {
         this.indexAndCheck(
-            TextStylePropertyName.WILDCARD,
+            TextStylePropertyName.ALL,
             -1
         );
     }
@@ -153,7 +153,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testConstantValue() {
         this.checkEquals(
-            Lists.of("WILDCARD=*"),
+            Lists.of("ALL=*"),
             Arrays.stream(
                     TextStylePropertyName.class.getDeclaredFields())
                 .filter(FieldAttributes.STATIC::is)
@@ -238,7 +238,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 .filter(FieldAttributes.STATIC::is)
                 .filter(f -> f.getType() == TextStylePropertyName.class)
                 .map(TextStylePropertyNameTest::getField)
-                .filter(n -> n != TextStylePropertyName.WILDCARD)
+                .filter(n -> n != TextStylePropertyName.ALL)
                 .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
@@ -247,7 +247,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     public void testValuesToString() {
         this.checkEquals(
             false,
-            TextStylePropertyName.VALUES.contains(TextStylePropertyName.WILDCARD),
+            TextStylePropertyName.VALUES.contains(TextStylePropertyName.ALL),
             TextStylePropertyName.VALUES::toString
         );
     }
@@ -784,8 +784,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testStylePatchWildcardEmptyTextStyle() {
-        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.WILDCARD;
+    public void testStylePatchAllEmptyTextStyle() {
+        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.ALL;
         final TextStyle propertyValue = TextStyle.EMPTY;
 
         this.stylePatchAndCheck(
@@ -813,8 +813,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testStylePatchWildcardReplaces() {
-        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.WILDCARD;
+    public void testStylePatchAllReplaces() {
+        final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.ALL;
         final TextStyle propertyValue = TextStyle.parse("text-align: LEFT; vertical-align: TOP;");
 
         this.stylePatchAndCheck(

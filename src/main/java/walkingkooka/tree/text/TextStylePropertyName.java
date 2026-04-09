@@ -63,7 +63,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
 
     /**
-     * Used to allocate unique index for each constant except for synthetic properties such as {@link #WILDCARD} or {@link #BORDER_COLOR}.
+     * Used to allocate unique index for each constant except for synthetic properties such as {@link #ALL} or {@link #BORDER_COLOR}.
      */
     static int NEXT_INDEX = 0;
 
@@ -169,7 +169,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
             visitor,
             null != visitor ?
                 NEXT_INDEX++ :
-                -1 // WILDCARD, BORDER_COLOR
+                -1 // ALL, BORDER_COLOR
         );
         TextStylePropertyName.CONSTANTS.put(
             property,
@@ -182,7 +182,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * A {@link TextStylePropertyName} that matches all properties.
      * Its only practical use is to clear or remove all style properties from a {@link TextStyle}, being the implementation of a clear style from a cell.
      */
-    public final static TextStylePropertyName<TextStyle> WILDCARD = registerConstant(
+    public final static TextStylePropertyName<TextStyle> ALL = registerConstant(
         "*",
         TextStylePropertyValueHandlerTextStyle.INSTANCE,
         null
@@ -890,12 +890,12 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     static {
         final Set<TextStylePropertyName<?>> values = SortedSets.tree();
         values.addAll(CONSTANTS.values());
-        values.remove(WILDCARD);
+        values.remove(ALL);
         VALUES = Sets.readOnly(values);
     }
 
     /**
-     * Returns all {@link TextStylePropertyName} except {@link #WILDCARD}.
+     * Returns all {@link TextStylePropertyName} except {@link #ALL}.
      */
     public static final Set<TextStylePropertyName<?>> VALUES;
 
