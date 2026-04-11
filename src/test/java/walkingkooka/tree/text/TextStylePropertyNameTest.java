@@ -45,6 +45,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>>
     implements ConstantsTesting<TextStylePropertyName<?>> {
 
@@ -326,6 +328,36 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         );
     }
 
+    // setValue.........................................................................................................
+
+    @Test
+    public void testSetValueWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStylePropertyName.TEXT_ALIGN.setValue(null)
+        );
+    }
+
+    @Test
+    public void testSetValue() {
+        this.setValueAndCheck(
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+    }
+
+    private <T> void setValueAndCheck(final TextStylePropertyName<T> name,
+                                      final T value) {
+        this.checkEquals(
+            TextStyleProperty.with(
+                name,
+                Optional.of(value)
+            ),
+            name.setValue(value),
+            () -> name + " setValue " + value
+        );
+    }
+    
     // setOrRemoveValue.................................................................................................
 
     @Test
