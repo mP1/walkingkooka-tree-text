@@ -322,37 +322,37 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 propertyName,
                 Optional.empty()
             ),
-            propertyName.setValue(Optional.empty())
+            propertyName.setOrRemoveValue(Optional.empty())
         );
     }
 
-    // setValue.........................................................................................................
+    // setOrRemoveValue.................................................................................................
 
     @Test
-    public void testSetValueWithNotEmpty() {
-        this.setValueAndCheck(
+    public void testSetOrRemoveValueWithNotEmpty() {
+        this.setOrRemoveValueAndCheck(
             TextStylePropertyName.COLOR,
             Optional.of(Color.BLACK)
         );
     }
 
     @Test
-    public void testSetValueWithEmpty() {
-        this.setValueAndCheck(
+    public void testSetOrRemoveValueWithEmpty() {
+        this.setOrRemoveValueAndCheck(
             TextStylePropertyName.COLOR,
             Optional.empty()
         );
     }
 
-    private <T> void setValueAndCheck(final TextStylePropertyName<T> name,
-                                      final Optional<T> value) {
+    private <T> void setOrRemoveValueAndCheck(final TextStylePropertyName<T> name,
+                                              final Optional<T> value) {
         this.checkEquals(
             TextStyleProperty.with(
                 name,
                 value
             ),
-            name.setValue(value),
-            () -> name + " setValue " + value
+            name.setOrRemoveValue(value),
+            () -> name + " setOrRemoveValue " + value
         );
     }
 
