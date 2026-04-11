@@ -957,6 +957,14 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.padding = name.startsWith("padding");
     }
 
+    public TextStyleProperty<T> setValue(final T value) {
+        return this.setOrRemoveValue(
+            Optional.ofNullable(
+                Objects.requireNonNull(value, "value")
+            )
+        );
+    }
+
     public TextStyleProperty<T> setOrRemoveValue(final Optional<T> value) {
         return TextStyleProperty.with(
             this,
