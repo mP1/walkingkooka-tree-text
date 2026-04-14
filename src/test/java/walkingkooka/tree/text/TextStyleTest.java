@@ -541,7 +541,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_BOTTOM_STYLE,
                     BorderStyle.DOTTED
                 ),
-            "border-bottom-style: dotted;"
+            "border-bottom-style: DOTTED;"
         );
     }
 
@@ -601,7 +601,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.OVERFLOW_WRAP,
                     OverflowWrap.BREAK_WORD
                 ),
-            "overflow-wrap: break-word;"
+            "overflow-wrap: BREAK_WORD;"
         );
     }
 
@@ -626,6 +626,18 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     "has spaces"
                 ),
             "text: \"has spaces\";"
+        );
+    }
+
+    @Test
+    public void testTextFontVariantSmallCaps() {
+        this.textAndCheck(
+            TextStyle.EMPTY
+                .set(
+                    TextStylePropertyName.FONT_VARIANT,
+                    FontVariant.SMALL_CAPS
+                ),
+            "font-variant: SMALL_CAPS;"
         );
     }
 
@@ -679,7 +691,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_TOP_WIDTH,
                     Length.pixel(123.0)
                 ),
-            "border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;"
+            "border-top-color: #123456; border-top-style: DOTTED; border-top-width: 123px;"
         );
     }
 
