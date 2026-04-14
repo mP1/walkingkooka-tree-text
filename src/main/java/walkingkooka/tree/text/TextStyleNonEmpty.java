@@ -19,10 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.naming.Name;
-import walkingkooka.text.CaseKind;
 import walkingkooka.text.CharSequences;
-import walkingkooka.text.HasText;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printer;
@@ -350,7 +347,10 @@ final class TextStyleNonEmpty extends TextStyle {
                 text.print(" ");
 
                 final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss = toTextValue(value);
+                final CharSequence valueCss = toTextValue(
+                    value,
+                    propertyName.handler
+                );
 
                 text.print(valueCss);
                 text.print(TextStyle.SEPARATOR.string());
@@ -362,29 +362,13 @@ final class TextStyleNonEmpty extends TextStyle {
         return b.toString();
     }
 
-    private static CharSequence toTextValue(final Object value) {
-        final CharSequence text;
-
-        // dont want to handle values such as FontFamily (which implements Name) here.
-        // Name extends HasText
-        if (value instanceof HasText && false == value instanceof Name) {
-            final HasText hasText = (HasText) value;
-            text = hasText.text();
-        } else {
-            if (value instanceof Enum) {
-                final Enum<?> enumEnum = (Enum<?>) value;
-                text = CaseKind.SNAKE.change(
-                    enumEnum.name().toLowerCase(),
-                    CaseKind.KEBAB
-                );
-            } else {
-                text = CharSequences.quoteIfNecessary(
-                    value.toString()
-                );
-            }
-        }
-
-        return text;
+    private static CharSequence toTextValue(final Object value,
+                                            final TextStylePropertyValueHandler<?> handler) {
+        return CharSequences.quoteIfNecessary(
+            handler.makeString(
+                Cast.to(value)
+            )
+        );
     }
 
     // BoxEdge........................................................................................................
