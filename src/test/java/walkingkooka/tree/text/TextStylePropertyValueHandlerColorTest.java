@@ -34,6 +34,24 @@ public final class TextStylePropertyValueHandlerColorTest extends TextStylePrope
     }
 
     @Test
+    public void testParseValueTextInvalidFails2() {
+        this.parseStringFails(
+            "Invalid!",
+            new RuntimeException("Unknown color name \"Invalid!\"")
+        );
+    }
+
+    @Test
+    public void testParseValueText() {
+        final Color color = Color.parse("#123");
+
+        this.parseStringAndCheck(
+            color.text(),
+            color
+        );
+    }
+
+    @Test
     public void testUnmarshallHashRgb() {
         this.unmarshallAndCheck(
             JsonNode.string("#123"),

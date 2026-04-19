@@ -21,6 +21,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -76,6 +77,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
 
     @Override
     String parseValueText(final String value) {
+        Objects.requireNonNull(value, "value");
         return value;
     }
 

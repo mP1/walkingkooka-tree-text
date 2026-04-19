@@ -23,6 +23,7 @@ import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -34,13 +35,53 @@ import java.math.MathContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ClassTesting<P>,
+public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ParseStringTesting<T>,
+    ClassTesting<P>,
     ToStringTesting<P>,
     TypeNameTesting<P> {
 
     TextStylePropertyValueHandlerTestCase() {
         super();
     }
+
+    // parseValue.......................................................................................................
+
+    @Test
+    public final void testParseValueTextWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.handler()
+                .parseValueText(null)
+        );
+    }
+
+    @Test
+    public final void testParseValueTextInvalidFails() {
+        if(false == this instanceof TextStylePropertyValueHandlerStringTest) {
+            this.parseStringFails(
+                "!!!!\n",
+                IllegalArgumentException.class
+            );
+        }
+    }
+
+    @Override
+    public final T parseString(final String text) {
+        return this.handler()
+            .parseValueText(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
+        return expected;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException expected) {
+        return expected;
+    }
+
+    // checkValue.......................................................................................................
 
     @Test
     public final void testCheckValueWithNullFails() {
