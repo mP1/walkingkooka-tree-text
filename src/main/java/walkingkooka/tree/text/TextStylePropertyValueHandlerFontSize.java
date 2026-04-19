@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -73,6 +74,8 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
 
     @Override
     FontSize parseValueText(final String value) {
+        CharSequences.failIfNullOrEmpty(value, "value");
+
         return FontSize.with(
             Integer.parseInt(value)
         );

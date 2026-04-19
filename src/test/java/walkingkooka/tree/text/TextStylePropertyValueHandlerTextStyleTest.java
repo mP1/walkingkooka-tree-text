@@ -21,6 +21,29 @@ import org.junit.jupiter.api.Test;
 
 public final class TextStylePropertyValueHandlerTextStyleTest extends TextStylePropertyValueHandlerTestCase<TextStylePropertyValueHandlerTextStyle, TextStyle> {
 
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseValueTextWithEmpty() {
+        this.parseStringAndCheck(
+            "",
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public void testParseValueText() {
+        final TextStyle textStyle = TextStyle.parse("text-align: LEFT; vertical-align: TOP");
+
+        this.parseStringAndCheck(
+            textStyle.text(),
+            textStyle
+        );
+    }
+
     @Test
     public void testToString() {
         this.toStringAndCheck(this.handler(), TextStyle.class.getSimpleName());

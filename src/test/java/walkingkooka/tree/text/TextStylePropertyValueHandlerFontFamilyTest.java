@@ -34,6 +34,22 @@ public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStyle
     }
 
     @Test
+    public void testParseValueTextInvalidFails2() {
+        this.parseStringInvalidCharacterFails(
+            "!InvalidFontFamily",
+            '!'
+        );
+    }
+
+    @Test
+    public void testParseValueText() {
+        this.parseStringAndCheck(
+            TIMES_NEW_ROMAN,
+            FontFamily.with(TIMES_NEW_ROMAN)
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string(TIMES_NEW_ROMAN),

@@ -32,6 +32,14 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
     }
 
     @Test
+    public void testParseValueTextWithNegativeValue() {
+        this.parseStringFails(
+            "-10",
+            new IllegalArgumentException("Invalid value -10 <= 0")
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.number(123),

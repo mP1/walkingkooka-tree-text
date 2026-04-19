@@ -21,8 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.tree.json.JsonNode;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public final class TextStylePropertyValueHandlerEnumTest extends TextStylePropertyValueHandlerTestCase2<TextStylePropertyValueHandlerEnum<TextWrapping>, TextWrapping> {
 
     @Test
@@ -36,26 +34,17 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
 
     @Test
     public void testParseValueTextWithUnknownFails() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> this.handler()
-                .parseValueText("BAD")
-        );
-
-        this.checkEquals(
-            "Unknown value \"BAD\"",
-            thrown.getMessage()
+        this.parseStringFails(
+            "BAD",
+            new IllegalArgumentException("Unknown value \"BAD\"")
         );
     }
 
     @Test
     public void testParseValueTextDifferentCase() {
-        this.checkEquals(
-            TextAlign.LEFT,
-            TextStylePropertyValueHandlerEnum.with(
-                    TextAlign.values(),
-                    TextAlign.class
-                ).parseValueText("leFT")
+        this.parseStringAndCheck(
+            "Clip",
+            TextWrapping.CLIP
         );
     }
 

@@ -31,6 +31,39 @@ public final class TextStylePropertyValueHandlerBorderTest extends TextStyleProp
         );
     }
 
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseValueTextInvalidFails2() {
+        this.parseStringFails(
+            "Invalid!",
+            new RuntimeException("Unknown color name \"Invalid!\"")
+        );
+    }
+
+    @Test
+    public void testParseValueTextEmpty() {
+        final Border border = Border.parse("");
+
+        this.parseStringAndCheck(
+            border.text(),
+            border
+        );
+    }
+
+    @Test
+    public void testParseValueText() {
+        final Border border = Border.parse("top-color: black; right-style: SOLID; bottom-width: 1px;");
+
+        this.parseStringAndCheck(
+            border.text(),
+            border
+        );
+    }
+
     @Test
     public void testUnmarshall() {
         final Border border = Border.parse("BLACK SOLID 1px")

@@ -33,6 +33,37 @@ public final class TextStylePropertyValueHandlerPaddingTest extends TextStylePro
         );
     }
 
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testParseValueTextWithInvalidFails() {
+        this.parseStringFails(
+            "!invalid",
+            new IllegalArgumentException("Invalid number length \"!invalid\"")
+        );
+    }
+
+    @Test
+    public void testParseValueTextWithInvalidFails2() {
+        this.parseStringFails(
+            "-1",
+            new IllegalArgumentException("Invalid length -1 < 0")
+        );
+    }
+
+    @Test
+    public void testParseValueTextWithEmptyString() {
+        final String text = "";
+
+        this.parseStringAndCheck(
+            text,
+            Padding.parse(text)
+        );
+    }
+
     @Test
     public void testUnmarshall() {
         final Padding padding = BoxEdge.BOTTOM.setPadding(
