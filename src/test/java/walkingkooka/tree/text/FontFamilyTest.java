@@ -69,36 +69,6 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
         );
     }
 
-    // TypeNaming.......................................................................................................
-
-    @Override
-    public void testTypeNaming() {
-    }
-
-    // HasJsonNode......................................................................................................
-
-    @Test
-    public void testUnmarshallStringInvalidFails() {
-        this.unmarshallFails(JsonNode.string(""));
-    }
-
-    @Test
-    public void testUnmarshallString() {
-        this.unmarshallAndCheck(JsonNode.string(TEXT),
-            FontFamily.with(TEXT));
-    }
-
-    @Test
-    public void testMarshall() {
-        this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
-    }
-
-    @Test
-    @Override
-    public void testMarshallRoundtripTwice() {
-        this.marshallRoundTripTwiceAndCheck(this.createObject());
-    }
-
     @Override
     public FontFamily createName(final String name) {
         return FontFamily.with(name);
@@ -124,17 +94,29 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
         return "Antiqua";
     }
 
-    @Override
-    public Class<FontFamily> type() {
-        return FontFamily.class;
+    // json.............................................................................................................
+
+    @Test
+    public void testUnmarshallStringInvalidFails() {
+        this.unmarshallFails(JsonNode.string(""));
     }
 
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
+    @Test
+    public void testUnmarshallString() {
+        this.unmarshallAndCheck(JsonNode.string(TEXT),
+            FontFamily.with(TEXT));
     }
 
-    // JsonNodeMarshallTesting..........................................................................................
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
+    }
+
+    @Test
+    @Override
+    public void testMarshallRoundtripTwice() {
+        this.marshallRoundTripTwiceAndCheck(this.createObject());
+    }
 
     @Override
     public FontFamily createJsonNodeMarshallingValue() {
@@ -145,5 +127,21 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     public FontFamily unmarshall(final JsonNode jsonNode,
                                  final JsonNodeUnmarshallContext context) {
         return FontFamily.unmarshall(jsonNode, context);
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public void testTypeNaming() {
+    }
+
+    @Override
+    public Class<FontFamily> type() {
+        return FontFamily.class;
+    }
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PUBLIC;
     }
 }
