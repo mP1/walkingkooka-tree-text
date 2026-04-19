@@ -53,6 +53,34 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
     }
 
     @Test
+    public void testParseValueTextNone() {
+        final Length<?> none = Length.none();
+
+        this.parseStringAndCheck(
+            none.toString(),
+            none
+        );
+    }
+
+    @Test
+    public void testParseValueTextWithNegativePixelsFails() {
+        this.parseStringFails(
+            "-1",
+            new IllegalArgumentException("Invalid length -1 < 0")
+        );
+    }
+
+    @Test
+    public void testParseValueTextPixels() {
+        final String text = "20px";
+
+        this.parseStringAndCheck(
+            text,
+            Length.parse(text)
+        );
+    }
+
+    @Test
     public void testUnmarshallNoneFails() {
         assertThrows(
             IllegalArgumentException.class,

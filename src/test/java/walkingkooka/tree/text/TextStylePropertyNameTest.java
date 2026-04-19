@@ -678,6 +678,31 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     // parseValue.......................................................................................................
+
+    @Test
+    public void testParseValueTextHeightWithNormalFails() {
+        this.parseValueFails(
+            TextStylePropertyName.HEIGHT,
+            Length.normal()
+                .text(),
+            new IllegalArgumentException("Invalid \"height\" expected NoneLength | PixelLength but got NormalLength")
+        );
+    }
+
+    private void parseValueFails(final TextStylePropertyName<?> propertyName,
+                                 final String text,
+                                 final RuntimeException expected) {
+        final RuntimeException thrown = assertThrows(
+            expected.getClass(),
+            () -> propertyName.parseValue(text)
+        );
+
+        this.checkEquals(
+            expected.getMessage(),
+            thrown.getMessage()
+        );
+    }
+
     @Test
     public void testParseValueString() {
         this.parseValueAndCheck(
@@ -706,18 +731,18 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
-    public void testParseValueNone() {
+    public void testParseValueBorderWidthNone() {
         this.parseValueAndCheck(
-            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+            TextStylePropertyName.BORDER_WIDTH,
             "none",
             Length.none()
         );
     }
 
     @Test
-    public void testParseValuePixels() {
+    public void testParseValueBorderWidthPixels() {
         this.parseValueAndCheck(
-            TextStylePropertyName.WIDTH,
+            TextStylePropertyName.BORDER_WIDTH,
             "100px",
             Length.pixel(100.0)
         );

@@ -995,12 +995,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Parses a {@link String} into the type value of this {@link TextStylePropertyName}.
+     * Parses a {@link String} into the type value of this {@link TextStylePropertyName}, and then performs a {@link #checkValue(Object)}.
+     * This is necessary because some handlers only parse and do not check value.
      */
     public T parseValue(final String value) {
         Objects.requireNonNull(value, "value");
 
-        return this.handler.parseValueText(value);
+        final T valueNotText = this.handler.parseValueText(value);
+        this.checkValue(valueNotText);
+        return valueNotText;
     }
 
     /**

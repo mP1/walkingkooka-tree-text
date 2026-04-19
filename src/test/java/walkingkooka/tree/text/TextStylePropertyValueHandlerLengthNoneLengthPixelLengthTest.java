@@ -73,6 +73,26 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
     }
 
     @Test
+    public void testParseValueTextNone() {
+        final Length<?> none = Length.none();
+
+        this.parseStringAndCheck(
+            none.toString(),
+            none
+        );
+    }
+
+    @Test
+    public void testParseValueText() {
+        final String text = "20px";
+
+        this.parseStringAndCheck(
+            text,
+            Length.parse(text)
+        );
+    }
+
+    @Test
     public void testUnmarshallNone() {
         final NoneLength none = Length.none();
         this.unmarshallAndCheck(this.marshall(none), none);
