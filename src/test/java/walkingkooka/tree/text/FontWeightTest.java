@@ -221,12 +221,18 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testToStringNormal() {
-        this.toStringAndCheck(FontWeight.NORMAL, "normal");
+        this.toStringAndCheck(
+            FontWeight.NORMAL,
+            "NORMAL"
+        );
     }
 
     @Test
     public void testToStringBold() {
-        this.toStringAndCheck(FontWeight.BOLD, "bold");
+        this.toStringAndCheck(
+            FontWeight.BOLD,
+            "BOLD"
+        );
     }
 
     @Test

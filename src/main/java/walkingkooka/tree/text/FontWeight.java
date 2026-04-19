@@ -40,8 +40,8 @@ public final class FontWeight implements Comparable<FontWeight>,
     private final static int BOLD_VALUE = 700;
 
     // VisibleFor TextStylePropertyValueHandlerFontWeight
-    final static String NORMAL_TEXT = "normal";
-    final static String BOLD_TEXT = "bold";
+    final static String NORMAL_TEXT = "NORMAL";
+    final static String BOLD_TEXT = "BOLD";
 
     /**
      * A constant holding the font-weight of normal text
@@ -111,8 +111,10 @@ public final class FontWeight implements Comparable<FontWeight>,
     }
 
     private static FontWeight unmarshallString(final String value) {
-        return BOLD_TEXT.equals(value) ? BOLD :
-            NORMAL_TEXT.equals(value) ? NORMAL :
+        return CASE_SENSITIVITY.equals(BOLD_TEXT, value) ?
+            BOLD :
+            CASE_SENSITIVITY.equals(NORMAL_TEXT, value) ?
+                NORMAL :
                 unmarshallString0(value);
     }
 

@@ -2153,7 +2153,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         this.propertiesAndCheck2(
             TextStylePropertyName.FONT_WEIGHT,
             FontWeight.BOLD,
-            "font-weight: bold\r\n"
+            "font-weight: BOLD\r\n"
         );
     }
 
