@@ -19,13 +19,22 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
+import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
+import walkingkooka.text.cursor.parser.LongParserToken;
+import walkingkooka.text.cursor.parser.Parser;
+import walkingkooka.text.cursor.parser.ParserContext;
+import walkingkooka.text.cursor.parser.ParserContexts;
+import walkingkooka.text.cursor.parser.Parsers;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.math.MathContext;
 import java.util.Objects;
 
 /**
@@ -59,11 +68,24 @@ public final class FontWeight implements Comparable<FontWeight>,
             CASE_SENSITIVITY.equals(NORMAL_TEXT, text) ?
                 FontWeight.NORMAL :
                 FontWeight.with(
-                    Integer.parseInt(
-                        CharSequences.failIfNullOrEmpty(text, "text")
-                    )
+                    PARSER.parseText(
+                            text,
+                            PARSER_CONTEXT
+                        ).cast(LongParserToken.class)
+                        .value()
+                        .intValue()
                 );
     }
+
+    private final static Parser<ParserContext> PARSER = Parsers.longParser(10);
+
+    private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
+        false, // canNumbersHaveGroupSeparator
+        InvalidCharacterExceptionFactory.POSITION,
+        ',', // valueSeparator
+        DateTimeContexts.fake(),
+        DecimalNumberContexts.american(MathContext.DECIMAL32)
+    );
 
     /**
      * Factory that creates a {@link FontWeight}.

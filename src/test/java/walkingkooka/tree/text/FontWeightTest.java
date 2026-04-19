@@ -69,6 +69,14 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     // parseValue......................................................................................................
 
     @Test
+    public void testParseWithInvalidCharacterFails() {
+        this.parseStringInvalidCharacterFails(
+            "123!!!",
+            '!'
+        );
+    }
+
+    @Test
     public void testParseWithBold() {
         this.parseStringAndCheck(
             "bold",
