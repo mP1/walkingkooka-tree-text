@@ -70,7 +70,7 @@ public final class FontWeight implements Comparable<FontWeight>,
      */
     public static FontWeight with(final int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("Invalid font-weight value=" + value);
+            throw new IllegalArgumentException("Invalid font-weight " + value + " < 0");
         }
 
         return NORMAL_VALUE == value ?
