@@ -38,7 +38,15 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testWithNegativeValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> FontWeight.with(-1));
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> FontWeight.with(-1)
+        );
+
+        this.checkEquals(
+            "Invalid font-weight -1 < 0",
+            thrown.getMessage()
+        );
     }
 
     @Test
