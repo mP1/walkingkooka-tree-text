@@ -18,9 +18,11 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.naming.Name;
+import walkingkooka.predicate.character.CharPredicate;
+import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -32,11 +34,38 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 public final class FontFamily implements Name,
     Comparable<FontFamily> {
 
+    /**
+     * A {@link FontFamily} may include any printable ascii characters and must be between {@link #MIN_LENGTH} and
+     * {@link #MAX_LENGTH}.
+     */
     public static FontFamily with(final String name) {
-        return new FontFamily(
-            CharSequences.failIfNullOrEmpty(name, "name")
+        CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
+            name,
+            "name",
+            INITIAL,
+            PART
         );
+
+        InvalidTextLengthException.throwIfFail(
+            "name",
+            name,
+            MIN_LENGTH,
+            MAX_LENGTH
+        );
+
+        return new FontFamily(name);
     }
+
+    public final static CharPredicate INITIAL = CharPredicates.letter()
+        .and(
+            CharPredicates.ascii()
+        );
+
+    public final static CharPredicate PART = CharPredicates.asciiPrintable();
+
+    public final static int MIN_LENGTH = 1;
+
+    public final static int MAX_LENGTH = 255;
 
     private FontFamily(final String name) {
         this.name = name;
