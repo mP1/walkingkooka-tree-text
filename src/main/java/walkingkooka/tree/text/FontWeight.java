@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -32,6 +33,8 @@ import java.util.Objects;
  */
 public final class FontWeight implements Comparable<FontWeight>,
     Value<Integer> {
+
+    private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
 
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;
@@ -51,9 +54,9 @@ public final class FontWeight implements Comparable<FontWeight>,
     public final static FontWeight BOLD = new FontWeight(BOLD_VALUE);
 
     public static FontWeight parse(final String text) {
-        return FontWeight.BOLD_TEXT.equals(text) ?
+        return CASE_SENSITIVITY.equals(BOLD_TEXT, text) ?
             FontWeight.BOLD :
-            FontWeight.NORMAL_TEXT.equals(text) ?
+            CASE_SENSITIVITY.equals(NORMAL_TEXT, text) ?
                 FontWeight.NORMAL :
                 FontWeight.with(
                     Integer.parseInt(

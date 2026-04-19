@@ -69,9 +69,25 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     }
 
     @Test
+    public void testParseWithBOLD() {
+        this.parseStringAndCheck(
+            "BOLD",
+            FontWeight.BOLD
+        );
+    }
+
+    @Test
     public void testParseWithNormal() {
         this.parseStringAndCheck(
             "normal",
+            FontWeight.NORMAL
+        );
+    }
+
+    @Test
+    public void testParseWithNORMAL() {
+        this.parseStringAndCheck(
+            "NORMAL",
             FontWeight.NORMAL
         );
     }
