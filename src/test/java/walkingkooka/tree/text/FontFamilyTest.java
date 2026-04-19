@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.naming.NameTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
@@ -26,11 +27,47 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     NameTesting<FontFamily, FontFamily>,
     JsonNodeMarshallingTesting<FontFamily> {
 
     private final static String TEXT = "Times New Roman";
+
+    // with.............................................................................................................
+
+    @Test
+    public void testWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> FontFamily.with(null)
+        );
+    }
+
+    @Test
+    public void testWithEmptyFails() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> FontFamily.with("")
+        );
+    }
+
+    @Test
+    public void testWithInvalidFirstFails() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> FontFamily.with("9")
+        );
+    }
+
+    @Test
+    public void testWithInvalidNonFirstFails() {
+        assertThrows(
+            InvalidCharacterException.class,
+            () -> FontFamily.with("Hello\n")
+        );
+    }
 
     // TypeNaming.......................................................................................................
 
