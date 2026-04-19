@@ -50,26 +50,26 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
     }
 
     @Override
-    Optional<Class<Enum<?>>> enumType() {
+    final Optional<Class<Enum<?>>> enumType() {
         return Optional.empty();
     }
 
     abstract boolean lengthCheck(final Length<?> length);
 
     @Override
-    Length<?> parseValue(final TextStyleParser parser) {
+    final Length<?> parseValue(final TextStyleParser parser) {
         return this.parseValueText(
             parser.token()
         );
     }
 
     @Override
-    Length<?> parseValueText(final String value) {
+    final Length<?> parseValueText(final String value) {
         return Length.parse(value);
     }
 
     @Override
-    String makeString(final Length<?> value) {
+    final String makeString(final Length<?> value) {
         return value.toString();
     }
 
