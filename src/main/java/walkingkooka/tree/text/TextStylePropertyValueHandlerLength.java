@@ -77,8 +77,8 @@ abstract class TextStylePropertyValueHandlerLength extends TextStylePropertyValu
 
     @Override
     final Length<?> unmarshall(final JsonNode node,
-                                         final TextStylePropertyName<?> name,
-                                         final JsonNodeUnmarshallContext context) {
+                               final TextStylePropertyName<?> name,
+                               final JsonNodeUnmarshallContext context) {
         final Length<?> length = context.unmarshall(
             node,
             Length.class
