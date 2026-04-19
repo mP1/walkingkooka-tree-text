@@ -53,8 +53,8 @@ public final class FontSize implements Comparable<FontSize>,
      * Factory that creates a {@link FontSize}.
      */
     public static FontSize with(final int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("Invalid value=" + value);
+        if (value <= 0) {
+            throw new IllegalArgumentException("Invalid value " + value + " <= 0");
         }
 
         return value < CONSTANT_COUNT ?
