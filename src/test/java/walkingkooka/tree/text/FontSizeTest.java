@@ -37,7 +37,10 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
 
     @Test
     public void testWithNegativeValueFails() {
-        assertThrows(IllegalArgumentException.class, () -> FontSize.with(-1));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> FontSize.with(-1)
+        );
     }
 
     @Test
@@ -61,10 +64,13 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         final FontSize size = FontSize.with(value);
         this.checkEquals(value, size.value(), "value");
 
-        assertNotSame(FontSize.with(value), size);
+        assertNotSame(
+            FontSize.with(value),
+            size
+        );
     }
 
-    // parseValue......................................................................................................
+    // parseValue.......................................................................................................
 
     @Test
     public void testParseValue() {
@@ -82,16 +88,20 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         );
     }
 
-    // HasJsonNode......................................................................................................
+    // json.............................................................................................................
 
     @Test
     public void testUnmarshallBooleanFails() {
-        this.unmarshallFails(JsonNode.booleanNode(true));
+        this.unmarshallFails(
+            JsonNode.booleanNode(true)
+        );
     }
 
     @Test
     public void testUnmarshallStringFails() {
-        this.unmarshallFails(JsonNode.string("fails!"));
+        this.unmarshallFails(
+            JsonNode.string("fails!")
+        );
     }
 
     @Test
@@ -106,19 +116,26 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
 
     @Test
     public void testUnmarshallNumberInvalidFails() {
-        this.unmarshallFails(JsonNode.number(-1));
+        this.unmarshallFails(
+            JsonNode.number(-1)
+        );
     }
 
     @Test
     public void testUnmarshallNumber() {
         final int value = 20;
-        this.unmarshallAndCheck(JsonNode.number(value),
-            FontSize.with(value));
+        this.unmarshallAndCheck(
+            JsonNode.number(value),
+            FontSize.with(value)
+        );
     }
 
     @Test
     public void testMarshall() {
-        this.marshallAndCheck(this.createComparable(), JsonNode.number(VALUE));
+        this.marshallAndCheck(
+            this.createComparable(),
+            JsonNode.number(VALUE)
+        );
     }
 
     @Test
@@ -127,22 +144,39 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         this.marshallRoundTripTwiceAndCheck(this.createObject());
     }
 
+    @Override
+    public FontSize unmarshall(final JsonNode jsonNode,
+                               final JsonNodeUnmarshallContext context) {
+        return FontSize.unmarshall(
+            jsonNode,
+            context
+        );
+    }
+
     // Object...........................................................................................................
 
     @Test
     public void testEqualsDifferent() {
-        this.checkNotEquals(FontSize.with(99));
+        this.checkNotEquals(
+            FontSize.with(99)
+        );
     }
 
     @Test
     public void testEqualsDifferentNonConstants() {
-        this.checkNotEquals(FontSize.with(999), FontSize.with(888));
+        this.checkNotEquals(
+            FontSize.with(999),
+            FontSize.with(888)
+        );
     }
 
     @Test
     public void testEqualsNonConstants() {
         final int value = 777;
-        this.checkEquals(FontSize.with(value), FontSize.with(value));
+        this.checkEquals(
+            FontSize.with(value),
+            FontSize.with(value)
+        );
     }
 
     // toString.........................................................................................................
@@ -181,13 +215,5 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     @Override
     public Set<FontSize> intentionalDuplicateConstants() {
         return Sets.empty();
-    }
-
-    // JsonNodeMarshallTesting..........................................................................................
-
-    @Override
-    public FontSize unmarshall(final JsonNode jsonNode,
-                               final JsonNodeUnmarshallContext context) {
-        return FontSize.unmarshall(jsonNode, context);
     }
 }
