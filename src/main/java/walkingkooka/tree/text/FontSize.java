@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.Value;
+import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -31,7 +32,8 @@ import java.util.stream.IntStream;
  * Value class that holds a font size.
  */
 public final class FontSize implements Comparable<FontSize>,
-    Value<Integer> {
+    Value<Integer>,
+    HasText {
 
     private final static int CONSTANT_COUNT = 40;
 
@@ -134,5 +136,12 @@ public final class FontSize implements Comparable<FontSize>,
     @Override
     public String toString() {
         return String.valueOf(this.value);
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.toString();
     }
 }
