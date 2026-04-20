@@ -155,7 +155,7 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         );
     }
 
-    // Object...........................................................................................................
+    // hashCode/equals/Comparable.......................................................................................
 
     @Test
     public void testEqualsDifferent() {
@@ -181,12 +181,19 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         );
     }
 
+    @Override
+    public FontSize createComparable() {
+        return this.createTextStylePropertyValue();
+    }
+
     // toString.........................................................................................................
 
     @Test
     public void testToString() {
         this.toStringAndCheck(FontSize.with(10), "10");
     }
+
+    // TextStylePropertyValue...........................................................................................
 
     @Override
     TextStylePropertyName<FontSize> textStylePropertyName() {
@@ -208,18 +215,11 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // class............................................................................................................
 
     @Override
     public Class<FontSize> type() {
         return FontSize.class;
-    }
-
-    // ComparableTesting.................................................................................................
-
-    @Override
-    public FontSize createComparable() {
-        return this.createTextStylePropertyValue();
     }
 
     // ConstantsTesting.................................................................................................
