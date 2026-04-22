@@ -110,18 +110,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     /**
-     * Creates and adds a new {@link TextStylePropertyName} that handles {@link NoneLength} or {@link PixelLength} values.
-     */
-    private static TextStylePropertyName<Length<?>> registerNoneLengthPixelLengthConstant(final String property,
-                                                                                          final BiConsumer<Length<?>, TextStyleVisitor> visitor) {
-        return registerConstant(
-            property,
-            TextStylePropertyValueHandler.noneLengthPixelLength(),
-            visitor
-        );
-    }
-
-    /**
      * Creates and adds a new {@link TextStylePropertyName} that handles {@link NormalLength} or {@link PixelLength} values.
      */
     private static TextStylePropertyName<Length<?>> registerNormalLengthPixelLengthConstant(final String property,
@@ -224,7 +212,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-bottom-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_BOTTOM_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> BORDER_BOTTOM_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "border-bottom-width",
         (l, v) -> v.visitBorderBottomWidth(l)
     );
@@ -266,7 +254,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-left-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_LEFT_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> BORDER_LEFT_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "border-left-width",
         (l, v) -> v.visitBorderLeftWidth(l)
     );
@@ -298,7 +286,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-right-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_RIGHT_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> BORDER_RIGHT_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "border-right-width",
         (l, v) -> v.visitBorderRightWidth(l)
     );
@@ -334,7 +322,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * border-top-width
      */
-    public final static TextStylePropertyName<Length<?>> BORDER_TOP_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> BORDER_TOP_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "border-top-width",
         (l, v) -> v.visitBorderTopWidth(l)
     );
@@ -344,7 +332,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     public final static TextStylePropertyName<Length<?>> BORDER_WIDTH = registerConstant(
         "border-width", // property name
-        TextStylePropertyValueHandler.noneLengthPixelLength(), // handler
+        TextStylePropertyValueHandler.noneLengthNumberLengthPixelLength(), // handler
         null // visitor should NEVER happen
     );
 
@@ -446,7 +434,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * height
      */
-    public final static TextStylePropertyName<Length<?>> HEIGHT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> HEIGHT = registerNoneLengthNumberLengthPixelLengthConstant(
         "height",
         (l, v) -> v.visitHeight(l));
 
@@ -508,7 +496,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin-bottom
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_BOTTOM = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MARGIN_BOTTOM = registerNoneLengthNumberLengthPixelLengthConstant(
         "margin-bottom",
         (l, v) -> v.visitMarginBottom(l)
     );
@@ -516,7 +504,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin-left
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_LEFT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MARGIN_LEFT = registerNoneLengthNumberLengthPixelLengthConstant(
         "margin-left",
         (l, v) -> v.visitMarginLeft(l)
     );
@@ -524,7 +512,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin-right
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_RIGHT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MARGIN_RIGHT = registerNoneLengthNumberLengthPixelLengthConstant(
         "margin-right",
         (l, v) -> v.visitMarginRight(l)
     );
@@ -532,7 +520,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * margin-top
      */
-    public final static TextStylePropertyName<Length<?>> MARGIN_TOP = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MARGIN_TOP = registerNoneLengthNumberLengthPixelLengthConstant(
         "margin-top",
         (l, v) -> v.visitMarginTop(l)
     );
@@ -540,7 +528,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * max-height
      */
-    public final static TextStylePropertyName<Length<?>> MAX_HEIGHT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MAX_HEIGHT = registerNoneLengthNumberLengthPixelLengthConstant(
         "max-height",
         (m, v) -> v.visitMaxHeight(m)
     );
@@ -548,7 +536,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * max-width
      */
-    public final static TextStylePropertyName<Length<?>> MAX_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MAX_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "max-width",
         (m, v) -> v.visitMaxWidth(m)
     );
@@ -556,7 +544,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * min-height
      */
-    public final static TextStylePropertyName<Length<?>> MIN_HEIGHT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MIN_HEIGHT = registerNoneLengthNumberLengthPixelLengthConstant(
         "min-height",
         (m, v) -> v.visitMinHeight(m)
     );
@@ -564,7 +552,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * min-width
      */
-    public final static TextStylePropertyName<Length<?>> MIN_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> MIN_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "min-width",
         (m, v) -> v.visitMinWidth(m)
     );
@@ -589,7 +577,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * outline-offset
      */
-    public final static TextStylePropertyName<Length<?>> OUTLINE_OFFSET = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> OUTLINE_OFFSET = registerNoneLengthNumberLengthPixelLengthConstant(
         "outline-offset",
         (l, v) -> v.visitOutlineOffset(l)
     );
@@ -607,7 +595,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * outline-width
      */
-    public final static TextStylePropertyName<Length<?>> OUTLINE_WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> OUTLINE_WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "outline-width",
         (l, v) -> v.visitOutlineWidth(l)
     );
@@ -655,7 +643,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding-bottom
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_BOTTOM = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> PADDING_BOTTOM = registerNoneLengthNumberLengthPixelLengthConstant(
         "padding-bottom",
         (l, v) -> v.visitPaddingBottom(l)
     );
@@ -663,7 +651,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding-left
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_LEFT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> PADDING_LEFT = registerNoneLengthNumberLengthPixelLengthConstant(
         "padding-left",
         (l, v) -> v.visitPaddingLeft(l)
     );
@@ -671,7 +659,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding-right
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_RIGHT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> PADDING_RIGHT = registerNoneLengthNumberLengthPixelLengthConstant(
         "padding-right",
         (l, v) -> v.visitPaddingRight(l)
     );
@@ -679,7 +667,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * padding-top
      */
-    public final static TextStylePropertyName<Length<?>> PADDING_TOP = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> PADDING_TOP = registerNoneLengthNumberLengthPixelLengthConstant(
         "padding-top",
         (l, v) -> v.visitPaddingTop(l)
     );
@@ -741,7 +729,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-decoration-thickness
      */
-    public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> TEXT_DECORATION_THICKNESS = registerNoneLengthNumberLengthPixelLengthConstant(
         "text-decoration-thickness",
         (l, v) -> v.visitTextDecorationThickness(l)
     );
@@ -749,7 +737,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * text-indent
      */
-    public final static TextStylePropertyName<Length<?>> TEXT_INDENT = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> TEXT_INDENT = registerNoneLengthNumberLengthPixelLengthConstant(
         "text-indent",
         (l, v) -> v.visitTextIndent(l)
     );
@@ -826,7 +814,7 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * width
      */
-    public final static TextStylePropertyName<Length<?>> WIDTH = registerNoneLengthPixelLengthConstant(
+    public final static TextStylePropertyName<Length<?>> WIDTH = registerNoneLengthNumberLengthPixelLengthConstant(
         "width",
         (w, v) -> v.visitWidth(w)
     );

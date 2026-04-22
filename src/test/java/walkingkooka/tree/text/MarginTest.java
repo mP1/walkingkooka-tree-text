@@ -189,6 +189,14 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
+    public void testTextAllAndDifferentValuesSomeWithoutUnits() {
+        this.textAndCheck(
+            Margin.parse("top: 1px; right: 2px; bottom: 3; left: 4;"),
+            "1px 2px 3 4"
+        );
+    }
+
+    @Test
     public void testTextLeft() {
         this.textAndCheck(
             Margin.parse("left: 1px")
@@ -272,6 +280,14 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
+    public void testParseInvalidCharacterFails() {
+        this.parseStringInvalidCharacterFails(
+            "1 2.5 3! 4",
+            '!'
+        );
+    }
+
+    @Test
     public void testParseInvalidMarginTextStylePropertyFails() {
         this.parseStringFails(
             "top-invalid: 1px;",
@@ -302,6 +318,26 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         this.parseStringAndCheck(
             text,
             TextStyle.parse(text)
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParsePropertyNamesWithPrefixWithoutUnits() {
+        final String text = "margin-top: 1; margin-right: 2.5; margin-bottom: 3; margin-right: 4;";
+
+        this.parseStringAndCheck(
+            text,
+            TextStyle.parse(text)
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseWithoutUnits() {
+        this.parseStringAndCheck(
+            "1 2 3.5 4",
+            TextStyle.parse("margin-top: 1; margin-right: 2; margin-bottom: 3.5; margin-left: 4;")
                 .margin(BoxEdge.ALL)
         );
     }

@@ -685,7 +685,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             TextStylePropertyName.HEIGHT,
             Length.normal()
                 .text(),
-            new IllegalArgumentException("Invalid \"height\" expected NoneLength | PixelLength but got NormalLength")
+            new IllegalArgumentException("Invalid \"height\" expected NoneLength | NumberLength | PixelLength but got NormalLength")
         );
     }
 
