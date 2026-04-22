@@ -40,46 +40,81 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
 
     @Test
     public void testUnits() {
-        assertArrayEquals(new Object[]{LengthUnit.PIXEL}, LengthUnit.units());
+        assertArrayEquals(
+            new Object[]{
+                LengthUnit.PIXEL
+            },
+            LengthUnit.units()
+        );
     }
 
     @Test
     public void testSuffix() {
-        this.checkEquals("px", LengthUnit.PIXEL.suffix(), "suffix");
+        this.checkEquals(
+            "px",
+            LengthUnit.PIXEL.suffix(),
+            "suffix"
+        );
     }
 
     @Test
     public void testUnitPresentPresent() {
-        this.unitPresentAndCheck("12px", LengthUnit.PIXEL, true);
+        this.unitPresentAndCheck(
+            "12px",
+            LengthUnit.PIXEL,
+            true
+        );
     }
 
     @Test
     public void testUnitPresentAbsent() {
-        this.unitPresentAndCheck("12", LengthUnit.PIXEL, false);
+        this.unitPresentAndCheck(
+            "12",
+            LengthUnit.PIXEL,
+            false
+        );
     }
 
     @Test
     public void testUnitPresentAbsent2() {
-        this.unitPresentAndCheck("12?", LengthUnit.PIXEL, false);
+        this.unitPresentAndCheck(
+            "12?",
+            LengthUnit.PIXEL,
+            false
+        );
     }
 
-    private void unitPresentAndCheck(final String text, final LengthUnit<?, ?> unit, final boolean expected) {
-        this.checkEquals(expected, unit.unitPresent(text), () -> "unitPresent " + CharSequences.quoteAndEscape(text));
+    private void unitPresentAndCheck(final String text,
+                                     final LengthUnit<?, ?> unit,
+                                     final boolean expected) {
+        this.checkEquals(
+            expected,
+            unit.unitPresent(text),
+            () -> "unitPresent " + CharSequences.quoteAndEscape(text));
     }
 
     @Test
     public void testCreate() {
-        this.checkEquals(Length.pixel(99.0), LengthUnit.PIXEL.create(99.0));
+        this.checkEquals(
+            Length.pixel(99.0),
+            LengthUnit.PIXEL.create(99.0)
+        );
     }
 
     @Test
     public void testParse() {
-        this.checkEquals(Length.pixel(99.0), LengthUnit.PIXEL.parse("99.0px"));
+        this.checkEquals(
+            Length.pixel(99.0),
+            LengthUnit.PIXEL.parse("99.0px")
+        );
     }
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(LengthUnit.PIXEL, "px");
+        this.toStringAndCheck(
+            LengthUnit.PIXEL,
+            "px"
+        );
     }
 
     // HasText..........................................................................................................
