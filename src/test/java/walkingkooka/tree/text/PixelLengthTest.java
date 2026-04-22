@@ -31,7 +31,10 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
     public void testParseInvalidValueFails() {
-        this.parseStringFails("!px", IllegalArgumentException.class);
+        this.parseStringFails(
+            "!px",
+            IllegalArgumentException.class
+        );
     }
 
     @Test
@@ -44,7 +47,10 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
     public void testParseIncorrectUnitCaseFails() {
-        this.parseStringFails("12PX", IllegalArgumentException.class);
+        this.parseStringFails(
+            "12PX",
+            IllegalArgumentException.class
+        );
     }
 
     @Test
@@ -57,48 +63,78 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
     public void testParse() {
-        this.parseStringAndCheck("12px", PixelLength.with(12));
+        this.parseStringAndCheck(
+            "12px",
+            PixelLength.with(12)
+        );
     }
 
     @Test
     public void testParse2() {
-        this.parseStringAndCheck("12.5px", PixelLength.with(12.5));
+        this.parseStringAndCheck(
+            "12.5px",
+            PixelLength.with(12.5)
+        );
     }
 
     @Test
     public void testParse3() {
-        this.parseStringAndCheck("345.75px", PixelLength.with(345.75));
+        this.parseStringAndCheck(
+            "345.75px",
+            PixelLength.with(345.75)
+        );
     }
 
     @Test
     public void testWith() {
         final double value = 12.5;
         final PixelLength pixels = PixelLength.with(value);
-        this.checkEquals(value, pixels.value(), "value");
+        this.checkEquals(
+            value,
+            pixels.value(),
+            "value"
+        );
     }
 
     @Test
     public void testWithNegative() {
         final double value = -12.5;
         final PixelLength pixels = PixelLength.with(value);
-        this.checkEquals(value, pixels.value(), "value");
+        this.checkEquals(
+            value,
+            pixels.value(),
+            "value"
+        );
     }
 
     @Test
     public void testPixelValue1() {
         final double value = 1;
-        this.pixelLengthAndCheck(PixelLength.with(value), value);
+        this.pixelLengthAndCheck(
+            PixelLength.with(value),
+            value
+        );
     }
 
     @Test
     public void testPixelValue2() {
         final double value = 2;
-        this.pixelLengthAndCheck(PixelLength.with(value), value);
+        this.pixelLengthAndCheck(
+            PixelLength.with(value),
+            value
+        );
     }
 
     @Test
     public void testEqualsDifferentValue() {
-        this.checkNotEquals(PixelLength.with(99));
+        this.checkNotEquals(
+            PixelLength.with(99)
+        );
+    }
+
+    @Override
+    public PixelLength parseString(final String text) {
+        return PixelLength.parsePixels(text);
     }
 
     // LengthVisitor....................................................................................................
@@ -129,25 +165,36 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
             }
         }.accept(length);
 
-        this.checkEquals("132", b.toString());
+        this.checkEquals(
+            "132",
+            b.toString()
+        );
     }
 
     // toString........................................................................................................
 
-
     @Test
     public void testToString() {
-        this.toStringAndCheck(PixelLength.with(0), "0px");
+        this.toStringAndCheck(
+            PixelLength.with(0),
+            "0px"
+        );
     }
 
     @Test
     public void testToStringDecimal() {
-        this.toStringAndCheck(PixelLength.with(10.5), "10.5px");
+        this.toStringAndCheck(
+            PixelLength.with(10.5),
+            "10.5px"
+        );
     }
 
     @Test
     public void testToString2() {
-        this.toStringAndCheck(PixelLength.with(99), "99px");
+        this.toStringAndCheck(
+            PixelLength.with(99),
+            "99px"
+        );
     }
 
     @Override
@@ -157,24 +204,12 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Override
     Optional<LengthUnit<Double, Length<Double>>> unit() {
-        return Cast.to(Optional.of(LengthUnit.PIXEL));
+        return Cast.to(
+            Optional.of(
+                LengthUnit.PIXEL
+            )
+        );
     }
-
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public Class<PixelLength> type() {
-        return PixelLength.class;
-    }
-
-    // ParseStringTesting...............................................................................................
-
-    @Override
-    public PixelLength parseString(final String text) {
-        return PixelLength.parsePixels(text);
-    }
-
-    // JsonNodeMarshallingTesting............................................................................................
 
     @Override
     public PixelLength unmarshall(final JsonNode from,
@@ -182,4 +217,10 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
         return Length.unmarshallPixel(from);
     }
 
+    // class............................................................................................................
+
+    @Override
+    public Class<PixelLength> type() {
+        return PixelLength.class;
+    }
 }
