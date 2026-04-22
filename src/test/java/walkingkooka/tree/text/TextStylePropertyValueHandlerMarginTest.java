@@ -40,17 +40,17 @@ public final class TextStylePropertyValueHandlerMarginTest extends TextStyleProp
 
     @Test
     public void testParseValueTextWithInvalidFails() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "!invalid",
-            new IllegalArgumentException("Invalid number length \"!invalid\"")
+            '!'
         );
     }
 
     @Test
     public void testParseValueTextWithInvalidFails2() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "-1",
-            new IllegalArgumentException("Invalid length -1 < 0")
+            '-'
         );
     }
 

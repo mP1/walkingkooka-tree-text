@@ -43,7 +43,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
     @Test
     public void testCheckValueNumber() {
         this.checkValue(
-            Length.number(1L)
+            Length.number(1.0)
         );
     }
 
@@ -73,9 +73,9 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
 
     @Test
     public void testParseValueTextWithNegativePixelsFails() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "-1",
-            new IllegalArgumentException("Invalid length -1 < 0")
+            '-'
         );
     }
 
@@ -113,7 +113,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
 
     @Test
     public void testUnmarshallNumber() {
-        final NumberLength number = Length.number(123);
+        final NumberLength number = Length.number(123.0);
         this.unmarshallAndCheck(
             this.marshall(number),
             number
@@ -140,7 +140,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
 
     @Test
     public void testMarshallNumber() {
-        final NumberLength number = Length.number(12);
+        final NumberLength number = Length.number(12.0);
         this.marshallAndCheck(
             number,
             this.marshall(number)

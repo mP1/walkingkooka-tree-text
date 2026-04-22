@@ -47,7 +47,7 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
 
     @Test
     public void testParseNumber() {
-        this.parseStringAndCheck("123", Length.number(123L));
+        this.parseStringAndCheck("123", Length.number(123.0));
     }
 
     @Test

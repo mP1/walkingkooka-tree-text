@@ -58,11 +58,6 @@ public final class NoneLength extends Length<Void> implements Value<Void> {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    long longValue() {
-        throw new UnsupportedOperationException();
-    }
-
     // unit.............................................................................................................
 
     @Override

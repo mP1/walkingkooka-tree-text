@@ -590,26 +590,31 @@ public final class BoxEdgeTest implements TreePrintableTesting,
 
     @Test
     public void testParseBorderInvalidBorderWidthFails() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> BoxEdge.ALL.parseBorder("black SOLID !invalid")
+        final String text = "black SOLID !invalid";
+
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder(text)
         );
 
         this.checkEquals(
-            "Invalid number length \"!invalid\"",
+            new InvalidCharacterException(
+                text,
+                text.indexOf('!')
+            ).getMessage(),
             thrown.getMessage()
         );
     }
 
     @Test
     public void testParseBorderInvalidBorderWidthFails2() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
             () -> BoxEdge.ALL.parseBorder("black SOLID !invalid ")
         );
 
         this.checkEquals(
-            "Invalid number length \"!invalid\"",
+            "Invalid character '!' at 12",
             thrown.getMessage()
         );
     }
@@ -707,14 +712,16 @@ public final class BoxEdgeTest implements TreePrintableTesting,
 
     @Test
     public void testParseBorderSolidColorFails() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> BoxEdge.ALL.parseBorder("SOLID BLACK")
+        final String text = "SOLID BLACK";
+
+        final InvalidCharacterException thrown = assertThrows(
+            InvalidCharacterException.class,
+            () -> BoxEdge.ALL.parseBorder(text)
         );
 
-        this.checkEquals(
-            "Invalid number length \"BLACK\"",
-            thrown.getMessage()
+        this.characterAndCheck(
+            thrown,
+            'B'
         );
     }
 

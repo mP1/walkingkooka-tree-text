@@ -117,7 +117,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Test
     public void testNumberLength() {
         final StringBuilder b = new StringBuilder();
-        final Length<?> length = Length.number(1);
+        final Length<?> length = Length.number(1.0);
 
         new FakeLengthVisitor() {
             @Override
@@ -143,7 +143,7 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
 
     @Test
     public void testNumberLength2() {
-        this.createVisitor().accept(Length.number(1));
+        this.createVisitor().accept(Length.number(1.0));
     }
 
     @Test

@@ -30,7 +30,7 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
 
     @Test
     public void testCheckValueNumberFails() {
-        final Length<?> value = Length.number(1L);
+        final Length<?> value = Length.number(1.0);
 
         this.checkValueFails(
             value,
@@ -64,9 +64,9 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
 
     @Test
     public void testParseValueTextWithNegativePixelsFails() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "-1",
-            new IllegalArgumentException("Invalid length -1 < 0")
+            '-'
         );
     }
 
@@ -105,7 +105,7 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
             IllegalArgumentException.class,
             () -> this.handler()
                 .unmarshall(
-                    this.marshall(Length.number(1)),
+                    this.marshall(Length.number(1.0)),
                     this.propertyName(),
                     this.unmarshallContext()
                 )
