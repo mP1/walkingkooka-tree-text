@@ -1088,6 +1088,9 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStylePropertyName.FONT_WEIGHT,
             FontWeight.BOLD
         ).set(
+            TextStylePropertyName.WIDTH,
+            Length.parse("12.5")
+        ).set(
             TextStylePropertyName.BORDER_TOP_WIDTH,
             Length.pixel(456.0)
         ).set(

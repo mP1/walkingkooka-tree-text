@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.predicate.character.CharPredicates;
@@ -80,6 +81,15 @@ abstract class BoxEdgeParser<T extends BorderMarginPadding> {
                 );
                 continue;
             } catch (final RuntimeException cause) {
+                if(cause instanceof InvalidCharacterException) {
+                    final InvalidCharacterException invalidCharacterException = (InvalidCharacterException) cause;
+                    invalidCharacterException.setTextAndPosition(
+                        textCursor.text(),
+                        start.lineInfo()
+                            .textOffset() +
+                            invalidCharacterException.position()
+                    );
+                }
                 if (null == firstRuntime) {
                     firstRuntime = cause;
                 }

@@ -55,6 +55,14 @@ public final class TextStylePropertyValueHandlerPaddingTest extends TextStylePro
     }
 
     @Test
+    public void testParseValueTextWithInvalidFails3() {
+        this.parseStringInvalidCharacterFails(
+            "1 2 3! 4",
+            '!'
+        );
+    }
+
+    @Test
     public void testParseValueTextWithEmptyString() {
         final String text = "";
 

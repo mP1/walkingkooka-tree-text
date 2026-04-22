@@ -188,6 +188,16 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
+    public void testTextAllAndDifferentValuesSomeWithoutUnits() {
+        final String text = "1px 2px 3 4";
+
+        this.textAndCheck(
+            Padding.parse(text),
+            text
+        );
+    }
+
+    @Test
     public void testTextLeft() {
         final String text = "1px";
 
@@ -217,6 +227,14 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         this.parseStringFails(
             "top: 1px; margin-top: 2px",
             InvalidTextStylePropertyNameException.padding(TextStylePropertyName.MARGIN_TOP)
+        );
+    }
+
+    @Test
+    public void testParseMarginFails2() {
+        this.parseStringInvalidCharacterFails(
+            "1px 2px -3.5",
+            '-'
         );
     }
 
@@ -264,6 +282,15 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         this.parseStringAndCheck(
             "1px 2px 3px 4px",
             TextStyle.parse("padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-left: 4px;")
+                .padding(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParseLengthsWithoutUnits() {
+        this.parseStringAndCheck(
+            "1 2.5 3 4.5",
+            TextStyle.parse("padding-top: 1; padding-right: 2.5; padding-bottom: 3; padding-left: 4.5;")
                 .padding(BoxEdge.ALL)
         );
     }
