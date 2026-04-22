@@ -18,6 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidCharacterException;
+import walkingkooka.NeverError;
 import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 
@@ -32,13 +34,95 @@ public final class PixelLength extends Length<Double> implements Value<Double> {
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;
 
     static PixelLength parsePixels0(final String text) {
-        UNIT.parseUnitTextCheck(text);
+        CharSequences.failIfNullOrEmpty(text, "text");
 
-        try {
-            return with(Double.parseDouble(text.substring(0, text.length() - 2)));
-        } catch (final NumberFormatException cause) {
-            throw new IllegalArgumentException("Invalid pixel count " + CharSequences.quoteAndEscape(text), cause);
+        final int MODE_WHOLE = 0;
+        final int MODE_DECIMAL = 1;
+        final int MODE_UNIT = 2;
+
+        int mode = MODE_WHOLE;
+
+        double value = 0;
+        double multiplier = 0.1;
+
+        int unitStart = -1;
+
+        int i = 0;
+        for(final char c : text.toCharArray()) {
+            switch(mode) {
+                case MODE_WHOLE:
+                    switch(c) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            final int digit = Character.digit(c, 10);
+                            value = value * 10 + digit;
+                            break;
+                        case '.':
+                            mode = MODE_DECIMAL;
+                            break;
+                        default:
+                            unitStart = i;
+                            mode = MODE_UNIT;
+                            break;
+                    }
+                    break;
+                case MODE_DECIMAL:
+                    switch(c) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            value = value + Character.digit(c, 10) * multiplier;
+                            multiplier = multiplier * 0.1;
+                            break;
+                        default:
+                            unitStart = i;
+                            mode = MODE_UNIT;
+                            break;
+                    }
+                    break;
+                case MODE_UNIT:
+                    break;
+                default:
+                    NeverError.unhandledCase(
+                        mode,
+                        MODE_WHOLE,
+                        MODE_DECIMAL,
+                        MODE_UNIT
+                    );
+            }
+
+            if(MODE_UNIT == mode) {
+                if(UNIT.text().charAt(i - unitStart) != c) {
+                    throw new InvalidCharacterException(
+                        text,
+                        i
+                    );
+                }
+            }
+
+            i++;
         }
+
+        if(-1 == unitStart) {
+            throw new IllegalArgumentException("Missing unit");
+        }
+
+        return with(value);
     }
 
     static PixelLength with(final double value) {
