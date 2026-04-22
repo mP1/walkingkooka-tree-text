@@ -30,26 +30,29 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
 
     @Test
-    public void testParseMissingUnitFails() {
-        this.parseStringFails("12", IllegalArgumentException.class);
-    }
-
-    @Test
     public void testParseInvalidValueFails() {
         this.parseStringFails("!px", IllegalArgumentException.class);
     }
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "12EM",
-            new IllegalArgumentException("Missing unit: \"px\"")
+            'E'
         );
     }
 
     @Test
     public void testParseIncorrectUnitCaseFails() {
         this.parseStringFails("12PX", IllegalArgumentException.class);
+    }
+
+    @Test
+    public void testParseMissingUnit() {
+        this.parseStringFails(
+            "12",
+            new IllegalArgumentException("Missing unit")
+        );
     }
 
     @Test
