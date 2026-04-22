@@ -26,6 +26,7 @@ import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasTextTesting;
 
 import java.util.Set;
 
@@ -34,7 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
     ConstantsTesting<LengthUnit<?, ?>>,
     ToStringTesting<LengthUnit<?, ?>>,
-    TypeNameTesting<LengthUnit<?, ?>> {
+    TypeNameTesting<LengthUnit<?, ?>>,
+    HasTextTesting {
 
     @Test
     public void testUnits() {
@@ -78,6 +80,16 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
     @Test
     public void testToString() {
         this.toStringAndCheck(LengthUnit.PIXEL, "px");
+    }
+
+    // HasText..........................................................................................................
+
+    @Test
+    public void testText() {
+        this.textAndCheck(
+            LengthUnit.PIXEL,
+            "px"
+        );
     }
 
     // ClassTesting.....................................................................................................

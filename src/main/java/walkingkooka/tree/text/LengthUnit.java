@@ -18,6 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -25,7 +26,7 @@ import java.util.function.Function;
 /**
  * The unit portion of a length. This is basically an ENUMS with type parameters
  */
-public final class LengthUnit<V, L extends Length<V>> {
+public final class LengthUnit<V, L extends Length<V>> implements HasText {
 
     /**
      * Pixel length unit.
@@ -108,6 +109,13 @@ public final class LengthUnit<V, L extends Length<V>> {
 
     @Override
     public String toString() {
+        return this.suffix;
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
         return this.suffix;
     }
 }
