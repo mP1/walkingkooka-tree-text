@@ -27,13 +27,13 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
+public final class NumberLengthTest extends LengthTestCase<NumberLength, Double> {
 
     @Test
     public void testParseInvalidNumberFails() {
-        this.parseStringFails(
+        this.parseStringInvalidCharacterFails(
             "A",
-            new IllegalArgumentException("Invalid number length \"A\"")
+            'A'
         );
     }
 
@@ -49,29 +49,40 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Test
     public void testParse() {
-        this.parseStringAndCheck("12", NumberLength.with(12L));
+        this.parseStringAndCheck(
+            "12",
+            NumberLength.with(12.0)
+        );
+    }
+
+    @Test
+    public void testParseWithDecimal() {
+        this.parseStringAndCheck(
+            "12.5",
+            NumberLength.with(12.5)
+        );
     }
 
     @Test
     public void testWith() {
-        final Long value = 12L;
+        final Double value = 12.5;
         final NumberLength number = NumberLength.with(value);
         this.checkEquals(value, number.value(), "value");
     }
 
     @Test
     public void testWithNegativeFails() {
-        assertThrows(IllegalArgumentException.class, () -> NumberLength.with(-1L));
+        assertThrows(IllegalArgumentException.class, () -> NumberLength.with(-1.0));
     }
 
     @Test
     public void testPixelValueFails() {
-        this.pixelLengthFails(NumberLength.with(1L));
+        this.pixelLengthFails(NumberLength.with(1.0));
     }
 
     @Test
     public void testEqualsDifferentValue() {
-        this.checkNotEquals(NumberLength.with(99L));
+        this.checkNotEquals(NumberLength.with(99.0));
     }
 
     // LengthVisitor....................................................................................................
@@ -110,21 +121,21 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Long> {
 
     @Test
     public void testToString() {
-        this.toStringAndCheck(NumberLength.with(0L), "0");
+        this.toStringAndCheck(NumberLength.with(0.0), "0");
     }
 
     @Test
     public void testToStringDecimal() {
-        this.toStringAndCheck(NumberLength.with(10L), "10");
+        this.toStringAndCheck(NumberLength.with(10.0), "10");
     }
 
     @Override
     NumberLength createLength() {
-        return NumberLength.with(123L);
+        return NumberLength.with(123.0);
     }
 
     @Override
-    Optional<LengthUnit<Long, Length<Long>>> unit() {
+    Optional<LengthUnit<Double, Length<Double>>> unit() {
         return Optional.empty();
     }
 

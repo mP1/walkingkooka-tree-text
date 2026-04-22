@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.iterator.Iterators;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
@@ -143,6 +144,16 @@ final class BoxEdgeParserBorder extends BoxEdgeParser<Border> {
                     width = Length.parse(token);
                     continue;
                 } catch (final RuntimeException cause) {
+                    if(cause instanceof InvalidCharacterException) {
+                        final InvalidCharacterException invalidCharacterException = (InvalidCharacterException) cause;
+                        invalidCharacterException.setTextAndPosition(
+                            textCursor.text(),
+                            start.lineInfo()
+                                .textOffset() -
+                                invalidCharacterException.position()
+                        );
+                    }
+
                     if (null == firstRuntime) {
                         firstRuntime = cause;
                     }

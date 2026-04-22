@@ -887,7 +887,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             "tab-size: 12",
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TAB_SIZE,
-                Length.number(12)
+                Length.number(12.0)
             )
         );
     }

@@ -17,29 +17,93 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.InvalidCharacterException;
+import walkingkooka.NeverError;
 import walkingkooka.Value;
-import walkingkooka.text.CharSequences;
 
 import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A positive whole number
+ * A length with only a positive number and no unit.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NumberLength extends Length<Long> implements Value<Long> {
+public final class NumberLength extends Length<Double> implements Value<Double> {
 
     static NumberLength parseNumber0(final String text) {
-        try {
-            return with(
-                Long.parseLong(text)
-            );
-        } catch (final NumberFormatException cause) {
-            throw new IllegalArgumentException("Invalid number length " + CharSequences.quoteAndEscape(text), cause);
+        final int MODE_WHOLE = 0;
+        final int MODE_DECIMAL = 1;
+
+        int mode = MODE_WHOLE;
+
+        double value = 0;
+        double multiplier = 0.1;
+
+        int i = 0;
+        for (final char c : text.toCharArray()) {
+            switch (mode) {
+                case MODE_WHOLE:
+                    switch (c) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            final int digit = Character.digit(c, 10);
+                            value = value * 10 + digit;
+                            break;
+                        case '.':
+                            mode = MODE_DECIMAL;
+                            break;
+                        default:
+                            throw new InvalidCharacterException(
+                                text,
+                                i
+                            );
+                    }
+                    break;
+                case MODE_DECIMAL:
+                    switch (c) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            value = value + Character.digit(c, 10) * multiplier;
+                            multiplier = multiplier * 0.1;
+                            break;
+                        default:
+                            throw new InvalidCharacterException(
+                                text,
+                                i
+                            );
+                    }
+                    break;
+                default:
+                    NeverError.unhandledCase(
+                        mode,
+                        MODE_WHOLE,
+                        MODE_DECIMAL
+                    );
+            }
+
+            i++;
         }
+
+        return with(value);
     }
 
-    static NumberLength with(final Long value) {
+    static NumberLength with(final Double value) {
         Objects.requireNonNull(value, "value");
 
         if (value < 0) {
@@ -49,25 +113,20 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
         return new NumberLength(value);
     }
 
-    private NumberLength(final Long value) {
+    private NumberLength(final Double value) {
         super();
         this.value = value;
     }
 
     @Override
-    public Long value() {
+    public Double value() {
         return this.value;
     }
 
-    private final Long value;
+    private final Double value;
 
     @Override
     double doubleValue() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    long longValue() {
         return this.value;
     }
 
@@ -79,7 +138,7 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
     // unit.............................................................................................................
 
     @Override
-    public Optional<LengthUnit<Long, Length<Long>>> unit() {
+    public Optional<LengthUnit<Double, Length<Double>>> unit() {
         return Optional.empty();
     }
 
@@ -94,16 +153,23 @@ public final class NumberLength extends Length<Long> implements Value<Long> {
 
     @Override
     public int hashCode() {
-        return Long.hashCode(this.value);
+        return Double.hashCode(this.value);
     }
 
     @Override
     boolean equals0(final Length<?> other) {
-        return this.longValue() == other.longValue();
+        return this.doubleValue() == other.doubleValue();
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        String toString = String.valueOf(this.value);
+        if(toString.endsWith(".0")) {
+            toString = toString.substring(
+                0,
+                toString.length() - 2
+            );
+        }
+        return toString;
     }
 }

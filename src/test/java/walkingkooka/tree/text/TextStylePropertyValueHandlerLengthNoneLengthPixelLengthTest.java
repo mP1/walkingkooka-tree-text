@@ -41,7 +41,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
 
     @Test
     public void testCheckValueWithNumberFails() {
-        final Length<?> value = Length.number(1L);
+        final Length<?> value = Length.number(1.0);
 
         this.checkValueFails(
             value,
@@ -120,7 +120,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthPixelLengthTest 
             () -> this.handler()
                 .unmarshall(
                     this.marshall(
-                        Length.number(1)
+                        Length.number(1.0)
                     ),
                     this.propertyName(),
                     this.unmarshallContext()

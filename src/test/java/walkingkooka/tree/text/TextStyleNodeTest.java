@@ -844,7 +844,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         styleNode.put(TextStylePropertyName.PADDING_LEFT, Length.pixel(6.0));
         styleNode.put(TextStylePropertyName.PADDING_RIGHT, Length.pixel(7.0));
         styleNode.put(TextStylePropertyName.PADDING_TOP, Length.pixel(8.0));
-        styleNode.put(TextStylePropertyName.TAB_SIZE, Length.number(12));
+        styleNode.put(TextStylePropertyName.TAB_SIZE, Length.number(12.0));
         styleNode.put(TextStylePropertyName.TEXT, "abc123");
         styleNode.put(TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT);
         styleNode.put(TextStylePropertyName.COLOR, Color.fromRgb(0x789abc));

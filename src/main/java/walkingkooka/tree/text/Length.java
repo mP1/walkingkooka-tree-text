@@ -104,7 +104,7 @@ public abstract class Length<V> implements HasText {
     /**
      * {@see NumberLength}
      */
-    public static NumberLength number(final long value) {
+    public static NumberLength number(final Double value) {
         return NumberLength.with(value);
     }
 
@@ -127,8 +127,6 @@ public abstract class Length<V> implements HasText {
     abstract public double pixelValue();
 
     abstract double doubleValue();
-
-    abstract long longValue();
 
     /**
      * The unit portion of this length.
