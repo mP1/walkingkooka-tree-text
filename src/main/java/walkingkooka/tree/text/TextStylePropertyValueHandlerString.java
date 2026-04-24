@@ -70,7 +70,7 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     @Override
     String parseValue(final TextStyleParser parser) {
         return this.parseValueText(
-            parser.quotedText()
+            parser.quotedOrMultiTokenText()
                 .orElseThrow(() -> new IllegalArgumentException("Missing quoted text"))
         );
     }
