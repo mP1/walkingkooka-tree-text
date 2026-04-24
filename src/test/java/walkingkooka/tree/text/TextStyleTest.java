@@ -953,7 +953,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseString2() {
+    public void testParseQuotedText() {
         this.parseStringAndCheck(
             "text: \"Hello 123\"",
             TextStyle.EMPTY.set(
@@ -986,7 +986,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseSeveral() {
+    public void testParseSeveralProperties() {
         this.parseStringAndCheck(
             "text: \"Hello\"; color: #123456",
             TextStyle.EMPTY.set(
@@ -1000,7 +1000,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseSeveral2() {
+    public void testParseSeveralProperties2() {
         this.parseStringAndCheck(
             "text: \"Hello\"; color: #123456; text-align: LEFT",
             TextStyle.EMPTY.set(
@@ -1017,7 +1017,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseSeveralCR() {
+    public void testParseSeveralPropertiesCR() {
         this.parseStringAndCheck(
             "text: \"Hello\";\rcolor: #123456;\rtext-align: LEFT\r",
             TextStyle.EMPTY.set(
@@ -1034,7 +1034,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseSeveralCRNL() {
+    public void testParseSeveralPropertiesCRNL() {
         this.parseStringAndCheck(
             "text: \"Hello\";\r\ncolor: #123456;\r\ntext-align: LEFT\r\n",
             TextStyle.EMPTY.set(
@@ -1051,7 +1051,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testParseSeveralNL() {
+    public void testParseSeveralPropertiesNL() {
         this.parseStringAndCheck(
             "text: \"Hello\";\ncolor: #123456;\ntext-align: LEFT\n",
             TextStyle.EMPTY.set(
