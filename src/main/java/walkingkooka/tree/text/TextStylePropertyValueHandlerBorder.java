@@ -67,7 +67,7 @@ final class TextStylePropertyValueHandlerBorder extends TextStylePropertyValueHa
     @Override
     Border parseValue(final TextStyleParser parser) {
         return this.parseValueText(
-            parser.quotedText()
+            parser.quotedOrMultiTokenText()
                 .orElse("")
         );
     }

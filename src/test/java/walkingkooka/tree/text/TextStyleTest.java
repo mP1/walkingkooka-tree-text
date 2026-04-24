@@ -816,6 +816,28 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testParseFontFamilyCourier() {
+        this.parseStringAndCheck(
+            "font-family: Courier",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_FAMILY,
+                FontFamily.with("Courier")
+            )
+        );
+    }
+
+    @Test
+    public void testParseFontFamilyNameWithSpaces() {
+        this.parseStringAndCheck(
+            "font-family: Times New Roman",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_FAMILY,
+                FontFamily.with("Times New Roman")
+            )
+        );
+    }
+
+    @Test
     public void testParseFontFamilyQuoted() {
         this.parseStringAndCheck(
             "font-family: \"Hello 123\"",
@@ -1006,6 +1028,23 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT,
                 "Hello"
+            ).set(
+                TextStylePropertyName.COLOR,
+                Color.parse("#123456")
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testParseSeveralPropertiesFontFamilyWithSpaces() {
+        this.parseStringAndCheck(
+            "font-family: Times New Roman; color: #123456; text-align: LEFT",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.FONT_FAMILY,
+                FontFamily.with("Times New Roman")
             ).set(
                 TextStylePropertyName.COLOR,
                 Color.parse("#123456")

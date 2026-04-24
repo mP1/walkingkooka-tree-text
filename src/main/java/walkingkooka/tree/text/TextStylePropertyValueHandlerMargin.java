@@ -67,7 +67,7 @@ final class TextStylePropertyValueHandlerMargin extends TextStylePropertyValueHa
     @Override
     Margin parseValue(final TextStyleParser parser) {
         return this.parseValueText(
-            parser.quotedText()
+            parser.quotedOrMultiTokenText()
                 .orElse("")
         );
     }

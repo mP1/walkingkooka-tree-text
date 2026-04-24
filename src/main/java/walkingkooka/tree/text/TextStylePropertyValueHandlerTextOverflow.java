@@ -72,7 +72,7 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
     @Override
     TextOverflow parseValue(final TextStyleParser parser) {
         return this.parseValueText(
-            parser.quotedText()
+            parser.quotedOrMultiTokenText()
                 .orElseGet(parser::token)
         );
     }

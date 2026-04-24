@@ -73,18 +73,23 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
     @Override
     FontFamily parseValue(final TextStyleParser parser) {
         return this.parseValueText(
-            parser.quotedText()
-                .map(TextStylePropertyValueHandlerFontFamily::unquote)
+            parser.quotedOrMultiTokenText()
+                .map(TextStylePropertyValueHandlerFontFamily::unquoteIfNecessary)
                 .orElseGet(parser::token)
         );
     }
 
-    private static String unquote(final String text) {
-        return CharSequences.subSequence(
-            text,
-            1,
-            -1
-        ).toString();
+    /**
+     * Not all {@link FontFamily} text values are within double-quoted text.
+     */
+    private static String unquoteIfNecessary(final String text) {
+        return text.startsWith("\"") && text.endsWith("\"") ?
+            CharSequences.subSequence(
+                text,
+                1,
+                -1
+            ).toString() :
+            text;
     }
 
     @Override

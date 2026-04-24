@@ -140,11 +140,29 @@ final class TextStyleParser implements CanBeEmpty {
         256
     );
 
-    Optional<String> quotedText() {
-        return this.text(QUOTED_TEXT);
+    /**
+     * A single text token, double-quoted text, or multiple tokens terminated by end of text or semi-colon
+     * <pre>
+     * SingleTextToken
+     * "double quoted text"
+     * Multi1 Multi2 Multi3
+     * Multi1 Multi2 Multi3;
+     * </pre>
+     */
+    Optional<String> quotedOrMultiTokenText() {
+        return this.text(QUOTED_TEXT_OR_MULTI_TOKENS);
     }
 
-    private final static Parser<ParserContext> QUOTED_TEXT = Parsers.doubleQuoted();
+    private final static Parser<ParserContext> QUOTED_TEXT_OR_MULTI_TOKENS = Parsers.doubleQuoted()
+        .or(
+            Parsers.charPredicateString(
+                CharPredicates.is(
+                        TextStyle.SEPARATOR.character()
+                ).negate(),
+                1,
+                256
+            )
+        );
 
     private Optional<String> text(final Parser<ParserContext> parser) {
         return this.parse(
