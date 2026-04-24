@@ -108,13 +108,18 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
 
     @Test
     public void testUnmarshallString() {
-        this.unmarshallAndCheck(JsonNode.string(TEXT),
-            FontFamily.with(TEXT));
+        this.unmarshallAndCheck(
+            JsonNode.string(TEXT),
+            FontFamily.with(TEXT)
+        );
     }
 
     @Test
     public void testMarshall() {
-        this.marshallAndCheck(this.createComparable(), JsonNode.string(TEXT));
+        this.marshallAndCheck(
+            this.createComparable(),
+            JsonNode.string(TEXT)
+        );
     }
 
     @Test
@@ -131,7 +136,10 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     @Override
     public FontFamily unmarshall(final JsonNode jsonNode,
                                  final JsonNodeUnmarshallContext context) {
-        return FontFamily.unmarshall(jsonNode, context);
+        return FontFamily.unmarshall(
+            jsonNode,
+            context
+        );
     }
 
     // class............................................................................................................
