@@ -69,6 +69,11 @@ public final class FontFamilyTest implements ClassTesting2<FontFamily>,
         );
     }
 
+    @Test
+    public void testWithNameIncludesSpaces() {
+        this.createNameAndCheck("Times New Roman");
+    }
+
     @Override
     public FontFamily createName(final String name) {
         return FontFamily.with(name);
