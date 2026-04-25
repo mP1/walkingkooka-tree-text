@@ -49,8 +49,8 @@ public final class TextStylePropertyValueHandlerMarginTest extends TextStyleProp
     @Test
     public void testParseValueTextWithInvalidFails2() {
         this.parseStringInvalidCharacterFails(
-            "-1",
-            '-'
+            "$1",
+            '$'
         );
     }
 

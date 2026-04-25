@@ -17,10 +17,16 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.InvalidCharacterException;
-import walkingkooka.NeverError;
 import walkingkooka.Value;
+import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.text.cursor.parser.DecimalParserToken;
+import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
+import walkingkooka.text.cursor.parser.ParserContext;
+import walkingkooka.text.cursor.parser.ParserContexts;
+import walkingkooka.text.cursor.parser.Parsers;
 
+import java.math.MathContext;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,77 +37,24 @@ import java.util.Optional;
 public final class NumberLength extends Length<Double> implements Value<Double> {
 
     static NumberLength parseNumber0(final String text) {
-        final int MODE_WHOLE = 0;
-        final int MODE_DECIMAL = 1;
-
-        int mode = MODE_WHOLE;
-
-        double value = 0;
-        double multiplier = 0.1;
-
-        int i = 0;
-        for (final char c : text.toCharArray()) {
-            switch (mode) {
-                case MODE_WHOLE:
-                    switch (c) {
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                            final int digit = Character.digit(c, 10);
-                            value = value * 10 + digit;
-                            break;
-                        case '.':
-                            mode = MODE_DECIMAL;
-                            break;
-                        default:
-                            throw new InvalidCharacterException(
-                                text,
-                                i
-                            );
-                    }
-                    break;
-                case MODE_DECIMAL:
-                    switch (c) {
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                            value = value + Character.digit(c, 10) * multiplier;
-                            multiplier = multiplier * 0.1;
-                            break;
-                        default:
-                            throw new InvalidCharacterException(
-                                text,
-                                i
-                            );
-                    }
-                    break;
-                default:
-                    NeverError.unhandledCase(
-                        mode,
-                        MODE_WHOLE,
-                        MODE_DECIMAL
-                    );
-            }
-
-            i++;
-        }
-
-        return with(value);
+        return with(
+            Parsers.decimal()
+                .parseText(
+                    text,
+                    PARSER_CONTEXT
+                ).cast(DecimalParserToken.class)
+                .value()
+                .doubleValue()
+        );
     }
+
+    private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
+        false, // canNumbersHaveGroupSeparator
+        InvalidCharacterExceptionFactory.POSITION,
+        ',',
+        DateTimeContexts.fake(),
+        DecimalNumberContexts.american(MathContext.DECIMAL32)
+    );
 
     static NumberLength with(final Double value) {
         return new NumberLength(
