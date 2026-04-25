@@ -18,15 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Value;
-import walkingkooka.datetime.DateTimeContexts;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
-import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
-import walkingkooka.text.cursor.parser.ParserContext;
-import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.text.cursor.parser.Parsers;
 
-import java.math.MathContext;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,14 +41,6 @@ public final class NumberLength extends Length<Double> implements Value<Double> 
                 .doubleValue()
         );
     }
-
-    private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
-        false, // canNumbersHaveGroupSeparator
-        InvalidCharacterExceptionFactory.POSITION,
-        ',',
-        DateTimeContexts.fake(),
-        DecimalNumberContexts.american(MathContext.DECIMAL32)
-    );
 
     static NumberLength with(final Double value) {
         return new NumberLength(

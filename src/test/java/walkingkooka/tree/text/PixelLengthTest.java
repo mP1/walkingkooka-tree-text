@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
@@ -41,7 +42,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public void testParseIncorrectUnitFails() {
         this.parseStringInvalidCharacterFails(
             "12EM",
-            'E'
+            '1'
         );
     }
 
@@ -57,7 +58,7 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public void testParseMissingUnit() {
         this.parseStringFails(
             "12",
-            new IllegalArgumentException("Missing unit")
+            new InvalidCharacterException("12", 0)
         );
     }
 

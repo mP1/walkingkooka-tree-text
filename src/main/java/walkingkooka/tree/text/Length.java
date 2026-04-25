@@ -18,13 +18,19 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.datetime.DateTimeContexts;
+import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
+import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
+import walkingkooka.text.cursor.parser.ParserContext;
+import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.math.MathContext;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -86,6 +92,14 @@ public abstract class Length<V> implements HasText {
 
         return PixelLength.parsePixels0(text);
     }
+
+    final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
+        false, // canNumbersHaveGroupSeparator
+        InvalidCharacterExceptionFactory.POSITION,
+        ',',
+        DateTimeContexts.fake(),
+        DecimalNumberContexts.american(MathContext.DECIMAL32)
+    );
 
     /**
      * {@see NoneLength}
