@@ -81,11 +81,6 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
         return value;
     }
 
-    @Override
-    String makeString(final String value) {
-        return value;
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override

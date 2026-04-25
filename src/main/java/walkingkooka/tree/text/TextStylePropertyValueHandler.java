@@ -19,7 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.color.Color;
-import walkingkooka.props.Properties;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -205,14 +204,6 @@ abstract class TextStylePropertyValueHandler<T> {
      * Parses the text form of a value into an actual value instance.
      */
     abstract T parseValueText(final String value);
-
-    // makeString ......................................................................................................
-
-    /**
-     * Creates a {@link String} representation of the given value, and is used to individual values into a {@link Properties}.
-     * This is the inverse of {@link #parseValueText(String)}.
-     */
-    abstract String makeString(final T value);
 
     // unmarshall ....................................................................................................
 

@@ -72,11 +72,6 @@ final class TextStylePropertyValueHandlerTextStyle extends TextStylePropertyValu
         return TextStyle.parse(value);
     }
 
-    @Override
-    String makeString(final TextStyle value) {
-        return value.text();
-    }
-
     // json.............................................................................................................
 
     @Override

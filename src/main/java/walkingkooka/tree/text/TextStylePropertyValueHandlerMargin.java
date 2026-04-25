@@ -77,11 +77,6 @@ final class TextStylePropertyValueHandlerMargin extends TextStylePropertyValueHa
         return Margin.parse(text);
     }
 
-    @Override
-    String makeString(final Margin value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override
