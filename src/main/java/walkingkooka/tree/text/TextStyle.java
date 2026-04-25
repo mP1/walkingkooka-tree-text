@@ -774,11 +774,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
             final TextStylePropertyName<?> name = nameAndValue.getKey();
             properties = properties.set(
                 name.propertiesPath,
-                name.handler.makeString(
-                    Cast.to(
-                        nameAndValue.getValue()
-                    )
-                )
+                nameAndValue.getValue()
+                    .toString()
             );
         }
 

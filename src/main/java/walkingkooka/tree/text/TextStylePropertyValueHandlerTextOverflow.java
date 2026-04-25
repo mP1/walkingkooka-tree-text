@@ -77,11 +77,6 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
         );
     }
 
-    @Override
-    String makeString(final TextOverflow value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override

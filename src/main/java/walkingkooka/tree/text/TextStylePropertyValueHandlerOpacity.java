@@ -76,11 +76,6 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
         );
     }
 
-    @Override
-    String makeString(final Opacity value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override

@@ -78,11 +78,6 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
         return Color.parse(text);
     }
 
-    @Override
-    String makeString(final Color value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override

@@ -347,10 +347,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 text.print(" ");
 
                 final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss = toTextValue(
-                    value,
-                    propertyName.handler
-                );
+                final CharSequence valueCss = toTextValue(value);
 
                 text.print(valueCss);
                 text.print(TextStyle.SEPARATOR.string());
@@ -362,12 +359,9 @@ final class TextStyleNonEmpty extends TextStyle {
         return b.toString();
     }
 
-    private static CharSequence toTextValue(final Object value,
-                                            final TextStylePropertyValueHandler<?> handler) {
+    private static CharSequence toTextValue(final Object value){
         return CharSequences.quoteIfNecessary(
-            handler.makeString(
-                Cast.to(value)
-            )
+            value.toString()
         );
     }
 

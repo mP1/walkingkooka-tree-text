@@ -77,11 +77,6 @@ final class TextStylePropertyValueHandlerPadding extends TextStylePropertyValueH
         return Padding.parse(text);
     }
 
-    @Override
-    String makeString(final Padding value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override

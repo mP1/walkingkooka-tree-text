@@ -77,11 +77,6 @@ final class TextStylePropertyValueHandlerBorder extends TextStylePropertyValueHa
         return Border.parse(text);
     }
 
-    @Override
-    String makeString(final Border value) {
-        return value.toString();
-    }
-
     // JsonNodeContext..................................................................................................
 
     @Override
