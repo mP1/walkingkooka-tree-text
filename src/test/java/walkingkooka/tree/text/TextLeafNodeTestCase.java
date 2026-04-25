@@ -72,7 +72,10 @@ public abstract class TextLeafNodeTestCase<N extends TextLeafNode<V>, V> extends
 
     final void createTextNodeAndCheck(final V value) {
         final N textNode = this.createTextNode(value);
-        this.checkEquals(value, textNode.value(), "value");
+        this.valueAndCheck(
+            textNode,
+            value
+        );
         this.childCountCheck(textNode, 0);
         this.checkEquals(TextNode.NO_ATTRIBUTES, textNode.attributes(), "attributes");
     }

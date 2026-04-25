@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
+import walkingkooka.ValueTesting;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ClassTesting2;
@@ -41,7 +42,8 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     HasTextTesting,
     ParseStringTesting<Opacity>,
     JsonNodeMarshallingTesting<Opacity>,
-    ToStringTesting<Opacity> {
+    ToStringTesting<Opacity>,
+    ValueTesting {
 
     private final static double VALUE = 0.25;
 
@@ -75,10 +77,9 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     public void testWith() {
         final double value = 0.5;
         final Opacity size = Opacity.with(value);
-        this.checkEquals(
-            value,
-            size.value(),
-            "value"
+        this.valueAndCheck(
+            size,
+            value
         );
     }
 

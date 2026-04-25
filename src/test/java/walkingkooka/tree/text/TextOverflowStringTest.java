@@ -41,8 +41,10 @@ public final class TextOverflowStringTest extends TextOverflowTestCase<TextOverf
 
     @Test
     public void testWith() {
-        final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
-        this.checkEquals(Optional.of(TEXT), textOverflow.value());
+        this.valueAndCheck(
+            TextOverflowString.with(TEXT),
+            Optional.of(TEXT)
+        );
     }
 
     @Test

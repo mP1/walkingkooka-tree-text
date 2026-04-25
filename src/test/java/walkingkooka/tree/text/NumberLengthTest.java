@@ -67,7 +67,10 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
     public void testWith() {
         final Double value = 12.5;
         final NumberLength number = NumberLength.with(value);
-        this.checkEquals(value, number.value(), "value");
+        this.valueAndCheck(
+            number,
+            value
+        );
     }
 
     @Test

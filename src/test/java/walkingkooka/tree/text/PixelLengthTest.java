@@ -89,10 +89,9 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public void testWith() {
         final double value = 12.5;
         final PixelLength pixels = PixelLength.with(value);
-        this.checkEquals(
-            value,
-            pixels.value(),
-            "value"
+        this.valueAndCheck(
+            pixels,
+            value
         );
     }
 

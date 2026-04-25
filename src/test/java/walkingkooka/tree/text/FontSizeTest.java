@@ -57,7 +57,10 @@ public final class FontSizeTest extends TextStylePropertyValueTestCase2<FontSize
     public void testWith() {
         final int value = 10;
         final FontSize size = FontSize.with(value);
-        this.checkEquals(value, size.value(), "value");
+        this.valueAndCheck(
+            size,
+            value
+        );
     }
 
     @Test

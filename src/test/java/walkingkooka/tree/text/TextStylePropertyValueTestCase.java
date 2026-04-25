@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
+import walkingkooka.ValueTesting;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting2;
@@ -31,7 +32,9 @@ import java.math.MathContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2<V>, ToStringTesting<V> {
+public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2<V>,
+    ToStringTesting<V>,
+    ValueTesting {
 
     TextStylePropertyValueTestCase() {
         super();
