@@ -289,8 +289,8 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     @Test
     public void testParseLengthsNegativeValues() {
         this.parseStringAndCheck(
-            "1px 2px 3px 4px",
-            TextStyle.parse("padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-left: 4px;")
+            "-1px -2px -3px -4px",
+            TextStyle.parse("padding-top: -1px; padding-right: -2px; padding-bottom: -3px; padding-left: -4px;")
                 .padding(BoxEdge.ALL)
         );
     }
