@@ -53,7 +53,10 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     public void testWith() {
         final int value = 400;
         final FontWeight size = FontWeight.with(value);
-        this.checkEquals(value, size.value(), "value");
+        this.valueAndCheck(
+            size,
+            value
+        );
     }
 
     @Test

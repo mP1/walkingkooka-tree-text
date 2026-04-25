@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.ValueTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.compare.ComparableTesting;
@@ -40,7 +41,8 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     HasNameTesting<TextStylePropertyName<TextAlign>>,
     ToStringTesting<TextStyleProperty<TextAlign>>,
     TreePrintableTesting,
-    ComparableTesting {
+    ComparableTesting,
+    ValueTesting {
 
     // with.............................................................................................................
 
@@ -85,10 +87,9 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
             name
         );
 
-        this.checkEquals(
-            value,
-            property.value(),
-            "value"
+        this.valueAndCheck(
+            property,
+            value
         );
     }
 

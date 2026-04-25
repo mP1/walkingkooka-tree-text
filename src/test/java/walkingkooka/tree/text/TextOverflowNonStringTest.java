@@ -29,7 +29,10 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
     @Test
     public void testWith() {
         final TextOverflowString textOverflow = TextOverflowString.with(TEXT);
-        this.checkEquals(Optional.of(TEXT), textOverflow.value());
+        this.valueAndCheck(
+            textOverflow,
+            Optional.of(TEXT)
+        );
     }
 
     @Test

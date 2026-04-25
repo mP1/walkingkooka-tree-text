@@ -107,10 +107,9 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
             text,
             value
         );
-        this.checkEquals(
-            value,
-            text.value(),
-            "value"
+        this.valueAndCheck(
+            text,
+            value
         );
     }
 
