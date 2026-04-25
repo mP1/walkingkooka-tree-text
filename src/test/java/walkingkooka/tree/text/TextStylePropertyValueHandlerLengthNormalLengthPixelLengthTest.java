@@ -63,10 +63,10 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
     }
 
     @Test
-    public void testParseValueTextWithNegativePixelsFails() {
-        this.parseStringInvalidCharacterFails(
+    public void testParseValueTextWithNegativePixels() {
+        this.parseStringAndCheck(
             "-1",
-            '-'
+            Length.number(-1.0)
         );
     }
 

@@ -343,6 +343,15 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
     }
 
     @Test
+    public void testParseWithoutUnitsNegativeValues() {
+        this.parseStringAndCheck(
+            "-1 -2 -3.5 -4",
+            TextStyle.parse("margin-top: -1; margin-right: -2; margin-bottom: -3.5; margin-left: -4;")
+                .margin(BoxEdge.ALL)
+        );
+    }
+
+    @Test
     public void testParsePropertyNamesWithoutPrefix() {
         final String text = "margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-right: 4px;";
 
