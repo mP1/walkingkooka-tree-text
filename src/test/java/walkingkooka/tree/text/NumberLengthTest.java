@@ -25,7 +25,6 @@ import walkingkooka.visit.Visiting;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class NumberLengthTest extends LengthTestCase<NumberLength, Double> {
 
@@ -66,16 +65,31 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
     @Test
     public void testWith() {
         final Double value = 12.5;
-        final NumberLength number = NumberLength.with(value);
+
         this.valueAndCheck(
-            number,
+            NumberLength.with(value),
             value
         );
     }
 
     @Test
-    public void testWithNegativeFails() {
-        assertThrows(IllegalArgumentException.class, () -> NumberLength.with(-1.0));
+    public void testWithZero() {
+        final Double value = 0.0;
+
+        this.valueAndCheck(
+            NumberLength.with(value),
+            value
+        );
+    }
+
+    @Test
+    public void testWithNegative() {
+        final Double value = -23.4;
+
+        this.valueAndCheck(
+            NumberLength.with(value),
+            value
+        );
     }
 
     @Test
