@@ -104,13 +104,9 @@ public final class NumberLength extends Length<Double> implements Value<Double> 
     }
 
     static NumberLength with(final Double value) {
-        Objects.requireNonNull(value, "value");
-
-        if (value < 0) {
-            throw new IllegalArgumentException("Invalid length " + value + " < 0");
-        }
-
-        return new NumberLength(value);
+        return new NumberLength(
+            Objects.requireNonNull(value, "value")
+        );
     }
 
     private NumberLength(final Double value) {
