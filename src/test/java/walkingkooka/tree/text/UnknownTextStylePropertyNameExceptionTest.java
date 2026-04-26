@@ -25,7 +25,7 @@ public final class UnknownTextStylePropertyNameExceptionTest implements Throwabl
 
     @Test
     public void testGetMessage() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new UnknownTextStylePropertyNameException("invalid123"),
             "TextStyle: Invalid property \"invalid123\""
         );
