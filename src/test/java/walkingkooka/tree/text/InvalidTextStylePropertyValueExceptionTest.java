@@ -38,7 +38,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageNullValue() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.COLOR,
                 null
@@ -49,7 +49,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageColor() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.COLOR,
                 "Invalid123"
@@ -60,7 +60,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageMargin() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 "Invalid123"
@@ -71,7 +71,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageWithExpected() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 "Invalid123"
@@ -84,7 +84,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageWithExpectedAndValue() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 "Invalid123"
@@ -97,7 +97,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageWithExpectedAndValue2() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 123
@@ -110,7 +110,7 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
 
     @Test
     public void testGetMessageWithExpectedAndValueType() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new InvalidTextStylePropertyValueException(
                 TextStylePropertyName.MARGIN,
                 "Invalid123"

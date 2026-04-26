@@ -25,7 +25,7 @@ public final class MissingTextStylePropertyNameExceptionTest implements Throwabl
 
     @Test
     public void testGetMessage() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new MissingTextStylePropertyNameException(TextStylePropertyName.COLOR),
             "TextStyle: Missing property \"color\""
         );
