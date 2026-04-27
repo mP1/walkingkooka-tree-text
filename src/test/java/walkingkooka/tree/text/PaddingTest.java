@@ -403,6 +403,52 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         );
     }
 
+    // setEdge..........................................................................................................
+
+    @Test
+    public void testSetEdgeFromAllToLeft() {
+        this.setEdgeAndCheck(
+            Padding.parse("left: 1px; right: 2px; top: 3px; bottom: 4px;"),
+            BoxEdge.LEFT,
+            BoxEdge.LEFT.setPadding(
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromAllToTop() {
+        this.setEdgeAndCheck(
+            Padding.parse("left: 1px; right: 2px; top: 3px; bottom: 4px;"),
+            BoxEdge.TOP,
+            BoxEdge.TOP.setPadding(
+                Optional.of(
+                    Length.pixel(3.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromLeftToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.LEFT.parsePadding("1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parsePadding("left: 1px;")
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromRightToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.RIGHT.parsePadding("1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parsePadding("right: 1px;")
+        );
+    }
+    
     // json.............................................................................................................
 
     @Test
