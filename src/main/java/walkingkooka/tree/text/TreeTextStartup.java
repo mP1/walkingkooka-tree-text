@@ -32,11 +32,14 @@ public final class TreeTextStartup implements PublicStaticHelper {
         // register json marshallers/unmarshallers.
         Text.EMPTY_TEXT.textOffset();
 
+        Border.parse("");
         FontFamily.with("Times New Roman");
         FontSize.with(1);
         FontWeight.NORMAL.value();
         Length.none();
+        Margin.parse("");
         Opacity.OPAQUE.value();
+        Padding.parse("");
         TextOverflow.CLIP.value();
     }
 
