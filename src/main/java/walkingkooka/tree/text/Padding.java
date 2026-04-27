@@ -23,7 +23,7 @@ import java.util.Optional;
 /**
  * Provides a bean like view of a padding.
  */
-public final class Padding extends BorderMarginPadding {
+public final class Padding extends MarginOrPadding {
 
     public static Padding parse(final String text) {
         return BoxEdge.ALL.parsePadding(text);
@@ -109,7 +109,7 @@ public final class Padding extends BorderMarginPadding {
 
     @Override
     String prepareText() {
-        return this.marginPaddingLengthsOrTextStyleToText(BoxEdge::paddingPropertyName);
+        return this.lengthsToText(BoxEdge::paddingPropertyName);
     }
 
     @Override
