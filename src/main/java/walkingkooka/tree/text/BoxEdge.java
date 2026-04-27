@@ -221,6 +221,12 @@ public enum BoxEdge {
         }
     };
 
+    BoxEdge() {
+        // LEFT -> left
+        this.textName = this.name()
+            .toLowerCase();
+    }
+
     public abstract BoxEdge flip();
 
     // border...........................................................................................................
@@ -496,6 +502,9 @@ public enum BoxEdge {
     public abstract TextStylePropertyName<Length<?>> marginPropertyName();
 
     public abstract TextStylePropertyName<Length<?>> paddingPropertyName();
+
+    // used by Margin/Padding.text
+    final String textName;
 
     /**
      * Tests if the given {@link TextStylePropertyName} matches this {@link BoxEdge}.
