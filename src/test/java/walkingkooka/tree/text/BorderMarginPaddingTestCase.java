@@ -110,23 +110,59 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         final TextStyle textStyle = this.textStyle();
 
         for (BoxEdge edge : BoxEdge.values()) {
-            final T borderMarginPadding = this.createBorderMarginPadding(edge, textStyle);
-            assertSame(borderMarginPadding, borderMarginPadding.setEdge(edge));
+            this.setEdgeAndCheck(
+                this.createBorderMarginPadding(
+                    edge,
+                    textStyle
+                ),
+                edge
+            );
         }
     }
 
     @Test
     public final void testSetEdgeDifferent() {
         final TextStyle textStyle = this.textStyle();
+        final BoxEdge different = BoxEdge.RIGHT;
 
-        final T borderMarginPadding = this.createBorderMarginPadding(BoxEdge.LEFT, textStyle);
-        final BorderMarginPadding different = borderMarginPadding.setEdge(BoxEdge.RIGHT);
-        assertNotSame(borderMarginPadding, different);
-        this.check(
+        this.setEdgeAndCheck(
+            this.createBorderMarginPadding(
+                BoxEdge.LEFT,
+                textStyle
+            ),
             different,
-            BoxEdge.RIGHT,
-            TextStyle.EMPTY
+            this.createBorderMarginPadding(
+                different,
+                TextStyle.EMPTY
+            )
         );
+    }
+
+    final void setEdgeAndCheck(final BorderMarginPadding borderMarginPadding,
+                               final BoxEdge edge) {
+        this.setEdgeAndCheck(
+            borderMarginPadding,
+            edge,
+            borderMarginPadding
+        );
+    }
+
+    final void setEdgeAndCheck(final BorderMarginPadding borderMarginPadding,
+                               final BoxEdge edge,
+                               final BorderMarginPadding expected) {
+        if (borderMarginPadding.edge().equals(edge)) {
+            assertSame(
+                expected,
+                borderMarginPadding.setEdge(edge),
+                () -> borderMarginPadding + " setEdge " + edge
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                borderMarginPadding.setEdge(edge),
+                () -> borderMarginPadding + " setEdge " + edge
+            );
+        }
     }
 
     // width............................................................................................................
