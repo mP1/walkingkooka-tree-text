@@ -153,6 +153,36 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
     }
 
     @Test
+    public void testTextAllWithLeft() {
+        final String text = "left: 1px";
+
+        this.textAndCheck(
+            BoxEdge.ALL.parsePadding(text),
+            text
+        );
+    }
+
+    @Test
+    public void testTextAllWithRight() {
+        final String text = "right: 1px";
+
+        this.textAndCheck(
+            BoxEdge.ALL.parsePadding(text),
+            text
+        );
+    }
+
+    @Test
+    public void testTextAllWithNothing() {
+        final String text = "";
+
+        this.textAndCheck(
+            BoxEdge.ALL.parsePadding(text),
+            text
+        );
+    }
+    
+    @Test
     public void testTextAllAndSameValues() {
         final Length<?> length = Length.pixel(2.0);
 

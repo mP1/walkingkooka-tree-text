@@ -261,42 +261,67 @@ abstract class BorderMarginPadding implements HasTextStyle,
             final BoxEdge boxEdge = this.edge;
 
             if (BoxEdge.ALL == boxEdge) {
-                final Length<?> top = textStyle.get(
-                    lengthPropertyNameGetter.apply(BoxEdge.TOP)
-                ).orElse(null);
 
-                final Length<?> right = textStyle.get(
-                    lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
-                ).orElse(null);
+                final Length<?> topLength = textStyle.get(
+                        lengthPropertyNameGetter.apply(BoxEdge.TOP)
+                    ).orElse(null);
 
-                final Length<?> bottom = textStyle.get(
-                    lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
-                ).orElse(null);
+                final Length<?> rightLength = textStyle.get(
+                        lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
+                    ).orElse(null);
 
-                final Length<?> left = textStyle.get(
-                    lengthPropertyNameGetter.apply(BoxEdge.LEFT)
-                ).orElse(null);
+                final Length<?> bottomLength = textStyle.get(
+                        lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
+                    ).orElse(null);
 
-                if (areAllEqual(top, right, bottom, left)) {
-                    text = top.text();
+                final Length<?> leftLength = textStyle.get(
+                        lengthPropertyNameGetter.apply(BoxEdge.LEFT)
+                    ).orElse(null);
+
+                if (areAllEqual(topLength, rightLength, bottomLength, leftLength)) {
+                    text = topLength.text();
                 } else {
                     final StringBuilder b = new StringBuilder();
-                    appendIfNotNull(
-                        top,
-                        b
-                    );
-                    appendIfNotNull(
-                        right,
-                        b
-                    );
-                    appendIfNotNull(
-                        bottom,
-                        b
-                    );
-                    appendIfNotNull(
-                        left,
-                        b
-                    );
+
+                    if (null != topLength && null != rightLength && null != bottomLength && null != leftLength) {
+                        appendIfNotNull(
+                            topLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            rightLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            bottomLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            leftLength,
+                            b
+                        );
+                    } else {
+                        appendIfNotNull(
+                            BoxEdge.TOP,
+                            topLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            BoxEdge.RIGHT,
+                            rightLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            BoxEdge.BOTTOM,
+                            bottomLength,
+                            b
+                        );
+                        appendIfNotNull(
+                            BoxEdge.LEFT,
+                            leftLength,
+                            b
+                        );
+                    }
 
                     text = b.toString();
                 }
@@ -316,6 +341,24 @@ abstract class BorderMarginPadding implements HasTextStyle,
         return Objects.equals(top, right) && Objects.equals(bottom, left) && Objects.equals(top, bottom);
     }
 
+    // top: 1px; right: 2px;
+    static void appendIfNotNull(final BoxEdge edge,
+                                final Length<?> valueOrNull,
+                                final StringBuilder b) {
+        if (null != valueOrNull) {
+            if(b.length() > 0) {
+                b.append(TextStyle.SEPARATOR);
+            }
+            // PROPERTY
+            // left: 1px
+            b.append(edge.textName)
+                .append(TextStyle.ASSIGNMENT.character())
+                .append(' ')
+                .append(valueOrNull);
+        }
+    }
+
+    // 1px SPACE 2px
     static void appendIfNotNull(final Object valueOrNull,
                                 final StringBuilder b) {
         if (null != valueOrNull) {
