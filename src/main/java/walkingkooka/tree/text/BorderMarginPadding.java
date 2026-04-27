@@ -273,7 +273,7 @@ abstract class BorderMarginPadding implements HasTextStyle,
     // TreePrintable....................................................................................................
 
     @Override
-    public void printTree(final IndentingPrinter printer) {
+    public final void printTree(final IndentingPrinter printer) {
         printer.println(this.getClass().getSimpleName());
 
         printer.indent();
