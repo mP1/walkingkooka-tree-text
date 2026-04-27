@@ -30,7 +30,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
@@ -250,112 +249,8 @@ abstract class BorderMarginPadding implements HasTextStyle,
 
     abstract String prepareText();
 
-    final String marginPaddingLengthsOrTextStyleToText(final Function<BoxEdge, TextStylePropertyName<Length<?>>> lengthPropertyNameGetter) {
-        final String text;
-
-        final TextStyle textStyle = this.textStyle;
-
-        if (textStyle.isEmpty()) {
-            text = "";
-        } else {
-            final BoxEdge boxEdge = this.edge;
-
-            if (BoxEdge.ALL == boxEdge) {
-
-                final Length<?> topLength = textStyle.get(
-                        lengthPropertyNameGetter.apply(BoxEdge.TOP)
-                    ).orElse(null);
-
-                final Length<?> rightLength = textStyle.get(
-                        lengthPropertyNameGetter.apply(BoxEdge.RIGHT)
-                    ).orElse(null);
-
-                final Length<?> bottomLength = textStyle.get(
-                        lengthPropertyNameGetter.apply(BoxEdge.BOTTOM)
-                    ).orElse(null);
-
-                final Length<?> leftLength = textStyle.get(
-                        lengthPropertyNameGetter.apply(BoxEdge.LEFT)
-                    ).orElse(null);
-
-                if (areAllEqual(topLength, rightLength, bottomLength, leftLength)) {
-                    text = topLength.text();
-                } else {
-                    final StringBuilder b = new StringBuilder();
-
-                    if (null != topLength && null != rightLength && null != bottomLength && null != leftLength) {
-                        appendIfNotNull(
-                            topLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            rightLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            bottomLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            leftLength,
-                            b
-                        );
-                    } else {
-                        appendIfNotNull(
-                            BoxEdge.TOP,
-                            topLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            BoxEdge.RIGHT,
-                            rightLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            BoxEdge.BOTTOM,
-                            bottomLength,
-                            b
-                        );
-                        appendIfNotNull(
-                            BoxEdge.LEFT,
-                            leftLength,
-                            b
-                        );
-                    }
-
-                    text = b.toString();
-                }
-
-            } else {
-                text = textStyle.get(
-                        lengthPropertyNameGetter.apply(boxEdge)
-                    ).map(Length::toString)
-                    .orElse("");
-            }
-        }
-
-        return text;
-    }
-
     static <T> boolean areAllEqual(final T top, final T right, final T bottom, final T left) {
         return Objects.equals(top, right) && Objects.equals(bottom, left) && Objects.equals(top, bottom);
-    }
-
-    // top: 1px; right: 2px;
-    static void appendIfNotNull(final BoxEdge edge,
-                                final Length<?> valueOrNull,
-                                final StringBuilder b) {
-        if (null != valueOrNull) {
-            if(b.length() > 0) {
-                b.append(TextStyle.SEPARATOR);
-            }
-            // PROPERTY
-            // left: 1px
-            b.append(edge.textName)
-                .append(TextStyle.ASSIGNMENT.character())
-                .append(' ')
-                .append(valueOrNull);
-        }
     }
 
     // 1px SPACE 2px
