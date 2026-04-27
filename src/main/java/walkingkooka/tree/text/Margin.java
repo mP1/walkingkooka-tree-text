@@ -25,6 +25,8 @@ import java.util.Optional;
  */
 public final class Margin extends MarginOrPadding {
 
+    public final static Margin EMPTY = BoxEdge.ALL.margin(TextStyle.EMPTY);
+
     public static Margin parse(final String text) {
         return BoxEdge.ALL.parseMargin(text);
     }
