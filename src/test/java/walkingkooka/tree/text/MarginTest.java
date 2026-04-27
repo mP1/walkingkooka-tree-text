@@ -104,7 +104,53 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
             Margin.parse("top: 1px; ")
         );
     }
-    
+
+    // setEdge..........................................................................................................
+
+    @Test
+    public void testSetEdgeFromAllToLeft() {
+        this.setEdgeAndCheck(
+            Margin.parse("left: 1px; right: 2px; top: 3px; bottom: 4px;"),
+            BoxEdge.LEFT,
+            BoxEdge.LEFT.setMargin(
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromAllToTop() {
+        this.setEdgeAndCheck(
+            Margin.parse("left: 1px; right: 2px; top: 3px; bottom: 4px;"),
+            BoxEdge.TOP,
+            BoxEdge.TOP.setMargin(
+                Optional.of(
+                    Length.pixel(3.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromLeftToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.LEFT.parseMargin("1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parseMargin("left: 1px;")
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromRightToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.RIGHT.parseMargin("1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parseMargin("right: 1px;")
+        );
+    }
+
     // toString.........................................................................................................
 
     @Test
