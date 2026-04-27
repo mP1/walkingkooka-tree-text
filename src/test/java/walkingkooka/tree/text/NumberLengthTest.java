@@ -93,8 +93,13 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
     }
 
     @Test
-    public void testPixelValueFails() {
-        this.pixelLengthFails(NumberLength.with(1.0));
+    public void testPixelValue() {
+        final double value = -1.25;
+
+        this.pixelLengthAndCheck(
+            NumberLength.with(value),
+            value
+        );
     }
 
     @Test
