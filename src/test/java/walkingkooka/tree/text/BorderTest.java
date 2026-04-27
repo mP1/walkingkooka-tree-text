@@ -499,6 +499,15 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
             BoxEdge.ALL.parseBorder("right-color: black; right-style: SOLID; right-width: 1px;")
         );
     }
+
+    @Test
+    public void testSetEdgeFromRightToLeft() {
+        this.setEdgeAndCheck(
+            BoxEdge.RIGHT.parseBorder("right-color: black; right-style: SOLID; right-width: 1px;"),
+            BoxEdge.LEFT,
+            BoxEdge.LEFT.parseBorder("")
+        );
+    }
     
     // helpers..........................................................................................................
 
