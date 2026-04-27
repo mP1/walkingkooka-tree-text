@@ -446,6 +446,60 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    // setEdge..........................................................................................................
+
+    @Test
+    public void testSetEdgeFromAllToLeft() {
+        this.setEdgeAndCheck(
+            Border.parse("left-width: 1px; left-color: black; left-style: SOLID; right-width: 2px; right-color: white; right-style: DASHED; top-width: 3px; bottom-width: 4px;"),
+            BoxEdge.LEFT,
+            BoxEdge.LEFT.setBorder(
+                Optional.of(
+                    Color.BLACK
+                ),
+                Optional.of(
+                    BorderStyle.SOLID
+                ),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromAllToTop() {
+        this.setEdgeAndCheck(
+            Border.parse("left-width: 1px; left-color: black; left-style: SOLID; right-width: 2px; right-color: white; right-style: DASHED; top-width: 3px; bottom-width: 4px;"),
+            BoxEdge.TOP,
+            BoxEdge.TOP.setBorder(
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(
+                    Length.pixel(3.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromLeftToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.LEFT.parseBorder("black SOLID 1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parseBorder("left-color: black; left-style: SOLID; left-width: 1px;")
+        );
+    }
+
+    @Test
+    public void testSetEdgeFromRightToAll() {
+        this.setEdgeAndCheck(
+            BoxEdge.RIGHT.parseBorder("black SOLID 1px"),
+            BoxEdge.ALL,
+            BoxEdge.ALL.parseBorder("right-color: black; right-style: SOLID; right-width: 1px;")
+        );
+    }
+    
     // helpers..........................................................................................................
 
     @Override
