@@ -106,6 +106,10 @@ abstract public class MarginOrPadding extends BorderMarginPadding {
                             leftLength,
                             b
                         );
+
+                        if(b.length() > 0) {
+                            b.append(TextStyle.SEPARATOR);
+                        }
                     }
 
                     text = b.toString();
@@ -128,7 +132,8 @@ abstract public class MarginOrPadding extends BorderMarginPadding {
                                 final StringBuilder b) {
         if (null != valueOrNull) {
             if(b.length() > 0) {
-                b.append(TextStyle.SEPARATOR);
+                b.append(TextStyle.SEPARATOR)
+                    .append(' ');
             }
             // PROPERTY
             // left: 1px
