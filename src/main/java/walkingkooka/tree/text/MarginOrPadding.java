@@ -106,10 +106,6 @@ abstract public class MarginOrPadding extends BorderMarginPadding {
                             leftLength,
                             b
                         );
-
-                        if(b.length() > 0) {
-                            b.append(TextStyle.SEPARATOR);
-                        }
                     }
 
                     text = b.toString();
