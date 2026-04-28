@@ -178,6 +178,16 @@ public final class BoxEdgeTest implements TreePrintableTesting,
         );
     }
 
+    // padding..........................................................................................................
+
+    @Test
+    public void testPaddingWithNullTextStyleFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.padding(null)
+        );
+    }
+
     // setBorder........................................................................................................
 
     @Test

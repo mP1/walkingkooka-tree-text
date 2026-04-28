@@ -485,6 +485,8 @@ public enum BoxEdge {
      * Creates a {@link Padding} pre-populated using the {@link TextStyle}.
      */
     public final Padding padding(final TextStyle style) {
+        Objects.requireNonNull(style, "style");
+
         return style.padding(this);
     }
 
