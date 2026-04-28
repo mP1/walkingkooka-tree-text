@@ -156,16 +156,27 @@ public final class BoxEdgeTest implements TreePrintableTesting,
 
     @Test
     public void testFlipRight() {
-        this.flipAndCheck(BoxEdge.RIGHT, BoxEdge.LEFT);
+        this.flipAndCheck(
+            BoxEdge.RIGHT,
+            BoxEdge.LEFT
+        );
     }
 
     @Test
     public void testFlipTop() {
-        this.flipAndCheck(BoxEdge.TOP, BoxEdge.BOTTOM);
+        this.flipAndCheck(
+            BoxEdge.TOP,
+            BoxEdge.BOTTOM
+        );
     }
 
-    private void flipAndCheck(final BoxEdge edge, final BoxEdge expected) {
-        assertSame(expected, edge.flip(), () -> edge + " flip");
+    private void flipAndCheck(final BoxEdge edge,
+                              final BoxEdge expected) {
+        assertSame(
+            expected,
+            edge.flip(),
+            () -> edge + " flip"
+        );
     }
 
     // margin...........................................................................................................
