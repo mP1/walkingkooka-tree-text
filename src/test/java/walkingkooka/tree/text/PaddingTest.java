@@ -158,7 +158,7 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
         this.textAndCheck(
             BoxEdge.ALL.parsePadding(text),
-            text + ";"
+            text
         );
     }
 
@@ -168,27 +168,23 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
         this.textAndCheck(
             BoxEdge.ALL.parsePadding(text),
-            text + ";"
+            text
         );
     }
 
     @Test
     public void testTextAllWithRightLeft() {
-        final String text = "right: 1px; left: 2px;";
-
         this.textAndCheck(
-            BoxEdge.ALL.parsePadding(text),
-            text
+            BoxEdge.ALL.parsePadding("right: 1px; left: 2px;"),
+            "right: 1px; left: 2px"
         );
     }
 
     @Test
     public void testTextAllWithRight2() {
-        final String text = "right: 1px;";
-
         this.textAndCheck(
-            BoxEdge.ALL.parsePadding(text),
-            text
+            BoxEdge.ALL.parsePadding("right: 1px;"),
+            "right: 1px"
         );
     }
 
@@ -503,14 +499,12 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
 
     @Test
     public void testMarshallAll() {
-        final String text = "top: 1px; left: 4px;";
-
-        final Padding padding = Padding.parse(text);
+        final Padding padding = Padding.parse("top: 1px; left: 4px;");
 
         this.marshallAndCheck(
             padding,
             JsonNode.string(
-                "ALL " + text
+                "ALL top: 1px; left: 4px"
             )
         );
     }
