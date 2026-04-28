@@ -469,6 +469,8 @@ public enum BoxEdge {
      * Creates a {@link Margin} pre-populated using the {@link TextStyle}.
      */
     public final Margin margin(final TextStyle style) {
+        Objects.requireNonNull(style, "style");
+
         return style.margin(this);
     }
 
