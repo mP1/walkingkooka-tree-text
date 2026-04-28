@@ -168,6 +168,16 @@ public final class BoxEdgeTest implements TreePrintableTesting,
         assertSame(expected, edge.flip(), () -> edge + " flip");
     }
 
+    // margin...........................................................................................................
+
+    @Test
+    public void testMarginWithNullTextStyleFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BoxEdge.ALL.margin(null)
+        );
+    }
+
     // setBorder........................................................................................................
 
     @Test
