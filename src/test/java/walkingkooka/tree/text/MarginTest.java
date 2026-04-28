@@ -207,13 +207,23 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
 
         this.textAndCheck(
             BoxEdge.ALL.parseMargin(text),
-            text
+            text + ";"
         );
     }
 
     @Test
     public void testTextAllWithRight() {
         final String text = "right: 1px";
+
+        this.textAndCheck(
+            BoxEdge.ALL.parseMargin(text),
+            text + ";"
+        );
+    }
+
+    @Test
+    public void testTextAllWithLeftRight() {
+        final String text = "right: 1px; left: 2px;";
 
         this.textAndCheck(
             BoxEdge.ALL.parseMargin(text),
