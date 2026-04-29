@@ -442,6 +442,21 @@ public enum BoxEdge {
 
     // parsePadding.....................................................................................................
 
+    /**
+     * Parses a padding definition including supporting shorter names (minus the padding prefix).
+     * <pre>
+     * // top=right=bottom=left=1px
+     * 1px
+     * 2px 3px 4px 5px
+     *
+     * padding-top: 1px
+     * padding-top: 2px; padding-right: 3px; padding-bottom: 4px; padding-right: 5px;
+     *
+     * // optional padding- prefix absent
+     * top: 1px
+     * top: 2px; right: 3px; bottom: 4px; right: 5px;
+     * </pre>
+     */
     public final Padding parsePadding(final String text) {
         return this.parseMarginPadding(
             text,
