@@ -414,6 +414,21 @@ public enum BoxEdge {
 
     // parseMargin......................................................................................................
 
+    /**
+     * Parses a margin definition including supporting shorter names (minus the margin prefix).
+     * <pre>
+     * // top=right=bottom=left=1px
+     * 1px
+     * 2px 3px 4px 5px
+     *
+     * margin-top: 1px
+     * margin-top: 2px; margin-right: 3px; margin-bottom: 4px; margin-right: 5px;
+     *
+     * // optional margin- prefix absent
+     * top: 1px
+     * top: 2px; right: 3px; bottom: 4px; right: 5px;
+     * </pre>
+     */
     public final Margin parseMargin(final String text) {
         return this.parseMarginPadding(
             text,
