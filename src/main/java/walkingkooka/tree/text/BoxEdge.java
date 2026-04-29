@@ -227,6 +227,13 @@ public enum BoxEdge {
             .toLowerCase();
     }
 
+    /**
+     * Returns the opposite {@link BoxEdge}
+     * <pre>
+     * LEFT -> RIGHT
+     * ALL -> ALL
+     * </pre>
+     */
     public abstract BoxEdge flip();
 
     // border...........................................................................................................
