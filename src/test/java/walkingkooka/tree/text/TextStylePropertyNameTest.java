@@ -29,6 +29,7 @@ import walkingkooka.props.PropertiesPath;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
@@ -48,7 +49,8 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>>
-    implements ConstantsTesting<TextStylePropertyName<?>> {
+    implements ConstantsTesting<TextStylePropertyName<?>>,
+    ThrowableTesting {
 
     // constants........................................................................................................
 
@@ -697,9 +699,9 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             () -> propertyName.parseValue(text)
         );
 
-        this.checkEquals(
-            expected.getMessage(),
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            expected.getMessage()
         );
     }
 

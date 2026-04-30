@@ -22,6 +22,7 @@ import walkingkooka.InvalidCharacterException;
 import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 
@@ -30,6 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>
     implements NameTesting2<N, N>,
     JsonNodeMarshallingTesting<N>,
+    ThrowableTesting,
     TreePrintableTesting {
 
     TextNodeNameNameTestCase() {
@@ -44,9 +46,9 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
                 () -> this.createName("abc-def--ghi")
             );
 
-            this.checkEquals(
-                "Invalid character '-' at 8",
-                thrown.getMessage()
+            this.getMessageAndCheck(
+                thrown,
+                "Invalid character '-' at 8"
             );
         }
     }

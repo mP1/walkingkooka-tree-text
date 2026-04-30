@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.visit.Visiting;
@@ -28,7 +29,8 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FlagTest extends TextLeafNodeTestCase<Flag, String> {
+public final class FlagTest extends TextLeafNodeTestCase<Flag, String>
+    implements ThrowableTesting {
 
     // &#x1F1E6; &#x1F1FA;
     // &#127462; &#127482;
@@ -59,9 +61,9 @@ public final class FlagTest extends TextLeafNodeTestCase<Flag, String> {
             () -> Flag.with("ABC")
         );
 
-        this.checkEquals(
-            "Invalid flag country code: \"ABC\" not 2 letters",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid flag country code: \"ABC\" not 2 letters"
         );
     }
 

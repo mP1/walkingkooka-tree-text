@@ -23,6 +23,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
 
@@ -34,7 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BoxEdgeTest implements TreePrintableTesting,
-    ClassTesting2<BoxEdge> {
+    ClassTesting2<BoxEdge>,
+    ThrowableTesting {
 
     @Test
     public void testBorderColorPropertyName() {
@@ -587,9 +589,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("!invalid-color SOLID 1px")
         );
 
-        this.checkEquals(
-            "Invalid rgb \"!invalid-color\"",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid rgb \"!invalid-color\""
         );
     }
 
@@ -600,9 +602,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("  !invalid-color SOLID 1px")
         );
 
-        this.checkEquals(
-            "Invalid rgb \"!invalid-color\"",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid rgb \"!invalid-color\""
         );
     }
 
@@ -613,9 +615,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("black !INVALID 1px")
         );
 
-        this.checkEquals(
-            "Unknown style \"!INVALID\"",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Unknown style \"!INVALID\""
         );
     }
 
@@ -628,12 +630,12 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder(text)
         );
 
-        this.checkEquals(
+        this.getMessageAndCheck(
+            thrown,
             new InvalidCharacterException(
                 text,
                 text.indexOf('!')
-            ).getMessage(),
-            thrown.getMessage()
+            ).getMessage()
         );
     }
 
@@ -644,9 +646,9 @@ public final class BoxEdgeTest implements TreePrintableTesting,
             () -> BoxEdge.ALL.parseBorder("black SOLID !invalid ")
         );
 
-        this.checkEquals(
-            "Invalid character '!' at 12",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid character '!' at 12"
         );
     }
 
