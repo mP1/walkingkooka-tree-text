@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.InvalidCharacterException;
+import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.reflect.ClassTesting2;
@@ -36,7 +37,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BoxEdgeTest implements TreePrintableTesting,
     ClassTesting2<BoxEdge>,
+    IteratorTesting,
     ThrowableTesting {
+
+    @Test
+    public void testTopRightBottomLeft() {
+        this.iterateAndCheck(
+            BoxEdge.topRightBottomLeft()
+                .iterator(),
+            BoxEdge.TOP,
+            BoxEdge.RIGHT,
+            BoxEdge.BOTTOM,
+            BoxEdge.LEFT
+        );
+    }
 
     @Test
     public void testBorderPropertyName() {
