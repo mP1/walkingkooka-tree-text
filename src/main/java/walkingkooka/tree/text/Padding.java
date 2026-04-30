@@ -25,6 +25,19 @@ import java.util.Optional;
  */
 public final class Padding extends MarginOrPadding {
 
+    /**
+     * Parses syntax similar CSS with supporting full {@link TextStylePropertyName} aswell as
+     * dropping the padding prefix or just {@link Length}.
+     * <pre>
+     * padding-top: 1px; padding-right: 2px; padding-bottom: 3px; padding-left: 4px;
+     * top: 1px; right: 2px; bottom: 3px; left: 4px;
+     * 1px 2px 3px 4px
+     *
+     * padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;
+     * top: 5px; right: 5px; bottom: 5px; left: 5px;
+     * 5px
+     * </pre>
+     */
     public static Padding parse(final String text) {
         return BoxEdge.ALL.parsePadding(text);
     }
