@@ -28,6 +28,7 @@ import walkingkooka.color.Color;
 import walkingkooka.props.HasPropertiesTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -48,6 +49,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     HasPropertiesTesting,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     JsonNodeMarshallingTesting<TextStyle>,
+    ThrowableTesting,
     ToStringTesting<TextStyle>,
     TreePrintableTesting {
 
@@ -89,10 +91,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                     )
                 )
         );
-        this.checkEquals(
-            "Invalid \"background-color\" expected Color but got String",
-            thrown.getMessage(),
-            () -> thrown.toString()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid \"background-color\" expected Color but got String"
         );
     }
 
@@ -108,10 +109,9 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
                     )
                 )
         );
-        this.checkEquals(
-            "Invalid \"*\" expected values not supported",
-            thrown.getMessage(),
-            () -> thrown.toString()
+        this.getMessageAndCheck(
+                thrown,
+            "Invalid \"*\" expected values not supported"
         );
     }
 

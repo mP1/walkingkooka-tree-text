@@ -22,6 +22,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -37,6 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ParseStringTesting<T>,
     ClassTesting<P>,
+    ThrowableTesting,
     ToStringTesting<P>,
     TypeNameTesting<P> {
 
@@ -120,20 +122,18 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
             throwType,
             () -> this.checkValue(value)
         );
-        this.checkEquals(
-            message,
-            thrown.getMessage(),
-            "message"
+        this.getMessageAndCheck(
+            thrown,
+            message
         );
 
         final TT thrown2 = assertThrows(
             throwType,
             () -> this.propertyName().checkValue(value)
         );
-        this.checkEquals(
-            message,
-            thrown2.getMessage(),
-            "message"
+        this.getMessageAndCheck(
+            thrown2,
+            message
         );
     }
 

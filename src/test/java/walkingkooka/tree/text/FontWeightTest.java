@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ConstantsTesting;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -32,7 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWeight>
     implements ComparableTesting2<FontWeight>, ConstantsTesting<FontWeight>,
-    ParseStringTesting<FontWeight> {
+    ParseStringTesting<FontWeight>,
+    ThrowableTesting {
 
     private final static int VALUE = 456;
 
@@ -43,9 +45,9 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
             () -> FontWeight.with(-1)
         );
 
-        this.checkEquals(
-            "Invalid font-weight -1 < 0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid font-weight -1 < 0"
         );
     }
 

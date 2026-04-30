@@ -25,6 +25,7 @@ import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -43,7 +44,8 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     ParseStringTesting<Opacity>,
     JsonNodeMarshallingTesting<Opacity>,
     ToStringTesting<Opacity>,
-    ValueTesting {
+    ValueTesting,
+    ThrowableTesting {
 
     private final static double VALUE = 0.25;
 
@@ -54,9 +56,9 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
             () -> Opacity.with(-0.1)
         );
 
-        this.checkEquals(
-            "Invalid value -0.1 not between 0.0 and 1.0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid value -0.1 not between 0.0 and 1.0"
         );
     }
 
@@ -67,9 +69,9 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
             () -> Opacity.with(1.01)
         );
 
-        this.checkEquals(
-            "Invalid value 1.01 not between 0.0 and 1.0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid value 1.01 not between 0.0 and 1.0"
         );
     }
 
