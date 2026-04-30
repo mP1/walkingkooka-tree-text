@@ -374,6 +374,20 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testGetBorderRight() {
+        this.getAndCheck(
+            TextStyle.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                    "border-right-color: WHITE; border-right-style: DASHED; border-right-width: 2px;" +
+                    "border-bottom-color: RED; border-bottom-style: DOUBLE; border-bottom-width: 3px;" +
+                    "border-left-color: BLUE; border-left-style: HIDDEN; border-left-width: 4px;"
+            ),
+            TextStylePropertyName.BORDER_RIGHT,
+            BoxEdge.RIGHT.parseBorder("WHITE DASHED 2px")
+        );
+    }
+
     // set..............................................................................................................
 
     @Test
@@ -618,6 +632,32 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testSetWithBorderRight() {
+        final TextStyle textStyle = TextStyle.parse(
+            "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                "border-right-color: WHITE; border-right-style: SOLID; border-right-width: 2px;" +
+                "border-bottom-color: RED; border-bottom-style: SOLID; border-bottom-width: 3px;" +
+                "border-left-color: BLUE; border-left-style: SOLID; border-left-width: 4px;"
+        );
+
+        this.setAndCheck(
+            textStyle,
+            TextStylePropertyName.BORDER_RIGHT,
+            Border.parse("GREEN DASHED 99px"),
+            textStyle.set(
+                TextStylePropertyName.BORDER_RIGHT_COLOR,
+                Color.parse("green")
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_STYLE,
+                BorderStyle.DASHED
+            ).set(
+                TextStylePropertyName.BORDER_RIGHT_WIDTH,
+                Length.pixel(99.0)
+            )
+        );
+    }
+
     private <T> void setAndCheck(final TextStyle textStyle,
                                  final TextStylePropertyName<T> propertyName,
                                  final T value) {
@@ -763,6 +803,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
                     "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
                     "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+                    "text-align: LEFT"
+            )
+        );
+    }
+
+    @Test
+    public void testRemoveBorderRight() {
+        final TextStyle textStyle = TextStyle.parse(
+            "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+                "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+                "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;" +
+                "text-align: LEFT"
+        );
+
+        this.removeAndCheck(
+            textStyle,
+            TextStylePropertyName.BORDER_RIGHT,
+            TextStyle.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                    "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+                    "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;" +
                     "text-align: LEFT"
             )
         );

@@ -286,6 +286,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     );
 
     /**
+     * border-right
+     */
+    public final static TextStylePropertyName<Border> BORDER_RIGHT = registerConstant(
+        "border-right", // property name
+        TextStylePropertyValueHandler.border(), // handler
+        null // visitor should NEVER happen
+    );
+    
+    /**
      * border-right-color
      */
     public final static TextStylePropertyName<Color> BORDER_RIGHT_COLOR = registerColor(
