@@ -137,6 +137,12 @@ final class TextStyleNonEmpty extends TextStyle {
                     get = border;
                 }
                 break;
+            case BORDER_BOTTOM:
+                final Border borderBottom = BoxEdge.BOTTOM.border(this);
+                if (borderBottom.isNotEmpty()) {
+                    get = borderBottom;
+                }
+                break;
             case BORDER_COLOR:
                 // only return a non null color if all colors are the same.
                 final Object borderColor = value.get(TextStylePropertyName.BORDER_TOP_COLOR);
@@ -231,9 +237,10 @@ final class TextStyleNonEmpty extends TextStyle {
 
         switch (propertyName.name) {
             case BORDER:
-                final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
-                borderTextStylePropertiesMap.removeBorder();
-                removed = this.setValues(borderTextStylePropertiesMap);
+                removed = this.removeBorder(BoxEdge.ALL);
+                break;
+            case BORDER_BOTTOM:
+                removed = this.removeBorder(BoxEdge.BOTTOM);
                 break;
             case BORDER_COLOR:
                 removed = this.removeValues(
@@ -287,6 +294,12 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return removed;
+    }
+
+    private TextStyle removeBorder(final BoxEdge boxEdge) {
+        final TextStylePropertiesMap borderBottomTextStylePropertiesMap = this.copy();
+        borderBottomTextStylePropertiesMap.removeBorder(boxEdge);
+        return this.setValues(borderBottomTextStylePropertiesMap);
     }
 
     private <T> TextStyle removeValues(final TextStylePropertyName<T> top,

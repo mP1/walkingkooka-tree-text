@@ -346,6 +346,20 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testGetBorderTop() {
+        this.getAndCheck(
+            TextStyle.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                    "border-right-color: WHITE; border-right-style: DASHED; border-right-width: 2px;" +
+                    "border-bottom-color: RED; border-bottom-style: DOUBLE; border-bottom-width: 3px;" +
+                    "border-left-color: BLUE; border-left-style: HIDDEN; border-left-width: 4px;"
+            ),
+            TextStylePropertyName.BORDER_BOTTOM,
+            BoxEdge.BOTTOM.parseBorder("RED DOUBLE 3px")
+        );
+    }
+
     // set..............................................................................................................
 
     @Test
@@ -538,6 +552,32 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    @Test
+    public void testSetWithBorderBottom() {
+        final TextStyle textStyle = TextStyle.parse(
+            "border-top-color: BLACK; border-top-style: SOLID; border-width: 1px;" +
+                "border-top-color: WHITE; border-top-style: SOLID; border-width: 2px;" +
+                "border-top-color: RED; border-top-style: SOLID; border-width: 3px;" +
+                "border-top-color: BLUE; border-top-style: SOLID; border-width: 4px;"
+        );
+
+        this.setAndCheck(
+            textStyle,
+            TextStylePropertyName.BORDER_BOTTOM,
+            Border.parse("GREEN DASHED 99px"),
+            textStyle.set(
+                TextStylePropertyName.BORDER_BOTTOM_COLOR,
+                Color.parse("green")
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_STYLE,
+                BorderStyle.DASHED
+            ).set(
+                TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+                Length.pixel(99.0)
+            )
+        );
+    }
+
     private <T> void setAndCheck(final TextStyle textStyle,
                                  final TextStylePropertyName<T> propertyName,
                                  final T value) {
@@ -640,6 +680,28 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
                 TextAlign.LEFT
+            )
+        );
+    }
+
+    @Test
+    public void testRemoveBorderBottom() {
+        final TextStyle textStyle = TextStyle.parse(
+            "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+                "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
+                "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;" +
+                "text-align: LEFT"
+        );
+
+        this.removeAndCheck(
+            textStyle,
+            TextStylePropertyName.BORDER_BOTTOM,
+            TextStyle.parse(
+                "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                    "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
+                    "border-left-color: GREEN; border-left-style: NONE; border-left-width: 4px;" +
+                    "text-align: LEFT"
             )
         );
     }
@@ -976,11 +1038,13 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             textStyle,
             Border.parse("border-top-color: WHITE;")
                 .setEdge(BoxEdge.TOP),
-            textStyle.set(
-                    TextStylePropertyName.BORDER_TOP_COLOR,
-                    Color.WHITE
-                ).remove(TextStylePropertyName.BORDER_TOP_STYLE)
-                .remove(TextStylePropertyName.BORDER_TOP_WIDTH)
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.WHITE
+            ).set(
+                TextStylePropertyName.TEXT_ALIGN,
+                TextAlign.LEFT
+            )
         );
     }
 

@@ -96,6 +96,14 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Test
+    public final void testSetValuesWithBorderBottomFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.BORDER_BOTTOM,
+            BoxEdge.BOTTOM.parseBorder("")
+        );
+    }
+
+    @Test
     public final void testSetValuesWithBorderColorFails() {
         this.setValuesWithInvalidPropertyNameFails(
             TextStylePropertyName.BORDER_COLOR,
