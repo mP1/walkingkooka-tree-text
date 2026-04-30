@@ -401,7 +401,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // getMargin........................................................................................................
 
     @Test
-    public void testMarginGet() {
+    public void testGetMargin() {
         this.getAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.MARGIN
@@ -411,7 +411,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // setMargin........................................................................................................
 
     @Test
-    public void testMarginSet() {
+    public void testSetMargin() {
         final Length<?> length = Length.pixel(100.0);
 
         this.setAndCheck(
@@ -438,7 +438,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // removeMargin.....................................................................................................
 
     @Test
-    public void testMarginRemove() {
+    public void testRemoveMargin() {
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.MARGIN,
