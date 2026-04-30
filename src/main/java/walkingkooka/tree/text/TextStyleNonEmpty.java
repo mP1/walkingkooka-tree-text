@@ -132,16 +132,10 @@ final class TextStyleNonEmpty extends TextStyle {
 
         switch (propertyName.name) {
             case BORDER:
-                final Border border = BoxEdge.ALL.border(this);
-                if (border.isNotEmpty()) {
-                    get = border;
-                }
+                get = this.getBorder(BoxEdge.ALL);
                 break;
             case BORDER_BOTTOM:
-                final Border borderBottom = BoxEdge.BOTTOM.border(this);
-                if (borderBottom.isNotEmpty()) {
-                    get = borderBottom;
-                }
+                get = this.getBorder(BoxEdge.BOTTOM);
                 break;
             case BORDER_COLOR:
                 // only return a non null color if all colors are the same.
@@ -157,10 +151,7 @@ final class TextStyleNonEmpty extends TextStyle {
                 }
                 break;
             case BORDER_LEFT:
-                final Border borderLeft = BoxEdge.LEFT.border(this);
-                if (borderLeft.isNotEmpty()) {
-                    get = borderLeft;
-                }
+                get = this.getBorder(BoxEdge.LEFT);
                 break;
             case BORDER_STYLE:
                 // only return a non null style if all styles are the same.
@@ -208,6 +199,13 @@ final class TextStyleNonEmpty extends TextStyle {
         return Optional.ofNullable(
             Cast.to(get)
         );
+    }
+
+    private Border getBorder(final BoxEdge edge) {
+        final Border border = edge.border(this);
+        return border.isNotEmpty() ?
+            border :
+            null;
     }
 
     // set..............................................................................................................
