@@ -84,22 +84,30 @@ final class TextStylePropertiesMap extends AbstractMap<TextStylePropertyName<?>,
         return copy;
     }
 
-    void removeBorder() {
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_COLOR);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_STYLE);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_WIDTH);
+    void removeBorder(final BoxEdge boxEdge) {
+        if(BoxEdge.TOP.equalsOrAll(boxEdge)) {
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_COLOR);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_STYLE);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_TOP_WIDTH);
+        }
 
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_COLOR);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_STYLE);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_WIDTH);
+        if(BoxEdge.RIGHT.equalsOrAll(boxEdge)) {
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_COLOR);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_STYLE);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_RIGHT_WIDTH);
+        }
 
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_COLOR);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_STYLE);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_WIDTH);
+        if(BoxEdge.BOTTOM.equalsOrAll(boxEdge)) {
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_COLOR);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_STYLE);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_BOTTOM_WIDTH);
+        }
 
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_COLOR);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_STYLE);
-        this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_WIDTH);
+        if(BoxEdge.LEFT.equalsOrAll(boxEdge)) {
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_COLOR);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_STYLE);
+            this.removeTextStyleProperty(TextStylePropertyName.BORDER_LEFT_WIDTH);
+        }
     }
 
     void removeMargin() {

@@ -763,6 +763,27 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
+    public void testParseBorderBottom() {
+        this.parseStringAndCheck(
+            "border-bottom: BLACK SOLID 1px",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.BORDER_BOTTOM,
+                BoxEdge.BOTTOM.setBorder(
+                    Optional.of(
+                        Color.BLACK
+                    ),
+                    Optional.of(
+                        BorderStyle.SOLID
+                    ),
+                    Optional.of(
+                        Length.pixel(1.0)
+                    )
+                )
+            )
+        );
+    }
+
+    @Test
     public void testParseColorInvalidCharacterFails() {
         this.parseStringFails(
             "color: #123XYZ",

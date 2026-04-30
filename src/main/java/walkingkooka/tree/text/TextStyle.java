@@ -79,6 +79,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     static final String BORDER = "border";
 
+    static final String BORDER_BOTTOM = "border-bottom";
+
     static final String MARGIN = "margin";
 
     static final String PADDING = "padding";
@@ -326,11 +328,16 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     TextStylePropertyName.ALL.cast(value);
                 break;
             case BORDER:
-                final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
-                borderTextStylePropertiesMap.setBorder(
-                    (Border)value
+                set = this.setBorder(
+                    value,
+                    BoxEdge.ALL
                 );
-                set = this.setValues(borderTextStylePropertiesMap);
+                break;
+            case BORDER_BOTTOM:
+                set = this.setBorder(
+                    value,
+                    BoxEdge.BOTTOM
+                );
                 break;
             case BORDER_COLOR:
                 set = this.setTopRightBottomLeft(
@@ -375,6 +382,16 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         }
 
         return set;
+    }
+
+    final TextStyle setBorder(final Object value,
+                              final BoxEdge boxEdge) {
+        final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
+        borderTextStylePropertiesMap.setBorder(
+            ((Border) value)
+                .setEdge(boxEdge)
+        );
+        return this.setTextStylePropertiesMap(borderTextStylePropertiesMap);
     }
 
     final <T> TextStyle setTopRightBottomLeft(final TextStylePropertyName<T> topName,

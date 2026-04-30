@@ -843,6 +843,38 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     }
 
     @Test
+    public void testStylePatchBorderBottom() {
+        final TextStylePropertyName<Border> propertyName = TextStylePropertyName.BORDER_BOTTOM;
+        final Border propertyValue = BoxEdge.TOP.parseBorder("#123456 SOLID 1px");
+
+        this.stylePatchAndCheck(
+            propertyName,
+            propertyValue,
+            JsonNode.object()
+                .set(
+                    JsonPropertyName.with("borderBottom"),
+                    "TOP " + propertyValue.text()
+                )
+        );
+
+        final TextStyle textStyle = TextStyle.EMPTY
+            .set(
+                TextStylePropertyName.BORDER_TOP_COLOR,
+                Color.WHITE
+            );
+
+        this.patchAndCheck(
+            propertyName,
+            propertyValue,
+            textStyle,
+            textStyle.set(
+                propertyName,
+                propertyValue
+            )
+        );
+    }
+
+    @Test
     public void testStylePatchBorderColor() {
         final TextStylePropertyName<Color> propertyName = TextStylePropertyName.BORDER_COLOR;
         final Color propertyValue = Color.parse("#123456");
