@@ -1568,10 +1568,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
-    // getMargin...................................................................................................
+    // getMargin........................................................................................................
 
     @Test
-    public void testMarginGetMissing() {
+    public void testGetMarginMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1582,7 +1582,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testMarginGet() {
+    public void testGetMargin() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1613,7 +1613,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setMargin........................................................................................................
 
     @Test
-    public void testMarginSet() {
+    public void testSetMargin() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1645,7 +1645,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // removeMargin.....................................................................................................
 
     @Test
-    public void testMarginRemoveMissing() {
+    public void testRemoveMarginMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1659,7 +1659,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testMarginRemoveSome() {
+    public void testRemoveMarginSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1676,7 +1676,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testMarginRemoveAll() {
+    public void testRemoveMarginAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
