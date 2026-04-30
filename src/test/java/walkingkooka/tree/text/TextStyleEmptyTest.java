@@ -449,7 +449,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // getPadding.......................................................................................................
 
     @Test
-    public void testPaddingGet() {
+    public void testGetPadding() {
         this.getAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.PADDING
@@ -459,7 +459,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // setPadding.......................................................................................................
     
     @Test
-    public void testPaddingSet() {
+    public void testSetPadding() {
         final Length<?> length = Length.pixel(100.0);
 
         this.setAndCheck(
@@ -486,7 +486,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // removePadding....................................................................................................
 
     @Test
-    public void testPaddingRemove() {
+    public void testRemovePadding() {
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.PADDING,
