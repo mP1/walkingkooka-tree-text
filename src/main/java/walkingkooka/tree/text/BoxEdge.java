@@ -36,6 +36,11 @@ public enum BoxEdge {
         }
 
         @Override
+        public TextStylePropertyName<Border> borderPropertyName() {
+            return TextStylePropertyName.BORDER_BOTTOM;
+        }
+
+        @Override
         public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_BOTTOM_COLOR;
         }
@@ -71,6 +76,11 @@ public enum BoxEdge {
         @Override
         public BoxEdge flip() {
             return RIGHT;
+        }
+
+        @Override
+        public TextStylePropertyName<Border> borderPropertyName() {
+            return TextStylePropertyName.BORDER_LEFT;
         }
 
         @Override
@@ -112,6 +122,11 @@ public enum BoxEdge {
         }
 
         @Override
+        public TextStylePropertyName<Border> borderPropertyName() {
+            return TextStylePropertyName.BORDER_RIGHT;
+        }
+
+        @Override
         public TextStylePropertyName<Color> borderColorPropertyName() {
             return TextStylePropertyName.BORDER_RIGHT_COLOR;
         }
@@ -147,6 +162,11 @@ public enum BoxEdge {
         @Override
         public BoxEdge flip() {
             return BOTTOM;
+        }
+
+        @Override
+        public TextStylePropertyName<Border> borderPropertyName() {
+            return TextStylePropertyName.BORDER_TOP;
         }
 
         @Override
@@ -186,6 +206,11 @@ public enum BoxEdge {
         @Override
         public BoxEdge flip() {
             return ALL;
+        }
+
+        @Override
+        public TextStylePropertyName<Border> borderPropertyName() {
+            return TextStylePropertyName.BORDER;
         }
 
         @Override
@@ -533,6 +558,8 @@ public enum BoxEdge {
     final Padding emptyPadding = Padding.with(this, TextStyle.EMPTY);
 
     // property names...................................................................................................
+
+    public abstract TextStylePropertyName<Border> borderPropertyName();
 
     public abstract TextStylePropertyName<Color> borderColorPropertyName();
 

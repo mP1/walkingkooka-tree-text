@@ -39,6 +39,20 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     ThrowableTesting {
 
     @Test
+    public void testBorderPropertyName() {
+        for (final BoxEdge edge : BoxEdge.values()) {
+            this.checkEquals(
+                TextStylePropertyName.with(
+                    BoxEdge.ALL == edge ?
+                        "border" :
+                        "border-" + edge.name().toLowerCase()
+                ),
+                edge.borderPropertyName()
+            );
+        }
+    }
+
+    @Test
     public void testBorderColorPropertyName() {
         this.checkEquals(
             Lists.empty(),
