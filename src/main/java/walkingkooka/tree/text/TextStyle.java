@@ -440,8 +440,10 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
     abstract TextStylePropertiesMap copy();
 
     /**
-     * Would be setter that returns a {@link TextStyle} that has the given values in addition to what it previously contained,
-     * returning a new instance if they are different values.
+     * Would be setter that takes a {@link Map} of non-compound {@link TextStylePropertyName} and values.
+     * If a value is null it is removed, and non null values set or replace existing values.
+     * <br>
+     * Compound values such as {@link TextStylePropertyName#BORDER} are not supported and will throw a {@link IllegalArgumentException}.
      */
     public final TextStyle setValues(final Map<TextStylePropertyName<?>, Object> values) {
         Objects.requireNonNull(values, "values");
@@ -450,152 +452,17 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
         if (values instanceof TextStylePropertiesMap) {
             textStyle = this.setTextStylePropertiesMap(
-                (TextStylePropertiesMap)values
+                (TextStylePropertiesMap) values
             );
 
         } else {
             final TextStylePropertiesMap copy = this.copy();
 
             for (final Entry<TextStylePropertyName<?>, Object> propertyNameAndValue : values.entrySet()) {
-                final TextStylePropertyName<?> propertyName = propertyNameAndValue.getKey();
-                final Object value = propertyNameAndValue.getValue();
-
-                if(null!=value) {
-                    propertyName.checkValue(value);
-                }
-
-                switch (propertyName.name) {
-                    case BORDER:
-                        final Border border = (Border) value;
-                        if (null != border) {
-                            copy.setBorder(border);
-                        } else {
-                            copy.removeBorder();
-                        }
-                        break;
-                    case BORDER_COLOR:
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_TOP_COLOR,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_RIGHT_COLOR,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_BOTTOM_COLOR,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_LEFT_COLOR,
-                            value
-                        );
-                        break;
-                    case BORDER_STYLE:
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_TOP_STYLE,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_RIGHT_STYLE,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_BOTTOM_STYLE,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_LEFT_STYLE,
-                            value
-                        );
-                        break;
-                    case BORDER_WIDTH:
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_TOP_WIDTH,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_RIGHT_WIDTH,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_BOTTOM_WIDTH,
-                            value
-                        );
-                        copy.setTextStyleProperty(
-                            TextStylePropertyName.BORDER_LEFT_WIDTH,
-                            value
-                        );
-                        break;
-                    case MARGIN:
-                        final Margin margin = (Margin) value;
-                        if(null != margin) {
-                            final BoxEdge marginBoxEdge = margin.edge();
-                            if (BoxEdge.ALL == marginBoxEdge) {
-                                copy.setBorderMarginPadding(
-                                    margin,
-                                    TextStylePropertyName.MARGIN_TOP
-                                );
-                                copy.setBorderMarginPadding(
-                                    margin,
-                                    TextStylePropertyName.MARGIN_RIGHT
-                                );
-                                copy.setBorderMarginPadding(
-                                    margin,
-                                    TextStylePropertyName.MARGIN_BOTTOM
-                                );
-                                copy.setBorderMarginPadding(
-                                    margin,
-                                    TextStylePropertyName.MARGIN_LEFT
-                                );
-                            } else {
-                                copy.setBorderMarginPadding(
-                                    margin,
-                                    marginBoxEdge.marginPropertyName()
-                                );
-                            }
-                        } else {
-                            copy.removeMargin();
-                        }
-                        break;
-                    case PADDING:
-                        final Padding padding = (Padding) value;
-                        if (null != padding) {
-                            final BoxEdge paddingBoxEdge = padding.edge();
-                            if (BoxEdge.ALL == paddingBoxEdge) {
-                                copy.setBorderMarginPadding(
-                                    padding,
-                                    TextStylePropertyName.PADDING_TOP
-                                );
-                                copy.setBorderMarginPadding(
-                                    padding,
-                                    TextStylePropertyName.PADDING_RIGHT
-                                );
-                                copy.setBorderMarginPadding(
-                                    padding,
-                                    TextStylePropertyName.PADDING_BOTTOM
-                                );
-                                copy.setBorderMarginPadding(
-                                    padding,
-                                    TextStylePropertyName.PADDING_LEFT
-                                );
-                            } else {
-                                copy.setBorderMarginPadding(
-                                    padding,
-                                    paddingBoxEdge.paddingPropertyName()
-                                );
-                            }
-                        } else {
-                            copy.removePadding();
-                        }
-                        break;
-                    default:
-                        copy.setTextStyleProperty(
-                            propertyName,
-                            value
-                        );
-                        break;
-                }
+                copy.setTextStyleProperty(
+                    propertyNameAndValue.getKey(),
+                    propertyNameAndValue.getValue()
+                );
             }
 
             textStyle = this.setTextStylePropertiesMap(copy);
