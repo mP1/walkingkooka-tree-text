@@ -25,6 +25,19 @@ import java.util.Optional;
  */
 public final class Margin extends MarginOrPadding {
 
+    /**
+     * Parses syntax similar CSS with supporting full {@link TextStylePropertyName} aswell as
+     * dropping the margin prefix or just {@link Length}.
+     * <pre>
+     * margin-top: 1px; margin-right: 2px; margin-bottom: 3px; margin-left: 4px;
+     * top: 1px; right: 2px; bottom: 3px; left: 4px;
+     * 1px 2px 3px 4px
+     *
+     * margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;
+     * top: 5px; right: 5px; bottom: 5px; left: 5px;
+     * 5px
+     * </pre>
+     */
     public static Margin parse(final String text) {
         return BoxEdge.ALL.parseMargin(text);
     }
