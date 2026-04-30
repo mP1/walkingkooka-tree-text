@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 
 import java.util.Objects;
@@ -245,6 +246,18 @@ public enum BoxEdge {
                 propertyName.startsWith("padding");
         }
     };
+
+    /**
+     * An {@link Iterable} that does not include {@link #ALL}
+     */
+    public static Iterable<BoxEdge> topRightBottomLeft() {
+        return Lists.of(
+            TOP,
+            RIGHT,
+            BOTTOM,
+            LEFT
+        );
+    }
 
     BoxEdge() {
         // LEFT -> left
