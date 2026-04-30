@@ -347,7 +347,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testGetBorderTop() {
+    public void testGetBorderBottom() {
         this.getAndCheck(
             TextStyle.parse(
                 "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
