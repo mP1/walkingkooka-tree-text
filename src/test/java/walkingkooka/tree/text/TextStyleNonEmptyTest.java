@@ -1707,7 +1707,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // getPadding.......................................................................................................
 
     @Test
-    public void testPaddingGetMissing() {
+    public void testGetPaddingMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1718,7 +1718,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testPaddingGet() {
+    public void testGetPadding() {
         final TextStyle textStyle = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1749,7 +1749,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setPadding.......................................................................................................
 
     @Test
-    public void testPaddingSet() {
+    public void testSetPadding() {
         final Padding padding = Padding.parse("1px 2px 3px 4px");
 
         this.setAndCheck(
@@ -1767,7 +1767,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // removePadding.....................................................................................................
 
     @Test
-    public void testPaddingRemoveMissing() {
+    public void testRemovePaddingMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1781,7 +1781,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testPaddingRemoveSome() {
+    public void testRemovePaddingSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1798,7 +1798,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testPaddingRemoveAll() {
+    public void testRemovePaddingAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
