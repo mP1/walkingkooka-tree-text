@@ -245,6 +245,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     );
 
     /**
+     * border-left
+     */
+    public final static TextStylePropertyName<Border> BORDER_LEFT = registerConstant(
+        "border-left", // property name
+        TextStylePropertyValueHandler.border(), // handler
+        null // visitor should NEVER happen
+    );
+
+    /**
      * border-left-color
      */
     public final static TextStylePropertyName<Color> BORDER_LEFT_COLOR = registerColor(
