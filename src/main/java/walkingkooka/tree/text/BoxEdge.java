@@ -558,4 +558,13 @@ public enum BoxEdge {
     }
 
     abstract boolean isTextStyleProperty(final String propertyName);
+
+    // equals...........................................................................................................
+
+    /**
+     * Returns true if the given {@link BoxEdge} is the same or {@link #ALL}
+     */
+    public boolean equalsOrAll(final BoxEdge other) {
+        return this.equals(other) || ALL.equals(other);
+    }
 }

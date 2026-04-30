@@ -1390,6 +1390,45 @@ public final class BoxEdgeTest implements TreePrintableTesting,
         );
     }
 
+    // equalsOrAll......................................................................................................
+
+    @Test
+    public void testEqualsOrAllDifferent() {
+        this.equalsOrAllAndCheck(
+            BoxEdge.TOP,
+            BoxEdge.RIGHT,
+            false
+        );
+    }
+
+    @Test
+    public void testEqualsOrAllDifferentButAll() {
+        this.equalsOrAllAndCheck(
+            BoxEdge.TOP,
+            BoxEdge.ALL,
+            true
+        );
+    }
+
+    @Test
+    public void testEqualsOrAllSame() {
+        this.equalsOrAllAndCheck(
+            BoxEdge.TOP,
+            BoxEdge.TOP,
+            true
+        );
+    }
+
+    private void equalsOrAllAndCheck(final BoxEdge left,
+                                     final BoxEdge right,
+                                     final boolean expected) {
+        this.checkEquals(
+            expected,
+            left.equalsOrAll(right),
+            () -> left + " equalsOrAll " + right
+        );
+    }
+
     // class............................................................................................................
 
     @Override
