@@ -80,6 +80,81 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     @Test
+    public final void testSetValuesWithAllFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.ALL,
+            TextStyle.EMPTY
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithBorderFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.BORDER,
+            BoxEdge.ALL.parseBorder("")
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithBorderColorFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.BORDER_COLOR,
+            Color.BLACK
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithBorderStyleFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.BORDER_STYLE,
+            BorderStyle.SOLID
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithBorderWidthFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.BORDER_WIDTH,
+            Length.none()
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithMarginFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.MARGIN,
+            Margin.parse("")
+        );
+    }
+
+    @Test
+    public final void testSetValuesWithPaddingFails() {
+        this.setValuesWithInvalidPropertyNameFails(
+            TextStylePropertyName.PADDING,
+            Padding.parse("")
+        );
+    }
+
+    private <T> void setValuesWithInvalidPropertyNameFails(final TextStylePropertyName<T> name,
+                                                           final T value) {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> this.createObject()
+                .setValues(
+                    Maps.of(
+                        name,
+                        value
+                    )
+                )
+        );
+        this.getMessageAndCheck(
+            thrown,
+            name.invalidTextStylePropertyNameException()
+                .getMessage()
+        );
+    }
+
+    @Test
     public final void testSetValuesWithInvalidValueFails() {
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
@@ -94,24 +169,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         this.getMessageAndCheck(
             thrown,
             "Invalid \"background-color\" expected Color but got String"
-        );
-    }
-
-    @Test
-    public final void testSetValuesWithAllFails() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> this.createObject()
-                .setValues(
-                    Maps.of(
-                        TextStylePropertyName.ALL,
-                        "hello"
-                    )
-                )
-        );
-        this.getMessageAndCheck(
-                thrown,
-            "Invalid property \"*\""
         );
     }
 
