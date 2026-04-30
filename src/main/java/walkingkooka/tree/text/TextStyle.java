@@ -320,6 +320,18 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
         final TextStyle set;
 
         switch (propertyName.name) {
+            case ALL:
+                set = this.equals(value) ?
+                    this :
+                    TextStylePropertyName.ALL.cast(value);
+                break;
+            case BORDER:
+                final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
+                borderTextStylePropertiesMap.setBorder(
+                    (Border)value
+                );
+                set = this.setValues(borderTextStylePropertiesMap);
+                break;
             case BORDER_COLOR:
                 set = this.setTopRightBottomLeft(
                     TextStylePropertyName.BORDER_TOP_COLOR,
@@ -347,24 +359,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     (Length<?>) value
                 );
                 break;
-            case BORDER:
-                final TextStylePropertiesMap borderTextStylePropertiesMap = this.copy();
-                borderTextStylePropertiesMap.setBorder(
-                    (Border)value
-                );
-                set = this.setValues(borderTextStylePropertiesMap);
-                break;
             case MARGIN:
             case PADDING:
                 set = this.merge(
                     ((HasTextStyle) value)
                         .textStyle()
                 );
-                break;
-            case ALL:
-                set = this.equals(value) ?
-                    this :
-                    TextStylePropertyName.ALL.cast(value);
                 break;
             default:
                 set = this.setValue(
