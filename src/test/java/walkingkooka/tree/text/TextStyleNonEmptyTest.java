@@ -1050,7 +1050,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // getBorderColor...................................................................................................
 
     @Test
-    public void testBorderColorGetMissing() {
+    public void testGetBorderColorMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1061,7 +1061,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderColorGetDifferent() {
+    public void testGetBorderColorDifferent() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1084,7 +1084,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderColorGetSame() {
+    public void testGetBorderColorSame() {
         final Color color = Color.BLACK;
 
         this.getAndCheck(
@@ -1112,7 +1112,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setBorderColor...................................................................................................
 
     @Test
-    public void testBorderColorSet() {
+    public void testSetBorderColor() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1142,7 +1142,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // removeBorderColor................................................................................................
 
     @Test
-    public void testBorderColorRemoveMissing() {
+    public void testRemoveBorderColorMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1156,7 +1156,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderColorRemoveSome() {
+    public void testRemoveBorderColorSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1173,7 +1173,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderColorRemoveAll() {
+    public void testRemoveBorderColorAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1204,7 +1204,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // getBorderStyle...................................................................................................
 
     @Test
-    public void testBorderStyleGetMissing() {
+    public void testGetBorderStyleMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1215,7 +1215,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderStyleGetDifferent() {
+    public void testGetBorderStyleDifferent() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1238,7 +1238,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderStyleGetSame() {
+    public void testGetBorderStyleSame() {
         final BorderStyle borderStyle = BorderStyle.DASHED;
 
         this.getAndCheck(
@@ -1266,7 +1266,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setBorderStyle...................................................................................................
 
     @Test
-    public void testBorderStyleSet() {
+    public void testSetBorderStyle() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1296,7 +1296,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // removeBorderStyle................................................................................................
 
     @Test
-    public void testBorderStyleRemoveMissing() {
+    public void testRemoveBorderStyleMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1310,7 +1310,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderStyleRemoveSome() {
+    public void testRemoveBorderStyleSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1327,7 +1327,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderStyleRemoveAll() {
+    public void testRemoveBorderStyleAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
