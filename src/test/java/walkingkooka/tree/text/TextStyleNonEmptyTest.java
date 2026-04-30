@@ -987,7 +987,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // getBorder........................................................................................................
 
     @Test
-    public void testBorderMissing() {
+    public void testBorderGetMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -998,7 +998,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderAll() {
+    public void testBorderGetAll() {
         final String text = "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
             "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
             "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
@@ -1012,7 +1012,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderAll2() {
+    public void testBorderGetAll2() {
         final String text = "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
             "border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px;" +
             "border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px;" +
@@ -1026,7 +1026,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderIncomplete() {
+    public void testBorderGetIncomplete() {
         final String text = "border-top-color: BLACK; border-right-style: SOLID; border-bottom-width: 1px;";
 
         this.getAndCheck(
@@ -1037,7 +1037,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderIncomplete2() {
+    public void testBorderGetIncomplete2() {
         final String text = "border-top-color: BLACK; border-right-style: SOLID; border-bottom-width: 1px;";
 
         this.getAndCheck(
