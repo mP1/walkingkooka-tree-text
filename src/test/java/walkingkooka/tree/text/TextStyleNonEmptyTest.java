@@ -555,10 +555,10 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     @Test
     public void testSetWithBorderBottom() {
         final TextStyle textStyle = TextStyle.parse(
-            "border-top-color: BLACK; border-top-style: SOLID; border-width: 1px;" +
-                "border-top-color: WHITE; border-top-style: SOLID; border-width: 2px;" +
-                "border-top-color: RED; border-top-style: SOLID; border-width: 3px;" +
-                "border-top-color: BLUE; border-top-style: SOLID; border-width: 4px;"
+            "border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;" +
+                "border-right-color: WHITE; border-right-style: SOLID; border-right-width: 2px;" +
+                "border-bottom-color: RED; border-bottom-style: SOLID; border-bottom-width: 3px;" +
+                "border-left-color: BLUE; border-left-style: SOLID; border-left-width: 4px;"
         );
 
         this.setAndCheck(
