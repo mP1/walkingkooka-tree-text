@@ -1358,7 +1358,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // getBorderWidth...................................................................................................
 
     @Test
-    public void testBorderWidthGetMissing() {
+    public void testGetBorderWidthMissing() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1369,7 +1369,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderWidthGetDifferent() {
+    public void testGetBorderWidthDifferent() {
         this.getAndCheck(
             TextStyle.EMPTY.set(
                 TextStylePropertyName.TEXT_ALIGN,
@@ -1392,7 +1392,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderWidthGetSame() {
+    public void testGetBorderWidthSame() {
         final Length<?> width = Length.pixel(888.0);
 
         this.getAndCheck(
@@ -1420,7 +1420,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // setBorderWidth...................................................................................................
 
     @Test
-    public void testBorderWidthSet() {
+    public void testSetBorderWidth() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1450,7 +1450,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // removeBorderWidth................................................................................................
 
     @Test
-    public void testBorderWidthRemoveMissing() {
+    public void testRemoveBorderWidthMissing() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1464,7 +1464,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderWidthRemoveSome() {
+    public void testRemoveBorderWidthSome() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
@@ -1481,7 +1481,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
-    public void testBorderWidthRemoveAll() {
+    public void testRemoveBorderWidthAll() {
         final TextStyle notEmpty = TextStyle.EMPTY.set(
             TextStylePropertyName.TEXT_ALIGN,
             TextAlign.LEFT
