@@ -85,6 +85,8 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
 
     static final String BORDER_RIGHT = "border-right";
 
+    static final String BORDER_TOP = "border-top";
+
     static final String MARGIN = "margin";
 
     static final String PADDING = "padding";
@@ -371,6 +373,12 @@ public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, O
                     TextStylePropertyName.BORDER_BOTTOM_STYLE,
                     TextStylePropertyName.BORDER_LEFT_STYLE,
                     (BorderStyle) value
+                );
+                break;
+            case BORDER_TOP:
+                set = this.setBorder(
+                    value,
+                    BoxEdge.TOP
                 );
                 break;
             case BORDER_WIDTH:

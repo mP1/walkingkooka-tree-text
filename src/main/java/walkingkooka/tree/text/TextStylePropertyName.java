@@ -331,6 +331,15 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     );
 
     /**
+     * border-top
+     */
+    public final static TextStylePropertyName<Border> BORDER_TOP = registerConstant(
+        "border-top", // property name
+        TextStylePropertyValueHandler.border(), // handler
+        null // visitor should NEVER happen
+    );
+    
+    /**
      * border-top-color
      */
     public final static TextStylePropertyName<Color> BORDER_TOP_COLOR = registerColor(

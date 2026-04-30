@@ -169,6 +169,9 @@ final class TextStyleNonEmpty extends TextStyle {
                     }
                 }
                 break;
+            case BORDER_TOP:
+                get = this.getBorder(BoxEdge.TOP);
+                break;
             case BORDER_WIDTH:
                 // only return a non null width if all widths are the same.
                 final Object borderWidth = value.get(TextStylePropertyName.BORDER_TOP_WIDTH);
@@ -270,6 +273,9 @@ final class TextStyleNonEmpty extends TextStyle {
                     TextStylePropertyName.BORDER_RIGHT_STYLE,
                     TextStylePropertyName.BORDER_BOTTOM_STYLE
                 );
+                break;
+            case BORDER_TOP:
+                removed = this.removeBorder(BoxEdge.TOP);
                 break;
             case BORDER_WIDTH:
                 removed = this.removeValues(
