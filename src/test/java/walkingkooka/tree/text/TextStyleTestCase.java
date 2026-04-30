@@ -111,7 +111,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
         );
         this.getMessageAndCheck(
                 thrown,
-            "Invalid \"*\" expected values not supported"
+            "Invalid property \"*\""
         );
     }
 
