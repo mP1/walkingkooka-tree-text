@@ -27,6 +27,40 @@ import java.util.Optional;
  */
 public final class Border extends BorderMarginPadding {
 
+    /**
+     * Produces text that can then be parsed by {@link #parse(String)}
+     * <pre>
+     * // abbreviated minimal representation
+     * BLACK SOLID 1px
+     * 
+     * // medium form with property names w/out border- prefix
+     * top-color: BLACK; top-style: SOLID; top-width: 1px;\\
+     * right-color: BLACK; right-style: SOLID; right-width: 1px; \\
+     * bottom-color: BLACK; bottom-style: SOLID; bottom-width: 1px; \\
+     * right-color: BLACK; right-style: SOLID; right-width: 1px;
+     *
+     * // long form with full property names
+     * border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;\\
+     * border-right-color: BLACK; border-right-style: SOLID; border-right-width: 1px; \\
+     * border-bottom-color: BLACK; border-bottom-style: SOLID; border-bottom-width: 1px; \\
+     * border-right-color: BLACK; border-right-style: SOLID; border-right-width: 1px;
+     *
+     * // abbreviated minimal representation
+     * BLACK SOLID 1px; WHITE DOTTED 2px; RED DASHED 3px; BLUE SOLID 4px;
+     *
+     * // medium form with property names w/out border- prefix
+     * top-color: BLACK; top-style: SOLID; top-width: 1px;\\
+     * right-color: WHITE; right-style: DOTTED; right-width: 2px; \\
+     * bottom-color: RED; bottom-style: DASHED; bottom-width: 3px; \\
+     * right-color: BLUE; right-style: SOLID; right-width: 4px;
+     *
+     * // long form with full property names
+     * border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;\\
+     * border-right-color: WHITE; border-right-style: DOTTED; border-right-width: 2px; \\
+     * border-bottom-color: RED; border-bottom-style: DASHED; border-bottom-width: 3px; \\
+     * border-right-color: BLUE; border-right-style: SOLID; border-right-width: 4px;
+     * </pre>
+     */
     public static Border parse(final String text) {
         return BoxEdge.ALL.parseBorder(text);
     }
