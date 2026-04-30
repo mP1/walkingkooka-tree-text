@@ -221,7 +221,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // getBorderColor...................................................................................................
 
     @Test
-    public void testBorderColorGet() {
+    public void testGetBorderColor() {
         this.getAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_COLOR
@@ -231,7 +231,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // setBorderColor...................................................................................................
 
     @Test
-    public void testBorderColorSet() {
+    public void testSetBorderColor() {
         final Color color = Color.WHITE;
 
         this.setAndCheck(
@@ -256,7 +256,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // removeBorderColor.................................................................................................
 
     @Test
-    public void testBorderColorRemove() {
+    public void testRemoveBorderColor() {
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_COLOR,
@@ -267,7 +267,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // getBorderStyle...................................................................................................
 
     @Test
-    public void testBorderStyleGet() {
+    public void testGetBorderStyle() {
         this.getAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_STYLE
@@ -277,7 +277,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // setBorderStyle...................................................................................................
 
     @Test
-    public void testBorderStyleSet() {
+    public void testSetBorderStyle() {
         final BorderStyle style = BorderStyle.DOUBLE;
 
         this.setAndCheck(
@@ -299,10 +299,10 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
-    // removeBorderStyle...................................................................................................
+    // removeBorderStyle................................................................................................
 
     @Test
-    public void testBorderStyleRemove() {
+    public void testRemoveBorderStyle() {
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_STYLE,
@@ -313,7 +313,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // getBorderWidth...................................................................................................
 
     @Test
-    public void testBorderWidthGet() {
+    public void testGetBorderWidth() {
         this.getAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_WIDTH
@@ -323,7 +323,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // setBorderWidth...................................................................................................
 
     @Test
-    public void testBorderWidthSet() {
+    public void testSetBorderWidth() {
         final Length<?> width = Length.pixel(123.0);
 
         this.setAndCheck(
@@ -348,7 +348,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     // removeBorderWidth................................................................................................
 
     @Test
-    public void testBorderWidthRemove() {
+    public void testRemoveBorderWidth() {
         this.removeAndCheck(
             TextStyle.EMPTY,
             TextStylePropertyName.BORDER_WIDTH,
