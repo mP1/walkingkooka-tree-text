@@ -430,10 +430,10 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
             "Padding\n" +
                 "  ALL\n" +
                 "    TextStyle\n" +
-                "      padding-bottom=3px (walkingkooka.tree.text.PixelLength)\n" +
-                "      padding-left=4px (walkingkooka.tree.text.PixelLength)\n" +
-                "      padding-right=2px (walkingkooka.tree.text.PixelLength)\n" +
-                "      padding-top=1px (walkingkooka.tree.text.PixelLength)\n"
+                "      padding-bottom=3px\n" +
+                "      padding-left=4px\n" +
+                "      padding-right=2px\n" +
+                "      padding-top=1px\n"
         );
     }
 
@@ -445,7 +445,7 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
             "Padding\n" +
                 "  TOP\n" +
                 "    TextStyle\n" +
-                "      padding-top=99px (walkingkooka.tree.text.PixelLength)\n"
+                "      padding-top=99px\n"
         );
     }
 

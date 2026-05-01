@@ -454,13 +454,11 @@ final class TextStyleNonEmpty extends TextStyle {
         for (final Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
             printer.print(propertyAndValue.getKey().value());
             printer.print("=");
-
-            final Object value = propertyAndValue.getValue();
-            printer.print(CharSequences.quoteIfChars(value));
-            printer.print(" (");
-            printer.print(value.getClass().getName());
-            printer.print(")");
-            printer.println();
+            printer.println(
+                CharSequences.quoteIfChars(
+                    propertyAndValue.getValue()
+                )
+            );
         }
 
         printer.outdent();
