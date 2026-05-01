@@ -60,7 +60,8 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     /**
      * A read only cache of already styles.
      */
-    private final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
+    // @VisibleForTesting
+    final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
 
     /**
      * Used to allocate unique index for each constant except for synthetic properties such as {@link #ALL} or {@link #BORDER_COLOR}.
@@ -979,6 +980,32 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
         this.border = name.startsWith("border");
         this.margin = name.startsWith("margin");
         this.padding = name.startsWith("padding");
+
+        final BoxEdge boxEdge;
+
+        if(this.border || this.margin || this.padding) {
+            if (name.contains("top")) {
+                boxEdge = BoxEdge.TOP;
+            } else {
+                if (name.contains("right")) {
+                    boxEdge = BoxEdge.RIGHT;
+                } else {
+                    if (name.contains("bottom")) {
+                        boxEdge = BoxEdge.BOTTOM;
+                    } else {
+                        if (name.contains("left")) {
+                            boxEdge = BoxEdge.LEFT;
+                        } else {
+                            boxEdge = BoxEdge.ALL;
+                        }
+                    }
+                }
+            }
+        } else {
+            boxEdge = null;
+        }
+
+        this.boxEdge = Optional.ofNullable(boxEdge);
     }
 
     public TextStyleProperty<T> setValue(final T value) {
@@ -1187,6 +1214,19 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
     }
 
     private final boolean padding;
+
+    /**
+     * Some properties may or may not have a {@link BoxEdge}.
+     * <pre>
+     * {@link #BORDER} -> {@link BoxEdge#ALL}
+     * {@link #BORDER_TOP} -> {@link BoxEdge#TOP}.
+     * </pre>
+     */
+    public Optional<BoxEdge> boxEdge() {
+        return this.boxEdge;
+    }
+
+    private final Optional<BoxEdge> boxEdge;
 
     // cast.............................................................................................................
 

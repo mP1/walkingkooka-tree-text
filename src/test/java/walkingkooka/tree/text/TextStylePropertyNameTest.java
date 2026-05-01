@@ -679,6 +679,214 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
         );
     }
 
+    // boxEdge..........................................................................................................
+
+    @Test
+    public void testBoxEdgeWithBorder() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER,
+            BoxEdge.ALL
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderTop() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_TOP,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderTopColor() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_TOP_COLOR,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderTopStyle() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_TOP_STYLE,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderTopWidth() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_TOP_WIDTH,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderRight() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_RIGHT,
+            BoxEdge.RIGHT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderBottom() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_BOTTOM,
+            BoxEdge.BOTTOM
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderLeft() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.BORDER_LEFT,
+            BoxEdge.LEFT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithMargin() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.MARGIN,
+            BoxEdge.ALL
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithMarginTop() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.MARGIN_TOP,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithMarginRight() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.MARGIN_RIGHT,
+            BoxEdge.RIGHT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithMarginBottom() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.MARGIN_BOTTOM,
+            BoxEdge.BOTTOM
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithMarginLeft() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.MARGIN_LEFT,
+            BoxEdge.LEFT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithPadding() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.PADDING,
+            BoxEdge.ALL
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithPaddingTop() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.PADDING_TOP,
+            BoxEdge.TOP
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithPaddingRight() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.PADDING_RIGHT,
+            BoxEdge.RIGHT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithPaddingBottom() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.PADDING_BOTTOM,
+            BoxEdge.BOTTOM
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithPaddingLeft() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.PADDING_LEFT,
+            BoxEdge.LEFT
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithColor() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.COLOR
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithOpaque() {
+        this.boxEdgeAndCheck(
+            TextStylePropertyName.OPACITY
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithBorderMarginPaddingProperty() {
+        this.checkEquals(
+            Sets.empty(),
+            TextStylePropertyName.CONSTANTS.values()
+                .stream()
+                .filter((TextStylePropertyName<?> name) -> name.isBorder() || name.isMargin() || name.isPadding())
+                .filter((TextStylePropertyName<?> name) -> name.boxEdge().isEmpty())
+                .collect(Collectors.toCollection(SortedSets::tree))
+        );
+    }
+
+    @Test
+    public void testBoxEdgeWithNonBorderMarginPaddingProperty() {
+        this.checkEquals(
+            Sets.empty(),
+            TextStylePropertyName.CONSTANTS.values()
+                .stream()
+                .filter((TextStylePropertyName<?> name) -> false == name.isBorder() && false == name.isMargin() && false == name.isPadding())
+                .filter((TextStylePropertyName<?> name) -> name.boxEdge().isPresent())
+                .collect(Collectors.toCollection(SortedSets::tree))
+        );
+    }
+
+    private void boxEdgeAndCheck(final TextStylePropertyName<?> propertyName) {
+        this.boxEdgeAndCheck(
+            propertyName,
+            Optional.empty()
+        );
+    }
+
+    private void boxEdgeAndCheck(final TextStylePropertyName<?> propertyName,
+                                 final BoxEdge expected) {
+        this.boxEdgeAndCheck(
+            propertyName,
+            Optional.of(expected)
+        );
+    }
+
+    private void boxEdgeAndCheck(final TextStylePropertyName<?> propertyName,
+                                 final Optional<BoxEdge> expected) {
+        this.checkEquals(
+            expected,
+            propertyName.boxEdge(),
+            propertyName::toString
+        );
+    }
+
     // parseValue.......................................................................................................
 
     @Test
