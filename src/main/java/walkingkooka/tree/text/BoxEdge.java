@@ -584,6 +584,18 @@ public enum BoxEdge {
 
     public abstract TextStylePropertyName<Length<?>> paddingPropertyName();
 
+    /**
+     * Tests the type of the given {@link MarginOrPadding} returning either {@link #marginPropertyName()} or
+     * {@link #paddingPropertyName()}.
+     */
+    public final TextStylePropertyName<Length<?>> marginOrPropertyName(final MarginOrPadding marginOrPadding) {
+        Objects.requireNonNull(marginOrPadding, "marginOrPadding");
+
+        return marginOrPadding instanceof Margin ?
+            this.marginPropertyName() :
+            this.paddingPropertyName();
+    }
+
     // used by Margin/Padding.text
     final String textName;
 
