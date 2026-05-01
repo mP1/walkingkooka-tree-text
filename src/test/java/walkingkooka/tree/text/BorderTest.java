@@ -684,11 +684,11 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
             "Border\n" +
                 "  ALL\n" +
                 "    TextStyle\n" +
-                "      border-bottom-color=green (walkingkooka.color.OpaqueRgbColor)\n" +
-                "      border-right-color=red (walkingkooka.color.OpaqueRgbColor)\n" +
-                "      border-right-style=SOLID (walkingkooka.tree.text.BorderStyle)\n" +
-                "      border-right-width=1px (walkingkooka.tree.text.PixelLength)\n" +
-                "      border-top-color=black (walkingkooka.color.OpaqueRgbColor)\n"
+                "      border-bottom-color=green\n" +
+                "      border-right-color=red\n" +
+                "      border-right-style=SOLID\n" +
+                "      border-right-width=1px\n" +
+                "      border-top-color=black\n"
         );
     }
 
@@ -700,7 +700,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
             "Border\n" +
                 "  TOP\n" +
                 "    TextStyle\n" +
-                "      border-top-color=black (walkingkooka.color.OpaqueRgbColor)\n"
+                "      border-top-color=black\n"
         );
     }
 

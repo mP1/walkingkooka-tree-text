@@ -2123,8 +2123,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         this.treePrintAndCheck(
             createTextStyle(),
             "TextStyle\n" +
-                "  font-family=Times News Roman (walkingkooka.tree.text.FontFamily)\n" +
-                "  word-wrap=BREAK_WORD (walkingkooka.tree.text.WordWrap)\n"
+                "  font-family=Times News Roman\n" +
+                "  word-wrap=BREAK_WORD\n"
         );
     }
 
@@ -2139,8 +2139,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
                 Color.parse("#123456")
             ),
             "TextStyle\n" +
-                "  background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
-                "  color=black (walkingkooka.color.OpaqueRgbColor)\n"
+                "  background-color=#123456\n" +
+                "  color=black\n"
         );
     }
 

@@ -894,10 +894,10 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
             ),
             "Style\n" +
                 "  TextStyle\n" +
-                "    background-color=#123456 (walkingkooka.color.OpaqueRgbColor)\n" +
-                "    border-bottom-style=DASHED (walkingkooka.tree.text.BorderStyle)\n" +
-                "    border-collapse=SEPARATE (walkingkooka.tree.text.BorderCollapse)\n" +
-                "    border-spacing=1px (walkingkooka.tree.text.PixelLength)\n" +
+                "    background-color=#123456\n" +
+                "    border-bottom-style=DASHED\n" +
+                "    border-collapse=SEPARATE\n" +
+                "    border-spacing=1px\n" +
                 "  Text \"a1\"\n" +
                 "  Text \"b2\"\n"
         );
