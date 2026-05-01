@@ -240,6 +240,52 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    @Test
+    public void testGetPropertyTopGetTopBorder() {
+        this.getPropertyAndCheck(
+            BoxEdge.TOP.parseBorder("top-color: black; top-style: SOLID; top-width: 1px"),
+            TextStylePropertyName.BORDER_TOP,
+            BoxEdge.TOP.setBorder(
+                Optional.of(
+                    Color.BLACK
+                ),
+                Optional.of(
+                    BorderStyle.SOLID
+                ),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testGetPropertyTopGetRightBorder() {
+        this.getPropertyAndCheck(
+            BoxEdge.TOP.parseBorder("top-color: black; top-style: SOLID; top-width: 1px"),
+            TextStylePropertyName.BORDER_BOTTOM
+        );
+    }
+
+    @Test
+    public void testGetPropertyAllGetTopBorder() {
+        this.getPropertyAndCheck(
+            Border.parse("top-color: black; top-style: SOLID; top-width: 1px; right-color: white;"),
+            TextStylePropertyName.BORDER_TOP,
+            BoxEdge.TOP.setBorder(
+                Optional.of(
+                    Color.BLACK
+                ),
+                Optional.of(
+                    BorderStyle.SOLID
+                ),
+                Optional.of(
+                    Length.pixel(1.0)
+                )
+            )
+        );
+    }
+
     // setProperty......................................................................................................
 
     @Test
