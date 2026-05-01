@@ -64,7 +64,7 @@ abstract public class MarginOrPadding extends BorderMarginPadding {
         );
     }
 
-    abstract MarginOrPaddingKind kind();
+    public abstract MarginOrPaddingKind kind();
 
     final String lengthsToText(final Function<BoxEdge, TextStylePropertyName<Length<?>>> lengthPropertyNameGetter) {
         final String text;

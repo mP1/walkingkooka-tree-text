@@ -59,7 +59,7 @@ public final class Padding extends MarginOrPadding {
     }
 
     @Override
-    MarginOrPaddingKind kind() {
+    public MarginOrPaddingKind kind() {
         return MarginOrPaddingKind.PADDING;
     }
 
