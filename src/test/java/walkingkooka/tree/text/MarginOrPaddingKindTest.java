@@ -17,10 +17,37 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class MarginOrPaddingKindTest implements ClassTesting<MarginOrPaddingKind> {
+
+    @Test
+    public void testMarginOrPaddingWhenMargin() {
+        this.marginOrPaddingAndCheck(
+            MarginOrPaddingKind.MARGIN,
+            TextStylePropertyName.MARGIN
+        );
+    }
+
+    @Test
+    public void testMarginOrPaddingWhenPadding() {
+        this.marginOrPaddingAndCheck(
+            MarginOrPaddingKind.PADDING,
+            TextStylePropertyName.PADDING
+        );
+    }
+
+    private void marginOrPaddingAndCheck(final MarginOrPaddingKind kind,
+                                         final TextStylePropertyName<?> expected) {
+        this.checkEquals(
+            expected,
+            kind.marginOrPadding()
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<MarginOrPaddingKind> type() {
