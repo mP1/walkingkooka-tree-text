@@ -59,6 +59,11 @@ public final class Padding extends MarginOrPadding {
     }
 
     @Override
+    MarginOrPaddingKind kind() {
+        return MarginOrPaddingKind.PADDING;
+    }
+
+    @Override
     public <V> Padding setProperty(final TextStylePropertyName<V> propertyName,
                                    final V value) {
         return this.setProperty0(
