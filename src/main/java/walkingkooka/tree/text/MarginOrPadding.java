@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -34,6 +35,36 @@ abstract public class MarginOrPadding extends BorderMarginPadding {
             textStyle
         );
     }
+
+    public final Optional<Length<?>> top() {
+        return this.getProperty(
+            this.kind()
+                .top()
+        );
+    }
+
+    public final Optional<Length<?>> right() {
+        return this.getProperty(
+            this.kind()
+                .right()
+        );
+    }
+
+    public final Optional<Length<?>> bottom() {
+        return this.getProperty(
+            this.kind()
+                .bottom()
+        );
+    }
+
+    public final Optional<Length<?>> left() {
+        return this.getProperty(
+            this.kind()
+                .left()
+        );
+    }
+
+    abstract MarginOrPaddingKind kind();
 
     final String lengthsToText(final Function<BoxEdge, TextStylePropertyName<Length<?>>> lengthPropertyNameGetter) {
         final String text;

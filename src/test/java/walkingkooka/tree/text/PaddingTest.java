@@ -46,6 +46,52 @@ public final class PaddingTest extends BorderMarginPaddingTestCase<Padding> {
         );
     }
 
+    // top..............................................................................................................
+
+    @Test
+    public void testTop() {
+        this.checkEquals(
+            Optional.of(
+                Length.pixel(1.0)
+            ),
+            Padding.parse("1px 2 3 4")
+                .top()
+        );
+    }
+
+    @Test
+    public void testRight() {
+        this.checkEquals(
+            Optional.of(
+                Length.pixel(2.0)
+            ),
+            Padding.parse("1 2px 3 4")
+                .right()
+        );
+    }
+
+    @Test
+    public void testBottom() {
+        this.checkEquals(
+            Optional.of(
+                Length.pixel(3.0)
+            ),
+            Padding.parse("1 2 3px 4")
+                .bottom()
+        );
+    }
+
+    @Test
+    public void testLeft() {
+        this.checkEquals(
+            Optional.of(
+                Length.pixel(4.0)
+            ),
+            Padding.parse("1 2 3 4px")
+                .left()
+        );
+    }
+
     // getProperty......................................................................................................
 
     @Test
