@@ -30,6 +30,11 @@ public enum MarginOrPaddingKind {
         }
 
         @Override
+        public TextStylePropertyName<Margin> marginOrPadding() {
+            return TextStylePropertyName.MARGIN;
+        }
+
+        @Override
         public TextStylePropertyName<Length<?>> top() {
             return TextStylePropertyName.MARGIN_TOP;
         }
@@ -58,6 +63,11 @@ public enum MarginOrPaddingKind {
         }
 
         @Override
+        public TextStylePropertyName<Padding> marginOrPadding() {
+            return TextStylePropertyName.PADDING;
+        }
+
+        @Override
         public TextStylePropertyName<Length<?>> top() {
             return TextStylePropertyName.PADDING_TOP;
         }
@@ -79,6 +89,8 @@ public enum MarginOrPaddingKind {
     };
 
     public abstract MarginOrPadding empty();
+
+    public abstract TextStylePropertyName<? extends MarginOrPadding> marginOrPadding();
     
     public abstract TextStylePropertyName<Length<?>> top();
 
