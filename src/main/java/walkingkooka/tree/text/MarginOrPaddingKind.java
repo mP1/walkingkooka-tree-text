@@ -23,6 +23,12 @@ package walkingkooka.tree.text;
 public enum MarginOrPaddingKind {
     
     MARGIN {
+
+        @Override
+        public Margin empty() {
+            return BoxEdge.ALL.margin(TextStyle.EMPTY);
+        }
+
         @Override
         public TextStylePropertyName<Length<?>> top() {
             return TextStylePropertyName.MARGIN_TOP;
@@ -45,6 +51,12 @@ public enum MarginOrPaddingKind {
     },
     
     PADDING {
+
+        @Override
+        public Padding empty() {
+            return BoxEdge.ALL.padding(TextStyle.EMPTY);
+        }
+
         @Override
         public TextStylePropertyName<Length<?>> top() {
             return TextStylePropertyName.PADDING_TOP;
@@ -65,6 +77,8 @@ public enum MarginOrPaddingKind {
             return TextStylePropertyName.PADDING_LEFT;
         }
     };
+
+    public abstract MarginOrPadding empty();
     
     public abstract TextStylePropertyName<Length<?>> top();
 
