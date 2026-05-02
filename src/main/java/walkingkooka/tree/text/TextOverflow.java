@@ -123,7 +123,12 @@ public abstract class TextOverflow implements Value<Optional<String>>,
                     );
                 default:
                     NeverError.unhandledCase(
-                        mode
+                        mode,
+                        MODE_SKIP_INITIAL_WHITESPACE,
+                        MODE_UNQUOTED_TOKEN,
+                        MODE_QUOTED_INSIDE,
+                        MODE_QUOTED_ESCAPING,
+                        MODE_QUOTED_OUTSIDE
                     );
             }
 
