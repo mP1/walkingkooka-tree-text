@@ -58,12 +58,18 @@ final class TextOverflowNonString extends TextOverflow {
 
     @Override
     public boolean isClip() {
-        return CLIP_TEXT.equals(this.value);
+        return CASE_SENSITIVITY.equals(
+            CLIP_TEXT,
+            this.value
+        );
     }
 
     @Override
     public boolean isEllipse() {
-        return ELLIPSIS_TEXT.equals(this.value);
+        return CASE_SENSITIVITY.equals(
+            ELLIPSIS_TEXT,
+            this.value
+        );
     }
 
     // Object .........................................................................................................
@@ -81,7 +87,10 @@ final class TextOverflowNonString extends TextOverflow {
     }
 
     private boolean equals0(final TextOverflowNonString other) {
-        return this.value.equals(other.value);
+        return CASE_SENSITIVITY.equals(
+            this.value,
+            other.value
+        );
     }
 
     @Override

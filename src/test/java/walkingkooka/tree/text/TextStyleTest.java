@@ -649,7 +649,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT_OVERFLOW,
                     TextOverflow.CLIP
                 ),
-            "text-overflow: clip;"
+            "text-overflow: CLIP;"
         );
     }
 
@@ -661,7 +661,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT_OVERFLOW,
                     TextOverflow.ELLIPSIS
                 ),
-            "text-overflow: ellipsis;"
+            "text-overflow: ELLIPSIS;"
         );
     }
 

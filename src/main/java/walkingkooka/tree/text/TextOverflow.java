@@ -20,7 +20,9 @@ package walkingkooka.tree.text;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.NeverError;
 import walkingkooka.Value;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasCaseSensitivity;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -33,9 +35,12 @@ import java.util.Optional;
  * Value class that holds a text-overflow
  */
 public abstract class TextOverflow implements Value<Optional<String>>,
-    HasText {
+    HasText,
+    HasCaseSensitivity {
 
-    final static String CLIP_TEXT = "clip";
+    public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
+
+    final static String CLIP_TEXT = "CLIP";
 
     /**
      * A constant that text-overflow should be clipped
@@ -43,7 +48,7 @@ public abstract class TextOverflow implements Value<Optional<String>>,
     @SuppressWarnings("StaticInitializerReferencesSubClass")
     public final static TextOverflow CLIP = TextOverflowNonString.constant(CLIP_TEXT);
 
-    final static String ELLIPSIS_TEXT = "ellipsis";
+    final static String ELLIPSIS_TEXT = "ELLIPSIS";
 
     /**
      * A constant that text-overflow should be clipped with three ellipsis.
@@ -129,7 +134,7 @@ public abstract class TextOverflow implements Value<Optional<String>>,
 
         switch (mode) {
             case MODE_UNQUOTED_TOKEN:
-                switch (text) {
+                switch (text.toUpperCase()) {
                     case CLIP_TEXT:
                         textOverflow = TextOverflow.CLIP;
                         break;
@@ -213,5 +218,12 @@ public abstract class TextOverflow implements Value<Optional<String>>,
             TextOverflow::unmarshall,
             TextOverflow::marshall,
             TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
+    }
+
+    // HasCaseSensitivity...............................................................................................
+
+    @Override
+    public CaseSensitivity caseSensitivity() {
+        return CASE_SENSITIVITY;
     }
 }

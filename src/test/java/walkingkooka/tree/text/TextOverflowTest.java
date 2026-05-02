@@ -63,23 +63,7 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     }
 
     @Test
-    public void testParseClipWrongCaseFails() {
-        this.parseStringFails(
-            "CLIP",
-            new IllegalArgumentException("Invalid text")
-        );
-    }
-
-    @Test
-    public void testParseEllipseWrongCaseFails() {
-        this.parseStringFails(
-            "ELLIPSE",
-            new IllegalArgumentException("Invalid text")
-        );
-    }
-
-    @Test
-    public void testParseClip() {
+    public void testParseClipLowerCase() {
         this.parseStringAndCheck(
             "clip",
             TextOverflow.CLIP
@@ -87,9 +71,25 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     }
 
     @Test
-    public void testParseEllipsis() {
+    public void testParseClipUpperCase() {
+        this.parseStringAndCheck(
+            "CLIP",
+            TextOverflow.CLIP
+        );
+    }
+
+    @Test
+    public void testParseEllipsisLowerCase() {
         this.parseStringAndCheck(
             "ellipsis",
+            TextOverflow.ELLIPSIS
+        );
+    }
+
+    @Test
+    public void testParseEllipsisUpperCase() {
+        this.parseStringAndCheck(
+            "ELLIPSIS",
             TextOverflow.ELLIPSIS
         );
     }
@@ -190,17 +190,23 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
 
     @Test
     public void testJsonStringRoundtrip() {
-        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("abc123"));
+        this.marshallRoundTripTwiceAndCheck(
+            TextOverflow.string("abc123")
+        );
     }
 
     @Test
     public void testJsonStringRoundtrip2() {
-        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("clip"));
+        this.marshallRoundTripTwiceAndCheck(
+            TextOverflow.string("CLIP")
+        );
     }
 
     @Test
     public void testJsonStringRoundtrip3() {
-        this.marshallRoundTripTwiceAndCheck(TextOverflow.string("ellipsis"));
+        this.marshallRoundTripTwiceAndCheck(
+            TextOverflow.string("ELLIPSIS")
+        );
     }
 
     // ClassTesting.....................................................................................................
