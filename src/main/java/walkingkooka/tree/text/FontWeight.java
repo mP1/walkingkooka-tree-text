@@ -120,6 +120,13 @@ public final class FontWeight implements Comparable<FontWeight>,
 
     private final int value;
 
+    /**
+     * Returns true if this is BOLD.
+     */
+    public boolean isBold() {
+        return this.value == BOLD_VALUE;
+    }
+
     // JsonNodeCon .....................................................................................................
 
     /**
@@ -147,7 +154,7 @@ public final class FontWeight implements Comparable<FontWeight>,
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         return NORMAL_VALUE == this.value ?
             NORMAL_JSON :
-            BOLD_VALUE == this.value ?
+            this.isBold() ?
                 BOLD_JSON :
                 JsonNode.number(this.value);
     }
