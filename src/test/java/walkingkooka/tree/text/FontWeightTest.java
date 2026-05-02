@@ -55,6 +55,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     public void testWith() {
         final int value = 400;
         final FontWeight size = FontWeight.with(value);
+
         this.valueAndCheck(
             size,
             value
@@ -63,12 +64,22 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
 
     @Test
     public void testBold() {
-        assertSame(FontWeight.BOLD, FontWeight.with(FontWeight.BOLD.value()));
+        assertSame(
+            FontWeight.BOLD,
+            FontWeight.with(
+                FontWeight.BOLD.value()
+            )
+        );
     }
 
     @Test
     public void testNormal() {
-        assertSame(FontWeight.NORMAL, FontWeight.with(FontWeight.NORMAL.value()));
+        assertSame(
+            FontWeight.NORMAL,
+            FontWeight.with(
+                FontWeight.NORMAL.value()
+            )
+        );
     }
 
     // parseValue......................................................................................................
@@ -206,58 +217,88 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         );
     }
 
-    // HasJsonNode......................................................................................................
+    @Override
+    FontWeight createTextStylePropertyValue() {
+        return FontWeight.with(VALUE);
+    }
+
+    @Override
+    TextStylePropertyName<FontWeight> textStylePropertyName() {
+        return TextStylePropertyName.FONT_WEIGHT;
+    }
+
+    // json.............................................................................................................
 
     @Test
     public void testUnmarshallBooleanFails() {
-        this.unmarshallFails(JsonNode.booleanNode(true));
+        this.unmarshallFails(
+            JsonNode.booleanNode(true)
+        );
     }
 
     @Test
     public void testUnmarshallInvalidStringFails() {
-        this.unmarshallFails(JsonNode.string("not bold or normal"));
+        this.unmarshallFails(
+            JsonNode.string("not bold or normal")
+        );
     }
 
     @Test
     public void testUnmarshallArrayFails() {
-        this.unmarshallFails(JsonNode.array());
+        this.unmarshallFails(
+            JsonNode.array()
+        );
     }
 
     @Test
     public void testUnmarshallObjectFails() {
-        this.unmarshallFails(JsonNode.object());
+        this.unmarshallFails(
+            JsonNode.object()
+        );
     }
 
     @Test
     public void testUnmarshallNumberInvalidFails() {
-        this.unmarshallFails(JsonNode.number(-1));
+        this.unmarshallFails(
+            JsonNode.number(-1)
+        );
     }
 
     @Test
     public void testUnmarshallBold() {
-        this.unmarshallAndCheck(JsonNode.string("bold"),
-            FontWeight.BOLD);
+        this.unmarshallAndCheck(
+            JsonNode.string("bold"),
+            FontWeight.BOLD
+        );
     }
 
     @Test
     public void testUnmarshallNormal() {
-        this.unmarshallAndCheck(JsonNode.string("normal"),
-            FontWeight.NORMAL);
+        this.unmarshallAndCheck(
+            JsonNode.string("normal"),
+            FontWeight.NORMAL
+        );
     }
 
     @Test
     public void testUnmarshallNormal2() {
-        this.unmarshallAndCheck(JsonNode.array()
-                .appendChild(JsonNode.string("normal"))
-                .get(0),
-            FontWeight.NORMAL);
+        this.unmarshallAndCheck(
+            JsonNode.array()
+                .appendChild(
+                    JsonNode.string("normal")
+                ).get(0),
+            FontWeight.NORMAL
+        );
     }
 
     @Test
     public void testUnmarshallNumber() {
         final int value = 20;
-        this.unmarshallAndCheck(JsonNode.number(value),
-            FontWeight.with(value));
+
+        this.unmarshallAndCheck(
+            JsonNode.number(value),
+            FontWeight.with(value)
+        );
     }
 
     @Test
@@ -300,6 +341,15 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         this.marshallRoundTripTwiceAndCheck(FontWeight.NORMAL);
     }
 
+    @Override
+    public FontWeight unmarshall(final JsonNode jsonNode,
+                                 final JsonNodeUnmarshallContext context) {
+        return FontWeight.unmarshall(
+            jsonNode,
+            context
+        );
+    }
+
     // Object...........................................................................................................
 
     @Test
@@ -323,17 +373,7 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         this.toStringAndCheck(FontWeight.with(456), "456");
     }
 
-    @Override
-    FontWeight createTextStylePropertyValue() {
-        return FontWeight.with(VALUE);
-    }
-
-    @Override
-    TextStylePropertyName<FontWeight> textStylePropertyName() {
-        return TextStylePropertyName.FONT_WEIGHT;
-    }
-
-    // ClassTesting.....................................................................................................
+    // class............................................................................................................
 
     @Override
     public Class<FontWeight> type() {
@@ -352,13 +392,5 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
     @Override
     public Set<FontWeight> intentionalDuplicateConstants() {
         return Sets.empty();
-    }
-
-    // JsonNodeMarshallingTesting...........................................................................................
-
-    @Override
-    public FontWeight unmarshall(final JsonNode jsonNode,
-                                 final JsonNodeUnmarshallContext context) {
-        return FontWeight.unmarshall(jsonNode, context);
     }
 }
