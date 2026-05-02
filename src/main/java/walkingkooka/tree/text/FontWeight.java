@@ -159,7 +159,7 @@ public final class FontWeight implements Comparable<FontWeight>,
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return NORMAL_VALUE == this.value ?
+        return this.isNormal() ?
             NORMAL_JSON :
             this.isBold() ?
                 BOLD_JSON :
