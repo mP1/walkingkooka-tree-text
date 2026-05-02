@@ -2292,7 +2292,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         this.propertiesAndCheck2(
             TextStylePropertyName.TEXT_OVERFLOW,
             TextOverflow.CLIP,
-            "text-overflow: clip\r\n"
+            "text-overflow: CLIP\r\n"
         );
     }
 

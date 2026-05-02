@@ -85,12 +85,18 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
 
     @Test
     public void testToStringClip() {
-        this.toStringAndCheck(TextOverflow.CLIP, "clip");
+        this.toStringAndCheck(
+            TextOverflow.CLIP,
+            "CLIP"
+        );
     }
 
     @Test
     public void testToStringEllipsis() {
-        this.toStringAndCheck(TextOverflow.ELLIPSIS, "ellipsis");
+        this.toStringAndCheck(
+            TextOverflow.ELLIPSIS,
+            "ELLIPSIS"
+        );
     }
 
     @Test
@@ -105,12 +111,12 @@ public final class TextOverflowNonStringTest extends TextOverflowTestCase<TextOv
 
     @Test
     public void testMarshallClip() {
-        this.marshallAndCheck(TextOverflow.CLIP, JsonNode.string("clip"));
+        this.marshallAndCheck(TextOverflow.CLIP, JsonNode.string("CLIP"));
     }
 
     @Test
     public void testMarshallEllipsis() {
-        this.marshallAndCheck(TextOverflow.ELLIPSIS, JsonNode.string("ellipsis"));
+        this.marshallAndCheck(TextOverflow.ELLIPSIS, JsonNode.string("ELLIPSIS"));
     }
 
     @Override
