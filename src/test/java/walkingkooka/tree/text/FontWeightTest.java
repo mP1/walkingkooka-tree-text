@@ -171,6 +171,41 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         );
     }
 
+    // isNormal...........................................................................................................
+
+    @Test
+    public void testIsNormalWithBold() {
+        this.isNormalAndCheck(
+            FontWeight.BOLD,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNormalWithNormal() {
+        this.isNormalAndCheck(
+            FontWeight.NORMAL,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNormalWithOther() {
+        this.isNormalAndCheck(
+            FontWeight.with(123),
+            false
+        );
+    }
+
+    private void isNormalAndCheck(final FontWeight fontWeight,
+                                  final boolean expected) {
+        this.checkEquals(
+            expected,
+            fontWeight.isNormal(),
+            fontWeight::toString
+        );
+    }
+
     // HasJsonNode......................................................................................................
 
     @Test
