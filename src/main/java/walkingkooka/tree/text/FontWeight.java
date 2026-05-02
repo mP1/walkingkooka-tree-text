@@ -127,6 +127,13 @@ public final class FontWeight implements Comparable<FontWeight>,
         return this.value == BOLD_VALUE;
     }
 
+    /**
+     * Returns true if this is NORMAL.
+     */
+    public boolean isNormal() {
+        return this.value == NORMAL_VALUE;
+    }
+
     // JsonNodeCon .....................................................................................................
 
     /**
