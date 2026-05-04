@@ -148,7 +148,14 @@ public abstract class TextOverflow implements Value<Optional<String>>,
                         break;
                     default:
                         // Invalid textOverflow: expected "CLIP", "ELLIPSIS" or quoted text got Hello
-                        throw new IllegalArgumentException("Invalid textOverflow: expected \"" + TextOverflow.CLIP + "\", \"" + TextOverflow.ELLIPSIS + "\" or quoted text got " + CharSequences.quote(text));
+                        throw new IllegalArgumentException(
+                            "Invalid textOverflow: expected \"" +
+                                TextOverflow.CLIP +
+                                "\", \"" +
+                                TextOverflow.ELLIPSIS +
+                                "\" or quoted text got " +
+                                CharSequences.quote(text)
+                        );
                 }
                 break;
             case MODE_QUOTED_INSIDE:
@@ -173,7 +180,7 @@ public abstract class TextOverflow implements Value<Optional<String>>,
 
         return textOverflow;
     }
-    
+
     /**
      * Factory that creates a {@link TextOverflow}.
      */
@@ -220,10 +227,12 @@ public abstract class TextOverflow implements Value<Optional<String>>,
     abstract JsonNode marshall(final JsonNodeMarshallContext context);
 
     static {
-        JsonNodeContext.register("text-overflow",
+        JsonNodeContext.register(
+            "text-overflow",
             TextOverflow::unmarshall,
             TextOverflow::marshall,
-            TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class);
+            TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class
+        );
     }
 
     // HasCaseSensitivity...............................................................................................
