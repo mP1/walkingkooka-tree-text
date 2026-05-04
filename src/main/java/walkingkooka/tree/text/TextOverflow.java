@@ -147,7 +147,8 @@ public abstract class TextOverflow implements Value<Optional<String>>,
                         textOverflow = TextOverflow.ELLIPSIS;
                         break;
                     default:
-                        throw new IllegalArgumentException("Invalid text");
+                        // Expected "CLIP" or "ELLIPSIS" or quoted text got Hello
+                        throw new IllegalArgumentException("Invalid textOverflow: expected \"" + TextOverflow.CLIP + "\", \"" + TextOverflow.ELLIPSIS + "\" or quoted text got " + CharSequences.quote(text));
                 }
                 break;
             case MODE_QUOTED_INSIDE:
