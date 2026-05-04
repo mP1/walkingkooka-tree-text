@@ -40,7 +40,7 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     public void testParseUnknownConstant() {
         this.parseStringFails(
             "abc",
-            new IllegalArgumentException("Invalid text")
+            new IllegalArgumentException("Invalid textOverflow: expected \"CLIP\", \"ELLIPSIS\" or quoted text got \"abc\"")
         );
     }
 
