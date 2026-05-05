@@ -892,6 +892,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // removeIf.........................................................................................................
+
+    @Test
+    public void testRemoveIfExisting() {
+        this.removeIfAndCheck(
+            TextStyle.parse("color: black; text-align: LEFT"),
+            TextStylePropertyName.COLOR,
+            Color.BLACK,
+            TextStyle.parse("text-align: LEFT")
+        );
+    }
+
+    @Test
+    public void testRemoveIfDifferentValue() {
+        this.removeIfAndCheck(
+            TextStyle.parse("color: BLACK; text-align: LEFT"),
+            TextStylePropertyName.COLOR,
+            Color.WHITE
+        );
+    }
+
+    @Test
+    public void testRemoveIfUnknown() {
+        this.removeIfAndCheck(
+            TextStyle.parse("text-align: LEFT"),
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+    }
+
     // set & remove ...................................................................................................
 
     @Test
