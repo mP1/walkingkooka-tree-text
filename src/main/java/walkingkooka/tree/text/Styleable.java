@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 /**
- * Adds merging to {@link HasTextStyle}.
+ * Defines numerous operations to a value that contains {@link TextStyle} and values identified by {@link TextStylePropertyName}..
  */
 public interface Styleable extends HasTextStyle {
 
