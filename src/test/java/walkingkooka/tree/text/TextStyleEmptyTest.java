@@ -516,6 +516,18 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // replaceIf........................................................................................................
+
+    @Test
+    public void testReplaceIf() {
+        this.replaceIfAndCheck(
+            TextStyle.EMPTY,
+            TextStylePropertyName.COLOR,
+            Color.BLACK,
+            Color.WHITE
+        );
+    }
+
     // TextStyleVisitor.................................................................................................
 
     @Test

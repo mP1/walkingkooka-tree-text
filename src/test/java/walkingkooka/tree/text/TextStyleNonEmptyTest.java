@@ -1025,6 +1025,39 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // replaceIf........................................................................................................
+
+    @Test
+    public void testReplaceIfAbsentProperty() {
+        this.replaceIfAndCheck(
+            TextStyle.parse("text-align: LEFT;"),
+            TextStylePropertyName.COLOR,
+            Color.BLACK,
+            Color.WHITE
+        );
+    }
+
+    @Test
+    public void testReplaceIfPropertyValueDifferent() {
+        this.replaceIfAndCheck(
+            TextStyle.parse("color: BLACK;"),
+            TextStylePropertyName.COLOR,
+            Color.WHITE,
+            Color.parse("red")
+        );
+    }
+
+    @Test
+    public void testReplaceIf() {
+        this.replaceIfAndCheck(
+            TextStyle.parse("color: BLACK; text-align: LEFT;"),
+            TextStylePropertyName.COLOR,
+            Color.BLACK,
+            Color.WHITE,
+            TextStyle.parse("color: WHITE; text-align: LEFT;")
+        );
+    }
+
     // setValues........................................................................................................
 
     @Test
