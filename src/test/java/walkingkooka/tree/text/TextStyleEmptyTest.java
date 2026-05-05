@@ -145,6 +145,17 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // removeIf.........................................................................................................
+
+    @Test
+    public void testRemoveIf() {
+        this.removeIfAndCheck(
+            TextStyle.EMPTY,
+            TextStylePropertyName.COLOR,
+            Color.BLACK
+        );
+    }
+
     // set..............................................................................................................
 
     @Test

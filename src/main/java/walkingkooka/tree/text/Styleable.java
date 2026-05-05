@@ -17,6 +17,8 @@
 
 package walkingkooka.tree.text;
 
+import java.util.Objects;
+
 /**
  * Defines numerous operations to a value that contains {@link TextStyle} and values identified by {@link TextStylePropertyName}..
  */
@@ -40,6 +42,25 @@ public interface Styleable extends HasTextStyle {
      * Removes the existing {@link TextStylePropertyName}.
      */
     Styleable remove(final TextStylePropertyName<?> propertyName);
+
+    /**
+     * Removes the given {@link TextStylePropertyName} if the current value matches the given value.
+     * If the property is absent or different nothing is removed.
+     */
+    default <T> Styleable removeIf(final TextStylePropertyName<T> propertyName,
+                                   final T propertyValue) {
+        Objects.requireNonNull(propertyName, "propertyName");
+        Objects.requireNonNull(propertyValue, "propertyValue");
+
+        final T currentValueOrNull = this.textStyle()
+            .get(propertyName)
+            .orElse(null);
+
+        // remove only if propertyName has propertyValue
+        return (null != currentValueOrNull && currentValueOrNull.equals(propertyValue)) ?
+            this.remove(propertyName) :
+            this;
+    }
 
     /**
      * Merges this with the given {@link TextStyle}.

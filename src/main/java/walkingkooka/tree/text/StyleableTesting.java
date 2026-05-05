@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.color.Color;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesting {
@@ -146,6 +147,69 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
         );
 
         return (S) set;
+    }
+
+    // removeIf.........................................................................................................
+
+    @Test
+    default void removeIfWithNullPropertyNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .removeIf(
+                    null,
+                    1
+                )
+        );
+    }
+
+    @Test
+    default void removeIfWithNullPropertyValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .removeIf(
+                    TextStylePropertyName.COLOR,
+                    null
+                )
+        );
+    }
+
+    default <S extends Styleable, V> S removeIfAndCheck(final S styleable,
+                                                        final TextStylePropertyName<V> propertyName,
+                                                        final V propertyValue) {
+        return this.removeIfAndCheck(
+            styleable,
+            propertyName,
+            propertyValue,
+            styleable
+        );
+    }
+
+    default <S extends Styleable, V> S removeIfAndCheck(final S styleable,
+                                                        final TextStylePropertyName<V> propertyName,
+                                                        final V propertyValue,
+                                                        final S expected) {
+        final Styleable removed = styleable.removeIf(
+            propertyName,
+            propertyValue
+        );
+
+        if (styleable.equals(expected)) {
+            assertSame(
+                expected,
+                removed,
+                () -> styleable + " removeIf " + propertyName
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                removed,
+                () -> styleable + " removeIf " + propertyName
+            );
+        }
+
+        return (S) removed;
     }
 
     T createStyleable();
