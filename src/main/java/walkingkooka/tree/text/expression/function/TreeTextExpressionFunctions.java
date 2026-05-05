@@ -149,6 +149,13 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     }
 
     /**
+     * {@see TreeTextExpressionFunctionTextStyleReplaceIf}
+     */
+    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleReplaceIf() {
+        return TreeTextExpressionFunctionTextStyleReplaceIf.instance();
+    }
+
+    /**
      * {@see TreeTextExpressionFunctionTextStyleSet}
      */
     public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleSet() {
