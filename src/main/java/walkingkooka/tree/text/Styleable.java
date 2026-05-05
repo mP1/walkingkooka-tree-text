@@ -23,11 +23,6 @@ package walkingkooka.tree.text;
 public interface Styleable extends HasTextStyle {
 
     /**
-     * Merges this with the given {@link TextStyle}.
-     */
-    Styleable merge(final TextStyle textStyle);
-
-    /**
      * Sets or replaces a single {@link TextStylePropertyName}.
      * Note a null propertyValue will throw a {@link IllegalArgumentException}.
      */
@@ -45,4 +40,9 @@ public interface Styleable extends HasTextStyle {
      * Removes the existing {@link TextStylePropertyName}.
      */
     Styleable remove(final TextStylePropertyName<?> propertyName);
+
+    /**
+     * Merges this with the given {@link TextStyle}.
+     */
+    Styleable merge(final TextStyle textStyle);
 }
