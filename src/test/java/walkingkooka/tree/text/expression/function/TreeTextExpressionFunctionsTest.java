@@ -507,6 +507,90 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testStyleRemoveIfWithTextNodeAndTextStylePropertyNameAndPropertyValue() {
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.COLOR,
+            Color.WHITE
+        );
+
+        final TextNode textNode = TextNode.text("Text123")
+            .setTextStyle(style);
+
+        final TextStylePropertyName<TextAlign> propertyName = TextStylePropertyName.TEXT_ALIGN;
+        final TextAlign propertyValue = TextAlign.LEFT;
+
+        this.evaluateAndCheck(
+            "styleRemoveIf",
+            Lists.of(
+                textNode.set(
+                    propertyName,
+                    propertyValue
+                ),
+                propertyName,
+                propertyValue
+            ),
+            textNode.removeIf(
+                propertyName,
+                propertyValue
+            )
+        );
+    }
+
+    @Test
+    public void testStyleRemoveIfWithTextStyleAndTextStylePropertyNameAndPropertyValue() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color propertyValue = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            propertyName,
+            propertyValue
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "styleRemoveIf",
+            Lists.of(
+                style,
+                propertyName,
+                propertyValue
+            ),
+            style.removeIf(
+                propertyName,
+                propertyValue
+            )
+        );
+    }
+
+    @Test
+    public void testStyleRemoveIfWithStringStringAndString() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color propertyValue = Color.BLACK;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            propertyName,
+            propertyValue
+        ).set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.LEFT
+        );
+
+        this.evaluateAndCheck(
+            "styleRemoveIf",
+            Lists.of(
+                style.text(),
+                propertyName.text(),
+                propertyValue.text()
+            ),
+            style.removeIf(
+                propertyName,
+                propertyValue
+            )
+        );
+    }
+
+    @Test
     public void testStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
@@ -774,6 +858,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.styleGet();
                             case "styleRemove":
                                 return TreeTextExpressionFunctions.styleRemove();
+                            case "styleRemoveIf":
+                                return TreeTextExpressionFunctions.styleRemoveIf();
                             case "styleSet":
                                 return TreeTextExpressionFunctions.styleSet();
                             case "styledText":
