@@ -63,6 +63,30 @@ public interface Styleable extends HasTextStyle {
     }
 
     /**
+     * Conditionally replaces a value with a new value if the old is matched.
+     * If the value is missing or different nothing happens and the original {@link Styleable} should be returned.
+     */
+    default <T> Styleable replaceIf(final TextStylePropertyName<T> propertyName,
+                                    final T oldPropertyValue,
+                                    final T newPropertyValue) {
+        Objects.requireNonNull(propertyName, "propertyName");
+        Objects.requireNonNull(oldPropertyValue, "oldPropertyValue");
+        Objects.requireNonNull(newPropertyValue, "newPropertyValue");
+
+        final T currentValueOrNull = this.textStyle()
+            .get(propertyName)
+            .orElse(null);
+
+        // remove only if propertyName has propertyValue
+        return (null != currentValueOrNull && currentValueOrNull.equals(oldPropertyValue)) ?
+            this.set(
+                propertyName,
+                newPropertyValue
+            ) :
+            this;
+    }
+
+    /**
      * Merges this with the given {@link TextStyle}.
      */
     Styleable merge(final TextStyle textStyle);

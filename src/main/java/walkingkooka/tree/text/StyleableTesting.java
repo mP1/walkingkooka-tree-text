@@ -212,5 +212,87 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
         return (S) removed;
     }
 
+    // replaceIf.........................................................................................................
+
+    @Test
+    default void testReplaceIfWithNullPropertyNameFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .replaceIf(
+                    null,
+                    Color.BLACK,
+                    Color.WHITE
+                )
+        );
+    }
+
+    @Test
+    default void testReplaceIfWithNullOldPropertyValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .replaceIf(
+                    TextStylePropertyName.COLOR,
+                    null,
+                    Color.WHITE
+                )
+        );
+    }
+
+    @Test
+    default void testReplaceIfWithNullNewPropertyValueFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createStyleable()
+                .replaceIf(
+                    TextStylePropertyName.COLOR,
+                    Color.BLACK,
+                    null
+                )
+        );
+    }
+
+    default <S extends Styleable, PV> S replaceIfAndCheck(final S styleable,
+                                                          final TextStylePropertyName<PV> propertyName,
+                                                          final PV oldPropertyValue,
+                                                          final PV newPropertyValue) {
+        return this.replaceIfAndCheck(
+            styleable,
+            propertyName,
+            oldPropertyValue,
+            newPropertyValue,
+            styleable
+        );
+    }
+
+    default <S extends Styleable, PV> S replaceIfAndCheck(final S styleable,
+                                                          final TextStylePropertyName<PV> propertyName,
+                                                          final PV oldPropertyValue,
+                                                          final PV newPropertyValue,
+                                                          final S expected) {
+        final Styleable replaceIf = styleable.replaceIf(
+            propertyName,
+            oldPropertyValue,
+            newPropertyValue
+        );
+
+        if (styleable.equals(expected)) {
+            assertSame(
+                replaceIf,
+                expected,
+                () -> styleable + " replaceIf " + propertyName + " " + oldPropertyValue + " " + newPropertyValue
+            );
+        } else {
+            this.checkEquals(
+                expected,
+                replaceIf,
+                () -> styleable + " replaceIf " + propertyName + " " + oldPropertyValue + " " + newPropertyValue
+            );
+        }
+
+        return (S) replaceIf;
+    }
+
     T createStyleable();
 }
