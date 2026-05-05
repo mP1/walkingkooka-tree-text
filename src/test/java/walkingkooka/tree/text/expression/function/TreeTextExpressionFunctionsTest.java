@@ -591,6 +591,90 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
     }
 
     @Test
+    public void testStyleReplaceIfWithStringAndStringAndStringDifferentValue() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color oldPropertyValue = Color.BLACK;
+        final Color newPropertyValue = Color.WHITE;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        ).set(
+            propertyName,
+            oldPropertyValue
+        );
+
+        this.evaluateAndCheck(
+            "styleReplaceIf",
+            Lists.of(
+                style.text(),
+                propertyName.text(),
+                "red",
+                newPropertyValue.toString()
+            ),
+            style
+        );
+    }
+
+    @Test
+    public void testStyleReplaceIfWithStringAndStringAndString() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color oldPropertyValue = Color.BLACK;
+        final Color newPropertyValue = Color.WHITE;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        ).set(
+            propertyName,
+            oldPropertyValue
+        );
+
+        this.evaluateAndCheck(
+            "styleReplaceIf",
+            Lists.of(
+                style.text(),
+                propertyName.text(),
+                oldPropertyValue.toString(),
+                newPropertyValue.toString()
+            ),
+            style.set(
+                propertyName,
+                newPropertyValue
+            )
+        );
+    }
+
+    @Test
+    public void testStyleReplaceIfWithTextStylePropertyNameColorColorDifferent() {
+        final TextStylePropertyName<Color> propertyName = TextStylePropertyName.COLOR;
+        final Color oldPropertyValue = Color.BLACK;
+        final Color newPropertyValue = Color.WHITE;
+
+        final TextStyle style = TextStyle.EMPTY.set(
+            TextStylePropertyName.TEXT_ALIGN,
+            TextAlign.CENTER
+        ).set(
+            propertyName,
+            oldPropertyValue
+        );
+
+        this.evaluateAndCheck(
+            "styleReplaceIf",
+            Lists.of(
+                style.text(),
+                propertyName.text(),
+                oldPropertyValue,
+                newPropertyValue
+            ),
+            style.set(
+                propertyName,
+                newPropertyValue
+            )
+        );
+    }
+
+    @Test
     public void testStyleSetWithTextStyleAndTextStylePropertyNameAndColor() {
         final TextStylePropertyName<Color> property = TextStylePropertyName.COLOR;
         final Color color = Color.BLACK;
@@ -860,6 +944,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 return TreeTextExpressionFunctions.styleRemove();
                             case "styleRemoveIf":
                                 return TreeTextExpressionFunctions.styleRemoveIf();
+                            case "styleReplaceIf":
+                                return TreeTextExpressionFunctions.styleReplaceIf();
                             case "styleSet":
                                 return TreeTextExpressionFunctions.styleSet();
                             case "styledText":
