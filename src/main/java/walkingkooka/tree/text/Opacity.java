@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
-import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
@@ -35,7 +35,7 @@ import java.util.Objects;
  * Value class that holds an opacity value.
  */
 public final class Opacity implements Comparable<Opacity>,
-    Value<Double>,
+    HasValue<Double>,
     HasText {
 
     private final static double TRANSPARENT_VALUE = 0;

@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.NeverError;
-import walkingkooka.Value;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -32,7 +32,7 @@ import java.util.Objects;
  * A leaf node, where a leaf has no children, but will have a value.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-abstract class TextLeafNode<V> extends TextNode implements Value<V> {
+abstract class TextLeafNode<V> extends TextNode implements HasValue<V> {
 
     /**
      * Package private to limit sub classing.
@@ -159,7 +159,7 @@ abstract class TextLeafNode<V> extends TextNode implements Value<V> {
 
     @Override //
     final boolean equals0(final TextNode other) {
-        final Value<?> hasValue = Cast.to(other);
+        final HasValue<?> hasValue = Cast.to(other);
         return this.value.equals(
             hasValue.value()
         );

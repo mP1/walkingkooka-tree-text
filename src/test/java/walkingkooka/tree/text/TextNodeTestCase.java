@@ -18,11 +18,11 @@
 package walkingkooka.tree.text;
 
 
-import walkingkooka.ValueTesting;
+import walkingkooka.HasValueTesting;
 import walkingkooka.reflect.ClassTesting2;
 
 public abstract class TextNodeTestCase<T> implements ClassTesting2<T>,
-    ValueTesting {
+    HasValueTesting {
 
     TextNodeTestCase() {
         super();

@@ -17,9 +17,9 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.NeverError;
-import walkingkooka.Value;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
@@ -34,7 +34,7 @@ import java.util.Optional;
 /**
  * Value class that holds a text-overflow
  */
-public abstract class TextOverflow implements Value<Optional<String>>,
+public abstract class TextOverflow implements HasValue<Optional<String>>,
     HasText,
     HasCaseSensitivity {
 

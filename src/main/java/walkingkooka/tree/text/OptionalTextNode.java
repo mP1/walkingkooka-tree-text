@@ -19,7 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -34,7 +34,7 @@ import java.util.Optional;
  * A typed Optional {@link TextNode}. This is especially necessary because generics are erased and it is not possible
  * to test and distinguish between empty Optionals of different values.
  */
-public final class OptionalTextNode implements Value<Optional<TextNode>>,
+public final class OptionalTextNode implements HasValue<Optional<TextNode>>,
         CanBeEmpty,
         TreePrintable {
 

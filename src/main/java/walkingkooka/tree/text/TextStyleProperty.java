@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.compare.CompareResult;
 import walkingkooka.naming.HasName;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -31,7 +31,7 @@ import java.util.Optional;
  * A pair that captures a {@link TextStylePropertyName} and an optional value for that property.
  */
 public final class TextStyleProperty<T> implements HasName<TextStylePropertyName<T>>,
-    Value<Optional<T>>,
+    HasValue<Optional<T>>,
     TreePrintable,
     Comparable<TextStyleProperty<T>> {
 
