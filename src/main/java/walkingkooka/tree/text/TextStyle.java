@@ -19,8 +19,8 @@ package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
-import walkingkooka.Value;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.props.HasProperties;
@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 /**
  * A {@link TextStyle} holds a {@link Map} of {@link TextStylePropertyName} and values.
  */
-public abstract class TextStyle implements Value<Map<TextStylePropertyName<?>, Object>>,
+public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>, Object>>,
     Patchable<TextStyle>,
     TreePrintable,
     HasText,

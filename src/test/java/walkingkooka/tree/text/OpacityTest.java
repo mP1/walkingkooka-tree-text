@@ -18,8 +18,8 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.HasValueTesting;
 import walkingkooka.ToStringTesting;
-import walkingkooka.ValueTesting;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.reflect.ClassTesting2;
@@ -44,7 +44,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     ParseStringTesting<Opacity>,
     JsonNodeMarshallingTesting<Opacity>,
     ToStringTesting<Opacity>,
-    ValueTesting,
+    HasValueTesting,
     ThrowableTesting {
 
     private final static double VALUE = 0.25;

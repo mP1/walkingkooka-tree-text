@@ -19,9 +19,9 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.ValueTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.compare.ComparableTesting;
@@ -42,7 +42,7 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     ToStringTesting<TextStyleProperty<TextAlign>>,
     TreePrintableTesting,
     ComparableTesting,
-    ValueTesting {
+    HasValueTesting {
 
     // with.............................................................................................................
 

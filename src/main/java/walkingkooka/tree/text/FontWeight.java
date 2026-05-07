@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CaseSensitivity;
@@ -41,7 +41,7 @@ import java.util.Objects;
  * Value class that holds a font weight.
  */
 public final class FontWeight implements Comparable<FontWeight>,
-    Value<Integer> {
+    HasValue<Integer> {
 
     private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
 

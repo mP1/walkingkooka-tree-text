@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.naming.HasName;
 import walkingkooka.text.CharSequences;
 
@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 public final class InvalidTextStylePropertyValueException extends IllegalArgumentException
     implements HasName<TextStylePropertyName<?>>,
-    Value<Object> {
+    HasValue<Object> {
 
     private static final long serialVersionUID = 1L;
 

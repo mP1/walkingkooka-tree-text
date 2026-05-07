@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
 import walkingkooka.text.cursor.parser.Parsers;
 
@@ -28,7 +28,7 @@ import java.util.Optional;
  * A length with only a positive number and no unit.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NumberLength extends Length<Double> implements Value<Double> {
+public final class NumberLength extends Length<Double> implements HasValue<Double> {
 
     static NumberLength parseNumber0(final String text) {
         return with(

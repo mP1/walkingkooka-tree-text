@@ -18,7 +18,7 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
 import walkingkooka.text.cursor.parser.Parser;
@@ -32,7 +32,7 @@ import java.util.Optional;
  * A measurement in pixels.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class PixelLength extends Length<Double> implements Value<Double> {
+public final class PixelLength extends Length<Double> implements HasValue<Double> {
 
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;
 
