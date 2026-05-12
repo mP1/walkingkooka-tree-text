@@ -23,7 +23,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
-import walkingkooka.currency.CurrencyExchangeRaters;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.environment.EnvironmentContexts;
@@ -987,7 +986,6 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 TreeTextConverters.urlToImage()
                             )
                         ),
-                        CurrencyExchangeRaters.fake(),
                         CurrencyLocaleContexts.fake(),
                         DateTimeContexts.fake(),
                         DecimalNumberContexts.fake()
