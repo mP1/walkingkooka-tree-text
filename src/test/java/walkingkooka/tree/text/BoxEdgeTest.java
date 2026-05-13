@@ -619,7 +619,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
 
         this.getMessageAndCheck(
             thrown,
-            "Invalid rgb \"!invalid-color\""
+            "Invalid rgb color \"!invalid-color\""
         );
     }
 
@@ -632,7 +632,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
 
         this.getMessageAndCheck(
             thrown,
-            "Invalid rgb \"!invalid-color\""
+            "Invalid rgb color \"!invalid-color\""
         );
     }
 
