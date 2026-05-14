@@ -355,10 +355,13 @@ final class TextStyleNonEmpty extends TextStyle {
 
     /**
      * Prints each property and value with spaces after each separator. The provider {@link Function} may be used to
-     * modify each {@link TextStylePropertyName}, such as removing a common prefix.
+     * modify each {@link TextStylePropertyName}, such as removing a common prefix. The later feature is used by
+     * {@link Border} {@link Margin} and {@link Padding} to return more compact representations {@link Border#text()}.
      *
      * <pre>
      * border-top-color: #123456; border-top-style: dotted; border-top-width: 123px;
+     * top-color: #123456; top-style: SOLID; top-width: 45px;
+     * margin: 1px 2px 3px 4px
      * </pre>
      */
     @Override
