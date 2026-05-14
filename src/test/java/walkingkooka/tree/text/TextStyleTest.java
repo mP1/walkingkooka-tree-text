@@ -121,16 +121,21 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Test
     public void testSetChildrenNullFails() {
-        assertThrows(NullPointerException.class, () -> TextStyle.EMPTY.setChildren(null));
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyle.EMPTY.setChildren(null)
+        );
     }
 
     @Test
     public void testSetChildrenEmptyAndNoProperties() {
         final List<TextNode> children = TextStyleNode.NO_CHILDREN;
 
-        this.setChildrenAndCheck(TextStyle.EMPTY,
+        this.setChildrenAndCheck(
+            TextStyle.EMPTY,
             children,
-            TextStyleNode.with(children, TextStylePropertiesMap.EMPTY));
+            TextStyleNode.with(children, TextStylePropertiesMap.EMPTY)
+        );
     }
 
     @Test
@@ -140,16 +145,22 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
         this.setChildrenAndCheck(textStyle,
             children,
-            TextNode.style(children).setAttributes(textStyle.value()));
+            TextNode.style(children)
+                .setAttributes(textStyle.value()));
     }
 
     @Test
     public void testSetChildrenAndNoProperties() {
         final List<TextNode> children = this.children();
 
-        this.setChildrenAndCheck(TextStyle.EMPTY,
+        this.setChildrenAndCheck(
+            TextStyle.EMPTY,
             children,
-            TextStyleNode.with(children, TextStylePropertiesMap.EMPTY));
+            TextStyleNode.with(
+                children,
+                TextStylePropertiesMap.EMPTY
+            )
+        );
     }
 
     @Test
@@ -157,21 +168,30 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         final TextStyle textStyle = this.textStyle();
         final List<TextNode> children = this.children();
 
-        this.setChildrenAndCheck(textStyle,
+        this.setChildrenAndCheck(
+            textStyle,
             children,
-            TextNode.style(children).setAttributes(textStyle.value()));
+            TextNode.style(children)
+                .setAttributes(
+                    textStyle.value()
+                )
+        );
     }
 
     private List<TextNode> children() {
-        return Lists.of(TextNode.text("text-1a"), TextNode.text("text-1b"));
+        return Lists.of(
+            TextNode.text("text-1a"),
+            TextNode.text("text-1b"));
     }
 
     private void setChildrenAndCheck(final TextStyle properties,
                                      final List<TextNode> children,
                                      final TextNode textStyleNode) {
-        this.checkEquals(textStyleNode,
+        this.checkEquals(
+            textStyleNode,
             properties.setChildren(children),
-            () -> properties + " setChildren " + children);
+            () -> properties + " setChildren " + children
+        );
     }
 
     // getOrFail.........................................................................................................
@@ -203,6 +223,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveAllNullValue() {
         final TextStyle style = TextStyle.EMPTY
             .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+
         this.setOrRemoveAndCheck(
             style,
             TextStylePropertyName.BACKGROUND_COLOR,
@@ -215,6 +236,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testSetOrRemoveNullValue() {
         final TextStyle style = TextStyle.EMPTY
             .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+
         this.setOrRemoveAndCheck(
             style,
             TextStylePropertyName.BACKGROUND_COLOR,
@@ -230,7 +252,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         this.checkEquals(
             expected,
             style.setOrRemove(name, value),
-            style + " setOrRemove " + name + " " + value
+            () -> style + " setOrRemove " + name + " " + value
         );
     }
 
@@ -290,7 +312,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testPatchJsonNull2() {
         this.patchAndCheck(
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.BLACK),
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.BLACK
+                ),
             JsonNode.nullNode(),
             TextStyle.EMPTY
         );
@@ -308,7 +333,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testPatchEmptyObject2() {
         this.patchAndCheck(
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.BLACK),
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.BLACK
+                ),
             JsonNode.object()
         );
     }
@@ -355,7 +383,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         this.patchAndCheck(
             TextStyle.EMPTY,
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+                .setNull(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.COLOR.value()
+                    )
+                )
         );
     }
 
@@ -365,7 +397,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode())
+                .setNull(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.COLOR.value()
+                    )
+                )
         );
     }
 
@@ -375,7 +411,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JsonNode.nullNode()),
+                .setNull(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.BACKGROUND_COLOR.value()
+                    )
+                ),
             TextStyle.EMPTY
         );
     }
@@ -386,11 +426,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
             JsonNode.object()
-                .set(
+                .setNull(
                     JsonPropertyName.with(
                         TextStylePropertyName.ALL.value()
-                    ),
-                    JsonNode.nullNode()
+                    )
                 ),
             TextStyle.EMPTY
         );
@@ -403,10 +442,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
                 .set(TextStylePropertyName.COLOR, Color.WHITE),
             JsonNode.object()
-                .set(
+                .setNull(
                     JsonPropertyName.with(
-                        TextStylePropertyName.ALL.value())
-                    , JsonNode.nullNode()
+                        TextStylePropertyName.ALL.value()
+                    )
                 ),
             TextStyle.EMPTY
         );
@@ -418,7 +457,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY
                 .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.RIGHT),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.TEXT_ALIGN.value()), JsonNode.nullNode()),
+                .setNull(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.TEXT_ALIGN.value()
+                    )
+                ),
             TextStyle.EMPTY
         );
     }
@@ -428,9 +471,17 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         this.patchAndCheck(
             TextStyle.EMPTY,
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+                .set(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.COLOR.value()
+                    ),
+                    marshall(Color.BLACK)
+                ),
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.BLACK)
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.BLACK
+                )
         );
     }
 
@@ -438,9 +489,17 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     public void testPatchSetProperty2() {
         this.patchAndCheck(
             TextStyle.EMPTY
-                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK),
+                .set(
+                    TextStylePropertyName.BACKGROUND_COLOR,
+                    Color.BLACK
+                ),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.BLACK)),
+                .set(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.COLOR.value()
+                    ),
+                    marshall(Color.BLACK)
+                ),
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
                 .set(TextStylePropertyName.COLOR, Color.BLACK)
@@ -453,9 +512,17 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             TextStyle.EMPTY
                 .set(TextStylePropertyName.COLOR, Color.BLACK),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), marshall(Color.WHITE)),
+                .set(
+                    JsonPropertyName.with(
+                        TextStylePropertyName.COLOR.value()
+                    ),
+                    marshall(Color.WHITE)
+                ),
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.WHITE)
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.WHITE
+                )
         );
     }
 
@@ -1642,8 +1709,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     private void setPaddingAndCheck(final TextStyle style,
-                                   final Padding padding,
-                                   final TextStyle expected) {
+                                    final Padding padding,
+                                    final TextStyle expected) {
         this.setPaddingAndCheck(
             style,
             Optional.of(padding),
@@ -1652,8 +1719,8 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     private void setPaddingAndCheck(final TextStyle style,
-                                   final Optional<Padding> padding,
-                                   final TextStyle expected) {
+                                    final Optional<Padding> padding,
+                                    final TextStyle expected) {
         this.checkEquals(
             expected,
             style.setPadding(padding),
