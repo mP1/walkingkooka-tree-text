@@ -243,7 +243,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testGetPropertyTopGetTopBorder() {
         this.getPropertyAndCheck(
-            BoxEdge.TOP.parseBorder("top-color: black; top-style: SOLID; top-width: 1px"),
+            BoxEdge.TOP.parseBorder("color: black; style: SOLID; width: 1px"),
             TextStylePropertyName.BORDER_TOP,
             BoxEdge.TOP.setBorder(
                 Optional.of(
@@ -262,7 +262,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testGetPropertyTopGetRightBorder() {
         this.getPropertyAndCheck(
-            BoxEdge.TOP.parseBorder("top-color: black; top-style: SOLID; top-width: 1px"),
+            BoxEdge.TOP.parseBorder("color: black; style: SOLID; width: 1px"),
             TextStylePropertyName.BORDER_BOTTOM
         );
     }
@@ -549,7 +549,7 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
     @Test
     public void testSetEdgeFromRightToLeft() {
         this.setEdgeAndCheck(
-            BoxEdge.RIGHT.parseBorder("right-color: black; right-style: SOLID; right-width: 1px;"),
+            BoxEdge.RIGHT.parseBorder("color: black; style: SOLID; width: 1px;"),
             BoxEdge.LEFT,
             BoxEdge.LEFT.parseBorder("")
         );
@@ -615,6 +615,16 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
             "top-color: BLACK; right-style: solid; bottom-width: 1px; left-color: WHITE;",
             TextStyle.parse("border-top-color: BLACK; border-right-style: solid; border-bottom-width: 1px; border-left-color: WHITE;")
                 .border(BoxEdge.ALL)
+        );
+    }
+
+    @Test
+    public void testParsePropertyNamesWithoutPrefixWhenTop() {
+        this.parseStringAndCheck(
+            BoxEdge.TOP::parseBorder,
+            "color: BLACK; style: SOLID; width: 1px;",
+            TextStyle.parse("border-top-color: BLACK; border-top-style: SOLID; border-top-width: 1px;")
+                .border(BoxEdge.TOP)
         );
     }
 
