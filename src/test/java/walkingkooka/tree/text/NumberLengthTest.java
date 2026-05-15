@@ -38,12 +38,18 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
 
     @Test
     public void testParseIncorrectUnitFails() {
-        this.parseStringFails("12EM", IllegalArgumentException.class);
+        this.parseStringFails(
+            "12EM",
+            IllegalArgumentException.class
+        );
     }
 
     @Test
     public void testParseIncorrectUnitCaseFails() {
-        this.parseStringFails("12PX", IllegalArgumentException.class);
+        this.parseStringFails(
+            "12PX",
+            IllegalArgumentException.class
+        );
     }
 
     @Test
@@ -61,6 +67,13 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
             NumberLength.with(12.5)
         );
     }
+
+    @Override
+    public NumberLength parseString(final String text) {
+        return NumberLength.parseNumber(text);
+    }
+
+    // with.............................................................................................................
 
     @Test
     public void testWith() {
@@ -136,7 +149,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
 
     @Test
     public void testClampWithGreaterThanPixelMax() {
-        final double max = 2.0 ;
+        final double max = 2.0;
 
         this.clampAndCheck(
             NumberLength.with(333.0),
@@ -148,7 +161,9 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
 
     @Test
     public void testEqualsDifferentValue() {
-        this.checkNotEquals(NumberLength.with(99.0));
+        this.checkNotEquals(
+            NumberLength.with(99.0)
+        );
     }
 
     // LengthVisitor....................................................................................................
@@ -182,19 +197,6 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         this.checkEquals("132", b.toString());
     }
 
-    // toString........................................................................................................
-
-
-    @Test
-    public void testToString() {
-        this.toStringAndCheck(NumberLength.with(0.0), "0");
-    }
-
-    @Test
-    public void testToStringDecimal() {
-        this.toStringAndCheck(NumberLength.with(10.0), "10");
-    }
-
     @Override
     NumberLength createLength() {
         return NumberLength.with(123.0);
@@ -205,21 +207,7 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         return Optional.empty();
     }
 
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public Class<NumberLength> type() {
-        return NumberLength.class;
-    }
-
-    // ParseStringTesting...............................................................................................
-
-    @Override
-    public NumberLength parseString(final String text) {
-        return NumberLength.parseNumber(text);
-    }
-
-    // JsonNodeMarshallingTesting...........................................................................................
+    // json.............................................................................................................
 
     @Override
     public NumberLength unmarshall(final JsonNode from,
@@ -227,4 +215,28 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         return Length.unmarshallNumber(from);
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            NumberLength.with(0.0),
+            "0"
+        );
+    }
+
+    @Test
+    public void testToStringDecimal() {
+        this.toStringAndCheck(
+            NumberLength.with(10.0),
+            "10"
+        );
+    }
+
+    // ClassTesting.....................................................................................................
+
+    @Override
+    public Class<NumberLength> type() {
+        return NumberLength.class;
+    }
 }
