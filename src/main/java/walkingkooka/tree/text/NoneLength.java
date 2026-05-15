@@ -58,6 +58,16 @@ public final class NoneLength extends Length<Double> implements HasValue<Double>
         return 0;
     }
 
+    /**
+     * If the value is 0 return {@link NoneLength} otherwise create a {@link NumberLength}.
+     */
+    @Override
+    Length<?> setLength(final Length<?> length) {
+        return length.doubleValue() == 0 ?
+            INSTANCE :
+            length;
+    }
+
     // unit.............................................................................................................
 
     @Override

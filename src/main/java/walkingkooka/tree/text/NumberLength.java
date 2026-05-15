@@ -70,6 +70,15 @@ public final class NumberLength extends Length<Double> implements HasValue<Doubl
         return this.value;
     }
 
+    @Override
+    NumberLength setLength(final Length<?> length) {
+        return length.isNumber() ?
+            (NumberLength) length :
+            with(
+                length.doubleValue() // copy value
+            );
+    }
+
     // unit.............................................................................................................
 
     @Override

@@ -102,6 +102,50 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         );
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampWithNegativeNumberMin() {
+        this.clampAndCheck(
+            NumberLength.with(55.0),
+            Length.number(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativePixelMin() {
+        this.clampAndCheck(
+            NumberLength.with(55.0),
+            Length.pixel(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativeNumberMax() {
+        final NumberLength max = Length.number(-1.0);
+
+        this.clampAndCheck(
+            NumberLength.with(22.0),
+            Length.number(-1.0),
+            max,
+            max
+        );
+    }
+
+    @Test
+    public void testClampWithGreaterThanPixelMax() {
+        final double max = 2.0 ;
+
+        this.clampAndCheck(
+            NumberLength.with(333.0),
+            Length.number(-1.0),
+            Length.pixel(max),
+            NumberLength.with(max)
+        );
+    }
+
     @Test
     public void testEqualsDifferentValue() {
         this.checkNotEquals(NumberLength.with(99.0));

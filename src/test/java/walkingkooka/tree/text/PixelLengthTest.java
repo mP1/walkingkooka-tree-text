@@ -125,6 +125,50 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
         );
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampWithNegativeNumberMin() {
+        this.clampAndCheck(
+            PixelLength.with(55.0),
+            Length.number(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativePixelMin() {
+        this.clampAndCheck(
+            PixelLength.with(55.0),
+            Length.pixel(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativeNumberMax() {
+        final double max = 2.0 ;
+
+        this.clampAndCheck(
+            PixelLength.with(333.0),
+            Length.number(-1.0),
+            Length.pixel(max),
+            PixelLength.with(max)
+        );
+    }
+
+    @Test
+    public void testClampWithGreaterThanPixelMax() {
+        final PixelLength max = Length.pixel(-1.0);
+
+        this.clampAndCheck(
+            PixelLength.with(22.0),
+            Length.number(-1.0),
+            max,
+            max
+        );
+    }
+
     @Test
     public void testEqualsDifferentValue() {
         this.checkNotEquals(
