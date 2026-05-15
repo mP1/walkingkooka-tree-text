@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.HasValue;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
 import walkingkooka.text.cursor.parser.Parsers;
 
@@ -28,7 +27,7 @@ import java.util.Optional;
  * A length with only a positive number and no unit.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NumberLength extends Length<Double> implements HasValue<Double> {
+public final class NumberLength extends Length<Double> {
 
     static NumberLength parseNumber0(final String text) {
         return with(
@@ -61,21 +60,11 @@ public final class NumberLength extends Length<Double> implements HasValue<Doubl
     private final Double value;
 
     @Override
-    double doubleValue() {
-        return this.value;
-    }
-
-    @Override
-    public double pixelValue() {
-        return this.value;
-    }
-
-    @Override
     NumberLength setLength(final Length<?> length) {
         return length.isNumber() ?
             (NumberLength) length :
             with(
-                length.doubleValue() // copy value
+                length.value() // copy value
             );
     }
 
@@ -102,7 +91,10 @@ public final class NumberLength extends Length<Double> implements HasValue<Doubl
 
     @Override
     boolean equals0(final Length<?> other) {
-        return this.doubleValue() == other.doubleValue();
+        return 0 == Double.compare(
+            this.value,
+            other.value()
+        );
     }
 
     @Override

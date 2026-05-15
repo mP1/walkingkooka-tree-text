@@ -105,16 +105,6 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         );
     }
 
-    @Test
-    public void testPixelValue() {
-        final double value = -1.25;
-
-        this.pixelLengthAndCheck(
-            NumberLength.with(value),
-            value
-        );
-    }
-
     // clamp............................................................................................................
 
     @Test

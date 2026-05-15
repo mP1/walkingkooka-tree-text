@@ -50,22 +50,6 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
         super();
     }
 
-    final void pixelLengthAndCheck(final L length,
-                                   final double expected) {
-        this.checkEquals(
-            expected,
-            length.pixelValue(),
-            () -> "" + length + " pixelLength"
-        );
-    }
-
-    final void pixelLengthFails(final Length<?> length) {
-        assertThrows(
-            UnsupportedOperationException.class,
-            () -> length.pixelValue()
-        );
-    }
-
     // clamp............................................................................................................
 
     @Test

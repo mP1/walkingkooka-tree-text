@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CharSequences;
@@ -40,7 +41,8 @@ import java.util.function.Function;
  * Base class for any measure.
  */
 public abstract class Length<V> implements HasText,
-    CanBeEmpty {
+    CanBeEmpty,
+    HasValue<Double> {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.
@@ -137,13 +139,6 @@ public abstract class Length<V> implements HasText,
     Length() {
     }
 
-    /**
-     * Returns this length in pixels or throws a {@link UnsupportedOperationException}.
-     */
-    abstract public double pixelValue();
-
-    abstract double doubleValue();
-
     // clamp............................................................................................................
 
     /**
@@ -161,8 +156,8 @@ public abstract class Length<V> implements HasText,
             throw new IllegalArgumentException("Invalid max, must not be normal");
         }
 
-        final double minDoubleValue = min.doubleValue();
-        final double maxDoubleValue = max.doubleValue();
+        final double minDoubleValue = min.value();
+        final double maxDoubleValue = max.value();
 
         if (minDoubleValue > maxDoubleValue) {
             throw new IllegalArgumentException("Invalid min " + min + " > max " + max);
@@ -173,7 +168,7 @@ public abstract class Length<V> implements HasText,
         if (this.isNormal()) {
             clamped = this;
         } else {
-            final double doubleValue = this.pixelValue();
+            final double doubleValue = this.value();
             if (doubleValue < minDoubleValue) {
                 clamped = this.setLength(min);
             } else {
@@ -316,7 +311,7 @@ public abstract class Length<V> implements HasText,
     public final boolean isEmpty() {
         return false == this.isNormal() &&
             0 == Math.signum(
-            this.doubleValue()
+            this.value()
         );
     }
 }

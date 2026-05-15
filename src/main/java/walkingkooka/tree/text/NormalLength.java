@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.HasValue;
 import walkingkooka.text.CharSequences;
 
 import java.util.Optional;
@@ -26,7 +25,7 @@ import java.util.Optional;
  * A normal measurement.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NormalLength extends Length<Void> implements HasValue<Void> {
+public final class NormalLength extends Length<Void> {
 
     final static String TEXT = "normal";
 
@@ -44,17 +43,7 @@ public final class NormalLength extends Length<Void> implements HasValue<Void> {
     }
 
     @Override
-    public Void value() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    double doubleValue() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public double pixelValue() {
+    public Double value() {
         throw new UnsupportedOperationException();
     }
 

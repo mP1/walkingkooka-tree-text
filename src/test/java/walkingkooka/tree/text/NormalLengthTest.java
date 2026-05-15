@@ -45,8 +45,11 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
     }
 
     @Test
-    public void testPixelValueFails() {
-        this.pixelLengthFails(NormalLength.INSTANCE);
+    public void testValueFails() {
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> NormalLength.INSTANCE.value()
+        );
     }
 
     // clamp............................................................................................................
