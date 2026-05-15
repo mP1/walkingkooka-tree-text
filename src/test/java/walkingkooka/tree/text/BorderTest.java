@@ -714,6 +714,77 @@ public final class BorderTest extends BorderMarginPaddingTestCase<Border> {
         );
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampNothing() {
+        this.clampAndCheck(
+            "BLACK SOLID 1px",
+            Length.none(),
+            Length.number(99.0)
+        );
+    }
+
+    @Test
+    public void testClampMin() {
+        this.clampAndCheck(
+            "BLACK SOLID -1px",
+            Length.none(),
+            Length.number(99.0),
+            "BLACK SOLID 0px"
+        );
+    }
+
+    @Test
+    public void testClampMinSome() {
+        this.clampAndCheck(
+            "border-top-color: BLACK; top-width: -11px; right-width: -22px; bottom-width: -33px; left-width: -44px;",
+            Length.number(1.0),
+            Length.number(2.0),
+            "border-top-color: BLACK; border-width: 1.0px"
+        );
+    }
+
+    @Test
+    public void testClampMax() {
+        this.clampAndCheck(
+            "BLACK SOLID 9999px",
+            Length.none(),
+            Length.number(99.0),
+            "BLACK SOLID 99px"
+        );
+    }
+
+    @Test
+    public void testClampMaxSome() {
+        this.clampAndCheck(
+            "border-top-color: BLACK; top-width: 11px; right-width: 22px; bottom-width: 33px; left-width: 44px;",
+            Length.number(1.0),
+            Length.number(2.0),
+            "border-top-color: BLACK; border-width: 2.0px"
+        );
+    }
+
+    @Test
+    public void testClampTopMax() {
+        this.clampAndCheck(
+            BoxEdge.TOP.parseBorder("width: 99"),
+            Length.number(1.0),
+            Length.number(2.0),
+            BoxEdge.TOP.parseBorder("width: 2.0")
+        );
+    }
+
+    @Test
+    public void testClampRightMax() {
+        this.clampAndCheck(
+            BoxEdge.RIGHT.parseBorder("width: 99"),
+            Length.number(1.0),
+            Length.number(2.0),
+            BoxEdge.RIGHT.parseBorder("width: 2.0")
+        );
+    }
+
     // json.............................................................................................................
 
     @Test

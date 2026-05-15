@@ -197,6 +197,87 @@ public final class MarginTest extends BorderMarginPaddingTestCase<Margin> {
         );
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampNothing() {
+        this.clampAndCheck(
+            "1px 2px 3px 4px",
+            Length.none(),
+            Length.number(99.0)
+        );
+    }
+
+    @Test
+    public void testClampMin() {
+        this.clampAndCheck(
+            "1px",
+            Length.number(2.0),
+            Length.number(99.0),
+            "2.0px"
+        );
+    }
+
+    @Test
+    public void testClampMinSome() {
+        this.clampAndCheck(
+            "-1px 1px 2px -4px",
+            Length.number(1.0),
+            Length.number(20.0),
+            "1px 1px 2px 1px"
+        );
+    }
+
+    @Test
+    public void testClampMinTop() {
+        this.clampAndCheck(
+            BoxEdge.TOP.parseMargin("-1px"),
+            Length.number(2.0),
+            Length.number(99.0),
+            BoxEdge.TOP.parseMargin("2px")
+        );
+    }
+
+    @Test
+    public void testClampMax() {
+        this.clampAndCheck(
+            "30",
+            Length.none(),
+            Length.number(20.0),
+            "20"
+        );
+    }
+
+    @Test
+    public void testClampMaxSome() {
+        this.clampAndCheck(
+            "1px 100px 200px 4px",
+            Length.number(1.0),
+            Length.number(20.0),
+            "1px 20px 20px 4px"
+        );
+    }
+
+    @Test
+    public void testClampMaxTop() {
+        this.clampAndCheck(
+            BoxEdge.TOP.parseMargin("100px"),
+            Length.number(1.0),
+            Length.number(20.0),
+            BoxEdge.TOP.parseMargin("20px")
+        );
+    }
+
+    @Test
+    public void testClampMinAndMax() {
+        this.clampAndCheck(
+            "-1px 2px 3px 100px",
+            Length.number(1.0),
+            Length.number(99.0),
+            "1px 2px 3px 99px"
+        );
+    }
+
     // toString.........................................................................................................
 
     @Test

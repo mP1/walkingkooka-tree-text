@@ -123,6 +123,18 @@ public final class Margin extends MarginOrPadding {
         );
     }
 
+    // clamp............................................................................................................
+
+    @Override
+    public Margin clamp(final Length<?> min,
+                        final Length<?> max) {
+        return this.clampBorderMarginPadding(
+            min,
+            max,
+            BoxEdge::marginPropertyName
+        ).cast();
+    }
+
     // HasText..........................................................................................................
 
     @Override

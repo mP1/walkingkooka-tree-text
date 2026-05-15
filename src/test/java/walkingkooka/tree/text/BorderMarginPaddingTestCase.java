@@ -513,6 +513,79 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         }
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public final void testClampWithNullMinFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .clamp(
+                    null,
+                    Length.none()
+                )
+        );
+    }
+
+    @Test
+    public final void testClampWithNullMaxFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createBorderMarginPadding()
+                .clamp(
+                    null,
+                    Length.none()
+                )
+        );
+    }
+
+    final void clampAndCheck(final String borderMappingPadding,
+                             final Length<?> min,
+                             final Length<?> max) {
+        this.clampAndCheck(
+            this.parseString(borderMappingPadding),
+            min,
+            max
+        );
+    }
+
+    final void clampAndCheck(final T borderMappingPadding,
+                             final Length<?> min,
+                             final Length<?> max) {
+        this.clampAndCheck(
+            borderMappingPadding,
+            min,
+            max,
+            borderMappingPadding
+        );
+    }
+
+    final void clampAndCheck(final String borderMappingPadding,
+                             final Length<?> min,
+                             final Length<?> max,
+                             final String expected) {
+        this.clampAndCheck(
+            this.parseString(borderMappingPadding),
+            min,
+            max,
+            this.parseString(expected)
+        );
+    }
+
+    final void clampAndCheck(final T borderMappingPadding,
+                             final Length<?> min,
+                             final Length<?> max,
+                             final T expected) {
+        this.checkEquals(
+            expected,
+            borderMappingPadding.clamp(
+                min,
+                max
+            ),
+            () -> borderMappingPadding + " clamp " + min + " " + max
+        );
+    }
+
     // equals...........................................................................................................
 
     @Test
