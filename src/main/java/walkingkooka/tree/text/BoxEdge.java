@@ -260,10 +260,37 @@ public enum BoxEdge {
     }
 
     BoxEdge() {
+        final String name = this.name();
+
         // LEFT -> left
-        this.textName = this.name()
-            .toLowerCase();
+        this.textName = name.toLowerCase();
+
+        final String prefixConcat = "ALL".equals(name) ?
+            "" :
+            this.textName;
+
+        this.borderPropertyNamePrefix = Border.PREFIX.concat(prefixConcat);
+        this.marginPropertyNamePrefix = Margin.PREFIX.concat(prefixConcat);
+        this.paddingPropertyNamePrefix = Padding.PREFIX.concat(prefixConcat);
     }
+
+    public final String borderPropertyNamePrefix() {
+        return this.borderPropertyNamePrefix;
+    }
+
+    final String borderPropertyNamePrefix;
+
+    public final String marginPropertyNamePrefix() {
+        return this.marginPropertyNamePrefix;
+    }
+
+    final String marginPropertyNamePrefix;
+
+    public final String paddingPropertyNamePrefix() {
+        return this.paddingPropertyNamePrefix;
+    }
+
+    final String paddingPropertyNamePrefix;
 
     /**
      * Returns the opposite {@link BoxEdge}

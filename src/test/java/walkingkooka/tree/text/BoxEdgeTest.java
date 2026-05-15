@@ -209,6 +209,111 @@ public final class BoxEdgeTest implements TreePrintableTesting,
         );
     }
 
+    // borderPropertyNamePrefix.........................................................................................
+
+    @Test
+    public void testBorderPropertyNamePrefixAll() {
+        this.borderPropertyNamePrefixAndCheck(
+            BoxEdge.ALL,
+            "border-"
+        );
+    }
+
+    @Test
+    public void testBorderPropertyNamePrefixTop() {
+        this.borderPropertyNamePrefixAndCheck(
+            BoxEdge.TOP,
+            "border-top"
+        );
+    }
+
+    @Test
+    public void testBorderPropertyNamePrefixRight() {
+        this.borderPropertyNamePrefixAndCheck(
+            BoxEdge.RIGHT,
+            "border-right"
+        );
+    }
+
+    private void borderPropertyNamePrefixAndCheck(final BoxEdge boxEdge,
+                                              final String expected) {
+        this.checkEquals(
+            expected,
+            boxEdge.borderPropertyNamePrefix(),
+            boxEdge::toString
+        );
+    }
+
+    // marginPropertyNamePrefix.........................................................................................
+
+    @Test
+    public void testMarginPropertyNamePrefixAll() {
+        this.marginPropertyNamePrefixAndCheck(
+            BoxEdge.ALL,
+            "margin-"
+        );
+    }
+
+    @Test
+    public void testMarginPropertyNamePrefixTop() {
+        this.marginPropertyNamePrefixAndCheck(
+            BoxEdge.TOP,
+            "margin-top"
+        );
+    }
+
+    @Test
+    public void testMarginPropertyNamePrefixRight() {
+        this.marginPropertyNamePrefixAndCheck(
+            BoxEdge.RIGHT,
+            "margin-right"
+        );
+    }
+
+    private void marginPropertyNamePrefixAndCheck(final BoxEdge boxEdge,
+                                              final String expected) {
+        this.checkEquals(
+            expected,
+            boxEdge.marginPropertyNamePrefix(),
+            boxEdge::toString
+        );
+    }
+
+    // paddingPropertyNamePrefix........................................................................................
+
+    @Test
+    public void testPaddingPropertyNamePrefixAll() {
+        this.paddingPropertyNamePrefixAndCheck(
+            BoxEdge.ALL,
+            "padding-"
+        );
+    }
+
+    @Test
+    public void testPaddingPropertyNamePrefixTop() {
+        this.paddingPropertyNamePrefixAndCheck(
+            BoxEdge.TOP,
+            "padding-top"
+        );
+    }
+
+    @Test
+    public void testPaddingPropertyNamePrefixRight() {
+        this.paddingPropertyNamePrefixAndCheck(
+            BoxEdge.RIGHT,
+            "padding-right"
+        );
+    }
+
+    private void paddingPropertyNamePrefixAndCheck(final BoxEdge boxEdge,
+                                              final String expected) {
+        this.checkEquals(
+            expected,
+            boxEdge.paddingPropertyNamePrefix(),
+            boxEdge::toString
+        );
+    }
+
     // margin...........................................................................................................
 
     @Test
