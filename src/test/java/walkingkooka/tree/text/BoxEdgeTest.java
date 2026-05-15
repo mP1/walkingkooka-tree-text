@@ -223,7 +223,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testBorderPropertyNamePrefixTop() {
         this.borderPropertyNamePrefixAndCheck(
             BoxEdge.TOP,
-            "border-top"
+            "border-top-"
         );
     }
 
@@ -231,7 +231,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testBorderPropertyNamePrefixRight() {
         this.borderPropertyNamePrefixAndCheck(
             BoxEdge.RIGHT,
-            "border-right"
+            "border-right-"
         );
     }
 
@@ -258,7 +258,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testMarginPropertyNamePrefixTop() {
         this.marginPropertyNamePrefixAndCheck(
             BoxEdge.TOP,
-            "margin-top"
+            "margin-top-"
         );
     }
 
@@ -266,7 +266,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testMarginPropertyNamePrefixRight() {
         this.marginPropertyNamePrefixAndCheck(
             BoxEdge.RIGHT,
-            "margin-right"
+            "margin-right-"
         );
     }
 
@@ -293,7 +293,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testPaddingPropertyNamePrefixTop() {
         this.paddingPropertyNamePrefixAndCheck(
             BoxEdge.TOP,
-            "padding-top"
+            "padding-top-"
         );
     }
 
@@ -301,7 +301,7 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     public void testPaddingPropertyNamePrefixRight() {
         this.paddingPropertyNamePrefixAndCheck(
             BoxEdge.RIGHT,
-            "padding-right"
+            "padding-right-"
         );
     }
 
