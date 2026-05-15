@@ -476,7 +476,7 @@ public enum BoxEdge {
         return hasPropertyNames(text) ?
             TextStyle.parse0(
                 text,
-                Border.PREFIX,
+                this.borderPropertyNamePrefix(),
                 (n) -> n.isBorder() && this.isTextStyleProperty(n),
                 InvalidTextStylePropertyNameException::border
             ).border(this) :
@@ -504,7 +504,7 @@ public enum BoxEdge {
     public final Margin parseMargin(final String text) {
         return this.parseMarginPadding(
             text,
-            Margin.PREFIX,
+            this.marginPropertyNamePrefix(),
             TextStylePropertyName::isMargin,
             InvalidTextStylePropertyNameException::margin,
             (TextStyle textStyle) -> textStyle.margin(this),
@@ -532,7 +532,7 @@ public enum BoxEdge {
     public final Padding parsePadding(final String text) {
         return this.parseMarginPadding(
             text,
-            Padding.PREFIX,
+            this.paddingPropertyNamePrefix(),
             TextStylePropertyName::isPadding,
             InvalidTextStylePropertyNameException::padding,
             (TextStyle textStyle) -> textStyle.padding(this),
