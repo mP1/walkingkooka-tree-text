@@ -48,7 +48,7 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
     public void testParseUpperCaseFails() {
         this.parseStringFails(
             "NONE",
-            IllegalArgumentException.class
+            new IllegalArgumentException("Invalid none text \"NONE\"")
         );
     }
 

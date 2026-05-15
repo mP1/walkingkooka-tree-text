@@ -32,7 +32,7 @@ public final class NoneLength extends Length<Double> implements HasValue<Double>
 
     static NoneLength parseNone0(final String text) {
         if (!TEXT.equals(text)) {
-            throw new IllegalArgumentException("Invalid normal text " + CharSequences.quoteAndEscape(text));
+            throw new IllegalArgumentException("Invalid none text " + CharSequences.quoteAndEscape(text));
         }
         return INSTANCE;
     }
