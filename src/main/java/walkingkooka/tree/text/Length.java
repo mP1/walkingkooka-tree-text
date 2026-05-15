@@ -142,6 +142,56 @@ public abstract class Length<V> implements HasText {
 
     abstract double doubleValue();
 
+    // clamp............................................................................................................
+
+    /**
+     * Useful to clamp a value between the given boundaries ignoring units. {@link NormalLength} cannot be clamped and
+     * will always return the original value ignore the min/max.
+     */
+    public final Length<?> clamp(final Length<?> min,
+                                 final Length<?> max) {
+        Objects.requireNonNull(min, "min");
+        if(min.isNormal()) {
+            throw new IllegalArgumentException("Invalid min, must not be normal");
+        }
+        Objects.requireNonNull(max, "max");
+        if(max.isNormal()) {
+            throw new IllegalArgumentException("Invalid max, must not be normal");
+        }
+
+        final double minDoubleValue = min.doubleValue();
+        final double maxDoubleValue = max.doubleValue();
+
+        if (minDoubleValue > maxDoubleValue) {
+            throw new IllegalArgumentException("Invalid min " + min + " > max " + max);
+        }
+
+        final Length<?> clamped;
+
+        if (this.isNormal()) {
+            clamped = this;
+        } else {
+            final double doubleValue = this.pixelValue();
+            if (doubleValue < minDoubleValue) {
+                clamped = this.setLength(min);
+            } else {
+                if (doubleValue > maxDoubleValue) {
+                    clamped = this.setLength(max);
+                } else {
+                    clamped = this;
+                }
+            }
+        }
+
+        return clamped;
+    }
+
+    /**
+     * Some lengths have a unit others do not. This helps {@link NumberLength} update the number component, keeping the original unit
+     * as necessary.
+     */
+    abstract Length<?> setLength(final Length<?> length);
+
     /**
      * The unit portion of this length.
      */

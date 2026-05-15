@@ -58,6 +58,15 @@ public final class NormalLength extends Length<Void> implements HasValue<Void> {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * {@link NormalLength} do not have a value, so setLength should never be called because previous comparisons by
+     * clamp will fail.
+     */
+    @Override
+    Length<?> setLength(final Length<?> length) {
+        throw new UnsupportedOperationException();
+    }
+
     // unit.............................................................................................................
 
     @Override

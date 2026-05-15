@@ -49,6 +49,35 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
         this.pixelLengthFails(NormalLength.INSTANCE);
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampNone() {
+        this.clampAndCheck(
+            this.createLength(),
+            Length.none(),
+            Length.none()
+        );
+    }
+
+    @Test
+    public void testClampNumber() {
+        this.clampAndCheck(
+            this.createLength(),
+            Length.number(1.0),
+            Length.number(2.0)
+        );
+    }
+
+    @Test
+    public void testClampPixel() {
+        this.clampAndCheck(
+            this.createLength(),
+            Length.pixel(1.0),
+            Length.pixel(2.0)
+        );
+    }
+
     // LengthVisitor....................................................................................................
 
     @Test

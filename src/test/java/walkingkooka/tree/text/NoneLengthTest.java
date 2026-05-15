@@ -43,6 +43,50 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
         this.pixelLengthAndCheck(NoneLength.INSTANCE, 0);
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampWithNegativeNumberMin() {
+        this.clampAndCheck(
+            this.createLength(),
+            Length.number(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativePixelMin() {
+        this.clampAndCheck(
+            this.createLength(),
+            Length.pixel(-1.0),
+            Length.number(222.0)
+        );
+    }
+
+    @Test
+    public void testClampWithNegativeNumberMax() {
+        final NumberLength max = Length.number(-1.0);
+
+        this.clampAndCheck(
+            this.createLength(),
+            Length.number(-1.0),
+            max,
+            max
+        );
+    }
+
+    @Test
+    public void testClampWithGreaterThanPixelMax() {
+        final PixelLength max = Length.pixel(-1.0);
+
+        this.clampAndCheck(
+            this.createLength(),
+            Length.number(-1.0),
+            max,
+            max
+        );
+    }
+
     // LengthVisitor....................................................................................................
 
     @Test

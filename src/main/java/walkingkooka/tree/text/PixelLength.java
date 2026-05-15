@@ -85,6 +85,15 @@ public final class PixelLength extends Length<Double> implements HasValue<Double
         return this.doubleValue();
     }
 
+    @Override
+    PixelLength setLength(final Length<?> length) {
+        return length.isPixel() ?
+            (PixelLength) length :
+            with(
+                length.doubleValue() // copy value keeping PX unit
+            );
+    }
+
     // unit.............................................................................................................
 
     @Override

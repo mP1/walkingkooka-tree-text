@@ -65,6 +65,108 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
         );
     }
 
+    // clamp............................................................................................................
+
+    @Test
+    public void testClampWithNullMinFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createLength()
+                .clamp(
+                    null,
+                    Length.none()
+                )
+        );
+    }
+
+    @Test
+    public void testClampWithNormalMinFails() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> this.createLength()
+                .clamp(
+                    Length.normal(),
+                    Length.none()
+                )
+        );
+    }
+
+    @Test
+    public void testClampWithNullMaxFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createLength()
+                .clamp(
+                    Length.none(),
+                    null
+                )
+        );
+    }
+
+    @Test
+    public void testClampWithNormalMaxFails() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> this.createLength()
+                .clamp(
+                    Length.none(),
+                    Length.normal()
+                )
+        );
+    }
+
+    @Test
+    public void testClampWithMinGreaterThanMaxFails() {
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> this.createLength()
+                .clamp(
+                    Length.number(111.0),
+                    Length.number(23.0)
+                )
+        );
+    }
+
+    @Test
+    public void testClampWithMinGreaterThanMaxFails2() {
+        assertThrows(
+            IllegalArgumentException
+                .class,
+            () -> this.createLength()
+                .clamp(
+                    Length.pixel(111.0),
+                    Length.number(23.0)
+                )
+        );
+    }
+
+    final void clampAndCheck(final L length,
+                             final Length<?> min,
+                             final Length<?> max) {
+        this.clampAndCheck(
+            length,
+            min,
+            max,
+            length
+        );
+    }
+
+    final void clampAndCheck(final L length,
+                             final Length<?> min,
+                             final Length<?> max,
+                             final Length<?> expected) {
+        this.checkEquals(
+            expected,
+            length.clamp(
+                min,
+                max
+            ),
+            () -> length + " clamp " + min + " " + max
+        );
+    }
+
+    // unit.............................................................................................................
+
     @Test
     public final void testUnit() {
         final L length = this.createLength();
