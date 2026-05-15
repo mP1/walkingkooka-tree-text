@@ -30,13 +30,34 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
 
     @Test
     public void testParseInvalidTextFails() {
-        this.parseStringFails("12px", IllegalArgumentException.class);
+        this.parseStringFails(
+            "12px",
+            IllegalArgumentException.class
+        );
     }
 
     @Test
-    public void testParse() {
-        this.parseStringAndCheck("none", NoneLength.INSTANCE);
+    public void testParseLowerCase() {
+        this.parseStringAndCheck(
+            "none",
+            NoneLength.INSTANCE
+        );
     }
+
+    @Test
+    public void testParseUpperCaseFails() {
+        this.parseStringFails(
+            "NONE",
+            IllegalArgumentException.class
+        );
+    }
+
+    @Override
+    public NoneLength parseString(final String text) {
+        return Length.parseNone(text);
+    }
+
+    // pixelValue.......................................................................................................
 
     @Test
     public void testPixelValue() {
@@ -140,13 +161,6 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
     @Override
     public Class<NoneLength> type() {
         return NoneLength.class;
-    }
-
-    // ParseStringTesting...............................................................................................
-
-    @Override
-    public NoneLength parseString(final String text) {
-        return Length.parseNone(text);
     }
 
     // JsonNodeMarshallTesting..........................................................................................
