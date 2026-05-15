@@ -233,6 +233,24 @@ public final class NumberLengthTest extends LengthTestCase<NumberLength, Double>
         );
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmpty() {
+        this.isEmptyAndCheck(
+            NumberLength.with(123.0),
+            false
+        );
+    }
+
+    @Test
+    public void testIsEmptyWithZero() {
+        this.isEmptyAndCheck(
+            NumberLength.with(0.0),
+            true
+        );
+    }
+
     // ClassTesting.....................................................................................................
 
     @Override

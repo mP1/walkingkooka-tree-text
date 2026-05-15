@@ -261,6 +261,24 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
         return Length.unmarshallPixel(from);
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmpty() {
+        this.isEmptyAndCheck(
+            PixelLength.with(123.0),
+            false
+        );
+    }
+
+    @Test
+    public void testIsEmptyWithZero() {
+        this.isEmptyAndCheck(
+            PixelLength.with(0.0),
+            true
+        );
+    }
+
     // class............................................................................................................
 
     @Override

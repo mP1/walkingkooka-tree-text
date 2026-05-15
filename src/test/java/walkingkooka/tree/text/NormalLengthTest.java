@@ -109,6 +109,16 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
         this.checkEquals("132", b.toString());
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmpty() {
+        this.isEmptyAndCheck(
+            this.createLength(),
+            false
+        );
+    }
+
     // toString........................................................................................................
 
     @Test
