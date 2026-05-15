@@ -267,7 +267,7 @@ public enum BoxEdge {
 
         final String prefixConcat = "ALL".equals(name) ?
             "" :
-            this.textName;
+            this.textName.concat("-");
 
         this.borderPropertyNamePrefix = Border.PREFIX.concat(prefixConcat);
         this.marginPropertyNamePrefix = Margin.PREFIX.concat(prefixConcat);
