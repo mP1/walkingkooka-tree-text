@@ -57,13 +57,6 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
         return Length.parseNone(text);
     }
 
-    // pixelValue.......................................................................................................
-
-    @Test
-    public void testPixelValue() {
-        this.pixelLengthAndCheck(NoneLength.INSTANCE, 0);
-    }
-
     // clamp............................................................................................................
 
     @Test

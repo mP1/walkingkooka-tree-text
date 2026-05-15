@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.HasValue;
 import walkingkooka.text.CharSequences;
 
 import java.util.Optional;
@@ -26,7 +25,7 @@ import java.util.Optional;
  * A none measurement.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NoneLength extends Length<Double> implements HasValue<Double> {
+public final class NoneLength extends Length<Double> {
 
     final static String TEXT = "none";
 
@@ -44,18 +43,8 @@ public final class NoneLength extends Length<Double> implements HasValue<Double>
     }
 
     @Override
-    public double pixelValue() {
-        return 0;
-    }
-
-    @Override
     public Double value() {
         return 0.0;
-    }
-
-    @Override
-    double doubleValue() {
-        return 0;
     }
 
     /**
@@ -63,7 +52,7 @@ public final class NoneLength extends Length<Double> implements HasValue<Double>
      */
     @Override
     Length<?> setLength(final Length<?> length) {
-        return length.doubleValue() == 0 ?
+        return length.value() == 0 ?
             INSTANCE :
             length;
     }

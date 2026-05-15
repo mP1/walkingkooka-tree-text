@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.HasValue;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
 import walkingkooka.text.cursor.parser.Parser;
@@ -32,7 +31,7 @@ import java.util.Optional;
  * A measurement in pixels.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class PixelLength extends Length<Double> implements HasValue<Double> {
+public final class PixelLength extends Length<Double> {
 
     private final static LengthUnit<Double, PixelLength> UNIT = LengthUnit.PIXEL;
 
@@ -76,21 +75,11 @@ public final class PixelLength extends Length<Double> implements HasValue<Double
     private final double value;
 
     @Override
-    double doubleValue() {
-        return this.value;
-    }
-
-    @Override
-    public double pixelValue() {
-        return this.doubleValue();
-    }
-
-    @Override
     PixelLength setLength(final Length<?> length) {
         return length.isPixel() ?
             (PixelLength) length :
             with(
-                length.doubleValue() // copy value keeping PX unit
+                length.value() // copy value keeping PX unit
             );
     }
 
@@ -119,7 +108,10 @@ public final class PixelLength extends Length<Double> implements HasValue<Double
 
     @Override
     boolean equals0(final Length<?> other) {
-        return 0 == Double.compare(this.value, other.doubleValue());
+        return 0 == Double.compare(
+            this.value,
+            other.value()
+        );
     }
 
     @Override

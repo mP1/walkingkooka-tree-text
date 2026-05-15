@@ -107,24 +107,6 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
         );
     }
 
-    @Test
-    public void testPixelValue1() {
-        final double value = 1;
-        this.pixelLengthAndCheck(
-            PixelLength.with(value),
-            value
-        );
-    }
-
-    @Test
-    public void testPixelValue2() {
-        final double value = 2;
-        this.pixelLengthAndCheck(
-            PixelLength.with(value),
-            value
-        );
-    }
-
     // clamp............................................................................................................
 
     @Test
