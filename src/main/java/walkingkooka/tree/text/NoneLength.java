@@ -26,7 +26,7 @@ import java.util.Optional;
  * A none measurement.
  */
 @SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
-public final class NoneLength extends Length<Void> implements HasValue<Void> {
+public final class NoneLength extends Length<Double> implements HasValue<Double> {
 
     final static String TEXT = "none";
 
@@ -49,19 +49,19 @@ public final class NoneLength extends Length<Void> implements HasValue<Void> {
     }
 
     @Override
-    public Void value() {
-        throw new UnsupportedOperationException();
+    public Double value() {
+        return 0.0;
     }
 
     @Override
     double doubleValue() {
-        throw new UnsupportedOperationException();
+        return 0;
     }
 
     // unit.............................................................................................................
 
     @Override
-    public Optional<LengthUnit<Void, Length<Void>>> unit() {
+    public Optional<LengthUnit<Double, Length<Double>>> unit() {
         return Optional.empty();
     }
 
