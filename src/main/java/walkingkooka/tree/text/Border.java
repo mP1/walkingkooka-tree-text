@@ -166,6 +166,18 @@ public final class Border extends BorderMarginPadding {
         );
     }
 
+    // clamp............................................................................................................
+
+    @Override
+    public Border clamp(final Length<?> min,
+                        final Length<?> max) {
+        return this.clampBorderMarginPadding(
+            min,
+            max,
+            BoxEdge::borderWidthPropertyName
+        ).cast();
+    }
+
     // HasText..........................................................................................................
 
     /**

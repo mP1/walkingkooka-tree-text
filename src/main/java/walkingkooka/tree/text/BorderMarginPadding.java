@@ -30,6 +30,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Base class for {@link Border}, {@link Margin} and {@link Padding}.
@@ -182,6 +183,65 @@ abstract class BorderMarginPadding implements HasTextStyle,
     @Override
     public final boolean isEmpty() {
         return this.textStyle.isEmpty();
+    }
+
+    // clamp............................................................................................................
+
+    public abstract BorderMarginPadding clamp(final Length<?> min,
+                                              final Length<?> max);
+
+    final BorderMarginPadding clampBorderMarginPadding(final Length<?> min,
+                                                       final Length<?> max,
+                                                       final Function<BoxEdge, TextStylePropertyName<Length<?>>> lengthPropertyNameGetter) {
+        Objects.requireNonNull(min, "min");
+        Objects.requireNonNull(max, "max");
+
+        BorderMarginPadding temp = this;
+
+        final BoxEdge boxEdge = this.edge();
+        switch (boxEdge) {
+            case TOP:
+            case RIGHT:
+            case BOTTOM:
+            case LEFT:
+                temp = temp.clampBorderLength(
+                    lengthPropertyNameGetter.apply(boxEdge),
+                    min,
+                    max
+                );
+                break;
+            default:
+                for (BoxEdge b : BoxEdge.topRightBottomLeft()) {
+                    temp = temp.clampBorderLength(
+                        lengthPropertyNameGetter.apply(b),
+                        min,
+                        max
+                    );
+                }
+                break;
+        }
+
+        return temp;
+    }
+
+    private BorderMarginPadding clampBorderLength(final TextStylePropertyName<Length<?>> property,
+                                                  final Length<?> min,
+                                                  final Length<?> max) {
+        BorderMarginPadding temp = this;
+
+        final Length<?> valueOrNull = temp.getProperty(property)
+            .orElse(null);
+        if (null != valueOrNull) {
+            temp = this.setProperty(
+                property,
+                valueOrNull.clamp(
+                    min,
+                    max
+                )
+            );
+        }
+
+        return temp;
     }
 
     // helper...........................................................................................................
