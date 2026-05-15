@@ -25,9 +25,8 @@ import walkingkooka.visit.Visiting;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
+public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
 
     @Test
     public void testParseInvalidTextFails() {
@@ -37,11 +36,6 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
     @Test
     public void testParse() {
         this.parseStringAndCheck("none", NoneLength.INSTANCE);
-    }
-
-    @Test
-    public void testWith() {
-        assertThrows(UnsupportedOperationException.class, NoneLength.INSTANCE::value);
     }
 
     @Test
@@ -93,7 +87,7 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Void> {
     }
 
     @Override
-    Optional<LengthUnit<Void, Length<Void>>> unit() {
+    Optional<LengthUnit<Double, Length<Double>>> unit() {
         return Optional.empty();
     }
 
