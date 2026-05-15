@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
@@ -38,7 +39,8 @@ import java.util.function.Function;
 /**
  * Base class for any measure.
  */
-public abstract class Length<V> implements HasText {
+public abstract class Length<V> implements HasText,
+    CanBeEmpty {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.
@@ -306,5 +308,15 @@ public abstract class Length<V> implements HasText {
     @Override
     public final String text() {
         return this.toString();
+    }
+
+    // CanBeEmpty.......................................................................................................
+
+    @Override
+    public final boolean isEmpty() {
+        return false == this.isNormal() &&
+            0 == Math.signum(
+            this.doubleValue()
+        );
     }
 }

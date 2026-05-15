@@ -139,6 +139,16 @@ public final class NoneLengthTest extends LengthTestCase<NoneLength, Double> {
         this.checkEquals("132", b.toString());
     }
 
+    // canBeEmpty.......................................................................................................
+
+    @Test
+    public void testIsEmpty() {
+        this.isEmptyAndCheck(
+            this.createLength(),
+            true
+        );
+    }
+
     // toString........................................................................................................
 
     @Test

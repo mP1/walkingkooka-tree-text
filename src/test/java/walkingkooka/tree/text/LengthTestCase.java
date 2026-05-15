@@ -18,10 +18,10 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.CanBeEmptyTesting;
 import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.predicate.Predicates;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.IsMethodTesting;
 import walkingkooka.reflect.JavaVisibility;
@@ -43,7 +43,8 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
     ToStringTesting<L>,
     TypeNameTesting<L>,
     HasTextTesting,
-    HasValueTesting {
+    HasValueTesting,
+    CanBeEmptyTesting {
 
     LengthTestCase() {
         super();
@@ -221,7 +222,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
 
     @Override
     public final Predicate<String> isMethodIgnoreMethodFilter() {
-        return Predicates.never();
+        return (String name) -> "isEmpty".equals(name) || "isNotEmpty".equals(name);
     }
 
     @Override
