@@ -23,12 +23,14 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.Url;
+import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class TextNodeTest extends TextNodeTestCase<TextNode> implements ToStringTesting<TextNode> {
+public final class TextNodeTest extends TextNodeTestCase<TextNode> implements HasContentTypeTesting,
+    ToStringTesting<TextNode> {
 
     //isTextNodeClass...................................................................................................
 
@@ -161,6 +163,26 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements To
                     color
                 )
             )
+        );
+    }
+
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentTypeWithHyperlink() {
+        this.contentTypeAndCheck(
+            TextNode.hyperlink(
+                Url.parseAbsolute("https://example.com")
+            ),
+            "application/json+walkingkooka.tree.text.TextNode"
+        );
+    }
+
+    @Test
+    public void testContentTypeWithText() {
+        this.contentTypeAndCheck(
+            TextNode.text("text-1a"),
+            "application/json+walkingkooka.tree.text.TextNode"
         );
     }
 

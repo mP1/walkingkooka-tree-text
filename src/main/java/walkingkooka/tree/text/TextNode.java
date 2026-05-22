@@ -24,6 +24,8 @@ import walkingkooka.UsesToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.net.Url;
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -48,6 +50,7 @@ import java.util.function.Predicate;
  * Base class that may be used to represent rich text, some nodes with styling textStyle and others with plain text.
  */
 public abstract class TextNode implements Node<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
+    HasContentType,
     HasText,
     HasTextNode,
     Styleable,
@@ -537,4 +540,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     public final TextNode textNode() {
         return this;
     }
+
+    // HasContentType...................................................................................................
+
+    @Override
+    public final Optional<MediaType> contentType() {
+        return Optional.of(CONTENT_TYPE);
+    }
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(TextNode.class);
 }
