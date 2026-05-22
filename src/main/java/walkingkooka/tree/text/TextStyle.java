@@ -679,10 +679,10 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
 
     @Override
     public final Optional<MediaType> contentType() {
-        return Optional.of(
-            HasContentType.json(TextStyle.class)
-        );
+        return Optional.of(CONTENT_TYPE);
     }
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(TextStyle.class);
 
     // HasTextStyle.....................................................................................................
 
