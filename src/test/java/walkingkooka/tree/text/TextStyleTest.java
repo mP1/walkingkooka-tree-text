@@ -24,6 +24,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.currency.CurrencyLocaleContexts;
+import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.props.Properties;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
@@ -48,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
     HashCodeEqualsDefinedTesting2<TextStyle>,
+    HasContentTypeTesting,
     HasTextTesting,
     HasTextStyleTesting,
     ParseStringTesting<TextStyle>,
@@ -1725,6 +1727,16 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             expected,
             style.setPadding(padding),
             () -> style + " setPadding " + padding
+        );
+    }
+
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            "application/json+walkingkooka.tree.text.TextStyle"
         );
     }
 

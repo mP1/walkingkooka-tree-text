@@ -23,6 +23,8 @@ import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
@@ -52,6 +54,7 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     HasText,
     Styleable,
     CanBeEmpty,
+    HasContentType,
     HasProperties {
 
     /**
@@ -670,6 +673,15 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
         }
 
         return result;
+    }
+
+    // HasContentType...................................................................................................
+
+    @Override
+    public final Optional<MediaType> contentType() {
+        return Optional.of(
+            HasContentType.json(TextStyle.class)
+        );
     }
 
     // HasTextStyle.....................................................................................................
