@@ -59,6 +59,6 @@ abstract class TreeTextConverterUrlTo<T extends TextNode, C extends ConverterCon
 
     @Override
     public final String toString() {
-        return "url to " + this.type();
+        return Url.class.getSimpleName() + " to " + this.type().getSimpleName();
     }
 }
