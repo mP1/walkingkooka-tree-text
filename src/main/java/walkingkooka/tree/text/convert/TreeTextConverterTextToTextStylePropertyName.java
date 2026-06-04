@@ -51,6 +51,6 @@ final class TreeTextConverterTextToTextStylePropertyName<C extends ConverterCont
 
     @Override
     public String toString() {
-        return TEXT + " to " + TextStylePropertyName.class.getName();
+        return TEXT + " to " + TextStylePropertyName.class.getSimpleName();
     }
 }
