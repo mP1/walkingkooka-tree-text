@@ -52,6 +52,6 @@ final class TreeTextConverterTextToPadding<C extends ConverterContext> extends T
 
     @Override
     public String toString() {
-        return "text to " + Padding.class.getSimpleName();
+        return TEXT + " to " + Padding.class.getSimpleName();
     }
 }

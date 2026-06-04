@@ -108,6 +108,18 @@ public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTest
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToFlag.instance(),
+            "TEXT to Flag"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToFlag<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToFlag.class);

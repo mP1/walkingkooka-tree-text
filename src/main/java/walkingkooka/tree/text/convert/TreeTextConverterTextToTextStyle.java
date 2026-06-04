@@ -54,6 +54,6 @@ final class TreeTextConverterTextToTextStyle<C extends ConverterContext> extends
 
     @Override
     public String toString() {
-        return "text to TextStyle";
+        return TEXT + " to " + TextStyle.class.getName();
     }
 }

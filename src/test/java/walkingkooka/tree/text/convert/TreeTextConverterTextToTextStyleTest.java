@@ -106,6 +106,18 @@ public final class TreeTextConverterTextToTextStyleTest extends TreeTextConverte
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToTextStyle.instance(),
+            "TEXT to TextStyle"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToTextStyle<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToTextStyle.class);

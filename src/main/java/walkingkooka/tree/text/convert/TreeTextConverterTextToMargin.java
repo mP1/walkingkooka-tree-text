@@ -52,6 +52,6 @@ final class TreeTextConverterTextToMargin<C extends ConverterContext> extends Tr
 
     @Override
     public String toString() {
-        return "text to " + Margin.class.getSimpleName();
+        return TEXT + " to " + Margin.class.getSimpleName();
     }
 }

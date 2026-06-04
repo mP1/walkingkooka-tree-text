@@ -79,6 +79,18 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToPadding.instance(),
+            "TEXT to Padding"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToPadding<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToPadding.class);

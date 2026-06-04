@@ -71,6 +71,18 @@ public final class TreeTextConverterTextToTextStylePropertyNameTest extends Tree
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToTextStylePropertyName.instance(),
+            "TEXT to TextStylePropertyName"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToTextStylePropertyName<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToTextStylePropertyName.class);
