@@ -79,6 +79,18 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToMargin.instance(),
+            "TEXT to Margin"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToMargin<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToMargin.class);

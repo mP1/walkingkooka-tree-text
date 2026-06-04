@@ -140,6 +140,18 @@ public final class TreeTextConverterTextToTextNodeTest extends TreeTextConverter
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToTextNode.instance(),
+            "TEXT to TextNode"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToTextNode<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToTextNode.class);

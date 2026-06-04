@@ -53,6 +53,6 @@ final class TreeTextConverterTextToFlag<C extends ConverterContext> extends Tree
 
     @Override
     public String toString() {
-        return "text to " + Flag.class.getSimpleName();
+        return TEXT + " to " + Flag.class.getSimpleName();
     }
 }

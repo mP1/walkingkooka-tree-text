@@ -52,6 +52,6 @@ final class TreeTextConverterTextToBorder<C extends ConverterContext> extends Tr
 
     @Override
     public String toString() {
-        return "text to " + Border.class.getSimpleName();
+        return TEXT + " to " + Border.class.getSimpleName();
     }
 }

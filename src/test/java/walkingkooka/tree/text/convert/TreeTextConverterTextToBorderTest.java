@@ -79,6 +79,18 @@ public final class TreeTextConverterTextToBorderTest extends TreeTextConverterTe
         };
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            TreeTextConverterTextToBorder.instance(),
+            "TEXT to Border"
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<TreeTextConverterTextToBorder<FakeConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToBorder.class);
