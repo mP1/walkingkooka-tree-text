@@ -32,6 +32,7 @@ import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.Node;
 import walkingkooka.tree.TraversableHasTextOffset;
 import walkingkooka.tree.expression.ExpressionFunctionName;
+import walkingkooka.tree.expression.HasExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -477,11 +478,13 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Creates a {@link NodeSelector} for {@link TextNode} from a {@link ExpressionNodeSelectorParserToken}.
      */
     public static NodeSelector<TextNode, TextNodeName, TextStylePropertyName<?>, Object> nodeSelectorExpressionParserToken(final ExpressionNodeSelectorParserToken token,
-                                                                                                                           final Predicate<ExpressionFunctionName> functions) {
+                                                                                                                           final Predicate<ExpressionFunctionName> functions,
+                                                                                                                           final HasExpressionNumberKind hasExpressionNumberKind) {
         return NodeSelector.parserToken(
             token,
             n -> TextNodeName.with(n.value()),
             functions,
+            hasExpressionNumberKind,
             TextNode.class
         );
     }
