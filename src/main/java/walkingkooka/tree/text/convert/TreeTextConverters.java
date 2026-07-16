@@ -31,13 +31,6 @@ public final class TreeTextConverters implements PublicStaticHelper{
     }
 
     /**
-     * {@see TreeTextConverterHasTextStyle}
-     */
-    public static <C extends ConverterContext> Converter<C> hasTextStyle() {
-        return TreeTextConverterHasTextStyle.instance();
-    }
-
-    /**
      * {@see TreeTextConverterPropertiesToTextStyle}
      */
     public static <C extends ConverterContext> Converter<C> propertiesToTextStyle() {
@@ -98,6 +91,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
      */
     public static <C extends ConverterContext> Converter<C> toStyleable() {
         return TreeTextConverterToStyleable.instance();
+    }
+
+    /**
+     * {@see TreeTextConverterToTextStyle}
+     */
+    public static <C extends ConverterContext> Converter<C> toTextStyle() {
+        return TreeTextConverterToTextStyle.instance();
     }
 
     /**

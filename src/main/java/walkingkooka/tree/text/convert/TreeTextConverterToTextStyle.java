@@ -27,16 +27,16 @@ import walkingkooka.tree.text.TextStyle;
 /**
  * A {@link Converter} that accepts converts a {@link walkingkooka.tree.text.HasTextStyle} into a {@link TextStyle}.
  */
-final class TreeTextConverterHasTextStyle<C extends ConverterContext> extends TreeTextConverter<C>
+final class TreeTextConverterToTextStyle<C extends ConverterContext> extends TreeTextConverter<C>
     implements TryingShortCircuitingConverter<C> {
 
-    static <C extends ConverterContext> TreeTextConverterHasTextStyle<C> instance() {
+    static <C extends ConverterContext> TreeTextConverterToTextStyle<C> instance() {
         return Cast.to(INSTANCE);
     }
 
-    private final static TreeTextConverterHasTextStyle<?> INSTANCE = new TreeTextConverterHasTextStyle<>();
+    private final static TreeTextConverterToTextStyle<?> INSTANCE = new TreeTextConverterToTextStyle<>();
 
-    private TreeTextConverterHasTextStyle() {
+    private TreeTextConverterToTextStyle() {
         super();
     }
 
@@ -61,6 +61,6 @@ final class TreeTextConverterHasTextStyle<C extends ConverterContext> extends Tr
 
     @Override
     public String toString() {
-        return HasTextStyle.class.getSimpleName() + " to " + TextStyle.class.getSimpleName();
+        return TextStyle.class.getSimpleName() + " to " + TextStyle.class.getSimpleName();
     }
 }
