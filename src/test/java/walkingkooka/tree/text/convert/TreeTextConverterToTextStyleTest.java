@@ -28,8 +28,8 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextConverterHasTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterHasTextStyle<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<TreeTextConverterHasTextStyle<FakeConverterContext>> {
+public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterToTextStyle<FakeConverterContext>, FakeConverterContext>
+    implements ToStringTesting<TreeTextConverterToTextStyle<FakeConverterContext>> {
 
     @Test
     public void testConvertStringToString() {
@@ -85,8 +85,8 @@ public final class TreeTextConverterHasTextStyleTest extends TreeTextConverterTe
     }
 
     @Override
-    public TreeTextConverterHasTextStyle<FakeConverterContext> createConverter() {
-        return TreeTextConverterHasTextStyle.instance();
+    public TreeTextConverterToTextStyle<FakeConverterContext> createConverter() {
+        return TreeTextConverterToTextStyle.instance();
     }
 
     @Override
@@ -100,14 +100,14 @@ public final class TreeTextConverterHasTextStyleTest extends TreeTextConverterTe
     public void testToString() {
         this.toStringAndCheck(
             this.createConverter(),
-            "HasTextStyle to TextStyle"
+            "TextStyle to TextStyle"
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterHasTextStyle<FakeConverterContext>> type() {
-        return Cast.to(TreeTextConverterHasTextStyle.class);
+    public Class<TreeTextConverterToTextStyle<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterToTextStyle.class);
     }
 }

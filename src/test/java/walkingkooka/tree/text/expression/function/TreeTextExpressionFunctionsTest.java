@@ -975,7 +975,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             Lists.of(
                                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
                                 Converters.simple(), // handles Text -> TextNode
-                                TreeTextConverters.hasTextStyle(),
+                                TreeTextConverters.toTextStyle(),
                                 TreeTextConverters.hasTextNode(),
                                 TreeTextConverters.textToFlag(),
                                 TreeTextConverters.textToTextNode(),
