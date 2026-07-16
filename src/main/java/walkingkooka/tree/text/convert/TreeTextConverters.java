@@ -24,13 +24,6 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class TreeTextConverters implements PublicStaticHelper{
 
     /**
-     * {@see TreeTextConverterHasTextNode}
-     */
-    public static <C extends ConverterContext> Converter<C> hasTextNode() {
-        return TreeTextConverterHasTextNode.instance();
-    }
-
-    /**
      * {@see TreeTextConverterPropertiesToTextStyle}
      */
     public static <C extends ConverterContext> Converter<C> propertiesToTextStyle() {
@@ -84,6 +77,13 @@ public final class TreeTextConverters implements PublicStaticHelper{
      */
     public static <C extends ConverterContext> Converter<C> textToTextStylePropertyName() {
         return TreeTextConverterTextToTextStylePropertyName.instance();
+    }
+
+    /**
+     * {@see TreeTextConverterToTextNode}
+     */
+    public static <C extends ConverterContext> Converter<C> toTextNode() {
+        return TreeTextConverterToTextNode.instance();
     }
 
     /**

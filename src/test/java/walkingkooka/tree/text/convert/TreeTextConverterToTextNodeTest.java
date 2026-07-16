@@ -29,8 +29,8 @@ import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextConverterHasTextNodeTest extends TreeTextConverterTestCase<TreeTextConverterHasTextNode<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<TreeTextConverterHasTextNode<FakeConverterContext>> {
+public final class TreeTextConverterToTextNodeTest extends TreeTextConverterTestCase<TreeTextConverterToTextNode<FakeConverterContext>, FakeConverterContext>
+    implements ToStringTesting<TreeTextConverterToTextNode<FakeConverterContext>> {
 
     @Test
     public void testStringToString() {
@@ -99,8 +99,8 @@ public final class TreeTextConverterHasTextNodeTest extends TreeTextConverterTes
     }
 
     @Override
-    public TreeTextConverterHasTextNode<FakeConverterContext> createConverter() {
-        return TreeTextConverterHasTextNode.instance();
+    public TreeTextConverterToTextNode<FakeConverterContext> createConverter() {
+        return TreeTextConverterToTextNode.instance();
     }
 
     @Override
@@ -121,7 +121,7 @@ public final class TreeTextConverterHasTextNodeTest extends TreeTextConverterTes
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterHasTextNode<FakeConverterContext>> type() {
-        return Cast.to(TreeTextConverterHasTextNode.class);
+    public Class<TreeTextConverterToTextNode<FakeConverterContext>> type() {
+        return Cast.to(TreeTextConverterToTextNode.class);
     }
 }
