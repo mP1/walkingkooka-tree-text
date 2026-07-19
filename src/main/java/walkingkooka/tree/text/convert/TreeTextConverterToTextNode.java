@@ -61,6 +61,6 @@ final class TreeTextConverterToTextNode<C extends ConverterContext> extends Tree
 
     @Override
     public String toString() {
-        return HasTextNode.class.getSimpleName();
+        return "to " + TextNode.class.getSimpleName();
     }
 }
