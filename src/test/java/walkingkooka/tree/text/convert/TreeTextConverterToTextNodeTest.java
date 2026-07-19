@@ -114,7 +114,7 @@ public final class TreeTextConverterToTextNodeTest extends TreeTextConverterTest
     public void testToString() {
         this.toStringAndCheck(
             this.createConverter(),
-            "HasTextNode"
+            "to TextNode"
         );
     }
 
