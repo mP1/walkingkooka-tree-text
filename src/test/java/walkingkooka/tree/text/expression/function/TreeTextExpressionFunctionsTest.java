@@ -43,7 +43,6 @@ import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
-import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
 import walkingkooka.tree.text.Border;
 import walkingkooka.tree.text.BoxEdge;
 import walkingkooka.tree.text.Flag;
@@ -954,7 +953,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             case "styledText":
                                 return TreeTextExpressionFunctions.styledText();
                             default:
-                                throw new UnknownExpressionFunctionException(name);
+                                throw name.unknownExpressionFunctionException();
                         }
                     }, // name -> function
                     (final RuntimeException cause) -> {
