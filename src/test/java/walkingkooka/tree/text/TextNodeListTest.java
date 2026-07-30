@@ -28,6 +28,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -178,5 +180,31 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     @Override
     public TextNodeList createJsonNodeMarshallingValue() {
         return this.createList();
+    }
+
+    // firstOrEmpty.....................................................................................................
+
+    @Test
+    public void testFirstOrEmptyWhenEmpty() {
+        this.firstOrEmptyAndCheck(
+            TextNodeList.with(Collections.EMPTY_LIST)
+        );
+    }
+
+    @Test
+    public void testFirstOrEmptyWhenNotEmpty() {
+        final Text first = TextNode.text("111");
+
+        final TextNodeList list = TextNodeList.with(
+            Lists.of(
+                first,
+                Text.emptyText()
+            )
+        );
+
+        this.firstOrEmptyAndCheck(
+            list,
+            first
+        );
     }
 }
