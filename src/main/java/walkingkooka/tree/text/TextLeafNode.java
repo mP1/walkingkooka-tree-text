@@ -27,6 +27,7 @@ import walkingkooka.text.printer.IndentingPrinter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A leaf node, where a leaf has no children, but will have a value.
@@ -139,6 +140,16 @@ abstract class TextLeafNode<V> extends TextNode implements HasValue<V> {
     @Override
     public final TextStyle textStyle() {
         return TextStyle.EMPTY;
+    }
+
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    /**
+     * All sub-classes have no {@link TextStyleProperty so always return {@link Optional#empty()}.
+     */
+    @Override //
+    final <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName) {
+        return Cast.to(NO_VALUE);
     }
 
     // toHtml ..........................................................................................................
