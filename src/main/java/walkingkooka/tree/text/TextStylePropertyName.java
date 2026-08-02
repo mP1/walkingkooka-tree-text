@@ -1160,6 +1160,17 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      */
     final BiConsumer<T, TextStyleVisitor> visitor;
 
+    // firstValueOrEmpty................................................................................................
+
+    /**
+     * Walks the {@link TextNode} returning the value for the first {@link TextStyleProperty} with this {@link TextStylePropertyName}.
+     */
+    public Optional<T> firstValueOrEmpty(final TextNode textNode) {
+        Objects.requireNonNull(textNode, "textNode");
+
+        return textNode.firstTextStyleValueOrEmpty(this);
+    }
+
     // patch............................................................................................................
 
     /**

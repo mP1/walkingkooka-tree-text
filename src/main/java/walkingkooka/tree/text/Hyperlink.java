@@ -33,6 +33,7 @@ import walkingkooka.visit.Visiting;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents a hyperlink potentially with child {@link TextNode} holding text and more.
@@ -247,6 +248,13 @@ public final class Hyperlink extends TextParentNode {
     @Override
     public TextStyle textStyle() {
         return TextStyle.EMPTY;
+    }
+
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    @Override //
+    <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName) {
+        return NO_VALUE;
     }
 
     // TreePrintable....................................................................................................

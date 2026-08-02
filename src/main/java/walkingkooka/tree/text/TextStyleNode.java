@@ -31,6 +31,7 @@ import walkingkooka.visit.Visiting;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents a collection of style properties that apply upon a list of {@link TextNode children}.
@@ -159,6 +160,26 @@ public final class TextStyleNode extends TextParentNode {
     }
 
     private final TextStylePropertiesMap attributes;
+
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    @Override //
+    <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName) {
+        Optional<T> value = this.textStyle()
+            .get(propertyName);
+
+        if(value.isEmpty()) {
+            // try all children in order until a value is found.
+            for (final TextNode child : this.children()) {
+                value = child.firstTextStyleValueOrEmpty(propertyName);
+                if (value.isPresent()) {
+                    break;
+                }
+            }
+        }
+
+        return value;
+    }
 
     // replace.........................................................................................................
 

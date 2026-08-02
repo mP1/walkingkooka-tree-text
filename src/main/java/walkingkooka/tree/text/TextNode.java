@@ -302,6 +302,15 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
     @Override
     public abstract TextStyle textStyle();
 
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    /**
+     * Returns the value of the first {@link TextStylePropertyName}.
+     */
+    abstract <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName);
+
+    final static Optional NO_VALUE = Optional.empty();
+
     // Styleable........................................................................................................
 
     @Override

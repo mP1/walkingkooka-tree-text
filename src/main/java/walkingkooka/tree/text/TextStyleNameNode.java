@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A {@link TextNode} with a {@link TextStyleName}.
@@ -148,6 +149,13 @@ public final class TextStyleNameNode extends TextParentNode {
     @Override
     public TextStyle textStyle() {
         return TextStyle.EMPTY;
+    }
+
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    @Override //
+    <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName) {
+        return NO_VALUE;
     }
 
     // replace..........................................................................................................

@@ -24,6 +24,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
 import walkingkooka.currency.CurrencyLocaleContexts;
+import walkingkooka.net.Url;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.props.PropertiesPath;
 import walkingkooka.reflect.ConstantsTesting;
@@ -33,6 +34,7 @@ import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.TextContextTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -50,6 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<TextStylePropertyName<?>>
     implements ConstantsTesting<TextStylePropertyName<?>>,
+    TextContextTesting,
     ThrowableTesting {
 
     // constants........................................................................................................
@@ -1264,6 +1267,190 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
                 )
             ),
             () -> initial + " patch " + propertyName + " patch " + value
+        );
+    }
+
+    // firstValueOrEmpty................................................................................................
+
+    @Test
+    public void testFirstValueOrEmptyWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStylePropertyName.TEXT.firstValueOrEmpty(null)
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithFlag() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.flag("AU")
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithImage() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.image(
+                Url.parseRelative("/image.png")
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithText() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.text(
+                "Hello World 123"
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextPlaceholderNode() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.placeholder(
+                TextPlaceholderName.with("Hello")
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithBadge() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.badge(
+                "Hello World 123"
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithHyperlink() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.hyperlink(
+                Url.parseRelative("/hyperlink123.html")
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextStyleNameNode() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.styleName(
+                TextStyleName.with("helloStyle123")
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextStyleMissing() {
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.EMPTY_TEXT.setTextStyle(
+                TextStyle.EMPTY.set(
+                    TextStylePropertyName.TEXT_ALIGN,
+                    TextAlign.LEFT
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextStylePresent() {
+        final Color color = Color.BLACK;
+
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.EMPTY_TEXT.setTextStyle(
+                TextStyle.EMPTY.set(
+                    TextStylePropertyName.COLOR,
+                    color
+                )
+            ),
+            color
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextStyleMultipleChildren() {
+        final Color color = Color.BLACK;
+
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.text("111")
+                .set(
+                    TextStylePropertyName.TEXT_ALIGN,
+                    TextAlign.LEFT
+                ).appendChild(
+                    TextNode.text("222")
+                        .set(
+                            TextStylePropertyName.COLOR,
+                            color
+                        )
+                ),
+            color
+        );
+    }
+
+    @Test
+    public void testFirstValueOrEmptyWithTextStyleMultipleValues() {
+        final Color color = Color.BLACK;
+
+        this.firstValueOrEmptyAndCheck(
+            TextStylePropertyName.COLOR,
+            TextNode.text("111")
+                .set(
+                    TextStylePropertyName.TEXT_ALIGN,
+                    TextAlign.LEFT
+                ).appendChild(
+                    TextNode.text("222")
+                        .set(
+                            TextStylePropertyName.COLOR,
+                            color
+                        )
+                ).appendChild(
+                    TextNode.text("333")
+                        .set(
+                            TextStylePropertyName.COLOR,
+                            Color.WHITE
+                        )
+                ),
+            color
+        );
+    }
+
+    private <T> void firstValueOrEmptyAndCheck(final TextStylePropertyName<T> propertyName,
+                                               final TextNode textNode) {
+        this.firstValueOrEmptyAndCheck(
+            propertyName,
+            textNode,
+            Optional.empty()
+        );
+    }
+
+    private <T> void firstValueOrEmptyAndCheck(final TextStylePropertyName<T> propertyName,
+                                               final TextNode textNode,
+                                               final T expected) {
+        this.firstValueOrEmptyAndCheck(
+            propertyName,
+            textNode,
+            Optional.of(expected)
+        );
+    }
+
+    private <T> void firstValueOrEmptyAndCheck(final TextStylePropertyName<T> propertyName,
+                                               final TextNode textNode,
+                                               final Optional<T> expected) {
+        this.checkEquals(
+            expected,
+            propertyName.firstValueOrEmpty(textNode),
+            () -> propertyName + " firstValueOrEmpty\n" + textNode.treeToString(TEXT_CONTEXT)
         );
     }
 

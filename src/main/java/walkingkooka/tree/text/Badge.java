@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
@@ -246,6 +247,13 @@ public final class Badge extends TextParentNode {
     @Override
     public TextStyle textStyle() {
         return TextStyle.EMPTY;
+    }
+
+    // firstTextStyleValueOrEmpty.......................................................................................
+
+    @Override //
+    <T> Optional<T> firstTextStyleValueOrEmpty(final TextStylePropertyName<T> propertyName) {
+        return Cast.to(NO_VALUE);
     }
 
     // TreePrintable....................................................................................................
