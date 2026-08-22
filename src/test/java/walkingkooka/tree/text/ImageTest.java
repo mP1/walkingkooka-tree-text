@@ -159,7 +159,7 @@ public final class ImageTest extends TextLeafNodeTestCase<Image, Url> {
         );
     }
 
-    // JsonNodeMarshallingTesting.......................................................................................
+    // JsonNodeMarshallerTesting.......................................................................................
 
     @Test
     public void testMarshall() {

@@ -26,7 +26,7 @@ import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
@@ -38,7 +38,7 @@ public final class OptionalTextNodeTest implements ClassTesting<OptionalTextNode
         CanBeEmptyTesting,
         HashCodeEqualsDefinedTesting2<OptionalTextNode>,
         ToStringTesting<OptionalTextNode>,
-        JsonNodeMarshallingTesting<OptionalTextNode>,
+        JsonNodeMarshallerTesting<OptionalTextNode>,
         TreePrintableTesting {
 
     // with.............................................................................................................

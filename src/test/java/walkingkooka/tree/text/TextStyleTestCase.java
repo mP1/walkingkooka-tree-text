@@ -32,7 +32,7 @@ import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     CanBeEmptyTesting,
     HasPropertiesTesting,
     HashCodeEqualsDefinedTesting2<TextStyle>,
-    JsonNodeMarshallingTesting<TextStyle>,
+    JsonNodeMarshallerTesting<TextStyle>,
     ThrowableTesting,
     ToStringTesting<TextStyle>,
     TreePrintableTesting {

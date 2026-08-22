@@ -28,7 +28,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
 import java.util.Map;
 import java.util.Optional;
@@ -44,7 +44,7 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     HasTextTesting,
     ParseStringTesting<T>,
     TreePrintableTesting,
-    JsonNodeMarshallingTesting<T>,
+    JsonNodeMarshallerTesting<T>,
     CanBeEmptyTesting {
 
     BorderMarginPaddingTestCase() {

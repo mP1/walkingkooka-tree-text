@@ -24,13 +24,13 @@ import walkingkooka.naming.NameTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> extends TextNodeTestCase<N>
     implements NameTesting2<N, N>,
-    JsonNodeMarshallingTesting<N>,
+    JsonNodeMarshallerTesting<N>,
     ThrowableTesting,
     TreePrintableTesting {
 
@@ -99,7 +99,7 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> e
         return JavaVisibility.PUBLIC;
     }
 
-    // JsonNodeMarshallingTesting...........................................................................................
+    // JsonNodeMarshallerTesting........................................................................................
 
     @Override
     public final N createJsonNodeMarshallingValue() {

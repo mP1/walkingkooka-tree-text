@@ -27,7 +27,7 @@ import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.HasTextOffsetTesting;
 import walkingkooka.tree.NodeTesting;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
 import java.util.Map;
 
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTestCase<TextNode>
     implements NodeTesting<TextNode, TextNodeName, TextStylePropertyName<?>, Object>,
-    JsonNodeMarshallingTesting<TextNode>,
+    JsonNodeMarshallerTesting<TextNode>,
     HasTextLengthTesting,
     HasTextOffsetTesting,
     StyleableTesting<N>,
@@ -222,7 +222,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         return "Text";
     }
 
-    // JsonNodeMarshallingTesting...........................................................................................
+    // JsonNodeMarshallerTesting........................................................................................
 
     @Override
     public final TextNode createJsonNodeMarshallingValue() {
