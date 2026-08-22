@@ -2215,7 +2215,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             TextStyle.EMPTY,
             TextStyle.unmarshall(
                 JsonNode.object(),
-                this.unmarshallContext()
+                JSON_NODE_UNMARSHALL_CONTEXT
             )
         );
     }
