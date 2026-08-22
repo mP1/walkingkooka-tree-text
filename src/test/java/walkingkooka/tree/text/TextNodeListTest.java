@@ -25,7 +25,7 @@ import walkingkooka.net.Url;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Collections;
@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     ClassTesting<TextNodeList>,
     ImmutableListTesting<TextNodeList, TextNode>,
-    JsonNodeMarshallingTesting<TextNodeList> {
+    JsonNodeMarshallerTesting<TextNodeList> {
 
     private final static TextNode NODE1 = TextNode.text("Hello");
 

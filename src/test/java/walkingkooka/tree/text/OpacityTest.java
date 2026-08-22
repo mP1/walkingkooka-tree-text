@@ -29,7 +29,7 @@ import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
@@ -42,7 +42,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     ConstantsTesting<Opacity>,
     HasTextTesting,
     ParseStringTesting<Opacity>,
-    JsonNodeMarshallingTesting<Opacity>,
+    JsonNodeMarshallerTesting<Opacity>,
     ToStringTesting<Opacity>,
     HasValueTesting,
     ThrowableTesting {

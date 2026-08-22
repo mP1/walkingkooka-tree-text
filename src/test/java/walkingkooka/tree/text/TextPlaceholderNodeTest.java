@@ -171,7 +171,7 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
         );
     }
 
-    // JsonNodeMarshallingTesting........................................................................................
+    // JsonNodeMarshallerTesting........................................................................................
 
     @Override
     public TextPlaceholderNode unmarshall(final JsonNode from,

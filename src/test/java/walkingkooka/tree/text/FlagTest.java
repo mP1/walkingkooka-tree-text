@@ -228,7 +228,7 @@ public final class FlagTest extends TextLeafNodeTestCase<Flag, String>
         );
     }
 
-    // JsonNodeMarshallingTesting.......................................................................................
+    // JsonNodeMarshallerTesting.......................................................................................
 
     @Test
     public void testMarshall() {

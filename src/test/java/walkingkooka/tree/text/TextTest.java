@@ -374,7 +374,7 @@ public final class TextTest extends TextLeafNodeTestCase<Text, String> {
         this.toStringAndCheck(Text.with("abc\tdef"), "\"abc\\tdef\"");
     }
 
-    // JsonNodeMarshallingTesting.......................................................................................
+    // JsonNodeMarshallerTesting.......................................................................................
 
     @Test
     public void testMarshall() {

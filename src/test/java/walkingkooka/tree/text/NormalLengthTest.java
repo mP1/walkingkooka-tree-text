@@ -153,7 +153,7 @@ public final class NormalLengthTest extends LengthTestCase<NormalLength, Void> {
         return NormalLength.parseNormal(text);
     }
 
-    // JsonNodeMarshallingTesting...........................................................................................
+    // JsonNodeMarshallerTesting........................................................................................
 
     @Override
     public NormalLength unmarshall(final JsonNode from,

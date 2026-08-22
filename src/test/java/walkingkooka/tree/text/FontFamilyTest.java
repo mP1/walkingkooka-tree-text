@@ -24,14 +24,14 @@ import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FontFamilyTest implements ClassTesting2<FontFamily>,
     NameTesting<FontFamily, FontFamily>,
-    JsonNodeMarshallingTesting<FontFamily> {
+    JsonNodeMarshallerTesting<FontFamily> {
 
     private final static String TEXT = "Times New Roman";
 

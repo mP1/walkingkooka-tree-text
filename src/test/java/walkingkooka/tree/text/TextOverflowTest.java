@@ -24,14 +24,14 @@ import walkingkooka.reflect.ConstantsTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
 public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
     ConstantsTesting<TextOverflow>,
-    JsonNodeMarshallingTesting<TextOverflow>,
+    JsonNodeMarshallerTesting<TextOverflow>,
     ParseStringTesting<TextOverflow> {
 
     // parse............................................................................................................
