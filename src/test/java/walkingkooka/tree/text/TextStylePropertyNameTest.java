@@ -23,7 +23,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.color.Color;
-import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.net.Url;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.props.PropertiesPath;
@@ -35,14 +34,11 @@ import walkingkooka.text.CaseKind;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.TextContextTesting;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import java.lang.reflect.Field;
-import java.math.MathContext;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -1260,11 +1256,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             expected,
             initial.patch(
                 propertyName.stylePatch(value),
-                JsonNodeUnmarshallContexts.basic(
-                    ExpressionNumberKind.BIG_DECIMAL,
-                    CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
-                    MathContext.DECIMAL32
-                )
+                JSON_NODE_UNMARSHALL_CONTEXT
             ),
             () -> initial + " patch " + propertyName + " patch " + value
         );

@@ -97,7 +97,7 @@ public final class TextStylePropertyValueHandlerLengthNoneLengthNumberLengthPixe
                 .unmarshall(
                     this.marshall(Length.normal()),
                     this.propertyName(),
-                    this.unmarshallContext()
+                    JSON_NODE_UNMARSHALL_CONTEXT
                 )
         );
     }
