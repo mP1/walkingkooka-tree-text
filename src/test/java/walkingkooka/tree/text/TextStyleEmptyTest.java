@@ -22,14 +22,10 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.props.Properties;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import walkingkooka.visit.Visiting;
 
-import java.math.MathContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -588,11 +584,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
             TextStyle.EMPTY,
             TextStyle.unmarshall(
                 JsonNode.object(),
-                JsonNodeUnmarshallContexts.basic(
-                    ExpressionNumberKind.DEFAULT,
-                    CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
-                    MathContext.DECIMAL32
-                )
+                JSON_NODE_UNMARSHALL_CONTEXT
             )
         );
     }

@@ -23,23 +23,18 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.props.Properties;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 import walkingkooka.tree.json.patch.PatchableTesting;
 
-import java.math.MathContext;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -477,7 +472,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     JsonPropertyName.with(
                         TextStylePropertyName.COLOR.value()
                     ),
-                    marshall(Color.BLACK)
+                    JSON_NODE_MARSHALL_CONTEXT.marshall(Color.BLACK)
                 ),
             TextStyle.EMPTY
                 .set(
@@ -500,7 +495,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     JsonPropertyName.with(
                         TextStylePropertyName.COLOR.value()
                     ),
-                    marshall(Color.BLACK)
+                    JSON_NODE_MARSHALL_CONTEXT.marshall(Color.BLACK)
                 ),
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK)
@@ -518,7 +513,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     JsonPropertyName.with(
                         TextStylePropertyName.COLOR.value()
                     ),
-                    marshall(Color.WHITE)
+                    JSON_NODE_MARSHALL_CONTEXT.marshall(Color.WHITE)
                 ),
             TextStyle.EMPTY
                 .set(
@@ -536,7 +531,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                 .set(TextStylePropertyName.COLOR, Color.BLACK)
                 .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD),
             JsonNode.object()
-                .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), marshall(Color.WHITE))
+                .set(JsonPropertyName.with(TextStylePropertyName.BACKGROUND_COLOR.value()), JSON_NODE_MARSHALL_CONTEXT.marshall(Color.WHITE))
                 .set(JsonPropertyName.with(TextStylePropertyName.COLOR.value()), JsonNode.nullNode()),
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.WHITE)
@@ -556,16 +551,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
 
     @Override
     public JsonNodeUnmarshallContext createPatchContext() {
-        return JsonNodeUnmarshallContexts.basic(
-            ExpressionNumberKind.BIG_DECIMAL,
-            CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
-            MathContext.UNLIMITED
-        );
-    }
-
-    private JsonNode marshall(final Object value) {
-        return JsonNodeMarshallContexts.basic()
-            .marshall(value);
+        return JSON_NODE_UNMARSHALL_CONTEXT;
     }
 
     // text..............................................................................................................

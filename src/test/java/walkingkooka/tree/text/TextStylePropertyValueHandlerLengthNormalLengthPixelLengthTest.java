@@ -88,7 +88,7 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
                 .unmarshall(
                     this.marshall(Length.none()),
                     this.propertyName(),
-                    this.unmarshallContext()
+                    JSON_NODE_UNMARSHALL_CONTEXT
                 )
         );
     }
@@ -107,7 +107,7 @@ public final class TextStylePropertyValueHandlerLengthNormalLengthPixelLengthTes
                 .unmarshall(
                     this.marshall(Length.number(1.0)),
                     this.propertyName(),
-                    this.unmarshallContext()
+                    JSON_NODE_UNMARSHALL_CONTEXT
                 )
         );
     }

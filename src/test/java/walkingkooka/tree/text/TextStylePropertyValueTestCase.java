@@ -21,18 +21,15 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.HasValueTesting;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
-
-import java.math.MathContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallUnmarshallContextTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2<V>,
+    JsonNodeMarshallUnmarshallContextTesting,
     ToStringTesting<V>,
     HasValueTesting {
 
@@ -60,11 +57,7 @@ public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2
         final JsonNode json = JsonNodeMarshallContexts.basic().marshallWithType(properties);
         this.checkEquals(
             properties,
-            JsonNodeUnmarshallContexts.basic(
-                ExpressionNumberKind.DEFAULT,
-                CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
-                MathContext.DECIMAL32
-            ).unmarshallWithType(json),
+            JSON_NODE_UNMARSHALL_CONTEXT.unmarshallWithType(json),
             () -> "" + properties);
     }
 

@@ -19,25 +19,19 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
-import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContexts;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
-
-import java.math.MathContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallUnmarshallContextTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ParseStringTesting<T>,
     ClassTesting<P>,
+    JsonNodeMarshallUnmarshallContextTesting,
     ThrowableTesting,
     ToStringTesting<P>,
     TypeNameTesting<P> {
@@ -143,20 +137,8 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     abstract TextStylePropertyName<T> propertyName();
 
-    final JsonNodeUnmarshallContext unmarshallContext() {
-        return JsonNodeUnmarshallContexts.basic(
-            ExpressionNumberKind.DEFAULT,
-            CurrencyLocaleContexts.fake(), // CurrencyCodeLanguageTagContext
-            MathContext.DECIMAL32
-        );
-    }
-
-    final JsonNodeMarshallContext marshallContext() {
-        return JsonNodeMarshallContexts.basic();
-    }
-
     final JsonNode marshall(final Object value) {
-        return this.marshallContext().marshall(value);
+        return JSON_NODE_MARSHALL_CONTEXT.marshall(value);
     }
 
     // ClassTesting.....................................................................................................

@@ -43,7 +43,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
 
         final JsonNode json = handler.marshall(
             value,
-            this.marshallContext()
+            JSON_NODE_MARSHALL_CONTEXT
         );
 
         this.checkEquals(
@@ -51,7 +51,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
             handler.unmarshall(
                 json,
                 this.propertyName(),
-                this.unmarshallContext()
+                JSON_NODE_UNMARSHALL_CONTEXT
             ),
             () -> "value " + CharSequences.quoteIfChars(value) + " to json " + json
         );
@@ -65,7 +65,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
                 .unmarshall(
                     node,
                     this.propertyName(),
-                    this.unmarshallContext()
+                    JSON_NODE_UNMARSHALL_CONTEXT
                 ),
             () -> "from JsonNode " + node
         );
@@ -78,7 +78,7 @@ public abstract class TextStylePropertyValueHandlerTestCase2<P extends TextStyle
             this.handler()
                 .marshall(
                     value,
-                    this.marshallContext()
+                    JSON_NODE_MARSHALL_CONTEXT
                 ),
             () -> "marshall " + CharSequences.quoteIfChars(value)
         );
