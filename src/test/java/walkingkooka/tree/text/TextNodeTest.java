@@ -25,7 +25,7 @@ import walkingkooka.color.Color;
 import walkingkooka.net.Url;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.tree.expression.ExpressionEvaluationContexts;
+import walkingkooka.tree.select.NodeSelectorContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
@@ -122,8 +122,7 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements Ha
                 .named(Text.NAME)
                 .stream(
                     node,
-                    (c) ->
-                        ExpressionEvaluationContexts.fake(),
+                    NodeSelectorContexts.fake(),
                     TextNode.class
                 ).count()
         );
