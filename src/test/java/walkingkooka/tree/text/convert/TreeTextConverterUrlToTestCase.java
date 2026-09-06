@@ -20,7 +20,6 @@ package walkingkooka.tree.text.convert;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.text.TextNode;
 
 public abstract class TreeTextConverterUrlToTestCase<C extends TreeTextConverterUrlTo<T, CC>, T extends TextNode, CC extends ConverterContext> implements ConverterTesting2<C, CC>,
@@ -31,12 +30,6 @@ public abstract class TreeTextConverterUrlToTestCase<C extends TreeTextConverter
     }
 
     // class............................................................................................................
-
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 
     @Override
     public String typeNamePrefix() {
