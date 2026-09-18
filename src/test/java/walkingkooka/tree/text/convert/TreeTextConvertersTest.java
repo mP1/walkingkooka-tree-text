@@ -28,7 +28,6 @@ import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
@@ -233,11 +232,6 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
     @Override
     public Class<TreeTextConverters> type() {
         return TreeTextConverters.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
