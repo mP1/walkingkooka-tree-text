@@ -19,10 +19,10 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.ToStringTesting;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 
 public abstract class TreeTextExpressionFunctionTestCase<F extends TreeTextExpressionFunction<T, FakeExpressionEvaluationContext>, T>
-    implements ExpressionFunctionTesting<F, T, FakeExpressionEvaluationContext>,
+    implements ExpressionFunctionTesting2<F, T, FakeExpressionEvaluationContext>,
     ToStringTesting<F> {
 
     TreeTextExpressionFunctionTestCase() {
