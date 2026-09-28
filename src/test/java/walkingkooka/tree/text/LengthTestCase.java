@@ -22,9 +22,8 @@ import walkingkooka.CanBeEmptyTesting;
 import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.IsMethodTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
@@ -35,7 +34,7 @@ import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTesting2<L>,
+public abstract class LengthTestCase<L extends Length<V>, V> implements PublicClassTesting<L>,
     HashCodeEqualsDefinedTesting2<L>,
     IsMethodTesting<L>,
     JsonNodeMarshallerTesting<L>,
@@ -175,13 +174,6 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements ClassTes
     abstract L createLength();
 
     abstract Optional<LengthUnit<V, Length<V>>> unit();
-
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
 
     // HashCodeEqualsDefinedTesting.....................................................................................
 
