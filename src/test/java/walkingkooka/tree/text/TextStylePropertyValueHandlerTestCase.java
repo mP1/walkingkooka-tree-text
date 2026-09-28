@@ -19,8 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
@@ -30,7 +29,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallUnmarshallContextTesting;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStylePropertyValueHandler<T>, T> implements ParseStringTesting<T>,
-    ClassTesting<P>,
+    PackagePrivateClassTesting<P>,
     JsonNodeMarshallUnmarshallContextTesting,
     ThrowableTesting,
     ToStringTesting<P>,
@@ -139,13 +138,6 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     final JsonNode marshall(final Object value) {
         return JSON_NODE_MARSHALL_CONTEXT.marshall(value);
-    }
-
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 
     // TypeNameTesting...................................................................................................
