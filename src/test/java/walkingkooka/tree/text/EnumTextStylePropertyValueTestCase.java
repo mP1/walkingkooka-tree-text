@@ -18,11 +18,12 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> extends TextStylePropertyValueTestCase<E> {
+public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> extends TextStylePropertyValueTestCase<E>
+    implements PublicClassTesting<E> {
 
     EnumTextStylePropertyValueTestCase() {
         super();
@@ -44,12 +45,5 @@ public abstract class EnumTextStylePropertyValueTestCase<E extends Enum<?>> exte
             enumValue,
             this.textStylePropertyName().parseValue(enumValue.name())
         );
-    }
-
-    // ClassTyping......................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
