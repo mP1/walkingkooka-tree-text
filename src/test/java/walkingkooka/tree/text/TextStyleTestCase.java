@@ -26,8 +26,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.props.HasPropertiesTesting;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -42,7 +41,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTesting2<TextStyle>,
+public abstract class TextStyleTestCase<T extends TextStyle> implements PackagePrivateClassTesting<TextStyle>,
     HasTextTesting,
     StyleableTesting<TextStyle>,
     CanBeEmptyTesting,
@@ -572,11 +571,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements ClassTes
     }
 
     abstract Class<T> textStyleType();
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 
     // JsonNodeMarshallTesting..........................................................................................
 
