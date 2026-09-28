@@ -17,21 +17,15 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
 public abstract class TextStylePropertyValueTestCase2<V> extends TextStylePropertyValueTestCase<V>
-    implements JsonNodeMarshallerTesting<V> {
+    implements JsonNodeMarshallerTesting<V>,
+    PublicClassTesting<V> {
 
     TextStylePropertyValueTestCase2() {
         super();
-    }
-
-    // ClassTyping......................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     // JsonNodeMarshallTesting...........................................................................................
