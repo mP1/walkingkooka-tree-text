@@ -52,7 +52,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     // clamp............................................................................................................
 
     @Test
-    public void testClampWithNullMinFails() {
+    public final void testClampWithNullMinFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createLength()
@@ -64,7 +64,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     }
 
     @Test
-    public void testClampWithNormalMinFails() {
+    public final void testClampWithNormalMinFails() {
         assertThrows(
             IllegalArgumentException.class,
             () -> this.createLength()
@@ -76,7 +76,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     }
 
     @Test
-    public void testClampWithNullMaxFails() {
+    public final void testClampWithNullMaxFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createLength()
@@ -88,7 +88,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     }
 
     @Test
-    public void testClampWithNormalMaxFails() {
+    public final void testClampWithNormalMaxFails() {
         assertThrows(
             IllegalArgumentException.class,
             () -> this.createLength()
@@ -100,7 +100,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     }
 
     @Test
-    public void testClampWithMinGreaterThanMaxFails() {
+    public final void testClampWithMinGreaterThanMaxFails() {
         assertThrows(
             IllegalArgumentException.class,
             () -> this.createLength()
@@ -112,7 +112,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     }
 
     @Test
-    public void testClampWithMinGreaterThanMaxFails2() {
+    public final void testClampWithMinGreaterThanMaxFails2() {
         assertThrows(
             IllegalArgumentException
                 .class,
