@@ -23,8 +23,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -37,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements ClassTesting2<T>,
+public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements PublicClassTesting<T>,
     HashCodeEqualsDefinedTesting2<T>,
     ToStringTesting<T>,
     HasTextStyleTesting,
@@ -657,13 +656,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
     @Override
     public final T createJsonNodeMarshallingValue() {
         return this.createObject();
-    }
-
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     // HashCodeEqualsDefined............................................................................................
