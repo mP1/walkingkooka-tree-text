@@ -17,10 +17,21 @@
 
 package walkingkooka.tree.text;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
 public final class HasTextStyleTestingTest implements HasTextStyleTesting,
     PublicClassTesting<HasTextStyleTesting> {
+
+    @Test
+    public void testConstantsDifferent() {
+        this.checkNotEquals(
+            TEXT_STYLE,
+            DIFFERENT_TEXT_STYLE
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<HasTextStyleTesting> type() {

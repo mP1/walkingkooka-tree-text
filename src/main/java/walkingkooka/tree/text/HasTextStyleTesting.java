@@ -17,9 +17,20 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.color.Color;
 import walkingkooka.text.printer.TreePrintableTesting;
 
 public interface HasTextStyleTesting extends TreePrintableTesting {
+
+    TextStyle TEXT_STYLE = TextStyle.EMPTY.set(
+        TextStylePropertyName.COLOR,
+        Color.BLACK
+    );
+
+    TextStyle DIFFERENT_TEXT_STYLE = TextStyle.EMPTY.set(
+        TextStylePropertyName.COLOR,
+        Color.WHITE
+    );
 
     default void textStyleAndCheck(final HasTextStyle has,
                                    final TextStyle expected) {
