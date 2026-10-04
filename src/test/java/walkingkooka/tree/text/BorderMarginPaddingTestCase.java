@@ -82,13 +82,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testEdge() {
-        final TextStyle textStyle = this.textStyle();
-
         for (BoxEdge edge : BoxEdge.values()) {
             this.edgeAndCheck(
                 this.createBorderMarginPadding(
                     edge,
-                    textStyle
+                    TEXT_STYLE
                 ),
                 edge
             );
@@ -106,13 +104,11 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testSetEdgeSame() {
-        final TextStyle textStyle = this.textStyle();
-
         for (BoxEdge edge : BoxEdge.values()) {
             this.setEdgeAndCheck(
                 this.createBorderMarginPadding(
                     edge,
-                    textStyle
+                    TEXT_STYLE
                 ),
                 edge
             );
@@ -121,13 +117,12 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testSetEdgeDifferent() {
-        final TextStyle textStyle = this.textStyle();
         final BoxEdge different = BoxEdge.RIGHT;
 
         this.setEdgeAndCheck(
             this.createBorderMarginPadding(
                 BoxEdge.LEFT,
-                textStyle
+                TEXT_STYLE
             ),
             different,
             this.createBorderMarginPadding(
@@ -589,9 +584,16 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Test
     public final void testEqualsDifferentDirection() {
-        final TextStyle textStyle = this.textStyle();
-        this.checkNotEquals(this.createBorderMarginPadding(BoxEdge.LEFT, textStyle),
-            this.createBorderMarginPadding(BoxEdge.RIGHT, textStyle));
+        this.checkNotEquals(
+            this.createBorderMarginPadding(
+                BoxEdge.LEFT,
+                TEXT_STYLE
+            ),
+            this.createBorderMarginPadding(
+                BoxEdge.RIGHT,
+                TEXT_STYLE
+            )
+        );
     }
 
     // helpers..........................................................................................................
@@ -607,13 +609,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
                                          final TextStyle textStyle);
 
     abstract TextStylePropertyName<Length<?>> widthPropertyName(final BoxEdge edge);
-
-    private TextStyle textStyle() {
-        return this.textStyle(
-            TextStylePropertyName.COLOR,
-            Color.fromArgb(0x123456)
-        );
-    }
 
     final <TT> TextStyle textStyle(final TextStylePropertyName<TT> propertyName,
                                    final TT value) {
@@ -662,6 +657,9 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
 
     @Override
     public final T createObject() {
-        return this.createBorderMarginPadding(BoxEdge.LEFT, this.textStyle());
+        return this.createBorderMarginPadding(
+            BoxEdge.LEFT,
+            TEXT_STYLE
+        );
     }
 }
