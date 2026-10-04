@@ -17,24 +17,11 @@
 
 package walkingkooka.tree.text;
 
-import org.junit.jupiter.api.Test;
-import walkingkooka.color.Color;
-
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesting {
+public interface StyleableTesting extends HasTextStyleTesting {
 
-    @Test
-    default void testMergeWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .merge(null)
-        );
-    }
-
-    default void mergeAndCheck(final T styleable,
+    default void mergeAndCheck(final Styleable styleable,
                                final TextStyle textStyle,
                                final Styleable expected) {
         this.checkEquals(
@@ -45,30 +32,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
     }
 
     // set..............................................................................................................
-
-    @Test
-    default void testSetWithNullPropertyNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .set(
-                    null,
-                    Color.BLACK
-                )
-        );
-    }
-
-    @Test
-    default void testSetWithNullPropertyValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .set(
-                    TextStylePropertyName.COLOR,
-                    null
-                )
-        );
-    }
 
     default <S extends Styleable, PV> S setAndCheck(final S styleable,
                                                     final TextStylePropertyName<PV> propertyName,
@@ -90,18 +53,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
 
     // setOrRemove......................................................................................................
 
-    @Test
-    default void testSetOrRemoveWithNullPropertyNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .setOrRemove(
-                    null,
-                    Color.BLACK
-                )
-        );
-    }
-
     default <S extends Styleable, PV> S setOrRemoveAndCheck(final S styleable,
                                                             final TextStylePropertyName<PV> propertyName,
                                                             final PV propertyValue,
@@ -122,17 +73,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
 
     // remove...........................................................................................................
 
-    @Test
-    default void testRemoveWithNullPropertyNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .remove(
-                    null
-                )
-        );
-    }
-
     default <S extends Styleable> S removeAndCheck(final S styleable,
                                                    final TextStylePropertyName<?> propertyName,
                                                    final S expected) {
@@ -150,30 +90,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
     }
 
     // removeIf.........................................................................................................
-
-    @Test
-    default void removeIfWithNullPropertyNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .removeIf(
-                    null,
-                    1
-                )
-        );
-    }
-
-    @Test
-    default void removeIfWithNullPropertyValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .removeIf(
-                    TextStylePropertyName.COLOR,
-                    null
-                )
-        );
-    }
 
     default <S extends Styleable, V> S removeIfAndCheck(final S styleable,
                                                         final TextStylePropertyName<V> propertyName,
@@ -213,45 +129,6 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
     }
 
     // replaceIf.........................................................................................................
-
-    @Test
-    default void testReplaceIfWithNullPropertyNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .replaceIf(
-                    null,
-                    Color.BLACK,
-                    Color.WHITE
-                )
-        );
-    }
-
-    @Test
-    default void testReplaceIfWithNullOldPropertyValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .replaceIf(
-                    TextStylePropertyName.COLOR,
-                    null,
-                    Color.WHITE
-                )
-        );
-    }
-
-    @Test
-    default void testReplaceIfWithNullNewPropertyValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createStyleable()
-                .replaceIf(
-                    TextStylePropertyName.COLOR,
-                    Color.BLACK,
-                    null
-                )
-        );
-    }
 
     default <S extends Styleable, PV> S replaceIfAndCheck(final S styleable,
                                                           final TextStylePropertyName<PV> propertyName,
@@ -293,6 +170,4 @@ public interface StyleableTesting<T extends Styleable> extends HasTextStyleTesti
 
         return (S) replaceIf;
     }
-
-    T createStyleable();
 }
