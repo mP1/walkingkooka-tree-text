@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStyleTestCase<T extends TextStyle> implements PackagePrivateClassTesting<TextStyle>,
     HasTextTesting,
-    StyleableTesting<TextStyle>,
+    StyleableTesting2<TextStyle>,
     CanBeEmptyTesting,
     HasPropertiesTesting,
     HashCodeEqualsDefinedTesting2<TextStyle>,
