@@ -271,11 +271,11 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
                 "  TEXT to TextNode (walkingkooka.tree.text.convert.TreeTextConverterTextToTextNode)\n" +
                 "  TEXT to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterTextToTextStyle)\n" +
                 "  TEXT to TextStylePropertyName (walkingkooka.tree.text.convert.TreeTextConverterTextToTextStylePropertyName)\n" +
-                "  TextStyle to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterToTextStyle)\n" +
                 "  Url to Hyperlink (walkingkooka.tree.text.convert.TreeTextConverterUrlToHyperlink)\n" +
                 "  Url to Image (walkingkooka.tree.text.convert.TreeTextConverterUrlToImage)\n" +
                 "  to Styleable (walkingkooka.tree.text.convert.TreeTextConverterToStyleable)\n" +
-                "  to TextNode (walkingkooka.tree.text.convert.TreeTextConverterToTextNode)\n"
+                "  to TextNode (walkingkooka.tree.text.convert.TreeTextConverterToTextNode)\n" +
+                "  to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterToTextStyle)\n"
         );
     }
 
