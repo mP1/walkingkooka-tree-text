@@ -28,7 +28,9 @@ import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
+import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Text;
@@ -37,6 +39,7 @@ import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 public final class TreeTextConvertersTest implements PublicStaticHelperTesting<TreeTextConverters>,
     ConverterTesting {
@@ -224,6 +227,55 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
                 }
             },
             expected
+        );
+    }
+
+    @Test
+    public void testConverterCollectionWithAllConvertersPrintTree() throws Exception {
+        final List<Converter<ConverterContext>> converters = Lists.array();
+
+        for (final Method method : TreeTextConverters.class.getMethods()) {
+            if (false == MethodAttributes.STATIC.is(method)) {
+                continue;
+            }
+
+            if (false == method.getReturnType().equals(Converter.class)) {
+                continue;
+            }
+
+            if (method.getParameterCount() != 0) {
+                continue;
+            }
+
+            if (method.getName().equals("fake")) {
+                continue;
+            }
+
+            converters.add(
+                (Converter<ConverterContext>) method.invoke(null)
+            );
+        }
+
+        converters.sort(
+            (Converter<?> left, Converter<?> right) -> left.toString().compareTo(right.toString())
+        );
+
+        this.treePrintAndCheck(
+            (TreePrintable) Converters.collection(converters),
+            "ConverterCollection\n" +
+                "  Properties to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterPropertiesToTextStyle)\n" +
+                "  TEXT to Border (walkingkooka.tree.text.convert.TreeTextConverterTextToBorder)\n" +
+                "  TEXT to Flag (walkingkooka.tree.text.convert.TreeTextConverterTextToFlag)\n" +
+                "  TEXT to Margin (walkingkooka.tree.text.convert.TreeTextConverterTextToMargin)\n" +
+                "  TEXT to Padding (walkingkooka.tree.text.convert.TreeTextConverterTextToPadding)\n" +
+                "  TEXT to TextNode (walkingkooka.tree.text.convert.TreeTextConverterTextToTextNode)\n" +
+                "  TEXT to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterTextToTextStyle)\n" +
+                "  TEXT to TextStylePropertyName (walkingkooka.tree.text.convert.TreeTextConverterTextToTextStylePropertyName)\n" +
+                "  TextStyle to TextStyle (walkingkooka.tree.text.convert.TreeTextConverterToTextStyle)\n" +
+                "  Url to Hyperlink (walkingkooka.tree.text.convert.TreeTextConverterUrlToHyperlink)\n" +
+                "  Url to Image (walkingkooka.tree.text.convert.TreeTextConverterUrlToImage)\n" +
+                "  to Styleable (walkingkooka.tree.text.convert.TreeTextConverterToStyleable)\n" +
+                "  to TextNode (walkingkooka.tree.text.convert.TreeTextConverterToTextNode)\n"
         );
     }
 
