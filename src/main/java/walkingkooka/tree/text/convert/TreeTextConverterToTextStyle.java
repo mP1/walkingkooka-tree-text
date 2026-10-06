@@ -61,6 +61,6 @@ final class TreeTextConverterToTextStyle<C extends ConverterContext> extends Tre
 
     @Override
     public String toString() {
-        return TextStyle.class.getSimpleName() + " to " + TextStyle.class.getSimpleName();
+        return "to " + TextStyle.class.getSimpleName();
     }
 }

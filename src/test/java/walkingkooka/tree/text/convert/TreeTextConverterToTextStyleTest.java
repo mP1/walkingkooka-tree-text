@@ -100,7 +100,7 @@ public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTes
     public void testToString() {
         this.toStringAndCheck(
             this.createConverter(),
-            "TextStyle to TextStyle"
+            "to TextStyle"
         );
     }
 
