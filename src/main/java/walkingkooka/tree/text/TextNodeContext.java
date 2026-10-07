@@ -18,9 +18,10 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Context;
+import walkingkooka.color.ColorContext;
 
 /**
  * A {@link Context} that accompanies some {@link TextNode} such as rendering into HTML.
  */
-public interface TextNodeContext extends Context {
+public interface TextNodeContext extends ColorContext {
 }
