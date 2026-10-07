@@ -181,7 +181,8 @@ public final class Hyperlink extends TextParentNode {
 
     @Override
     boolean buildHtml(final boolean shouldIndent,
-                      final IndentingPrinter html) {
+                      final IndentingPrinter html,
+                      final TextNodeContext context) {
         if (shouldIndent) {
             html.lineStart();
             html.indent();
@@ -198,7 +199,8 @@ public final class Hyperlink extends TextParentNode {
             html.print(">");
             this.buildChildNodesHtml(
                 true,
-                html
+                html,
+                context
             );
             html.print("</A>");
         }

@@ -405,13 +405,14 @@ public abstract class TextNode implements Node<TextNode, TextNodeName, TextStyle
      * Returns the HTML equivalent of this {@link TextNode}.
      */
     @Override
-    public abstract String toHtml();
+    public abstract String toHtml(TextNodeContext context);
 
     /**
      * Internal method appends the HTML for this {@link TextNode}.
      */
     abstract boolean buildHtml(final boolean shouldIndent,
-                               final IndentingPrinter html);
+                               final IndentingPrinter html,
+                               final TextNodeContext context);
 
     // helper............................................................................................................
 

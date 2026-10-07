@@ -69,7 +69,10 @@ public final class TextPlaceholderNodeTest extends TextLeafNodeTestCase<TextPlac
     public void testToHtml() {
         assertThrows(
             UnsupportedOperationException.class,
-            () -> this.createTextNode().toHtml()
+            () -> this.createTextNode()
+                .toHtml(
+                    TextNodeContexts.fake()
+                )
         );
     }
 

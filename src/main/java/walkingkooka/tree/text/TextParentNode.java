@@ -179,7 +179,9 @@ abstract class TextParentNode extends TextNode {
      * Placeholders must be resolved before converting to html.
      */
     @Override
-    public final String toHtml() {
+    public final String toHtml(final TextNodeContext context) {
+        Objects.requireNonNull(context, "context");
+
         final StringBuilder html = new StringBuilder();
 
         try (final IndentingPrinter printer = Printers.stringBuilder
@@ -189,7 +191,8 @@ abstract class TextParentNode extends TextNode {
         ) {
             this.buildHtml(
                 false, // shouldIndent
-                printer
+                printer,
+                context
             );
         }
 
@@ -197,13 +200,15 @@ abstract class TextParentNode extends TextNode {
     }
 
     final boolean buildChildNodesHtml(final boolean shouldIndent,
-                                      final IndentingPrinter html) {
+                                      final IndentingPrinter html,
+                                      final TextNodeContext context) {
         boolean i = shouldIndent;
 
         for (final TextNode child : this.children()) {
             i = child.buildHtml(
                 i,
-                html
+                html,
+                context
             );
 
             i = child.isStyle() || child.isStyleName();

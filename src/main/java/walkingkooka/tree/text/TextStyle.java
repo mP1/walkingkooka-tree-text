@@ -714,5 +714,22 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
 
     // toText(Function).................................................................................................
 
-    abstract String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper);
+    final String toText() {
+        return this.toText(TextStylePropertyName::value);
+    }
+
+    final String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
+        return this.toText(
+            propertyNameMapper,
+            new FakeTextNodeContext() {
+                @Override
+                public Optional<Color> lookupColor(final Color color) {
+                    return Optional.of(color);
+                }
+            }
+        );
+    }
+
+    abstract String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper,
+                           final TextNodeContext context);
 }

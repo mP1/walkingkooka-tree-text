@@ -94,7 +94,7 @@ public final class Image extends TextLeafNode<Url> {
      * Renders an IMG with a SRC
      */
     @Override
-    public String toHtml() {
+    public String toHtml(TextNodeContext context) {
         return "<IMG src=\"" + this.value + "\"/>";
     }
 

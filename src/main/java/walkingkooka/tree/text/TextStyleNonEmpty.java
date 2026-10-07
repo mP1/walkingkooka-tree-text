@@ -19,6 +19,7 @@ package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -343,9 +344,7 @@ final class TextStyleNonEmpty extends TextStyle {
     @Override
     public String text() {
         if (null == this.text) {
-            this.text = this.toText(
-                TextStylePropertyName::value
-            );
+            this.text = this.toText();
         }
 
         return this.text;
@@ -365,7 +364,8 @@ final class TextStyleNonEmpty extends TextStyle {
      * </pre>
      */
     @Override
-    String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
+    String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper,
+                  final TextNodeContext context) {
         final StringBuilder b = new StringBuilder();
 
         try (final Printer text = Printers.stringBuilder(b, LineEnding.SYSTEM)) {
@@ -382,9 +382,16 @@ final class TextStyleNonEmpty extends TextStyle {
                 text.print(" ");
 
                 final Object value = propertyAndValue.getValue();
-                final CharSequence valueCss = toTextValue(value);
 
-                text.print(valueCss);
+                text.print(
+                    value instanceof Color ?
+                        context.lookupColorOrFail(
+                            (Color) value
+                        ).toString() :
+                        CharSequences.quoteIfNecessary(
+                            value.toString()
+                        )
+                );
                 text.print(TextStyle.SEPARATOR.string());
 
                 separator = " ";
@@ -392,12 +399,6 @@ final class TextStyleNonEmpty extends TextStyle {
         }
 
         return b.toString();
-    }
-
-    private static CharSequence toTextValue(final Object value){
-        return CharSequences.quoteIfNecessary(
-            value.toString()
-        );
     }
 
     // BoxEdge........................................................................................................

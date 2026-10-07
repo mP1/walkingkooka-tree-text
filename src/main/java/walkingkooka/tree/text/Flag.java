@@ -115,7 +115,7 @@ public final class Flag extends TextLeafNode<String> {
      * This assumes that a font with the flag emojis or similar is already set.
      */
     @Override
-    public String toHtml() {
+    public String toHtml(TextNodeContext context) {
         final String value = this.value;
 
         // The Unicode sequence for the Australian flag emoji (🇦🇺)

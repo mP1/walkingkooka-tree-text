@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.color.Color;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
@@ -30,6 +31,7 @@ import walkingkooka.tree.NodeTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -172,9 +174,31 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
 
     final void toHtmlAndCheck(final TextNode node,
                               final String html) {
+
+        this.toHtmlAndCheck(
+            node,
+            new FakeTextNodeContext() {
+                @Override
+                public Optional<Color> lookupColor(final Color color) {
+                    return Optional.ofNullable(
+                        color.isIndexed() || color.isNamed() ?
+                            null :
+                            color
+                    );
+                }
+            },
+            html
+        );
+    }
+
+    final void toHtmlAndCheck(final TextNode node,
+                              final TextNodeContext context,
+                              final String html) {
         this.checkEquals(
             html,
-            node.toHtml(),
+            node.toHtml(
+                context
+            ),
             () -> node + " toHtml"
         );
     }
