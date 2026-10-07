@@ -156,8 +156,11 @@ abstract class TextLeafNode<V> extends TextNode implements HasValue<V> {
 
     @Override //
     final boolean buildHtml(final boolean shouldIndent,
-                            final IndentingPrinter html) {
-        html.print(this.toHtml());
+                            final IndentingPrinter html,
+                            final TextNodeContext context) {
+        html.print(
+            this.toHtml(context)
+        );
         return false;
     }
 

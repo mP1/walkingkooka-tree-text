@@ -90,7 +90,7 @@ public final class TextPlaceholderNode extends TextLeafNode<TextPlaceholderName>
      * Placeholders must be resolved before converting to html.
      */
     @Override
-    public String toHtml() {
+    public String toHtml(TextNodeContext context) {
         throw new UnsupportedOperationException();
     }
 

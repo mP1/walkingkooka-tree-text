@@ -14,6 +14,7 @@ import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextNodeContexts;
 import walkingkooka.tree.text.TextStyleName;
 import walkingkooka.tree.text.TextStyleNameNode;
 import walkingkooka.tree.text.TextStyleNode;
@@ -129,7 +130,11 @@ public class TestGwtTest extends GWTTestCase {
 
             @Override
             protected void visit(final Image node) {
-                printer.print(node.toHtml());
+                printer.print(
+                    node.toHtml(
+                        TextNodeContexts.fake()
+                    )
+                );
             }
 
             @Override

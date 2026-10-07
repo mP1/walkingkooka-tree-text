@@ -181,10 +181,12 @@ public final class Badge extends TextParentNode {
 
     @Override
     boolean buildHtml(final boolean shouldIndent,
-                      final IndentingPrinter html) {
+                      final IndentingPrinter html,
+                      final TextNodeContext context) {
             this.buildChildNodesHtml(
                 true,
-                html
+                html,
+                context
             );
 
         return true;

@@ -25,5 +25,5 @@ public interface HasHtml {
     /**
      * Returns the HTML equivalent of this value.
      */
-    String toHtml();
+    String toHtml(final TextNodeContext context);
 }

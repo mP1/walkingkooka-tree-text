@@ -22,6 +22,8 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
+import walkingkooka.color.IndexedColor;
+import walkingkooka.color.NamedColor;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -29,6 +31,7 @@ import walkingkooka.visit.Visiting;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -332,6 +335,36 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
         );
     }
 
+    @Test
+    public void testTextWithIndexedColor() {
+        this.textAndCheck(
+            TextNode.style(
+                Lists.of(
+                    Text.with("a1"),
+                    Text.with("b2")
+                )
+            ).setTextStyle(
+                TextStyle.parse("color:123")
+            ),
+            "a1b2"
+        );
+    }
+
+    @Test
+    public void testTextWithNamedColor() {
+        this.textAndCheck(
+            TextNode.style(
+                Lists.of(
+                    Text.with("a1"),
+                    Text.with("b2")
+                )
+            ).setTextStyle(
+                TextStyle.parse("color:\"NamedColor123\"")
+            ),
+            "a1b2"
+        );
+    }
+
     // HasTextOffset ....................................................................................................
 
     @Test
@@ -510,6 +543,90 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                 )
             ),
             "<SPAN style=\"color: #111;\">before<SPAN style=\"color: #222;\">middle</SPAN>after</SPAN>"
+        );
+    }
+
+    private final static IndexedColor INDEXED_COLOR = Color.indexed(123);
+
+    @Test
+    public void testToHtmlWithTextStyleIndexedColor() {
+        this.toHtmlAndCheck(
+            TextStyleNode.with(
+                Lists.of(
+                    TextStyleNode.with(
+                        Lists.of(
+                            TextNode.text("middle")
+                        ),
+                        TextStylePropertiesMap.with(
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                INDEXED_COLOR
+                            )
+                        )
+                    )
+                ),
+                TextStylePropertiesMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#111")
+                    )
+                )
+            ),
+            new FakeTextNodeContext() {
+                @Override
+                public Optional<Color> lookupColor(final Color color) {
+                    return Optional.of(
+                        INDEXED_COLOR.equals(color) ?
+                            Color.parse("#222") :
+                            color
+                    );
+                }
+            },
+            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222;\">middle</SPAN>" + LineEnding.NL +
+                "</SPAN>"
+        );
+    }
+
+    private final static NamedColor NAMED_COLOR = Color.named("TestNamedColor123");
+
+    @Test
+    public void testToHtmlWithTextStyleNamedColor() {
+        this.toHtmlAndCheck(
+            TextStyleNode.with(
+                Lists.of(
+                    TextStyleNode.with(
+                        Lists.of(
+                            TextNode.text("middle")
+                        ),
+                        TextStylePropertiesMap.with(
+                            Maps.of(
+                                TextStylePropertyName.COLOR,
+                                NAMED_COLOR
+                            )
+                        )
+                    )
+                ),
+                TextStylePropertiesMap.with(
+                    Maps.of(
+                        TextStylePropertyName.COLOR,
+                        Color.parse("#111")
+                    )
+                )
+            ),
+            new FakeTextNodeContext() {
+                @Override
+                public Optional<Color> lookupColor(final Color color) {
+                    return Optional.of(
+                        NAMED_COLOR.equals(color) ?
+                            Color.parse("#222") :
+                            color
+                    );
+                }
+            },
+            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222;\">middle</SPAN>" + LineEnding.NL +
+                "</SPAN>"
         );
     }
 

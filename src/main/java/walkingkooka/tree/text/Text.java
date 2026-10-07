@@ -140,7 +140,7 @@ public final class Text extends TextLeafNode<String> implements HasText {
      * Returns the HTML equivalent of this {@link TextNode}.
      */
     @Override
-    public String toHtml() {
+    public String toHtml(TextNodeContext context) {
         return this.text()
             .replace("\"", "&quot;")
             .replace("&", "&amp;")

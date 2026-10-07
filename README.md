@@ -109,12 +109,20 @@ new FakeTextNodeVisitor() {
 
     @Override
     protected void visit(final Flag node) {
-        printer.print(node.toHtml()); // prints flag emoji
+        printer.print(
+          node.toHtml(
+            TextNodeContexts.fake()
+          )
+        ); // prints flag emoji
     }
     
     @Override
     protected void visit(final Image node) {
-        printer.print(node.toHtml());
+        printer.print(
+          node.toHtml(
+            TextNodeContexts.fake()
+          )
+        );
     }
 
     @Override

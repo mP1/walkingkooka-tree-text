@@ -186,7 +186,8 @@ final class TextStyleEmpty extends TextStyle {
     // toText(Function).................................................................................................
 
     @Override
-    String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper) {
+    String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper,
+                  final TextNodeContext context) {
         return "";
     }
 }

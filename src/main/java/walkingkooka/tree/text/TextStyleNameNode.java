@@ -176,7 +176,8 @@ public final class TextStyleNameNode extends TextParentNode {
 
     @Override
     boolean buildHtml(final boolean shouldIndent,
-                      final IndentingPrinter html) {
+                      final IndentingPrinter html,
+                      final TextNodeContext context) {
         if (shouldIndent) {
             html.lineStart();
             html.indent();
@@ -188,7 +189,8 @@ public final class TextStyleNameNode extends TextParentNode {
 
         final boolean i = this.buildChildNodesHtml(
             true, // shouldIndent
-            html
+            html,
+            context
         );
 
         html.print("</SPAN>");
