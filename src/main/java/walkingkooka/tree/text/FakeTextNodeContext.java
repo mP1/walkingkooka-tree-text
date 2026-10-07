@@ -17,21 +17,11 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.color.FakeColorContext;
 
-/**
- * A collection of {@link TextNodeContext}.
- */
-public final class TextNodeContexts implements PublicStaticHelper {
+public class FakeTextNodeContext extends FakeColorContext implements TextNodeContext{
 
-    /**
-     * {@link FakeTextNodeContext}
-     */
-    public static FakeTextNodeContext fake() {
-        return new FakeTextNodeContext();
-    }
-
-    private TextNodeContexts() {
-        throw new UnsupportedOperationException();
+    public FakeTextNodeContext() {
+        super();
     }
 }
