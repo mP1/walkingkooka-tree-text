@@ -187,7 +187,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
                 Converters.textToProperties(),
                 Converters.numberToNumber(),
                 NetConverters.textToUrl(),
-                ColorConverters.colorToColor(),
+                ColorConverters.toColor(),
                 ColorConverters.numberToColor(),
                 ColorConverters.textToColor(),
                 TreeTextConverters.toTextStyle(),
