@@ -17,12 +17,11 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
 import walkingkooka.net.Url;
 import walkingkooka.tree.text.TextNode;
 
-abstract class TreeTextConverterUrlTo<T extends TextNode, C extends ConverterContext> extends TreeTextConverter<C> implements TryingShortCircuitingConverter<C> {
+abstract class TreeTextConverterUrlTo<T extends TextNode, C extends TreeTextConverterContext> extends TreeTextConverter<C> implements TryingShortCircuitingConverter<C> {
 
     TreeTextConverterUrlTo() {
         super();

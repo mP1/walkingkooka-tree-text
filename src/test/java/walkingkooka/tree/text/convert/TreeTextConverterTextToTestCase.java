@@ -17,11 +17,10 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.reflect.ClassTesting2;
 
-public abstract class TreeTextConverterTextToTestCase<C extends TreeTextConverterTextTo<CC>, CC extends ConverterContext> implements ConverterTesting2<C, CC>,
+public abstract class TreeTextConverterTextToTestCase<C extends TreeTextConverterTextTo<CC>, CC extends TreeTextConverterContext> implements ConverterTesting2<C, CC>,
     ClassTesting2<C> {
 
     TreeTextConverterTextToTestCase() {

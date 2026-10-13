@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.net.Url;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
@@ -25,9 +24,9 @@ import walkingkooka.tree.text.TextNode;
 /**
  * Converts {@link Url}, creating a {@link Hyperlink} with the given {@link Url}.
  */
-final class TreeTextConverterUrlToHyperlink<C extends ConverterContext> extends TreeTextConverterUrlTo<Hyperlink, C> {
+final class TreeTextConverterUrlToHyperlink<C extends TreeTextConverterContext> extends TreeTextConverterUrlTo<Hyperlink, C> {
 
-    static <C extends ConverterContext> TreeTextConverterUrlToHyperlink<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterUrlToHyperlink<C> instance() {
         return INSTANCE;
     }
 

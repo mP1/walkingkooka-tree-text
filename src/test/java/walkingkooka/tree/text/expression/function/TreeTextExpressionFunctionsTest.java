@@ -22,13 +22,8 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.convert.BinaryNumberConverterFunctions;
-import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterContexts;
+import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.currency.CurrencyLocaleContexts;
-import walkingkooka.datetime.DateTimeContexts;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.PublicStaticHelperTesting;
@@ -57,6 +52,8 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextOverflow;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.convert.FakeTreeTextConverterContext;
+import walkingkooka.tree.text.convert.TreeTextConverterContext;
 import walkingkooka.tree.text.convert.TreeTextConverters;
 import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
@@ -960,7 +957,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     @Override
                     public boolean canConvert(final Object value,
                                               final Class<?> type) {
-                        return this.converterContext.canConvert(
+                        return this.treeTextConverterContext.canConvert(
                             value,
                             type
                         );
@@ -969,17 +966,34 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     @Override
                     public <T> Either<T, String> convert(final Object value,
                                                          final Class<T> target) {
-                        return this.converterContext.convert(
+                        return this.treeTextConverterContext.convert(
                             value,
                             target
                         );
                     }
 
-                    private final ConverterContext converterContext = ConverterContexts.basic(
-                        false, // canNumbersHaveGroupSeparator
-                        Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
-                        ',', // valueSeparator
-                        Converters.collection(
+                    private final TreeTextConverterContext treeTextConverterContext = new FakeTreeTextConverterContext() {
+                        @Override
+                        public boolean canConvert(final Object value,
+                                                  final Class<?> type) {
+                            return this.converter.canConvert(
+                                value,
+                                type,
+                                this
+                            );
+                        }
+
+                        @Override
+                        public <T> Either<T, String> convert(final Object value,
+                                                             final Class<T> target) {
+                            return this.converter.convert(
+                                value,
+                                target,
+                                this
+                            );
+                        }
+
+                        private final Converter<TreeTextConverterContext> converter = Converters.collection(
                             Lists.of(
                                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
                                 Converters.simple(), // handles Text -> TextNode
@@ -994,13 +1008,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                                 TreeTextConverters.urlToHyperlink(),
                                 TreeTextConverters.urlToImage()
                             )
-                        ),
-                        BinaryNumberConverterFunctions.fake(), // multiplier
-                        BINARY_TEXT_CONTEXT,
-                        CurrencyLocaleContexts.fake(),
-                        DateTimeContexts.fake(),
-                        DecimalNumberContexts.fake()
-                    );
+                        );
+                    };
                 }
             )
         );

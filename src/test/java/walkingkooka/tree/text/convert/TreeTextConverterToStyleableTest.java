@@ -24,15 +24,14 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextConverterToStyleableTest extends TreeTextConverterTestCase<TreeTextConverterToStyleable<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<TreeTextConverterToStyleable<FakeConverterContext>> {
+public final class TreeTextConverterToStyleableTest extends TreeTextConverterTestCase<TreeTextConverterToStyleable<FakeTreeTextConverterContext>, FakeTreeTextConverterContext>
+    implements ToStringTesting<TreeTextConverterToStyleable<FakeTreeTextConverterContext>> {
 
     @Test
     public void testStringToStringFails() {
@@ -75,13 +74,13 @@ public final class TreeTextConverterToStyleableTest extends TreeTextConverterTes
     }
 
     @Override
-    public TreeTextConverterToStyleable<FakeConverterContext> createConverter() {
+    public TreeTextConverterToStyleable<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterToStyleable.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -103,7 +102,7 @@ public final class TreeTextConverterToStyleableTest extends TreeTextConverterTes
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.collection(
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.collection(
                 Lists.of(
                     Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
                     TreeTextConverters.textToTextStyle()
@@ -125,7 +124,7 @@ public final class TreeTextConverterToStyleableTest extends TreeTextConverterTes
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterToStyleable<FakeConverterContext>> type() {
+    public Class<TreeTextConverterToStyleable<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterToStyleable.class);
     }
 }

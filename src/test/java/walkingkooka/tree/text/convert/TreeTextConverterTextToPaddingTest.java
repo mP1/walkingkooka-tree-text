@@ -22,10 +22,9 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Padding;
 
-public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterTestCase<TreeTextConverterTextToPadding<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterTestCase<TreeTextConverterTextToPadding<FakeTreeTextConverterContext>, FakeTreeTextConverterContext> {
 
     @Test
     public void testConvertNullToPaddingFails() {
@@ -47,13 +46,13 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
     }
 
     @Override
-    public TreeTextConverterTextToPadding<FakeConverterContext> createConverter() {
+    public TreeTextConverterTextToPadding<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterTextToPadding.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -75,7 +74,7 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
         };
     }
 
@@ -92,7 +91,7 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterTextToPadding<FakeConverterContext>> type() {
+    public Class<TreeTextConverterTextToPadding<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToPadding.class);
     }
 }

@@ -17,10 +17,9 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 
-abstract class TreeTextConverterTextTo<C extends ConverterContext> extends TreeTextConverter<C> implements TextToTryingShortCircuitingConverter<C> {
+abstract class TreeTextConverterTextTo<C extends TreeTextConverterContext> extends TreeTextConverter<C> implements TextToTryingShortCircuitingConverter<C> {
 
     TreeTextConverterTextTo() {
         super();
