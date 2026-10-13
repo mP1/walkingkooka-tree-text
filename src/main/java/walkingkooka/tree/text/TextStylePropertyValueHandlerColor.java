@@ -96,7 +96,7 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     @Override
     JsonNode marshall(final Color color,
                       final JsonNodeMarshallContext context) {
-        final WebColorName webColorName = color.toWebColorName()
+        final WebColorName webColorName = color.webColorName()
             .orElse(null);
         return null != webColorName ?
             context.marshall(
