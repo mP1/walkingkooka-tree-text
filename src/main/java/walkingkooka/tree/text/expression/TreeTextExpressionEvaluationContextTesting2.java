@@ -17,12 +17,10 @@
 
 package walkingkooka.tree.text.expression;
 
-import walkingkooka.color.ColorContextTesting2;
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
+import walkingkooka.color.expression.ColorExpressionEvaluationContextTesting2;
 
 public interface TreeTextExpressionEvaluationContextTesting2<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionEvaluationContextTesting,
-    ExpressionEvaluationContextTesting2<C>,
-    ColorContextTesting2<C> {
+    ColorExpressionEvaluationContextTesting2<C> {
 
     @Override
     default String typeNameSuffix() {
