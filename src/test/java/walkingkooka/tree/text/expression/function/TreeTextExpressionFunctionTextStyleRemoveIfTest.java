@@ -21,17 +21,17 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.InvalidExpressionFunctionParameterCountException;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TreeTextExpressionFunctionTextStyleRemoveIfTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleRemoveIf<FakeExpressionEvaluationContext>, Styleable> {
+public final class TreeTextExpressionFunctionTextStyleRemoveIfTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleRemoveIf<FakeTreeTextExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextNodeAndTextStylePropertyNameFails() {
@@ -109,13 +109,13 @@ public final class TreeTextExpressionFunctionTextStyleRemoveIfTest extends TreeT
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyleRemoveIf<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyleRemoveIf<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyleRemoveIf.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -141,7 +141,7 @@ public final class TreeTextExpressionFunctionTextStyleRemoveIfTest extends TreeT
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyleRemoveIf<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyleRemoveIf<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleRemoveIf.class);
     }
 }

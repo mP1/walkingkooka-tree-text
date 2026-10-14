@@ -21,14 +21,14 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTextStyleRemoveTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>, Styleable> {
+public final class TreeTextExpressionFunctionTextStyleRemoveTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleRemove<FakeTreeTextExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextNodeAndTextStylePropertyName() {
@@ -80,13 +80,13 @@ public final class TreeTextExpressionFunctionTextStyleRemoveTest extends TreeTex
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyleRemove<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyleRemove.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -107,7 +107,7 @@ public final class TreeTextExpressionFunctionTextStyleRemoveTest extends TreeTex
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyleRemove<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyleRemove<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleRemove.class);
     }
 }

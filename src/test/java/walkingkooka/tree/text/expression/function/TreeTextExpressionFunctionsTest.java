@@ -19,26 +19,26 @@ package walkingkooka.tree.text.expression.function;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.convert.BinaryNumberConverterFunctions;
+import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
-import walkingkooka.environment.EnvironmentContexts;
-import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.BinaryTextContextTesting;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.Expression;
-import walkingkooka.tree.expression.ExpressionEvaluationContexts;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
-import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.HasExpressionNumberKindTesting;
+import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Border;
 import walkingkooka.tree.text.BoxEdge;
 import walkingkooka.tree.text.Flag;
@@ -58,10 +58,13 @@ import walkingkooka.tree.text.TextOverflow;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 import walkingkooka.tree.text.convert.TreeTextConverters;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -898,12 +901,17 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     .map(Expression::value)
                     .collect(Collectors.toList())
             ).toValue(
-                ExpressionEvaluationContexts.basic(
-                    EXPRESSION_NUMBER_KIND,
-                    (e, c) -> {
-                        throw new UnsupportedOperationException();
-                    },
-                    (name) -> {
+                new FakeTreeTextExpressionEvaluationContext() {
+
+                    @Override
+                    public ExpressionFunction<?, ExpressionEvaluationContext> expressionFunction(final ExpressionFunctionName name) {
+                        Objects.requireNonNull(name, "name");
+                        return Cast.to(
+                            this.treeTextExpressionFunction(name)
+                        );
+                    }
+
+                    private ExpressionFunction<?, TreeTextExpressionEvaluationContext> treeTextExpressionFunction(final ExpressionFunctionName name) {
                         switch (name.value()) {
                             case "flag":
                                 return TreeTextExpressionFunctions.flag();
@@ -938,18 +946,36 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             default:
                                 throw name.unknownExpressionFunctionException();
                         }
-                    }, // name -> function
-                    (final RuntimeException cause) -> {
-                        throw cause;
-                    },
-                    (ExpressionReference reference) -> {
-                        throw new UnsupportedOperationException();
-                    },
-                    (ExpressionReference reference) -> {
-                        throw new UnsupportedOperationException();
-                    },
-                    CaseSensitivity.SENSITIVE,
-                    ConverterContexts.basic(
+                    }
+
+                    @Override
+                    public <T> T prepareParameter(final ExpressionFunctionParameter<T> parameter,
+                                                  final Object value) {
+                        return parameter.convertOrFail(
+                            value,
+                            this
+                        );
+                    }
+
+                    @Override
+                    public boolean canConvert(final Object value,
+                                              final Class<?> type) {
+                        return this.converterContext.canConvert(
+                            value,
+                            type
+                        );
+                    }
+
+                    @Override
+                    public <T> Either<T, String> convert(final Object value,
+                                                         final Class<T> target) {
+                        return this.converterContext.convert(
+                            value,
+                            target
+                        );
+                    }
+
+                    private final ConverterContext converterContext = ConverterContexts.basic(
                         false, // canNumbersHaveGroupSeparator
                         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateTimeOffset
                         ',', // valueSeparator
@@ -974,10 +1000,8 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                         CurrencyLocaleContexts.fake(),
                         DateTimeContexts.fake(),
                         DecimalNumberContexts.fake()
-                    ),
-                    EnvironmentContexts.fake(),
-                    LocaleContexts.fake()
-                )
+                    );
+                }
             )
         );
     }

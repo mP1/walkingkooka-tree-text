@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionHyperlinkTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>, Hyperlink> {
+public final class TreeTextExpressionFunctionHyperlinkTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionHyperlink<FakeTreeTextExpressionEvaluationContext>, Hyperlink> {
 
     @Test
     public void testApplyWithString() {
@@ -40,13 +40,13 @@ public final class TreeTextExpressionFunctionHyperlinkTest extends TreeTextExpre
     }
 
     @Override
-    public TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionHyperlink<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionHyperlink.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext() {
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext() {
 
         };
     }
@@ -69,7 +69,7 @@ public final class TreeTextExpressionFunctionHyperlinkTest extends TreeTextExpre
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionHyperlink<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionHyperlink<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionHyperlink.class);
     }
 }

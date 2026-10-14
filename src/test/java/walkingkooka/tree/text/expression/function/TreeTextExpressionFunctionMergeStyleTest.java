@@ -20,12 +20,12 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionMergeStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext>, Styleable> {
+public final class TreeTextExpressionFunctionMergeStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionMergeStyle<FakeTreeTextExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextNodeAndTextNode() {
@@ -60,13 +60,13 @@ public final class TreeTextExpressionFunctionMergeStyleTest extends TreeTextExpr
     }
 
     @Override
-    public TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionMergeStyle<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionMergeStyle.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -87,7 +87,7 @@ public final class TreeTextExpressionFunctionMergeStyleTest extends TreeTextExpr
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionMergeStyle<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionMergeStyle<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionMergeStyle.class);
     }
 }

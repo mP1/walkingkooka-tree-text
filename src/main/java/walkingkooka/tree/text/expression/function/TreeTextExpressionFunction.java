@@ -19,7 +19,6 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -36,13 +35,14 @@ import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.Optional;
 
 /**
  * A {@link ExpressionFunction} with an assumed {@link C}.
  */
-abstract class TreeTextExpressionFunction<T, C extends ExpressionEvaluationContext> implements ExpressionFunction<T, C> {
+abstract class TreeTextExpressionFunction<T, C extends TreeTextExpressionEvaluationContext> implements ExpressionFunction<T, C> {
 
     final static ExpressionFunctionParameter<Border> BORDER = ExpressionFunctionParameterName.with("border")
         .required(Border.class)

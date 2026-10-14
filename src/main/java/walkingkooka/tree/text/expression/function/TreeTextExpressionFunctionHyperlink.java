@@ -19,26 +19,26 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link Url} and creates a {@link walkingkooka.tree.text.Hyperlink}.
  */
-final class TreeTextExpressionFunctionHyperlink<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Hyperlink, C> {
+final class TreeTextExpressionFunctionHyperlink<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Hyperlink, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionHyperlink<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionHyperlink<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionHyperlink<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionHyperlink<>();
+    private final static TreeTextExpressionFunctionHyperlink INSTANCE = new TreeTextExpressionFunctionHyperlink<>();
 
     private TreeTextExpressionFunctionHyperlink() {
         super("hyperlink");

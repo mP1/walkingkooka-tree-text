@@ -19,26 +19,26 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Badge;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link Url} and creates a {@link Badge}.
  */
-final class TreeTextExpressionFunctionBadge<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Badge, C> {
+final class TreeTextExpressionFunctionBadge<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Badge, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionBadge<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionBadge<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionBadge<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionBadge<>();
+    private final static TreeTextExpressionFunctionBadge INSTANCE = new TreeTextExpressionFunctionBadge<>();
 
     private TreeTextExpressionFunctionBadge() {
         super("badge");

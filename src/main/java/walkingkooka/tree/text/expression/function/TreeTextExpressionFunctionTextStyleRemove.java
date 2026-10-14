@@ -18,27 +18,27 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that may be used to remove an individual property from a {@link TextStyle} return result.
  */
-final class TreeTextExpressionFunctionTextStyleRemove<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
+final class TreeTextExpressionFunctionTextStyleRemove<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleRemove<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleRemove<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionTextStyleRemove<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleRemove<>();
+    private final static TreeTextExpressionFunctionTextStyleRemove INSTANCE = new TreeTextExpressionFunctionTextStyleRemove<>();
 
     private TreeTextExpressionFunctionTextStyleRemove() {
         super("styleRemove");

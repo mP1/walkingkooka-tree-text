@@ -18,13 +18,13 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
@@ -33,16 +33,16 @@ import java.util.List;
  * already the correct type it will attempt to parse string values using {@link TextStylePropertyName#parseValue(String)}.
  * If the value is null it will be removed.
  */
-final class TreeTextExpressionFunctionTextStyleSet<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
+final class TreeTextExpressionFunctionTextStyleSet<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleSet<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleSet<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionTextStyleSet<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleSet<>();
+    private final static TreeTextExpressionFunctionTextStyleSet INSTANCE = new TreeTextExpressionFunctionTextStyleSet<>();
 
     private TreeTextExpressionFunctionTextStyleSet() {
         super("styleSet");

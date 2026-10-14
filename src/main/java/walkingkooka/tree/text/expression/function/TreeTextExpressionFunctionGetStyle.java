@@ -18,27 +18,27 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that may be used to get the {@link TextStyle} from a given {@link TextNode}.
  */
-final class TreeTextExpressionFunctionGetStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionGetStyle<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionGetStyle<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionGetStyle<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionGetStyle<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionGetStyle<>();
+    private final static TreeTextExpressionFunctionGetStyle INSTANCE = new TreeTextExpressionFunctionGetStyle<>();
 
     private TreeTextExpressionFunctionGetStyle() {
         super("getStyle");

@@ -20,10 +20,10 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Padding;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionPaddingTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionPadding<FakeExpressionEvaluationContext>, Padding> {
+public final class TreeTextExpressionFunctionPaddingTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionPadding<FakeTreeTextExpressionEvaluationContext>, Padding> {
 
     @Test
     public void testApplyWithPadding() {
@@ -36,13 +36,13 @@ public final class TreeTextExpressionFunctionPaddingTest extends TreeTextExpress
     }
 
     @Override
-    public TreeTextExpressionFunctionPadding<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionPadding<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionPadding.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -63,7 +63,7 @@ public final class TreeTextExpressionFunctionPaddingTest extends TreeTextExpress
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionPadding<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionPadding<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionPadding.class);
     }
 }

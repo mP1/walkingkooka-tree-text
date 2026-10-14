@@ -20,10 +20,10 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionSetTextTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionSetText<FakeExpressionEvaluationContext>, TextNode> {
+public final class TreeTextExpressionFunctionSetTextTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionSetText<FakeTreeTextExpressionEvaluationContext>, TextNode> {
 
     @Test
     public void testApplyWithString() {
@@ -40,13 +40,13 @@ public final class TreeTextExpressionFunctionSetTextTest extends TreeTextExpress
     }
 
     @Override
-    public TreeTextExpressionFunctionSetText<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionSetText<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionSetText.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -67,7 +67,7 @@ public final class TreeTextExpressionFunctionSetTextTest extends TreeTextExpress
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionSetText<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionSetText<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionSetText.class);
     }
 }
