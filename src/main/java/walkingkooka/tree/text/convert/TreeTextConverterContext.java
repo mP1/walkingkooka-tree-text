@@ -17,7 +17,7 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
+import walkingkooka.color.convert.ColorConverterContext;
 
-public interface TreeTextConverterContext extends ConverterContext {
+public interface TreeTextConverterContext extends ColorConverterContext {
 }
