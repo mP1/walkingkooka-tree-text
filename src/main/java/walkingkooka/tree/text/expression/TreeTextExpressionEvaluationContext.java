@@ -17,9 +17,7 @@
 
 package walkingkooka.tree.text.expression;
 
-import walkingkooka.color.ColorContext;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.color.expression.ColorExpressionEvaluationContext;
 
-public interface TreeTextExpressionEvaluationContext extends ExpressionEvaluationContext,
-    ColorContext {
+public interface TreeTextExpressionEvaluationContext extends ColorExpressionEvaluationContext {
 }
