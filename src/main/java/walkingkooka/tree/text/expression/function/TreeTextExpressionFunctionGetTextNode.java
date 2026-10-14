@@ -18,26 +18,26 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that may be used to get the {@link TextNode} from a source.
  */
-final class TreeTextExpressionFunctionGetTextNode<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextNode, C> {
+final class TreeTextExpressionFunctionGetTextNode<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<TextNode, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionGetTextNode<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionGetTextNode<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionGetTextNode<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionGetTextNode<>();
+    private final static TreeTextExpressionFunctionGetTextNode INSTANCE = new TreeTextExpressionFunctionGetTextNode<>();
 
     private TreeTextExpressionFunctionGetTextNode() {
         super("getTextNode");

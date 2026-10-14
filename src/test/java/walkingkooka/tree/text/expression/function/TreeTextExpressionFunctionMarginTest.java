@@ -20,10 +20,10 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Margin;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionMarginTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionMargin<FakeExpressionEvaluationContext>, Margin> {
+public final class TreeTextExpressionFunctionMarginTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionMargin<FakeTreeTextExpressionEvaluationContext>, Margin> {
 
     @Test
     public void testApplyWithMargin() {
@@ -36,13 +36,13 @@ public final class TreeTextExpressionFunctionMarginTest extends TreeTextExpressi
     }
 
     @Override
-    public TreeTextExpressionFunctionMargin<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionMargin<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionMargin.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -63,7 +63,7 @@ public final class TreeTextExpressionFunctionMarginTest extends TreeTextExpressi
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionMargin<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionMargin<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionMargin.class);
     }
 }

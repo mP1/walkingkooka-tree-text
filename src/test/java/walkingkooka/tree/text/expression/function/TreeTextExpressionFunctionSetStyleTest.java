@@ -20,11 +20,11 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionSetStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionSetStyle<FakeExpressionEvaluationContext>, TextNode> {
+public final class TreeTextExpressionFunctionSetStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionSetStyle<FakeTreeTextExpressionEvaluationContext>, TextNode> {
 
     @Test
     public void testApplyTextNodeAndTextStyle() {
@@ -56,13 +56,13 @@ public final class TreeTextExpressionFunctionSetStyleTest extends TreeTextExpres
     }
 
     @Override
-    public TreeTextExpressionFunctionSetStyle<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionSetStyle<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionSetStyle.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -83,7 +83,7 @@ public final class TreeTextExpressionFunctionSetStyleTest extends TreeTextExpres
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionSetStyle<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionSetStyle<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionSetStyle.class);
     }
 }

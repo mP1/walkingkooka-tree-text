@@ -19,26 +19,26 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link Url} and creates a {@link Image}.
  */
-final class TreeTextExpressionFunctionImage<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Image, C> {
+final class TreeTextExpressionFunctionImage<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Image, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionImage<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionImage<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionImage<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionImage<>();
+    private final static TreeTextExpressionFunctionImage INSTANCE = new TreeTextExpressionFunctionImage<>();
 
     private TreeTextExpressionFunctionImage() {
         super("image");

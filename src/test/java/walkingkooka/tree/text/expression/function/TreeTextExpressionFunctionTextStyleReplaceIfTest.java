@@ -22,13 +22,13 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTextStyleReplaceIfTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleReplaceIf<FakeExpressionEvaluationContext>, Styleable> {
+public final class TreeTextExpressionFunctionTextStyleReplaceIfTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleReplaceIf<FakeTreeTextExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextStyleAndTextStylePropertyNameOldPropertyValueNewPropertyWrongOldValue() {
@@ -87,13 +87,13 @@ public final class TreeTextExpressionFunctionTextStyleReplaceIfTest extends Tree
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyleReplaceIf<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyleReplaceIf<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyleReplaceIf.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext() {
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext() {
             @Override
             public <T> Either<T, String> convert(final Object value,
                                                  final Class<T> type) {
@@ -123,7 +123,7 @@ public final class TreeTextExpressionFunctionTextStyleReplaceIfTest extends Tree
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyleReplaceIf<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyleReplaceIf<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleReplaceIf.class);
     }
 }

@@ -18,27 +18,27 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that merges two {@link TextStyle} into one.
  */
-final class TreeTextExpressionFunctionMergeStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
+final class TreeTextExpressionFunctionMergeStyle<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionMergeStyle<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionMergeStyle<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionMergeStyle<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionMergeStyle<>();
+    private final static TreeTextExpressionFunctionMergeStyle INSTANCE = new TreeTextExpressionFunctionMergeStyle<>();
 
     private TreeTextExpressionFunctionMergeStyle() {
         super("mergeStyle");

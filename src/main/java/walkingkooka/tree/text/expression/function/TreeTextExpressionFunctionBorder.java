@@ -18,25 +18,25 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Border;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link String} and creates a {@link Border}.
  */
-final class TreeTextExpressionFunctionBorder<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Border, C> {
+final class TreeTextExpressionFunctionBorder<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Border, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionBorder<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionBorder<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionBorder<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionBorder<>();
+    private final static TreeTextExpressionFunctionBorder INSTANCE = new TreeTextExpressionFunctionBorder<>();
 
     private TreeTextExpressionFunctionBorder() {
         super("border");

@@ -19,25 +19,25 @@ package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Flag;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link Url} and creates a {@link Flag}.
  */
-final class TreeTextExpressionFunctionFlag<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Flag, C> {
+final class TreeTextExpressionFunctionFlag<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Flag, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionFlag<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionFlag<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionFlag<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionFlag<>();
+    private final static TreeTextExpressionFunctionFlag INSTANCE = new TreeTextExpressionFunctionFlag<>();
 
     private TreeTextExpressionFunctionFlag() {
         super("flag");

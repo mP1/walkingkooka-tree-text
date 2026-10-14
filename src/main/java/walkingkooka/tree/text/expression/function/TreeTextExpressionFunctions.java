@@ -18,7 +18,6 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.text.Badge;
 import walkingkooka.tree.text.Border;
@@ -30,6 +29,7 @@ import walkingkooka.tree.text.Padding;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 /**
  * A collection of helpers for getting {@link ExpressionFunction}.
@@ -39,133 +39,133 @@ public final class TreeTextExpressionFunctions implements PublicStaticHelper {
     /**
      * {@see TreeTextExpressionFunctionBadge}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Badge, C> badge() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Badge, C> badge() {
         return TreeTextExpressionFunctionBadge.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionBorder}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Border, C> border() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Border, C> border() {
         return TreeTextExpressionFunctionBorder.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionFlag}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Flag, C> flag() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Flag, C> flag() {
         return TreeTextExpressionFunctionFlag.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionGetTextNode}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> getTextNode() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextNode, C> getTextNode() {
         return TreeTextExpressionFunctionGetTextNode.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionGetStyle}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> getStyle() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextStyle, C> getStyle() {
         return TreeTextExpressionFunctionGetStyle.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionHyperlink}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Hyperlink, C> hyperlink() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Hyperlink, C> hyperlink() {
         return TreeTextExpressionFunctionHyperlink.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionImage}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Image, C> image() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Image, C> image() {
         return TreeTextExpressionFunctionImage.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionMargin}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Margin, C> margin() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Margin, C> margin() {
         return TreeTextExpressionFunctionMargin.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionMergeStyle}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> mergeStyle() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Styleable, C> mergeStyle() {
         return TreeTextExpressionFunctionMergeStyle.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionPadding}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Padding, C> padding() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Padding, C> padding() {
         return TreeTextExpressionFunctionPadding.instance();
     }
     
     /**
      * {@see TreeTextExpressionFunctionSetText}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> setText() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextNode, C> setText() {
         return TreeTextExpressionFunctionSetText.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionSetStyle}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> setStyle() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextNode, C> setStyle() {
         return TreeTextExpressionFunctionSetStyle.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyle}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextStyle, C> style() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextStyle, C> style() {
         return TreeTextExpressionFunctionTextStyle.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleGet}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Object, C> styleGet() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Object, C> styleGet() {
         return TreeTextExpressionFunctionTextStyleGet.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleRemove}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleRemove() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleRemove() {
         return TreeTextExpressionFunctionTextStyleRemove.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleRemoveIf}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleRemoveIf() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleRemoveIf() {
         return TreeTextExpressionFunctionTextStyleRemoveIf.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleReplaceIf}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleReplaceIf() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleReplaceIf() {
         return TreeTextExpressionFunctionTextStyleReplaceIf.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionTextStyleSet}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleSet() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<Styleable, C> styleSet() {
         return TreeTextExpressionFunctionTextStyleSet.instance();
     }
 
     /**
      * {@see TreeTextExpressionFunctionStyledText}
      */
-    public static <C extends ExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
+    public static <C extends TreeTextExpressionEvaluationContext> ExpressionFunction<TextNode, C> styledText() {
         return TreeTextExpressionFunctionStyledText.instance();
     }
     

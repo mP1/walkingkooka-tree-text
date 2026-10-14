@@ -20,11 +20,11 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionGetStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionGetStyle<FakeExpressionEvaluationContext>, TextStyle> {
+public final class TreeTextExpressionFunctionGetStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionGetStyle<FakeTreeTextExpressionEvaluationContext>, TextStyle> {
 
     @Test
     public void testApplyWithTextNode() {
@@ -53,13 +53,13 @@ public final class TreeTextExpressionFunctionGetStyleTest extends TreeTextExpres
     }
 
     @Override
-    public TreeTextExpressionFunctionGetStyle<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionGetStyle<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionGetStyle.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -80,7 +80,7 @@ public final class TreeTextExpressionFunctionGetStyleTest extends TreeTextExpres
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionGetStyle<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionGetStyle<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionGetStyle.class);
     }
 }

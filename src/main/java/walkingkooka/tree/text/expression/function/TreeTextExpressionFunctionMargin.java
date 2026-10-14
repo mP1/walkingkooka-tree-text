@@ -18,25 +18,25 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Margin;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link String} and creates a {@link Margin}.
  */
-final class TreeTextExpressionFunctionMargin<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Margin, C> {
+final class TreeTextExpressionFunctionMargin<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Margin, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionMargin<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionMargin<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionMargin<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionMargin<>();
+    private final static TreeTextExpressionFunctionMargin INSTANCE = new TreeTextExpressionFunctionMargin<>();
 
     private TreeTextExpressionFunctionMargin() {
         super("margin");

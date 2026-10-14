@@ -22,14 +22,14 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTextStyleSetTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>, Styleable> {
+public final class TreeTextExpressionFunctionTextStyleSetTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleSet<FakeTreeTextExpressionEvaluationContext>, Styleable> {
 
     @Test
     public void testApplyWithTextStyleAndTextStylePropertyNameWhenNewProperty() {
@@ -140,13 +140,13 @@ public final class TreeTextExpressionFunctionTextStyleSetTest extends TreeTextEx
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyleSet<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyleSet.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext() {
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext() {
             @Override
             public <T> Either<T, String> convert(final Object value,
                                                  final Class<T> type) {
@@ -176,7 +176,7 @@ public final class TreeTextExpressionFunctionTextStyleSetTest extends TreeTextEx
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyleSet<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyleSet<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleSet.class);
     }
 }

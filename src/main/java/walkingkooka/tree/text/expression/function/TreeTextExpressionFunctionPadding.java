@@ -18,25 +18,25 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.Padding;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that accepts a {@link String} and creates a {@link Padding}.
  */
-final class TreeTextExpressionFunctionPadding<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Padding, C> {
+final class TreeTextExpressionFunctionPadding<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Padding, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionPadding<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionPadding<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionPadding<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionPadding<>();
+    private final static TreeTextExpressionFunctionPadding INSTANCE = new TreeTextExpressionFunctionPadding<>();
 
     private TreeTextExpressionFunctionPadding() {
         super("padding");

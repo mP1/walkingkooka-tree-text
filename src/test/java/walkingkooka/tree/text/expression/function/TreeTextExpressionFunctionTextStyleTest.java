@@ -20,12 +20,12 @@ package walkingkooka.tree.text.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTextStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyle<FakeExpressionEvaluationContext>, TextStyle> {
+public final class TreeTextExpressionFunctionTextStyleTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyle<FakeTreeTextExpressionEvaluationContext>, TextStyle> {
 
     @Test
     public void testApply() {
@@ -43,13 +43,13 @@ public final class TreeTextExpressionFunctionTextStyleTest extends TreeTextExpre
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyle<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyle<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyle.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -70,7 +70,7 @@ public final class TreeTextExpressionFunctionTextStyleTest extends TreeTextExpre
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyle<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyle<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyle.class);
     }
 }

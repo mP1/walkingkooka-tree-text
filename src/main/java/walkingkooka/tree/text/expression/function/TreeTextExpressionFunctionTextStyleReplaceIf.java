@@ -18,28 +18,28 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.text.Styleable;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
 /**
  * A function that may be used to conditionally replace a value if another old value is present, using {@link Styleable#replaceIf(TextStylePropertyName, Object, Object)}.
  */
-final class TreeTextExpressionFunctionTextStyleReplaceIf<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
+final class TreeTextExpressionFunctionTextStyleReplaceIf<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<Styleable, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleReplaceIf<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionTextStyleReplaceIf<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionTextStyleReplaceIf<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyleReplaceIf<>();
+    private final static TreeTextExpressionFunctionTextStyleReplaceIf INSTANCE = new TreeTextExpressionFunctionTextStyleReplaceIf<>();
 
     private TreeTextExpressionFunctionTextStyleReplaceIf() {
         super("styleReplaceIf");

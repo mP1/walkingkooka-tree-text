@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionImageTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionImage<FakeExpressionEvaluationContext>, Image> {
+public final class TreeTextExpressionFunctionImageTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionImage<FakeTreeTextExpressionEvaluationContext>, Image> {
 
     @Test
     public void testApply() {
@@ -40,13 +40,13 @@ public final class TreeTextExpressionFunctionImageTest extends TreeTextExpressio
     }
 
     @Override
-    public TreeTextExpressionFunctionImage<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionImage<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionImage.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext() {
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext() {
 
         };
     }
@@ -69,7 +69,7 @@ public final class TreeTextExpressionFunctionImageTest extends TreeTextExpressio
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionImage<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionImage<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionImage.class);
     }
 }

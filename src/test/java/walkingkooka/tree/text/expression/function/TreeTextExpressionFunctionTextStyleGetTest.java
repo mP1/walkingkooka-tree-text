@@ -21,13 +21,13 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
+import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTextStyleGetTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleGet<FakeExpressionEvaluationContext>, Object> {
+public final class TreeTextExpressionFunctionTextStyleGetTest extends TreeTextExpressionFunctionTestCase<TreeTextExpressionFunctionTextStyleGet<FakeTreeTextExpressionEvaluationContext>, Object> {
 
     @Test
     public void testApplyWithTextNodeAndTextStylePropertyName() {
@@ -81,13 +81,13 @@ public final class TreeTextExpressionFunctionTextStyleGetTest extends TreeTextEx
     }
 
     @Override
-    public TreeTextExpressionFunctionTextStyleGet<FakeExpressionEvaluationContext> createBiFunction() {
+    public TreeTextExpressionFunctionTextStyleGet<FakeTreeTextExpressionEvaluationContext> createBiFunction() {
         return TreeTextExpressionFunctionTextStyleGet.instance();
     }
 
     @Override
-    public FakeExpressionEvaluationContext createContext() {
-        return new FakeExpressionEvaluationContext();
+    public FakeTreeTextExpressionEvaluationContext createContext() {
+        return new FakeTreeTextExpressionEvaluationContext();
     }
 
     @Override
@@ -108,7 +108,7 @@ public final class TreeTextExpressionFunctionTextStyleGetTest extends TreeTextEx
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextExpressionFunctionTextStyleGet<FakeExpressionEvaluationContext>> type() {
+    public Class<TreeTextExpressionFunctionTextStyleGet<FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunctionTextStyleGet.class);
     }
 }

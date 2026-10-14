@@ -18,9 +18,9 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
@@ -28,16 +28,16 @@ import java.util.List;
  * A function that may be used to set or replace text on a given {@link TextNode}.
  * An example of this functions utility is to set the text for a {@link walkingkooka.tree.text.Hyperlink}.
  */
-final class TreeTextExpressionFunctionSetText<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextNode, C> {
+final class TreeTextExpressionFunctionSetText<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<TextNode, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionSetText<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionSetText<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionSetText<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionSetText<>();
+    private final static TreeTextExpressionFunctionSetText INSTANCE = new TreeTextExpressionFunctionSetText<>();
 
     private TreeTextExpressionFunctionSetText() {
         super("setText");

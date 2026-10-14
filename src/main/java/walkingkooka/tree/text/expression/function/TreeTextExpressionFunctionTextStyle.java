@@ -18,9 +18,9 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.expression.TreeTextExpressionEvaluationContext;
 
 import java.util.List;
 
@@ -28,16 +28,16 @@ import java.util.List;
  * A function that may be used create a {@link TextStyle}. This might be useful to prepare a {@link TextStyle} as a parameter
  * to another function.
  */
-final class TreeTextExpressionFunctionTextStyle<C extends ExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
+final class TreeTextExpressionFunctionTextStyle<C extends TreeTextExpressionEvaluationContext> extends TreeTextExpressionFunction<TextStyle, C> {
 
-    static <C extends ExpressionEvaluationContext> TreeTextExpressionFunctionTextStyle<C> instance() {
+    static <C extends TreeTextExpressionEvaluationContext> TreeTextExpressionFunctionTextStyle<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TreeTextExpressionFunctionTextStyle<ExpressionEvaluationContext> INSTANCE = new TreeTextExpressionFunctionTextStyle<>();
+    private final static TreeTextExpressionFunctionTextStyle INSTANCE = new TreeTextExpressionFunctionTextStyle<>();
 
     private TreeTextExpressionFunctionTextStyle() {
         super("style");
