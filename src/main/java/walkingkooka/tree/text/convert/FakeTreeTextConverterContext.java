@@ -17,11 +17,46 @@
 
 package walkingkooka.tree.text.convert;
 
+import walkingkooka.color.Color;
+import walkingkooka.color.IndexedColor;
+import walkingkooka.color.NamedColor;
 import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.tree.expression.ExpressionNumberKind;
+
+import java.util.Optional;
 
 public class FakeTreeTextConverterContext extends FakeConverterContext implements TreeTextConverterContext {
 
     public FakeTreeTextConverterContext() {
         super();
+    }
+
+    // ColorContext.....................................................................................................
+
+    @Override
+    public IndexedColor indexedColor(final int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<Color> lookupColor(final Color color) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NamedColor namedColor(final String name) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Color parseColor(final String color) {
+        throw new UnsupportedOperationException();
+    }
+
+    // HasExpressionNumberKind..........................................................................................
+
+    @Override
+    public ExpressionNumberKind expressionNumberKind() {
+        throw new UnsupportedOperationException();
     }
 }
