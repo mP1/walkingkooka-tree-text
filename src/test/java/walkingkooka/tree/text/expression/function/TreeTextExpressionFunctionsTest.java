@@ -32,16 +32,13 @@ import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.text.BinaryTextContextTesting;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.text.Indentation;
-import walkingkooka.text.LineEnding;
-import walkingkooka.text.TextPrinting;
-import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.tree.expression.ExpressionFunctionName;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionReference;
+import walkingkooka.tree.expression.HasExpressionNumberKindTesting;
 import walkingkooka.tree.text.Border;
 import walkingkooka.tree.text.BoxEdge;
 import walkingkooka.tree.text.Flag;
@@ -49,6 +46,7 @@ import walkingkooka.tree.text.FontFamily;
 import walkingkooka.tree.text.FontSize;
 import walkingkooka.tree.text.FontWeight;
 import walkingkooka.tree.text.HasTextNode;
+import walkingkooka.tree.text.HasTextStyleTesting;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.Margin;
@@ -63,13 +61,14 @@ import walkingkooka.tree.text.convert.TreeTextConverters;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public final class TreeTextExpressionFunctionsTest implements PublicStaticHelperTesting<TreeTextExpressionFunctions>,
-    TreePrintableTesting {
+    BinaryTextContextTesting,
+    HasExpressionNumberKindTesting,
+    HasTextStyleTesting {
 
     @Test
     public void testFlagWithString() {
@@ -95,54 +94,39 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
 
     @Test
     public void testGetStyleWithString() {
-        final TextStyle textStyle = TextStyle.EMPTY.set(
-            TextStylePropertyName.TEXT_ALIGN,
-            TextAlign.LEFT
-        );
-
         this.evaluateAndCheck(
             "getStyle",
             Lists.of(
-                textStyle.text()
+                TEXT_STYLE.text()
             ),
-            textStyle
+            TEXT_STYLE
         );
     }
 
     @Test
     public void testGetStyleWithStringBuilder() {
-        final TextStyle textStyle = TextStyle.EMPTY.set(
-            TextStylePropertyName.TEXT_ALIGN,
-            TextAlign.LEFT
-        );
-
         this.evaluateAndCheck(
             "getStyle",
             Lists.of(
                 new StringBuilder(
-                    textStyle.text()
+                    TEXT_STYLE.text()
                 )
             ),
-            textStyle
+            TEXT_STYLE
         );
     }
 
     @Test
     public void testGetStyleWithTextNode() {
-        final TextStyle textStyle = TextStyle.EMPTY.set(
-            TextStylePropertyName.TEXT_ALIGN,
-            TextAlign.LEFT
-        );
-
         final Hyperlink hyperlink = TextNode.hyperlink(
             Url.parseAbsolute("https://example.com")
         );
         this.evaluateAndCheck(
             "getStyle",
             Lists.of(
-                hyperlink.setTextStyle(textStyle)
+                hyperlink.setTextStyle(TEXT_STYLE)
             ),
-            textStyle
+            TEXT_STYLE
         );
     }
 
@@ -915,7 +899,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                     .collect(Collectors.toList())
             ).toValue(
                 ExpressionEvaluationContexts.basic(
-                    ExpressionNumberKind.BIG_DECIMAL,
+                    EXPRESSION_NUMBER_KIND,
                     (e, c) -> {
                         throw new UnsupportedOperationException();
                     },
@@ -986,10 +970,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
                             )
                         ),
                         BinaryNumberConverterFunctions.fake(), // multiplier
-                        TextPrinting.with(
-                            Indentation.SPACES2,
-                            LineEnding.NL
-                        ).setCharset(StandardCharsets.UTF_8),
+                        BINARY_TEXT_CONTEXT,
                         CurrencyLocaleContexts.fake(),
                         DateTimeContexts.fake(),
                         DecimalNumberContexts.fake()
