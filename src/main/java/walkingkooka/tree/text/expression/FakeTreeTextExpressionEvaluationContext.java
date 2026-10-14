@@ -17,12 +17,39 @@
 
 package walkingkooka.tree.text.expression;
 
+import walkingkooka.color.Color;
+import walkingkooka.color.IndexedColor;
+import walkingkooka.color.NamedColor;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
+
+import java.util.Optional;
 
 public class FakeTreeTextExpressionEvaluationContext extends FakeExpressionEvaluationContext
     implements TreeTextExpressionEvaluationContext {
 
     public FakeTreeTextExpressionEvaluationContext() {
         super();
+    }
+
+    // ColorContext.....................................................................................................
+
+    @Override
+    public IndexedColor indexedColor(final int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<Color> lookupColor(final Color color) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public NamedColor namedColor(final String name) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Color parseColor(final String color) {
+        throw new UnsupportedOperationException();
     }
 }
