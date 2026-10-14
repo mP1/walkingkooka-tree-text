@@ -24,7 +24,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.tree.text.TextStyle;
@@ -33,7 +32,7 @@ import java.util.Currency;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class TreeTextConverterPropertiesToTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterPropertiesToTextStyle<FakeConverterContext>, FakeConverterContext>  {
+public final class TreeTextConverterPropertiesToTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterPropertiesToTextStyle<FakeTreeTextConverterContext>, FakeTreeTextConverterContext>  {
 
     @Test
     public void testConvertPropertiesToTextStyle() {
@@ -57,13 +56,13 @@ public final class TreeTextConverterPropertiesToTextStyleTest extends TreeTextCo
     }
 
     @Override
-    public TreeTextConverterPropertiesToTextStyle<FakeConverterContext> createConverter() {
+    public TreeTextConverterPropertiesToTextStyle<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterPropertiesToTextStyle.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -113,7 +112,7 @@ public final class TreeTextConverterPropertiesToTextStyleTest extends TreeTextCo
     }
 
     @Override
-    public Class<TreeTextConverterPropertiesToTextStyle<FakeConverterContext>> type() {
+    public Class<TreeTextConverterPropertiesToTextStyle<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterPropertiesToTextStyle.class);
     }
 }

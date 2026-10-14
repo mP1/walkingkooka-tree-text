@@ -17,14 +17,13 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.net.Url;
 import walkingkooka.tree.text.Image;
 import walkingkooka.tree.text.TextNode;
 
-final class TreeTextConverterUrlToImage<C extends ConverterContext> extends TreeTextConverterUrlTo<Image, C> {
+final class TreeTextConverterUrlToImage<C extends TreeTextConverterContext> extends TreeTextConverterUrlTo<Image, C> {
 
-    static <C extends ConverterContext> TreeTextConverterUrlToImage<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterUrlToImage<C> instance() {
         return INSTANCE;
     }
 

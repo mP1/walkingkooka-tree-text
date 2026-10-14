@@ -25,7 +25,6 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterTesting;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.net.Url;
 import walkingkooka.net.convert.NetConverters;
 import walkingkooka.reflect.MethodAttributes;
@@ -180,7 +179,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
     private <T> void convertAndCheck(final Object value,
                                      final Class<T> type,
                                      final T expected) {
-        final Converter<ConverterContext> converter = Converters.collection(
+        final Converter<TreeTextConverterContext> converter = Converters.collection(
             Lists.of(
                 Converters.simple(),
                 Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
@@ -205,7 +204,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
             converter,
             value,
             type,
-            new FakeConverterContext() {
+            new FakeTreeTextConverterContext() {
                 @Override
                 public boolean canConvert(final Object value,
                                           final Class<?> type) {

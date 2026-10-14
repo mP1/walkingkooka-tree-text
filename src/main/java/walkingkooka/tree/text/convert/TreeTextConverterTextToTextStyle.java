@@ -18,7 +18,6 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextStyle;
 
@@ -26,9 +25,9 @@ import walkingkooka.tree.text.TextStyle;
  * A {@link Converter} that accepts text and parses it into a {@link TextStyle}. Note a type of {@link HasTextStyle}
  * is also accepted and will return a {@link TextStyle}.
  */
-final class TreeTextConverterTextToTextStyle<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToTextStyle<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToTextStyle<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToTextStyle<C> instance() {
         return INSTANCE;
     }
 

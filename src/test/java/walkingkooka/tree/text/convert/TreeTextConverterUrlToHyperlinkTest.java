@@ -22,15 +22,13 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.net.Url;
 import walkingkooka.tree.text.Hyperlink;
 import walkingkooka.tree.text.TextNode;
 
-public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverterUrlToTestCase<TreeTextConverterUrlToHyperlink<FakeConverterContext>, Hyperlink, FakeConverterContext> {
+public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverterUrlToTestCase<TreeTextConverterUrlToHyperlink<FakeTreeTextConverterContext>, Hyperlink, FakeTreeTextConverterContext> {
 
     @Test
     public void testConvertCharSequenceToHyperlink() {
@@ -57,13 +55,13 @@ public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverter
     }
 
     @Override
-    public TreeTextConverterUrlToHyperlink<FakeConverterContext> createConverter() {
+    public TreeTextConverterUrlToHyperlink<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterUrlToHyperlink.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -85,22 +83,22 @@ public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverter
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.collection(
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.collection(
                 Lists.of(
                     Converters.simple(),
-                    new TextToTryingShortCircuitingConverter<>() {
+                    new TextToTryingShortCircuitingConverter<TreeTextConverterContext>() {
 
                         @Override
                         public boolean isTargetType(final Object value,
                                                     final Class<?> type,
-                                                    final ConverterContext context) {
+                                                    final TreeTextConverterContext context) {
                             return Url.isClass(type);
                         }
 
                         @Override
                         public Object parseText(final String text,
                                                 final Class<?> type,
-                                                final ConverterContext context) {
+                                                final TreeTextConverterContext context) {
                             return Url.parseAsUrl(
                                 text,
                                 Cast.to(type)
@@ -109,12 +107,12 @@ public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverter
                     },
                     Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString()
                 )
-            ).cast(FakeConverterContext.class);
+            ).cast(FakeTreeTextConverterContext.class);
         };
     }
 
     @Override
-    public Class<TreeTextConverterUrlToHyperlink<FakeConverterContext>> type() {
+    public Class<TreeTextConverterUrlToHyperlink<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterUrlToHyperlink.class);
     }
 }

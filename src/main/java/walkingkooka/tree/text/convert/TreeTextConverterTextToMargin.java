@@ -18,15 +18,14 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.Margin;
 
 /**
  * A {@link Converter} that creates a {@link Margin}
  */
-final class TreeTextConverterTextToMargin<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToMargin<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToMargin<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToMargin<C> instance() {
         return INSTANCE;
     }
 

@@ -20,16 +20,14 @@ package walkingkooka.tree.text.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
-import walkingkooka.convert.ConverterContexts;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.HasTextStyle;
 import walkingkooka.tree.text.TextAlign;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterToTextStyle<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<TreeTextConverterToTextStyle<FakeConverterContext>> {
+public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTestCase<TreeTextConverterToTextStyle<FakeTreeTextConverterContext>, FakeTreeTextConverterContext>
+    implements ToStringTesting<TreeTextConverterToTextStyle<FakeTreeTextConverterContext>> {
 
     @Test
     public void testConvertStringToString() {
@@ -85,13 +83,13 @@ public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTes
     }
 
     @Override
-    public TreeTextConverterToTextStyle<FakeConverterContext> createConverter() {
+    public TreeTextConverterToTextStyle<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterToTextStyle.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return (FakeConverterContext) ConverterContexts.fake();
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext();
     }
 
     // toString.........................................................................................................
@@ -107,7 +105,7 @@ public final class TreeTextConverterToTextStyleTest extends TreeTextConverterTes
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterToTextStyle<FakeConverterContext>> type() {
+    public Class<TreeTextConverterToTextStyle<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterToTextStyle.class);
     }
 }

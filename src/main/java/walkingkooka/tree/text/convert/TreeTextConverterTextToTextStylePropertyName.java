@@ -17,15 +17,14 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.TextStylePropertyName;
 
 /**
  * Useful to convert string parameters to a function that requires a {@link TextStylePropertyName}.
  */
-final class TreeTextConverterTextToTextStylePropertyName<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToTextStylePropertyName<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToTextStylePropertyName<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToTextStylePropertyName<C> instance() {
         return INSTANCE;
     }
 

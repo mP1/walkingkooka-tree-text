@@ -22,10 +22,9 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Margin;
 
-public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTestCase<TreeTextConverterTextToMargin<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTestCase<TreeTextConverterTextToMargin<FakeTreeTextConverterContext>, FakeTreeTextConverterContext> {
 
     @Test
     public void testConvertNullToMarginFails() {
@@ -47,13 +46,13 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
     }
 
     @Override
-    public TreeTextConverterTextToMargin<FakeConverterContext> createConverter() {
+    public TreeTextConverterTextToMargin<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterTextToMargin.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -75,7 +74,7 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
         };
     }
 
@@ -92,7 +91,7 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterTextToMargin<FakeConverterContext>> type() {
+    public Class<TreeTextConverterTextToMargin<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToMargin.class);
     }
 }

@@ -18,9 +18,8 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 
-abstract class TreeTextConverter<C extends ConverterContext> implements Converter<C> {
+abstract class TreeTextConverter<C extends TreeTextConverterContext> implements Converter<C> {
 
     TreeTextConverter() {
         super();

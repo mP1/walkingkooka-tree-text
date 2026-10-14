@@ -22,11 +22,10 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.TextNode;
 
-public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTestCase<TreeTextConverterTextToFlag<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTestCase<TreeTextConverterTextToFlag<FakeTreeTextConverterContext>, FakeTreeTextConverterContext> {
 
     @Test
     public void testConvertTextNodeToTextNodeFails() {
@@ -76,13 +75,13 @@ public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTest
     }
 
     @Override
-    public TreeTextConverterTextToFlag<FakeConverterContext> createConverter() {
+    public TreeTextConverterTextToFlag<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterTextToFlag.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -104,7 +103,7 @@ public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTest
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
         };
     }
 
@@ -121,7 +120,7 @@ public final class TreeTextConverterTextToFlagTest extends TreeTextConverterTest
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterTextToFlag<FakeConverterContext>> type() {
+    public Class<TreeTextConverterTextToFlag<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToFlag.class);
     }
 }

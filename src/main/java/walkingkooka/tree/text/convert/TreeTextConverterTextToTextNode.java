@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text.convert;
 
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.HasTextNode;
 import walkingkooka.tree.text.Text;
 import walkingkooka.tree.text.TextNode;
@@ -25,9 +24,9 @@ import walkingkooka.tree.text.TextNode;
 /**
  * Converts several sources such as {@link String} or {@link HasTextNode} or {@link TextNode} to a {@link TextNode}
  */
-final class TreeTextConverterTextToTextNode<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToTextNode<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToTextNode<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToTextNode<C> instance() {
         return INSTANCE;
     }
 

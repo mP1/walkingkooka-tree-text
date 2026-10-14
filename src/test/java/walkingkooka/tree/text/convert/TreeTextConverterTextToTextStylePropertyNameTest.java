@@ -22,10 +22,9 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.tree.text.TextStylePropertyName;
 
-public final class TreeTextConverterTextToTextStylePropertyNameTest extends TreeTextConverterTextToTestCase<TreeTextConverterTextToTextStylePropertyName<FakeConverterContext>, FakeConverterContext> {
+public final class TreeTextConverterTextToTextStylePropertyNameTest extends TreeTextConverterTextToTestCase<TreeTextConverterTextToTextStylePropertyName<FakeTreeTextConverterContext>, FakeTreeTextConverterContext> {
 
     @Test
     public void testConvertCharSequenceToTextStylePropertyName() {
@@ -39,13 +38,13 @@ public final class TreeTextConverterTextToTextStylePropertyNameTest extends Tree
     }
 
     @Override
-    public TreeTextConverterTextToTextStylePropertyName<FakeConverterContext> createConverter() {
+    public TreeTextConverterTextToTextStylePropertyName<FakeTreeTextConverterContext> createConverter() {
         return TreeTextConverterTextToTextStylePropertyName.instance();
     }
 
     @Override
-    public FakeConverterContext createContext() {
-        return new FakeConverterContext() {
+    public FakeTreeTextConverterContext createContext() {
+        return new FakeTreeTextConverterContext() {
 
             @Override
             public boolean canConvert(final Object value,
@@ -67,7 +66,7 @@ public final class TreeTextConverterTextToTextStylePropertyNameTest extends Tree
                 );
             }
 
-            private final Converter<FakeConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
         };
     }
 
@@ -84,7 +83,7 @@ public final class TreeTextConverterTextToTextStylePropertyNameTest extends Tree
     // class............................................................................................................
 
     @Override
-    public Class<TreeTextConverterTextToTextStylePropertyName<FakeConverterContext>> type() {
+    public Class<TreeTextConverterTextToTextStylePropertyName<FakeTreeTextConverterContext>> type() {
         return Cast.to(TreeTextConverterTextToTextStylePropertyName.class);
     }
 }

@@ -18,15 +18,14 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.Padding;
 
 /**
  * A {@link Converter} that creates a {@link Padding}
  */
-final class TreeTextConverterTextToPadding<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToPadding<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToPadding<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToPadding<C> instance() {
         return INSTANCE;
     }
 

@@ -18,16 +18,15 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.tree.text.Flag;
 import walkingkooka.tree.text.TextNode;
 
 /**
  * A {@link Converter} that creates a {@link Flag} with the given two letter country code such as AU or NZ
  */
-final class TreeTextConverterTextToFlag<C extends ConverterContext> extends TreeTextConverterTextTo<C> {
+final class TreeTextConverterTextToFlag<C extends TreeTextConverterContext> extends TreeTextConverterTextTo<C> {
 
-    static <C extends ConverterContext> TreeTextConverterTextToFlag<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterTextToFlag<C> instance() {
         return INSTANCE;
     }
 

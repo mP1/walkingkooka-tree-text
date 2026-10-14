@@ -18,7 +18,6 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.Cast;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
 import walkingkooka.props.Properties;
 import walkingkooka.tree.text.TextStyle;
@@ -26,13 +25,13 @@ import walkingkooka.tree.text.TextStyle;
 /**
  * Converts a {@link Properties} into a {@link TextStyle}. Note the source value will be converted to a {@link Properties}.
  */
-final class TreeTextConverterPropertiesToTextStyle<C extends ConverterContext> extends TreeTextConverter<C>
+final class TreeTextConverterPropertiesToTextStyle<C extends TreeTextConverterContext> extends TreeTextConverter<C>
     implements TryingShortCircuitingConverter<C> {
 
     /**
      * Type safe singleton getter
      */
-    static <C extends ConverterContext> TreeTextConverterPropertiesToTextStyle<C> instance() {
+    static <C extends TreeTextConverterContext> TreeTextConverterPropertiesToTextStyle<C> instance() {
         return Cast.to(INSTANCE);
     }
 

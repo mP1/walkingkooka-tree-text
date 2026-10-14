@@ -18,7 +18,6 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterContext;
 import walkingkooka.reflect.PublicStaticHelper;
 
 public final class TreeTextConverters implements PublicStaticHelper{
@@ -26,91 +25,91 @@ public final class TreeTextConverters implements PublicStaticHelper{
     /**
      * {@see TreeTextConverterPropertiesToTextStyle}
      */
-    public static <C extends ConverterContext> Converter<C> propertiesToTextStyle() {
+    public static <C extends TreeTextConverterContext> Converter<C> propertiesToTextStyle() {
         return TreeTextConverterPropertiesToTextStyle.instance();
     }
 
     /**
      * {@see TreeTextConverterTextToBorder}
      */
-    public static <C extends ConverterContext> Converter<C> textToBorder() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToBorder() {
         return TreeTextConverterTextToBorder.instance();
     }
     
     /**
      * {@see TreeTextConverterTextToFlag}
      */
-    public static <C extends ConverterContext> Converter<C> textToFlag() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToFlag() {
         return TreeTextConverterTextToFlag.instance();
     }
 
     /**
      * {@see TreeTextConverterTextToMargin}
      */
-    public static <C extends ConverterContext> Converter<C> textToMargin() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToMargin() {
         return TreeTextConverterTextToMargin.instance();
     }
 
     /**
      * {@see TreeTextConverterTextToPadding}
      */
-    public static <C extends ConverterContext> Converter<C> textToPadding() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToPadding() {
         return TreeTextConverterTextToPadding.instance();
     }
     
     /**
      * {@see TreeTextConverterTextToTextNode}
      */
-    public static <C extends ConverterContext> Converter<C> textToTextNode() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToTextNode() {
         return TreeTextConverterTextToTextNode.instance();
     }
 
     /**
      * {@see TreeTextConverterTextToTextStyle}
      */
-    public static <C extends ConverterContext> Converter<C> textToTextStyle() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToTextStyle() {
         return TreeTextConverterTextToTextStyle.instance();
     }
 
     /**
      * {@see TreeTextConverterTextToTextStylePropertyName}
      */
-    public static <C extends ConverterContext> Converter<C> textToTextStylePropertyName() {
+    public static <C extends TreeTextConverterContext> Converter<C> textToTextStylePropertyName() {
         return TreeTextConverterTextToTextStylePropertyName.instance();
     }
 
     /**
      * {@see TreeTextConverterToTextNode}
      */
-    public static <C extends ConverterContext> Converter<C> toTextNode() {
+    public static <C extends TreeTextConverterContext> Converter<C> toTextNode() {
         return TreeTextConverterToTextNode.instance();
     }
 
     /**
      * {@see TreeTextConverterToStyleable}
      */
-    public static <C extends ConverterContext> Converter<C> toStyleable() {
+    public static <C extends TreeTextConverterContext> Converter<C> toStyleable() {
         return TreeTextConverterToStyleable.instance();
     }
 
     /**
      * {@see TreeTextConverterToTextStyle}
      */
-    public static <C extends ConverterContext> Converter<C> toTextStyle() {
+    public static <C extends TreeTextConverterContext> Converter<C> toTextStyle() {
         return TreeTextConverterToTextStyle.instance();
     }
 
     /**
      * {@see TreeTextConverterUrlToHyperlink}
      */
-    public static <C extends ConverterContext> Converter<C> urlToHyperlink() {
+    public static <C extends TreeTextConverterContext> Converter<C> urlToHyperlink() {
         return TreeTextConverterUrlToHyperlink.instance();
     }
 
     /**
      * {@see TreeTextConverterUrlToImage}
      */
-    public static <C extends ConverterContext> Converter<C> urlToImage() {
+    public static <C extends TreeTextConverterContext> Converter<C> urlToImage() {
         return TreeTextConverterUrlToImage.instance();
     }
 
