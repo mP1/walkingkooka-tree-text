@@ -284,34 +284,46 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
         );
     }
 
-    // replace...........................................................................................................
+    // replace..........................................................................................................
 
     @Test
     public final void testReplaceNullTextNodeFails() {
-        assertThrows(NullPointerException.class, () -> this.createObject().replace(null));
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject()
+                .replace(null)
+        );
     }
 
     final void replaceAndCheck(final TextStyle textStyle,
                                final TextNode textNode) {
-        assertSame(textNode,
+        assertSame(
+            textNode,
             textStyle.replace(textNode),
-            () -> textStyle + " replace " + textNode);
+            () -> textStyle + " replace " + textNode
+        );
     }
 
     final void replaceAndCheck(final TextStyle textStyle,
                                final TextNode textNode,
                                final TextNode expected) {
         final TextNode actual = textStyle.replace(textNode);
-        this.checkEquals(expected,
+        this.checkEquals(
+            expected,
             actual,
-            () -> textStyle + " replace " + textNode + "\nEXPECTED.root\n" + expected.root() + "\nACTUAL.root\n" + actual.root() + '\n');
+            () -> textStyle + " replace " + textNode + "\nEXPECTED.root\n" + expected.root() + "\nACTUAL.root\n" + actual.root() + '\n'
+        );
     }
 
     // get..............................................................................................................
 
     @Test
     public final void testGetNullFails() {
-        assertThrows(NullPointerException.class, () -> this.createObject().get(null));
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject()
+                .get(null)
+        );
     }
 
     @Test
@@ -359,7 +371,11 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
             IllegalArgumentException.class,
             () -> {
                 final TextStylePropertyName<?> propertyName = TextStylePropertyName.FONT_FAMILY;
-                this.createObject().set(propertyName, Cast.to("invalid"));
+                this.createObject()
+                    .set(
+                        propertyName,
+                        Cast.to("invalid")
+                    );
             }
         );
     }
@@ -383,13 +399,20 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
 
     @Test
     public final void testRemoveNullFails() {
-        assertThrows(NullPointerException.class, () -> this.createObject().remove(null));
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject()
+                .remove(null)
+        );
     }
 
     @Test
     public final void testRemoveUnknown() {
         final TextStyle textStyle = this.createObject();
-        assertSame(textStyle, textStyle.remove(TextStylePropertyName.HYPHENS));
+        assertSame(
+            textStyle,
+            textStyle.remove(TextStylePropertyName.HYPHENS)
+        );
     }
 
     // setBorder........................................................................................................
@@ -398,7 +421,8 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     public final void testSetBorderWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> this.createObject().setBorder(null)
+            () -> this.createObject()
+                .setBorder(null)
         );
     }
 
@@ -577,7 +601,10 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     @Override
     public final TextStyle unmarshall(final JsonNode from,
                                       final JsonNodeUnmarshallContext context) {
-        return TextStyle.unmarshall(from, context);
+        return TextStyle.unmarshall(
+            from,
+            context
+        );
     }
 
     @Override
