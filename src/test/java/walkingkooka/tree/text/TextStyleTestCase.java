@@ -52,6 +52,11 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     ToStringTesting<TextStyle>,
     TreePrintableTesting {
 
+    final static List<TextNode> CHILDREN = Lists.of(
+        TextNode.text("a1"),
+        TextNode.text("b2")
+    );
+
     TextStyleTestCase() {
         super();
     }
@@ -574,10 +579,6 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
 
     final TextStyleNameNode styleName(final String styleName) {
         return TextNode.styleName(TextStyleName.with(styleName));
-    }
-
-    final List<TextNode> children() {
-        return Lists.of(TextNode.text("a1"), TextNode.text("b2"));
     }
 
     // Styleable........................................................................................................

@@ -69,12 +69,13 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testReplaceTextStyle() {
-        this.replaceAndCheck2(TextNode.style(this.children()));
+        this.replaceAndCheck2(
+            TextNode.style(CHILDREN));
     }
 
     @Test
     public void testReplaceTextStyle2() {
-        final TextNode node = TextNode.style(children());
+        final TextNode node = TextNode.style(CHILDREN);
 
         this.replaceAndCheck(
             TextStyle.EMPTY,
@@ -90,7 +91,7 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
 
     @Test
     public void testReplaceTextStyleNodeWithParent() {
-        final TextNode textStyleNode = TextNode.style(this.children());
+        final TextNode textStyleNode = TextNode.style(CHILDREN);
 
         this.replaceAndCheck(
             TextStyle.EMPTY,
