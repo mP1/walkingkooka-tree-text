@@ -2189,6 +2189,17 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     }
 
     @Test
+    public void testTreePrintDifferentLineEnding() {
+        this.treePrintAndCheck(
+            createTextStyle(),
+            DIFFERENT_LINE_ENDING,
+            "TextStyle\r\n" +
+                "  font-family=Times News Roman\r\n" +
+                "  word-wrap=BREAK_WORD\r\n"
+        );
+    }
+
+    @Test
     public void testTreePrintIncludingColorWithWebColorNames() {
         this.treePrintAndCheck(
             TextStyle.EMPTY.set(
