@@ -27,7 +27,6 @@ import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -176,14 +175,13 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testReplaceTextStyleWithoutAttributes() {
-        final List<TextNode> children = this.children();
         final TextStyle textStyle = this.createTextStyle();
 
         this.replaceAndCheck(
             textStyle,
-            TextNode.style(children),
+            TextNode.style(CHILDREN),
             TextStyleNode.with(
-                children,
+                CHILDREN,
                 TextStylePropertiesMap.with(textStyle.value())
             )
         );
@@ -191,9 +189,8 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testReplaceTextStyleWithAttributes() {
-        final List<TextNode> children = this.children();
         final TextNode textStyle = TextStyleNode.with(
-            children,
+            CHILDREN,
             this.createTextStyle()
                 .textStylePropertiesMap()
         );
@@ -201,13 +198,13 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         this.replaceAndCheck(
             TextStyle.EMPTY,
             textStyle,
-            TextNode.style(children)
+            TextNode.style(CHILDREN)
         );
     }
 
     @Test
     public void testReplaceTextStyleWithParent() {
-        final TextNode textStyleNode = TextNode.style(this.children());
+        final TextNode textStyleNode = TextNode.style(CHILDREN);
 
         final TextStyle textStyle = this.createTextStyle(
             PROPERTY2,
@@ -225,7 +222,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
 
     @Test
     public void testReplaceTextStyleWithParent2() {
-        final TextNode textStyleNode = TextNode.style(this.children());
+        final TextNode textStyleNode = TextNode.style(CHILDREN);
 
         final TextStyle textStyle = this.createTextStyle(
             PROPERTY2,
