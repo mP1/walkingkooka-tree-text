@@ -80,7 +80,9 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> i
     public final String possibleValidChars(final int position) {
         return 0 == position ?
             ASCII_LETTERS :
-            ASCII_LETTERS_DIGITS + "-";
+            (position & 1) == 0 ?
+                ASCII_LETTERS_DIGITS + "-" :
+                ASCII_LETTERS_DIGITS;
     }
 
     @Override
