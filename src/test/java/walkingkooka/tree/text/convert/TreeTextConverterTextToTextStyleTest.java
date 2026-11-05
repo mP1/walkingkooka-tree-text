@@ -101,7 +101,7 @@ public final class TreeTextConverterTextToTextStyleTest extends TreeTextConverte
                 );
             }
 
-            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.toText();
         };
     }
 

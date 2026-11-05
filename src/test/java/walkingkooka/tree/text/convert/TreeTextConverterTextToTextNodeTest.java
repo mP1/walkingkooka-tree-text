@@ -135,7 +135,7 @@ public final class TreeTextConverterTextToTextNodeTest extends TreeTextConverter
                 );
             }
 
-            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.toText();
         };
     }
 

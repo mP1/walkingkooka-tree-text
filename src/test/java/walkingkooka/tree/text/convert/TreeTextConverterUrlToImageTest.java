@@ -105,7 +105,7 @@ public final class TreeTextConverterUrlToImageTest extends TreeTextConverterUrlT
                             );
                         }
                     },
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString()
+                    Converters.toText()
                 )
             ).cast(FakeTreeTextConverterContext.class);
         };

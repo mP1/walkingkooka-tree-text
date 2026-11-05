@@ -182,7 +182,7 @@ public final class TreeTextConvertersTest implements PublicStaticHelperTesting<T
         final Converter<TreeTextConverterContext> converter = Converters.collection(
             Lists.of(
                 Converters.simple(),
-                Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                Converters.toText(),
                 Converters.textToProperties(),
                 Converters.numberToNumber(),
                 NetConverters.textToUrl(),
