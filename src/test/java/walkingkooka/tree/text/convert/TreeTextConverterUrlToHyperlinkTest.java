@@ -105,7 +105,7 @@ public final class TreeTextConverterUrlToHyperlinkTest extends TreeTextConverter
                             );
                         }
                     },
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString()
+                    Converters.toText()
                 )
             ).cast(FakeTreeTextConverterContext.class);
         };

@@ -74,7 +74,7 @@ public final class TreeTextConverterTextToMarginTest extends TreeTextConverterTe
                 );
             }
 
-            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.toText();
         };
     }
 

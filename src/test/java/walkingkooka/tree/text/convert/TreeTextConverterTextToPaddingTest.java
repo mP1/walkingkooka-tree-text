@@ -74,7 +74,7 @@ public final class TreeTextConverterTextToPaddingTest extends TreeTextConverterT
                 );
             }
 
-            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.toText();
         };
     }
 

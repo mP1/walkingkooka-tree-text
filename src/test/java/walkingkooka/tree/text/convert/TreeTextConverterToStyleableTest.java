@@ -104,7 +104,7 @@ public final class TreeTextConverterToStyleableTest extends TreeTextConverterTes
 
             private final Converter<FakeTreeTextConverterContext> converter = Converters.collection(
                 Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                    Converters.toText(),
                     TreeTextConverters.textToTextStyle()
                 )
             );

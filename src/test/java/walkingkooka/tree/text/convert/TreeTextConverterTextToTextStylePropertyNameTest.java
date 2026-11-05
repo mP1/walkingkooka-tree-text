@@ -66,7 +66,7 @@ public final class TreeTextConverterTextToTextStylePropertyNameTest extends Tree
                 );
             }
 
-            private final Converter<FakeTreeTextConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeTreeTextConverterContext> converter = Converters.toText();
         };
     }
 

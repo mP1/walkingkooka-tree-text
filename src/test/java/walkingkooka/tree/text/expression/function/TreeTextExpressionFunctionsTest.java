@@ -995,7 +995,7 @@ public final class TreeTextExpressionFunctionsTest implements PublicStaticHelper
 
                         private final Converter<TreeTextConverterContext> converter = Converters.collection(
                             Lists.of(
-                                Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                                Converters.toText(),
                                 Converters.simple(), // handles Text -> TextNode
                                 TreeTextConverters.toTextStyle(),
                                 TreeTextConverters.toTextNode(),
