@@ -25,7 +25,7 @@ import walkingkooka.color.ColorContexts;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextNodeContextBasicTest implements TextNodeContextTesting2<TextNodeContextBasic>,
-    ToStringTesting<TextNodeContextBasic> {
+    ToStringTesting {
 
     private final static ColorContext COLOR_CONTEXT = ColorContexts.basic();
 

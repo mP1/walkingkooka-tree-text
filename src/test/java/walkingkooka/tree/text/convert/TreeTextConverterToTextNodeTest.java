@@ -28,7 +28,7 @@ import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStylePropertyName;
 
 public final class TreeTextConverterToTextNodeTest extends TreeTextConverterTestCase<TreeTextConverterToTextNode<FakeTreeTextConverterContext>, FakeTreeTextConverterContext>
-    implements ToStringTesting<TreeTextConverterToTextNode<FakeTreeTextConverterContext>> {
+    implements ToStringTesting {
 
     @Test
     public void testStringToString() {

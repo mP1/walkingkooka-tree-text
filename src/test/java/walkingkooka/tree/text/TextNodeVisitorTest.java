@@ -42,10 +42,6 @@ public final class TextNodeVisitorTest implements TextNodeVisitorTesting<TextNod
     }
 
     @Override
-    public void testCheckToStringOverridden() {
-    }
-
-    @Override
     public TextNodeVisitor createVisitor() {
         return new TextNodeVisitor() {
 

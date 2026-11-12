@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding> implements PublicClassTesting<T>,
     HashCodeEqualsDefinedTesting2<T>,
-    ToStringTesting<T>,
+    ToStringTesting,
     HasTextStyleTesting,
     HasTextTesting,
     ParseStringTesting<T>,

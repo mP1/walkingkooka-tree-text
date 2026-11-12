@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
     ConstantsTesting<LengthUnit<?, ?>>,
-    ToStringTesting<LengthUnit<?, ?>>,
+    ToStringTesting,
     TypeNameTesting<LengthUnit<?, ?>>,
     HasTextTesting {
 

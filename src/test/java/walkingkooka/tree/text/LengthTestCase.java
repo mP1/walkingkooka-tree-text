@@ -39,7 +39,7 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
     IsMethodTesting<L>,
     JsonNodeMarshallerTesting<L>,
     ParseStringTesting<L>,
-    ToStringTesting<L>,
+    ToStringTesting,
     TypeNameTesting<L>,
     HasTextTesting,
     HasValueTesting,

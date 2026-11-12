@@ -49,7 +49,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     HashCodeEqualsDefinedTesting2<TextStyle>,
     JsonNodeMarshallerTesting<TextStyle>,
     ThrowableTesting,
-    ToStringTesting<TextStyle>,
+    ToStringTesting,
     TreePrintableTesting {
 
     final static List<TextNode> CHILDREN = Lists.of(
