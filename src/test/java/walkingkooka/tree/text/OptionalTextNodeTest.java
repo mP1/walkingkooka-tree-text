@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class OptionalTextNodeTest implements ClassTesting<OptionalTextNode>,
         CanBeEmptyTesting,
         HashCodeEqualsDefinedTesting2<OptionalTextNode>,
-        ToStringTesting<OptionalTextNode>,
+        ToStringTesting,
         JsonNodeMarshallerTesting<OptionalTextNode>,
         TreePrintableTesting {
 

@@ -43,7 +43,7 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     HasTextTesting,
     ParseStringTesting<Opacity>,
     JsonNodeMarshallerTesting<Opacity>,
-    ToStringTesting<Opacity>,
+    ToStringTesting,
     HasValueTesting,
     ThrowableTesting {
 

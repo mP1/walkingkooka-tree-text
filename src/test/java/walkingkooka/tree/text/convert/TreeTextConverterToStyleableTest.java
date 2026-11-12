@@ -31,7 +31,7 @@ import walkingkooka.tree.text.TextStyle;
 import walkingkooka.tree.text.TextStylePropertyName;
 
 public final class TreeTextConverterToStyleableTest extends TreeTextConverterTestCase<TreeTextConverterToStyleable<FakeTreeTextConverterContext>, FakeTreeTextConverterContext>
-    implements ToStringTesting<TreeTextConverterToStyleable<FakeTreeTextConverterContext>> {
+    implements ToStringTesting {
 
     @Test
     public void testStringToStringFails() {

@@ -23,7 +23,7 @@ import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext
 
 public abstract class TreeTextExpressionFunctionTestCase<F extends TreeTextExpressionFunction<T, FakeTreeTextExpressionEvaluationContext>, T>
     implements ExpressionFunctionTesting2<F, T, FakeTreeTextExpressionEvaluationContext>,
-    ToStringTesting<F> {
+    ToStringTesting {
 
     TreeTextExpressionFunctionTestCase() {
         super();

@@ -27,10 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextStyleVisitor> {
 
     @Override
-    public void testCheckToStringOverridden() {
-    }
-
-    @Override
     public void testClassVisibility() {
     }
 

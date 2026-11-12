@@ -32,7 +32,7 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     PackagePrivateClassTesting<P>,
     JsonNodeMarshallUnmarshallContextTesting,
     ThrowableTesting,
-    ToStringTesting<P>,
+    ToStringTesting,
     TypeNameTesting<P> {
 
     TextStylePropertyValueHandlerTestCase() {

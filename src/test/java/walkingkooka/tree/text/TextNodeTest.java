@@ -30,7 +30,7 @@ import walkingkooka.tree.select.NodeSelectorContexts;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextNodeTest extends TextNodeTestCase<TextNode> implements HasContentTypeTesting,
-    ToStringTesting<TextNode> {
+    ToStringTesting {
 
     //isTextNodeClass...................................................................................................
 

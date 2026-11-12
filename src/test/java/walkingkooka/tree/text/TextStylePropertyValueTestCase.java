@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class TextStylePropertyValueTestCase<V> implements ClassTesting2<V>,
     JsonNodeMarshallUnmarshallContextTesting,
-    ToStringTesting<V>,
+    ToStringTesting,
     HasValueTesting {
 
     TextStylePropertyValueTestCase() {

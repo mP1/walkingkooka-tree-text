@@ -50,7 +50,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     ParseStringTesting<TextStyle>,
     JsonNodeMarshallerTesting<TextStyle>,
     PatchableTesting<TextStyle>,
-    ToStringTesting<TextStyle> {
+    ToStringTesting {
 
     // isStyleClass.....................................................................................................
 

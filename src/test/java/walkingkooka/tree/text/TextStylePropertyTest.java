@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStylePropertyTest implements ClassTesting<TextStyleProperty<TextAlign>>,
     HashCodeEqualsDefinedTesting2<TextStyleProperty<TextAlign>>,
     HasNameTesting,
-    ToStringTesting<TextStyleProperty<TextAlign>>,
+    ToStringTesting,
     TreePrintableTesting,
     ComparableTesting,
     HasValueTesting {

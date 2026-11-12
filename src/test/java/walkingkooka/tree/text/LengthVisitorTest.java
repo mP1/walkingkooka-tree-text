@@ -25,10 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisitor> {
 
-    @Override
-    public void testCheckToStringOverridden() {
-    }
-
     @Test
     public void testAcceptSkipRemaining() {
         final StringBuilder b = new StringBuilder();
