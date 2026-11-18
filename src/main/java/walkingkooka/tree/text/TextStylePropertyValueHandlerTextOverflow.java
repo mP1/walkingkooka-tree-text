@@ -65,6 +65,11 @@ final class TextStylePropertyValueHandlerTextOverflow extends TextStylePropertyV
     }
 
     @Override
+    String textValue(final TextOverflow value) {
+        return value.text();
+    }
+
+    @Override
     TextOverflow parseValueText(final String value) {
         return TextOverflow.parse(value);
     }

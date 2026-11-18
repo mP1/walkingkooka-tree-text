@@ -66,6 +66,11 @@ final class TextStylePropertyValueHandlerFontFamily extends TextStylePropertyVal
     }
 
     @Override
+    String textValue(final FontFamily value) {
+        return value.text();
+    }
+
+    @Override
     FontFamily parseValueText(final String value) {
         return FontFamily.with(value);
     }

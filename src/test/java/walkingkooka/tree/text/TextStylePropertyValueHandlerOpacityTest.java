@@ -32,6 +32,22 @@ public final class TextStylePropertyValueHandlerOpacityTest extends TextStylePro
     }
 
     @Test
+    public void testTextValueWithOpaque() {
+        this.textValueAndCheck(
+            Opacity.OPAQUE,
+            "opaque"
+        );
+    }
+
+    @Test
+    public void testTextValueWithNumber() {
+        this.textValueAndCheck(
+            Opacity.with(0.5),
+            "0.5"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string(Opacity.OPAQUE_TEXT),

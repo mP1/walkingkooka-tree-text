@@ -33,6 +33,14 @@ public final class TextStylePropertyValueHandlerMarginTest extends TextStyleProp
         );
     }
 
+    @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            Margin.parse("left: 1px"),
+            "margin ALL left: 1px"
+        );
+    }
+
     @Override
     public void testParseStringEmptyFails() {
         throw new UnsupportedOperationException();

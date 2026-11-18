@@ -73,6 +73,11 @@ final class TextStylePropertyValueHandlerBorder extends TextStylePropertyValueHa
     }
 
     @Override
+    String textValue(final Border value) {
+        return value.text();
+    }
+
+    @Override
     Border parseValueText(final String text) {
         return Border.parse(text);
     }

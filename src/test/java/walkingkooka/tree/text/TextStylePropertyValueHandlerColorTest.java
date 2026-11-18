@@ -34,6 +34,14 @@ public final class TextStylePropertyValueHandlerColorTest extends TextStylePrope
     }
 
     @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            Color.parse("#123"),
+            "#123"
+        );
+    }
+
+    @Test
     public void testParseValueTextInvalidFails2() {
         this.parseStringFails(
             "Invalid!",

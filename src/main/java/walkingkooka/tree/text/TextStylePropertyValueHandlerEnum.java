@@ -91,6 +91,11 @@ final class TextStylePropertyValueHandlerEnum<E extends Enum<E>> extends TextSty
     }
 
     @Override
+    String textValue(final E value) {
+        return value.name();
+    }
+
+    @Override
     E parseValueText(final String text) {
         Objects.requireNonNull(text, "text");
 

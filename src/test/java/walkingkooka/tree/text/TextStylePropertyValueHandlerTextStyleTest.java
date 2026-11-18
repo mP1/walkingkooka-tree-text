@@ -27,6 +27,16 @@ public final class TextStylePropertyValueHandlerTextStyleTest extends TextStyleP
     }
 
     @Test
+    public void testTextValue() {
+        final String string = "color: red;";
+
+        this.textValueAndCheck(
+            TextStyle.parse(string),
+            string
+        );
+    }
+
+    @Test
     public void testParseValueTextWithEmpty() {
         this.parseStringAndCheck(
             "",

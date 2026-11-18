@@ -34,6 +34,14 @@ public final class TextStylePropertyValueHandlerFontFamilyTest extends TextStyle
     }
 
     @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            FontFamily.with(TIMES_NEW_ROMAN),
+            TIMES_NEW_ROMAN
+        );
+    }
+
+    @Test
     public void testParseValueTextInvalidFails2() {
         this.parseStringInvalidCharacterFails(
             "!InvalidFontFamily",

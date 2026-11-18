@@ -73,6 +73,11 @@ final class TextStylePropertyValueHandlerFontSize extends TextStylePropertyValue
     }
 
     @Override
+    String textValue(final FontSize value) {
+        return value.text();
+    }
+
+    @Override
     FontSize parseValueText(final String value) {
         CharSequences.failIfNullOrEmpty(value, "value");
 

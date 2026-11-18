@@ -32,6 +32,22 @@ public final class TextStylePropertyValueHandlerFontWeightTest extends TextStyle
     }
 
     @Test
+    public void testTextValueWithBold() {
+        this.textValueAndCheck(
+            FontWeight.BOLD,
+            "BOLD"
+        );
+    }
+
+    @Test
+    public void testTextValueWithNumber() {
+        this.textValueAndCheck(
+            FontWeight.with(123),
+            "123"
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.number(123),

@@ -74,6 +74,11 @@ final class TextStylePropertyValueHandlerColor extends TextStylePropertyValueHan
     }
 
     @Override
+    String textValue(final Color value) {
+        return value.text();
+    }
+
+    @Override
     Color parseValueText(final String text) {
         return Color.parse(text);
     }

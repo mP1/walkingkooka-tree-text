@@ -73,6 +73,11 @@ final class TextStylePropertyValueHandlerMargin extends TextStylePropertyValueHa
     }
 
     @Override
+    String textValue(final Margin value) {
+        return value.toString();
+    }
+
+    @Override
     Margin parseValueText(final String text) {
         return Margin.parse(text);
     }
