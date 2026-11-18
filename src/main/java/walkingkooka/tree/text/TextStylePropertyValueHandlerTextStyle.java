@@ -68,6 +68,11 @@ final class TextStylePropertyValueHandlerTextStyle extends TextStylePropertyValu
     }
 
     @Override
+    String textValue(final TextStyle value) {
+        return value.text();
+    }
+
+    @Override
     TextStyle parseValueText(final String value) {
         return TextStyle.parse(value);
     }

@@ -33,6 +33,14 @@ public final class TextStylePropertyValueHandlerEnumTest extends TextStyleProper
     }
 
     @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            TextWrapping.CLIP,
+            "CLIP"
+        );
+    }
+
+    @Test
     public void testParseValueTextWithUnknownFails() {
         this.parseStringFails(
             "BAD",

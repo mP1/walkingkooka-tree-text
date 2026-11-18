@@ -198,6 +198,13 @@ abstract class TextStylePropertyValueHandler<T> {
      */
     abstract T parseValue(final TextStyleParser parser);
 
+    // textValue........................................................................................................
+
+    /**
+     * Converts the provided value into text. The text product should be parse-able by {@link #parseValueText(String)}.
+     */
+    abstract String textValue(final T value);
+
     // parseValueText...................................................................................................
 
     /**

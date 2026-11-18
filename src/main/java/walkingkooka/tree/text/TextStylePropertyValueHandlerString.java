@@ -76,6 +76,11 @@ final class TextStylePropertyValueHandlerString extends TextStylePropertyValueHa
     }
 
     @Override
+    String textValue(final String value) {
+        return value;
+    }
+
+    @Override
     String parseValueText(final String value) {
         Objects.requireNonNull(value, "value");
         return value;

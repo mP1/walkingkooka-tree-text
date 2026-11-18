@@ -34,6 +34,24 @@ public final class TextStylePropertyValueHandlerTextOverflowTest extends TextSty
     }
 
     @Test
+    public void testTextValueWithClip() {
+        this.textValueAndCheck(
+            TextOverflow.CLIP,
+            "CLIP"
+        );
+    }
+
+    @Test
+    public void testTextValueWithString() {
+        final String string = "abc123";
+
+        this.textValueAndCheck(
+            TextOverflow.string(string),
+            '"' + string + '"'
+        );
+    }
+
+    @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.string("\"" + STRING + "\""),

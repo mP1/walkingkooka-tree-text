@@ -33,6 +33,14 @@ public final class TextStylePropertyValueHandlerPaddingTest extends TextStylePro
         );
     }
 
+    @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            Padding.parse("left: 1px;"),
+            "left: 1px"
+        );
+    }
+
     @Override
     public void testParseStringEmptyFails() {
         throw new UnsupportedOperationException();

@@ -23,6 +23,7 @@ import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.test.ParseStringTesting;
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallUnmarshallContextTesting;
 
@@ -37,6 +38,19 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
 
     TextStylePropertyValueHandlerTestCase() {
         super();
+    }
+
+    // textValue........................................................................................................
+
+    final void textValueAndCheck(final T value,
+                                 final String expected) {
+        this.checkEquals(
+            expected,
+            this.handler()
+                .textValue(value),
+            () -> CharSequences.quoteIfChars(value)
+                .toString()
+        );
     }
 
     // parseValue.......................................................................................................

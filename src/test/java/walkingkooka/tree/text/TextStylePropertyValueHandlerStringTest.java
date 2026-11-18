@@ -44,6 +44,16 @@ public final class TextStylePropertyValueHandlerStringTest extends TextStyleProp
         this.checkValue(" \t");
     }
 
+    @Test
+    public void testTextValue() {
+        final String string = "abc123";
+
+        this.textValueAndCheck(
+            string,
+            string
+        );
+    }
+
     @Override
     public void testParseStringEmptyFails() {
         throw new UnsupportedOperationException();

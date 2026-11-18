@@ -65,6 +65,11 @@ final class TextStylePropertyValueHandlerOpacity extends TextStylePropertyValueH
     }
 
     @Override
+    String textValue(final Opacity value) {
+        return value.text();
+    }
+
+    @Override
     Opacity parseValueText(final String value) {
         return Opacity.parse(value);
     }

@@ -32,6 +32,14 @@ public final class TextStylePropertyValueHandlerFontSizeTest extends TextStylePr
     }
 
     @Test
+    public void testTextValue() {
+        this.textValueAndCheck(
+            FontSize.with(123),
+            "123"
+        );
+    }
+
+    @Test
     public void testParseValueTextWithNegativeValue() {
         this.parseStringFails(
             "-10",

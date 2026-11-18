@@ -65,6 +65,11 @@ final class TextStylePropertyValueHandlerPadding extends TextStylePropertyValueH
     }
 
     @Override
+    String textValue(final Padding value) {
+        return value.text();
+    }
+
+    @Override
     Padding parseValue(final TextStyleParser parser) {
         return this.parseValueText(
             parser.quotedOrMultiTokenText()

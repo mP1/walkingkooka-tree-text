@@ -72,6 +72,11 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
     }
 
     @Override
+    String textValue(final FontWeight value) {
+        return value.toString();
+    }
+
+    @Override
     FontWeight parseValueText(final String value) {
         return FontWeight.parse(value);
     }
