@@ -33,6 +33,7 @@ import walkingkooka.net.header.MediaType;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
@@ -42,6 +43,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.patch.Patchable;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -104,6 +106,35 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     public final static CharacterConstant ASSIGNMENT = CharacterConstant.with(':');
 
     public final static CharacterConstant SEPARATOR = CharacterConstant.with(';');
+
+    // fromCsvStringList................................................................................................
+
+    public static TextStyle fromCsvStringList(final CsvStringList csvStringList) {
+        Objects.requireNonNull(csvStringList, "csvStringList");
+
+        final Map<TextStylePropertyName<?>, Object> nameToValue = Maps.sorted();
+
+        final Iterator<String> columns = csvStringList.iterator();
+        while (columns.hasNext()) {
+            final String name = columns.next();
+            final TextStylePropertyName<?> textStylePropertyName = TextStylePropertyName.with(name);
+
+            if (false == columns.hasNext()) {
+                throw new IllegalArgumentException("Missing value for " + CharSequences.quoteAndEscape(name));
+            }
+
+            final Object value = textStylePropertyName.handler.parseValueText(
+                columns.next()
+            );
+
+            nameToValue.put(
+                textStylePropertyName,
+                value
+            );
+        }
+
+        return EMPTY.setValues(nameToValue);
+    }
 
     // parse............................................................................................................
 
