@@ -30,6 +30,7 @@ import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.props.Properties;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -55,6 +56,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     ParseStringTesting<TextStyle>,
     JsonNodeMarshallerTesting<TextStyle>,
     PatchableTesting<TextStyle>,
+    ThrowableTesting,
     ToStringTesting {
 
     // isStyleClass.....................................................................................................
@@ -104,6 +106,27 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     // fromCsvStringList................................................................................................
+
+    @Test
+    public void testFromCsvStringListWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyle.fromCsvStringList(null)
+        );
+    }
+
+    @Test
+    public void testFromCsvStringListWithMissingPropertyValueTokenFails() {
+        this.getMessageAndCheck(
+            assertThrows(
+                IllegalArgumentException.class,
+                () -> TextStyle.fromCsvStringList(
+                    CsvStringList.parse("color,red,text-align")
+                )
+            ),
+            "Missing value for \"text-align\""
+        );
+    }
 
     @Test
     public void testFromCsvStringListWithEmpty() {
