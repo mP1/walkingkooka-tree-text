@@ -67,12 +67,12 @@ public abstract class TextStylePropertyValueHandlerTestCase<P extends TextStyleP
     }
 
     @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
+    public final Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
         return expected;
     }
 
     @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException expected) {
+    public final RuntimeException parseStringFailedExpected(final RuntimeException expected) {
         return expected;
     }
 
