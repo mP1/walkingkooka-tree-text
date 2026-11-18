@@ -20,6 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
@@ -45,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStyleTest implements ClassTesting2<TextStyle>,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     HasContentTypeTesting,
+    HasCsvStringListTesting,
     HasTextTesting,
     HasTextStyleTesting,
     ParseStringTesting<TextStyle>,
@@ -250,6 +252,49 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
             expected,
             style.setOrRemove(name, value),
             () -> style + " setOrRemove " + name + " " + value
+        );
+    }
+
+    // HasCsvStringList.................................................................................................
+
+    @Test
+    public void testCsvStringList() {
+        this.csvStringListAndCheck(
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
+                .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
+                .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
+                .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
+                .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
+                .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
+                .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
+                .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+                .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
+                .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
+                .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
+                .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
+                .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
+                .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
+                .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
+                .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+                .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
+                .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
+                .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
+                .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
+                .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
+                .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
+                .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
+                .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
+                .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
+                .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
+                .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
+                .set(TextStylePropertyName.WORD_SPACING, Length.normal())
+                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+                .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR),
+            "background-color,#123456,border-bottom-color,#222,border-bottom-style,DASHED,border-bottom-width,1px,border-collapse,COLLAPSE,border-spacing,5px,font-family,Times New Roman,font-kerning,NORMAL,font-size,10,font-stretch,EXPANDED,font-style,ITALIC,font-variant,SMALL_CAPS,hanging-punctuation,ALLOW_END,height,15px,hyphens,MANUAL,letter-spacing,2.5px,list-style-position,INSIDE,list-style-type,DECIMAL,opacity,transparent,overflow-wrap,NORMAL,overflow-x,HIDDEN,text-align,CENTER,text-decoration-line,LINE_THROUGH,text-decoration-style,DASHED,text-justify,INTER_CHARACTER,text-transform,CAPITALIZE,text-wrapping,CLIP,vertical-align,BOTTOM,visibility,HIDDEN,word-break,NORMAL,word-spacing,normal,word-wrap,BREAK_WORD,writing-mode,VERTICAL_LR"
         );
     }
 

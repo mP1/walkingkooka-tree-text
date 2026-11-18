@@ -21,6 +21,9 @@ import walkingkooka.CanBeEmpty;
 import walkingkooka.Cast;
 import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
+import walkingkooka.collect.list.CsvStringList;
+import walkingkooka.collect.list.HasCsvStringList;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.header.HasContentType;
@@ -51,6 +54,7 @@ import java.util.function.Predicate;
 public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>, Object>>,
     Patchable<TextStyle>,
     TreePrintable,
+    HasCsvStringList,
     HasText,
     Styleable,
     CanBeEmpty,
@@ -683,6 +687,27 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     }
 
     public final static MediaType CONTENT_TYPE = HasContentType.json(TextStyle.class);
+
+    // HasCsvStringList.................................................................................................
+
+    @Override
+    public CsvStringList csvStringList() {
+        final List<String> strings = Lists.array();
+
+        for(final Entry<TextStylePropertyName<?>, ?> nameAndValue : this.textStylePropertiesMap().entrySet()) {
+            final TextStylePropertyName<?> name = nameAndValue.getKey();
+            final Object value = nameAndValue.getValue();
+
+            strings.add(name.name);
+            strings.add(
+                name.handler.textValue(
+                    Cast.to(value)
+                )
+            );
+        }
+
+        return CsvStringList.EMPTY.setElements(strings);
+    }
 
     // HasTextStyle.....................................................................................................
 
