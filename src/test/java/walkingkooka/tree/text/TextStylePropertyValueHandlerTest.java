@@ -18,14 +18,9 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
-public final class TextStylePropertyValueHandlerTest implements ClassTesting<TextStylePropertyValueHandler<?>> {
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
+public final class TextStylePropertyValueHandlerTest implements PackagePrivateClassTesting<TextStylePropertyValueHandler<?>> {
 
     @Override
     public Class<TextStylePropertyValueHandler<?>> type() {
