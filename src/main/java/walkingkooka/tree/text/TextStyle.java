@@ -23,7 +23,9 @@ import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringList;
+import walkingkooka.collect.list.HasTsvStringList;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.header.HasContentType;
@@ -55,6 +57,7 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     Patchable<TextStyle>,
     TreePrintable,
     HasCsvStringList,
+    HasTsvStringList,
     HasText,
     Styleable,
     CanBeEmpty,
@@ -707,6 +710,15 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
         }
 
         return CsvStringList.EMPTY.setElements(strings);
+    }
+
+    // HasTsvStringList.................................................................................................
+
+    @Override
+    public TsvStringList tsvStringList() {
+        return TsvStringList.EMPTY.setElements(
+            this.csvStringList()
+        );
     }
 
     // HasTextStyle.....................................................................................................
