@@ -73,7 +73,7 @@ final class TextStylePropertyValueHandlerFontWeight extends TextStylePropertyVal
 
     @Override
     String textValue(final FontWeight value) {
-        return value.toString();
+        return value.text();
     }
 
     @Override
