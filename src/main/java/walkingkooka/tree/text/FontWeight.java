@@ -23,6 +23,7 @@ import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasText;
 import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
 import walkingkooka.text.cursor.parser.LongParserToken;
 import walkingkooka.text.cursor.parser.Parser;
@@ -41,7 +42,8 @@ import java.util.Objects;
  * Value class that holds a font weight.
  */
 public final class FontWeight implements Comparable<FontWeight>,
-    HasValue<Integer> {
+    HasValue<Integer>,
+    HasText {
 
     private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
 
@@ -214,5 +216,12 @@ public final class FontWeight implements Comparable<FontWeight>,
             BOLD_VALUE == value ?
                 BOLD_TEXT :
                 String.valueOf(value);
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.toString();
     }
 }
