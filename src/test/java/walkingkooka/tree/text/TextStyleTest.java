@@ -24,6 +24,8 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.HasTsvStringListTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.list.StringLikeList;
+import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.header.HasContentTypeTesting;
@@ -105,22 +107,22 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
-    // fromCsvStringList................................................................................................
+    // fromStringLikeList...............................................................................................
 
     @Test
-    public void testFromCsvStringListWithNullFails() {
+    public void testFromStringLikeListWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> TextStyle.fromCsvStringList(null)
+            () -> TextStyle.fromStringLikeList(null)
         );
     }
 
     @Test
-    public void testFromCsvStringListWithMissingPropertyValueTokenFails() {
+    public void testFromStringLikeListWithMissingPropertyValueTokenFails() {
         this.getMessageAndCheck(
             assertThrows(
                 IllegalArgumentException.class,
-                () -> TextStyle.fromCsvStringList(
+                () -> TextStyle.fromStringLikeList(
                     CsvStringList.parse("color,red,text-align")
                 )
             ),
@@ -129,24 +131,24 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     }
 
     @Test
-    public void testFromCsvStringListWithEmpty() {
-        this.fromCsvStringListAndCheck(
+    public void testFromStringLikeListWithEmpty() {
+        this.fromStringLikeListAndCheck(
             CsvStringList.EMPTY,
             TextStyle.EMPTY
         );
     }
 
     @Test
-    public void testFromCsvStringListWithColor() {
-        this.fromCsvStringListAndCheck(
+    public void testFromStringLikeListWithColor() {
+        this.fromStringLikeListAndCheck(
             CsvStringList.parse("color,RED"),
             TextStyle.parse("color: RED")
         );
     }
 
     @Test
-    public void testFromCsvStringListWithMany() {
-        this.fromCsvStringListAndCheck(
+    public void testFromStringLikeListWithCsvStringListMany() {
+        this.fromStringLikeListAndCheck(
             CsvStringList.parse("background-color,#123456,border-bottom-color,#222,border-bottom-style,DASHED,border-bottom-width,1px,border-collapse,COLLAPSE,border-spacing,5px,font-family,Times New Roman,font-kerning,NORMAL,font-size,10,font-stretch,EXPANDED,font-style,ITALIC,font-variant,SMALL_CAPS,hanging-punctuation,ALLOW_END,height,15px,hyphens,MANUAL,letter-spacing,2.5px,list-style-position,INSIDE,list-style-type,DECIMAL,opacity,transparent,overflow-wrap,NORMAL,overflow-x,HIDDEN,text-align,CENTER,text-decoration-line,LINE_THROUGH,text-decoration-style,DASHED,text-justify,INTER_CHARACTER,text-transform,CAPITALIZE,text-wrapping,CLIP,vertical-align,BOTTOM,visibility,HIDDEN,word-break,NORMAL,word-spacing,normal,word-wrap,BREAK_WORD,writing-mode,VERTICAL_LR"),
             TextStyle.EMPTY
                 .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
@@ -185,11 +187,52 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
-    private void fromCsvStringListAndCheck(final CsvStringList csvStringList,
-                                           final TextStyle expected) {
+    @Test
+    public void testFromStringLikeListWithTsvStringListMany() {
+        this.fromStringLikeListAndCheck(
+            TsvStringList.parse("background-color\t#123456\tborder-bottom-color\t#222\tborder-bottom-style\tDASHED\tborder-bottom-width\t1px\tborder-collapse\tCOLLAPSE\tborder-spacing\t5px\tfont-family\tTimes New Roman\tfont-kerning\tNORMAL\tfont-size\t10\tfont-stretch\tEXPANDED\tfont-style\tITALIC\tfont-variant\tSMALL_CAPS\thanging-punctuation\tALLOW_END\theight\t15px\thyphens\tMANUAL\tletter-spacing\t2.5px\tlist-style-position\tINSIDE\tlist-style-type\tDECIMAL\topacity\ttransparent\toverflow-wrap\tNORMAL\toverflow-x\tHIDDEN\ttext-align\tCENTER\ttext-decoration-line\tLINE_THROUGH\ttext-decoration-style\tDASHED\ttext-justify\tINTER_CHARACTER\ttext-transform\tCAPITALIZE\ttext-wrapping\tCLIP\tvertical-align\tBOTTOM\tvisibility\tHIDDEN\tword-break\tNORMAL\tword-spacing\tnormal\tword-wrap\tBREAK_WORD\twriting-mode\tVERTICAL_LR"),
+            TextStyle.EMPTY
+                .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
+                .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
+                .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
+                .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
+                .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
+                .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
+                .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
+                .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
+                .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
+                .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+                .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
+                .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
+                .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
+                .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
+                .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
+                .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
+                .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
+                .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+                .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
+                .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
+                .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
+                .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
+                .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
+                .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
+                .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
+                .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
+                .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
+                .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
+                .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
+                .set(TextStylePropertyName.WORD_SPACING, Length.normal())
+                .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+                .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR)
+        );
+    }
+
+    private void fromStringLikeListAndCheck(final StringLikeList stringLikeList, 
+                                            final TextStyle expected) {
         this.checkEquals(
             expected,
-            TextStyle.fromCsvStringList(csvStringList)
+            TextStyle.fromStringLikeList(stringLikeList)
         );
     }
 
