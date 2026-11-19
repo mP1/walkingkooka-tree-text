@@ -25,6 +25,7 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringList;
 import walkingkooka.collect.list.HasTsvStringList;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.list.StringLikeList;
 import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
@@ -107,14 +108,14 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
 
     public final static CharacterConstant SEPARATOR = CharacterConstant.with(';');
 
-    // fromCsvStringList................................................................................................
+    // fromStringLikeList................................................................................................
 
-    public static TextStyle fromCsvStringList(final CsvStringList csvStringList) {
-        Objects.requireNonNull(csvStringList, "csvStringList");
+    public static TextStyle fromStringLikeList(final StringLikeList stringLikeList) {
+        Objects.requireNonNull(stringLikeList, "stringLikeList");
 
         final Map<TextStylePropertyName<?>, Object> nameToValue = Maps.sorted();
 
-        final Iterator<String> columns = csvStringList.iterator();
+        final Iterator<String> columns = stringLikeList.iterator();
         while (columns.hasNext()) {
             final String name = columns.next();
             final TextStylePropertyName<?> textStylePropertyName = TextStylePropertyName.with(name);
