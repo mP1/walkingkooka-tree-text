@@ -706,6 +706,36 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
         return result;
     }
 
+    /**
+     * Creates a {@link walkingkooka.tree.json.JsonObject} where each {@link TextStylePropertyName} and value
+     * becomes json properties and values. The {@link walkingkooka.tree.json.JsonObject} may update the patch to
+     * remove values by assigning a {@link walkingkooka.tree.json.JsonNull} value.
+     */
+    public final JsonNode textStylePatch(final JsonNodeMarshallContext context) {
+        Objects.requireNonNull(context, "context");
+
+        final List<JsonNode> json = Lists.array();
+
+        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value().entrySet()) {
+            final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
+            final JsonNode value = propertyName.handler.marshall(
+                Cast.to(
+                    propertyAndValue.getValue()
+                ),
+                context
+            );
+
+            json.add(
+                value.setName(
+                    propertyName.jsonPropertyName
+                )
+            );
+        }
+
+        return JsonNode.object()
+            .setChildren(json);
+    }
+
     // HasContentType...................................................................................................
 
     @Override

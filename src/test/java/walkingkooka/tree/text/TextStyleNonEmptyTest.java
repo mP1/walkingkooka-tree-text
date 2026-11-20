@@ -2175,6 +2175,21 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
         );
     }
 
+    // textStylePatch...................................................................................................
+
+    @Test
+    public void testTextStylePatch() {
+        this.textStylePatchAndCheck(
+            this.createTextStyle(),
+            JsonNode.parse(
+                "{\n" +
+                    "  \"fontFamily\": \"Times News Roman\",\n" +
+                    "  \"wordWrap\": \"BREAK_WORD\"\n" +
+                    "}"
+            )
+        );
+    }
+
     // TreePrintable....................................................................................................
 
     @Test
