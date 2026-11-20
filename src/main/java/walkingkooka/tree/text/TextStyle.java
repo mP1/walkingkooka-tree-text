@@ -645,28 +645,20 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     // JsonNodeContext..................................................................................................
 
     /**
-     * Accepts a json object holding the styles as a map.
+     * Requires a {@link walkingkooka.tree.json.JsonString} which will be parsed with {@link #parse(String)}.
      */
     static TextStyle unmarshall(final JsonNode node,
                                 final JsonNodeUnmarshallContext context) {
-        final Map<TextStylePropertyName<?>, Object> properties = Maps.ordered();
-
-        for (JsonNode child : node.objectOrFail().children()) {
-            final TextStylePropertyName<?> name = TextStylePropertyName.unmarshall(child);
-            properties.put(
-                name,
-                name.handler.unmarshall(
-                    child,
-                    name,
-                    context
-                )
-            );
-        }
-
-        return TextStyle.EMPTY.setValues(properties);
+        return parse(
+            node.stringOrFail()
+        );
     }
 
-    abstract JsonNode marshall(final JsonNodeMarshallContext context);
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        return JsonNode.string(
+            this.text()
+        );
+    }
 
     static {
         JsonNodeContext.register("text-style",
