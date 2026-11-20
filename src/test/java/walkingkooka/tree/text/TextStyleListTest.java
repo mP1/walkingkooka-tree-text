@@ -1,16 +1,67 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.HasTsvStringListTesting;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
     HasTextStyleTesting,
     HasCsvStringListTesting,
     HasTsvStringListTesting {
-    
+
+    // fromCsvStringList................................................................................................
+
+    @Test
+    public void testFromCsvStringListWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyleList.fromCsvStringList(null)
+        );
+    }
+
+    @Test
+    public void testFromCsvListWithEmpty() {
+        this.fromCsvStringListAndCheck(
+            CsvStringList.EMPTY,
+            TextStyleList.EMPTY
+        );
+    }
+
+    @Test
+    public void testFromCsvListWithNotEmpty() {
+        this.fromCsvStringListAndCheck(
+            CsvStringList.EMPTY.concat(TEXT_STYLE.csvStringList().text())
+                .concat(DIFFERENT_TEXT_STYLE.csvStringList().text()),
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(DIFFERENT_TEXT_STYLE)
+        );
+    }
+
+    @Test
+    public void testFromCsvListWithNotEmptyAndNull() {
+        this.fromCsvStringListAndCheck(
+            CsvStringList.EMPTY.concat(TEXT_STYLE.csvStringList().text())
+                .concat("")
+                .concat(DIFFERENT_TEXT_STYLE.csvStringList().text()),
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(TextStyle.EMPTY)
+                .concat(DIFFERENT_TEXT_STYLE)
+        );
+    }
+
+    private void fromCsvStringListAndCheck(final CsvStringList csvStringList,
+                                           final TextStyleList expected) {
+        this.checkEquals(
+            expected,
+            TextStyleList.fromCsvStringList(csvStringList)
+        );
+    }
+
     // setElements......................................................................................................
 
     @Test
