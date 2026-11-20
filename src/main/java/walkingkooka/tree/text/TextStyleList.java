@@ -1,5 +1,7 @@
 package walkingkooka.tree.text;
 
+import walkingkooka.collect.list.CsvStringList;
+import walkingkooka.collect.list.HasCsvStringList;
 import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
 
@@ -11,7 +13,8 @@ import java.util.List;
  * A {@link List} that holds nullable {@link TextStyle textStyle}.
  */
 public final class TextStyleList extends AbstractList<TextStyle>
-    implements ImmutableListDefaults<TextStyleList, TextStyle> {
+    implements ImmutableListDefaults<TextStyleList, TextStyle>,
+    HasCsvStringList {
 
     public final static TextStyleList EMPTY = new TextStyleList(Lists.empty());
 
@@ -59,4 +62,17 @@ public final class TextStyleList extends AbstractList<TextStyle>
     }
 
     private final List<TextStyle> list;
+
+    // HasCsvString.....................................................................................................
+
+    @Override
+    public CsvStringList csvStringList() {
+        return CsvStringList.makeCsvStringList(
+            this.list,
+            (final TextStyle textStyle) -> null == textStyle ?
+                "" :
+                textStyle.csvStringList()
+                    .text()
+        );
+    }
 }

@@ -1,11 +1,13 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
-    HasTextStyleTesting {
+    HasTextStyleTesting,
+    HasCsvStringListTesting {
     
     // setElements......................................................................................................
 
@@ -36,6 +38,35 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     @Override
     public TextStyleList createList() {
         return TextStyleList.EMPTY;
+    }
+
+    // HasCsvStringList.................................................................................................
+
+    @Test
+    public void testCsvStringListWithEmpty() {
+        this.csvStringListAndCheck(
+            TextStyleList.EMPTY,
+            ""
+        );
+    }
+
+    @Test
+    public void testCsvStringListWithNotEmpty() {
+        this.csvStringListAndCheck(
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(DIFFERENT_TEXT_STYLE),
+            "\"color,black\",\"color,white\""
+        );
+    }
+
+    @Test
+    public void testCsvStringListWithNotEmptyIncludingNull() {
+        this.csvStringListAndCheck(
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(null)
+                .concat(DIFFERENT_TEXT_STYLE),
+            "\"color,black\",,\"color,white\""
+        );
     }
 
     // class............................................................................................................
