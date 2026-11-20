@@ -392,14 +392,16 @@ final class TextStyleNonEmpty extends TextStyle {
                             value.toString()
                         )
                 );
-                text.print(TextStyle.SEPARATOR.string());
 
-                separator = " ";
+                separator = TEXT_SEPARATOR;
             }
         }
 
         return b.toString();
     }
+
+    private final static String TEXT_SEPARATOR = TextStyle.SEPARATOR.string()
+        .concat(" ");
 
     // BoxEdge........................................................................................................
 

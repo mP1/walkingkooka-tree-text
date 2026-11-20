@@ -421,7 +421,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Color.parse("#123456")
                     )
                 ),
-            "<SPAN style=\"color: #123456;\">abc123</SPAN>"
+            "<SPAN style=\"color: #123456\">abc123</SPAN>"
         );
     }
 
@@ -440,7 +440,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     )
                 )
             ),
-            "<SPAN style=\"color: #123456;\">abcxyz</SPAN>"
+            "<SPAN style=\"color: #123456\">abcxyz</SPAN>"
         );
     }
 
@@ -468,8 +468,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     )
                 )
             ),
-            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
-                "  <SPAN style=\"color: #222;\">middle</SPAN>" + LineEnding.NL +
+            "<SPAN style=\"color: #111\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222\">middle</SPAN>" + LineEnding.NL +
                 "</SPAN>"
         );
     }
@@ -509,9 +509,9 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     )
                 )
             ),
-            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
-                "  <SPAN style=\"color: #222;\">middle1</SPAN>" + LineEnding.NL +
-                "  <SPAN style=\"color: #333;\">middle2</SPAN>" + LineEnding.NL +
+            "<SPAN style=\"color: #111\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222\">middle1</SPAN>" + LineEnding.NL +
+                "  <SPAN style=\"color: #333\">middle2</SPAN>" + LineEnding.NL +
                 "</SPAN>"
         );
     }
@@ -542,7 +542,7 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     )
                 )
             ),
-            "<SPAN style=\"color: #111;\">before<SPAN style=\"color: #222;\">middle</SPAN>after</SPAN>"
+            "<SPAN style=\"color: #111\">before<SPAN style=\"color: #222\">middle</SPAN>after</SPAN>"
         );
     }
 
@@ -582,8 +582,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     );
                 }
             },
-            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
-                "  <SPAN style=\"color: #222;\">middle</SPAN>" + LineEnding.NL +
+            "<SPAN style=\"color: #111\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222\">middle</SPAN>" + LineEnding.NL +
                 "</SPAN>"
         );
     }
@@ -624,8 +624,8 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                     );
                 }
             },
-            "<SPAN style=\"color: #111;\">" + LineEnding.NL +
-                "  <SPAN style=\"color: #222;\">middle</SPAN>" + LineEnding.NL +
+            "<SPAN style=\"color: #111\">" + LineEnding.NL +
+                "  <SPAN style=\"color: #222\">middle</SPAN>" + LineEnding.NL +
                 "</SPAN>"
         );
     }

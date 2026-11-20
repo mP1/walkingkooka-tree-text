@@ -796,7 +796,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.FONT_FAMILY,
                     FontFamily.with("Banana")
                 ),
-            "font-family: Banana;"
+            "font-family: Banana"
         );
     }
 
@@ -808,7 +808,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.FONT_FAMILY,
                     FontFamily.with("Times New Roman")
                 ),
-            "font-family: \"Times New Roman\";"
+            "font-family: \"Times New Roman\""
         );
     }
 
@@ -820,7 +820,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_BOTTOM_STYLE,
                     BorderStyle.DOTTED
                 ),
-            "border-bottom-style: DOTTED;"
+            "border-bottom-style: DOTTED"
         );
     }
 
@@ -832,7 +832,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_BOTTOM_WIDTH,
                     Length.pixel(12.5)
                 ),
-            "border-bottom-width: 12.5px;"
+            "border-bottom-width: 12.5px"
         );
     }
 
@@ -844,7 +844,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_COLOR,
                     Color.BLACK
                 ),
-            "border-bottom-color: black; border-left-color: black; border-right-color: black; border-top-color: black;"
+            "border-bottom-color: black; border-left-color: black; border-right-color: black; border-top-color: black"
         );
     }
 
@@ -856,7 +856,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.COLOR,
                     Color.parse("#123456")
                 ),
-            "color: #123456;"
+            "color: #123456"
         );
     }
 
@@ -868,7 +868,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.FONT_SIZE,
                     FontSize.with(123)
                 ),
-            "font-size: 123;"
+            "font-size: 123"
         );
     }
 
@@ -880,7 +880,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.OVERFLOW_WRAP,
                     OverflowWrap.BREAK_WORD
                 ),
-            "overflow-wrap: BREAK_WORD;"
+            "overflow-wrap: BREAK_WORD"
         );
     }
 
@@ -892,7 +892,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT,
                     "has-no-spaces"
                 ),
-            "text: has-no-spaces;"
+            "text: has-no-spaces"
         );
     }
 
@@ -904,7 +904,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT,
                     "has spaces"
                 ),
-            "text: \"has spaces\";"
+            "text: \"has spaces\""
         );
     }
 
@@ -916,7 +916,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.FONT_VARIANT,
                     FontVariant.SMALL_CAPS
                 ),
-            "font-variant: SMALL_CAPS;"
+            "font-variant: SMALL_CAPS"
         );
     }
 
@@ -928,7 +928,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT_OVERFLOW,
                     TextOverflow.CLIP
                 ),
-            "text-overflow: CLIP;"
+            "text-overflow: CLIP"
         );
     }
 
@@ -940,7 +940,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT_OVERFLOW,
                     TextOverflow.ELLIPSIS
                 ),
-            "text-overflow: ELLIPSIS;"
+            "text-overflow: ELLIPSIS"
         );
     }
 
@@ -952,7 +952,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.TEXT_OVERFLOW,
                     TextOverflow.string("Hello")
                 ),
-            "text-overflow: \"Hello\";"
+            "text-overflow: \"Hello\""
         );
     }
 
@@ -970,7 +970,7 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
                     TextStylePropertyName.BORDER_TOP_WIDTH,
                     Length.pixel(123.0)
                 ),
-            "border-top-color: #123456; border-top-style: DOTTED; border-top-width: 123px;"
+            "border-top-color: #123456; border-top-style: DOTTED; border-top-width: 123px"
         );
     }
 
