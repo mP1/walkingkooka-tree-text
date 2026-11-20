@@ -6,6 +6,7 @@ import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.HasTsvStringListTesting;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.list.TsvStringList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -62,6 +63,54 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         );
     }
 
+    // fromTsvStringList................................................................................................
+
+    @Test
+    public void testFromTsvStringListWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyleList.fromTsvStringList(null)
+        );
+    }
+
+    @Test
+    public void testFromTsvListWithEmpty() {
+        this.fromTsvStringListAndCheck(
+            TsvStringList.EMPTY,
+            TextStyleList.EMPTY
+        );
+    }
+
+    @Test
+    public void testFromTsvListWithNotEmpty() {
+        this.fromTsvStringListAndCheck(
+            TsvStringList.EMPTY.concat(TEXT_STYLE.tsvStringList().text())
+                .concat(DIFFERENT_TEXT_STYLE.tsvStringList().text()),
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(DIFFERENT_TEXT_STYLE)
+        );
+    }
+
+    @Test
+    public void testFromTsvListWithNotEmptyAndEmptyTextStyle() {
+        this.fromTsvStringListAndCheck(
+            TsvStringList.EMPTY.concat(TEXT_STYLE.tsvStringList().text())
+                .concat("")
+                .concat(DIFFERENT_TEXT_STYLE.tsvStringList().text()),
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(TextStyle.EMPTY)
+                .concat(DIFFERENT_TEXT_STYLE)
+        );
+    }
+
+    private void fromTsvStringListAndCheck(final TsvStringList tsvStringList,
+                                           final TextStyleList expected) {
+        this.checkEquals(
+            expected,
+            TextStyleList.fromTsvStringList(tsvStringList)
+        );
+    }
+    
     // concat...........................................................................................................
 
     @Test
