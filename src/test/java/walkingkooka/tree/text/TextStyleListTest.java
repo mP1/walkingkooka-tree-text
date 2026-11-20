@@ -118,7 +118,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         this.csvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color: black;\",\"color: white;\""
+            "\"color: black\",\"color: white\""
         );
     }
 
@@ -128,7 +128,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color: black;\",,\"color: white;\""
+            "\"color: black\",,\"color: white\""
         );
     }
 
@@ -147,7 +147,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         this.tsvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color: black;\"\t\"color: white;\""
+            "\"color: black\"\t\"color: white\""
         );
     }
 
@@ -157,7 +157,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color: black;\"\t\t\"color: white;\""
+            "\"color: black\"\t\t\"color: white\""
         );
     }
 

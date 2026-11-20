@@ -2144,7 +2144,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             TextStyle.EMPTY.set(
                 TextStylePropertyName.COLOR, Color.parse("#123456")
             ),
-            "color: #123456;"
+            "color: #123456"
         );
     }
 
@@ -2156,7 +2156,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             ).set(
                 TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
             ),
-            "color: #123456; text-align: LEFT;"
+            "color: #123456; text-align: LEFT"
         );
     }
 
@@ -2172,7 +2172,7 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
             ).set(
                 TextStylePropertyName.TEXT_ALIGN, TextAlign.LEFT
             ),
-            "background-color: #123456; color: red; text-align: LEFT;"
+            "background-color: #123456; color: red; text-align: LEFT"
         );
     }
 
