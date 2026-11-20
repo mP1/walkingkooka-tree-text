@@ -6,7 +6,6 @@ import walkingkooka.collect.list.HasCsvStringListTesting;
 import walkingkooka.collect.list.HasTsvStringListTesting;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.list.TsvStringList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,99 +14,51 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     HasCsvStringListTesting,
     HasTsvStringListTesting {
 
-    // fromCsvStringList................................................................................................
+    // fromStringLikeList................................................................................................
 
     @Test
-    public void testFromCsvStringListWithNullFails() {
+    public void testFromStringLikeListWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> TextStyleList.fromCsvStringList(null)
+            () -> TextStyleList.fromStringLikeList(null)
         );
     }
 
     @Test
-    public void testFromCsvListWithEmpty() {
-        this.fromCsvStringListAndCheck(
+    public void testFromStringLikeListWithEmpty() {
+        this.fromStringLikeListAndCheck(
             CsvStringList.EMPTY,
             TextStyleList.EMPTY
         );
     }
 
     @Test
-    public void testFromCsvListWithNotEmpty() {
-        this.fromCsvStringListAndCheck(
-            CsvStringList.EMPTY.concat(TEXT_STYLE.csvStringList().text())
-                .concat(DIFFERENT_TEXT_STYLE.csvStringList().text()),
+    public void testFromStringLikeListWithNotEmpty() {
+        this.fromStringLikeListAndCheck(
+            CsvStringList.EMPTY.concat(TEXT_STYLE.text())
+                .concat(DIFFERENT_TEXT_STYLE.text()),
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(DIFFERENT_TEXT_STYLE)
         );
     }
 
     @Test
-    public void testFromCsvListWithNotEmptyAndEmptyTextStyle() {
-        this.fromCsvStringListAndCheck(
-            CsvStringList.EMPTY.concat(TEXT_STYLE.csvStringList().text())
+    public void testFromStringLikeListWithNotEmptyAndEmptyTextStyle() {
+        this.fromStringLikeListAndCheck(
+            CsvStringList.EMPTY.concat(TEXT_STYLE.text())
                 .concat("")
-                .concat(DIFFERENT_TEXT_STYLE.csvStringList().text()),
+                .concat(DIFFERENT_TEXT_STYLE.text()),
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE)
         );
     }
 
-    private void fromCsvStringListAndCheck(final CsvStringList csvStringList,
-                                           final TextStyleList expected) {
+    private void fromStringLikeListAndCheck(final CsvStringList csvStringList,
+                                            final TextStyleList expected) {
         this.checkEquals(
             expected,
-            TextStyleList.fromCsvStringList(csvStringList)
-        );
-    }
-
-    // fromTsvStringList................................................................................................
-
-    @Test
-    public void testFromTsvStringListWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextStyleList.fromTsvStringList(null)
-        );
-    }
-
-    @Test
-    public void testFromTsvListWithEmpty() {
-        this.fromTsvStringListAndCheck(
-            TsvStringList.EMPTY,
-            TextStyleList.EMPTY
-        );
-    }
-
-    @Test
-    public void testFromTsvListWithNotEmpty() {
-        this.fromTsvStringListAndCheck(
-            TsvStringList.EMPTY.concat(TEXT_STYLE.tsvStringList().text())
-                .concat(DIFFERENT_TEXT_STYLE.tsvStringList().text()),
-            TextStyleList.EMPTY.concat(TEXT_STYLE)
-                .concat(DIFFERENT_TEXT_STYLE)
-        );
-    }
-
-    @Test
-    public void testFromTsvListWithNotEmptyAndEmptyTextStyle() {
-        this.fromTsvStringListAndCheck(
-            TsvStringList.EMPTY.concat(TEXT_STYLE.tsvStringList().text())
-                .concat("")
-                .concat(DIFFERENT_TEXT_STYLE.tsvStringList().text()),
-            TextStyleList.EMPTY.concat(TEXT_STYLE)
-                .concat(TextStyle.EMPTY)
-                .concat(DIFFERENT_TEXT_STYLE)
-        );
-    }
-
-    private void fromTsvStringListAndCheck(final TsvStringList tsvStringList,
-                                           final TextStyleList expected) {
-        this.checkEquals(
-            expected,
-            TextStyleList.fromTsvStringList(tsvStringList)
+            TextStyleList.fromStringLikeList(csvStringList)
         );
     }
     
@@ -167,7 +118,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         this.csvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color,black\",\"color,white\""
+            "\"color: black;\",\"color: white;\""
         );
     }
 
@@ -177,7 +128,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color,black\",,\"color,white\""
+            "\"color: black;\",,\"color: white;\""
         );
     }
 
@@ -196,7 +147,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         this.tsvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color\tblack\"\t\"color\twhite\""
+            "\"color: black;\"\t\"color: white;\""
         );
     }
 
@@ -206,7 +157,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
             TextStyleList.EMPTY.concat(TEXT_STYLE)
                 .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
-            "\"color\tblack\"\t\t\"color\twhite\""
+            "\"color: black;\"\t\t\"color: white;\""
         );
     }
 
