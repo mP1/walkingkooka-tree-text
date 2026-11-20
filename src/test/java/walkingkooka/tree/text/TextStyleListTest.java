@@ -43,7 +43,7 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     }
 
     @Test
-    public void testFromCsvListWithNotEmptyAndNull() {
+    public void testFromCsvListWithNotEmptyAndEmptyTextStyle() {
         this.fromCsvStringListAndCheck(
             CsvStringList.EMPTY.concat(TEXT_STYLE.csvStringList().text())
                 .concat("")
@@ -59,6 +59,16 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         this.checkEquals(
             expected,
             TextStyleList.fromCsvStringList(csvStringList)
+        );
+    }
+
+    // concat...........................................................................................................
+
+    @Test
+    public void testConcatWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyleList.EMPTY.concat(null)
         );
     }
 
@@ -113,10 +123,10 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     }
 
     @Test
-    public void testCsvStringListWithNotEmptyIncludingNull() {
+    public void testCsvStringListWithNotEmptyIncludingEmptyTextStyle() {
         this.csvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
-                .concat(null)
+                .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
             "\"color,black\",,\"color,white\""
         );
@@ -142,10 +152,10 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     }
 
     @Test
-    public void testTsvStringListWithNotEmptyIncludingNull() {
+    public void testTsvStringListWithNotEmptyIncludingEmptyTextStyle() {
         this.tsvStringListAndCheck(
             TextStyleList.EMPTY.concat(TEXT_STYLE)
-                .concat(null)
+                .concat(TextStyle.EMPTY)
                 .concat(DIFFERENT_TEXT_STYLE),
             "\"color\tblack\"\t\t\"color\twhite\""
         );
