@@ -10,6 +10,8 @@ import walkingkooka.collect.list.TsvStringList;
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A {@link List} that holds nullable {@link TextStyle textStyle}.
@@ -18,6 +20,19 @@ public final class TextStyleList extends AbstractList<TextStyle>
     implements ImmutableListDefaults<TextStyleList, TextStyle>,
     HasCsvStringList,
     HasTsvStringList {
+
+    public static TextStyleList fromCsvStringList(final CsvStringList csvStringList) {
+        Objects.requireNonNull(csvStringList, "csvStringList");
+
+        return EMPTY.setElements(
+            csvStringList.stream()
+                .map(
+                    (String string) -> TextStyle.fromStringLikeList(
+                        CsvStringList.parse(string)
+                    )
+                ).collect(Collectors.toList())
+        );
+    }
 
     public final static TextStyleList EMPTY = new TextStyleList(Lists.empty());
 
