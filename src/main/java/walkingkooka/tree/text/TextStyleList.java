@@ -5,12 +5,14 @@ import walkingkooka.collect.list.HasCsvStringList;
 import walkingkooka.collect.list.HasTsvStringList;
 import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.list.StringLikeList;
 import walkingkooka.collect.list.TsvStringList;
 
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -22,15 +24,34 @@ public final class TextStyleList extends AbstractList<TextStyle>
     HasTsvStringList {
 
     public static TextStyleList fromCsvStringList(final CsvStringList csvStringList) {
-        Objects.requireNonNull(csvStringList, "csvStringList");
+        return fromStringLikeList(
+            csvStringList,
+            "csvStringList",
+            (String string) -> TextStyle.fromStringLikeList(
+                CsvStringList.parse(string)
+            )
+        );
+    }
+
+    public static TextStyleList fromTsvStringList(final TsvStringList tsvStringList) {
+        return fromStringLikeList(
+            tsvStringList,
+            "tsvStringList",
+            (String string) -> TextStyle.fromStringLikeList(
+                TsvStringList.parse(string)
+            )
+        );
+    }
+
+    private static TextStyleList fromStringLikeList(final StringLikeList stringList,
+                                                    final String label,
+                                                    final Function<String, TextStyle> stringListParser) {
+        Objects.requireNonNull(stringList, label);
 
         return EMPTY.setElements(
-            csvStringList.stream()
-                .map(
-                    (String string) -> TextStyle.fromStringLikeList(
-                        CsvStringList.parse(string)
-                    )
-                ).collect(Collectors.toList())
+            stringList.stream()
+                .map(stringListParser)
+                .collect(Collectors.toList())
         );
     }
 
