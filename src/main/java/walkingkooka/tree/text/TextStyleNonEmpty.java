@@ -18,17 +18,13 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.Printer;
 import walkingkooka.text.printer.Printers;
-import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -475,34 +471,5 @@ final class TextStyleNonEmpty extends TextStyle {
     @Override
     public String toString() {
         return this.value.toString();
-    }
-
-    // JsonNodeContext..................................................................................................
-
-    /**
-     * Creates a json-object where the properties are strings, and the value without types.
-     */
-    @Override
-    JsonNode marshall(final JsonNodeMarshallContext context) {
-        final List<JsonNode> json = Lists.array();
-
-        for (Entry<TextStylePropertyName<?>, Object> propertyAndValue : this.value.entrySet()) {
-            final TextStylePropertyName<?> propertyName = propertyAndValue.getKey();
-            final JsonNode value = propertyName.handler.marshall(
-                Cast.to(
-                    propertyAndValue.getValue()
-                ),
-                context
-            );
-
-            json.add(
-                value.setName(
-                    propertyName.jsonPropertyName
-                )
-            );
-        }
-
-        return JsonNode.object()
-            .setChildren(json);
     }
 }

@@ -812,7 +812,17 @@ public final class TextStyleNodeTest extends TextParentNodeTestCase<TextStyleNod
                         Color.fromRgb(0x123456)
                     )
                 ),
-            "{\"styles\": {\"backgroundColor\": \"#123456\"}, \"children\": [{\"type\": \"text\", \"value\": \"text123\"}]}"
+            "{\n" +
+                "  \"styles\": {\n" +
+                "    \"backgroundColor\": \"#123456\"\n" +
+                "  },\n" +
+                "  \"children\": [\n" +
+                "    {\n" +
+                "      \"type\": \"text\",\n" +
+                "      \"value\": \"text123\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}"
         );
     }
 

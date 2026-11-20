@@ -1124,7 +1124,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             JsonNode.object()
                 .set(
                     JsonPropertyName.with("*"),
-                    JsonNode.object()
+                    JsonNode.string("")
                 )
         );
 
@@ -1145,7 +1145,8 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Test
     public void testStylePatchAllReplaces() {
         final TextStylePropertyName<TextStyle> propertyName = TextStylePropertyName.ALL;
-        final TextStyle propertyValue = TextStyle.parse("text-align: LEFT; vertical-align: TOP;");
+        final String textStyleText = "text-align: LEFT; vertical-align: TOP";
+        final TextStyle propertyValue = TextStyle.parse(textStyleText);
 
         this.stylePatchAndCheck(
             propertyName,
@@ -1153,14 +1154,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
             JsonNode.object()
                 .set(
                     JsonPropertyName.with("*"),
-                    JsonNode.object()
-                        .set(
-                            JsonPropertyName.with("textAlign"),
-                            "LEFT"
-                        ).set(
-                            JsonPropertyName.with("verticalAlign"),
-                            "TOP"
-                        )
+                    JsonNode.string(textStyleText)
                 )
         );
 

@@ -580,11 +580,11 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
     }
 
     @Test
-    public void testUnmarshallEmptyJsonObject() {
+    public void testUnmarshallEmptyJsonString() {
         assertSame(
             TextStyle.EMPTY,
             TextStyle.unmarshall(
-                JsonNode.object(),
+                JsonNode.string(""),
                 JSON_NODE_UNMARSHALL_CONTEXT
             )
         );

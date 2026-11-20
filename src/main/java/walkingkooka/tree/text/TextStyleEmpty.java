@@ -19,8 +19,6 @@ package walkingkooka.tree.text;
 
 import walkingkooka.collect.map.Maps;
 import walkingkooka.text.printer.IndentingPrinter;
-import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 
 import java.util.Map;
 import java.util.Objects;
@@ -174,13 +172,6 @@ final class TextStyleEmpty extends TextStyle {
     @Override
     public String toString() {
         return "";
-    }
-
-    // JsonNodeContext..................................................................................................
-
-    @Override
-    JsonNode marshall(final JsonNodeMarshallContext context) {
-        return JsonNode.object();
     }
 
     // toText(Function).................................................................................................

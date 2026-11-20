@@ -25,7 +25,6 @@ import walkingkooka.color.WebColorName;
 import walkingkooka.props.Properties;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.JsonPropertyName;
 
 import java.util.Map;
 import java.util.Optional;
@@ -2218,31 +2217,36 @@ public final class TextStyleNonEmptyTest extends TextStyleTestCase<TextStyleNonE
     // json.............................................................................................................
 
     @Test
-    public void testUnmarshallEmptyJsonObject() {
+    public void testUnmarshallEmptyJsonString() {
         assertSame(
             TextStyle.EMPTY,
             TextStyle.unmarshall(
-                JsonNode.object(),
+                JsonNode.string(""),
                 JSON_NODE_UNMARSHALL_CONTEXT
             )
         );
     }
 
     @Test
-    public void testMarshallColor() {
+    public void testMarshallWithColor() {
         this.marshallAndCheck(
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.parse("#123456")),
-            JsonNode.object()
-                .set(JsonPropertyName.with("color"), JsonNode.string("#123456"))
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.parse("#123456")
+                ),
+            JsonNode.string("color: #123456")
         );
     }
 
     @Test
-    public void testMarshallColorRoundtrip() {
+    public void testMarshallWithColorRoundtrip() {
         this.marshallRoundTripTwiceAndCheck(
             TextStyle.EMPTY
-                .set(TextStylePropertyName.COLOR, Color.parse("#123456"))
+                .set(
+                    TextStylePropertyName.COLOR,
+                    Color.parse("#123456")
+                )
         );
     }
 

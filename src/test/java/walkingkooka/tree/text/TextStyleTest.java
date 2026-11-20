@@ -1509,11 +1509,11 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
     // json.............................................................................................................
 
     @Test
-    public void testUnmarshallEmptyJsonObject() {
+    public void testUnmarshallEmptyJsonString() {
         assertSame(
             TextStyle.EMPTY,
             TextStyle.unmarshall(
-                JsonNode.object(),
+                JsonNode.string(""),
                 this.createPatchContext()
             )
         );
