@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A {@link List} that holds nullable {@link TextStyle textStyle}.
+ * A {@link List} that holds non-null {@link TextStyle textStyle}.
  */
 public final class TextStyleList extends AbstractList<TextStyle>
     implements ImmutableListDefaults<TextStyleList, TextStyle>,
@@ -75,8 +75,8 @@ public final class TextStyleList extends AbstractList<TextStyle>
     }
 
     @Override
-    public void elementCheck(final TextStyle currency) {
-        // null is allowed
+    public void elementCheck(final TextStyle textStyle) {
+        Objects.requireNonNull(textStyle, "textStyle");
     }
 
     private final List<TextStyle> list;
@@ -90,9 +90,7 @@ public final class TextStyleList extends AbstractList<TextStyle>
     public CsvStringList csvStringList() {
         return CsvStringList.makeCsvStringList(
             this.list,
-            (final TextStyle textStyle) -> null == textStyle ?
-                "" :
-                textStyle.csvStringList()
+            (final TextStyle textStyle) -> textStyle.csvStringList()
                     .text()
         );
     }
@@ -106,9 +104,7 @@ public final class TextStyleList extends AbstractList<TextStyle>
     public TsvStringList tsvStringList() {
         return TsvStringList.makeTsvStringList(
             this.list,
-            (final TextStyle textStyle) -> null == textStyle ?
-                "" :
-                textStyle.tsvStringList()
+            (final TextStyle textStyle) -> textStyle.tsvStringList()
                     .text()
         );
     }
