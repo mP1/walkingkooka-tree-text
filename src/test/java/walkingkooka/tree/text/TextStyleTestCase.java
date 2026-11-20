@@ -31,6 +31,7 @@ import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -560,6 +561,36 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
             NullPointerException.class,
             () -> this.createStyleable()
                 .margin(null)
+        );
+    }
+
+    // textStylePatch...................................................................................................
+
+    @Test
+    public final void testTextStylePatchWithNullContextFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject()
+                .textStylePatch(null)
+        );
+    }
+
+    final void textStylePatchAndCheck(final TextStyle textStyle,
+                                      final JsonNode expected) {
+        this.textStylePatchAndCheck(
+            textStyle,
+            JSON_NODE_MARSHALL_CONTEXT,
+            expected
+        );
+    }
+
+    final void textStylePatchAndCheck(final TextStyle textStyle,
+                                      final JsonNodeMarshallContext context,
+                                      final JsonNode expected) {
+        this.checkEquals(
+            expected,
+            textStyle.textStylePatch(context),
+            textStyle::text
         );
     }
 

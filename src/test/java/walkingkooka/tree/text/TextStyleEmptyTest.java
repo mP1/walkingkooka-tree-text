@@ -565,6 +565,16 @@ public final class TextStyleEmptyTest extends TextStyleTestCase<TextStyleEmpty> 
         );
     }
 
+    // textStylePatch...................................................................................................
+
+    @Test
+    public void testTextStylePatch() {
+        this.textStylePatchAndCheck(
+            TextStyleEmpty.instance(),
+            JsonNode.object()
+        );
+    }
+
     // TreePrintable....................................................................................................
 
     @Test
