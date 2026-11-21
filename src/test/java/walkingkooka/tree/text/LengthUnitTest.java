@@ -30,12 +30,21 @@ import walkingkooka.text.HasTextTesting;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class LengthUnitTest implements PublicClassTesting<LengthUnit<?, ?>>,
     ConstantsTesting<LengthUnit<?, ?>>,
     ToStringTesting,
     TypeNameTesting<LengthUnit<?, ?>>,
     HasTextTesting {
+
+    @Test
+    public void testCaseSensitivityConstant() {
+        assertSame(
+            LengthUnit.CASE_SENSITIVITY,
+            Length.CASE_SENSITIVITY
+        );
+    }
 
     @Test
     public void testUnits() {
