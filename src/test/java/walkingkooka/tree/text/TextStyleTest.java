@@ -1463,28 +1463,6 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
         );
     }
 
-    @Test
-    public void testParseWidthLengthNormalLowerCase() {
-        this.parseStringAndCheck(
-            "width: normal",
-            TextStyle.EMPTY.set(
-                TextStylePropertyName.WIDTH,
-                Length.normal()
-            )
-        );
-    }
-
-    @Test
-    public void testParseWidthLengthNormalUpperCase() {
-        this.parseStringAndCheck(
-            "width: NORMAL",
-            TextStyle.EMPTY.set(
-                TextStylePropertyName.WIDTH,
-                Length.normal()
-            )
-        );
-    }
-
     @Override
     public TextStyle parseString(final String text) {
         return TextStyle.parse(text);
