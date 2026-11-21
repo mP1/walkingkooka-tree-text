@@ -17,6 +17,7 @@
 
 package walkingkooka.tree.text;
 
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.HasText;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ import java.util.function.Function;
  * The unit portion of a length. This is basically an ENUMS with type parameters
  */
 public final class LengthUnit<V, L extends Length<V>> implements HasText {
+
+    public final static CaseSensitivity CASE_SENSITIVITY = Length.CASE_SENSITIVITY;
 
     /**
      * Pixel length unit.
