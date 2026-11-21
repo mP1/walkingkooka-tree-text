@@ -21,9 +21,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasTextTesting;
@@ -32,7 +31,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
+public final class LengthUnitTest implements PublicClassTesting<LengthUnit<?, ?>>,
     ConstantsTesting<LengthUnit<?, ?>>,
     ToStringTesting,
     TypeNameTesting<LengthUnit<?, ?>>,
@@ -127,18 +126,6 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
         );
     }
 
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public Class<LengthUnit<?, ?>> type() {
-        return Cast.to(LengthUnit.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
     // ConstantsTesting.................................................................................................
 
     @Override
@@ -146,7 +133,12 @@ public final class LengthUnitTest implements ClassTesting2<LengthUnit<?, ?>>,
         return Sets.empty();
     }
 
-    // TypeNameTesting..................................................................................................
+    // Class............................................................................................................
+
+    @Override
+    public Class<LengthUnit<?, ?>> type() {
+        return Cast.to(LengthUnit.class);
+    }
 
     @Override
     public String typeNamePrefix() {
