@@ -21,7 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.HasValue;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
 import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
@@ -43,9 +42,8 @@ import java.util.Objects;
  */
 public final class FontWeight implements Comparable<FontWeight>,
     HasValue<Integer>,
-    HasText {
-
-    private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
+    HasText,
+    HasTextStyleCaseSensitivity {
 
     private final static int NORMAL_VALUE = 400;
     private final static int BOLD_VALUE = 700;

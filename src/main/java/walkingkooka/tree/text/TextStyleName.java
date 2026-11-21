@@ -24,8 +24,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * The name of a textStyle {@link TextNode}.
  */
-public final class TextStyleName extends TextNodeNameName<TextStyleName>
-    implements HasTextStyleCaseSensitivity {
+public final class TextStyleName extends TextNodeNameName<TextStyleName> {
 
     /**
      * Factory that creates a new {@link TextStyleName}.

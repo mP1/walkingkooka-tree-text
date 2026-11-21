@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
@@ -26,11 +25,6 @@ public final class TextStyleNameTest extends TextNodeNameNameTestCase<TextStyleN
     @Override
     public TextStyleName createName(final String name) {
         return TextStyleName.with(name);
-    }
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return TextStyle.CASE_SENSITIVITY;
     }
 
     @Override

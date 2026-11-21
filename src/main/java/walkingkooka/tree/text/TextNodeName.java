@@ -25,8 +25,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * The name of an {@link TextNode}.
  */
-public final class TextNodeName extends TextNodeNameName<TextNodeName>
-    implements HasTextStyleCaseSensitivity {
+public final class TextNodeName extends TextNodeNameName<TextNodeName> {
 
     public static TextNodeName with(final String name) {
         checkName(name);

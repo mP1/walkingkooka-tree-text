@@ -24,8 +24,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * The name of a placeholder.
  */
-public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderName>
-    implements HasTextStyleCaseSensitivity {
+public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderName> {
 
     public static TextPlaceholderName with(final String name) {
         checkName(name);
