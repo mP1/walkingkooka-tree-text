@@ -19,14 +19,13 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-public final class LengthTest implements ClassTesting2<Length<?>>,
+public final class LengthTest implements PublicClassTesting<Length<?>>,
     JsonNodeMarshallerTesting<Length<?>>,
     ParseStringTesting<Length<?>> {
 
@@ -55,20 +54,6 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
         this.parseStringAndCheck("12.5px", Length.pixel(12.5));
     }
 
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public Class<Length<?>> type() {
-        return Cast.to(Length.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
-    // ParseStringTesting...............................................................................................
-
     @Override
     public Length<?> parseString(final String text) {
         return Length.parse(text);
@@ -95,5 +80,12 @@ public final class LengthTest implements ClassTesting2<Length<?>>,
     @Override
     public Length<?> createJsonNodeMarshallingValue() {
         return Length.pixel(123.0);
+    }
+
+    // Class............................................................................................................
+
+    @Override
+    public Class<Length<?>> type() {
+        return Cast.to(Length.class);
     }
 }
