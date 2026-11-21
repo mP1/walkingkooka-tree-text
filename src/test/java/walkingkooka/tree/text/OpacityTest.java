@@ -22,9 +22,8 @@ import walkingkooka.HasValueTesting;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.compare.ComparableTesting2;
-import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
@@ -37,7 +36,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class OpacityTest implements ClassTesting2<Opacity>,
+public final class OpacityTest implements PublicClassTesting<Opacity>,
     ComparableTesting2<Opacity>,
     ConstantsTesting<Opacity>,
     HasTextTesting,
@@ -327,11 +326,6 @@ public final class OpacityTest implements ClassTesting2<Opacity>,
     }
 
     // class............................................................................................................
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
 
     @Override
     public Class<Opacity> type() {
