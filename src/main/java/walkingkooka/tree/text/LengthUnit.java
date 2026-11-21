@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasText;
 
 import java.util.Arrays;
@@ -71,12 +70,6 @@ public final class LengthUnit<V, L extends Length<V>> implements HasText {
 
     boolean unitPresent(final String text) {
         return text.endsWith(this.suffix);
-    }
-
-    void parseUnitTextCheck(final String text) {
-        if (false == this.unitPresent(text)) {
-            throw new IllegalArgumentException("Missing unit: " + CharSequences.quoteAndEscape(this.suffix));
-        }
     }
 
     /**
