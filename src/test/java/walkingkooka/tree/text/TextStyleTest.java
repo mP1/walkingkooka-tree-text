@@ -344,19 +344,28 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     @Test
     public void testSetOrRemoveNonNullValue() {
         final TextStyle style = TextStyle.EMPTY
-            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.BLACK
+            );
         this.setOrRemoveAndCheck(
             style,
             TextStylePropertyName.COLOR,
             Color.WHITE,
-            style.set(TextStylePropertyName.COLOR, Color.WHITE)
+            style.set(
+                TextStylePropertyName.COLOR,
+                Color.WHITE
+            )
         );
     }
 
     @Test
     public void testSetOrRemoveAllNullValue() {
         final TextStyle style = TextStyle.EMPTY
-            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.BLACK
+            );
 
         this.setOrRemoveAndCheck(
             style,
@@ -369,7 +378,10 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     @Test
     public void testSetOrRemoveNullValue() {
         final TextStyle style = TextStyle.EMPTY
-            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.BLACK);
+            .set(
+                TextStylePropertyName.BACKGROUND_COLOR,
+                Color.BLACK
+            );
 
         this.setOrRemoveAndCheck(
             style,
@@ -474,48 +486,6 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
                 .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR),
             "background-color\t#123456\tborder-bottom-color\t#222\tborder-bottom-style\tDASHED\tborder-bottom-width\t1px\tborder-collapse\tCOLLAPSE\tborder-spacing\t5px\tfont-family\tTimes New Roman\tfont-kerning\tNORMAL\tfont-size\t10\tfont-stretch\tEXPANDED\tfont-style\tITALIC\tfont-variant\tSMALL_CAPS\thanging-punctuation\tALLOW_END\theight\t15px\thyphens\tMANUAL\tletter-spacing\t2.5px\tlist-style-position\tINSIDE\tlist-style-type\tDECIMAL\topacity\ttransparent\toverflow-wrap\tNORMAL\toverflow-x\tHIDDEN\ttext-align\tCENTER\ttext-decoration-line\tLINE_THROUGH\ttext-decoration-style\tDASHED\ttext-justify\tINTER_CHARACTER\ttext-transform\tCAPITALIZE\ttext-wrapping\tCLIP\tvertical-align\tBOTTOM\tvisibility\tHIDDEN\tword-break\tNORMAL\tword-spacing\tnormal\tword-wrap\tBREAK_WORD\twriting-mode\tVERTICAL_LR"
         );
-    }
-
-    // json.............................................................................................................
-
-    @Test
-    public void testJsonRoundtripAllPropertyTypes() {
-        final TextStyle style = TextStyle.EMPTY
-            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
-            .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
-            .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
-            .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
-            .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
-            .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
-            .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
-            .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
-            .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
-            .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
-            .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
-            .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
-            .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
-            .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
-            .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
-            .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
-            .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
-            .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
-            .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
-            .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
-            .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
-            .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
-            .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
-            .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
-            .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
-            .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
-            .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
-            .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
-            .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
-            .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
-            .set(TextStylePropertyName.WORD_SPACING, Length.normal())
-            .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
-            .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
-
-        this.marshallRoundTripTwiceAndCheck(style);
     }
 
     // patch............................................................................................................
@@ -1506,6 +1476,46 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     }
 
     // json.............................................................................................................
+
+    @Test
+    public void testJsonRoundtripAllPropertyTypes() {
+        final TextStyle style = TextStyle.EMPTY
+            .set(TextStylePropertyName.BACKGROUND_COLOR, Color.parse("#123456"))
+            .set(TextStylePropertyName.BORDER_BOTTOM_COLOR, Color.parse("#222222"))
+            .set(TextStylePropertyName.BORDER_BOTTOM_STYLE, BorderStyle.DASHED)
+            .set(TextStylePropertyName.BORDER_BOTTOM_WIDTH, Length.pixel(1.0))
+            .set(TextStylePropertyName.BORDER_COLLAPSE, BorderCollapse.COLLAPSE)
+            .set(TextStylePropertyName.BORDER_SPACING, Length.pixel(5.0))
+            .set(TextStylePropertyName.FONT_FAMILY, FontFamily.with("Times New Roman"))
+            .set(TextStylePropertyName.FONT_KERNING, FontKerning.NORMAL)
+            .set(TextStylePropertyName.FONT_SIZE, FontSize.with(10))
+            .set(TextStylePropertyName.FONT_STRETCH, FontStretch.EXPANDED)
+            .set(TextStylePropertyName.FONT_STYLE, FontStyle.ITALIC)
+            .set(TextStylePropertyName.FONT_VARIANT, FontVariant.SMALL_CAPS)
+            .set(TextStylePropertyName.HANGING_PUNCTUATION, HangingPunctuation.ALLOW_END)
+            .set(TextStylePropertyName.HEIGHT, Length.pixel(15.0))
+            .set(TextStylePropertyName.HYPHENS, Hyphens.MANUAL)
+            .set(TextStylePropertyName.LETTER_SPACING, Length.pixel(2.5))
+            .set(TextStylePropertyName.LIST_STYLE_POSITION, ListStylePosition.INSIDE)
+            .set(TextStylePropertyName.LIST_STYLE_TYPE, ListStyleType.DECIMAL)
+            .set(TextStylePropertyName.OPACITY, Opacity.TRANSPARENT)
+            .set(TextStylePropertyName.OVERFLOW_WRAP, OverflowWrap.NORMAL)
+            .set(TextStylePropertyName.OVERFLOW_X, Overflow.HIDDEN)
+            .set(TextStylePropertyName.TEXT_ALIGN, TextAlign.CENTER)
+            .set(TextStylePropertyName.TEXT_DECORATION_LINE, TextDecorationLine.LINE_THROUGH)
+            .set(TextStylePropertyName.TEXT_DECORATION_STYLE, TextDecorationStyle.DASHED)
+            .set(TextStylePropertyName.TEXT_JUSTIFY, TextJustify.INTER_CHARACTER)
+            .set(TextStylePropertyName.TEXT_TRANSFORM, TextTransform.CAPITALIZE)
+            .set(TextStylePropertyName.TEXT_WRAPPING, TextWrapping.CLIP)
+            .set(TextStylePropertyName.VERTICAL_ALIGN, VerticalAlign.BOTTOM)
+            .set(TextStylePropertyName.VISIBILITY, Visibility.HIDDEN)
+            .set(TextStylePropertyName.WORD_BREAK, WordBreak.NORMAL)
+            .set(TextStylePropertyName.WORD_SPACING, Length.normal())
+            .set(TextStylePropertyName.WORD_WRAP, WordWrap.BREAK_WORD)
+            .set(TextStylePropertyName.WRITING_MODE, WritingMode.VERTICAL_LR);
+
+        this.marshallRoundTripTwiceAndCheck(style);
+    }
 
     @Test
     public void testUnmarshallEmptyJsonString() {
