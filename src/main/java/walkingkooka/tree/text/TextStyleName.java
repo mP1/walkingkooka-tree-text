@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -25,7 +24,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * The name of a textStyle {@link TextNode}.
  */
-public final class TextStyleName extends TextNodeNameName<TextStyleName> {
+public final class TextStyleName extends TextNodeNameName<TextStyleName>
+    implements HasTextStyleCaseSensitivity {
 
     /**
      * Factory that creates a new {@link TextStyleName}.
@@ -53,13 +53,4 @@ public final class TextStyleName extends TextNodeNameName<TextStyleName> {
             TextStyleName::marshall,
             TextStyleName.class);
     }
-
-    // HasCaseSensitivity................................................................................................
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return CASE_SENSITIVITY;
-    }
-
-    private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
 }

@@ -30,7 +30,7 @@ public final class TextStyleNameTest extends TextNodeNameNameTestCase<TextStyleN
 
     @Override
     public CaseSensitivity caseSensitivity() {
-        return CaseSensitivity.SENSITIVE;
+        return TextStyle.CASE_SENSITIVITY;
     }
 
     @Override
