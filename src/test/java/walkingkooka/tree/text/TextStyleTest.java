@@ -1463,6 +1463,28 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
         );
     }
 
+    @Test
+    public void testParseWordSpacingLengthNormalLowerCase() {
+        this.parseStringAndCheck(
+            "word-spacing: normal",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.WORD_SPACING,
+                Length.normal()
+            )
+        );
+    }
+
+    @Test
+    public void testParseWordSpacingLengthNormalUpperCase() {
+        this.parseStringAndCheck(
+            "word-spacing: NORMAL",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.WORD_SPACING,
+                Length.normal()
+            )
+        );
+    }
+
     @Override
     public TextStyle parseString(final String text) {
         return TextStyle.parse(text);
