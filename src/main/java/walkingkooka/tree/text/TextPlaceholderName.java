@@ -17,7 +17,6 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -25,7 +24,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 /**
  * The name of a placeholder.
  */
-public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderName> {
+public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderName>
+    implements HasTextStyleCaseSensitivity {
 
     public static TextPlaceholderName with(final String name) {
         checkName(name);
@@ -50,13 +50,4 @@ public final class TextPlaceholderName extends TextNodeNameName<TextPlaceholderN
             TextPlaceholderName::marshall,
             TextPlaceholderName.class);
     }
-
-    // HasCaseSensitivity................................................................................................
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return CASE_SENSITIVITY;
-    }
-
-    private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
 }
