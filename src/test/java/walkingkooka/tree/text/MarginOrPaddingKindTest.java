@@ -18,10 +18,9 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 
-public final class MarginOrPaddingKindTest implements ClassTesting<MarginOrPaddingKind> {
+public final class MarginOrPaddingKindTest implements PublicClassTesting<MarginOrPaddingKind> {
 
     @Test
     public void testMarginOrPaddingWhenMargin() {
@@ -52,10 +51,5 @@ public final class MarginOrPaddingKindTest implements ClassTesting<MarginOrPaddi
     @Override
     public Class<MarginOrPaddingKind> type() {
         return MarginOrPaddingKind.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
