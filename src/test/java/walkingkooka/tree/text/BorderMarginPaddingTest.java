@@ -18,10 +18,9 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
-public final class BorderMarginPaddingTest implements ClassTesting2<BorderMarginPadding> {
+public final class BorderMarginPaddingTest implements PackagePrivateClassTesting<BorderMarginPadding> {
 
     @Test
     @Override
@@ -32,10 +31,5 @@ public final class BorderMarginPaddingTest implements ClassTesting2<BorderMargin
     @Override
     public Class<BorderMarginPadding> type() {
         return BorderMarginPadding.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
