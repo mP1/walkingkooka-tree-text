@@ -34,6 +34,7 @@ import walkingkooka.net.header.MediaType;
 import walkingkooka.props.HasProperties;
 import walkingkooka.props.Properties;
 import walkingkooka.props.PropertiesPath;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.HasText;
@@ -66,6 +67,11 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
     CanBeEmpty,
     HasContentType,
     HasProperties {
+
+    /**
+     * All string comparisons for tokens or constants must be {@link CaseSensitivity#INSENSITIVE}.
+     */
+    public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
 
     /**
      * Tests if the given {@link Class} is for a {@link TextStyle}.
