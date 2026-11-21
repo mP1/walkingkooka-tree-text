@@ -37,6 +37,7 @@ import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
+import walkingkooka.text.HasCaseSensitivity;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -60,6 +61,7 @@ import java.util.function.Predicate;
 public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>, Object>>,
     Patchable<TextStyle>,
     TreePrintable,
+    HasCaseSensitivity,
     HasCsvStringList,
     HasTsvStringList,
     HasText,
@@ -829,4 +831,11 @@ public abstract class TextStyle implements HasValue<Map<TextStylePropertyName<?>
 
     abstract String toText(final Function<TextStylePropertyName<?>, String> propertyNameMapper,
                            final TextNodeContext context);
+
+    // HasCaseSensitivity...............................................................................................
+
+    @Override
+    public CaseSensitivity caseSensitivity() {
+        return CASE_SENSITIVITY;
+    }
 }
