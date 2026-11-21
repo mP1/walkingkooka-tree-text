@@ -22,8 +22,7 @@ import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -36,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BoxEdgeTest implements TreePrintableTesting,
-    ClassTesting2<BoxEdge>,
+    PublicClassTesting<BoxEdge>,
     IteratorTesting,
     ThrowableTesting {
 
@@ -1537,10 +1536,5 @@ public final class BoxEdgeTest implements TreePrintableTesting,
     @Override
     public Class<BoxEdge> type() {
         return BoxEdge.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
