@@ -20,9 +20,7 @@ package walkingkooka.tree.text;
 import walkingkooka.HasValue;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.NeverError;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
-import walkingkooka.text.HasCaseSensitivity;
 import walkingkooka.text.HasText;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
@@ -36,9 +34,7 @@ import java.util.Optional;
  */
 public abstract class TextOverflow implements HasValue<Optional<String>>,
     HasText,
-    HasCaseSensitivity {
-
-    public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
+    HasTextStyleCaseSensitivity {
 
     final static String CLIP_TEXT = "CLIP";
 
@@ -233,12 +229,5 @@ public abstract class TextOverflow implements HasValue<Optional<String>>,
             TextOverflow::marshall,
             TextOverflow.class, TextOverflowNonString.class, TextOverflowString.class
         );
-    }
-
-    // HasCaseSensitivity...............................................................................................
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return CASE_SENSITIVITY;
     }
 }

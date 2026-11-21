@@ -31,7 +31,6 @@ import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseKind;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.TextContextTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -1465,11 +1464,6 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
     @Override
     public TextStylePropertyName<?> createName(final String name) {
         return TextStylePropertyName.with(name);
-    }
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return TextStyle.CASE_SENSITIVITY;
     }
 
     @Override

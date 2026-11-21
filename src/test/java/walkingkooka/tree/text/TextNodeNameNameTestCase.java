@@ -22,6 +22,7 @@ import walkingkooka.InvalidCharacterException;
 import walkingkooka.naming.Name;
 import walkingkooka.naming.NameTesting2;
 import walkingkooka.reflect.ThrowableTesting;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 
@@ -90,6 +91,13 @@ public abstract class TextNodeNameNameTestCase<N extends Name & Comparable<N>> i
         return 0 == position ?
             CONTROL + ASCII_DIGITS :
             CONTROL;
+    }
+
+    // HasCaseSensitivity...............................................................................................
+
+    @Override
+    public final CaseSensitivity caseSensitivity() {
+        return TextStyle.CASE_SENSITIVITY;
     }
 
     // JsonNodeMarshallerTesting........................................................................................

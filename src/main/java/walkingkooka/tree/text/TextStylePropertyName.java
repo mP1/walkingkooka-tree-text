@@ -50,18 +50,13 @@ import java.util.function.BiConsumer;
 public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePropertyName<?>> implements HasUrlFragment,
     ValueName<T> {
 
-    /**
-     * First because required by {@link #CONSTANTS} init.
-     */
-    private final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
-
     // constants
 
     /**
      * A read only cache of already styles.
      */
     // @VisibleForTesting
-    final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(TextStylePropertyName.CASE_SENSITIVITY.comparator());
+    final static Map<String, TextStylePropertyName<?>> CONSTANTS = Maps.sorted(CASE_SENSITIVITY.comparator());
 
     /**
      * Used to allocate unique index for each constant except for synthetic properties such as {@link #ALL} or {@link #BORDER_COLOR}.

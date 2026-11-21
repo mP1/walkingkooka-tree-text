@@ -30,7 +30,8 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
  * Base class of all {@link Name names} in this package.
  */
 abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> implements Name,
-    Comparable<N> {
+    Comparable<N>,
+    HasTextStyleCaseSensitivity {
 
     /**
      * Verifies that the given name has valid characters and a valid length.
@@ -83,8 +84,7 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
 
     @Override
     public final int hashCode() {
-        return this.caseSensitivity()
-            .hash(this.name);
+        return CASE_SENSITIVITY.hash(this.name);
     }
 
     @Override
@@ -96,8 +96,7 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
     }
 
     private boolean equals0(final N other) {
-        return caseSensitivity()
-            .equals(
+        return CASE_SENSITIVITY.equals(
                 this.name,
                 other.name
             );
@@ -112,8 +111,7 @@ abstract class TextNodeNameName<N extends TextNodeNameName<N> & Comparable<N>> i
 
     @Override
     public final int compareTo(final N other) {
-        return this.caseSensitivity()
-            .comparator()
+        return CASE_SENSITIVITY.comparator()
             .compare(
                 this.name,
                 other.name
