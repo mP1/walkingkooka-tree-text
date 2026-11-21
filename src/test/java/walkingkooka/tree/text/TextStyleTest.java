@@ -1482,7 +1482,7 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
 
     @Override
     public TextStyle createObject() {
-        return this.TEXT_STYLE;
+        return TEXT_STYLE;
     }
 
     // toString.........................................................................................................
