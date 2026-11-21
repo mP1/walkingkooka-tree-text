@@ -491,7 +491,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     // border...........................................................................................................
 
     @Test
-    public void testBorderWithNullBoxEdgeFails() {
+    public final void testBorderWithNullBoxEdgeFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createStyleable()
@@ -545,7 +545,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     // margin...........................................................................................................
 
     @Test
-    public void testMarginWithNullBoxEdgeFails() {
+    public final void testMarginWithNullBoxEdgeFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createStyleable()
@@ -556,7 +556,7 @@ public abstract class TextStyleTestCase<T extends TextStyle> implements PackageP
     // padding..........................................................................................................
 
     @Test
-    public void testPaddingWithNullBoxEdgeFails() {
+    public final void testPaddingWithNullBoxEdgeFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createStyleable()
