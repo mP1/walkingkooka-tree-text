@@ -30,8 +30,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.props.Properties;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
@@ -48,7 +47,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStyleTest implements ClassTesting2<TextStyle>,
+public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     HashCodeEqualsDefinedTesting2<TextStyle>,
     HasContentTypeTesting,
     HasCsvStringListTesting,
@@ -1964,15 +1963,10 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // class............................................................................................................
 
     @Override
     public Class<TextStyle> type() {
         return TextStyle.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
