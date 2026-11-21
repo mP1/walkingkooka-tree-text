@@ -53,9 +53,9 @@ public abstract class Length<V> implements HasText,
     public static Length<?> parse(final String text) {
         checkText(text);
 
-        return NoneLength.TEXT.equals(text) ?
+        return CASE_SENSITIVITY.equals(NoneLength.TEXT, text) ?
             NoneLength.INSTANCE :
-            NormalLength.TEXT.equals(text) ?
+            CASE_SENSITIVITY.equals(NormalLength.TEXT, text) ?
                 NormalLength.INSTANCE :
                 LengthUnit.tryAllParse(text);
     }
