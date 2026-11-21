@@ -60,6 +60,21 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     ThrowableTesting,
     ToStringTesting {
 
+    private final static TextStylePropertyName<?> PROPERTY1 = TextStylePropertyName.WORD_WRAP;
+
+    private final static Object VALUE1 = WordWrap.BREAK_WORD;
+
+    private final static TextStylePropertyName<?> PROPERTY2 = TextStylePropertyName.FONT_FAMILY;
+
+    private final static Object VALUE2 = FontFamily.with("Times News Roman");
+
+    private final static TextStyle TEXT_STYLE = TextStyle.EMPTY.setValues(
+        Maps.of(
+            PROPERTY1, VALUE1,
+            PROPERTY2, VALUE2
+        )
+    );
+
     // isStyleClass.....................................................................................................
 
     @Test
@@ -240,8 +255,8 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     @Test
     public void testValue() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
+        map.put(PROPERTY1, VALUE1);
+        map.put(PROPERTY2, VALUE2);
 
         final TextStyle textStyle = TextStyle.EMPTY.setValues(map);
         this.checkEquals(
@@ -274,7 +289,7 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
 
     @Test
     public void testSetChildrenEmpty() {
-        final TextStyle textStyle = this.textStyle();
+        final TextStyle textStyle = this.TEXT_STYLE;
         final List<TextNode> children = TextStyleNode.NO_CHILDREN;
 
         this.setChildrenAndCheck(textStyle,
@@ -299,7 +314,7 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
 
     @Test
     public void testSetChildrenAndProperties() {
-        final TextStyle textStyle = this.textStyle();
+        final TextStyle textStyle = this.TEXT_STYLE;
         final List<TextNode> children = this.children();
 
         this.setChildrenAndCheck(
@@ -1445,7 +1460,7 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
 
     @Override
     public TextStyle createObject() {
-        return this.textStyle();
+        return this.TEXT_STYLE;
     }
 
     // toString.........................................................................................................
@@ -1453,8 +1468,8 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
     @Test
     public void testToString() {
         final Map<TextStylePropertyName<?>, Object> map = Maps.sorted();
-        map.put(this.property1(), this.value1());
-        map.put(this.property2(), this.value2());
+        map.put(PROPERTY1, VALUE1);
+        map.put(PROPERTY2, VALUE2);
 
         this.toStringAndCheck(
             TextStyle.EMPTY.setValues(map),
@@ -1539,38 +1554,11 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
         return this.createObject();
     }
 
-    // helpers..........................................................................................................
-
-    private TextStyle textStyle() {
-        return TextStyle.EMPTY.setValues(
-            Maps.of(
-                this.property1(), this.value1(),
-                this.property2(), this.value2()
-            )
-        );
-    }
-
-    private TextStylePropertyName<?> property1() {
-        return TextStylePropertyName.WORD_WRAP;
-    }
-
-    private Object value1() {
-        return WordWrap.BREAK_WORD;
-    }
-
-    private TextStylePropertyName<?> property2() {
-        return TextStylePropertyName.FONT_FAMILY;
-    }
-
-    private Object value2() {
-        return FontFamily.with("Times News Roman");
-    }
-
     // HasTextStyle.....................................................................................................
 
     @Test
     public void testTextStyle() {
-        final TextStyle textStyle = this.textStyle();
+        final TextStyle textStyle = this.TEXT_STYLE;
 
         assertSame(
             textStyle,
