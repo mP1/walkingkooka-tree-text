@@ -17,18 +17,12 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
-public final class BoxEdgeParserPaddingTest implements ClassTesting<BoxEdgeParserPadding> {
+public final class BoxEdgeParserPaddingTest implements PackagePrivateClassTesting<BoxEdgeParserPadding> {
 
     @Override
     public Class<BoxEdgeParserPadding> type() {
         return BoxEdgeParserPadding.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
