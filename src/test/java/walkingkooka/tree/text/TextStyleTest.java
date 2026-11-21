@@ -1950,6 +1950,20 @@ public final class TextStyleTest implements ClassTesting2<TextStyle>,
         );
     }
 
+    // patch............................................................................................................
+
+    @Test
+    public void testTextStylePatchAndPatch() {
+        final TextStyle before = TextStyle.parse("color: BLACK; text-align: LEFT");
+        final TextStyle patch = TextStyle.parse("text-align: RIGHT");
+
+        this.patchAndCheck(
+            before,
+            patch.textStylePatch(JSON_NODE_MARSHALL_CONTEXT),
+            before.merge(patch)
+        );
+    }
+
     // ClassTesting.....................................................................................................
 
     @Override
