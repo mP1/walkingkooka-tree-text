@@ -320,8 +320,10 @@ public abstract class Length<V> implements HasText,
 
     // HasCaseSensitivity...............................................................................................
 
+    public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.INSENSITIVE;
+
     @Override
     public final CaseSensitivity caseSensitivity() {
-        return CaseSensitivity.INSENSITIVE;
+        return CASE_SENSITIVITY;
     }
 }
