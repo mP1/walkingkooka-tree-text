@@ -252,42 +252,59 @@ public abstract class Length<V> implements HasText,
      */
     static Length<?> unmarshall(final JsonNode node,
                                 final JsonNodeUnmarshallContext context) {
-        return unmarshall0(node, Length::parse);
+        return unmarshall0(
+            node,
+            Length::parse
+        );
     }
 
     /**
      * Accepts a json string holding a {@link NoneLength}
      */
     static NoneLength unmarshallNone(final JsonNode node) {
-        return unmarshall0(node, Length::parseNone);
+        return unmarshall0(
+            node,
+            Length::parseNone
+        );
     }
 
     /**
      * Accepts a json string holding a {@link NormalLength}
      */
     static NormalLength unmarshallNormal(final JsonNode node) {
-        return unmarshall0(node, Length::parseNormal);
+        return unmarshall0(
+            node,
+            Length::parseNormal
+        );
     }
 
     /**
      * Accepts a json string holding a {@link NumberLength}
      */
     static NumberLength unmarshallNumber(final JsonNode node) {
-        return unmarshall0(node, Length::parseNumber);
+        return unmarshall0(
+            node,
+            Length::parseNumber
+        );
     }
 
     /**
      * Accepts a json string holding a {@link PixelLength}.
      */
     static PixelLength unmarshallPixel(final JsonNode node) {
-        return unmarshall0(node, Length::parsePixels);
+        return unmarshall0(
+            node,
+            Length::parsePixels
+        );
     }
 
     private static <L extends Length<?>> L unmarshall0(final JsonNode node,
                                                        final Function<String, L> factory) {
         Objects.requireNonNull(node, "node");
 
-        return factory.apply(node.stringOrFail());
+        return factory.apply(
+            node.stringOrFail()
+        );
     }
 
     final JsonNode marshall(final JsonNodeMarshallContext context) {
@@ -295,10 +312,12 @@ public abstract class Length<V> implements HasText,
     }
 
     static {
-        JsonNodeContext.register("length",
+        JsonNodeContext.register(
+            "length",
             Length::unmarshall,
             Length::marshall,
-            Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class);
+            Length.class, NoneLength.class, NormalLength.class, NumberLength.class, PixelLength.class
+        );
     }
 
     // HasText..........................................................................................................
