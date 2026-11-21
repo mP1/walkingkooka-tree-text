@@ -30,15 +30,20 @@ public final class LengthUnit<V, L extends Length<V>> implements HasText {
     /**
      * Pixel length unit.
      */
-    public final static LengthUnit<Double, PixelLength> PIXEL = new LengthUnit<>("px",
+    public final static LengthUnit<Double, PixelLength> PIXEL = new LengthUnit<>(
+        "px",
         PixelLength::parsePixels,
-        Length::pixel);
+        Length::pixel
+    );
 
     /**
      * Returns all units.
      */
     public static LengthUnit<?, ?>[] units() {
-        return Arrays.copyOf(UNITS, UNITS.length); // array.clone not supported in j2cl.
+        return Arrays.copyOf(
+            UNITS,
+            UNITS.length
+        ); // array.clone not supported in j2cl.
     }
 
     // @see Length:parse
@@ -77,7 +82,10 @@ public final class LengthUnit<V, L extends Length<V>> implements HasText {
      */
     String toString(final Double value) {
         final long longValue = Math.round(value);
-        return (longValue == value ? String.valueOf(longValue) : String.valueOf(value)) + this.suffix;
+
+        return (longValue == value ?
+            String.valueOf(longValue) :
+            String.valueOf(value)) + this.suffix;
     }
 
     private final String suffix;
@@ -99,6 +107,8 @@ public final class LengthUnit<V, L extends Length<V>> implements HasText {
     }
 
     private final Function<V, L> factory;
+
+    // Object...........................................................................................................
 
     @Override
     public String toString() {
