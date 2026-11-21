@@ -26,8 +26,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.color.Color;
 import walkingkooka.compare.ComparableTesting;
 import walkingkooka.naming.HasNameTesting;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Comparator;
@@ -36,7 +35,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class TextStylePropertyTest implements ClassTesting<TextStyleProperty<TextAlign>>,
+public final class TextStylePropertyTest implements PublicClassTesting<TextStyleProperty<TextAlign>>,
     HashCodeEqualsDefinedTesting2<TextStyleProperty<TextAlign>>,
     HasNameTesting,
     ToStringTesting,
@@ -341,10 +340,5 @@ public final class TextStylePropertyTest implements ClassTesting<TextStyleProper
     @Override
     public Class<TextStyleProperty<TextAlign>> type() {
         return Cast.to(TextStyleProperty.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
