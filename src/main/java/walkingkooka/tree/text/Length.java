@@ -22,7 +22,9 @@ import walkingkooka.Cast;
 import walkingkooka.HasValue;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
+import walkingkooka.text.HasCaseSensitivity;
 import walkingkooka.text.HasText;
 import walkingkooka.text.cursor.parser.InvalidCharacterExceptionFactory;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -42,7 +44,8 @@ import java.util.function.Function;
  */
 public abstract class Length<V> implements HasText,
     CanBeEmpty,
-    HasValue<Double> {
+    HasValue<Double>,
+    HasCaseSensitivity {
 
     /**
      * Parses text that contains a support measurement mostly a number and unit.
@@ -313,5 +316,12 @@ public abstract class Length<V> implements HasText,
             0 == Math.signum(
             this.value()
         );
+    }
+
+    // HasCaseSensitivity...............................................................................................
+
+    @Override
+    public final CaseSensitivity caseSensitivity() {
+        return CaseSensitivity.INSENSITIVE;
     }
 }
