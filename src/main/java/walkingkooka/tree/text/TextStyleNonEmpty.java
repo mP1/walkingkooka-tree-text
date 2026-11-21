@@ -35,7 +35,6 @@ import java.util.function.Predicate;
 /**
  * A {@link TextStyleNonEmpty} holds a non empty {@link Map} of {@link TextStylePropertyName} and values.
  */
-@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 final class TextStyleNonEmpty extends TextStyle {
 
     /**

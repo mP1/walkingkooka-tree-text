@@ -29,7 +29,6 @@ import java.util.function.Predicate;
 /**
  * A {@link TextStyle} with style and values.
  */
-@SuppressWarnings("lgtm[java/inconsistent-equals-and-hashcode]")
 final class TextStyleEmpty extends TextStyle {
 
     /**
