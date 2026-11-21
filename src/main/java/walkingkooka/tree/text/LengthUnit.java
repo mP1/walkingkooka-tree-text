@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 /**
- * The unit portion of a length. This is basically an ENUMS with type parameters
+ * The unit portion of a length. This is basically an ENUMS with type parameters. Parsing of units is case-insensitive.
  */
 public final class LengthUnit<V, L extends Length<V>> implements HasText {
 
@@ -77,7 +77,10 @@ public final class LengthUnit<V, L extends Length<V>> implements HasText {
     }
 
     boolean unitPresent(final String text) {
-        return text.endsWith(this.suffix);
+        return CASE_SENSITIVITY.endsWith(
+            text,
+            this.suffix
+        );
     }
 
     /**

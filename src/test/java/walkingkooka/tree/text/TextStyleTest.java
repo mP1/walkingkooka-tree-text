@@ -1485,6 +1485,28 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
         );
     }
 
+    @Test
+    public void testParseWordSpacingLengthPixelsLowerCase() {
+        this.parseStringAndCheck(
+            "word-spacing: 12.5px",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.WORD_SPACING,
+                Length.pixel(12.5)
+            )
+        );
+    }
+
+    @Test
+    public void testParseWordSpacingLengthPixelsUpperCase() {
+        this.parseStringAndCheck(
+            "word-spacing: 12.5PX",
+            TextStyle.EMPTY.set(
+                TextStylePropertyName.WORD_SPACING,
+                Length.pixel(12.5)
+            )
+        );
+    }
+
     @Override
     public TextStyle parseString(final String text) {
         return TextStyle.parse(text);

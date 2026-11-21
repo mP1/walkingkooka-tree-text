@@ -18,7 +18,6 @@
 package walkingkooka.tree.text;
 
 import walkingkooka.Cast;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.cursor.parser.DecimalParserToken;
 import walkingkooka.text.cursor.parser.Parser;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -54,7 +53,7 @@ public final class PixelLength extends Length<Double> {
         .and(
             Parsers.string(
                 UNIT.suffix(),
-                CaseSensitivity.SENSITIVE
+                LengthUnit.CASE_SENSITIVITY
             )
         );
 

@@ -64,6 +64,11 @@ public final class LengthTest implements PublicClassTesting<Length<?>>,
         this.parseStringAndCheck("12.5px", Length.pixel(12.5));
     }
 
+    @Test
+    public void testParsePixelsUnitsUpperCase() {
+        this.parseStringAndCheck("12.5PX", Length.pixel(12.5));
+    }
+
     @Override
     public Length<?> parseString(final String text) {
         return Length.parse(text);
