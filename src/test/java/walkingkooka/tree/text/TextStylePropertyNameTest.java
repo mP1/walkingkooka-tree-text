@@ -1469,7 +1469,7 @@ public final class TextStylePropertyNameTest extends TextNodeNameNameTestCase<Te
 
     @Override
     public CaseSensitivity caseSensitivity() {
-        return CaseSensitivity.SENSITIVE;
+        return TextStyle.CASE_SENSITIVITY;
     }
 
     @Override
