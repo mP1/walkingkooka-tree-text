@@ -47,14 +47,6 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     }
 
     @Test
-    public void testParseIncorrectUnitCaseFails() {
-        this.parseStringFails(
-            "12PX",
-            IllegalArgumentException.class
-        );
-    }
-
-    @Test
     public void testParseMissingUnit() {
         this.parseStringFails(
             "12",
@@ -66,6 +58,14 @@ public final class PixelLengthTest extends LengthTestCase<PixelLength, Double> {
     public void testParse() {
         this.parseStringAndCheck(
             "12px",
+            PixelLength.with(12)
+        );
+    }
+
+    @Test
+    public void testParseWithUnitsUpperCased() {
+        this.parseStringAndCheck(
+            "12PX",
             PixelLength.with(12)
         );
     }
