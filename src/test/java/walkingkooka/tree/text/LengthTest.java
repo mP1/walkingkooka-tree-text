@@ -40,8 +40,18 @@ public final class LengthTest implements PublicClassTesting<Length<?>>,
     }
 
     @Test
+    public void testParseNoneUpperCase() {
+        this.parseStringAndCheck("NONE", Length.none());
+    }
+
+    @Test
     public void testParseNormal() {
         this.parseStringAndCheck("normal", Length.normal());
+    }
+
+    @Test
+    public void testParseNormalUpperCase() {
+        this.parseStringAndCheck("NORMAL", Length.normal());
     }
 
     @Test
