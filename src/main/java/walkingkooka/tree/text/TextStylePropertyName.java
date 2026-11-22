@@ -28,7 +28,6 @@ import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.props.PropertiesPath;
 import walkingkooka.text.CaseKind;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -1193,13 +1192,6 @@ public final class TextStylePropertyName<T> extends TextNodeNameName<TextStylePr
      * Used to marshall a value when creating a patch {@link JsonNode}.
      */
     private final static JsonNodeMarshallContext MARSHALL_CONTEXT = JsonNodeMarshallContexts.basic();
-
-    // HasCaseSensitivity................................................................................................
-
-    @Override
-    public CaseSensitivity caseSensitivity() {
-        return CASE_SENSITIVITY;
-    }
 
     // BorderMarginPadding..............................................................................................
 
