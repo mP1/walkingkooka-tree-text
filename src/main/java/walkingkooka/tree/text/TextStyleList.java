@@ -49,7 +49,7 @@ public final class TextStyleList extends AbstractList<TextStyle>
 
     @Override
     public TextStyleList setElements(final Collection<TextStyle> collection) {
-        TextStyleList currencyList;
+        final TextStyleList currencyList;
 
         if (collection instanceof TextStyleList) {
             currencyList = (TextStyleList) collection;
