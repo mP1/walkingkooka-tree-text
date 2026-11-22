@@ -19,8 +19,7 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.CsvStringList;
-import walkingkooka.collect.list.HasCsvStringListTesting;
-import walkingkooka.collect.list.HasTsvStringListTesting;
+import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 
@@ -30,8 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
     HasTextStyleTesting,
-    HasCsvStringListTesting,
-    HasTsvStringListTesting {
+    HasCsvStringListTsvStringListTesting2<TextStyleList> {
 
     // fromStringLikeList................................................................................................
 
@@ -188,6 +186,11 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
                 .concat(DIFFERENT_TEXT_STYLE),
             "\"color: black\"\t\t\"color: white\""
         );
+    }
+
+    @Override
+    public TextStyleList createHasCsvStringListTsvStringList() {
+        return this.createList();
     }
 
     // class............................................................................................................
