@@ -7,6 +7,8 @@ import walkingkooka.collect.list.HasTsvStringListTesting;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
@@ -73,6 +75,16 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
     }
 
     // setElements......................................................................................................
+
+    @Test
+    public void testSetElementsWithNullElementFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> TextStyleList.EMPTY.setElements(
+                Arrays.asList((TextStyle)null)
+            )
+        );
+    }
 
     @Test
     public void testSetElementsWithDifferent() {

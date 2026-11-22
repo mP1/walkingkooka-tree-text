@@ -55,7 +55,11 @@ public final class TextStyleList extends AbstractList<TextStyle>
             currencyList = (TextStyleList) collection;
         } else {
             final List<TextStyle> copy = Lists.array();
-            copy.addAll(collection);
+            for (final TextStyle textStyle : collection) {
+                this.elementCheck(textStyle);
+
+                copy.add(textStyle);
+            }
 
             if (copy.equals(this)) {
                 currencyList = this;
