@@ -22,6 +22,9 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Arrays;
 
@@ -29,7 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
     HasTextStyleTesting,
-    HasCsvStringListTsvStringListTesting2<TextStyleList> {
+    HasCsvStringListTsvStringListTesting2<TextStyleList>,
+    JsonNodeMarshallerTesting<TextStyleList> {
 
     // fromStringLikeList................................................................................................
 
@@ -193,6 +197,31 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         return this.createList();
     }
 
+    // json.............................................................................................................
+
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(
+            TextStyleList.EMPTY.concat(TEXT_STYLE)
+                .concat(DIFFERENT_TEXT_STYLE),
+            "\"color: black,color: white\""
+        );
+    }
+
+    @Override
+    public TextStyleList unmarshall(final JsonNode jsonNode,
+                                    final JsonNodeUnmarshallContext context) {
+        return TextStyleList.unmarshall(
+            jsonNode,
+            context
+        );
+    }
+
+    @Override
+    public TextStyleList createJsonNodeMarshallingValue() {
+        return this.createList();
+    }
+    
     // class............................................................................................................
 
     @Override
