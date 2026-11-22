@@ -58,6 +58,8 @@ public final class TreeTextStartup implements PublicStaticHelper {
         Opacity.OPAQUE.value();
         Padding.parse("");
         TextOverflow.CLIP.value();
+
+        TextStyleList.EMPTY.size();
     }
 
     public static void init() {
