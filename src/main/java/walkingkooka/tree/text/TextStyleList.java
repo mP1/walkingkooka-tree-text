@@ -54,6 +54,8 @@ public final class TextStyleList extends AbstractList<TextStyle>
         if (collection instanceof TextStyleList) {
             currencyList = (TextStyleList) collection;
         } else {
+            Objects.requireNonNull(collection, "collection");
+
             final List<TextStyle> copy = Lists.array();
             for (final TextStyle textStyle : collection) {
                 this.elementCheck(textStyle);
