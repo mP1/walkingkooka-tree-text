@@ -139,16 +139,6 @@ public final class FontWeightTest extends TextStylePropertyValueTestCase2<FontWe
         return FontWeight.parse(text);
     }
 
-    @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
-        return thrown;
-    }
-
-    @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
-    }
-
     // isBold...........................................................................................................
 
     @Test

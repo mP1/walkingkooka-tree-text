@@ -1512,16 +1512,6 @@ public final class TextStyleTest implements PublicClassTesting<TextStyle>,
         return TextStyle.parse(text);
     }
 
-    @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
-        return thrown;
-    }
-
-    @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
-    }
-
     // hashCode/equals..................................................................................................
 
     @Override
