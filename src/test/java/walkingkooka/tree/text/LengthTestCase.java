@@ -210,18 +210,6 @@ public abstract class LengthTestCase<L extends Length<V>, V> implements PublicCl
         );
     }
 
-    // ParseStringTesting...............................................................................................
-
-    @Override
-    public final Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> expected) {
-        return expected;
-    }
-
-    @Override
-    public final RuntimeException parseStringFailedExpected(final RuntimeException expected) {
-        return expected;
-    }
-
     // TypeNameTesting..................................................................................................
 
     @Override

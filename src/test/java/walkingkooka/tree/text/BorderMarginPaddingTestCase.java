@@ -634,18 +634,6 @@ public abstract class BorderMarginPaddingTestCase<T extends BorderMarginPadding>
         );
     }
 
-    // parse............................................................................................................
-
-    @Override
-    public final Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
-        return thrown;
-    }
-
-    @Override
-    public final RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
-    }
-
     // json.............................................................................................................
 
     @Override
