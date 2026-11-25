@@ -19,9 +19,8 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.ConstantsTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -29,7 +28,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Set;
 
-public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
+public final class TextOverflowTest implements PublicClassTesting<TextOverflow>,
     ConstantsTesting<TextOverflow>,
     JsonNodeMarshallerTesting<TextOverflow>,
     ParseStringTesting<TextOverflow> {
@@ -199,16 +198,11 @@ public final class TextOverflowTest implements ClassTesting2<TextOverflow>,
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // class............................................................................................................
 
     @Override
     public Class<TextOverflow> type() {
         return TextOverflow.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     // ConstantTesting..................................................................................................
