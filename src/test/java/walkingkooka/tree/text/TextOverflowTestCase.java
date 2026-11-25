@@ -20,7 +20,7 @@ package walkingkooka.tree.text;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -29,7 +29,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextStylePropertyValueTestCase<TextOverflow>
     implements HashCodeEqualsDefinedTesting2<TextOverflow>,
     TypeNameTesting<TextOverflow>,
-    JsonNodeMarshallerTesting<TextOverflow> {
+    JsonNodeMarshallerTesting<TextOverflow>,
+    PackagePrivateClassTesting<TextOverflow> {
 
     TextOverflowTestCase() {
         super();
@@ -65,7 +66,7 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
         return (T)this.createTextStylePropertyValue();
     }
 
-    // ClassTesting.....................................................................................................
+    // Class............................................................................................................
 
     @Override
     public final Class<TextOverflow> type() {
@@ -73,11 +74,6 @@ public abstract class TextOverflowTestCase<T extends TextOverflow> extends TextS
     }
 
     abstract Class<T> textOverflowType();
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 
     @Override
     public final String typeNamePrefix() {
