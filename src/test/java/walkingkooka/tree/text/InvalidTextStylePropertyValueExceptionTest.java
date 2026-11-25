@@ -18,12 +18,13 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.ThrowableTesting2;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class InvalidTextStylePropertyValueExceptionTest implements ThrowableTesting2<InvalidTextStylePropertyValueException> {
+public final class InvalidTextStylePropertyValueExceptionTest implements ThrowableTesting2<InvalidTextStylePropertyValueException>,
+    PublicClassTesting<InvalidTextStylePropertyValueException> {
 
     @Test
     public void testNewWithNullPropertyNameFails() {
@@ -131,10 +132,5 @@ public final class InvalidTextStylePropertyValueExceptionTest implements Throwab
     @Override
     public Class<InvalidTextStylePropertyValueException> type() {
         return InvalidTextStylePropertyValueException.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
