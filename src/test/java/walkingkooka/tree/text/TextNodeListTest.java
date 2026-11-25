@@ -22,8 +22,7 @@ import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.ListTesting2;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -34,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
-    ClassTesting<TextNodeList>,
+    PublicClassTesting<TextNodeList>,
     ImmutableListTesting<TextNodeList, TextNode>,
     JsonNodeMarshallerTesting<TextNodeList> {
 
@@ -128,16 +127,6 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         );
     }
 
-    @Override
-    public Class<TextNodeList> type() {
-        return TextNodeList.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
     // Json...........................................................................................................
 
     @Test
@@ -216,5 +205,12 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
             list,
             first
         );
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public Class<TextNodeList> type() {
+        return TextNodeList.class;
     }
 }
