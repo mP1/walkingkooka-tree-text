@@ -53,24 +53,8 @@ public final class TextNodeList extends AbstractList<TextNode>
 
     public static TextNodeList EMPTY = new TextNodeList(Lists.empty());
 
-    public static TextNodeList with(final Collection<TextNode> nodes) {
-        final TextNodeList textNodeList;
-
-        if (nodes instanceof TextNodeList) {
-            textNodeList = (TextNodeList) nodes;
-        } else {
-            final List<TextNode> copy = Lists.array();
-            copy.addAll(nodes);
-
-            textNodeList = copy.isEmpty() ?
-                EMPTY :
-                new TextNodeList(copy);
-        }
-
-        return textNodeList;
-    }
-
-    private TextNodeList(final List<TextNode> nodes) {
+    // @VisibleForTesting
+    TextNodeList(final List<TextNode> nodes) {
         this.nodes = nodes;
     }
 
@@ -93,17 +77,29 @@ public final class TextNodeList extends AbstractList<TextNode>
 
     @Override
     public TextNodeList setElements(final Collection<TextNode> nodes) {
-        final TextNodeList copy = with(nodes);
-        return this.equals(copy) ?
-            this :
-            copy;
+        final TextNodeList textNodeList;
+
+        if (nodes instanceof TextNodeList) {
+            textNodeList = (TextNodeList) nodes;
+        } else {
+            final List<TextNode> copy = Lists.array();
+            copy.addAll(nodes);
+
+            textNodeList = copy.isEmpty() ?
+                EMPTY :
+                this.nodes.equals(copy) ?
+                    this :
+                    new TextNodeList(copy);
+        }
+
+        return textNodeList;
     }
 
     // json.............................................................................................................
 
     static TextNodeList unmarshall(final JsonNode node,
                                    final JsonNodeUnmarshallContext context) {
-        return with(
+        return EMPTY.setElements(
             Cast.to(
                 context.unmarshallListWithType(node)
             )

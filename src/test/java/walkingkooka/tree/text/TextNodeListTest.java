@@ -27,10 +27,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.List;
 
 public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     PublicClassTesting<TextNodeList>,
@@ -41,33 +38,6 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     private final static TextNode NODE1 = TextNode.text("Hello");
 
     private final static TextNode NODE2 = TextNode.hyperlink(ABSOLUTE_URL);
-
-    @Test
-    public void testWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextNodeList.with(null)
-        );
-    }
-
-    @Test
-    public void testDoesntDoubleWrap() {
-        final TextNodeList list = this.createList();
-        assertSame(
-            list,
-            TextNodeList.with(list)
-        );
-    }
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            TextNodeList.EMPTY,
-            TextNodeList.with(
-                Lists.empty()
-            )
-        );
-    }
 
     @Test
     public void testGet() {
@@ -116,9 +86,32 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         );
     }
 
+    @Test
+    public void testSetElementsWithEmptyList() {
+        this.setElementsAndCheck(
+            this.createList(),
+            Lists.empty(),
+            TextNodeList.EMPTY
+        );
+    }
+
+    @Test
+    public void testSetElementsWithListIncludesNull() {
+        final List<TextNode> list = Lists.of(
+            null,
+            NODE2
+        );
+
+        this.setElementsAndCheck(
+            this.createList(),
+            list,
+            new TextNodeList(list)
+        );
+    }
+
     @Override
     public TextNodeList createList() {
-        return TextNodeList.with(
+        return new TextNodeList(
             Lists.of(
                 NODE1,
                 NODE2
@@ -185,7 +178,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     @Test
     public void testFirstOrEmptyWhenEmpty() {
         this.firstOrEmptyAndCheck(
-            TextNodeList.with(Collections.EMPTY_LIST)
+            TextNodeList.EMPTY
         );
     }
 
@@ -193,7 +186,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     public void testFirstOrEmptyWhenNotEmpty() {
         final Text first = TextNode.text("111");
 
-        final TextNodeList list = TextNodeList.with(
+        final TextNodeList list = new TextNodeList(
             Lists.of(
                 first,
                 Text.emptyText()
