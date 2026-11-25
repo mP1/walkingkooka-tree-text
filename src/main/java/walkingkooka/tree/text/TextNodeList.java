@@ -52,12 +52,12 @@ public final class TextNodeList extends AbstractList<TextNode>
     implements ImmutableListDefaults<TextNodeList, TextNode> {
 
     public static TextNodeList with(final Collection<TextNode> nodes) {
-        Objects.requireNonNull(nodes, "nodes");
-
         return nodes instanceof TextNodeList ?
             (TextNodeList) nodes :
             new TextNodeList(
-                new ArrayList<>(nodes)
+                new ArrayList<>(
+                    Objects.requireNonNull(nodes, "nodes")
+                )
             );
     }
 
