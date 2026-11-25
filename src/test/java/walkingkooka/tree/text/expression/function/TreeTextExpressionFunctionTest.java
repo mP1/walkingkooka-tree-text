@@ -18,19 +18,13 @@
 package walkingkooka.tree.text.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.tree.text.expression.FakeTreeTextExpressionEvaluationContext;
 
-public final class TreeTextExpressionFunctionTest implements ClassTesting2<TreeTextExpressionFunction<Void, FakeTreeTextExpressionEvaluationContext>> {
+public final class TreeTextExpressionFunctionTest implements PackagePrivateClassTesting<TreeTextExpressionFunction<Void, FakeTreeTextExpressionEvaluationContext>> {
 
     @Override
     public Class<TreeTextExpressionFunction<Void, FakeTreeTextExpressionEvaluationContext>> type() {
         return Cast.to(TreeTextExpressionFunction.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
