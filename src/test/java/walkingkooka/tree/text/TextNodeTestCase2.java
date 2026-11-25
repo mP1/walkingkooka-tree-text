@@ -22,7 +22,6 @@ import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.Url;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextLengthTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -225,7 +224,7 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
         return this.createTextNode();
     }
 
-    // ClassTesting.....................................................................................................
+    // class............................................................................................................
 
     @Override
     public final Class<TextNode> type() {
@@ -233,13 +232,6 @@ public abstract class TextNodeTestCase2<N extends TextNode> extends TextNodeTest
     }
 
     abstract Class<N> textNodeType();
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
-    // TypeNameTesting...................................................................................................
 
     @Override
     public final String typeNamePrefix() {
