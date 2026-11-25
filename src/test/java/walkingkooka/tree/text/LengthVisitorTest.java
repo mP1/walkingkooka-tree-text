@@ -18,12 +18,13 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisitor> {
+public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisitor>,
+    PublicClassTesting<LengthVisitor> {
 
     @Test
     public void testAcceptSkipRemaining() {
@@ -194,10 +195,5 @@ public final class LengthVisitorTest implements LengthVisitorTesting<LengthVisit
     @Override
     public Class<LengthVisitor> type() {
         return LengthVisitor.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
