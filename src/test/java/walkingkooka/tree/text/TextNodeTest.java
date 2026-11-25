@@ -24,7 +24,6 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
 import walkingkooka.net.Url;
 import walkingkooka.net.header.HasContentTypeTesting;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.select.NodeSelectorContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -185,15 +184,10 @@ public final class TextNodeTest extends TextNodeTestCase<TextNode> implements Ha
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // Class............................................................................................................
 
     @Override
     public Class<TextNode> type() {
         return TextNode.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
