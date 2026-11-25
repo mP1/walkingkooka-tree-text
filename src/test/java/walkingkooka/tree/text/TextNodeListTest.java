@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.ListTesting2;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.net.Url;
+import walkingkooka.net.HasAbsoluteUrlTesting;
 import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -34,14 +34,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     PublicClassTesting<TextNodeList>,
+    HasAbsoluteUrlTesting,
     ImmutableListTesting<TextNodeList, TextNode>,
     JsonNodeMarshallerTesting<TextNodeList> {
 
     private final static TextNode NODE1 = TextNode.text("Hello");
 
-    private final static TextNode NODE2 = TextNode.hyperlink(
-        Url.parseAbsolute("https://example.com/link123")
-    );
+    private final static TextNode NODE2 = TextNode.hyperlink(ABSOLUTE_URL);
 
     @Test
     public void testWithNullFails() {
@@ -141,7 +140,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
                 "  {\n" +
                 "    \"type\": \"hyperlink\",\n" +
                 "    \"value\": {\n" +
-                "      \"url\": \"https://example.com/link123\"\n" +
+                "      \"url\": \"https://example.com\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "]"
@@ -159,7 +158,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
                 "  {\n" +
                 "    \"type\": \"hyperlink\",\n" +
                 "    \"value\": {\n" +
-                "      \"url\": \"https://example.com/link123\"\n" +
+                "      \"url\": \"https://example.com\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "]",
