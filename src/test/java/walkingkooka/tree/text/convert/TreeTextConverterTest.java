@@ -18,20 +18,14 @@
 package walkingkooka.tree.text.convert;
 
 import walkingkooka.Cast;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
-public final class TreeTextConverterTest implements ClassTesting2<TreeTextConverter<?>> {
+public final class TreeTextConverterTest implements PackagePrivateClassTesting<TreeTextConverter<?>> {
 
     // class............................................................................................................
 
     @Override
     public Class<TreeTextConverter<?>> type() {
         return Cast.to(TreeTextConverter.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
