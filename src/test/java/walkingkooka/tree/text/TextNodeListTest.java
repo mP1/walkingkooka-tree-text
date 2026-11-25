@@ -62,6 +62,16 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     }
 
     @Test
+    public void testWithEmpty() {
+        assertSame(
+            TextNodeList.EMPTY,
+            TextNodeList.with(
+                Lists.empty()
+            )
+        );
+    }
+
+    @Test
     public void testGet() {
         this.getAndCheck(
             this.createList(),
