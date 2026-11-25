@@ -22,8 +22,7 @@ import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.color.Color;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class TextStylePropertiesMapEntrySetIteratorTest implements IteratorTesting,
-    ClassTesting<TextStylePropertiesMapEntrySetIterator> {
+    PackagePrivateClassTesting<TextStylePropertiesMapEntrySetIterator> {
 
     @Test
     public void testIterateWhenEmpty() {
@@ -131,10 +130,5 @@ public final class TextStylePropertiesMapEntrySetIteratorTest implements Iterato
     @Override
     public Class<TextStylePropertiesMapEntrySetIterator> type() {
         return TextStylePropertiesMapEntrySetIterator.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
