@@ -19,9 +19,10 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 
-public final class TextNodeVisitorTest implements TextNodeVisitorTesting<TextNodeVisitor> {
+public final class TextNodeVisitorTest implements TextNodeVisitorTesting<TextNodeVisitor>,
+    PublicClassTesting<TextNodeVisitor> {
 
     @Test
     public void testAcceptProperties() {
@@ -50,11 +51,6 @@ public final class TextNodeVisitorTest implements TextNodeVisitorTesting<TextNod
                 return TextNodeVisitorTest.class.getSimpleName();
             }
         };
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
