@@ -19,12 +19,13 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.color.Color;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextStyleVisitor> {
+public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextStyleVisitor>,
+    PackagePrivateClassTesting<TextStyleVisitor> {
 
     @Override
     public void testClassVisibility() {
@@ -871,11 +872,6 @@ public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextS
         @Override
         protected void endVisit(final TextStylePropertyName<?> property, final Object value) {
         }
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 
     @Override
