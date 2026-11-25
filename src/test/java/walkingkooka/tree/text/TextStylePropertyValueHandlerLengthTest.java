@@ -17,20 +17,12 @@
 
 package walkingkooka.tree.text;
 
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
-public final class TextStylePropertyValueHandlerLengthTest implements ClassTesting2<TextStylePropertyValueHandlerLength> {
-
-    // ClassTesting.....................................................................................................
+public final class TextStylePropertyValueHandlerLengthTest implements PackagePrivateClassTesting<TextStylePropertyValueHandlerLength> {
 
     @Override
     public Class<TextStylePropertyValueHandlerLength> type() {
         return TextStylePropertyValueHandlerLength.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
