@@ -18,10 +18,11 @@
 package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.reflect.ThrowableTesting2;
 
-public final class UnknownTextStylePropertyNameExceptionTest implements ThrowableTesting2<UnknownTextStylePropertyNameException> {
+public final class UnknownTextStylePropertyNameExceptionTest implements ThrowableTesting2<UnknownTextStylePropertyNameException>,
+    PublicClassTesting<UnknownTextStylePropertyNameException> {
 
     @Test
     public void testGetMessage() {
@@ -41,10 +42,5 @@ public final class UnknownTextStylePropertyNameExceptionTest implements Throwabl
     @Override
     public Class<UnknownTextStylePropertyNameException> type() {
         return UnknownTextStylePropertyNameException.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
