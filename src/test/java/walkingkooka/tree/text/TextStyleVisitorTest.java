@@ -19,17 +19,13 @@ package walkingkooka.tree.text;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.color.Color;
-import walkingkooka.reflect.PackagePrivateClassTesting;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.visit.Visiting;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class TextStyleVisitorTest implements TextStyleVisitorTesting<TextStyleVisitor>,
-    PackagePrivateClassTesting<TextStyleVisitor> {
-
-    @Override
-    public void testClassVisibility() {
-    }
+    PublicClassTesting<TextStyleVisitor> {
 
     @Override
     public void testStartVisitMethodsSingleParameter() {
