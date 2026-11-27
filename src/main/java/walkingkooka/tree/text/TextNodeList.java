@@ -72,27 +72,46 @@ public final class TextNodeList extends AbstractList<TextNode>
 
     @Override
     public void elementCheck(final TextNode node) {
-        Objects.requireNonNull(node, "node");
+        // null allowed
     }
 
     @Override
-    public TextNodeList setElements(final Collection<TextNode> nodes) {
+    public TextNodeList setElements(final Collection<TextNode> textNodes) {
         final TextNodeList textNodeList;
 
-        if (nodes instanceof TextNodeList) {
-            textNodeList = (TextNodeList) nodes;
+        if (textNodes instanceof TextNodeList) {
+            textNodeList = (TextNodeList) textNodes;
         } else {
             final List<TextNode> copy = Lists.array();
-            copy.addAll(nodes);
+            copy.addAll(
+                Objects.requireNonNull(textNodes, "textNodes")
+            );
 
-            textNodeList = copy.isEmpty() ?
-                EMPTY :
-                this.nodes.equals(copy) ?
-                    this :
-                    new TextNodeList(copy);
+            textNodeList = this.nodes.equals(copy) ?
+                this :
+                this.replaceTextNodes(copy);
         }
 
         return textNodeList;
+    }
+
+    @Override
+    public TextNodeList subList(final int from,
+                                final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceTextNodes(
+                this.nodes.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private TextNodeList replaceTextNodes(final List<TextNode> textNodes) {
+        return textNodes.isEmpty() ?
+            EMPTY :
+            new TextNodeList(textNodes);
     }
 
     // json.............................................................................................................

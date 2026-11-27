@@ -35,16 +35,22 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     ImmutableListTesting<TextNodeList, TextNode>,
     JsonNodeMarshallerTesting<TextNodeList> {
 
-    private final static TextNode NODE1 = TextNode.text("Hello");
+    private final static TextNode TEXT_NODE1 = TextNode.text("Hello");
 
-    private final static TextNode NODE2 = TextNode.hyperlink(ABSOLUTE_URL);
+    private final static TextNode TEXT_NODE2 = TextNode.hyperlink(ABSOLUTE_URL);
+
+    private final static TextNode TEXT_NODE3 = TextNode.text("Hello333");
+
+    private final static TextNode TEXT_NODE4 = TextNode.text("Hello444");
+
+    private final static TextNode TEXT_NODE5 = TextNode.text("Hello555");
 
     @Test
     public void testGet() {
         this.getAndCheck(
             this.createList(),
             0, // index
-            NODE1 // expected
+            TEXT_NODE1 // expected
         );
     }
 
@@ -53,7 +59,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         this.getAndCheck(
             this.createList(),
             1, // index
-            NODE2 // expected
+            TEXT_NODE2 // expected
         );
     }
 
@@ -62,7 +68,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         this.setFails(
             this.createList(),
             0, // index
-            NODE1 // expected
+            TEXT_NODE1 // expected
         );
     }
 
@@ -99,7 +105,7 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
     public void testSetElementsWithListIncludesNull() {
         final List<TextNode> list = Lists.of(
             null,
-            NODE2
+            TEXT_NODE2
         );
 
         this.setElementsAndCheck(
@@ -109,12 +115,71 @@ public class TextNodeListTest implements ListTesting2<TextNodeList, TextNode>,
         );
     }
 
+    // subList..........................................................................................................
+
+    private final static List<TextNode> ELEMENTS = Lists.of(
+        TEXT_NODE1,
+        TEXT_NODE2,
+        TEXT_NODE3,
+        TEXT_NODE4,
+        TEXT_NODE5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new TextNodeList(ELEMENTS),
+            0,
+            2,
+            new TextNodeList(
+                Lists.of(
+                    TEXT_NODE1,
+                    TEXT_NODE2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new TextNodeList(ELEMENTS),
+            2,
+            4,
+            new TextNodeList(
+                Lists.of(
+                    TEXT_NODE3,
+                    TEXT_NODE4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new TextNodeList(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new TextNodeList(
+                Lists.of(
+                    TEXT_NODE3,
+                    TEXT_NODE4
+                )
+            )
+        );
+    }
+
     @Override
     public TextNodeList createList() {
         return new TextNodeList(
             Lists.of(
-                NODE1,
-                NODE2
+                TEXT_NODE1,
+                TEXT_NODE2
             )
         );
     }
