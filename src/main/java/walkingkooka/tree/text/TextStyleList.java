@@ -69,36 +69,50 @@ public final class TextStyleList extends AbstractList<TextStyle>
     }
 
     @Override
-    public TextStyleList setElements(final Collection<TextStyle> collection) {
-        final TextStyleList currencyList;
+    public void elementCheck(final TextStyle node) {
+        Objects.requireNonNull(node, "Includes null TextStyle");
+    }
+    
+    @Override
+    public TextStyleList setElements(final Collection<TextStyle> textStyles) {
+        final TextStyleList textStyleList;
 
-        if (collection instanceof TextStyleList) {
-            currencyList = (TextStyleList) collection;
+        if (textStyles instanceof TextStyleList) {
+            textStyleList = (TextStyleList) textStyles;
         } else {
-            Objects.requireNonNull(collection, "collection");
+            Objects.requireNonNull(textStyles, "textStyles");
 
             final List<TextStyle> copy = Lists.array();
-            for (final TextStyle textStyle : collection) {
+            for (final TextStyle textStyle : textStyles) {
                 this.elementCheck(textStyle);
-
                 copy.add(textStyle);
             }
 
-            if (copy.equals(this)) {
-                currencyList = this;
-            } else {
-                currencyList = copy.isEmpty() ?
-                    EMPTY :
-                    new TextStyleList(copy);
-            }
+            textStyleList = this.list.equals(copy) ?
+                this :
+                this.replaceTextStyles(copy);
         }
 
-        return currencyList;
+        return textStyleList;
     }
 
     @Override
-    public void elementCheck(final TextStyle textStyle) {
-        Objects.requireNonNull(textStyle, "textStyle");
+    public TextStyleList subList(final int from,
+                                 final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceTextStyles(
+                this.list.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private TextStyleList replaceTextStyles(final List<TextStyle> textStyles) {
+        return textStyles.isEmpty() ?
+            EMPTY :
+            new TextStyleList(textStyles);
     }
 
     private final List<TextStyle> list;

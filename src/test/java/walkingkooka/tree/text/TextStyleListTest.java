@@ -27,6 +27,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -129,6 +130,84 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
         );
     }
 
+    // subList..........................................................................................................
+
+    private final static TextStyle TEXT_STYLE1 = TEXT_STYLE;
+
+    private final static TextStyle TEXT_STYLE2 = DIFFERENT_TEXT_STYLE;
+
+    private final static TextStyle TEXT_STYLE3 = TextStyle.EMPTY.set(
+        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+        Length.pixel(333.0)
+    );
+
+    private final static TextStyle TEXT_STYLE4 = TextStyle.EMPTY.set(
+        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+        Length.pixel(444.0)
+    );
+
+    private final static TextStyle TEXT_STYLE5 = TextStyle.EMPTY.set(
+        TextStylePropertyName.BORDER_BOTTOM_WIDTH,
+        Length.pixel(555.0)
+    );
+
+    private final static List<TextStyle> ELEMENTS = Lists.of(
+        TEXT_STYLE1,
+        TEXT_STYLE2,
+        TEXT_STYLE3,
+        TEXT_STYLE4,
+        TEXT_STYLE5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new TextStyleList(ELEMENTS),
+            0,
+            2,
+            new TextStyleList(
+                Lists.of(
+                    TEXT_STYLE1,
+                    TEXT_STYLE2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new TextStyleList(ELEMENTS),
+            2,
+            4,
+            new TextStyleList(
+                Lists.of(
+                    TEXT_STYLE3,
+                    TEXT_STYLE4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new TextStyleList(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new TextStyleList(
+                Lists.of(
+                    TEXT_STYLE3,
+                    TEXT_STYLE4
+                )
+            )
+        );
+    }
+    
     @Override
     public TextStyleList createList() {
         return TextStyleList.EMPTY;
