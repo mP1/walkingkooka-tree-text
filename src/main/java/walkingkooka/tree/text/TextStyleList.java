@@ -74,26 +74,14 @@ public final class TextStyleList extends AbstractList<TextStyle>
     }
     
     @Override
-    public TextStyleList setElements(final Collection<TextStyle> textStyles) {
-        final TextStyleList textStyleList;
-
-        if (textStyles instanceof TextStyleList) {
-            textStyleList = (TextStyleList) textStyles;
-        } else {
-            Objects.requireNonNull(textStyles, "textStyles");
-
-            final List<TextStyle> copy = Lists.array();
-            for (final TextStyle textStyle : textStyles) {
-                this.elementCheck(textStyle);
-                copy.add(textStyle);
-            }
-
-            textStyleList = this.list.equals(copy) ?
-                this :
-                this.replaceTextStyles(copy);
-        }
-
-        return textStyleList;
+    public TextStyleList setElements(final Collection<TextStyle> elements) {
+        return (TextStyleList)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<TextStyle> collection) -> collection instanceof TextStyleList,
+                this::elementCheck,
+                this::replaceTextStyles
+            );
     }
 
     @Override

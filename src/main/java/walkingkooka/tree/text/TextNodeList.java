@@ -28,7 +28,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * An immutable list of {@link TextNode}. This exists primarily to support marshalling/unmarshalling JSON which does
@@ -76,23 +75,14 @@ public final class TextNodeList extends AbstractList<TextNode>
     }
 
     @Override
-    public TextNodeList setElements(final Collection<TextNode> textNodes) {
-        final TextNodeList textNodeList;
-
-        if (textNodes instanceof TextNodeList) {
-            textNodeList = (TextNodeList) textNodes;
-        } else {
-            final List<TextNode> copy = Lists.array();
-            copy.addAll(
-                Objects.requireNonNull(textNodes, "textNodes")
+    public TextNodeList setElements(final Collection<TextNode> elements) {
+        return (TextNodeList)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<TextNode> collection) -> collection instanceof TextNodeList,
+                this::elementCheck,
+                this::replaceTextNodes
             );
-
-            textNodeList = this.nodes.equals(copy) ?
-                this :
-                this.replaceTextNodes(copy);
-        }
-
-        return textNodeList;
     }
 
     @Override
