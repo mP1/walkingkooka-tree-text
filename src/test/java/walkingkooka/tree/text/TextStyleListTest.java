@@ -22,6 +22,7 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -34,7 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class TextStyleListTest implements ImmutableListTesting<TextStyleList, TextStyle>,
     HasTextStyleTesting,
     HasCsvStringListTsvStringListTesting2<TextStyleList>,
-    JsonNodeMarshallerTesting<TextStyleList> {
+    JsonNodeMarshallerTesting<TextStyleList>,
+    ThrowableTesting {
 
     // fromStringLikeList................................................................................................
 
@@ -98,11 +100,14 @@ public final class TextStyleListTest implements ImmutableListTesting<TextStyleLi
 
     @Test
     public void testSetElementsWithNullElementFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> TextStyleList.EMPTY.setElements(
-                Arrays.asList((TextStyle)null)
-            )
+        this.getMessageAndCheck(
+            assertThrows(
+                NullPointerException.class,
+                () -> TextStyleList.EMPTY.setElements(
+                    Arrays.asList((TextStyle) null)
+                )
+            ),
+            "Includes null TextStyle"
         );
     }
 
